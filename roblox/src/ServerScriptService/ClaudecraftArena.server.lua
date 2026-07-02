@@ -37,6 +37,10 @@ local effectsFolder = Instance.new("Folder")
 effectsFolder.Name = "Effects"
 effectsFolder.Parent = arena
 
+local interiorsFolder = Instance.new("Folder")
+interiorsFolder.Name = "BuildingInteriors"
+interiorsFolder.Parent = arena
+
 local lastActionAt: { [Player]: { [string]: number } } = {}
 local flightState: { [Player]: { enabled: boolean, velocity: LinearVelocity?, attachment: Attachment? } } = {}
 
@@ -79,6 +83,12 @@ local function addLabel(part: BasePart, text: string)
 	label.TextScaled = true
 	label.TextStrokeTransparency = 0.35
 	label.Parent = gui
+end
+
+local function markMinimap(instance: Instance, kind: string, name: string, color: Color3)
+	instance:SetAttribute("MinimapKind", kind)
+	instance:SetAttribute("MinimapName", name)
+	instance:SetAttribute("MinimapColor", color)
 end
 
 local function scaledBoardPosition(board, point, y: number)
@@ -247,6 +257,192 @@ local function buildChapel(center: Vector3)
 	)
 end
 
+local teleportDebounce: { [Player]: number } = {}
+
+local function teleportPlayer(player: Player, position: Vector3)
+	local now = os.clock()
+	if teleportDebounce[player] and now - teleportDebounce[player] < 1 then
+		return
+	end
+	teleportDebounce[player] = now
+
+	local character = player.Character
+	local root = character and character:FindFirstChild("HumanoidRootPart")
+	if root then
+		root.CFrame = CFrame.new(position + Vector3.new(0, 4, 0))
+	end
+end
+
+local function connectTeleport(part: BasePart, targetPosition: Vector3)
+	part.Touched:Connect(function(hit)
+		local player = Players:GetPlayerFromCharacter(hit.Parent)
+		if player then
+			teleportPlayer(player, targetPosition)
+		end
+	end)
+end
+
+local function addBuilding(config, index: number)
+	local model = Instance.new("Model")
+	model.Name = config.Name
+	model.Parent = arena
+	model:SetAttribute("BuildingId", config.Id)
+
+	local body = makePart(
+		"BuildingBody",
+		Vector3.new(32, 18, 28),
+		CFrame.new(config.Position + Vector3.new(0, 9, 0)),
+		config.Color,
+		Enum.Material.WoodPlanks,
+		model
+	)
+	markMinimap(body, "Building", config.Name, config.Color)
+
+	local roof = makePart(
+		"BuildingRoof",
+		Vector3.new(38, 5, 34),
+		CFrame.new(config.Position + Vector3.new(0, 20.5, 0)),
+		config.Color:Lerp(Color3.new(0.18, 0.05, 0.04), 0.45),
+		Enum.Material.Slate,
+		model
+	)
+	roof.CanCollide = true
+
+	local door = makePart(
+		"EnterDoor",
+		Vector3.new(8, 9, 1),
+		CFrame.new(config.Position + Vector3.new(0, 4.5, -14.6)),
+		Color3.fromRGB(40, 28, 22),
+		Enum.Material.Wood,
+		model
+	)
+	door.CanCollide = false
+	door.Transparency = 0.08
+	addLabel(door, config.Name)
+
+	local interiorOrigin = Vector3.new(1300 + index * 140, 0, 0)
+	local room = Instance.new("Model")
+	room.Name = config.Name .. " Interior"
+	room.Parent = interiorsFolder
+
+	local floor = makePart(
+		"InteriorFloor",
+		Vector3.new(74, 2, 58),
+		CFrame.new(interiorOrigin + Vector3.new(0, -1, 0)),
+		Color3.fromRGB(52, 58, 64),
+		Enum.Material.Concrete,
+		room
+	)
+	floor.CanCollide = true
+
+	for _, wall in ipairs({
+		{ Offset = Vector3.new(0, 10, -29), Size = Vector3.new(74, 20, 2) },
+		{ Offset = Vector3.new(0, 10, 29), Size = Vector3.new(74, 20, 2) },
+		{ Offset = Vector3.new(-37, 10, 0), Size = Vector3.new(2, 20, 58) },
+		{ Offset = Vector3.new(37, 10, 0), Size = Vector3.new(2, 20, 58) },
+	}) do
+		makePart(
+			"InteriorWall",
+			wall.Size,
+			CFrame.new(interiorOrigin + wall.Offset),
+			config.Color:Lerp(Color3.fromRGB(245, 245, 235), 0.4),
+			Enum.Material.SmoothPlastic,
+			room
+		)
+	end
+
+	local tablePart = makePart(
+		"PlanningTable",
+		Vector3.new(24, 3, 12),
+		CFrame.new(interiorOrigin + Vector3.new(0, 1.5, 0)),
+		Color3.fromRGB(116, 75, 48),
+		Enum.Material.WoodPlanks,
+		room
+	)
+	tablePart.CanCollide = true
+
+	local exit = makePart(
+		"ExitDoor",
+		Vector3.new(12, 1, 12),
+		CFrame.new(interiorOrigin + Vector3.new(0, 0.35, 22)),
+		Color3.fromRGB(255, 214, 88),
+		Enum.Material.Neon,
+		room
+	)
+	exit.CanCollide = false
+	addLabel(exit, "Exit to " .. config.Name)
+
+	connectTeleport(door, interiorOrigin)
+	connectTeleport(exit, config.Position + Vector3.new(0, 0, -24))
+end
+
+local function buildCollectibles()
+	local folder = Instance.new("Folder")
+	folder.Name = "Collectibles"
+	folder.Parent = arena
+
+	for _, collectible in ipairs(Config.World.Collectibles) do
+		local orb = makePart(
+			collectible.Name,
+			Vector3.new(5, 5, 5),
+			CFrame.new(collectible.Position),
+			collectible.Color,
+			Enum.Material.Neon,
+			folder
+		)
+		orb.Shape = Enum.PartType.Ball
+		orb.CanCollide = false
+		markMinimap(orb, "Collectible", collectible.Name, collectible.Color)
+
+		local light = Instance.new("PointLight")
+		light.Color = collectible.Color
+		light.Range = 18
+		light.Brightness = 1.2
+		light.Parent = orb
+
+		local collected = false
+		orb.Touched:Connect(function(hit)
+			local player = Players:GetPlayerFromCharacter(hit.Parent)
+			if not player or collected then
+				return
+			end
+			collected = true
+			local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+			if humanoid then
+				humanoid.Health = math.min(humanoid.MaxHealth, humanoid.Health + 35)
+			end
+			orb.Transparency = 1
+			orb:SetAttribute("MinimapKind", nil)
+			task.delay(12, function()
+				if orb.Parent then
+					collected = false
+					orb.Transparency = 0
+					markMinimap(orb, "Collectible", collectible.Name, collectible.Color)
+				end
+			end)
+		end)
+	end
+end
+
+local function buildObstacleCourse()
+	local folder = Instance.new("Folder")
+	folder.Name = "ObstacleCourse"
+	folder.Parent = arena
+
+	for _, obstacle in ipairs(Config.World.ObstacleCourse) do
+		local part = makePart(
+			obstacle.Name,
+			obstacle.Size,
+			CFrame.new(obstacle.Position),
+			obstacle.Color,
+			Enum.Material.WoodPlanks,
+			folder
+		)
+		part.CanCollide = true
+		markMinimap(part, "Obstacle", obstacle.Name, Color3.fromRGB(255, 184, 0))
+	end
+end
+
 local function buildWorld()
 	local board = Config.World.Board
 	local boardFolder = Instance.new("Folder")
@@ -362,6 +558,11 @@ local function buildWorld()
 	)
 	buildCamp(scaledBoardPosition(board, { 76, -76 }, 0))
 	buildChapel(scaledBoardPosition(board, { 80, 80 }, 0))
+	buildCollectibles()
+	buildObstacleCourse()
+	for index, building in ipairs(Config.World.Buildings) do
+		addBuilding(building, index)
+	end
 end
 
 local function createLimb(name: string, size: Vector3, offset: Vector3, color: Color3, parent: Model)
@@ -383,7 +584,90 @@ local function weld(root: BasePart, part: BasePart)
 	weldConstraint.Parent = root
 end
 
-local function createEnemyRig(template, spawnPosition: Vector3)
+local function createCreatureEnemyRig(template, spawnPosition: Vector3)
+	local model = Instance.new("Model")
+	model.Name = template.Name
+	model:SetAttribute("Damage", template.Damage)
+	model:SetAttribute("Home", spawnPosition)
+
+	local scale = template.Scale or 1
+	local root = Instance.new("Part")
+	root.Name = "HumanoidRootPart"
+	root.Size = Vector3.new(5, 3, 7) * scale
+	root.Transparency = 1
+	root.CanCollide = false
+	root.Position = spawnPosition
+	root.Parent = model
+	model.PrimaryPart = root
+	markMinimap(root, "Enemy", template.Name, template.Color)
+
+	local humanoid = Instance.new("Humanoid")
+	humanoid.MaxHealth = template.Health
+	humanoid.Health = template.Health
+	humanoid.WalkSpeed = template.Speed
+	humanoid.DisplayName = template.Name
+	humanoid.Parent = model
+
+	local body = Instance.new("Part")
+	body.Name = "CreatureBody"
+	body.Shape = Enum.PartType.Ball
+	body.Size = Vector3.new(6, 3.2, 8) * scale
+	body.Color = template.Color
+	body.Material = Enum.Material.SmoothPlastic
+	body.CanCollide = false
+	body.Position = spawnPosition
+	body.Parent = model
+	weld(root, body)
+
+	local head = Instance.new("Part")
+	head.Name = "CreatureHead"
+	head.Shape = Enum.PartType.Ball
+	head.Size = Vector3.new(3, 2.5, 3) * scale
+	head.Color = template.Color:Lerp(Color3.new(1, 1, 1), 0.12)
+	head.Material = Enum.Material.SmoothPlastic
+	head.CanCollide = false
+	head.Position = spawnPosition + Vector3.new(0, 0.8 * scale, -4.2 * scale)
+	head.Parent = model
+	weld(root, head)
+
+	for index = 1, 4 do
+		local side = index <= 2 and -1 or 1
+		local front = index % 2 == 0 and -1 or 1
+		local leg = Instance.new("Part")
+		leg.Name = "CreatureLeg"
+		leg.Size = Vector3.new(1.2, 3, 1.2) * scale
+		leg.Color = template.Color:Lerp(Color3.new(0, 0, 0), 0.16)
+		leg.Material = Enum.Material.SmoothPlastic
+		leg.CanCollide = false
+		leg.Position = spawnPosition + Vector3.new(side * 2.2 * scale, -2.2 * scale, front * 2.4 * scale)
+		leg.Parent = model
+		weld(root, leg)
+	end
+
+	if template.Kind == "spider" then
+		for index = 1, 8 do
+			local angle = (index / 8) * math.pi * 2
+			local leg = Instance.new("Part")
+			leg.Name = "SpiderLeg"
+			leg.Size = Vector3.new(0.7, 0.7, 5.5) * scale
+			leg.Color = template.Color:Lerp(Color3.new(0, 0, 0), 0.2)
+			leg.Material = Enum.Material.SmoothPlastic
+			leg.CanCollide = false
+			leg.CFrame = CFrame.new(
+				spawnPosition + Vector3.new(math.cos(angle) * 3 * scale, -0.8 * scale, math.sin(angle) * 3 * scale)
+			) * CFrame.Angles(0, -angle, 0)
+			leg.Parent = model
+			weld(root, leg)
+		end
+	end
+
+	addLabel(head, template.Name)
+	model:PivotTo(CFrame.new(spawnPosition))
+	model.Parent = enemiesFolder
+	return model
+end
+
+local function createHumanoidEnemyRig(template, spawnPosition: Vector3)
 	local description = Instance.new("HumanoidDescription")
 	description.HeadColor = template.Color:Lerp(Color3.new(1, 1, 1), 0.18)
 	description.TorsoColor = template.Color
@@ -408,21 +692,23 @@ local function createEnemyRig(template, spawnPosition: Vector3)
 		model:ScaleTo(scale)
 	end
 
-	local highlight = Instance.new("Highlight")
-	highlight.FillTransparency = 0.82
-	highlight.FillColor = template.Color
-	highlight.OutlineColor = template.Color:Lerp(Color3.new(1, 1, 1), 0.35)
-	highlight.OutlineTransparency = 0
-	highlight.Parent = model
-
 	local root = model:FindFirstChild("HumanoidRootPart")
 	if root then
+		markMinimap(root, "Enemy", template.Name, template.Color)
 		addLabel(root, template.Name)
 	end
 
 	model:PivotTo(CFrame.new(spawnPosition))
 	model.Parent = enemiesFolder
 	return model
+end
+
+local function createEnemyRig(template, spawnPosition: Vector3)
+	if template.Kind == "beast" or template.Kind == "spider" then
+		return createCreatureEnemyRig(template, spawnPosition)
+	end
+
+	return createHumanoidEnemyRig(template, spawnPosition)
 end
 
 local function spawnEnemies()

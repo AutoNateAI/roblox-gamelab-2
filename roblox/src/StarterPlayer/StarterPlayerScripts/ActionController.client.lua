@@ -20,6 +20,52 @@ local cameraHeight = 6
 local flying = false
 local keysDown = {}
 local lastFlightSync = 0
+local boardWorldSize = Config.World.Board.Size * Config.World.Board.CoordinateScale
+local minimapPreviousPositions = {}
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ActionArenaHud"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local minimap = Instance.new("Frame")
+minimap.Name = "Minimap"
+minimap.AnchorPoint = Vector2.new(1, 1)
+minimap.BackgroundColor3 = Color3.fromRGB(9, 15, 18)
+minimap.BackgroundTransparency = 0.08
+minimap.BorderSizePixel = 0
+minimap.Position = UDim2.new(1, -18, 1, -18)
+minimap.Size = UDim2.fromOffset(220, 220)
+minimap.Parent = screenGui
+
+local minimapCorner = Instance.new("UICorner")
+minimapCorner.CornerRadius = UDim.new(0, 8)
+minimapCorner.Parent = minimap
+
+local minimapStroke = Instance.new("UIStroke")
+minimapStroke.Color = Color3.fromRGB(214, 207, 179)
+minimapStroke.Transparency = 0.25
+minimapStroke.Thickness = 1
+minimapStroke.Parent = minimap
+
+local minimapTitle = Instance.new("TextLabel")
+minimapTitle.BackgroundTransparency = 1
+minimapTitle.Font = Enum.Font.GothamBold
+minimapTitle.Position = UDim2.fromOffset(10, 7)
+minimapTitle.Size = UDim2.new(1, -20, 0, 18)
+minimapTitle.Text = "Eastbrook Map"
+minimapTitle.TextColor3 = Color3.fromRGB(246, 241, 217)
+minimapTitle.TextSize = 13
+minimapTitle.TextXAlignment = Enum.TextXAlignment.Left
+minimapTitle.Parent = minimap
+
+local minimapLayer = Instance.new("Frame")
+minimapLayer.Name = "Layer"
+minimapLayer.BackgroundTransparency = 1
+minimapLayer.ClipsDescendants = true
+minimapLayer.Position = UDim2.fromOffset(8, 28)
+minimapLayer.Size = UDim2.new(1, -16, 1, -36)
+minimapLayer.Parent = minimap
 
 local function getCharacterParts()
 	local character = player.Character
@@ -39,7 +85,7 @@ local function cameraBasis()
 end
 
 local function getMoveVector()
-	local forward, right = cameraBasis()
+	local forward = cameraBasis()
 	local move = Vector3.zero
 
 	if keysDown[Enum.KeyCode.W] then
@@ -47,12 +93,6 @@ local function getMoveVector()
 	end
 	if keysDown[Enum.KeyCode.S] then
 		move -= forward
-	end
-	if keysDown[Enum.KeyCode.D] then
-		move += right
-	end
-	if keysDown[Enum.KeyCode.A] then
-		move -= right
 	end
 	if flying and keysDown[Enum.KeyCode.Space] then
 		move += Vector3.yAxis
@@ -107,11 +147,11 @@ end, Enum.KeyCode.J)
 
 bindAction("ArenaBolt", function()
 	fireAction("HandBolt")
-end, Enum.KeyCode.K)
+end, Enum.KeyCode.D, Enum.KeyCode.K)
 
 bindAction("ArenaFlight", function()
 	setFlying(not flying)
-end, Enum.KeyCode.L)
+end, Enum.KeyCode.A, Enum.KeyCode.L)
 
 bindAction("ArenaSlam", function()
 	fireAction("GroundSlam")
@@ -140,6 +180,108 @@ player.CharacterAdded:Connect(function()
 	if humanoid then
 		humanoid.WalkSpeed = Config.Player.WalkSpeed
 		humanoid.JumpPower = Config.Player.JumpPower
+	end
+end)
+
+local function minimapPoint(position: Vector3)
+	local half = boardWorldSize / 2
+	local x = math.clamp((position.X + half) / boardWorldSize, 0, 1)
+	local y = math.clamp((position.Z + half) / boardWorldSize, 0, 1)
+	return UDim2.fromScale(x, y)
+end
+
+local function makeMapDot(name: string, kind: string, color: Color3, position: Vector3, size: number, rotation: number?)
+	local dot
+	if kind == "Enemy" then
+		dot = Instance.new("TextLabel")
+		dot.BackgroundTransparency = 1
+		dot.Font = Enum.Font.GothamBold
+		dot.Text = "▲"
+		dot.TextScaled = true
+		dot.TextStrokeTransparency = 0.2
+		dot.Rotation = rotation or 0
+	else
+		dot = Instance.new("Frame")
+		dot.BackgroundColor3 = color
+		dot.BorderSizePixel = 0
+		local corner = Instance.new("UICorner")
+		corner.CornerRadius = UDim.new(1, 0)
+		corner.Parent = dot
+	end
+
+	dot.Name = kind .. "_" .. name
+	dot.AnchorPoint = Vector2.new(0.5, 0.5)
+	dot.Position = minimapPoint(position)
+	dot.Size = UDim2.fromOffset(size, size)
+	if dot:IsA("TextLabel") then
+		dot.TextColor3 = color
+	else
+		dot.BackgroundColor3 = color
+	end
+	dot.Parent = minimapLayer
+
+	if kind == "Building" then
+		local label = Instance.new("TextLabel")
+		label.BackgroundTransparency = 1
+		label.Font = Enum.Font.GothamMedium
+		label.Position = UDim2.fromOffset(8, -5)
+		label.Size = UDim2.fromOffset(72, 12)
+		label.Text = name
+		label.TextColor3 = Color3.fromRGB(246, 241, 217)
+		label.TextSize = 8
+		label.TextTruncate = Enum.TextTruncate.AtEnd
+		label.TextXAlignment = Enum.TextXAlignment.Left
+		label.Parent = dot
+	end
+end
+
+local function refreshMinimap()
+	for _, child in ipairs(minimapLayer:GetChildren()) do
+		child:Destroy()
+	end
+
+	makeMapDot("Obstacle Course", "Obstacle", Color3.fromRGB(255, 184, 0), Vector3.new(94, 0, -130), 8)
+
+	local _, _, root = getCharacterParts()
+	if root then
+		makeMapDot("Player", "Player", Color3.fromRGB(255, 255, 255), root.Position, 10)
+	end
+
+	for _, instance in ipairs(Workspace:GetDescendants()) do
+		if instance:IsA("BasePart") then
+			local kind = instance:GetAttribute("MinimapKind")
+			if kind then
+				local name = instance:GetAttribute("MinimapName") or instance.Name
+				local color = instance:GetAttribute("MinimapColor") or Color3.fromRGB(255, 255, 255)
+				local size = 6
+				local rotation = 0
+
+				if kind == "Enemy" then
+					size = 13
+					local previous = minimapPreviousPositions[instance]
+					if previous and (instance.Position - previous).Magnitude > 0.2 then
+						local delta = instance.Position - previous
+						rotation = math.deg(math.atan2(-delta.X, -delta.Z))
+					end
+					minimapPreviousPositions[instance] = instance.Position
+				elseif kind == "Building" then
+					size = 8
+				elseif kind == "Collectible" then
+					size = 7
+				elseif kind == "Obstacle" then
+					size = 6
+				end
+
+				makeMapDot(name, kind, color, instance.Position, size, rotation)
+			end
+		end
+	end
+end
+
+task.spawn(function()
+	while screenGui.Parent do
+		refreshMinimap()
+		task.wait(0.25)
 	end
 end)
 

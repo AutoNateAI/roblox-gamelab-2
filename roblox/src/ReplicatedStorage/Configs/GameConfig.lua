@@ -74,6 +74,70 @@ GameConfig.World = {
 			{ { 0, 0 }, { -20, -10 }, { -12, -14 } },
 		},
 	},
+	Buildings = {
+		{
+			Id = "kellogg-foundation",
+			Name = "W.K. Kellogg Foundation",
+			Position = Vector3.new(-44, 0, -28),
+			Color = Color3.fromRGB(46, 111, 92),
+		},
+		{
+			Id = "food-reimagined",
+			Name = "BC Food Reimagined",
+			Position = Vector3.new(74, 0, 16),
+			Color = Color3.fromRGB(198, 123, 42),
+		},
+		{
+			Id = "gvsu-innovation",
+			Name = "Grand Valley State University Battle Creek Innovation Hub",
+			Position = Vector3.new(122, 0, 78),
+			Color = Color3.fromRGB(28, 92, 154),
+		},
+		{
+			Id = "medc",
+			Name = "Michigan Economic Development Corporation",
+			Position = Vector3.new(-96, 0, -108),
+			Color = Color3.fromRGB(75, 91, 158),
+		},
+		{
+			Id = "battle-creek-unlimited",
+			Name = "Battle Creek Unlimited",
+			Position = Vector3.new(152, 0, -126),
+			Color = Color3.fromRGB(130, 68, 158),
+		},
+	},
+	Collectibles = {
+		{ Name = "Arcane Charge", Position = Vector3.new(-35, 3, 44), Color = Color3.fromRGB(70, 215, 255) },
+		{ Name = "Flight Rune", Position = Vector3.new(48, 3, -48), Color = Color3.fromRGB(255, 214, 88) },
+		{ Name = "Health Spark", Position = Vector3.new(112, 3, 112), Color = Color3.fromRGB(70, 230, 130) },
+		{ Name = "Power Core", Position = Vector3.new(-150, 3, 18), Color = Color3.fromRGB(255, 90, 150) },
+	},
+	ObstacleCourse = {
+		{
+			Name = "Balance Beam",
+			Position = Vector3.new(35, 3, -92),
+			Size = Vector3.new(70, 2, 6),
+			Color = Color3.fromRGB(145, 95, 42),
+		},
+		{
+			Name = "Jump Block A",
+			Position = Vector3.new(70, 4, -118),
+			Size = Vector3.new(14, 8, 14),
+			Color = Color3.fromRGB(99, 112, 126),
+		},
+		{
+			Name = "Jump Block B",
+			Position = Vector3.new(98, 7, -142),
+			Size = Vector3.new(14, 14, 14),
+			Color = Color3.fromRGB(99, 112, 126),
+		},
+		{
+			Name = "Sky Bridge",
+			Position = Vector3.new(132, 11, -166),
+			Size = Vector3.new(60, 3, 10),
+			Color = Color3.fromRGB(105, 74, 48),
+		},
+	},
 	Zones = {
 		{
 			Name = "Eastbrook",
