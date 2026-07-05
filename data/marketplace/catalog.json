@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "AutoNateAI GameLab",
-    "positioning": "AI-powered Roblox publishing for trend games, organization games, educational quests, and creator marketplace offers."
+    "positioning": "Roblox quest packs, paid team campaigns, and custom organization game builds."
   },
   "collections": [
     {
@@ -20,8 +20,8 @@
       "id": "prod_opportunity_arcade_pilot",
       "handle": "opportunity-arcade-pilot",
       "title": "Opportunity Arcade Pilot",
-      "subtitle": "A 10-15 minute Roblox quest for testing the AutoNateAI publishing loop.",
-      "description": "Players collect demand, community, loop, and proof while racing toward a publish-ready capstone.",
+      "subtitle": "A standalone Roblox quest pack for solo practice or invited friends.",
+      "description": "Players collect demand, community, loop, and proof while racing toward a capstone that prepares them for live team events.",
       "collection_id": "col_season_1",
       "collection_title": "Season 1 Quests",
       "type": "roblox-experience",
@@ -30,7 +30,7 @@
       "creator": "AutoNate Core Team",
       "rating": 4.9,
       "badge": "Featured",
-      "category": "Experiences",
+      "category": "Quest Packs",
       "metadata": {
         "quest_id": "opportunity-arcade-pilot",
         "engine": "marketplace",
@@ -40,9 +40,9 @@
       "variants": [
         {
           "id": "var_pilot_playable",
-          "title": "Playable Quest Package",
+          "title": "Quest Pack",
           "sku": "GL-S1-PILOT-PLAYABLE",
-          "price_usd": 2500
+          "price_usd": 35
         }
       ]
     },
@@ -50,27 +50,27 @@
       "id": "prod_trend_sniper_sprint",
       "handle": "trend-sniper-sprint",
       "title": "Trend Sniper Sprint",
-      "subtitle": "Research, prototype, and publish a Roblox trend test in one focused sprint.",
-      "description": "Built for fast validation: monitor player demand, shape a mechanic, launch a playable proof, and decide whether to scale.",
-      "collection_id": "col_services",
-      "collection_title": "Studio Services",
-      "type": "service",
+      "subtitle": "A timed research quest that turns trend signals into team decisions.",
+      "description": "Built for practice before events: monitor demand, choose a mechanic, collect proof, and decide whether the team should scale.",
+      "collection_id": "col_season_1",
+      "collection_title": "Season 1 Quests",
+      "type": "roblox-experience",
       "status": "draft",
       "image": "/assets/vendor-and-bags.jpg",
       "creator": "NateDev Studio",
       "rating": 4.8,
       "badge": "New Release",
-      "category": "Scripts & AI",
+      "category": "Quest Packs",
       "metadata": {
         "engine": "trend-sniper",
-        "delivery": "3-7 day sprint"
+        "delivery": "self-serve quest pack"
       },
       "variants": [
         {
           "id": "var_trend_sprint",
-          "title": "Sprint",
+          "title": "Quest Pack",
           "sku": "GL-SVC-TREND-SPRINT",
-          "price_usd": 5000
+          "price_usd": 50
         }
       ]
     },
@@ -106,8 +106,8 @@
       "id": "prod_education_sim_kit",
       "handle": "education-simulation-kit",
       "title": "Education Simulation Kit",
-      "subtitle": "Reusable Roblox classroom and training mechanics for learning games.",
-      "description": "Includes quest prompts, assessment loops, badge logic, and facilitator-ready game structures.",
+      "subtitle": "Reusable Roblox practice mechanics for solo players, friends, and event prep.",
+      "description": "Includes quest prompts, assessment loops, badge logic, and training structures that prepare players for paid team campaigns.",
       "collection_id": "col_season_1",
       "collection_title": "Season 1 Quests",
       "type": "roblox-experience",
@@ -116,7 +116,7 @@
       "creator": "GameLab Learning",
       "rating": 4.7,
       "badge": "Top Rated",
-      "category": "Education",
+      "category": "Quest Packs",
       "metadata": {
         "engine": "education",
         "delivery": "template kit"
@@ -124,9 +124,9 @@
       "variants": [
         {
           "id": "var_education_sim_kit",
-          "title": "Template Kit",
+          "title": "Training Pack",
           "sku": "GL-S1-EDU-KIT",
-          "price_usd": 1200
+          "price_usd": 25
         }
       ]
     },
@@ -161,9 +161,9 @@
     {
       "id": "prod_live_build_event",
       "handle": "live-build-event",
-      "title": "Live Build Event",
-      "subtitle": "A hosted GameLab event that turns a concept into a playable Roblox demo.",
-      "description": "Designed for community launches, sponsor activations, and creator education sessions.",
+      "title": "Thursday CTF Quest Entry",
+      "subtitle": "A paid team competition entry for one Roblox quest night.",
+      "description": "Players join teams, unlock powers through learning mechanics, and compete for a 25% grand-prize pot.",
       "collection_id": "col_services",
       "collection_title": "Studio Services",
       "type": "event",
@@ -180,9 +180,9 @@
       "variants": [
         {
           "id": "var_live_build_event",
-          "title": "Hosted Event",
+          "title": "Player Entry",
           "sku": "GL-EVT-LIVE-BUILD",
-          "price_usd": 3500
+          "price_usd": 35
         }
       ]
     }

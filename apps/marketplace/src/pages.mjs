@@ -1,5 +1,6 @@
 import {
   categories,
+  eventCalendar,
   events,
   retainers,
   services,
@@ -21,12 +22,12 @@ export function renderHome(catalog) {
       <section class="home-hero">
         <div class="hero-bg"><img src="/assets/eastbrook-dusk.jpg" alt="Season 1 Roblox world" /></div>
         <div class="hero-content">
-          <span class="kicker">Spring 2026 Launch</span>
-          <h1>Neon Vanguard Season</h1>
-          <p>Access game kits, quest systems, Roblox publishing services, and organization-ready experiences built for the next generation of Roblox commerce.</p>
+          <span class="kicker">Every Tuesday + Thursday</span>
+          <h1>Join the Next Quest</h1>
+          <p>Team-based quests through a digital world with real-world effects. Practice the concepts, unlock powers, compete with your crew, and leave more capable than you started.</p>
           <div class="button-row">
-            <a class="primary-button" href="/marketplace">Explore Season Pass</a>
-            <a class="secondary-button" href="/marketplace">View Collection</a>
+            <a class="primary-button" href="/events">View Quest Calendar</a>
+            <a class="secondary-button" href="/marketplace">Browse Quest Packs</a>
           </div>
         </div>
       </section>
@@ -34,8 +35,8 @@ export function renderHome(catalog) {
       <section class="section">
         <div class="section-head">
           <div>
-            <h2>Trending Experiences</h2>
-            <p>The most useful GameLab offers this week.</p>
+            <h2>Quest Packs</h2>
+            <p>Standalone game quests for solo practice or private runs with invited friends.</p>
           </div>
           <a href="/marketplace">View all ${icon("arrow_forward")}</a>
         </div>
@@ -52,21 +53,21 @@ export function renderHome(catalog) {
       <section id="creators" class="spotlight-section">
         <div class="spotlight-image"><img src="/assets/vendor-and-bags.jpg" alt="Creator vendor workspace" /></div>
         <div>
-          <span class="kicker">Creator Spotlight</span>
-          <h2>Vertex Vanguard</h2>
-          <p>Specializing in optimized Roblox environments, reusable quest kits, and custom procedural systems. The studio pattern: build, package, list, sell, and learn from demand.</p>
+          <span class="kicker">Offer Stack</span>
+          <h2>Practice packs, paid campaigns, custom builds</h2>
+          <p>Marketplace packs become training material. Events turn those mechanics into team competitions. Organization services turn program initiatives into custom Roblox worlds.</p>
           <div class="stat-grid">
             <div><strong>98%</strong><span>Positive feedback</span></div>
             <div><strong>50k+</strong><span>Total player touches</span></div>
           </div>
-          <a class="outline-button" href="/services">View Full Portfolio</a>
+          <a class="outline-button" href="/services">Build for an Organization</a>
         </div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Start Building Your Empire</h2>
-          <p>Join the GameLab pipeline for weekly drops, Roblox quest opportunities, and marketplace build notes.</p>
+          <h2>Get the Next Quest Drop</h2>
+          <p>Weekly updates for quest packs, Thursday open events, and paid team campaigns.</p>
           <form>
             <input placeholder="Enter your professional email" type="email" />
             <button type="button">Subscribe Now</button>
@@ -88,7 +89,7 @@ export function renderMarketplace(catalog) {
         <div class="page-toolbar">
           <div>
             <h1>Marketplace</h1>
-            <p>Discover ${catalog.products.length.toLocaleString()} premium products for your next Roblox experience.</p>
+            <p>Buy standalone quest packs for solo practice, invited friends, or event training material before competition night.</p>
           </div>
           <label class="sort-control">Sort by:
             <select><option>Trending</option><option>Newest</option><option>Price: Low to High</option><option>Price: High to Low</option></select>
@@ -248,7 +249,7 @@ export function renderServices() {
       <section class="content-canvas">
         <section class="service-hero">
           <img src="/assets/eastbrook-dusk.jpg" alt="Professional Roblox services" />
-          <div><h1>Professional Organization Services</h1><p>Enterprise-grade custom Roblox worlds, training simulations, optimization, and monetization systems.</p></div>
+          <div><h1>Custom Roblox Builds for Organizations</h1><p>Program initiatives, workforce concepts, school campaigns, and community outcomes turned into branded quest worlds.</p></div>
         </section>
         <div class="service-grid">
           ${services.map(serviceCard).join("")}
@@ -271,11 +272,15 @@ export function renderEvents() {
       <section class="content-canvas">
         <header class="events-hero">
           <img src="/assets/party-questing.jpg" alt="Live GameLab event" />
-          <div><h1>Upcoming Events</h1><p>Master Roblox commerce with live workshops, build-offs, launches, and creator education sessions.</p></div>
+          <div><h1>Team Quest Events</h1><p>Thursday open CTF quests and paid team campaigns where players unlock powers by practicing real concepts, then compete for map advantage.</p></div>
         </header>
         <section class="discord-bento">
-          <div><span class="kicker">${icon("rocket_launch")} Community Exclusive</span><h2>Join the Discord for Early Access</h2><p>Get priority registration for high-demand events and exclusive creator channels.</p><button>Join Discord</button></div>
-          <aside><h3>Host Your Own Event</h3><p>Submit your experience for the official marketplace calendar.</p><a href="#">Become a Partner ${icon("arrow_forward")}</a></aside>
+          <div><span class="kicker">${icon("rocket_launch")} B2C Quest Pipeline</span><h2>$35 team entries. 25% prize-pot grand prize.</h2><p>Players sign up for campaigns, form teams, complete learning mechanics, unlock advantages, and compete in a Roblox capture-the-flag style finale.</p><button>Join Discord</button></div>
+          <aside><h3>Thursday Open Quests</h3><p>Open events run on Thursdays. Tuesday slots support practice packs, invite-only teams, and paid campaign prep.</p><a href="/marketplace">Browse training packs ${icon("arrow_forward")}</a></aside>
+        </section>
+        <section class="event-calendar-section">
+          <div class="section-head"><div><h2>Quest Calendar</h2><p>Use marketplace packs for practice, then join Thursday open quests or paid team campaigns.</p></div><a href="/marketplace">Training packs ${icon("arrow_forward")}</a></div>
+          <div class="quest-calendar">${eventCalendar.map(calendarCard).join("")}</div>
         </section>
         <section>
           <div class="section-head"><h2>Scheduled Events</h2><div>${icon("calendar_today")}${icon("view_list")}</div></div>
@@ -341,8 +346,22 @@ function eventCard(event) {
         <h3>${event.title}</h3>
         <div class="event-meta"><span>${icon("calendar_month")} ${event.date}</span><span>${icon("schedule")} ${event.time}</span><span>${icon("person")} ${event.host}</span></div>
         <p>${event.description}</p>
+        <div class="event-value"><span>${event.price}</span><span>${event.prize}</span></div>
       </div>
       <aside><span>Seats Remaining</span><b class="${event.disabled ? "full" : ""}">${event.seats}</b><button ${event.disabled ? "disabled" : ""}>${event.action}</button></aside>
+    </article>
+  `;
+}
+
+function calendarCard(item) {
+  return `
+    <article class="calendar-card ${item.active ? "active" : ""}">
+      <div class="calendar-date"><span>${item.weekday}</span><b>${item.date}</b></div>
+      <div>
+        <span class="event-type">${item.mode}</span>
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+      </div>
     </article>
   `;
 }
