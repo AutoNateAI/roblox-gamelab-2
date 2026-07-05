@@ -1,0 +1,103 @@
+{
+  "season": {
+    "id": "season-1",
+    "title": "Season 1: Opportunity Arcade",
+    "status": "draft",
+    "targetMinutes": 12,
+    "thesis": "AutoNateAI ships fast Roblox quests that test player demand, teach useful concepts, and become proof for organization partnerships."
+  },
+  "quests": [
+    {
+      "id": "opportunity-arcade-pilot",
+      "title": "Opportunity Arcade Pilot",
+      "status": "ready-to-compose",
+      "engine": "marketplace",
+      "targetMinutes": 12,
+      "audience": "Roblox players who already understand upgrades, collections, and timed challenges.",
+      "buyer": "AutoNateAI internal publishing pipeline.",
+      "logline": "Players race through an arcade of real-world opportunity signals, collect proof, dodge distraction, and beat a capstone pitch timer.",
+      "learningObjectives": [
+        "Recognize market demand signals before building.",
+        "Match a game mechanic to a buyer or player segment.",
+        "Package a playable quest as a lead magnet."
+      ],
+      "acts": [
+        {
+          "id": "signal-scan",
+          "title": "Signal Scan",
+          "zone": "trend-floor",
+          "mission": "collect-demand-signals",
+          "entryScene": null,
+          "exitScene": null,
+          "levelId": "level-2-scout"
+        },
+        {
+          "id": "mechanic-match",
+          "title": "Mechanic Match",
+          "zone": "prototype-bay",
+          "mission": "match-loop-to-audience",
+          "entryScene": null,
+          "exitScene": null,
+          "levelId": "level-3-builder"
+        },
+        {
+          "id": "publish-pitch",
+          "title": "Publish Pitch",
+          "zone": "launch-stage",
+          "mission": "package-playable-proof",
+          "entryScene": null,
+          "exitScene": null,
+          "levelId": "level-4-publisher"
+        }
+      ],
+      "zones": [
+        {
+          "id": "trend-floor",
+          "name": "Trend Floor",
+          "purpose": "Teach players to spot demand before building."
+        },
+        {
+          "id": "prototype-bay",
+          "name": "Prototype Bay",
+          "purpose": "Turn signals into a repeatable Roblox action loop."
+        },
+        {
+          "id": "launch-stage",
+          "name": "Launch Stage",
+          "purpose": "Package the quest for publishing, outreach, and monetization."
+        }
+      ],
+      "concepts": {
+        "positive": [
+          { "id": "demand", "name": "Demand", "zone": "trend-floor", "points": 40 },
+          { "id": "community", "name": "Community", "zone": "trend-floor", "points": 40 },
+          { "id": "loop", "name": "Loop", "zone": "prototype-bay", "points": 50 },
+          { "id": "proof", "name": "Proof", "zone": "launch-stage", "points": 60 }
+        ],
+        "negative": [
+          { "id": "distraction", "name": "Distraction", "zone": "trend-floor", "damage": 10 },
+          { "id": "scope-creep", "name": "Scope Creep", "zone": "prototype-bay", "damage": 15 },
+          { "id": "no-offer", "name": "No Offer", "zone": "launch-stage", "damage": 20 }
+        ]
+      },
+      "boss": {
+        "id": "pitch-timer",
+        "name": "Pitch Timer",
+        "zone": "launch-stage",
+        "requiredPowerUpIds": ["demand", "community", "loop", "proof"],
+        "timeLimitSeconds": 90
+      },
+      "monetizationHooks": [
+        "VIP publisher room",
+        "cosmetic founder badge",
+        "boosted proof collection trail",
+        "private server workshop mode"
+      ],
+      "portalNextActions": [
+        "Pick the first Roblox mechanic to clone as a learning-safe pattern.",
+        "Pull matching Airtable org/program records for sponsor angles.",
+        "Generate the first Luau config pass from this quest brief."
+      ]
+    }
+  ]
+}
