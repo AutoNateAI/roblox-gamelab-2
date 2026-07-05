@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "rojo serve roblox/default.project.json",
     "dev:alt": "rojo serve roblox/default.project.json --port 34873",
-    "marketplace:dev": "node apps/marketplace/server.mjs",
+    "marketplace:dev": "node --watch apps/marketplace/server.mjs",
     "marketplace:build": "node apps/marketplace/scripts/export-static.mjs",
     "marketplace:check": "node apps/marketplace/scripts/check-catalog.mjs",
     "build": "rojo build roblox/default.project.json --output output/exports/claudecraft-action-arena.rbxlx",
