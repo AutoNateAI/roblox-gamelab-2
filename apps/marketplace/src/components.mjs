@@ -31,13 +31,12 @@ export function topNav(active = "home", mode = "full") {
   return `
     <header class="top-shell ${mode === "checkout" ? "checkout-shell" : ""}">
       <nav class="top-nav">
-        <a class="brand" href="/">AutoNateAI GameLab</a>
+        <a class="brand" href="/">AutoNateAI</a>
         ${mode === "checkout" ? `<span class="secure-dot"><i></i>Secure Checkout</span>` : `<div class="nav-links">${links}</div>`}
         <div class="nav-actions">
           <button aria-label="Search">${icon("search")}</button>
           <a aria-label="Cart" href="/checkout">${icon("shopping_cart")}</a>
           <button aria-label="Favorite">${icon("favorite")}</button>
-          <button aria-label="Account">${icon("person")}</button>
         </div>
       </nav>
     </header>

@@ -349,10 +349,11 @@ function eventCard(event) {
 
 function mobileNav(active) {
   const items = [
-    ["home", "Home", "/"],
-    ["marketplace", "Market", "/marketplace"],
-    ["favorite", "Saved", "#"],
-    ["inventory_2", "Library", "/success"],
+    ["home", "Home", "/", "home"],
+    ["marketplace", "Market", "/marketplace", "marketplace"],
+    ["design_services", "Services", "/services", "services"],
+    ["event", "Events", "/events", "events"],
+    ["favorite", "Saved", "#", "saved"],
   ];
-  return `<nav class="mobile-nav">${items.map(([symbol, label, href]) => `<a class="${active === label.toLowerCase() ? "active" : ""}" href="${href}">${icon(symbol)}<span>${label}</span></a>`).join("")}</nav>`;
+  return `<nav class="mobile-nav">${items.map(([symbol, label, href, key]) => `<a class="${active === key ? "active" : ""}" href="${href}">${icon(symbol)}<span>${label}</span></a>`).join("")}</nav>`;
 }

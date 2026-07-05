@@ -1,11 +1,8 @@
 export const navItems = [
-  { label: "Marketplace", href: "/", keys: ["home", "marketplace"] },
-  { label: "Experiences", href: "/marketplace", keys: ["experiences"] },
+  { label: "Home", href: "/", keys: ["home"] },
+  { label: "Marketplace", href: "/marketplace", keys: ["marketplace"] },
   { label: "Services", href: "/services", keys: ["services"] },
   { label: "Events", href: "/events", keys: ["events"] },
-  { label: "Creators", href: "/marketplace#creators", keys: ["creators"] },
-  { label: "Library", href: "/success", keys: ["library"] },
-  { label: "Sell", href: "/services#retainers", keys: ["sell"] },
 ];
 
 export const categories = [
