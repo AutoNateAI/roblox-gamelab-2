@@ -1,0 +1,190 @@
+{
+  "brand": {
+    "name": "AutoNateAI GameLab",
+    "positioning": "AI-powered Roblox publishing for trend games, organization games, educational quests, and creator marketplace offers."
+  },
+  "collections": [
+    {
+      "id": "col_season_1",
+      "handle": "season-1",
+      "title": "Season 1 Quests"
+    },
+    {
+      "id": "col_services",
+      "handle": "studio-services",
+      "title": "Studio Services"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_opportunity_arcade_pilot",
+      "handle": "opportunity-arcade-pilot",
+      "title": "Opportunity Arcade Pilot",
+      "subtitle": "A 10-15 minute Roblox quest for testing the AutoNateAI publishing loop.",
+      "description": "Players collect demand, community, loop, and proof while racing toward a publish-ready capstone.",
+      "collection_id": "col_season_1",
+      "collection_title": "Season 1 Quests",
+      "type": "roblox-experience",
+      "status": "draft",
+      "image": "/assets/party-questing.jpg",
+      "creator": "AutoNate Core Team",
+      "rating": 4.9,
+      "badge": "Featured",
+      "category": "Experiences",
+      "metadata": {
+        "quest_id": "opportunity-arcade-pilot",
+        "engine": "marketplace",
+        "roblox_template": "claudecraft-action-arena",
+        "build_window_days": 7
+      },
+      "variants": [
+        {
+          "id": "var_pilot_playable",
+          "title": "Playable Quest Package",
+          "sku": "GL-S1-PILOT-PLAYABLE",
+          "price_usd": 2500
+        }
+      ]
+    },
+    {
+      "id": "prod_trend_sniper_sprint",
+      "handle": "trend-sniper-sprint",
+      "title": "Trend Sniper Sprint",
+      "subtitle": "Research, prototype, and publish a Roblox trend test in one focused sprint.",
+      "description": "Built for fast validation: monitor player demand, shape a mechanic, launch a playable proof, and decide whether to scale.",
+      "collection_id": "col_services",
+      "collection_title": "Studio Services",
+      "type": "service",
+      "status": "draft",
+      "image": "/assets/vendor-and-bags.jpg",
+      "creator": "NateDev Studio",
+      "rating": 4.8,
+      "badge": "New Release",
+      "category": "Scripts & AI",
+      "metadata": {
+        "engine": "trend-sniper",
+        "delivery": "3-7 day sprint"
+      },
+      "variants": [
+        {
+          "id": "var_trend_sprint",
+          "title": "Sprint",
+          "sku": "GL-SVC-TREND-SPRINT",
+          "price_usd": 5000
+        }
+      ]
+    },
+    {
+      "id": "prod_org_quest_build",
+      "handle": "organization-quest-build",
+      "title": "Organization Quest Build",
+      "subtitle": "Turn a program, campaign, or curriculum into a Roblox experience.",
+      "description": "Designed for nonprofits, cities, schools, churches, and workforce programs that need engagement, proof, and distribution.",
+      "collection_id": "col_services",
+      "collection_title": "Studio Services",
+      "type": "service",
+      "status": "draft",
+      "image": "/assets/eastbrook-dusk.jpg",
+      "creator": "AutoNate Partnerships",
+      "rating": 5,
+      "badge": "Trending",
+      "category": "Services",
+      "metadata": {
+        "engine": "organization",
+        "delivery": "sponsored game package"
+      },
+      "variants": [
+        {
+          "id": "var_org_starter",
+          "title": "Starter Quest",
+          "sku": "GL-SVC-ORG-STARTER",
+          "price_usd": 7500
+        }
+      ]
+    },
+    {
+      "id": "prod_education_sim_kit",
+      "handle": "education-simulation-kit",
+      "title": "Education Simulation Kit",
+      "subtitle": "Reusable Roblox classroom and training mechanics for learning games.",
+      "description": "Includes quest prompts, assessment loops, badge logic, and facilitator-ready game structures.",
+      "collection_id": "col_season_1",
+      "collection_title": "Season 1 Quests",
+      "type": "roblox-experience",
+      "status": "draft",
+      "image": "/assets/title-screen.jpg",
+      "creator": "GameLab Learning",
+      "rating": 4.7,
+      "badge": "Top Rated",
+      "category": "Education",
+      "metadata": {
+        "engine": "education",
+        "delivery": "template kit"
+      },
+      "variants": [
+        {
+          "id": "var_education_sim_kit",
+          "title": "Template Kit",
+          "sku": "GL-S1-EDU-KIT",
+          "price_usd": 1200
+        }
+      ]
+    },
+    {
+      "id": "prod_creator_vendor_pack",
+      "handle": "creator-vendor-pack",
+      "title": "Creator Vendor Pack",
+      "subtitle": "Marketplace listing, product page copy, and asset packaging for Roblox creators.",
+      "description": "A vendor-ready package for creators who want their Roblox assets positioned like commerce products.",
+      "collection_id": "col_services",
+      "collection_title": "Studio Services",
+      "type": "service",
+      "status": "draft",
+      "image": "/assets/vendor-and-bags.jpg",
+      "creator": "AutoNate Marketplace Ops",
+      "rating": 4.6,
+      "badge": "Vendor Tool",
+      "category": "Creator Tools",
+      "metadata": {
+        "engine": "marketplace",
+        "delivery": "listing package"
+      },
+      "variants": [
+        {
+          "id": "var_creator_vendor_pack",
+          "title": "Vendor Listing Package",
+          "sku": "GL-SVC-VENDOR-PACK",
+          "price_usd": 900
+        }
+      ]
+    },
+    {
+      "id": "prod_live_build_event",
+      "handle": "live-build-event",
+      "title": "Live Build Event",
+      "subtitle": "A hosted GameLab event that turns a concept into a playable Roblox demo.",
+      "description": "Designed for community launches, sponsor activations, and creator education sessions.",
+      "collection_id": "col_services",
+      "collection_title": "Studio Services",
+      "type": "event",
+      "status": "draft",
+      "image": "/assets/party-questing.jpg",
+      "creator": "AutoNate Events",
+      "rating": 4.9,
+      "badge": "Live",
+      "category": "Events",
+      "metadata": {
+        "engine": "community",
+        "delivery": "live event"
+      },
+      "variants": [
+        {
+          "id": "var_live_build_event",
+          "title": "Hosted Event",
+          "sku": "GL-EVT-LIVE-BUILD",
+          "price_usd": 3500
+        }
+      ]
+    }
+  ]
+}
