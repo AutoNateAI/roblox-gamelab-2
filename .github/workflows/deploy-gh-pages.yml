@@ -32,6 +32,9 @@ jobs:
       - name: Check marketplace catalog
         run: npm run marketplace:check
 
+      - name: Prepare export directory
+        run: mkdir -p output/exports
+
       - name: Build Roblox place
         run: npm run build
 
