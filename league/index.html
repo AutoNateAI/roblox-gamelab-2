@@ -1,0 +1,99 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>League | AutoNateAI</title>
+        <meta name="description" content="Capture the Flag (v1, borrowed from Screeps: Arena's simplest arena). Each side has one flag that cannot be destroyed or moved. First creep to touch the enemy's flag wins instantly. If time expires with neither flag touched, the match is a draw. No economy scoring, no judgment calls — just a position check. Future seasons can layer in economy (Spawn and Swamp style) or area-control scoring (Collect and Control style) once there's real gameplay data." />
+        <meta property="og:title" content="League | AutoNateAI" />
+        <meta property="og:description" content="Capture the Flag (v1, borrowed from Screeps: Arena's simplest arena). Each side has one flag that cannot be destroyed or moved. First creep to touch the enemy's flag wins instantly. If time expires with neither flag touched, the match is a draw. No economy scoring, no judgment calls — just a position check. Future seasons can layer in economy (Spawn and Swamp style) or area-control scoring (Collect and Control style) once there's real gameplay data." />
+        <meta property="og:image" content="/assets/og/league.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links"><a class="" href="/">Home</a><a class="" href="/programs">Programs</a><a class="active" href="/league">League</a></div>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="nav-cta" href="/programs">Enroll Now</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="league-page">
+      <header class="events-hero">
+        <img src="/assets/screeps/screeps-08.jpg" alt="Screeps arena combat" />
+        <div>
+          <span class="kicker"><span class="material-symbols-outlined">flag</span> League / Tournament</span>
+          <h1>League Season 1 — Capture the Flag</h1>
+          <p>Enter your bot in the next AutoNateAI Screeps League</p>
+        </div>
+      </header>
+
+      <section class="league-grid">
+        <article class="league-rules">
+          <h2>Win condition</h2>
+          <p>Capture the Flag (v1, borrowed from Screeps: Arena's simplest arena). Each side has one flag that cannot be destroyed or moved. First creep to touch the enemy's flag wins instantly. If time expires with neither flag touched, the match is a draw. No economy scoring, no judgment calls — just a position check. Future seasons can layer in economy (Spawn and Swamp style) or area-control scoring (Collect and Control style) once there's real gameplay data.</p>
+        </article>
+        <aside class="league-facts">
+          <div><span>Format</span><b>Single Elimination</b></div>
+          <div><span>Entry Fee</span><b>TBD</b></div>
+          <div><span>Status</span><b class="status-pill ">Coming Soon</b></div>
+          <button disabled>Register Interest</button>
+        </aside>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head"><div><h2>How it works</h2><p>Run on our own private Screeps server &mdash; not the public World.</p></div></div>
+        <div class="league-how">
+          <div><span class="material-symbols-outlined">dns</span><h3>Our own server</h3><p>Every match runs on infrastructure we control. No live PvP risk to a student's room outside of a scheduled match.</p></div>
+          <div><span class="material-symbols-outlined">flag</span><h3>Capture the Flag</h3><p>Each side gets one flag that can't be destroyed or moved. First creep to touch the enemy's flag wins instantly.</p></div>
+          <div><span class="material-symbols-outlined">emoji_events</span><h3>Bracket season</h3><p>Bots &mdash; often capstone projects from the AI Software Architect path &mdash; face off in a scheduled, spectator-friendly bracket.</p></div>
+        </div>
+      </section>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>An AI Software Architect league built inside a real, persistent Screeps colony. Build first. Dissect the architecture. Repeat until it's yours.</p>
+        </div>
+        
+    <div>
+      <h5>Path</h5>
+      <ul><li><a href="/programs">All Programs</a></li><li><a href="/league">The Screeps League</a></li><li><a href="/programs">Explorer → Certificate</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="/">About AutoNateAI</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Screeps screenshots courtesy of Screeps (screeps.com) &mdash; used editorially to describe the curriculum.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

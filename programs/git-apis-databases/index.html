@@ -1,0 +1,174 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Git, APIs & Databases | AutoNateAI</title>
+        <meta name="description" content="Put the Screeps bot under real version control and deployment tooling: Git history, the Screeps API/CLI deploy pipeline, and Memory-as-a-database schema design." />
+        <meta property="og:title" content="Git, APIs &amp; Databases | AutoNateAI" />
+        <meta property="og:description" content="Put the Screeps bot under real version control and deployment tooling: Git history, the Screeps API/CLI deploy pipeline, and Memory-as-a-database schema design." />
+        <meta property="og:image" content="/assets/og/git-apis-databases.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links"><a class="" href="/">Home</a><a class="active" href="/programs">Programs</a><a class="" href="/league">League</a></div>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="nav-cta" href="/programs">Enroll Now</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="product-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs">Programs</a><span>/</span><b>Git, APIs &amp; Databases</b></nav>
+      <section class="product-detail">
+        <div class="product-gallery">
+          <img src="/assets/screeps/screeps-04.jpg" alt="Git, APIs &amp; Databases preview" />
+          <div><img src="/assets/screeps/screeps-04.jpg" alt="Screeps gameplay" /><img src="/assets/screeps/screeps-07.jpg" alt="Screeps gameplay" /><img src="/assets/screeps/screeps-01.jpg" alt="Screeps gameplay" /></div>
+        </div>
+        <aside class="buy-panel">
+          <span class="kicker">Developer Badge</span>
+          <h1>Git, APIs &amp; Databases</h1>
+          <p>Put the Screeps bot under real version control and deployment tooling: Git history, the Screeps API/CLI deploy pipeline, and Memory-as-a-database schema design.</p>
+          <div class="detail-rating"><span class="status-pill live">Enrolling Now</span><span>Program 3 of 6 &middot; 3 weeks</span></div>
+          <dl>
+            <dt>Learning outcomes</dt><dd>Use Git branches and commits meaningfully; deploy code via the Screeps CLI/API; design a simple data schema; use a diff tool to review AI-suggested changes before deploying.</dd>
+            <dt>Project</dt><dd>Bot code lives in Git, deploys via CLI, and pulls live stats into an external tracker via the Screeps API.</dd>
+            <dt>Portfolio artifact</dt><dd>A Git repo with commit history + a live external stats dashboard.</dd>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head"><div><h2>Choose how you enroll</h2><p>Every offering covers the same six sessions and the same badge.</p></div></div>
+        <div class="offerings-grid">
+    <article class="offering-card">
+      <span class="kicker">Self-Paced</span>
+      <h3>$129<small>Per Program</small></h3>
+      <p>Self-paced, no set meetings</p>
+      
+      <a class="primary-button full" href="/checkout?program=git-apis-databases&offering=rec95cn0TaYyaM7io">Enroll &mdash; Self-Paced</a>
+    </article>
+  
+    <article class="offering-card">
+      <span class="kicker">Cohort</span>
+      <h3>$499<small>Per Program</small></h3>
+      <p>Twice weekly, live</p>
+      <p class="offering-capacity"><span class="material-symbols-outlined">group</span> Capped at 12 students</p>
+      <a class="primary-button full" href="/checkout?program=git-apis-databases&offering=recuZdMyyhItr6TxY">Enroll &mdash; Cohort</a>
+    </article>
+  </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head"><h2>Inside the 3 weeks</h2></div>
+        <div class="session-list">
+          
+            <article class="session-card">
+              <span class="session-number">01</span>
+              <div>
+                <h3>Session 1: Git for a Living Codebase</h3>
+                <p>Initialize Git for the bot codebase; learn commit hygiene and branching for experiments.</p>
+                <div class="session-meta"><span><b>Live:</b> Turn the existing bot folder into a Git repo; make a branch to test a risky change safely.</span><span><b>Homework:</b> Make 3 small commits with meaningful messages before next session.</span></div>
+              </div>
+            </article>
+          
+            <article class="session-card">
+              <span class="session-number">02</span>
+              <div>
+                <h3>Session 2: Deploying via the Screeps API</h3>
+                <p>Set up the Screeps CLI/API deploy pipeline (e.g. screeps-api/grunt-screeps).</p>
+                <div class="session-meta"><span><b>Live:</b> Configure and run a CLI deploy; push a one-line change and confirm it takes effect live.</span><span><b>Homework:</b> Successfully deploy a small change to your live bot via CLI.</span></div>
+              </div>
+            </article>
+          
+            <article class="session-card">
+              <span class="session-number">03</span>
+              <div>
+                <h3>Session 3: Memory as a Database</h3>
+                <p>Treat Memory as a lightweight database; design a clean schema for roles, room state, and task queues.</p>
+                <div class="session-meta"><span><b>Live:</b> Redesign the bot's Memory schema as a small data model; implement it with AI assistance.</span><span><b>Homework:</b> Redesign your Memory schema on paper before touching code.</span></div>
+              </div>
+            </article>
+          
+            <article class="session-card">
+              <span class="session-number">04</span>
+              <div>
+                <h3>Session 4: External Stats Dashboard</h3>
+                <p>Pull live Screeps stats via the API into an external dashboard (tie-in to Airtable or a webhook).</p>
+                <div class="session-meta"><span><b>Live:</b> Build a simple external tracker pulling energy/creep-count stats from the Screeps API.</span><span><b>Homework:</b> Add one new stat to your external dashboard.</span></div>
+              </div>
+            </article>
+          
+            <article class="session-card">
+              <span class="session-number">05</span>
+              <div>
+                <h3>Session 5: Reviewing Before Deploying</h3>
+                <p>Use a diff tool to review AI-suggested changes critically before deploying to a live bot.</p>
+                <div class="session-meta"><span><b>Live:</b> Ask the AI agent for a refactor; review the diff line-by-line before approving the deploy.</span><span><b>Homework:</b> Review an AI-suggested diff and write one sentence on whether to accept it and why.</span></div>
+              </div>
+            </article>
+          
+            <article class="session-card">
+              <span class="session-number">06</span>
+              <div>
+                <h3>Session 6: Project Checkpoint - Developer Badge</h3>
+                <p>Confirm the full pipeline works end-to-end: Git, CLI deploy, live bot, external stats.</p>
+                <div class="session-meta"><span><b>Live:</b> Demo the full pipeline live: commit, deploy, and show the dashboard updating in real time.</span><span><b>Homework:</b> Share your Git repo link and dashboard screenshot in the portfolio folder.</span></div>
+              </div>
+            </article>
+          
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head"><h2>Other programs on the path</h2><a href="/programs">Back to all programs <span class="material-symbols-outlined">arrow_forward</span></a></div>
+        <div class="mini-grid"><a class="mini-card" href="/programs/ai-assisted-development-foundations"><img src="/assets/screeps/screeps-02.jpg" alt="AI-Assisted Development Foundations" /><div><strong>AI-Assisted Development Foundations</strong><span>Explorer Badge</span></div><b>$129+</b></a><a class="mini-card" href="/programs/understanding-generated-code"><img src="/assets/screeps/screeps-03.jpg" alt="Understanding Generated Code" /><div><strong>Understanding Generated Code</strong><span>Builder Badge</span></div><b>$129+</b></a><a class="mini-card" href="/programs/software-architecture-patterns"><img src="/assets/screeps/screeps-05.jpg" alt="Software Architecture Patterns" /><div><strong>Software Architecture Patterns</strong><span>Studio Member Badge</span></div><b>$129+</b></a></div>
+      </section>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>An AI Software Architect league built inside a real, persistent Screeps colony. Build first. Dissect the architecture. Repeat until it's yours.</p>
+        </div>
+        
+    <div>
+      <h5>Path</h5>
+      <ul><li><a href="/programs">All Programs</a></li><li><a href="/league">The Screeps League</a></li><li><a href="/programs">Explorer → Certificate</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="/">About AutoNateAI</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Contact</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Screeps screenshots courtesy of Screeps (screeps.com) &mdash; used editorially to describe the curriculum.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

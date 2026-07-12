@@ -3,22 +3,34 @@
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>AutoNateAI GameLab | Marketplace</title>
+        <title>AutoNateAI | AI Software Architect League</title>
+        <meta name="description" content="An AI Software Architect league taught entirely inside Screeps, a real persistent JavaScript programming game. Build first, dissect the architecture, repeat." />
+        <meta property="og:title" content="AutoNateAI | AI Software Architect League" />
+        <meta property="og:description" content="An AI Software Architect league taught entirely inside Screeps, a real persistent JavaScript programming game. Build first, dissect the architecture, repeat." />
+        <meta property="og:image" content="/assets/og/programs.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles.css" />
       </head>
       <body>
         
     <header class="top-shell ">
       <nav class="top-nav">
-        <a class="brand" href="/">AutoNateAI</a>
-        <div class="nav-links"><a class="active" href="/">Home</a><a class="" href="/marketplace">Marketplace</a><a class="" href="/services">Services</a><a class="" href="/events">Events</a></div>
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links"><a class="active" href="/">Home</a><a class="" href="/programs">Programs</a><a class="" href="/league">League</a></div>
         <div class="nav-actions">
-          <button aria-label="Search"><span class="material-symbols-outlined">search</span></button>
-          <a aria-label="Cart" href="/checkout"><span class="material-symbols-outlined">shopping_cart</span></a>
-          <button aria-label="Favorite"><span class="material-symbols-outlined">favorite</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="nav-cta" href="/programs">Enroll Now</a>
         </div>
       </nav>
     </header>
@@ -26,137 +38,123 @@
         
     <main>
       <section class="home-hero">
-        <div class="hero-bg"><img src="/assets/eastbrook-dusk.jpg" alt="Season 1 Roblox world" /></div>
+        <div class="hero-bg"><img src="/assets/screeps/screeps-01.jpg" alt="A Screeps room in progress" /></div>
         <div class="hero-content">
-          <span class="kicker">Every Tuesday + Thursday</span>
-          <h1>Join the Next Quest</h1>
-          <p>Team-based quests through a digital world with real-world effects. Practice the concepts, unlock powers, compete with your crew, and leave more capable than you started.</p>
+          <span class="kicker"><span class="material-symbols-outlined">terminal</span> AI Software Architect League</span>
+          <h1>Build Systems Inside a Living Screeps Colony</h1>
+          <p>Foundation path. Build first with AI, then dissect the architecture, repeat until the pattern is internalized. Every other path assumes these skills. Screeps is a real, persistent JavaScript game &mdash; the code you write runs 24/7, whether you're watching or not. You build with an AI coding agent first, then dissect the architecture until it's genuinely yours.</p>
           <div class="button-row">
-            <a class="primary-button" href="/events">View Quest Calendar</a>
-            <a class="secondary-button" href="/marketplace">Browse Quest Packs</a>
+            <a class="primary-button" href="/programs">View the Path <span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="secondary-button" href="/league">See the League</a>
           </div>
+        </div>
+      </section>
+
+      <section class="section badge-strip-section">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">military_tech</span> Progression</span>
+            <h2>Explorer &rarr; Certificate</h2>
+            <p>Six programs. One continuously-running bot. Every badge is earned by shipping a working system, not finishing a video.</p>
+          </div>
+        </div>
+        <div class="badge-strip">
+          <div class="badge-step"><span>01</span><b>Explorer</b></div><i class="badge-connector"></i><div class="badge-step"><span>02</span><b>Builder</b></div><i class="badge-connector"></i><div class="badge-step"><span>03</span><b>Developer</b></div><i class="badge-connector"></i><div class="badge-step"><span>04</span><b>Studio Member</b></div><i class="badge-connector"></i><div class="badge-step"><span>05</span><b>Lead Developer</b></div><i class="badge-connector"></i><div class="badge-step"><span>06</span><b>Certificate</b></div>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <h2>Quest Packs</h2>
-            <p>Standalone game quests for solo practice or private runs with invited friends.</p>
+            <h2>The Path</h2>
+            <p>Beginners to intermediate developers who want to work fluently with AI coding agents.</p>
           </div>
-          <a href="/marketplace">View all <span class="material-symbols-outlined">arrow_forward</span></a>
+          <a href="/programs">View all programs <span class="material-symbols-outlined">arrow_forward</span></a>
         </div>
         <div class="trending-grid">
-    <article class="market-card featured-card">
-      <a class="card-media" href="/store/products/opportunity-arcade-pilot">
-        <img src="/assets/party-questing.jpg" alt="Opportunity Arcade Pilot" />
-        <span class="card-badge">Featured</span>
-        <span class="card-price">$35</span>
-        <span class="quick-action">Quick Add</span>
+    <article class="market-card ">
+      <a class="card-media" href="/programs/ai-assisted-development-foundations">
+        <img src="/assets/screeps/screeps-02.jpg" alt="AI-Assisted Development Foundations" />
+        <span class="card-badge">Explorer Badge</span>
+        <span class="card-price">$129+</span>
       </a>
       <div class="card-body">
         <div class="card-title-row">
-          <h3>Opportunity Arcade Pilot</h3>
-          <span class="rating"><span class="material-symbols-outlined">star</span> 4.9</span>
+          <span class="program-sequence">Program 1</span>
+          <span class="status-pill live">Enrolling Now</span>
         </div>
-        <p>A standalone Roblox quest pack for solo practice or invited friends.</p>
+        <h3>AI-Assisted Development Foundations</h3>
+        <p>Build a working single-room Screeps economy bot (spawn, harvest, build, upgrade) using an AI coding agent (Codex/Claude Code/Gemini CLI) before understanding syntax. Screeps is a real JavaScript programming game — you write code that controls persistent units in a live world — so 'working' means the bot actually runs and survives.</p>
         <div class="card-meta">
-          <span>By AutoNate Core Team</span>
-          <b>Quest Packs</b>
+          <span><span class="material-symbols-outlined">calendar_month</span> 3 weeks</span>
+          <b>Explorer Badge</b>
         </div>
       </div>
     </article>
   
     <article class="market-card ">
-      <a class="card-media" href="/store/products/trend-sniper-sprint">
-        <img src="/assets/vendor-and-bags.jpg" alt="Trend Sniper Sprint" />
-        <span class="card-badge">New Release</span>
-        <span class="card-price">$50</span>
-        <span class="quick-action">Quick Add</span>
+      <a class="card-media" href="/programs/understanding-generated-code">
+        <img src="/assets/screeps/screeps-03.jpg" alt="Understanding Generated Code" />
+        <span class="card-badge">Builder Badge</span>
+        <span class="card-price">$129+</span>
       </a>
       <div class="card-body">
         <div class="card-title-row">
-          <h3>Trend Sniper Sprint</h3>
-          <span class="rating"><span class="material-symbols-outlined">star</span> 4.8</span>
+          <span class="program-sequence">Program 2</span>
+          <span class="status-pill live">Enrolling Now</span>
         </div>
-        <p>A timed research quest that turns trend signals into team decisions.</p>
+        <h3>Understanding Generated Code</h3>
+        <p>Go back through the Program 1 Screeps bot and break down the architecture piece by piece: the tick loop, Memory persistence, role modules, and spawn logic. Students learn to read code they didn't originally write.</p>
         <div class="card-meta">
-          <span>By NateDev Studio</span>
-          <b>Quest Packs</b>
+          <span><span class="material-symbols-outlined">calendar_month</span> 3 weeks</span>
+          <b>Builder Badge</b>
         </div>
       </div>
     </article>
   
     <article class="market-card ">
-      <a class="card-media" href="/store/products/organization-quest-build">
-        <img src="/assets/eastbrook-dusk.jpg" alt="Organization Quest Build" />
-        <span class="card-badge">Trending</span>
-        <span class="card-price">$7,500</span>
-        <span class="quick-action">Quick Add</span>
+      <a class="card-media" href="/programs/git-apis-databases">
+        <img src="/assets/screeps/screeps-04.jpg" alt="Git, APIs &amp; Databases" />
+        <span class="card-badge">Developer Badge</span>
+        <span class="card-price">$129+</span>
       </a>
       <div class="card-body">
         <div class="card-title-row">
-          <h3>Organization Quest Build</h3>
-          <span class="rating"><span class="material-symbols-outlined">star</span> 5</span>
+          <span class="program-sequence">Program 3</span>
+          <span class="status-pill live">Enrolling Now</span>
         </div>
-        <p>Turn a program, campaign, or curriculum into a Roblox experience.</p>
+        <h3>Git, APIs &amp; Databases</h3>
+        <p>Put the Screeps bot under real version control and deployment tooling: Git history, the Screeps API/CLI deploy pipeline, and Memory-as-a-database schema design.</p>
         <div class="card-meta">
-          <span>By AutoNate Partnerships</span>
-          <b>Services</b>
+          <span><span class="material-symbols-outlined">calendar_month</span> 3 weeks</span>
+          <b>Developer Badge</b>
         </div>
       </div>
     </article>
   </div>
       </section>
 
-      <section class="section">
-        <h2>Browse by Category</h2>
-        <div class="category-bento">
-          
-    <a class="category-tile large" href="/marketplace">
-      <img src="/assets/eastbrook-dusk.jpg" alt="Quest Packs" />
-      <div><h3>Quest Packs</h3><p>$25-$50 Packs</p></div>
-    </a>
-  
-    <a class="category-tile " href="/marketplace">
-      <img src="/assets/title-screen.jpg" alt="Team Training" />
-      <div><h3>Team Training</h3><p>Invite-only runs</p></div>
-    </a>
-  
-    <a class="category-tile " href="/marketplace">
-      <img src="/assets/vendor-and-bags.jpg" alt="Organization Builds" />
-      <div><h3>Organization Builds</h3><p>Custom games</p></div>
-    </a>
-  
-    <a class="category-tile wide" href="/marketplace">
-      <img src="/assets/party-questing.jpg" alt="CTF Events" />
-      <div><h3>CTF Events</h3><p>$35 Entries</p></div>
-    </a>
-  
-        </div>
-      </section>
-
-      <section id="creators" class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/vendor-and-bags.jpg" alt="Creator vendor workspace" /></div>
+      <section class="spotlight-section">
+        <div class="spotlight-image"><img src="/assets/screeps/screeps-07.jpg" alt="Screeps combat room" /></div>
         <div>
-          <span class="kicker">Offer Stack</span>
-          <h2>Practice packs, paid campaigns, custom builds</h2>
-          <p>Marketplace packs become training material. Events turn those mechanics into team competitions. Organization services turn program initiatives into custom Roblox worlds.</p>
+          <span class="kicker"><span class="material-symbols-outlined">flag</span> League</span>
+          <h2>League Season 1 — Capture the Flag</h2>
+          <p>Capture the Flag (v1, borrowed from Screeps: Arena's simplest arena). Run on our own private Screeps server &mdash; students' bots compete directly, no live public-world risk, fully within our control.</p>
           <div class="stat-grid">
-            <div><strong>98%</strong><span>Positive feedback</span></div>
-            <div><strong>50k+</strong><span>Total player touches</span></div>
+            <div><strong>Single Elimination</strong><span>Format</span></div>
+            <div><strong>TBD</strong><span>Entry Fee</span></div>
           </div>
-          <a class="outline-button" href="/services">Build for an Organization</a>
+          <a class="outline-button" href="/league">Coming Soon &mdash; Learn More</a>
         </div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Get the Next Quest Drop</h2>
-          <p>Weekly updates for quest packs, Thursday open events, and paid team campaigns.</p>
+          <h2>Get Notified When Enrollment Opens</h2>
+          <p>New cohorts, self-paced access, and League season dates &mdash; straight to your inbox.</p>
           <form>
-            <input placeholder="Enter your professional email" type="email" />
-            <button type="button">Subscribe Now</button>
+            <input placeholder="Enter your email" type="email" />
+            <button type="button">Notify Me</button>
           </form>
           <small>By subscribing, you agree to our Terms of Service and Privacy Policy.</small>
         </div>
@@ -167,31 +165,24 @@
     <footer class="site-footer">
       <div class="footer-grid">
         <div>
-          <strong>AutoNateAI</strong>
-          <p>Empowering the next generation of Roblox creators with premium AI-driven assets and marketplace tools.</p>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>An AI Software Architect league built inside a real, persistent Screeps colony. Build first. Dissect the architecture. Repeat until it's yours.</p>
         </div>
         
     <div>
-      <h5>Marketplace</h5>
-      <ul><li><a href="#">Trending Now</a></li><li><a href="#">New Releases</a></li><li><a href="#">Creator Spotlight</a></li><li><a href="#">Enterprise Kits</a></li></ul>
-    </div>
-  
-        
-    <div>
-      <h5>Resources</h5>
-      <ul><li><a href="#">Developer Portal</a></li><li><a href="#">Asset Guidelines</a></li><li><a href="#">Optimization Guide</a></li><li><a href="#">Support Hub</a></li></ul>
+      <h5>Path</h5>
+      <ul><li><a href="/programs">All Programs</a></li><li><a href="/league">The Screeps League</a></li><li><a href="/programs">Explorer → Certificate</a></li></ul>
     </div>
   
         
     <div>
       <h5>Company</h5>
-      <ul><li><a href="#">About Us</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Contact</a></li></ul>
+      <ul><li><a href="/">About AutoNateAI</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Contact</a></li></ul>
     </div>
   
       </div>
       <div class="footer-bottom">
-        <span>© 2026 AutoNateAI GameLab. All rights reserved. Built for the Roblox Creator Economy.</span>
-        <span class="footer-icons"><span class="material-symbols-outlined">share</span><span class="material-symbols-outlined">language</span></span>
+        <span>&copy; 2026 AutoNateAI. Screeps screenshots courtesy of Screeps (screeps.com) &mdash; used editorially to describe the curriculum.</span>
       </div>
     </footer>
   
