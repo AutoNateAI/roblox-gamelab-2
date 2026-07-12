@@ -23,11 +23,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          node --version
+          npm --version
+          npm ci || {
+            cat /home/runner/.npm/_logs/*-debug-0.log
+            exit 1
+          }
 
       - name: Check marketplace catalog
         run: npm run marketplace:check
