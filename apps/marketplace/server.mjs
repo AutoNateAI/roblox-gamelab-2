@@ -4,11 +4,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   renderCheckout,
-  renderEvents,
   renderHome,
-  renderMarketplace,
-  renderProductDetail,
-  renderServices,
+  renderLeague,
+  renderProgramDetail,
+  renderPrograms,
   renderSuccess,
 } from "./src/pages.mjs";
 
@@ -75,18 +74,29 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url || "/", `http://${request.headers.host}`);
 
   try {
-    const pageRoutes = new Set(["/", "/marketplace", "/checkout", "/success", "/services", "/events"]);
+    const pageRoutes = new Set(["/", "/programs", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
-      const catalog = await readJson("data/marketplace/catalog.json");
+      const programsData = await readJson("data/marketplace/programs.json");
       const renderers = {
         "/": renderHome,
-        "/marketplace": renderMarketplace,
+        "/programs": renderPrograms,
+        "/league": renderLeague,
         "/checkout": renderCheckout,
         "/success": renderSuccess,
-        "/services": renderServices,
-        "/events": renderEvents,
       };
-      html(response, 200, renderers[url.pathname](catalog));
+      html(response, 200, renderers[url.pathname](programsData));
+      return;
+    }
+
+    if (url.pathname.startsWith("/programs/")) {
+      const handle = url.pathname.split("/").filter(Boolean).at(-1);
+      const programsData = await readJson("data/marketplace/programs.json");
+      const program = programsData.programs.find((item) => item.handle === handle);
+      if (!program) {
+        json(response, 404, { error: "Program not found" });
+        return;
+      }
+      html(response, 200, renderProgramDetail(programsData, program));
       return;
     }
 
@@ -100,31 +110,8 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (url.pathname === "/api/gamelab/season-1") {
-      json(response, 200, await readJson("data/season-1/quests.json"));
-      return;
-    }
-
-    if (url.pathname === "/api/gamelab/quests") {
-      const season = await readJson("data/season-1/quests.json");
-      json(response, 200, season.quests);
-      return;
-    }
-
-    if (url.pathname === "/store/products") {
-      json(response, 200, await readJson("data/marketplace/catalog.json"));
-      return;
-    }
-
-    if (url.pathname.startsWith("/store/products/")) {
-      const handle = url.pathname.split("/").filter(Boolean).at(-1);
-      const catalog = await readJson("data/marketplace/catalog.json");
-      const product = catalog.products.find((item) => item.handle === handle);
-      if (!product) {
-        json(response, 404, { error: "Product not found" });
-        return;
-      }
-      html(response, 200, renderProductDetail(catalog, product));
+    if (url.pathname === "/programs.json") {
+      json(response, 200, await readJson("data/marketplace/programs.json"));
       return;
     }
 
@@ -135,5 +122,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, () => {
-  console.log(`AutoNateAI GameLab marketplace running at http://localhost:${port}`);
+  console.log(`AutoNateAI marketplace running at http://localhost:${port}`);
 });

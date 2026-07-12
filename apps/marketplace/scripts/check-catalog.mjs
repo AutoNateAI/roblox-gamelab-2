@@ -1,28 +1,32 @@
 import { readFile } from "node:fs/promises";
 
-const catalog = JSON.parse(await readFile("data/marketplace/catalog.json", "utf8"));
-const season = JSON.parse(await readFile("data/season-1/quests.json", "utf8"));
+const data = JSON.parse(await readFile("data/marketplace/programs.json", "utf8"));
 
-const productHandles = new Set();
 const errors = [];
+const handles = new Set();
 
-for (const product of catalog.products || []) {
-  if (!product.title || !product.handle) {
-    errors.push("Every product needs a title and handle.");
+if (!data.path || !data.path.name) {
+  errors.push("Missing path metadata.");
+}
+
+for (const program of data.programs || []) {
+  if (!program.handle || !program.name) {
+    errors.push("Every program needs a handle and name.");
   }
-  if (productHandles.has(product.handle)) {
-    errors.push(`Duplicate product handle: ${product.handle}`);
+  if (handles.has(program.handle)) {
+    errors.push(`Duplicate program handle: ${program.handle}`);
   }
-  productHandles.add(product.handle);
-  if (!Array.isArray(product.variants) || product.variants.length === 0) {
-    errors.push(`${product.handle} needs at least one variant.`);
+  handles.add(program.handle);
+  if (!Array.isArray(program.offerings) || program.offerings.length === 0) {
+    errors.push(`${program.handle} needs at least one Program Offering.`);
+  }
+  if (!Array.isArray(program.sessions) || program.sessions.length === 0) {
+    errors.push(`${program.handle} needs at least one Session.`);
   }
 }
 
-for (const quest of season.quests || []) {
-  if (!quest.id || !quest.title || !Array.isArray(quest.acts)) {
-    errors.push(`Invalid Season 1 quest: ${quest.id || "missing-id"}`);
-  }
+if (!data.league) {
+  errors.push("Missing league data.");
 }
 
 if (errors.length) {
@@ -30,4 +34,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Catalog OK: ${catalog.products.length} products, ${season.quests.length} quests.`);
+console.log(
+  `Programs OK: ${data.programs.length} programs, ${data.programs.reduce((n, p) => n + p.offerings.length, 0)} offerings.`,
+);

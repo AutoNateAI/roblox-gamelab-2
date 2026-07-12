@@ -3,11 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   renderCheckout,
-  renderEvents,
   renderHome,
-  renderMarketplace,
-  renderProductDetail,
-  renderServices,
+  renderLeague,
+  renderProgramDetail,
+  renderPrograms,
   renderSuccess,
 } from "../src/pages.mjs";
 
@@ -16,20 +15,16 @@ const rootDir = path.resolve(__dirname, "../../..");
 const publicDir = path.join(rootDir, "apps/marketplace/public");
 const outDir = path.join(rootDir, "dist/site");
 
-const catalog = JSON.parse(
-  await readFile(path.join(rootDir, "data/marketplace/catalog.json"), "utf8"),
-);
-const season = JSON.parse(
-  await readFile(path.join(rootDir, "data/season-1/quests.json"), "utf8"),
+const programsData = JSON.parse(
+  await readFile(path.join(rootDir, "data/marketplace/programs.json"), "utf8"),
 );
 
 const routes = [
-  ["index.html", renderHome(catalog)],
-  ["marketplace/index.html", renderMarketplace(catalog)],
-  ["checkout/index.html", renderCheckout(catalog)],
-  ["success/index.html", renderSuccess(catalog)],
-  ["services/index.html", renderServices(catalog)],
-  ["events/index.html", renderEvents(catalog)],
+  ["index.html", renderHome(programsData)],
+  ["programs/index.html", renderPrograms(programsData)],
+  ["league/index.html", renderLeague(programsData)],
+  ["checkout/index.html", renderCheckout(programsData)],
+  ["success/index.html", renderSuccess(programsData)],
 ];
 
 await rm(outDir, { recursive: true, force: true });
@@ -41,10 +36,10 @@ for (const [routePath, html] of routes) {
   await writeFile(filePath, html);
 }
 
-for (const product of catalog.products) {
-  const filePath = path.join(outDir, "store/products", product.handle, "index.html");
+for (const program of programsData.programs) {
+  const filePath = path.join(outDir, "programs", program.handle, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderProductDetail(catalog, product));
+  await writeFile(filePath, renderProgramDetail(programsData, program));
 }
 
 await cp(path.join(publicDir, "styles.css"), path.join(outDir, "styles.css"));
@@ -53,23 +48,19 @@ await cp(path.join(publicDir, "assets"), path.join(outDir, "assets"), {
   recursive: true,
 });
 
-await mkdir(path.join(outDir, "store/products"), { recursive: true });
 await writeFile(
-  path.join(outDir, "store/products/index.json"),
-  JSON.stringify(catalog, null, 2),
-);
-await mkdir(path.join(outDir, "api/gamelab/season-1"), { recursive: true });
-await writeFile(
-  path.join(outDir, "api/gamelab/season-1/index.json"),
-  JSON.stringify(season, null, 2),
+  path.join(outDir, "programs.json"),
+  JSON.stringify(programsData, null, 2),
 );
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 await writeFile(
   path.join(outDir, "404.html"),
-  renderHome(catalog).replace(
-    "<title>AutoNateAI GameLab | Marketplace</title>",
-    "<title>Page Not Found | AutoNateAI GameLab</title>",
+  renderHome(programsData).replace(
+    "<title>AutoNateAI | AI Software Architect League</title>",
+    "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
 
-console.log(`Exported ${routes.length} marketplace pages to ${path.relative(rootDir, outDir)}`);
+console.log(
+  `Exported ${routes.length + programsData.programs.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
+);

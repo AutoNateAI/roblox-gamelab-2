@@ -1,6 +1,11 @@
-import { navItems } from "./data.mjs";
+import { navItems, screepsScreenshots } from "./data.mjs";
+
+function cardShot(program) {
+  return screepsScreenshots[(program.sequence || 0) % screepsScreenshots.length];
+}
 
 export function money(value) {
+  if (value === null || value === undefined) return "—";
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -20,6 +25,10 @@ export function icon(name) {
   return `<span class="material-symbols-outlined">${name}</span>`;
 }
 
+export function statusLabel(status) {
+  return status === "Active" ? "Enrolling Now" : "Coming Soon";
+}
+
 export function topNav(active = "home", mode = "full") {
   const links = navItems
     .map((item) => {
@@ -31,33 +40,30 @@ export function topNav(active = "home", mode = "full") {
   return `
     <header class="top-shell ${mode === "checkout" ? "checkout-shell" : ""}">
       <nav class="top-nav">
-        <a class="brand" href="/">AutoNateAI</a>
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
         ${mode === "checkout" ? `<span class="secure-dot"><i></i>Secure Checkout</span>` : `<div class="nav-links">${links}</div>`}
         <div class="nav-actions">
-          <button aria-label="Search">${icon("search")}</button>
-          <a aria-label="Cart" href="/checkout">${icon("shopping_cart")}</a>
-          <button aria-label="Favorite">${icon("favorite")}</button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Enroll Now</a>`}
         </div>
       </nav>
     </header>
   `;
 }
 
-export function footer(active = "home") {
+export function footer() {
   return `
     <footer class="site-footer">
       <div class="footer-grid">
         <div>
-          <strong>AutoNateAI</strong>
-          <p>Empowering the next generation of Roblox creators with premium AI-driven assets and marketplace tools.</p>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>An AI Software Architect league built inside a real, persistent Screeps colony. Build first. Dissect the architecture. Repeat until it's yours.</p>
         </div>
-        ${footerColumn("Marketplace", ["Trending Now", "New Releases", "Creator Spotlight", "Enterprise Kits"], active)}
-        ${footerColumn("Resources", ["Developer Portal", "Asset Guidelines", "Optimization Guide", "Support Hub"], active)}
-        ${footerColumn("Company", ["About Us", "Terms of Service", "Privacy Policy", "Contact"], active)}
+        ${footerColumn("Path", [["All Programs", "/programs"], ["The Screeps League", "/league"], ["Explorer → Certificate", "/programs"]])}
+        ${footerColumn("Company", [["About AutoNateAI", "/"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
-        <span>© 2026 AutoNateAI GameLab. All rights reserved. Built for the Roblox Creator Economy.</span>
-        <span class="footer-icons">${icon("share")}${icon("language")}</span>
+        <span>&copy; 2026 AutoNateAI. Screeps screenshots courtesy of Screeps (screeps.com) &mdash; used editorially to describe the curriculum.</span>
       </div>
     </footer>
   `;
@@ -67,84 +73,92 @@ function footerColumn(title, items) {
   return `
     <div>
       <h5>${title}</h5>
-      <ul>${items.map((item) => `<li><a href="#">${item}</a></li>`).join("")}</ul>
+      <ul>${items.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join("")}</ul>
     </div>
   `;
 }
 
-export function pageShell({ title, active, body, mode = "full" }) {
+const SITE_NAME = "AutoNateAI";
+const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
+const DEFAULT_DESCRIPTION =
+  "An AI Software Architect league taught entirely inside Screeps, a real persistent JavaScript programming game. Build first, dissect the architecture, repeat.";
+
+export function pageShell({
+  title,
+  active,
+  body,
+  mode = "full",
+  ogImage = DEFAULT_OG_IMAGE,
+  description = DEFAULT_DESCRIPTION,
+}) {
   return `<!doctype html>
     <html lang="en">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>${title}</title>
+        <meta name="description" content="${escapeHtml(description)}" />
+        <meta property="og:title" content="${escapeHtml(title)}" />
+        <meta property="og:description" content="${escapeHtml(description)}" />
+        <meta property="og:image" content="${ogImage}" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/styles.css" />
       </head>
       <body>
         ${topNav(active, mode)}
         ${body}
-        ${mode === "checkout" ? "" : footer(active)}
+        ${mode === "checkout" ? "" : footer()}
         <script type="module" src="/app.js"></script>
       </body>
     </html>`;
 }
 
-export function productCard(product, options = {}) {
-  const variant = product.variants?.[0] || { price_usd: 0 };
-  const featured = options.featured || product.badge === "Featured";
+export function programCard(program) {
+  const cheapest = program.offerings?.[0];
+  const available = program.status === "Active";
 
   return `
-    <article class="market-card ${featured ? "featured-card" : ""}">
-      <a class="card-media" href="/store/products/${product.handle}">
-        <img src="${product.image}" alt="${escapeHtml(product.title)}" />
-        <span class="card-badge">${escapeHtml(product.badge || product.collection_title)}</span>
-        <span class="card-price">${money(variant.price_usd)}</span>
-        <span class="quick-action">Quick Add</span>
+    <article class="market-card ${available ? "" : "coming-soon"}">
+      <a class="card-media" href="/programs/${program.handle}">
+        <img src="${cardShot(program)}" alt="${escapeHtml(program.name)}" />
+        <span class="card-badge">${escapeHtml(program.badge)}</span>
+        <span class="card-price">${cheapest ? `${money(cheapest.price)}+` : "TBD"}</span>
       </a>
       <div class="card-body">
         <div class="card-title-row">
-          <h3>${escapeHtml(product.title)}</h3>
-          <span class="rating">${icon("star")} ${product.rating || "4.8"}</span>
+          <span class="program-sequence">Program ${program.sequence}</span>
+          <span class="status-pill ${available ? "live" : ""}">${statusLabel(program.status)}</span>
         </div>
-        <p>${escapeHtml(product.subtitle || product.description)}</p>
+        <h3>${escapeHtml(program.name)}</h3>
+        <p>${escapeHtml(program.description)}</p>
         <div class="card-meta">
-          <span>By ${escapeHtml(product.creator || "AutoNateAI")}</span>
-          <b>${escapeHtml(product.category || product.type)}</b>
+          <span>${icon("calendar_month")} ${program.durationWeeks || 3} weeks</span>
+          <b>${escapeHtml(program.badge)}</b>
         </div>
       </div>
     </article>
   `;
 }
 
-export function sidebarFilters() {
+export function offeringCard(offering, program) {
   return `
-    <aside class="side-filters">
-      <div>
-        <h2>Filters</h2>
-        <p>Refine Marketplace</p>
-      </div>
-      ${filterButton("category", "Categories", true)}
-      <div class="filter-checks">
-        <label><input type="checkbox" /> 3D Assets</label>
-        <label><input type="checkbox" checked /> Scripts & AI</label>
-        <label><input type="checkbox" /> UI Kits</label>
-      </div>
-      ${filterButton("label", "Tags")}
-      ${filterButton("payments", "Price Range")}
-      <input class="range" type="range" />
-      <div class="range-labels"><span>$0</span><span>$7,500+</span></div>
-      ${filterButton("speed", "Difficulty")}
-      ${filterButton("inventory_2", "Asset Type")}
-      ${filterButton("toggle_on", "Status")}
-      <button class="filter-apply">Apply Filters</button>
-    </aside>
+    <article class="offering-card">
+      <span class="kicker">${escapeHtml(offering.deliveryType)}</span>
+      <h3>${money(offering.price)}<small>${escapeHtml(offering.priceUnit || "")}</small></h3>
+      <p>${escapeHtml(offering.meetingFrequency || "")}</p>
+      ${offering.capacity ? `<p class="offering-capacity">${icon("group")} Capped at ${offering.capacity} students</p>` : ""}
+      <a class="primary-button full" href="/checkout?program=${program.handle}&offering=${offering.id}">Enroll &mdash; ${escapeHtml(offering.deliveryType)}</a>
+    </article>
   `;
-}
-
-function filterButton(symbol, label, active = false) {
-  return `<button class="filter-button ${active ? "active" : ""}">${icon(symbol)}${label}</button>`;
 }

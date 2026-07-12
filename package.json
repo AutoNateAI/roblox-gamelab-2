@@ -9,6 +9,9 @@
     "marketplace:dev": "node --watch apps/marketplace/server.mjs",
     "marketplace:build": "node apps/marketplace/scripts/export-static.mjs",
     "marketplace:check": "node apps/marketplace/scripts/check-catalog.mjs",
+    "marketplace:sync": "node apps/marketplace/scripts/sync-airtable.mjs",
+    "marketplace:og": "node apps/marketplace/scripts/generate-og-images.mjs",
+    "marketplace:admin": "node --watch apps/marketplace/admin-server.mjs",
     "build": "rojo build roblox/default.project.json --output output/exports/claudecraft-action-arena.rbxlx",
     "format": "stylua roblox/src",
     "format:check": "stylua --check roblox/src"
@@ -16,5 +19,9 @@
   "devDependencies": {
     "@johnnymorganz/stylua-bin": "2.5.2",
     "rojo": "1.0.3-rojo7.6.1"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "sharp": "^0.35.3"
   }
 }
