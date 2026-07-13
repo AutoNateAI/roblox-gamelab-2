@@ -1,4 +1,4 @@
-document.querySelectorAll("button, .primary-button, .secondary-button, .outline-button").forEach((element) => {
+document.querySelectorAll("button, .primary-button, .secondary-button, .outline-button, .filter-row button").forEach((element) => {
   element.addEventListener("mousedown", () => element.classList.add("pressed"));
   element.addEventListener("mouseup", () => element.classList.remove("pressed"));
   element.addEventListener("mouseleave", () => element.classList.remove("pressed"));
@@ -80,8 +80,39 @@ if (catalog && successProgramEl) {
   if (program && offering) {
     successProgramEl.textContent = program.name;
     const offeringEl = document.querySelector("[data-success-offering]");
-    if (offeringEl) offeringEl.textContent = `${program.name} — ${offering.deliveryType}`;
+    if (offeringEl) offeringEl.textContent = `${program.name} - ${offering.deliveryType}`;
     const totalEl = document.querySelector("[data-success-total]");
     if (totalEl) totalEl.textContent = money(offering.price);
   }
 }
+
+// --- Article search / category filters ---
+const articleSearch = document.querySelector("[data-article-search]");
+const articleGrid = document.querySelector("[data-article-grid]");
+const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+let activeArticleFilter = "All";
+
+function filterArticles() {
+  if (!articleGrid) return;
+  const query = (articleSearch?.value || "").trim().toLowerCase();
+  const cards = Array.from(articleGrid.querySelectorAll("[data-category]"));
+
+  cards.forEach((card) => {
+    const categoryMatch = activeArticleFilter === "All" || card.dataset.category === activeArticleFilter;
+    const textMatch = !query || (card.dataset.search || "").includes(query);
+    card.hidden = !(categoryMatch && textMatch);
+  });
+
+  articleGrid.classList.toggle("is-empty", cards.every((card) => card.hidden));
+}
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeArticleFilter = button.dataset.filter || "All";
+    filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+    filterArticles();
+  });
+});
+
+filterButtons[0]?.classList.add("active");
+articleSearch?.addEventListener("input", filterArticles);
