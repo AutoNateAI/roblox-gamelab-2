@@ -409,6 +409,45 @@ h1 {
   gap: var(--gutter);
 }
 
+.trending-grid .market-card:only-child,
+.market-grid .market-card:only-child {
+  max-width: 620px;
+}
+
+.value-grid,
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.value-grid article {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 26px;
+}
+
+.value-grid article > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: var(--secondary-soft);
+  color: var(--secondary);
+  margin-bottom: 18px;
+}
+
+.value-grid h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.value-grid p {
+  color: var(--on-variant);
+  line-height: 1.55;
+  margin: 0;
+}
+
 .market-card {
   overflow: hidden;
   border: 1px solid var(--outline);
@@ -622,6 +661,13 @@ h1 {
   padding: 48px var(--margin) var(--section);
 }
 
+.articles-page,
+.article-page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 48px var(--margin) var(--section);
+}
+
 .page-toolbar {
   display: flex;
   align-items: end;
@@ -639,6 +685,164 @@ h1 {
   margin: 0;
   color: var(--on-variant);
   max-width: 640px;
+}
+
+.content-tools {
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  margin-bottom: 34px;
+  padding: 22px;
+}
+
+.content-tools label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  color: var(--on-variant);
+  padding: 0 14px;
+}
+
+.content-tools input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--on-surface);
+  padding: 16px 0;
+}
+
+.content-tools input:focus {
+  outline: 0;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-row button {
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  color: var(--on-variant);
+  cursor: pointer;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 10px 14px;
+  text-transform: uppercase;
+}
+
+.filter-row button.active,
+.filter-row button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.article-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.article-grid.is-empty::after {
+  content: "No articles match that search.";
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  color: var(--on-variant);
+  padding: 28px;
+}
+
+.article-card {
+  overflow: hidden;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+}
+
+.article-card[hidden] {
+  display: none;
+}
+
+.article-card a {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+}
+
+.article-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.article-card div {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 22px;
+}
+
+.article-card h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.article-card p {
+  color: var(--on-variant);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-row span {
+  border: 1px solid var(--outline);
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 8px;
+  text-transform: uppercase;
+}
+
+.article-detail {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.article-detail header {
+  margin-bottom: 34px;
+}
+
+.article-detail header p {
+  color: var(--on-variant);
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.article-detail > img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  margin-bottom: 34px;
+}
+
+.article-body {
+  display: grid;
+  gap: 20px;
+  color: var(--on-variant);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.article-body p {
+  margin: 0;
 }
 
 .events-hero {
@@ -935,6 +1139,14 @@ h1 {
   color: var(--on-variant);
   line-height: 1.55;
   margin: 0 0 14px;
+}
+
+.session-card .session-date {
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .session-meta {
@@ -1312,7 +1524,9 @@ h1 {
   }
 
   .trending-grid,
-  .market-grid {
+  .market-grid,
+  .value-grid,
+  .article-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1360,7 +1574,9 @@ h1 {
   .product-gallery div,
   .two-col,
   .league-grid,
-  .session-card {
+  .session-card,
+  .value-grid,
+  .article-grid {
     grid-template-columns: 1fr;
   }
 

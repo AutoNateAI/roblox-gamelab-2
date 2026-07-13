@@ -2,6 +2,8 @@ import { mkdir, readFile, rm, writeFile, cp } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  renderArticleDetail,
+  renderArticles,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -9,6 +11,7 @@ import {
   renderPrograms,
   renderSuccess,
 } from "../src/pages.mjs";
+import { articles } from "../src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
@@ -22,6 +25,7 @@ const programsData = JSON.parse(
 const routes = [
   ["index.html", renderHome(programsData)],
   ["programs/index.html", renderPrograms(programsData)],
+  ["articles/index.html", renderArticles()],
   ["league/index.html", renderLeague(programsData)],
   ["checkout/index.html", renderCheckout(programsData)],
   ["success/index.html", renderSuccess(programsData)],
@@ -34,6 +38,12 @@ for (const [routePath, html] of routes) {
   const filePath = path.join(outDir, routePath);
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, html);
+}
+
+for (const article of articles) {
+  const filePath = path.join(outDir, "articles", article.handle, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderArticleDetail(article));
 }
 
 for (const program of programsData.programs) {
@@ -56,11 +66,11 @@ await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | AI Software Architect League</title>",
+    "<title>AutoNateAI | AI Software Architect Path for Youth</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
 
 console.log(
-  `Exported ${routes.length + programsData.programs.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
+  `Exported ${routes.length + programsData.programs.length + articles.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
 );

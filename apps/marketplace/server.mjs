@@ -3,6 +3,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  renderArticleDetail,
+  renderArticles,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -10,6 +12,7 @@ import {
   renderPrograms,
   renderSuccess,
 } from "./src/pages.mjs";
+import { articles } from "./src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -74,17 +77,29 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url || "/", `http://${request.headers.host}`);
 
   try {
-    const pageRoutes = new Set(["/", "/programs", "/league", "/checkout", "/success"]);
+    const pageRoutes = new Set(["/", "/programs", "/articles", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       const renderers = {
         "/": renderHome,
         "/programs": renderPrograms,
+        "/articles": renderArticles,
         "/league": renderLeague,
         "/checkout": renderCheckout,
         "/success": renderSuccess,
       };
       html(response, 200, renderers[url.pathname](programsData));
+      return;
+    }
+
+    if (url.pathname.startsWith("/articles/")) {
+      const handle = url.pathname.split("/").filter(Boolean).at(-1);
+      const article = articles.find((item) => item.handle === handle);
+      if (!article) {
+        json(response, 404, { error: "Article not found" });
+        return;
+      }
+      html(response, 200, renderArticleDetail(article));
       return;
     }
 

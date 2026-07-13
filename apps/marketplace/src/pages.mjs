@@ -1,4 +1,4 @@
-import { badgeProgression, screepsScreenshots } from "./data.mjs";
+import { articles, badgeProgression, screepsScreenshots } from "./data.mjs";
 import {
   escapeHtml,
   footer,
@@ -17,43 +17,48 @@ function shot(index) {
 
 export function renderHome(data) {
   const { path, programs, league } = data;
-  const featured = programs.slice(0, 3);
+  const featured = programs.slice(0, 1);
+  const primaryProgram = featured[0];
 
   const body = `
     <main>
       <section class="home-hero">
         <div class="hero-bg"><img src="${shot(0)}" alt="A Screeps room in progress" /></div>
         <div class="hero-content">
-          <span class="kicker">${icon("terminal")} AI Software Architect League</span>
-          <h1>Build Systems Inside a Living Screeps Colony</h1>
-          <p>${escapeHtml(path.description)} Screeps is a real, persistent JavaScript game &mdash; the code you write runs 24/7, whether you're watching or not. You build with an AI coding agent first, then dissect the architecture until it's genuinely yours.</p>
+          <span class="kicker">${icon("terminal")} Youth AI + Coding Program</span>
+          <h1>Teach students to think in systems by building a living AI-powered colony.</h1>
+          <p>AutoNateAI uses Screeps &mdash; a real JavaScript strategy world &mdash; to help students learn critical thinking, Git, AI-assisted coding, debugging, and software architecture. They do not just watch lessons. They build a bot that has to survive, adapt, and compete.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs">View the Path ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/league">See the League</a>
+            <a class="primary-button" href="/programs/${primaryProgram.handle}">Enroll for $250 ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/articles/what-is-screeps">What is Screeps?</a>
           </div>
-        </div>
-      </section>
-
-      <section class="section badge-strip-section">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("military_tech")} Progression</span>
-            <h2>Explorer &rarr; Certificate</h2>
-            <p>Six programs. One continuously-running bot. Every badge is earned by shipping a working system, not finishing a video.</p>
-          </div>
-        </div>
-        <div class="badge-strip">
-          ${badgeProgression.map((badge, i) => `<div class="badge-step"><span>${String(i + 1).padStart(2, "0")}</span><b>${badge}</b></div>`).join(`<i class="badge-connector"></i>`)}
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <h2>The Path</h2>
-            <p>${escapeHtml(path.targetAudience)}</p>
+            <span class="kicker">${icon("public")} Why this works</span>
+            <h2>A game world where code has consequences.</h2>
+            <p>Screeps makes software architecture visible. Students write code to control workers, manage energy, remember state, use Git, collaborate with AI, and test strategies against a live environment.</p>
           </div>
-          <a href="/programs">View all programs ${icon("arrow_forward")}</a>
+        </div>
+        <div class="value-grid">
+          <article><span>${icon("psychology")}</span><h3>Systems thinking</h3><p>Students learn loops, bottlenecks, resources, feedback, and tradeoffs through a colony they can see.</p></article>
+          <article><span>${icon("smart_toy")}</span><h3>AI collaboration</h3><p>They use AI to build faster, then learn to inspect, question, and improve the generated code.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Git foundations</h3><p>Every student stores and shares code in a repo, building the habits of real software work.</p></article>
+          <article><span>${icon("emoji_events")}</span><h3>Battle day</h3><p>The final session is a private-server tournament where strategies meet reality.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("school")} First Program</span>
+            <h2>AI Software Architect Path</h2>
+            <p>Three weeks. Six live evening sessions. One student-owned bot repo. One final cohort battle.</p>
+          </div>
+          <a href="/programs">View program ${icon("arrow_forward")}</a>
         </div>
         <div class="trending-grid">${featured.map((program) => programCard(program)).join("")}</div>
       </section>
@@ -61,36 +66,50 @@ export function renderHome(data) {
       <section class="spotlight-section">
         <div class="spotlight-image"><img src="${shot(6)}" alt="Screeps combat room" /></div>
         <div>
-          <span class="kicker">${icon("flag")} League</span>
-          <h2>${escapeHtml(league.season?.name || "AutoNateAI Screeps League")}</h2>
-          <p>${escapeHtml(league.season?.winCondition?.split(".")[0] || "")}. Run on our own private Screeps server &mdash; students' bots compete directly, no live public-world risk, fully within our control.</p>
+          <span class="kicker">${icon("flag")} Final Session</span>
+          <h2>${escapeHtml(league.season?.name || "Battle Day")}</h2>
+          <p>${escapeHtml(league.product?.cta || "")} The competition is not just about winning. It gives students a reason to test assumptions, explain decisions, and see how systems behave under pressure.</p>
           <div class="stat-grid">
             <div><strong>${escapeHtml(league.season?.format || "TBD")}</strong><span>Format</span></div>
-            <div><strong>${league.season?.entryFee ? money(league.season.entryFee) : "TBD"}</strong><span>Entry Fee</span></div>
+            <div><strong>Included</strong><span>Battle Day</span></div>
           </div>
-          <a class="outline-button" href="/league">${statusLabel(league.season?.status)} &mdash; Learn More</a>
+          <a class="outline-button" href="/league">See Battle Day</a>
         </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("article")} Articles</span>
+            <h2>Explain the world before asking families to buy in.</h2>
+            <p>Guides, strategy notes, and tutorials help students and parents understand what Screeps is and why it builds durable thinking skills.</p>
+          </div>
+          <a href="/articles">Browse articles ${icon("arrow_forward")}</a>
+        </div>
+        <div class="article-grid">${articles.slice(0, 3).map((article) => articleCard(article)).join("")}</div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Get Notified When Enrollment Opens</h2>
-          <p>New cohorts, self-paced access, and League season dates &mdash; straight to your inbox.</p>
+          <h2>Ready for the August cohort?</h2>
+          <p>Program week opens Monday, August 3. Live sessions run Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
-            <button type="button">Notify Me</button>
+            <button type="button">Request Info</button>
           </form>
-          <small>By subscribing, you agree to our Terms of Service and Privacy Policy.</small>
+          <small>Discord onboarding, local setup help, and the program repo are included.</small>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "AutoNateAI | AI Software Architect League",
+    title: "AutoNateAI | AI Software Architect Path for Youth",
     active: "home",
     body,
     ogImage: "/assets/og/programs.jpg",
+    description:
+      "A 3-week youth coding program where students learn systems thinking, Git, AI-assisted coding, and debugging by building bots in Screeps.",
   });
 }
 
@@ -100,9 +119,9 @@ export function renderPrograms(data) {
     <main class="programs-page">
       <div class="page-toolbar">
         <div>
-          <span class="kicker">${icon("route")} ${escapeHtml(path.name)}</span>
-          <h1>The Path</h1>
-          <p>${escapeHtml(path.description)} ${escapeHtml(path.estimatedDuration)}.</p>
+          <span class="kicker">${icon("route")} Program Marketplace</span>
+          <h1>One focused program to start the path.</h1>
+          <p>${escapeHtml(path.description)} ${escapeHtml(path.estimatedDuration)}. Tagged to the ${escapeHtml(path.name)} path.</p>
         </div>
       </div>
       <div class="market-grid">${programs.map((program) => programCard(program)).join("")}</div>
@@ -134,8 +153,9 @@ export function renderProgramDetail(data, program) {
           <span class="kicker">${escapeHtml(program.badge)}</span>
           <h1>${escapeHtml(program.name)}</h1>
           <p>${escapeHtml(program.description)}</p>
-          <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>Program ${program.sequence} of 6 &middot; ${program.durationWeeks || 3} weeks</span></div>
+          <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 3} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
           <dl>
+            <dt>Start</dt><dd>${escapeHtml(program.cohortNote || program.startDate || "Next cohort TBD")}</dd>
             <dt>Learning outcomes</dt><dd>${escapeHtml(program.learningOutcomes)}</dd>
             <dt>Project</dt><dd>${escapeHtml(program.projectSummary)}</dd>
             <dt>Portfolio artifact</dt><dd>${escapeHtml(program.portfolioArtifact)}</dd>
@@ -144,7 +164,7 @@ export function renderProgramDetail(data, program) {
       </section>
 
       <section class="section compact">
-        <div class="section-head"><div><h2>Choose how you enroll</h2><p>Every offering covers the same six sessions and the same badge.</p></div></div>
+        <div class="section-head"><div><h2>Enroll in the August cohort</h2><p>Setup help, Discord access, the preconfigured program repo, Git introduction, and battle day are included.</p></div></div>
         <div class="offerings-grid">${program.offerings.map((offering) => offeringCard(offering, program)).join("")}</div>
       </section>
 
@@ -158,6 +178,7 @@ export function renderProgramDetail(data, program) {
               <span class="session-number">${String(session.number).padStart(2, "0")}</span>
               <div>
                 <h3>${escapeHtml(session.name)}</h3>
+                ${session.date ? `<p class="session-date">${escapeHtml(session.date)}</p>` : ""}
                 <p>${escapeHtml(session.objectives)}</p>
                 <div class="session-meta"><span><b>Live:</b> ${escapeHtml(session.liveActivity)}</span><span><b>Homework:</b> ${escapeHtml(session.homework)}</span></div>
               </div>
@@ -168,10 +189,14 @@ export function renderProgramDetail(data, program) {
         </div>
       </section>
 
-      <section class="section compact">
+      ${
+        related.length
+          ? `<section class="section compact">
         <div class="section-head"><h2>Other programs on the path</h2><a href="/programs">Back to all programs ${icon("arrow_forward")}</a></div>
         <div class="mini-grid">${related.map((p) => miniProgramCard(p)).join("")}</div>
-      </section>
+      </section>`
+          : ""
+      }
     </main>
   `;
 
@@ -208,7 +233,7 @@ export function renderLeague(data) {
         </article>
         <aside class="league-facts">
           <div><span>Format</span><b>${escapeHtml(season?.format || "TBD")}</b></div>
-          <div><span>Entry Fee</span><b>${season?.entryFee ? money(season.entryFee) : "TBD"}</b></div>
+          <div><span>Entry Fee</span><b>Included</b></div>
           <div><span>Status</span><b class="status-pill ${available ? "live" : ""}">${statusLabel(season?.status)}</b></div>
           <button ${available ? "" : "disabled"}>${available ? "Register Your Bot" : "Register Interest"}</button>
         </aside>
@@ -231,6 +256,64 @@ export function renderLeague(data) {
     body,
     ogImage: "/assets/og/league.jpg",
     description: season?.winCondition || "",
+  });
+}
+
+export function renderArticles() {
+  const body = `
+    <main class="articles-page">
+      <div class="page-toolbar">
+        <div>
+          <span class="kicker">${icon("article")} Articles / Tutorials / Strategy</span>
+          <h1>Learn the world before you enter it.</h1>
+          <p>Searchable, filterable content for students, families, educators, and partners who want to understand how Screeps supports critical thinking through code.</p>
+        </div>
+      </div>
+      <div class="content-tools">
+        <label>${icon("search")} <input type="search" placeholder="Search articles, strategy, Git, Screeps..." data-article-search /></label>
+        <div class="filter-row" data-article-filters>
+          ${["All", ...new Set(articles.map((article) => article.category))].map((category) => `<button type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}
+        </div>
+      </div>
+      <div class="article-grid" data-article-grid>${articles.map((article) => articleCard(article)).join("")}</div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Articles | AutoNateAI",
+    active: "articles",
+    body,
+    ogImage: "/assets/og/default.jpg",
+    description:
+      "Articles, tutorials, and strategy notes about Screeps, youth coding, AI-assisted development, Git, and systems thinking.",
+  });
+}
+
+export function renderArticleDetail(article) {
+  const body = `
+    <main class="article-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/articles">Articles</a><span>/</span><b>${escapeHtml(article.title)}</b></nav>
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
+          <h1>${escapeHtml(article.title)}</h1>
+          <p>${escapeHtml(article.summary)}</p>
+          <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+        </header>
+        <img src="${article.image}" alt="${escapeHtml(article.title)}" />
+        <div class="article-body">
+          ${article.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+        </div>
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${article.title} | AutoNateAI`,
+    active: "articles",
+    body,
+    ogImage: article.image,
+    description: article.summary,
   });
 }
 
@@ -327,4 +410,20 @@ function paymentMethod(symbol, label, active = false) {
 function miniProgramCard(program) {
   const cheapest = program.offerings?.[0];
   return `<a class="mini-card" href="/programs/${program.handle}"><img src="${shot(program.sequence)}" alt="${escapeHtml(program.name)}" /><div><strong>${escapeHtml(program.name)}</strong><span>${escapeHtml(program.badge)}</span></div><b>${cheapest ? `${money(cheapest.price)}+` : "TBD"}</b></a>`;
+}
+
+function articleCard(article) {
+  return `
+    <article class="article-card" data-category="${escapeHtml(article.category)}" data-search="${escapeHtml(`${article.title} ${article.summary} ${article.tags.join(" ")}`.toLowerCase())}">
+      <a href="/articles/${article.handle}">
+        <img src="${article.image}" alt="${escapeHtml(article.title)}" />
+        <div>
+          <span class="kicker">${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
+          <h3>${escapeHtml(article.title)}</h3>
+          <p>${escapeHtml(article.summary)}</p>
+          <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+        </div>
+      </a>
+    </article>
+  `;
 }

@@ -57,9 +57,9 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>An AI Software Architect league built inside a real, persistent Screeps colony. Build first. Dissect the architecture. Repeat until it's yours.</p>
+          <p>Youth coding programs that turn AI, Git, JavaScript, and systems thinking into a world students can operate, explain, and improve.</p>
         </div>
-        ${footerColumn("Path", [["All Programs", "/programs"], ["The Screeps League", "/league"], ["Explorer → Certificate", "/programs"]])}
+        ${footerColumn("Path", [["AI Software Architect", "/programs/ai-software-architect"], ["Programs", "/programs"], ["Articles", "/articles"], ["Battle Day", "/league"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
@@ -81,7 +81,7 @@ function footerColumn(title, items) {
 const SITE_NAME = "AutoNateAI";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "An AI Software Architect league taught entirely inside Screeps, a real persistent JavaScript programming game. Build first, dissect the architecture, repeat.";
+  "AutoNateAI teaches youth programming, critical thinking, Git, AI-assisted coding, and software architecture through Screeps, a live JavaScript strategy world.";
 
 export function pageShell({
   title,
@@ -98,11 +98,15 @@ export function pageShell({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>${title}</title>
         <meta name="description" content="${escapeHtml(description)}" />
+        <meta name="robots" content="index,follow" />
         <meta property="og:title" content="${escapeHtml(title)}" />
         <meta property="og:description" content="${escapeHtml(description)}" />
         <meta property="og:image" content="${ogImage}" />
+        <meta property="og:site_name" content="${SITE_NAME}" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="${escapeHtml(title)}" />
+        <meta name="twitter:description" content="${escapeHtml(description)}" />
         <script>
           (function () {
             var stored = localStorage.getItem("anai-theme");
@@ -133,7 +137,7 @@ export function programCard(program) {
       <a class="card-media" href="/programs/${program.handle}">
         <img src="${cardShot(program)}" alt="${escapeHtml(program.name)}" />
         <span class="card-badge">${escapeHtml(program.badge)}</span>
-        <span class="card-price">${cheapest ? `${money(cheapest.price)}+` : "TBD"}</span>
+        <span class="card-price">${cheapest ? money(cheapest.price) : "TBD"}</span>
       </a>
       <div class="card-body">
         <div class="card-title-row">
