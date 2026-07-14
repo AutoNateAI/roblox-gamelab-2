@@ -116,12 +116,22 @@ export const marketplaceApi = onRequest(
           return;
         }
 
-        const { sourceId, programHandle, offeringId } = request.body || {};
+        const { sourceId, programHandle, offeringId, buyer = {} } = request.body || {};
         const offering = OFFERINGS[`${programHandle}:${offeringId}`];
         if (!offering || !sourceId) {
           sendJson(response, 400, { error: "Missing program, offering, or Square source token." });
           return;
         }
+        const buyerName = String(buyer.buyerName || "").trim();
+        const buyerEmail = String(buyer.buyerEmail || "").trim();
+        const studentName = String(buyer.studentName || "").trim();
+        const discordHandle = String(buyer.discordHandle || "").trim();
+        const noteParts = [
+          `${offering.programName} - ${offering.offeringName}`,
+          buyerName ? `Buyer: ${buyerName}` : "",
+          studentName ? `Student: ${studentName}` : "",
+          discordHandle ? `Discord: ${discordHandle}` : "",
+        ].filter(Boolean);
 
         const { response: squareResponse, payload } = await squareFetch(settings.paymentsUrl, settings, {
           method: "POST",
@@ -133,7 +143,8 @@ export const marketplaceApi = onRequest(
               amount: offering.amount,
               currency: offering.currency,
             },
-            note: `${offering.programName} - ${offering.offeringName}`,
+            buyer_email_address: buyerEmail || undefined,
+            note: noteParts.join(" | "),
             reference_id: `${programHandle}:${offeringId}`,
           }),
         });

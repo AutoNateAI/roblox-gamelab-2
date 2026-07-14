@@ -451,6 +451,14 @@ export function renderCheckout(data) {
             ${paymentMethod("account_balance_wallet", "PayPal")}
             ${paymentMethod("currency_bitcoin", "Crypto")}
           </div>
+          <div class="form-stack enrollment-fields">
+            <label>Parent / Buyer Name<input data-checkout-field="buyerName" autocomplete="name" placeholder="ALEX RIVERA" /></label>
+            <label>Email for Enrollment Access<input data-checkout-field="buyerEmail" autocomplete="email" placeholder="alex@example.com" type="email" /></label>
+            <div class="two-col">
+              <label>Student Name<input data-checkout-field="studentName" autocomplete="off" placeholder="JORDAN RIVERA" /></label>
+              <label>Discord Handle <small>Optional</small><input data-checkout-field="discordHandle" autocomplete="off" placeholder="@student" /></label>
+            </div>
+          </div>
           <div class="square-card-container" data-square-card></div>
           <div class="form-stack mock-card-fields">
             <label>Cardholder Name<input placeholder="ALEX RIVERA" /></label>
