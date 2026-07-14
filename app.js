@@ -181,6 +181,12 @@ const completeButton = document.querySelector("[data-checkout-complete]");
 completeButton?.addEventListener("click", async (event) => {
   if (!squareCard || !squareConfig?.enabled || !selection.program || !selection.offering) return;
   event.preventDefault();
+  const checkoutFields = Object.fromEntries(
+    Array.from(document.querySelectorAll("[data-checkout-field]")).map((field) => [
+      field.dataset.checkoutField,
+      field.value.trim(),
+    ]),
+  );
   completeButton.setAttribute("aria-busy", "true");
   completeButton.classList.add("disabled");
   completeButton.innerHTML = "Processing...";
@@ -197,6 +203,7 @@ completeButton?.addEventListener("click", async (event) => {
         sourceId: tokenResult.token,
         programHandle: selection.program.handle,
         offeringId: selection.offering.id,
+        buyer: checkoutFields,
       }),
     });
     const payload = await response.json();
