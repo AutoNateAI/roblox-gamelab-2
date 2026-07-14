@@ -21,6 +21,13 @@ export function renderHome(data) {
   const primaryCheckoutHref = primaryOffering
     ? `/checkout?program=${primaryProgram.handle}&offering=${primaryOffering.id}`
     : `/programs/${primaryProgram.handle}`;
+  const landingArticles = [
+    "coding-as-workforce-development",
+    "why-tournament-day-matters",
+    "systems-thinking-through-code",
+  ]
+    .map((handle) => articles.find((article) => article.handle === handle))
+    .filter(Boolean);
 
   const body = `
     <main>
@@ -125,7 +132,7 @@ export function renderHome(data) {
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
-        <div class="article-grid">${articles.slice(0, 4).map((article) => articleCard(article)).join("")}</div>
+        <div class="article-grid">${landingArticles.map((article) => articleCard(article)).join("")}</div>
       </section>
 
       <section class="newsletter">
@@ -333,6 +340,8 @@ export function renderLeague(data) {
 }
 
 export function renderArticles() {
+  const featuredArticle = articles.find((article) => article.handle === "systems-thinking-through-code");
+  const listedArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
   const body = `
     <main class="articles-page">
       <div class="page-toolbar">
@@ -342,13 +351,14 @@ export function renderArticles() {
           <p>Searchable, filterable content for students, families, educators, and partners who want to understand systems-based programming, Git, APIs, automation, and AI-assisted coding.</p>
         </div>
       </div>
+      ${featuredArticle ? featuredArticleCard(featuredArticle) : ""}
       <div class="content-tools">
         <label>${icon("search")} <input type="search" placeholder="Search articles, strategy, Git, Screeps..." data-article-search /></label>
         <div class="filter-row" data-article-filters>
           ${["All", ...new Set(articles.map((article) => article.category))].map((category) => `<button type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}
         </div>
       </div>
-      <div class="article-grid" data-article-grid>${articles.map((article) => articleCard(article)).join("")}</div>
+      <div class="article-grid" data-article-grid>${listedArticles.map((article) => articleCard(article)).join("")}</div>
     </main>
   `;
 
@@ -515,6 +525,22 @@ function programFeature(program, extraClass = "") {
 function miniProgramCard(program) {
   const cheapest = program.offerings?.[0];
   return `<a class="mini-card" href="/programs/${program.handle}"><img src="${shot(program.sequence)}" alt="${escapeHtml(program.name)}" /><div><strong>${escapeHtml(program.name)}</strong><span>${escapeHtml(program.badge)}</span></div><b>${cheapest ? `${money(cheapest.price)}+` : "TBD"}</b></a>`;
+}
+
+function featuredArticleCard(article) {
+  return `
+    <article class="featured-article">
+      <a href="/articles/${article.handle}">
+        <img src="${article.image}" alt="${escapeHtml(article.title)}" />
+        <div>
+          <span class="kicker">Featured &middot; ${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
+          <h2>${escapeHtml(article.title)}</h2>
+          <p>${escapeHtml(article.summary)}</p>
+          <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+        </div>
+      </a>
+    </article>
+  `;
 }
 
 function articleCard(article) {
