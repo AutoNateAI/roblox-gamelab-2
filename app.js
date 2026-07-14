@@ -133,7 +133,32 @@ async function setupSquareCard(config) {
       : "https://sandbox.web.squarecdn.com/v1/square.js";
   await loadScript(scriptUrl);
   const payments = window.Square.payments(config.applicationId, config.locationId);
-  squareCard = await payments.card();
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  squareCard = await payments.card({
+    style: {
+      input: {
+        backgroundColor: isLight ? "#eef1e8" : "#0e141d",
+        color: isLight ? "#14181a" : "#eef2ee",
+        fontFamily: "Inter, sans-serif",
+        fontSize: "18px",
+        fontWeight: "600",
+        placeholderColor: isLight ? "#7b857c" : "#93a69b",
+      },
+      ".input-container": {
+        borderColor: isLight ? "#d7ddce" : "#253141",
+        borderRadius: "0px",
+      },
+      ".input-container.is-focus": {
+        borderColor: "#f2b134",
+      },
+      ".message-text": {
+        color: isLight ? "#57635a" : "#93a69b",
+      },
+      ".message-icon": {
+        color: "#f2b134",
+      },
+    },
+  });
   await squareCard.attach("[data-square-card]");
   container.classList.add("ready");
   document.body.classList.add("square-enabled");
