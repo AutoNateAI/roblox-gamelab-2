@@ -451,7 +451,8 @@ export function renderCheckout(data) {
             ${paymentMethod("account_balance_wallet", "PayPal")}
             ${paymentMethod("currency_bitcoin", "Crypto")}
           </div>
-          <div class="form-stack">
+          <div class="square-card-container" data-square-card></div>
+          <div class="form-stack mock-card-fields">
             <label>Cardholder Name<input placeholder="ALEX RIVERA" /></label>
             <label>Card Number<input placeholder="0000 0000 0000 0000" /></label>
             <div class="two-col">

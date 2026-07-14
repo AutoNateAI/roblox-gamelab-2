@@ -1,0 +1,25 @@
+{
+  "functions": {
+    "source": "functions",
+    "codebase": "roblox-gamelab-marketplace",
+    "runtime": "nodejs22"
+  },
+  "hosting": {
+    "public": "dist/site",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "/api/marketplace/**", "function": "marketplaceApi" },
+      { "source": "/api/square/**", "function": "marketplaceApi" }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        ]
+      }
+    ]
+  }
+}

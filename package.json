@@ -12,6 +12,8 @@
     "marketplace:sync": "node apps/marketplace/scripts/sync-airtable.mjs",
     "marketplace:og": "node apps/marketplace/scripts/generate-og-images.mjs",
     "marketplace:admin": "node --watch apps/marketplace/admin-server.mjs",
+    "marketplace:firebase:dry-run": "npm run marketplace:build && firebase deploy --only hosting,functions:roblox-gamelab-marketplace --dry-run",
+    "marketplace:firebase:deploy": "npm run marketplace:build && firebase deploy --only hosting,functions:roblox-gamelab-marketplace",
     "build": "rojo build roblox/default.project.json --output output/exports/claudecraft-action-arena.rbxlx",
     "format": "stylua roblox/src",
     "format:check": "stylua --check roblox/src"

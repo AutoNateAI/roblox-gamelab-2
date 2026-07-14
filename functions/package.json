@@ -1,0 +1,17 @@
+{
+  "name": "roblox-gamelab-marketplace-functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions:roblox-gamelab-marketplace"
+  },
+  "dependencies": {
+    "firebase-functions": "^7.2.5"
+  }
+}

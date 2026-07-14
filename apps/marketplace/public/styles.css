@@ -1882,6 +1882,22 @@ h1 {
   background: var(--secondary-soft);
 }
 
+.square-card-container {
+  display: none;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  margin-top: 22px;
+  padding: 18px;
+}
+
+.square-card-container.ready {
+  display: block;
+}
+
+.square-enabled .mock-card-fields {
+  display: none;
+}
+
 .payment-method {
   display: grid;
   place-items: center;

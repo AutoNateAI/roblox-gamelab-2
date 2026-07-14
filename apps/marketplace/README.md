@@ -54,3 +54,22 @@ Prepared endpoints:
   `SQUARE_*_LOCATION_ID`.
 - `POST /api/square/payments` accepts a Square `sourceId`, program handle, and
   offering ID, then creates the payment through Square's Payments API.
+
+## Firebase deploy
+
+This repo uses the shared Firebase project `autonateai-learning-hub` with a
+separate functions codebase, `roblox-gamelab-marketplace`, and API namespace:
+
+- `GET /api/marketplace/square/config`
+- `GET /api/marketplace/square/locations`
+- `POST /api/marketplace/square/payments`
+
+Deploy with:
+
+```bash
+npm run marketplace:firebase:deploy
+```
+
+The legacy `/api/square/*` paths are also rewritten to the same function for
+backwards compatibility. The custom domain must point at Firebase Hosting before
+`https://autonateai.com/api/marketplace/...` will work in production.

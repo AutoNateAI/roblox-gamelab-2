@@ -101,6 +101,10 @@ function squareCanListLocations(settings = squareSettings()) {
   return Boolean(settings.accessToken);
 }
 
+function marketplaceApiPath(pathname) {
+  return pathname.replace(/^\/api\/marketplace/, "").replace(/^\/api/, "");
+}
+
 function json(response, status, payload) {
   response.writeHead(status, {
     "content-type": "application/json; charset=utf-8",
@@ -140,6 +144,7 @@ async function staticFile(response, pathname) {
 
 const server = createServer(async (request, response) => {
   const url = new URL(request.url || "/", `http://${request.headers.host}`);
+  const apiPath = marketplaceApiPath(url.pathname);
 
   try {
     const pageRoutes = new Set(["/", "/programs", "/articles", "/league", "/checkout", "/success"]);
@@ -190,7 +195,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (url.pathname === "/api/square/config") {
+    if (apiPath === "/square/config") {
       const settings = squareSettings();
       json(response, 200, {
         enabled: squareIsReady(settings),
@@ -202,7 +207,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (url.pathname === "/api/square/locations") {
+    if (apiPath === "/square/locations") {
       const settings = squareSettings();
       if (!squareCanListLocations(settings)) {
         json(response, 503, { error: "Square access token is not configured." });
@@ -220,7 +225,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (url.pathname === "/api/square/payments" && request.method === "POST") {
+    if (apiPath === "/square/payments" && request.method === "POST") {
       const settings = squareSettings();
       if (!squareIsReady(settings)) {
         json(response, 503, { error: "Square is not configured." });
