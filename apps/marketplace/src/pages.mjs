@@ -72,6 +72,20 @@ export function renderHome(data) {
 
       <section class="section compete-section">
         <div class="compete-layout">
+          <div class="compete-visual">
+            <div class="compete-media">
+              <img src="${shot(7)}" alt="Screeps battle with colonies competing" />
+              <div class="compete-callout">
+                <span>${icon("flag")} Tournament capstone</span>
+                <strong>Head-to-head colony battles</strong>
+                <p>Students test whether their automation, debugging, and strategy can hold up when another bot is trying to win.</p>
+              </div>
+            </div>
+            <div class="button-row compete-actions">
+              <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
+              <a class="outline-button" href="/league">See Tournament Day</a>
+            </div>
+          </div>
           <div class="compete-copy">
             <span class="kicker">${icon("emoji_events")} Learn, Build, Battle</span>
             <h2>Students learn to code, then compete against each other's code.</h2>
@@ -80,18 +94,6 @@ export function renderHome(data) {
               <article><b>01</b><span>Set up Screeps, map the colony, and write the first creep behavior.</span></article>
               <article><b>02</b><span>Use functions, logic, Memory, and Git to turn scripts into a system.</span></article>
               <article><b>03</b><span>Prepare a tournament branch for AutoNateAI capture-the-flag.</span></article>
-            </div>
-            <div class="button-row">
-              <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
-              <a class="outline-button" href="/league">See Tournament Day</a>
-            </div>
-          </div>
-          <div class="compete-media">
-            <img src="${shot(7)}" alt="Screeps battle with colonies competing" />
-            <div class="compete-callout">
-              <span>${icon("flag")} Tournament capstone</span>
-              <strong>Head-to-head colony battles</strong>
-              <p>Students test whether their automation, debugging, and strategy can hold up when another bot is trying to win.</p>
             </div>
           </div>
         </div>
