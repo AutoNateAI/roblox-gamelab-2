@@ -70,16 +70,31 @@ export function renderHome(data) {
         </div>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("school")} Current Program</span>
-            <h2>${escapeHtml(primaryProgram.name)}</h2>
-            <p>Six weeks. Twelve live virtual sessions. One student-owned Screeps bot repo. One tournament where students test their colony system under pressure.</p>
+      <section class="section compete-section">
+        <div class="compete-layout">
+          <div class="compete-copy">
+            <span class="kicker">${icon("emoji_events")} Learn, Build, Battle</span>
+            <h2>Students learn to code, then compete against each other's code.</h2>
+            <p>The course starts with programming fundamentals inside Screeps, then moves toward strategy: roles, memory, automation, Git branches, and Codex-supported improvements. By the end, students are not just showing a project. They are running a colony built from their own decisions.</p>
+            <div class="compete-curriculum">
+              <article><b>01</b><span>Set up Screeps, map the colony, and write the first creep behavior.</span></article>
+              <article><b>02</b><span>Use functions, logic, Memory, and Git to turn scripts into a system.</span></article>
+              <article><b>03</b><span>Prepare a tournament branch for AutoNateAI capture-the-flag.</span></article>
+            </div>
+            <div class="button-row">
+              <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
+              <a class="outline-button" href="/league">See Tournament Day</a>
+            </div>
           </div>
-          <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
+          <div class="compete-media">
+            <img src="${shot(7)}" alt="Screeps battle with colonies competing" />
+            <div class="compete-callout">
+              <span>${icon("flag")} Tournament capstone</span>
+              <strong>Head-to-head colony battles</strong>
+              <p>Students test whether their automation, debugging, and strategy can hold up when another bot is trying to win.</p>
+            </div>
+          </div>
         </div>
-        ${programFeature(primaryProgram)}
       </section>
 
       <section class="spotlight-section">
@@ -103,8 +118,8 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("article")} Articles</span>
-            <h2>Explain the learning model before asking people to buy seats.</h2>
-            <p>Guides and strategy notes help parents, schools, churches, and youth organizations understand why Screeps-based programming builds durable confidence.</p>
+            <h2>For the adults deciding where students spend their time.</h2>
+            <p>These reads help families and program leaders see the bigger picture: why the game is fun, why the code matters, and how the cohort turns curiosity into workforce-ready habits.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
