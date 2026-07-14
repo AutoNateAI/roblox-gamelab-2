@@ -41,8 +41,13 @@ export function topNav(active = "home", mode = "full") {
     <header class="top-shell ${mode === "checkout" ? "checkout-shell" : ""}">
       <nav class="top-nav">
         <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
-        ${mode === "checkout" ? `<span class="secure-dot"><i></i>Secure Checkout</span>` : `<div class="nav-links">${links}</div>`}
+        ${
+          mode === "checkout"
+            ? `<span class="secure-dot"><i></i>Secure Checkout</span>`
+            : `<div class="nav-links" data-mobile-menu>${links}</div>`
+        }
         <div class="nav-actions">
+          ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
           ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Reserve Seats</a>`}
         </div>
