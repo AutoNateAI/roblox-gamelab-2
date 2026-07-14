@@ -72,6 +72,13 @@ function money(value) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
 }
 
+function formatDate(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(
+    new Date(`${value}T00:00:00`),
+  );
+}
+
 function readCatalog() {
   const script = document.getElementById("programs-data");
   if (!script) return null;
@@ -100,7 +107,7 @@ if (catalog && summaryEl) {
     summaryEl.innerHTML = `
       <div class="summary-item">
         <img src="${program.thumbnail}" alt="${program.name}" />
-        <div><strong>${program.name}</strong><span>${offering.deliveryType} &middot; ${offering.meetingFrequency || ""}</span></div>
+        <div><strong>${program.name}</strong><span>${offering.deliveryType} &middot; ${offering.meetingFrequency || ""}</span><em>Next cohort opens ${formatDate(program.startDate)}</em></div>
         <b>${money(offering.price)}</b>
       </div>
     `;
