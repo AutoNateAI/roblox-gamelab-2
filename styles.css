@@ -581,7 +581,9 @@ h1 {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   font-weight: 700;
-  padding: 12px;
+  letter-spacing: 0.04em;
+  padding: 14px;
+  text-transform: uppercase;
 }
 
 .program-feature-actions {

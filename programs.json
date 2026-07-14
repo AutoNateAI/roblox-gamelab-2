@@ -14,7 +14,7 @@
       "id": "program-ai-software-architect-august-2026",
       "handle": "ai-software-architect",
       "name": "AI Systems Programming Lab",
-      "description": "Students learn programming by building a working Screeps colony system from the ground up. Across 6 weeks, they practice variables, functions, logic, Git, API thinking, automation, debugging, and Codex-supported development while seeing their code run inside a living strategy world.",
+      "description": "A six-week live cohort where students build a Screeps colony bot, save their work in Git, use Codex responsibly, and prepare their code for a head-to-head capture-the-flag tournament.",
       "durationWeeks": 6,
       "sequence": 1,
       "learningOutcomes": "Understand variables, functions, conditionals, loops, data, APIs, Git commits, debugging, automation workflows, scalable system design, and how to use Codex as a coding partner while building in Screeps.",
