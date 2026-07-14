@@ -12,6 +12,21 @@ function shot(index) {
   return screepsScreenshots[index % screepsScreenshots.length];
 }
 
+function formatDate(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(`${value}T00:00:00`));
+}
+
+function cohortBadge(program, label = "Next cohort") {
+  const date = formatDate(program?.startDate);
+  if (!date) return "";
+  return `<span class="cohort-date">${icon("calendar_month")} ${label}: ${escapeHtml(date)}</span>`;
+}
+
 export function renderHome(data) {
   const { programs, league } = data;
   const featured = programs.slice(0, 1);
@@ -38,6 +53,10 @@ export function renderHome(data) {
             <span class="kicker">${icon("terminal")} Youth Programming Cohort</span>
             <h1>A coding cohort students actually want to show up for.</h1>
             <p>Students build inside Screeps, an online strategy world where JavaScript controls a live colony. They code the systems that keep that colony running and leave with Git-backed proof of how they think. For parents, schools, churches, and program directors, it is a six-week workforce-development experience that blends fun, community, AI literacy, and real software habits.</p>
+            <div class="cohort-date-row">
+              ${cohortBadge(primaryProgram)}
+              <span>${escapeHtml(primaryProgram.cohortNote || "")}</span>
+            </div>
             <div class="button-row">
               <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
               <a class="secondary-button" href="/programs/${primaryProgram.handle}">See what students build</a>
@@ -138,7 +157,7 @@ export function renderHome(data) {
       <section class="newsletter">
         <div>
           <h2>Reserve seats for the next cohort.</h2>
-          <p>New cohorts run every so often. The August cohort is six weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern.</p>
+          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is six weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
@@ -168,6 +187,10 @@ export function renderPrograms(data) {
           <span class="kicker">${icon("route")} Youth Programming Program</span>
           <h1>AI Systems Programming Lab</h1>
           <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot that ends in AutoNateAI capture-the-flag.</p>
+          <div class="cohort-date-row compact">
+            ${programs[0] ? cohortBadge(programs[0]) : ""}
+            <span>${programs[0] ? escapeHtml(programs[0].cohortNote || "") : ""}</span>
+          </div>
         </div>
       </div>
       ${programs.map((program) => programFeature(program, "program-page-feature", 6, true)).join("")}
@@ -205,6 +228,10 @@ export function renderProgramDetail(data, program) {
           <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
           <h1>${escapeHtml(program.name)}</h1>
           <p>A six-week live cohort where students learn systems thinking by building a Screeps colony they can care about. Their JavaScript gathers resources, remembers state, automates decisions, recovers from failure, and competes, so real software ideas become visible instead of abstract.</p>
+          <div class="cohort-date-row compact">
+            ${cohortBadge(program)}
+            <span>${escapeHtml(program.cohortNote || "")}</span>
+          </div>
           <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 6} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
           <div class="detail-cta-box">
             <strong>${price}<small> per student</small></strong>
@@ -226,9 +253,9 @@ export function renderProgramDetail(data, program) {
 
       <section class="detail-proof-strip">
         <a href="${checkoutHref}"><b>${price}</b><span>Full 6-week program</span></a>
+        <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
         <a href="#curriculum"><b>12</b><span>Live Screeps sessions</span></a>
         <a href="#outcomes"><b>Git</b><span>Student-owned repo</span></a>
-        <a href="/league"><b>CTF</b><span>Tournament day</span></a>
       </section>
 
       <section class="section compact detail-sales-band" id="outcomes">
@@ -251,7 +278,7 @@ export function renderProgramDetail(data, program) {
         <div>
           <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
           <h2>${price} for the full program</h2>
-          <p>Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support.</p>
+          <p>${escapeHtml(program.cohortNote || "")} Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support.</p>
         </div>
         <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
       </section>
@@ -560,6 +587,10 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
         </div>
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>
+        <div class="cohort-date-row compact">
+          ${cohortBadge(program)}
+          <span>${escapeHtml(program.cohortNote || "")}</span>
+        </div>
         <div class="program-feature-points">
           <span>Screeps colony bot</span>
           <span>Student Git repo</span>
