@@ -70,6 +70,6 @@ Deploy with:
 npm run marketplace:firebase:deploy
 ```
 
-The legacy `/api/square/*` paths are also rewritten to the same function for
-backwards compatibility. The custom domain must point at Firebase Hosting before
-`https://autonateai.com/api/marketplace/...` will work in production.
+The GitHub Pages frontend can call the Firebase API directly at
+`https://autonateai-learning-hub.web.app/api/marketplace/...`, so the custom
+domain can stay on GitHub Pages while Firebase handles payment requests.

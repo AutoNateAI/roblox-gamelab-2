@@ -1,5 +1,6 @@
 node_modules/
 .npm-cache/
+.firebase/
 output/exports/
 .env
 dist/
