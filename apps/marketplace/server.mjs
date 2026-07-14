@@ -240,6 +240,11 @@ const server = createServer(async (request, response) => {
         json(response, 400, { error: "Missing program, offering, or Square source token." });
         return;
       }
+      const buyerName = String(body.buyer?.cardholderName || body.buyer?.buyerName || "").trim();
+      const buyerEmail = String(body.buyer?.buyerEmail || "").trim();
+      const noteParts = [`${program.name} - ${offering.name}`, buyerName ? `Cardholder: ${buyerName}` : ""].filter(
+        Boolean,
+      );
 
       const squareResponse = await fetch(settings.paymentsUrl, {
         method: "POST",
@@ -256,7 +261,8 @@ const server = createServer(async (request, response) => {
             amount: Math.round(Number(offering.price) * 100),
             currency: "USD",
           },
-          note: `${program.name} - ${offering.name}`,
+          buyer_email_address: buyerEmail || undefined,
+          note: noteParts.join(" | "),
           reference_id: `${program.handle}:${offering.id}`,
         }),
       });

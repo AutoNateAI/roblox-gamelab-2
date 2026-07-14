@@ -441,32 +441,29 @@ export function renderCheckout(data) {
       </div>
       <div class="checkout-grid">
         <section class="checkout-form">
-          <h1>Payment Method</h1>
+          <span class="kicker">Secure seat reservation</span>
+          <h1>Reserve a student seat</h1>
+          <p class="checkout-lede">You are reserving one seat in the AI Systems Programming Lab. Card payment is processed securely through Square; student onboarding details come next after payment is confirmed.</p>
           <div class="square-status" data-square-status>
             <strong>Square payment setup pending</strong>
             <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
           </div>
-          <div class="payment-grid">
-            ${paymentMethod("credit_card", "Credit Card", true)}
-          </div>
-          <div class="form-stack enrollment-fields">
-            <label>Parent / Buyer Name<input data-checkout-field="buyerName" autocomplete="name" placeholder="ALEX RIVERA" /></label>
-            <label>Email for Enrollment Access<input data-checkout-field="buyerEmail" autocomplete="email" placeholder="alex@example.com" type="email" /></label>
-            <div class="two-col">
-              <label>Student Name<input data-checkout-field="studentName" autocomplete="off" placeholder="JORDAN RIVERA" /></label>
-              <label>Discord Handle <small>Optional</small><input data-checkout-field="discordHandle" autocomplete="off" placeholder="@student" /></label>
+          <div class="checkout-product-strip">
+            <div>
+              <strong>AI Systems Programming Lab</strong>
+              <span>6 weeks · 12 live sessions · 25 student max</span>
             </div>
+            <b>$369</b>
+          </div>
+          <div class="form-stack payment-fields">
+            <label>Name on Card<input data-checkout-field="cardholderName" autocomplete="cc-name" placeholder="ALEX RIVERA" /></label>
+            <label>Purchaser Email<input data-checkout-field="buyerEmail" autocomplete="email" placeholder="alex@example.com" type="email" /></label>
+          </div>
+          <div class="square-card-label">
+            <strong>Card Info</strong>
+            <span>Encrypted and processed by Square</span>
           </div>
           <div class="square-card-container" data-square-card></div>
-          <div class="form-stack mock-card-fields">
-            <label>Cardholder Name<input placeholder="ALEX RIVERA" /></label>
-            <label>Card Number<input placeholder="0000 0000 0000 0000" /></label>
-            <div class="two-col">
-              <label>Expiry Date<input placeholder="MM / YY" /></label>
-              <label>CVV<input placeholder="***" type="password" /></label>
-            </div>
-            <label>Promo Code<input placeholder="EXPLORER10" /></label>
-          </div>
         </section>
         <aside class="order-summary">
           <h2>Order Summary</h2>
@@ -510,6 +507,21 @@ export function renderSuccess(data) {
           <h3>Order Details</h3>
           <dl><dt>Order ID</dt><dd>#AN-${Math.floor(10000 + Math.random() * 89999)}</dd><dt>Offering</dt><dd data-success-offering>&mdash;</dd><dt>Total Paid</dt><dd data-success-total>&mdash;</dd></dl>
         </aside>
+      </section>
+      <section class="student-onboarding-card">
+        <div>
+          <span class="kicker">Next step</span>
+          <h2>Add student details</h2>
+          <p>Tell us who the seat is for so onboarding, setup notes, and cohort access can be pointed to the right student.</p>
+        </div>
+        <form class="form-stack student-info-form" data-student-info-form>
+          <div class="two-col">
+            <label>Student Name<input data-student-field="studentName" autocomplete="off" placeholder="JORDAN RIVERA" required /></label>
+            <label>Student Email<input data-student-field="studentEmail" autocomplete="email" placeholder="jordan@example.com" type="email" required /></label>
+          </div>
+          <button class="primary-button" type="submit">Save Student Info ${icon("arrow_forward")}</button>
+          <p class="fine-print" data-student-info-status></p>
+        </form>
       </section>
       <section class="section compact">
         <h2>Program details</h2>

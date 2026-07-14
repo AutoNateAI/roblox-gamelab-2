@@ -1,5 +1,9 @@
 import { randomUUID } from "node:crypto";
+import { initializeApp, getApps } from "firebase-admin/app";
+import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { onRequest } from "firebase-functions/v2/https";
+
+const firebaseApp = getApps().length ? getApps()[0] : initializeApp();
 
 const OFFERINGS = {
   "ai-software-architect:offering-ai-software-architect-august-2026": {
@@ -71,6 +75,10 @@ function routePath(request) {
   return request.path.replace(/^\/api\/marketplace/, "").replace(/^\/api/, "");
 }
 
+function cleanString(value) {
+  return String(value || "").trim();
+}
+
 export const marketplaceApi = onRequest(
   {
     region: "us-central1",
@@ -122,15 +130,11 @@ export const marketplaceApi = onRequest(
           sendJson(response, 400, { error: "Missing program, offering, or Square source token." });
           return;
         }
-        const buyerName = String(buyer.buyerName || "").trim();
+        const buyerName = String(buyer.cardholderName || buyer.buyerName || "").trim();
         const buyerEmail = String(buyer.buyerEmail || "").trim();
-        const studentName = String(buyer.studentName || "").trim();
-        const discordHandle = String(buyer.discordHandle || "").trim();
         const noteParts = [
           `${offering.programName} - ${offering.offeringName}`,
-          buyerName ? `Buyer: ${buyerName}` : "",
-          studentName ? `Student: ${studentName}` : "",
-          discordHandle ? `Discord: ${discordHandle}` : "",
+          buyerName ? `Cardholder: ${buyerName}` : "",
         ].filter(Boolean);
 
         const { response: squareResponse, payload } = await squareFetch(settings.paymentsUrl, settings, {
@@ -149,6 +153,38 @@ export const marketplaceApi = onRequest(
           }),
         });
         sendJson(response, squareResponse.ok ? 200 : squareResponse.status, payload);
+        return;
+      }
+
+      if (request.method === "POST" && pathname === "/enrollments") {
+        const {
+          studentName,
+          studentEmail,
+          buyerEmail,
+          paymentId,
+          programHandle,
+          offeringId,
+        } = request.body || {};
+        const cleanedStudentName = cleanString(studentName);
+        const cleanedStudentEmail = cleanString(studentEmail).toLowerCase();
+        if (!cleanedStudentName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanedStudentEmail)) {
+          sendJson(response, 400, { error: "Student name and valid student email are required." });
+          return;
+        }
+
+        const document = {
+          namespace: "autonateai-youth-programming",
+          source: "marketplace-checkout-success",
+          studentName: cleanedStudentName,
+          studentEmail: cleanedStudentEmail,
+          buyerEmail: cleanString(buyerEmail).toLowerCase(),
+          paymentId: cleanString(paymentId),
+          programHandle: cleanString(programHandle),
+          offeringId: cleanString(offeringId),
+          createdAt: FieldValue.serverTimestamp(),
+        };
+        const docRef = await getFirestore(firebaseApp).collection("marketplace_enrollments").add(document);
+        sendJson(response, 200, { ok: true, enrollmentId: docRef.id });
         return;
       }
 
