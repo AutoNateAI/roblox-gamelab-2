@@ -59,8 +59,23 @@
         </article>
         <aside class="order-details">
           <h3>Order Details</h3>
-          <dl><dt>Order ID</dt><dd>#AN-51185</dd><dt>Offering</dt><dd data-success-offering>&mdash;</dd><dt>Total Paid</dt><dd data-success-total>&mdash;</dd></dl>
+          <dl><dt>Order ID</dt><dd>#AN-78260</dd><dt>Offering</dt><dd data-success-offering>&mdash;</dd><dt>Total Paid</dt><dd data-success-total>&mdash;</dd></dl>
         </aside>
+      </section>
+      <section class="student-onboarding-card">
+        <div>
+          <span class="kicker">Next step</span>
+          <h2>Add student details</h2>
+          <p>Tell us who the seat is for so onboarding, setup notes, and cohort access can be pointed to the right student.</p>
+        </div>
+        <form class="form-stack student-info-form" data-student-info-form>
+          <div class="two-col">
+            <label>Student Name<input data-student-field="studentName" autocomplete="off" placeholder="JORDAN RIVERA" required /></label>
+            <label>Student Email<input data-student-field="studentEmail" autocomplete="email" placeholder="jordan@example.com" type="email" required /></label>
+          </div>
+          <button class="primary-button" type="submit">Save Student Info <span class="material-symbols-outlined">arrow_forward</span></button>
+          <p class="fine-print" data-student-info-status></p>
+        </form>
       </section>
       <section class="section compact">
         <h2>Program details</h2>

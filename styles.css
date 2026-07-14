@@ -1845,14 +1845,46 @@ h1 {
 }
 
 .checkout-form h1 {
-  margin-top: 0;
+  margin: 8px 0 10px;
   font-size: 32px;
 }
 
-.payment-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 14px;
+.checkout-lede {
+  color: var(--on-variant);
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 760px;
+  margin: 0 0 24px;
+}
+
+.checkout-product-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  margin: 0 0 24px;
+  padding: 18px;
+}
+
+.checkout-product-strip strong,
+.checkout-product-strip b {
+  display: block;
+  color: var(--on-surface);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+}
+
+.checkout-product-strip span {
+  display: block;
+  color: var(--on-variant);
+  margin-top: 4px;
+}
+
+.checkout-product-strip b {
+  color: var(--primary);
+  white-space: nowrap;
 }
 
 .square-status {
@@ -1862,7 +1894,7 @@ h1 {
   background: var(--surface-low);
   color: var(--on-variant);
   margin-bottom: 18px;
-  padding: 14px;
+  padding: 16px;
 }
 
 .square-status strong {
@@ -1886,8 +1918,8 @@ h1 {
   display: none;
   border: 1px solid var(--outline);
   background: var(--surface-low);
-  margin-top: 24px;
-  padding: 20px;
+  margin-top: 12px;
+  padding: 18px;
 }
 
 .square-card-container.ready {
@@ -1898,8 +1930,25 @@ h1 {
   background: var(--surface-low);
 }
 
-.square-enabled .mock-card-fields {
-  display: none;
+.square-card-label {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 24px;
+  color: var(--on-variant);
+}
+
+.square-card-label strong {
+  color: var(--on-surface);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.square-card-label span {
+  font-size: 13px;
 }
 
 .payment-method {
@@ -1930,8 +1979,8 @@ h1 {
   margin-top: 42px;
 }
 
-.enrollment-fields {
-  margin-top: 28px;
+.payment-fields {
+  margin-top: 0;
 }
 
 .form-stack label {
@@ -2108,6 +2157,35 @@ h1 {
 .access-card p {
   color: var(--on-variant);
   line-height: 1.6;
+}
+
+.student-onboarding-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+  gap: var(--gutter);
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  margin-top: var(--gutter);
+  padding: 32px;
+}
+
+.student-onboarding-card h2 {
+  margin: 8px 0 10px;
+  font-size: 34px;
+}
+
+.student-onboarding-card p {
+  color: var(--on-variant);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.student-info-form {
+  margin-top: 0;
+}
+
+.student-info-form .primary-button {
+  justify-self: start;
 }
 
 .order-details {
@@ -2503,11 +2581,11 @@ h1 {
   .detail-proof-strip,
   .detail-fast-points,
   .detail-enroll-band,
+  .student-onboarding-card,
   .week-grid,
   .outcome-grid,
   .mini-grid,
   .footer-grid,
-  .payment-grid,
   .two-col,
   .league-grid,
   .session-card,
@@ -2523,6 +2601,16 @@ h1 {
 
   .featured-article img {
     min-height: 230px;
+  }
+
+  .checkout-product-strip,
+  .square-card-label {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .student-info-form .primary-button {
+    width: 100%;
   }
 
   .breadcrumbs {

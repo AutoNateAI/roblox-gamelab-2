@@ -104,7 +104,8 @@ function cohortCapacity(program, offering) {
 
 const catalog = readCatalog();
 const selection = catalog ? findSelection(catalog) : {};
-const squareApiBase = "https://autonateai-learning-hub.web.app/api/marketplace/square";
+const marketplaceApiBase = "https://autonateai-learning-hub.web.app/api/marketplace";
+const squareApiBase = `${marketplaceApiBase}/square`;
 let squareCard = null;
 let squareConfig = null;
 
@@ -139,9 +140,9 @@ async function setupSquareCard(config) {
       input: {
         backgroundColor: isLight ? "#eef1e8" : "#0e141d",
         color: isLight ? "#14181a" : "#eef2ee",
-        fontFamily: "Inter, sans-serif",
-        fontSize: "18px",
-        fontWeight: "600",
+        fontFamily: "JetBrains Mono, monospace",
+        fontSize: "16px",
+        fontWeight: "700",
         placeholderColor: isLight ? "#7b857c" : "#93a69b",
       },
       ".input-container": {
@@ -212,6 +213,14 @@ completeButton?.addEventListener("click", async (event) => {
       field.value.trim(),
     ]),
   );
+  const purchaserEmail = checkoutFields.buyerEmail || "";
+  if (!checkoutFields.cardholderName || !purchaserEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(purchaserEmail)) {
+    if (squareStatusEl) {
+      squareStatusEl.classList.remove("ready");
+      squareStatusEl.innerHTML = `<strong>Missing checkout details</strong><span>Add the name on card and a valid purchaser email before payment.</span>`;
+    }
+    return;
+  }
   completeButton.setAttribute("aria-busy", "true");
   completeButton.classList.add("disabled");
   completeButton.innerHTML = "Processing...";
@@ -235,7 +244,20 @@ completeButton?.addEventListener("click", async (event) => {
     if (!response.ok) {
       throw new Error(payload.error || payload.errors?.[0]?.detail || "Square payment failed.");
     }
-    window.location.href = `/success?program=${selection.program.handle}&offering=${selection.offering.id}`;
+    const paymentId = payload.payment?.id || "";
+    localStorage.setItem(
+      "anai-latest-payment",
+      JSON.stringify({
+        paymentId,
+        buyerEmail: checkoutFields.buyerEmail,
+        cardholderName: checkoutFields.cardholderName,
+        programHandle: selection.program.handle,
+        offeringId: selection.offering.id,
+        paidAt: new Date().toISOString(),
+      }),
+    );
+    const paymentParam = paymentId ? `&payment=${encodeURIComponent(paymentId)}` : "";
+    window.location.href = `/success?program=${selection.program.handle}&offering=${selection.offering.id}${paymentParam}`;
   } catch (error) {
     squareStatusEl?.classList.remove("ready");
     if (squareStatusEl) {
@@ -258,6 +280,55 @@ if (catalog && successProgramEl) {
     if (totalEl) totalEl.textContent = money(offering.price);
   }
 }
+
+const studentInfoForm = document.querySelector("[data-student-info-form]");
+studentInfoForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const studentFields = Object.fromEntries(
+    Array.from(studentInfoForm.querySelectorAll("[data-student-field]")).map((field) => [
+      field.dataset.studentField,
+      field.value.trim(),
+    ]),
+  );
+  const statusEl = document.querySelector("[data-student-info-status]");
+  if (!studentFields.studentName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(studentFields.studentEmail || "")) {
+    if (statusEl) statusEl.textContent = "Add the student's name and a valid student email.";
+    return;
+  }
+  const params = new URLSearchParams(window.location.search);
+  let latestPayment = {};
+  try {
+    latestPayment = JSON.parse(localStorage.getItem("anai-latest-payment") || "{}");
+  } catch {
+    latestPayment = {};
+  }
+  const submitButton = studentInfoForm.querySelector("button");
+  submitButton?.setAttribute("disabled", "true");
+  if (statusEl) statusEl.textContent = "Saving student details...";
+  localStorage.setItem(
+    "anai-latest-student-info",
+    JSON.stringify({ ...studentFields, savedAt: new Date().toISOString() }),
+  );
+  try {
+    const response = await fetch(`${marketplaceApiBase}/enrollments`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        ...studentFields,
+        buyerEmail: latestPayment.buyerEmail || "",
+        paymentId: params.get("payment") || latestPayment.paymentId || "",
+        programHandle: params.get("program") || latestPayment.programHandle || "",
+        offeringId: params.get("offering") || latestPayment.offeringId || "",
+      }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || "Student details could not be saved.");
+    if (statusEl) statusEl.textContent = "Student details saved for onboarding.";
+  } catch (error) {
+    submitButton?.removeAttribute("disabled");
+    if (statusEl) statusEl.textContent = `${error.message} Your browser kept a local backup.`;
+  }
+});
 
 // --- Article search / category filters ---
 const articleSearch = document.querySelector("[data-article-search]");
