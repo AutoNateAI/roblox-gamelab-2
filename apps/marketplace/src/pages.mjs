@@ -187,17 +187,7 @@ export function renderPrograms(data) {
   const { path, programs } = data;
   const body = `
     <main class="programs-page">
-      <div class="page-toolbar">
-        <div>
-          <span class="kicker">${icon("route")} Youth Programming Program</span>
-          <h1>AI Systems Programming Lab</h1>
-          <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot. Each cohort is capped at ${programs[0] ? cohortCapacity(programs[0]) : "25 student max"} and supported through a dedicated AutoNateAI Discord channel.</p>
-          <div class="cohort-date-row compact">
-            ${programs[0] ? cohortBadge(programs[0]) : ""}
-            <span>${programs[0] ? escapeHtml(programs[0].cohortNote || "") : ""} Students use the Discord channel for coding help, Screeps discussion, build sessions, hackathons, and industry-leader networking.</span>
-          </div>
-        </div>
-      </div>
+
       ${programs.map((program) => programFeature(program, "program-page-feature", 6, true)).join("")}
     </main>
   `;

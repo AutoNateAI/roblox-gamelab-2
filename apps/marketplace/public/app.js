@@ -142,10 +142,10 @@ async function setupSquareCard(config) {
       input: {
         backgroundColor: isLight ? "#eef1e8" : "#0e141d",
         color: isLight ? "#14181a" : "#eef2ee",
-        fontFamily: "JetBrains Mono, monospace",
+        fontFamily: "monospace",
         fontSize: "16px",
         fontWeight: "700",
-        placeholderColor: isLight ? "#7b857c" : "#93a69b",
+        placeholderColor: isLight ? "rgb(123, 133, 124)" : "rgb(147, 166, 155)",
       },
       ".message-text": {
         color: isLight ? "#57635a" : "#93a69b",
