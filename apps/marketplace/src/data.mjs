@@ -93,5 +93,37 @@ export const articles = [
     tags: ["Git", "Portfolio", "Codex"],
     readingTime: "3 min read",
     image: "/assets/screeps/screeps-06.jpg",
+  },
+  {
+    handle: "coding-as-workforce-development",
+    title: "Coding as Workforce Development, Not Just Screen Time",
+    category: "Strategy",
+    audience: "Program directors, schools, churches, and workforce partners",
+    summary:
+      "The strongest youth technology programs do more than introduce tools. They help students practice focus, problem solving, communication, version control, and follow-through.",
+    body: [
+      "When families and organizations buy seats in a youth coding program, they are not only buying exposure to JavaScript. They are buying a structured environment where students can practice the habits that show up later in real work: asking clearer questions, testing ideas, recovering from mistakes, and explaining decisions.",
+      "The AI Systems Programming Lab uses Screeps because it makes those habits visible. If a student writes unclear logic, the colony stalls. If they commit working code before experimenting, they can recover. If they use Codex without understanding the output, the room eventually exposes the gap.",
+      "That is why the program fits workforce-development and community initiatives. Students get a fun shared challenge, but underneath that challenge they are practicing collaboration, technical communication, persistence, and systems thinking."
+    ],
+    tags: ["Workforce Development", "Community Programs", "Youth Coding"],
+    readingTime: "4 min read",
+    image: "/assets/screeps/screeps-05.jpg",
+  },
+  {
+    handle: "why-tournament-day-matters",
+    title: "Why Tournament Day Changes the Energy",
+    category: "Guide",
+    audience: "Parents, students, and youth program leaders",
+    summary:
+      "A tournament gives students a real reason to care about debugging, architecture, and strategy. Their code has to compete against another student's code.",
+    body: [
+      "Tournament Day changes the tone of the program because the work becomes public, playful, and real. Students are not just turning in an assignment. They are preparing a colony to compete against another colony under AutoNateAI capture-the-flag rules.",
+      "That pressure makes the technical lessons matter. Git protects the battle branch. Debugging keeps the bot from freezing. Functions make strategy easier to change. Memory helps the colony act with consistency. Automation determines whether the bot can keep moving when the match gets messy.",
+      "The result is a capstone students can talk about with pride. They can explain what they tried, what broke, what worked, and what they would build next. For adults watching, that is the proof: the student is learning how to think through a system."
+    ],
+    tags: ["Tournament Day", "Screeps", "Student Motivation"],
+    readingTime: "3 min read",
+    image: "/assets/screeps/screeps-08.jpg",
   }
 ];
