@@ -104,7 +104,7 @@ function cohortCapacity(program, offering) {
 
 const catalog = readCatalog();
 const selection = catalog ? findSelection(catalog) : {};
-const squareApiBase = "/api/marketplace/square";
+const squareApiBase = "https://autonateai-learning-hub.web.app/api/marketplace/square";
 let squareCard = null;
 let squareConfig = null;
 
