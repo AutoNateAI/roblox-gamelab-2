@@ -1,5 +1,6 @@
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,6 +21,8 @@ const rootDir = path.resolve(__dirname, "../..");
 const publicDir = path.join(__dirname, "public");
 const port = Number(process.env.PORT || 4173);
 
+loadLocalEnv(path.join(rootDir, ".env"));
+
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -37,6 +40,20 @@ async function readJson(relativePath) {
   return JSON.parse(file);
 }
 
+function loadLocalEnv(filePath) {
+  if (!existsSync(filePath)) return;
+  const lines = readFileSync(filePath, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#") || !trimmed.includes("=")) continue;
+    const index = trimmed.indexOf("=");
+    const key = trimmed.slice(0, index).trim();
+    const rawValue = trimmed.slice(index + 1).trim();
+    const value = rawValue.replace(/^['"]|['"]$/g, "");
+    if (key && process.env[key] === undefined) process.env[key] = value;
+  }
+}
+
 async function readRequestJson(request) {
   const chunks = [];
   for await (const chunk of request) {
@@ -46,15 +63,25 @@ async function readRequestJson(request) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 
+function envValue(...keys) {
+  for (const key of keys) {
+    const value = process.env[key]?.trim();
+    if (value && value !== "..." && value.toLowerCase() !== "replace_me") return value;
+  }
+  return "";
+}
+
 function squareSettings() {
-  const environment = process.env.SQUARE_ENVIRONMENT === "production" ? "production" : "sandbox";
+  const selectedEnvironment = envValue("SQUARE_ENVIRONMENT", "SQUARE_ACTIVE_ENVIRONMENT", "MARKETPLACE_SQUARE_ENVIRONMENT");
+  const environment = ["production", "prod", "live"].includes(selectedEnvironment.toLowerCase()) ? "production" : "sandbox";
   const prefix = environment === "production" ? "SQUARE_PRODUCTION" : "SQUARE_SANDBOX";
+  const suffix = environment === "production" ? "PROD" : "SANDBOX";
   return {
     environment,
-    applicationId: process.env[`${prefix}_APPLICATION_ID`] || process.env.SQUARE_APPLICATION_ID || "",
-    locationId: process.env[`${prefix}_LOCATION_ID`] || process.env.SQUARE_LOCATION_ID || "",
-    accessToken: process.env[`${prefix}_ACCESS_TOKEN`] || process.env.SQUARE_ACCESS_TOKEN || "",
-    apiVersion: process.env.SQUARE_VERSION || "2026-06-18",
+    applicationId: envValue(`${prefix}_APPLICATION_ID`, `SQUARE_APPLICATION_ID_${suffix}`, "SQUARE_APPLICATION_ID"),
+    locationId: envValue(`${prefix}_LOCATION_ID`, `SQUARE_LOCATION_ID_${suffix}`, "SQUARE_LOCATION_ID"),
+    accessToken: envValue(`${prefix}_ACCESS_TOKEN`, `SQUARE_ACCESS_TOKEN_${suffix}`, "SQUARE_ACCESS_TOKEN"),
+    apiVersion: envValue("SQUARE_VERSION") || "2026-06-18",
     paymentsUrl:
       environment === "production"
         ? "https://connect.squareup.com/v2/payments"
