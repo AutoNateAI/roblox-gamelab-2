@@ -1428,6 +1428,23 @@ h1 {
   font-weight: 600;
 }
 
+.detail-fast-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.detail-fast-points span {
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  color: var(--on-surface);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
 .detail-proof-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1485,6 +1502,35 @@ h1 {
   line-height: 1.55;
   margin: 0;
   padding: 0 22px 24px;
+}
+
+.detail-sales-band {
+  padding-bottom: 42px;
+}
+
+.detail-enroll-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, var(--outline));
+  background: var(--surface);
+  margin: 20px 0 8px;
+  padding: 32px;
+}
+
+.detail-enroll-band h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.05;
+}
+
+.detail-enroll-band p {
+  color: var(--on-variant);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 780px;
 }
 
 .offerings-grid {
@@ -1577,6 +1623,113 @@ h1 {
 
 .session-meta b {
   color: var(--on-surface);
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.week-card {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 24px;
+}
+
+.week-card-head {
+  border-bottom: 1px solid var(--outline);
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+
+.week-card-head span {
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.week-card h3 {
+  margin: 8px 0 0;
+  font-size: 24px;
+  line-height: 1.12;
+}
+
+.week-session-list {
+  display: grid;
+  gap: 16px;
+}
+
+.week-session-list details {
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  padding: 14px;
+}
+
+.week-session-list summary {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.week-session-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.week-session-list b {
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.week-session-list span {
+  color: var(--on-surface);
+  font-weight: 800;
+}
+
+.week-session-list p {
+  color: var(--on-variant);
+  line-height: 1.5;
+  margin: 12px 0 0 48px;
+}
+
+.week-session-detail {
+  display: grid;
+  gap: 8px;
+  color: var(--on-variant);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 12px 0 0 48px;
+}
+
+.week-session-detail strong {
+  color: var(--on-surface);
+}
+
+.detail-bottom-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  margin-top: 24px;
+  padding: 22px;
+}
+
+.detail-bottom-cta strong {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+}
+
+.detail-bottom-cta span {
+  color: var(--on-variant);
 }
 
 .stepper {
@@ -2096,6 +2249,9 @@ h1 {
   .compete-layout,
   .program-feature-points,
   .detail-proof-strip,
+  .detail-fast-points,
+  .detail-enroll-band,
+  .week-grid,
   .outcome-grid,
   .mini-grid,
   .footer-grid,
@@ -2187,9 +2343,21 @@ h1 {
   .program-feature-actions .primary-button,
   .program-feature-actions .outline-button,
   .section-head .primary-button,
+  .detail-enroll-band .primary-button,
+  .detail-bottom-cta .primary-button,
   .detail-cta-box .primary-button,
   .detail-cta-box .outline-button {
     width: 100%;
+  }
+
+  .detail-enroll-band,
+  .detail-bottom-cta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .week-card {
+    padding: 20px;
   }
 
   .product-detail-page,

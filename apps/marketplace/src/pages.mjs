@@ -185,10 +185,11 @@ export function renderPrograms(data) {
 
 export function renderProgramDetail(data, program) {
   const related = data.programs.filter((p) => p.handle !== program.handle).slice(0, 3);
-  const gallery = [shot(program.sequence), shot(program.sequence + 3), shot(program.sequence + 6)];
+  const gallery = [shot(6), shot(7), shot(8)];
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$369";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
+  const sessionWeeks = chunkSessions(program.sessions || [], 2);
 
   const body = `
     <main class="product-detail-page">
@@ -199,20 +200,24 @@ export function renderProgramDetail(data, program) {
           <div>${gallery.map((src) => `<img src="${src}" alt="Screeps gameplay" />`).join("")}</div>
         </div>
         <aside class="buy-panel">
-          <span class="kicker">${escapeHtml(program.badge)}</span>
+          <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
           <h1>${escapeHtml(program.name)}</h1>
-          <p>${escapeHtml(program.description)}</p>
+          <p>A six-week live cohort where students build a Screeps colony bot, learn real software habits, and finish by battling their code in AutoNateAI capture-the-flag.</p>
           <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 6} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
           <div class="detail-cta-box">
             <strong>${price}<small> per student</small></strong>
             <a class="primary-button full" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
             <a class="outline-button full" href="#curriculum">View 12 Sessions</a>
           </div>
+          <div class="detail-fast-points">
+            <span>Screeps setup included</span>
+            <span>Student-owned Git repo</span>
+            <span>Codex coaching</span>
+            <span>Tournament branch</span>
+          </div>
           <dl>
-            <dt>Start</dt><dd>${escapeHtml(program.cohortNote || program.startDate || "Next cohort TBD")}</dd>
-            <dt>Learning outcomes</dt><dd>${escapeHtml(program.learningOutcomes)}</dd>
-            <dt>Project</dt><dd>${escapeHtml(program.projectSummary)}</dd>
-            <dt>Portfolio artifact</dt><dd>${escapeHtml(program.portfolioArtifact)}</dd>
+            <dt>Best fit</dt><dd>Students ready for a fun, structured path into coding, AI literacy, and systems thinking.</dd>
+            <dt>They leave with</dt><dd>A working Screeps bot, Git history, architecture notes, and tournament reflection.</dd>
           </dl>
         </aside>
       </section>
@@ -224,12 +229,12 @@ export function renderProgramDetail(data, program) {
         <a href="/league"><b>CTF</b><span>Tournament day</span></a>
       </section>
 
-      <section class="section compact" id="outcomes">
+      <section class="section compact detail-sales-band" id="outcomes">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("architecture")} What They Build</span>
-            <h2>A Screeps colony that behaves like a real software system.</h2>
-            <p>Students do not just learn syntax. They design roles, automate decisions, persist state in Memory, debug failures, use Git checkpoints, and explain how their system could scale.</p>
+            <span class="kicker">${icon("architecture")} What Makes It Worth Buying</span>
+            <h2>Students get a game they care about and a portfolio artifact adults can understand.</h2>
+            <p>They do not just watch lessons. They build roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony system works under tournament pressure.</p>
           </div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
@@ -240,32 +245,26 @@ export function renderProgramDetail(data, program) {
         </div>
       </section>
 
-      <section class="section compact">
-        <div class="section-head"><div><h2>Enroll in the next cohort</h2><p>Setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support are included.</p></div></div>
-        <div class="offerings-grid">${program.offerings.map((offering) => offeringCard(offering, program)).join("")}</div>
+      <section class="detail-enroll-band">
+        <div>
+          <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
+          <h2>${price} for the full program</h2>
+          <p>Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support.</p>
+        </div>
+        <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
       </section>
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>Inside the ${program.durationWeeks || 6} weeks</h2><p>Every live session and homework task moves the Screeps colony forward.</p></div>
+          <div><h2>12 sessions, grouped by what students are building.</h2><p>Every live session and homework task moves the Screeps colony closer to tournament day.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
-        <div class="session-list">
-          ${program.sessions
-            .map(
-              (session) => `
-            <article class="session-card">
-              <span class="session-number">${String(session.number).padStart(2, "0")}</span>
-              <div>
-                <h3>${escapeHtml(session.name)}</h3>
-                ${session.date ? `<p class="session-date">${escapeHtml(session.date)}</p>` : ""}
-                <p>${escapeHtml(session.objectives)}</p>
-                <div class="session-meta"><span><b>Live:</b> ${escapeHtml(session.liveActivity)}</span><span><b>Homework:</b> ${escapeHtml(session.homework)}</span></div>
-              </div>
-            </article>
-          `,
-            )
-            .join("")}
+        <div class="week-grid">
+          ${sessionWeeks.map((sessions, index) => weekCard(index, sessions)).join("")}
+        </div>
+        <div class="detail-bottom-cta">
+          <div><strong>Ready to put a student in the cohort?</strong><span>Seats include all 12 live sessions and the tournament capstone.</span></div>
+          <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
       </section>
 
@@ -488,6 +487,47 @@ function dataScript(data) {
 
 function paymentMethod(symbol, label, active = false) {
   return `<button class="payment-method ${active ? "active" : ""}">${icon(symbol)}<span>${label}</span></button>`;
+}
+
+function chunkSessions(sessions, size) {
+  const chunks = [];
+  for (let index = 0; index < sessions.length; index += size) {
+    chunks.push(sessions.slice(index, index + size));
+  }
+  return chunks;
+}
+
+function weekCard(index, sessions) {
+  const title = [
+    "Setup and first code",
+    "Functions and decisions",
+    "Git and debugging",
+    "APIs, Memory, and roles",
+    "Automation and Codex",
+    "Tournament prep and battle day",
+  ][index] || `Week ${index + 1}`;
+
+  return `
+    <article class="week-card">
+      <div class="week-card-head">
+        <span>Week ${String(index + 1).padStart(2, "0")}</span>
+        <h3>${escapeHtml(title)}</h3>
+      </div>
+      <div class="week-session-list">
+        ${sessions
+          .map(
+            (session) => `
+          <details>
+            <summary><b>${String(session.number).padStart(2, "0")}</b><span>${escapeHtml(session.name.replace(/^Session \d+:\s*/, ""))}</span></summary>
+            <p>${escapeHtml(session.objectives)}</p>
+            <div class="week-session-detail"><span><strong>Live:</strong> ${escapeHtml(session.liveActivity)}</span><span><strong>Homework:</strong> ${escapeHtml(session.homework)}</span></div>
+          </details>
+        `,
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
 }
 
 function programFeature(program, extraClass = "", imageIndex = program.sequence + 1, showOverlay = false) {
