@@ -448,8 +448,6 @@ export function renderCheckout(data) {
           </div>
           <div class="payment-grid">
             ${paymentMethod("credit_card", "Credit Card", true)}
-            ${paymentMethod("account_balance_wallet", "PayPal")}
-            ${paymentMethod("currency_bitcoin", "Crypto")}
           </div>
           <div class="form-stack enrollment-fields">
             <label>Parent / Buyer Name<input data-checkout-field="buyerName" autocomplete="name" placeholder="ALEX RIVERA" /></label>
