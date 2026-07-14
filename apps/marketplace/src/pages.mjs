@@ -195,14 +195,16 @@ export function renderProgramDetail(data, program) {
     <main class="product-detail-page">
       <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs">Programs</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
       <section class="program-detail-hero">
-        <div class="product-gallery">
-          <img src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" />
-          <div>${gallery.map((src) => `<img src="${src}" alt="Screeps gameplay" />`).join("")}</div>
+        <div class="product-gallery" data-carousel>
+          <img data-carousel-main src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" />
+          <div class="gallery-controls">
+            ${gallery.map((src, index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-carousel-slide="${src}" aria-label="Show Screeps screenshot ${index + 1}"></button>`).join("")}
+          </div>
         </div>
         <aside class="buy-panel">
           <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
           <h1>${escapeHtml(program.name)}</h1>
-          <p>A six-week live cohort where students build a Screeps colony bot, learn real software habits, and finish by battling their code in AutoNateAI capture-the-flag.</p>
+          <p>A six-week live cohort where students learn systems thinking by building a Screeps colony they can care about. Their JavaScript gathers resources, remembers state, automates decisions, recovers from failure, and competes, so real software ideas become visible instead of abstract.</p>
           <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 6} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
           <div class="detail-cta-box">
             <strong>${price}<small> per student</small></strong>
@@ -216,8 +218,8 @@ export function renderProgramDetail(data, program) {
             <span>Tournament branch</span>
           </div>
           <dl>
-            <dt>Best fit</dt><dd>Students ready for a fun, structured path into coding, AI literacy, and systems thinking.</dd>
-            <dt>They leave with</dt><dd>A working Screeps bot, Git history, architecture notes, and tournament reflection.</dd>
+            <dt>Best fit</dt><dd>Students ready for a fun, structured path into coding, AI literacy, teamwork, and systems thinking.</dd>
+            <dt>They leave with</dt><dd>A working Screeps bot, Git history, architecture notes, and a tournament reflection that shows how their system performed.</dd>
           </dl>
         </aside>
       </section>
@@ -234,7 +236,7 @@ export function renderProgramDetail(data, program) {
           <div>
             <span class="kicker">${icon("architecture")} What Makes It Worth Buying</span>
             <h2>Students get a game they care about and a portfolio artifact adults can understand.</h2>
-            <p>They do not just watch lessons. They build roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony system works under tournament pressure.</p>
+            <p>They do not just watch lessons. They build roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony system works under tournament pressure. Screeps gives them something to protect and improve while they learn real architecture habits.</p>
           </div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
@@ -256,7 +258,7 @@ export function renderProgramDetail(data, program) {
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>12 sessions, grouped by what students are building.</h2><p>Every live session and homework task moves the Screeps colony closer to tournament day.</p></div>
+          <div><h2>12 sessions, grouped by the system students are growing.</h2><p>Because Screeps keeps running, students see the same pressures real software faces: changing state, feedback loops, dependencies, automation, failure recovery, and performance under competition.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         <div class="week-grid">
@@ -498,20 +500,22 @@ function chunkSessions(sessions, size) {
 }
 
 function weekCard(index, sessions) {
-  const title = [
-    "Setup and first code",
-    "Functions and decisions",
-    "Git and debugging",
-    "APIs, Memory, and roles",
-    "Automation and Codex",
-    "Tournament prep and battle day",
-  ][index] || `Week ${index + 1}`;
+  const weekMeta = [
+    ["Setup and first code", "Students meet the world, map the colony system, and see their first code become visible behavior they can protect and improve."],
+    ["Functions and decisions", "Students turn repeated actions into reusable behaviors and teach the colony to make choices when conditions change."],
+    ["Git and debugging", "Students learn how real builders protect progress, investigate failures, and recover working versions when a live system breaks."],
+    ["APIs, Memory, and roles", "Students connect game objects, persistent memory, and role-based design to how software systems communicate, remember, and divide work."],
+    ["Automation and Codex", "Students use automation and AI support to improve the bot while staying responsible for the decisions their system makes."],
+    ["Tournament prep and battle day", "Students tune a battle branch and test the system against another colony under competitive pressure."],
+  ][index] || [`Week ${index + 1}`, "Students keep improving the colony system."];
+  const [title, summary] = weekMeta;
 
   return `
     <article class="week-card">
       <div class="week-card-head">
         <span>Week ${String(index + 1).padStart(2, "0")}</span>
         <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(summary)}</p>
       </div>
       <div class="week-session-list">
         ${sessions

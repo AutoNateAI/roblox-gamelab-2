@@ -1304,7 +1304,7 @@ h1 {
 .product-detail-page {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--section) var(--margin);
+  padding: 42px var(--margin) var(--section);
 }
 
 .breadcrumbs {
@@ -1314,7 +1314,7 @@ h1 {
   color: var(--on-variant);
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .breadcrumbs a {
@@ -1329,44 +1329,64 @@ h1 {
 }
 
 .product-gallery {
+  position: relative;
+  align-self: start;
   display: grid;
-  gap: 14px;
+  overflow: hidden;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
 }
 
 .product-gallery > img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: min(480px, calc(100vh - 250px));
+  min-height: 380px;
   object-fit: cover;
+  object-position: center;
 }
 
-.product-gallery div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+.gallery-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  border: 1px solid var(--outline);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  padding: 8px;
+  backdrop-filter: blur(12px);
 }
 
-.product-gallery div img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+.gallery-controls button {
+  width: 34px;
+  height: 8px;
+  border: 0;
+  background: var(--outline-strong);
+  cursor: pointer;
+  padding: 0;
+}
+
+.gallery-controls button.active {
+  background: var(--primary);
 }
 
 .buy-panel {
   align-self: start;
   border: 1px solid var(--outline);
   background: var(--surface);
-  padding: 32px;
+  padding: 24px;
 }
 
 .buy-panel h1 {
-  margin: 14px 0;
-  font-size: clamp(32px, 4vw, 48px);
+  margin: 12px 0;
+  font-size: clamp(30px, 3.2vw, 42px);
 }
 
 .buy-panel p {
   color: var(--on-variant);
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .detail-rating {
@@ -1374,7 +1394,7 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  margin: 20px 0;
+  margin: 16px 0;
 }
 
 .detail-rating span:last-child {
@@ -1385,11 +1405,11 @@ h1 {
 
 .buy-panel dl {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   color: var(--on-variant);
   border-top: 1px solid var(--outline);
-  margin: 20px 0 0;
-  padding-top: 24px;
+  margin: 16px 0 0;
+  padding-top: 18px;
 }
 
 .buy-panel dt {
@@ -1411,13 +1431,13 @@ h1 {
   gap: 12px;
   border: 1px solid var(--outline);
   background: var(--surface-low);
-  margin: 22px 0;
-  padding: 18px;
+  margin: 18px 0;
+  padding: 14px;
 }
 
 .detail-cta-box strong {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 34px;
+  font-size: 30px;
   line-height: 1;
 }
 
@@ -1451,7 +1471,7 @@ h1 {
   gap: 1px;
   border: 1px solid var(--outline);
   background: var(--outline);
-  margin: 28px 0 8px;
+  margin: 18px 0 8px;
 }
 
 .detail-proof-strip a {
@@ -1656,6 +1676,12 @@ h1 {
   margin: 8px 0 0;
   font-size: 24px;
   line-height: 1.12;
+}
+
+.week-card-head p {
+  color: var(--on-variant);
+  line-height: 1.5;
+  margin: 10px 0 0;
 }
 
 .week-session-list {
@@ -2284,12 +2310,15 @@ h1 {
     text-overflow: ellipsis;
   }
 
-  .product-gallery div {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .product-gallery > img {
+    height: auto;
+    min-height: 300px;
+    aspect-ratio: 16 / 10;
   }
 
-  .product-gallery div img {
-    aspect-ratio: 1;
+  .gallery-controls {
+    right: 12px;
+    bottom: 12px;
   }
 
   .program-feature-body,
