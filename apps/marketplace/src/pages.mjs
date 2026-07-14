@@ -517,10 +517,10 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>
         <div class="program-feature-points">
-          <span>${icon("sports_esports")} Screeps colony bot</span>
-          <span>${icon("account_tree")} Git repo</span>
-          <span>${icon("hub")} API thinking</span>
-          <span>${icon("smart_toy")} Codex workflows</span>
+          <span>Screeps colony bot</span>
+          <span>Student Git repo</span>
+          <span>Automation logic</span>
+          <span>Codex coaching</span>
         </div>
         <div class="program-feature-actions">
           <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
