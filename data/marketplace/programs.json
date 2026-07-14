@@ -19,7 +19,7 @@
       "sequence": 1,
       "learningOutcomes": "Understand variables, functions, conditionals, loops, data, APIs, Git commits, debugging, automation workflows, scalable system design, and how to use Codex as a coding partner while building in Screeps.",
       "projectSummary": "A student-built Screeps bot that can harvest energy, spawn creeps, assign roles, persist memory, recover from failures, use Git history, and explain the architecture behind the colony.",
-      "portfolioArtifact": "A student-owned Git repository with Screeps bot code, commits, README notes, screenshots or demo clips, architecture notes, and a final reflection on how the system scales.",
+      "portfolioArtifact": "A student-owned Git repository with Screeps bot code, commits, README notes, screenshots or match clips, architecture notes, and a final reflection on how the system performed under pressure.",
       "badge": "Youth Systems Programming",
       "pathTags": ["Youth Programming", "Systems Thinking", "Git", "APIs", "Automation", "Codex"],
       "status": "Active",
@@ -109,19 +109,19 @@
         },
         {
           "number": 11,
-          "name": "Session 11: Colony Architecture and Demo Prep",
+          "name": "Session 11: Colony Architecture and Tournament Prep",
           "date": "Tuesday, September 8, 2026",
-          "objectives": "Connect the Screeps bot pieces into a clear architecture: game interface, logic, Memory, APIs, automation, and version history.",
-          "liveActivity": "Create a simple colony architecture diagram, clean the README, capture screenshots, and prepare the final walkthrough.",
-          "homework": "Finish the final Screeps branch and prepare a 3-minute demo."
+          "objectives": "Connect the Screeps bot pieces into a clear architecture and prepare the colony for AutoNateAI capture-the-flag rules.",
+          "liveActivity": "Create a simple colony architecture diagram, clean the README, capture screenshots, and prepare the tournament branch.",
+          "homework": "Finish the final Screeps branch and write a short tournament strategy note."
         },
         {
           "number": 12,
-          "name": "Session 12: Screeps Demo Day and Next Build",
+          "name": "Session 12: Tournament Day and Next Build",
           "date": "Thursday, September 10, 2026",
-          "objectives": "Present the working Screeps system, explain the architecture, review tradeoffs, and identify the next version.",
-          "liveActivity": "Student Screeps demos, instructor feedback, peer questions, and a final reflection on programming, Git, APIs, automation, and AI.",
-          "homework": "Submit final repo link, Screeps screenshots or demo clip, architecture notes, and reflection."
+          "objectives": "Battle student colonies head-to-head in AutoNateAI capture-the-flag, explain the architecture, review tradeoffs, and identify the next version.",
+          "liveActivity": "Students submit tournament branches, run Screeps capture-the-flag matches, watch colony strategies collide, and reflect on programming, Git, APIs, automation, and AI.",
+          "homework": "Submit final repo link, Screeps match screenshots or clips, architecture notes, tournament reflection, and next-build plan."
         }
       ],
       "offerings": [
@@ -140,15 +140,15 @@
   ],
   "league": {
     "product": {
-      "title": "AutoNateAI Student Demo Day",
-      "cta": "The cohort ends with a live demo session where students show their Screeps colony, explain the system they built, the code decisions they made, and what they would automate next.",
+      "title": "AutoNateAI Tournament Day",
+      "cta": "The cohort ends with an AutoNateAI capture-the-flag tournament inside Screeps where student colonies battle head-to-head.",
       "price": null,
       "status": "Included"
     },
     "season": {
-      "name": "August Cohort Demo Day",
-      "format": "Student project showcase",
-      "winCondition": "Students present a working Screeps bot, walk through the architecture, show their Git history, explain one automation or API/data flow, and reflect on what they would build next.",
+      "name": "August Cohort Tournament Day",
+      "format": "AutoNateAI Screeps capture-the-flag",
+      "winCondition": "Students submit battle-ready Screeps bot branches to the tournament server. Colonies go head-to-head under capture-the-flag rules while students explain their architecture, Git history, automation decisions, and what they would improve next.",
       "entryFee": null,
       "startDate": "2026-09-10",
       "endDate": "2026-09-10",

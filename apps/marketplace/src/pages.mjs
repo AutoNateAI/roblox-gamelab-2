@@ -18,6 +18,9 @@ export function renderHome(data) {
   const primaryProgram = featured[0];
   const primaryOffering = primaryProgram.offerings?.[0];
   const primaryPrice = primaryOffering ? money(primaryOffering.price) : "$369";
+  const primaryCheckoutHref = primaryOffering
+    ? `/checkout?program=${primaryProgram.handle}&offering=${primaryOffering.id}`
+    : `/programs/${primaryProgram.handle}`;
 
   const body = `
     <main>
@@ -29,7 +32,7 @@ export function renderHome(data) {
             <h1>A coding cohort students actually want to show up for.</h1>
             <p>Students build inside Screeps, an online strategy world where JavaScript controls a live colony. They code the systems that keep that colony running and leave with Git-backed proof of how they think. For parents, schools, churches, and program directors, it is a six-week workforce-development experience that blends fun, community, AI literacy, and real software habits.</p>
             <div class="button-row">
-              <a class="primary-button" href="/programs/${primaryProgram.handle}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
+              <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
               <a class="secondary-button" href="/programs/${primaryProgram.handle}">See what students build</a>
             </div>
           </div>
@@ -37,13 +40,13 @@ export function renderHome(data) {
             <img src="${shot(3)}" alt="Screeps room showing a student-built colony system" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What they build</span>
-              <h2>One colony. One repo. One final demo.</h2>
-              <p>Students turn game strategy into real software habits: version control, debugging, automation, AI-assisted development, and clear technical explanation.</p>
+              <h2>One colony. One repo. One tournament.</h2>
+              <p>Students turn game strategy into real software habits, then battle their colonies head-to-head in AutoNateAI capture-the-flag.</p>
               <div class="hero-facts">
                 <span>Workforce-ready habits</span>
                 <span>Community cohort</span>
                 <span>Screeps bot repo</span>
-                <span>Final demo day</span>
+                <span>Tournament day</span>
               </div>
             </div>
           </aside>
@@ -57,6 +60,7 @@ export function renderHome(data) {
             <h2>Screeps makes scalable software visible.</h2>
             <p>Every concept connects to a colony students can see: loops move creeps, functions become reusable behaviors, Git protects working bot versions, APIs explain how code talks to systems, and automation helps the colony scale.</p>
           </div>
+          <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seats ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid">
           <article><span>${icon("functions")}</span><h3>Code that runs</h3><p>Variables, functions, conditionals, loops, and data structures control real creeps inside a persistent room.</p></article>
@@ -71,9 +75,9 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("school")} Current Program</span>
             <h2>${escapeHtml(primaryProgram.name)}</h2>
-            <p>Six weeks. Twelve live virtual sessions. One student-owned Screeps bot repo. One final demo where students explain how their colony system works.</p>
+            <p>Six weeks. Twelve live virtual sessions. One student-owned Screeps bot repo. One tournament where students test their colony system under pressure.</p>
           </div>
-          <a href="/programs/${primaryProgram.handle}">View program ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         ${programFeature(primaryProgram)}
       </section>
@@ -82,13 +86,16 @@ export function renderHome(data) {
         <div class="spotlight-image"><img src="${shot(6)}" alt="Screeps combat room" /></div>
         <div>
           <span class="kicker">${icon("flag")} Capstone</span>
-          <h2>${escapeHtml(league.season?.name || "Demo Day")}</h2>
-          <p>${escapeHtml(league.product?.cta || "")} The point is not just a finished project. Buyers should see students becoming clearer thinkers who can describe behavior, make changes safely, and explain how pieces of the Screeps system work together.</p>
+          <h2>${escapeHtml(league.season?.name || "Tournament Day")}</h2>
+          <p>${escapeHtml(league.product?.cta || "")} This is where the course gets loud: students see whether their logic, automation, and architecture hold up when another colony is trying to win.</p>
           <div class="stat-grid">
             <div><strong>${escapeHtml(league.season?.format || "TBD")}</strong><span>Format</span></div>
-            <div><strong>Included</strong><span>Final Demo</span></div>
+            <div><strong>Included</strong><span>Final Tournament</span></div>
           </div>
-          <a class="outline-button" href="/league">See Demo Day</a>
+          <div class="button-row">
+            <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seats ${icon("arrow_forward")}</a>
+            <a class="outline-button" href="/league">See Tournament Day</a>
+          </div>
         </div>
       </section>
 
@@ -99,7 +106,7 @@ export function renderHome(data) {
             <h2>Explain the learning model before asking people to buy seats.</h2>
             <p>Guides and strategy notes help parents, schools, churches, and youth organizations understand why Screeps-based programming builds durable confidence.</p>
           </div>
-          <a href="/articles">Browse articles ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
         <div class="article-grid">${articles.slice(0, 4).map((article) => articleCard(article)).join("")}</div>
       </section>
@@ -112,7 +119,7 @@ export function renderHome(data) {
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
           </form>
-          <small>Screeps setup help, cohort workspace, Git repo guidance, and final demo support are included.</small>
+          <small>Screeps setup help, cohort workspace, Git repo guidance, and tournament-day support are included.</small>
         </div>
       </section>
     </main>
@@ -190,7 +197,7 @@ export function renderProgramDetail(data, program) {
         <a href="${checkoutHref}"><b>${price}</b><span>Full 6-week program</span></a>
         <a href="#curriculum"><b>12</b><span>Live Screeps sessions</span></a>
         <a href="#outcomes"><b>Git</b><span>Student-owned repo</span></a>
-        <a href="/league"><b>Demo</b><span>Final showcase</span></a>
+        <a href="/league"><b>CTF</b><span>Tournament day</span></a>
       </section>
 
       <section class="section compact" id="outcomes">
@@ -205,12 +212,12 @@ export function renderProgramDetail(data, program) {
         <div class="outcome-grid">
           <article><img src="${shot(2)}" alt="Screeps room with active creeps" /><h3>Working colony bot</h3><p>Harvesters, upgraders, builders, spawn logic, Memory, and role-based behavior.</p></article>
           <article><img src="${shot(4)}" alt="Screeps room showing system growth" /><h3>Production habits</h3><p>Git commits, README notes, bug reports, diffs, and recoverable development checkpoints.</p></article>
-          <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>Architecture explanation</h3><p>Students present the system, tradeoffs, automation loops, and next scaling decisions.</p></article>
+          <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>Tournament-ready strategy</h3><p>Students tune their colony for AutoNateAI capture-the-flag and explain what they would scale next.</p></article>
         </div>
       </section>
 
       <section class="section compact">
-        <div class="section-head"><div><h2>Enroll in the next cohort</h2><p>Setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and final demo support are included.</p></div></div>
+        <div class="section-head"><div><h2>Enroll in the next cohort</h2><p>Setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support are included.</p></div></div>
         <div class="offerings-grid">${program.offerings.map((offering) => offeringCard(offering, program)).join("")}</div>
       </section>
 
@@ -269,38 +276,38 @@ export function renderLeague(data) {
       <header class="events-hero">
         <img src="${shot(7)}" alt="Screeps arena combat" />
         <div>
-          <span class="kicker">${icon("flag")} Final Showcase</span>
-          <h1>${escapeHtml(season?.name || "AutoNateAI Demo Day")}</h1>
+          <span class="kicker">${icon("flag")} Tournament Day</span>
+          <h1>${escapeHtml(season?.name || "AutoNateAI Tournament Day")}</h1>
           <p>${escapeHtml(product?.cta || "")}</p>
         </div>
       </header>
 
       <section class="league-grid">
         <article class="league-rules">
-          <h2>What students show</h2>
+          <h2>What students compete with</h2>
           <p>${escapeHtml(season?.winCondition || "TBD")}</p>
         </article>
         <aside class="league-facts">
           <div><span>Format</span><b>${escapeHtml(season?.format || "TBD")}</b></div>
           <div><span>Entry Fee</span><b>Included</b></div>
           <div><span>Status</span><b class="status-pill ${available ? "live" : ""}">${statusLabel(season?.status)}</b></div>
-          <button ${available ? "" : "disabled"}>${available ? "Reserve Seats" : "Register Interest"}</button>
+          <a class="primary-button full ${available ? "" : "disabled"}" href="/programs">${available ? "Reserve Seats" : "Register Interest"}</a>
         </aside>
       </section>
 
       <section class="section compact">
-        <div class="section-head"><div><h2>How it works</h2><p>The final session turns the project into proof students can explain to parents, educators, and program partners.</p></div></div>
+        <div class="section-head"><div><h2>How it works</h2><p>The final session turns the project into a head-to-head Screeps match students can explain to parents, educators, and program partners.</p></div><a class="primary-button" href="/programs">Get Seats ${icon("arrow_forward")}</a></div>
         <div class="league-how">
-          <div><span class="material-symbols-outlined">account_tree</span><h3>Repository proof</h3><p>Students show the Git history, README, and key code decisions behind the project.</p></div>
-          <div><span class="material-symbols-outlined">hub</span><h3>System walkthrough</h3><p>They explain inputs, functions, data flow, API or automation logic, and the tradeoffs they made.</p></div>
-          <div><span class="material-symbols-outlined">record_voice_over</span><h3>Live demo</h3><p>Each student presents the working system, answers questions, and names the next version they would build.</p></div>
+          <div><span class="material-symbols-outlined">account_tree</span><h3>Battle branch</h3><p>Students submit a Git branch tuned for the tournament rules and ready to run on the match server.</p></div>
+          <div><span class="material-symbols-outlined">flag</span><h3>Capture the flag</h3><p>Colonies face off head-to-head. The bot has to move, defend, make decisions, and react under pressure.</p></div>
+          <div><span class="material-symbols-outlined">emoji_events</span><h3>Strategy review</h3><p>Students explain what worked, what broke, and how they would improve the next version of the colony.</p></div>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Demo Day | AutoNateAI",
+    title: "Tournament Day | AutoNateAI",
     active: "league",
     body,
     ogImage: "/assets/og/league.jpg",

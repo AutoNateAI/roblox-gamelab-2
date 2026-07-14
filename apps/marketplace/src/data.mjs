@@ -2,7 +2,7 @@ export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
   { label: "Program", href: "/programs", keys: ["programs"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
-  { label: "Demo Day", href: "/league", keys: ["league"] },
+  { label: "Tournament", href: "/league", keys: ["league"] },
 ];
 
 export const badgeProgression = [
@@ -40,7 +40,7 @@ export const articles = [
     body: [
       "Screeps is not just a game added onto a coding class. It is the environment where the software system lives. Students write JavaScript that controls workers, manages energy, upgrades rooms, and decides what the colony should do next.",
       "That makes abstract programming easier to understand. A variable can track state. A function can become a reusable creep behavior. A conditional can decide whether to harvest or transfer energy. Memory can store assignments across game ticks. Git can protect the last working version before a student tries a new strategy.",
-      "For buyers, the value is that students are practicing production-style thinking in a contained environment. They learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture instead of only chasing syntax."
+      "For buyers, the value is that students are practicing production-style thinking in a contained environment. They learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture before testing it in a cohort tournament."
     ],
     tags: ["Screeps", "Software Systems", "Youth Programming"],
     readingTime: "4 min read",
@@ -88,7 +88,7 @@ export const articles = [
     body: [
       "When students build with AI, the code can change quickly. Git gives them a way to slow the process down and make the work understandable. Every commit becomes a checkpoint: what changed, why it changed, and whether it helped.",
       "That is especially important when students use Codex. A small code change can fix a feature or break behavior somewhere else. Git gives students a path back to the last working version.",
-      "By the end of the program, each student has more than a project. They have a small software portfolio: commit history, notes, screenshots or demo clips, architecture notes, and final reflections that show how their thinking developed."
+      "By the end of the program, each student has more than a project. They have a small software portfolio: commit history, notes, screenshots or match clips, architecture notes, and tournament reflections that show how their thinking developed."
     ],
     tags: ["Git", "Portfolio", "Codex"],
     readingTime: "3 min read",

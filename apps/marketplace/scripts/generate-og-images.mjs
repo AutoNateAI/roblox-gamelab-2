@@ -115,9 +115,9 @@ await composite({
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Final Showcase",
-  title: programsData.league?.season?.name || "AutoNateAI Demo Day",
-  footer: "AutoNateAI · Student Project Showcase",
+  eyebrow: "Tournament Day",
+  title: programsData.league?.season?.name || "AutoNateAI Tournament Day",
+  footer: "AutoNateAI · Screeps Capture the Flag",
   outFile: path.join(outDir, "league.jpg"),
 });
 

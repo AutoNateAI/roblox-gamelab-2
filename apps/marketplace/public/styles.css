@@ -421,6 +421,10 @@ h1 {
   font-weight: 700;
 }
 
+.section-head a.primary-button {
+  color: var(--on-primary);
+}
+
 .badge-strip {
   display: flex;
   align-items: center;
