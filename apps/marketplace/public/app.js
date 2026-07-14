@@ -129,6 +129,7 @@ async function setupSquareCard(config) {
   const container = document.querySelector("[data-square-card]");
   if (!container || !config.enabled) return;
   container.innerHTML = "";
+  container.classList.remove("unavailable");
   const scriptUrl =
     config.environment === "production"
       ? "https://web.squarecdn.com/v1/square.js"
@@ -146,13 +147,6 @@ async function setupSquareCard(config) {
         fontWeight: "700",
         placeholderColor: isLight ? "#7b857c" : "#93a69b",
       },
-      ".input-container": {
-        borderColor: isLight ? "#d7ddce" : "#253141",
-        borderRadius: "0px",
-      },
-      ".input-container.is-focus": {
-        borderColor: "#f2b134",
-      },
       ".message-text": {
         color: isLight ? "#57635a" : "#93a69b",
       },
@@ -169,10 +163,23 @@ async function setupSquareCard(config) {
   completeButton?.removeAttribute("aria-disabled");
 }
 
+async function fetchSquareConfig() {
+  const response = await fetch(`${squareApiBase}/config`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Square config returned ${response.status}`);
+  return response.json();
+}
+
+function markSquareUnavailable(message) {
+  const container = document.querySelector("[data-square-card]");
+  if (container) {
+    container.classList.add("unavailable");
+    container.innerHTML = `<span>${message}</span>`;
+  }
+}
+
 const squareStatusEl = document.querySelector("[data-square-status]");
 if (squareStatusEl) {
-  fetch(`${squareApiBase}/config`)
-    .then((response) => response.json())
+  fetchSquareConfig()
     .then(async (config) => {
       squareConfig = config;
       squareStatusEl.classList.toggle("ready", Boolean(config.enabled));
@@ -180,14 +187,21 @@ if (squareStatusEl) {
         ? `<strong>Square payments ready</strong><span>${config.environment} environment connected. Enter card details below to complete enrollment.</span>`
         : `<strong>Square payment setup pending</strong><span>Add the ${config.environment} Square application ID, access token, and location ID to enable card payments. Use /api/square/locations after adding the access token to find the location ID.</span>`;
       if (config.enabled) {
-        await setupSquareCard(config);
+        try {
+          await setupSquareCard(config);
+        } catch (error) {
+          squareConfig = null;
+          squareStatusEl.classList.remove("ready");
+          squareStatusEl.innerHTML = `<strong>Card fields could not load</strong><span>${error.message || "Square could not mount the secure card field."}</span>`;
+          markSquareUnavailable("Card fields could not load. Refresh the page or check Square credentials.");
+        }
       } else {
-        document.querySelector("[data-square-card]")?.classList.add("unavailable");
+        markSquareUnavailable("Square payment setup is pending.");
       }
     })
-    .catch(() => {
-      squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>Checkout preview is still available, but payment configuration could not be checked.</span>`;
-      document.querySelector("[data-square-card]")?.classList.add("unavailable");
+    .catch((error) => {
+      squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>${error.message || "Checkout preview is still available, but payment configuration could not be checked."}</span>`;
+      markSquareUnavailable("Card fields are unavailable until Square status loads.");
     });
 }
 
