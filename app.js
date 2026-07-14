@@ -26,6 +26,21 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
 
 syncThemeIcon();
 
+// --- Mobile navigation ---
+const mobileMenuToggle = document.querySelector("[data-mobile-menu-toggle]");
+const mobileMenu = document.querySelector("[data-mobile-menu]");
+mobileMenuToggle?.addEventListener("click", () => {
+  const isOpen = mobileMenu?.classList.toggle("open") || false;
+  mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+mobileMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    mobileMenuToggle?.setAttribute("aria-expanded", "false");
+  });
+});
+
 // --- Lightweight image carousel ---
 document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const main = carousel.querySelector("[data-carousel-main]");
