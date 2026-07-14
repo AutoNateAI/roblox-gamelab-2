@@ -48,21 +48,30 @@ async function readRequestJson(request) {
 
 function squareSettings() {
   const environment = process.env.SQUARE_ENVIRONMENT === "production" ? "production" : "sandbox";
+  const prefix = environment === "production" ? "SQUARE_PRODUCTION" : "SQUARE_SANDBOX";
   return {
     environment,
-    applicationId: process.env.SQUARE_APPLICATION_ID || "",
-    locationId: process.env.SQUARE_LOCATION_ID || "",
-    accessToken: process.env.SQUARE_ACCESS_TOKEN || "",
+    applicationId: process.env[`${prefix}_APPLICATION_ID`] || process.env.SQUARE_APPLICATION_ID || "",
+    locationId: process.env[`${prefix}_LOCATION_ID`] || process.env.SQUARE_LOCATION_ID || "",
+    accessToken: process.env[`${prefix}_ACCESS_TOKEN`] || process.env.SQUARE_ACCESS_TOKEN || "",
     apiVersion: process.env.SQUARE_VERSION || "2026-06-18",
     paymentsUrl:
       environment === "production"
         ? "https://connect.squareup.com/v2/payments"
         : "https://connect.squareupsandbox.com/v2/payments",
+    locationsUrl:
+      environment === "production"
+        ? "https://connect.squareup.com/v2/locations"
+        : "https://connect.squareupsandbox.com/v2/locations",
   };
 }
 
 function squareIsReady(settings = squareSettings()) {
   return Boolean(settings.applicationId && settings.locationId && settings.accessToken);
+}
+
+function squareCanListLocations(settings = squareSettings()) {
+  return Boolean(settings.accessToken);
 }
 
 function json(response, status, payload) {
@@ -158,10 +167,29 @@ const server = createServer(async (request, response) => {
       const settings = squareSettings();
       json(response, 200, {
         enabled: squareIsReady(settings),
+        canListLocations: squareCanListLocations(settings),
         environment: settings.environment,
         applicationId: settings.applicationId || null,
         locationId: settings.locationId || null,
       });
+      return;
+    }
+
+    if (url.pathname === "/api/square/locations") {
+      const settings = squareSettings();
+      if (!squareCanListLocations(settings)) {
+        json(response, 503, { error: "Square access token is not configured." });
+        return;
+      }
+
+      const squareResponse = await fetch(settings.locationsUrl, {
+        headers: {
+          "authorization": `Bearer ${settings.accessToken}`,
+          "Square-Version": settings.apiVersion,
+        },
+      });
+      const payload = await squareResponse.json();
+      json(response, squareResponse.ok ? 200 : squareResponse.status, payload);
       return;
     }
 
