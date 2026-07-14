@@ -112,7 +112,7 @@ if (squareStatusEl) {
       squareStatusEl.classList.toggle("ready", Boolean(config.enabled));
       squareStatusEl.innerHTML = config.enabled
         ? `<strong>Square payments ready</strong><span>${config.environment} environment connected. Card payments can be wired through the Square Web Payments SDK.</span>`
-        : `<strong>Square payment setup pending</strong><span>Add SQUARE_APPLICATION_ID, SQUARE_LOCATION_ID, and SQUARE_ACCESS_TOKEN to enable live card payments.</span>`;
+        : `<strong>Square payment setup pending</strong><span>Add the ${config.environment} Square application ID, access token, and location ID to enable card payments. Use /api/square/locations after adding the access token to find the location ID.</span>`;
     })
     .catch(() => {
       squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>Checkout preview is still available, but payment configuration could not be checked.</span>`;
