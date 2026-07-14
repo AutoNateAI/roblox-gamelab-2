@@ -166,11 +166,11 @@ export function renderPrograms(data) {
       <div class="page-toolbar">
         <div>
           <span class="kicker">${icon("route")} Youth Programming Program</span>
-          <h1>One focused cohort. Built to run again.</h1>
-          <p>${escapeHtml(path.description)} ${escapeHtml(path.estimatedDuration)}. Built for organizations and families purchasing seats for students.</p>
+          <h1>AI Systems Programming Lab</h1>
+          <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot that ends in AutoNateAI capture-the-flag.</p>
         </div>
       </div>
-      ${programs.map((program) => programFeature(program, "program-page-feature")).join("")}
+      ${programs.map((program) => programFeature(program, "program-page-feature", 7)).join("")}
     </main>
   `;
 
@@ -490,7 +490,7 @@ function paymentMethod(symbol, label, active = false) {
   return `<button class="payment-method ${active ? "active" : ""}">${icon(symbol)}<span>${label}</span></button>`;
 }
 
-function programFeature(program, extraClass = "") {
+function programFeature(program, extraClass = "", imageIndex = program.sequence + 1) {
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$369";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
@@ -498,7 +498,7 @@ function programFeature(program, extraClass = "") {
   return `
     <article class="program-feature ${extraClass}">
       <a class="program-feature-media" href="/programs/${program.handle}">
-        <img src="${shot(program.sequence + 1)}" alt="Screeps colony system preview" />
+        <img src="${shot(imageIndex)}" alt="Screeps colony system preview" />
       </a>
       <div class="program-feature-body">
         <div class="program-feature-topline">
