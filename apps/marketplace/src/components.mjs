@@ -64,7 +64,7 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>A focused youth programming cohort that turns coding foundations, Git, APIs, automation, and Codex into systems students can operate, explain, and improve.</p>
         </div>
-        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"], ["Tournament Day", "/league"]])}
+        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">

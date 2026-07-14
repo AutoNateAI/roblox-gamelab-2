@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { randomUUID } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,6 +35,34 @@ const contentTypes = {
 async function readJson(relativePath) {
   const file = await readFile(path.join(rootDir, relativePath), "utf8");
   return JSON.parse(file);
+}
+
+async function readRequestJson(request) {
+  const chunks = [];
+  for await (const chunk of request) {
+    chunks.push(chunk);
+  }
+  if (!chunks.length) return {};
+  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+}
+
+function squareSettings() {
+  const environment = process.env.SQUARE_ENVIRONMENT === "production" ? "production" : "sandbox";
+  return {
+    environment,
+    applicationId: process.env.SQUARE_APPLICATION_ID || "",
+    locationId: process.env.SQUARE_LOCATION_ID || "",
+    accessToken: process.env.SQUARE_ACCESS_TOKEN || "",
+    apiVersion: process.env.SQUARE_VERSION || "2026-06-18",
+    paymentsUrl:
+      environment === "production"
+        ? "https://connect.squareup.com/v2/payments"
+        : "https://connect.squareupsandbox.com/v2/payments",
+  };
+}
+
+function squareIsReady(settings = squareSettings()) {
+  return Boolean(settings.applicationId && settings.locationId && settings.accessToken);
 }
 
 function json(response, status, payload) {
@@ -122,6 +151,58 @@ const server = createServer(async (request, response) => {
         namespace: "/api/gamelab",
         timestamp: new Date().toISOString(),
       });
+      return;
+    }
+
+    if (url.pathname === "/api/square/config") {
+      const settings = squareSettings();
+      json(response, 200, {
+        enabled: squareIsReady(settings),
+        environment: settings.environment,
+        applicationId: settings.applicationId || null,
+        locationId: settings.locationId || null,
+      });
+      return;
+    }
+
+    if (url.pathname === "/api/square/payments" && request.method === "POST") {
+      const settings = squareSettings();
+      if (!squareIsReady(settings)) {
+        json(response, 503, { error: "Square is not configured." });
+        return;
+      }
+
+      const body = await readRequestJson(request);
+      const programsData = await readJson("data/marketplace/programs.json");
+      const program = programsData.programs.find((item) => item.handle === body.programHandle);
+      const offering = program?.offerings?.find((item) => item.id === body.offeringId) || program?.offerings?.[0];
+      if (!program || !offering || !body.sourceId) {
+        json(response, 400, { error: "Missing program, offering, or Square source token." });
+        return;
+      }
+
+      const squareResponse = await fetch(settings.paymentsUrl, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "authorization": `Bearer ${settings.accessToken}`,
+          "Square-Version": settings.apiVersion,
+        },
+        body: JSON.stringify({
+          idempotency_key: randomUUID(),
+          source_id: body.sourceId,
+          location_id: settings.locationId,
+          amount_money: {
+            amount: Math.round(Number(offering.price) * 100),
+            currency: "USD",
+          },
+          note: `${program.name} - ${offering.name}`,
+          reference_id: `${program.handle}:${offering.id}`,
+        }),
+      });
+
+      const payload = await squareResponse.json();
+      json(response, squareResponse.ok ? 200 : squareResponse.status, payload);
       return;
     }
 

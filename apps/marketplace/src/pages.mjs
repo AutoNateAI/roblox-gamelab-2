@@ -27,6 +27,11 @@ function cohortBadge(program, label = "Next cohort") {
   return `<span class="cohort-date">${icon("calendar_month")} ${label}: ${escapeHtml(date)}</span>`;
 }
 
+function cohortCapacity(program) {
+  const capacity = program?.offerings?.[0]?.capacity || 25;
+  return `${capacity} student max`;
+}
+
 export function renderHome(data) {
   const { programs, league } = data;
   const featured = programs.slice(0, 1);
@@ -55,7 +60,7 @@ export function renderHome(data) {
             <p>Students build inside Screeps, an online strategy world where JavaScript controls a live colony. They code the systems that keep that colony running and leave with Git-backed proof of how they think. For parents, schools, churches, and program directors, it is a six-week workforce-development experience that blends fun, community, AI literacy, and real software habits.</p>
             <div class="cohort-date-row">
               ${cohortBadge(primaryProgram)}
-              <span>${escapeHtml(primaryProgram.cohortNote || "")}</span>
+              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for coding help, Screeps strategy, build sessions, hackathons, and industry-leader networking.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
@@ -70,9 +75,9 @@ export function renderHome(data) {
               <p>Students turn game strategy into real software habits, then battle their colonies head-to-head in AutoNateAI capture-the-flag.</p>
               <div class="hero-facts">
                 <span>Workforce-ready habits</span>
-                <span>Community cohort</span>
+                <span>${cohortCapacity(primaryProgram)}</span>
                 <span>Screeps bot repo</span>
-                <span>Tournament day</span>
+                <span>Discord cohort channel</span>
               </div>
             </div>
           </aside>
@@ -92,7 +97,7 @@ export function renderHome(data) {
           <article><span>${icon("functions")}</span><h3>Code that runs</h3><p>Variables, functions, conditionals, loops, and data structures control real creeps inside a persistent room.</p></article>
           <article><span>${icon("account_tree")}</span><h3>Git like builders</h3><p>Students commit working bot versions, read diffs, recover from broken changes, and leave with a visible repo history.</p></article>
           <article><span>${icon("hub")}</span><h3>APIs and automation</h3><p>Screeps game objects make API thinking concrete while spawn logic, roles, and Memory teach automation loops.</p></article>
-          <article><span>${icon("smart_toy")}</span><h3>Codex workflows</h3><p>Codex helps students plan, generate, debug, and review bot features, but they only keep code they can explain.</p></article>
+          <article><span>${icon("forum")}</span><h3>Discord cohort</h3><p>Every cohort gets a dedicated AutoNateAI Discord channel for coding questions, Screeps discussion, hackathons, and industry networking.</p></article>
         </div>
       </section>
 
@@ -109,7 +114,7 @@ export function renderHome(data) {
             </div>
             <div class="button-row compete-actions">
               <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
-              <a class="outline-button" href="/league">See Tournament Day</a>
+              <a class="outline-button" href="/programs/${primaryProgram.handle}">View Curriculum</a>
             </div>
           </div>
           <div class="compete-copy">
@@ -137,7 +142,7 @@ export function renderHome(data) {
           </div>
           <div class="button-row">
             <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seats ${icon("arrow_forward")}</a>
-            <a class="outline-button" href="/league">See Tournament Day</a>
+            <a class="outline-button" href="/programs/${primaryProgram.handle}">View Program</a>
           </div>
         </div>
       </section>
@@ -157,7 +162,7 @@ export function renderHome(data) {
       <section class="newsletter">
         <div>
           <h2>Reserve seats for the next cohort.</h2>
-          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is six weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern.</p>
+          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is six weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
@@ -186,10 +191,10 @@ export function renderPrograms(data) {
         <div>
           <span class="kicker">${icon("route")} Youth Programming Program</span>
           <h1>AI Systems Programming Lab</h1>
-          <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot that ends in AutoNateAI capture-the-flag.</p>
+          <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot. Each cohort is capped at ${programs[0] ? cohortCapacity(programs[0]) : "25 student max"} and supported through a dedicated AutoNateAI Discord channel.</p>
           <div class="cohort-date-row compact">
             ${programs[0] ? cohortBadge(programs[0]) : ""}
-            <span>${programs[0] ? escapeHtml(programs[0].cohortNote || "") : ""}</span>
+            <span>${programs[0] ? escapeHtml(programs[0].cohortNote || "") : ""} Students use the Discord channel for coding help, Screeps discussion, build sessions, hackathons, and industry-leader networking.</span>
           </div>
         </div>
       </div>
@@ -230,7 +235,7 @@ export function renderProgramDetail(data, program) {
           <p>A six-week live cohort where students learn systems thinking by building a Screeps colony they can care about. Their JavaScript gathers resources, remembers state, automates decisions, recovers from failure, and competes, so real software ideas become visible instead of abstract.</p>
           <div class="cohort-date-row compact">
             ${cohortBadge(program)}
-            <span>${escapeHtml(program.cohortNote || "")}</span>
+            <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Every cohort gets a dedicated AutoNateAI Discord channel for coding, Screeps strategy, build sessions, hackathons, and industry-leader networking.</span>
           </div>
           <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 6} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
           <div class="detail-cta-box">
@@ -239,13 +244,13 @@ export function renderProgramDetail(data, program) {
             <a class="outline-button full" href="#curriculum">View 12 Sessions</a>
           </div>
           <div class="detail-fast-points">
-            <span>Screeps setup included</span>
+            <span>${cohortCapacity(program)}</span>
             <span>Student-owned Git repo</span>
+            <span>Dedicated Discord channel</span>
             <span>Codex coaching</span>
-            <span>Tournament branch</span>
           </div>
           <dl>
-            <dt>Best fit</dt><dd>Students ready for a fun, structured path into coding, AI literacy, teamwork, and systems thinking.</dd>
+            <dt>Best fit</dt><dd>Students ready for a fun, structured path into coding, AI literacy, teamwork, community, and systems thinking.</dd>
             <dt>They leave with</dt><dd>A working Screeps bot, Git history, architecture notes, and a tournament reflection that shows how their system performed.</dd>
           </dl>
         </aside>
@@ -254,7 +259,7 @@ export function renderProgramDetail(data, program) {
       <section class="detail-proof-strip">
         <a href="${checkoutHref}"><b>${price}</b><span>Full 6-week program</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
-        <a href="#curriculum"><b>12</b><span>Live Screeps sessions</span></a>
+        <a href="#curriculum"><b>25</b><span>Student max</span></a>
         <a href="#outcomes"><b>Git</b><span>Student-owned repo</span></a>
       </section>
 
@@ -278,7 +283,7 @@ export function renderProgramDetail(data, program) {
         <div>
           <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
           <h2>${price} for the full program</h2>
-          <p>${escapeHtml(program.cohortNote || "")} Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, and tournament-day support.</p>
+          <p>${escapeHtml(program.cohortNote || "")} Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, dedicated AutoNateAI Discord access, and tournament-day support.</p>
         </div>
         <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
       </section>
@@ -437,6 +442,10 @@ export function renderCheckout(data) {
       <div class="checkout-grid">
         <section class="checkout-form">
           <h1>Payment Method</h1>
+          <div class="square-status" data-square-status>
+            <strong>Square payment setup pending</strong>
+            <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
+          </div>
           <div class="payment-grid">
             ${paymentMethod("credit_card", "Credit Card", true)}
             ${paymentMethod("account_balance_wallet", "PayPal")}
@@ -589,13 +598,13 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
         <p>${escapeHtml(program.description)}</p>
         <div class="cohort-date-row compact">
           ${cohortBadge(program)}
-          <span>${escapeHtml(program.cohortNote || "")}</span>
+          <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord channel included for coding, Screeps, hackathons, and industry networking.</span>
         </div>
         <div class="program-feature-points">
           <span>Screeps colony bot</span>
           <span>Student Git repo</span>
-          <span>Automation logic</span>
-          <span>Codex coaching</span>
+          <span>${cohortCapacity(program)}</span>
+          <span>Discord cohort channel</span>
         </div>
         <div class="program-feature-actions">
           <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>

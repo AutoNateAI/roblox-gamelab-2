@@ -24,3 +24,22 @@ Open `http://localhost:4173`.
 
 - `data/season-1/quests.json` is the quest-building source of truth.
 - `data/marketplace/catalog.json` is the Medusa-shaped commerce catalog.
+
+## Square payment prep
+
+Checkout stays in preview mode until Square credentials are present. To enable
+the server-side payment route, set:
+
+```bash
+SQUARE_ENVIRONMENT=sandbox # or production
+SQUARE_APPLICATION_ID=...
+SQUARE_LOCATION_ID=...
+SQUARE_ACCESS_TOKEN=...
+SQUARE_VERSION=2026-06-18
+```
+
+Prepared endpoints:
+
+- `GET /api/square/config` reports whether Square is configured.
+- `POST /api/square/payments` accepts a Square `sourceId`, program handle, and
+  offering ID, then creates the payment through Square's Payments API.

@@ -98,7 +98,26 @@ function findSelection(catalog) {
   return { program, offering };
 }
 
+function cohortCapacity(program, offering) {
+  return `${offering?.capacity || program?.offerings?.[0]?.capacity || 25} student max`;
+}
+
 const catalog = readCatalog();
+
+const squareStatusEl = document.querySelector("[data-square-status]");
+if (squareStatusEl) {
+  fetch("/api/square/config")
+    .then((response) => response.json())
+    .then((config) => {
+      squareStatusEl.classList.toggle("ready", Boolean(config.enabled));
+      squareStatusEl.innerHTML = config.enabled
+        ? `<strong>Square payments ready</strong><span>${config.environment} environment connected. Card payments can be wired through the Square Web Payments SDK.</span>`
+        : `<strong>Square payment setup pending</strong><span>Add SQUARE_APPLICATION_ID, SQUARE_LOCATION_ID, and SQUARE_ACCESS_TOKEN to enable live card payments.</span>`;
+    })
+    .catch(() => {
+      squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>Checkout preview is still available, but payment configuration could not be checked.</span>`;
+    });
+}
 
 const summaryEl = document.querySelector("[data-order-summary]");
 if (catalog && summaryEl) {
@@ -107,7 +126,7 @@ if (catalog && summaryEl) {
     summaryEl.innerHTML = `
       <div class="summary-item">
         <img src="${program.thumbnail}" alt="${program.name}" />
-        <div><strong>${program.name}</strong><span>${offering.deliveryType} &middot; ${offering.meetingFrequency || ""}</span><em>Next cohort opens ${formatDate(program.startDate)}</em></div>
+        <div><strong>${program.name}</strong><span>${offering.deliveryType} &middot; ${offering.meetingFrequency || ""}</span><em>Next cohort opens ${formatDate(program.startDate)} &middot; ${cohortCapacity(program, offering)} &middot; Dedicated Discord cohort channel</em></div>
         <b>${money(offering.price)}</b>
       </div>
     `;

@@ -2,7 +2,6 @@ export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
   { label: "Program", href: "/programs", keys: ["programs"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
-  { label: "Tournament", href: "/league", keys: ["league"] },
 ];
 
 export const badgeProgression = [

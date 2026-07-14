@@ -1855,6 +1855,33 @@ h1 {
   gap: 14px;
 }
 
+.square-status {
+  display: grid;
+  gap: 6px;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  color: var(--on-variant);
+  margin-bottom: 18px;
+  padding: 14px;
+}
+
+.square-status strong {
+  color: var(--on-surface);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.square-status span {
+  line-height: 1.45;
+}
+
+.square-status.ready {
+  border-color: color-mix(in srgb, var(--secondary) 70%, var(--outline));
+  background: var(--secondary-soft);
+}
+
 .payment-method {
   display: grid;
   place-items: center;
