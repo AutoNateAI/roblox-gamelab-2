@@ -64,9 +64,9 @@ export function renderAdminDashboard({ programs, league, syncMessage }) {
     </table>
 
     <section class="admin-league">
-      <h2>League</h2>
-      <p><strong>${escapeHtml(league.product?.fields?.["Title"] || "AutoNateAI Screeps League")}</strong> &mdash; status: ${escapeHtml(league.product?.fields?.["Status"] || "Idea")}</p>
-      <p class="admin-muted">Edit League Seasons directly in Airtable for now &mdash; the admin tool focuses on Programs and Offerings.</p>
+      <h2>Final Showcase</h2>
+      <p><strong>${escapeHtml(league.product?.fields?.["Title"] || "AutoNateAI Demo Day")}</strong> &mdash; status: ${escapeHtml(league.product?.fields?.["Status"] || "Idea")}</p>
+      <p class="admin-muted">Edit showcase seasons directly in Airtable for now &mdash; the admin tool focuses on Programs and Offerings.</p>
     </section>
   `,
   );

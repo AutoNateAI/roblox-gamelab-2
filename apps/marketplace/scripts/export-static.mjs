@@ -66,7 +66,7 @@ await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | AI Software Architect Path for Youth</title>",
+    "<title>AutoNateAI | Youth Systems Programming Lab</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );

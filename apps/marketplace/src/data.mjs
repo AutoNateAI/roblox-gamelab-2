@@ -1,8 +1,8 @@
 export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
-  { label: "Programs", href: "/programs", keys: ["programs"] },
+  { label: "Program", href: "/programs", keys: ["programs"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
-  { label: "League", href: "/league", keys: ["league"] },
+  { label: "Demo Day", href: "/league", keys: ["league"] },
 ];
 
 export const badgeProgression = [
@@ -31,18 +31,34 @@ export const screepsScreenshots = [
 
 export const articles = [
   {
-    handle: "what-is-screeps",
-    title: "What Is Screeps?",
+    handle: "screeps-as-a-systems-lab",
+    title: "Why Screeps Works as a Systems Lab",
     category: "Guide",
-    audience: "Parents, students, and program partners",
+    audience: "Parents, schools, churches, and youth program partners",
     summary:
-      "Screeps is a programming strategy world where students write JavaScript to control autonomous workers. It turns coding into a visible system students can inspect, debug, and improve.",
+      "Screeps lets students see software architecture in motion. Their JavaScript controls a live colony, so programming concepts become visible decisions, failures, and improvements.",
     body: [
-      "Screeps looks like a strategy game, but underneath it is a live software system. Students write code that controls tiny worker units called creeps. Those creeps harvest resources, build structures, upgrade rooms, and eventually compete against other bots.",
-      "That matters because the game makes invisible programming ideas visible. A loop becomes a worker repeating a job. Bad state management becomes a stuck colony. A vague instruction becomes a bot that wastes time. Students can see why systems thinking matters.",
-      "In AutoNateAI, Screeps becomes the training environment for AI-assisted software architecture. Students are not only learning syntax. They are learning how to describe behavior, use AI carefully, test code against a real environment, and explain the system they built."
+      "Screeps is not just a game added onto a coding class. It is the environment where the software system lives. Students write JavaScript that controls workers, manages energy, upgrades rooms, and decides what the colony should do next.",
+      "That makes abstract programming easier to understand. A variable can track state. A function can become a reusable creep behavior. A conditional can decide whether to harvest or transfer energy. Memory can store assignments across game ticks. Git can protect the last working version before a student tries a new strategy.",
+      "For buyers, the value is that students are practicing production-style thinking in a contained environment. They learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture instead of only chasing syntax."
     ],
-    tags: ["Screeps", "Youth Coding", "Systems Thinking"],
+    tags: ["Screeps", "Software Systems", "Youth Programming"],
+    readingTime: "4 min read",
+    image: "/assets/screeps/screeps-03.jpg",
+  },
+  {
+    handle: "what-is-screeps",
+    title: "Why Students Build a Real System",
+    category: "Guide",
+    audience: "Parents, schools, churches, and youth program partners",
+    summary:
+      "Students learn faster when programming concepts connect to one working project. A real system gives variables, functions, data, APIs, automation, and Git a reason to exist.",
+    body: [
+      "Many students are introduced to coding as a list of topics: variables, functions, conditionals, loops, and syntax. Those topics matter, but they become easier to retain when students can see how each piece helps a larger system work.",
+      "The AutoNateAI lab is built around that idea. Students do not only complete disconnected exercises. They build a project with inputs, decisions, outputs, data, version history, and automation opportunities.",
+      "That gives buyers a clearer outcome to evaluate. At the end, students can show the code, explain the architecture, walk through Git history, and describe how AI helped without pretending the AI did all the thinking."
+    ],
+    tags: ["Youth Programming", "Systems Thinking", "Project-Based Learning"],
     readingTime: "4 min read",
     image: "/assets/screeps/screeps-01.jpg",
   },
@@ -52,10 +68,10 @@ export const articles = [
     category: "Strategy",
     audience: "Youth program leaders and educators",
     summary:
-      "A good coding program should help students understand feedback loops, constraints, resources, and tradeoffs. Screeps gives those ideas a world students can actually operate.",
+      "A good coding program should help students understand feedback loops, constraints, resources, and tradeoffs. A real project gives those ideas something students can operate.",
     body: [
       "Most students are told to learn coding as a list of concepts: variables, loops, functions, arrays. Those concepts matter, but they become powerful when students can see why they are needed.",
-      "In Screeps, a loop is not abstract. It is the colony deciding what every worker should do each tick. A function is not only a syntax pattern. It is a reusable behavior. Memory is not just data. It is the colony remembering assignments and decisions.",
+      "In the lab, a loop is not abstract. It is the system checking for new work. A function is not only a syntax pattern. It is a reusable behavior. Data is not just a value. It is what the system remembers and acts on.",
       "That is the bridge to real-world software architecture. Businesses, cities, classrooms, and teams all run on systems. Students learn to ask better questions: What is the bottleneck? What is the feedback signal? What state needs to persist? What should be automated next?"
     ],
     tags: ["Critical Thinking", "Software Architecture", "Education"],
@@ -64,17 +80,17 @@ export const articles = [
   },
   {
     handle: "why-git-matters-for-students",
-    title: "Why Students Learn Git in the AI Software Architect Path",
+    title: "Why Students Learn Git in the AI Systems Programming Lab",
     category: "Tutorial",
     audience: "Students and parents",
     summary:
-      "Git helps students save progress, share code, compare changes, and build confidence as their bot evolves from a first script into a real project.",
+      "Git helps students save progress, share code, compare changes, and build confidence as their idea evolves from a first script into a real project.",
     body: [
       "When students build with AI, the code can change quickly. Git gives them a way to slow the process down and make the work understandable. Every commit becomes a checkpoint: what changed, why it changed, and whether it helped.",
-      "That is especially important in Screeps because the bot is alive. A small code change can improve the colony or break it. Git gives students a path back to the last working version.",
-      "By the end of the program, each student has more than a bot. They have a small software portfolio: commit history, notes, screenshots, and battle-day reflections that show how their thinking developed."
+      "That is especially important when students use Codex. A small code change can fix a feature or break behavior somewhere else. Git gives students a path back to the last working version.",
+      "By the end of the program, each student has more than a project. They have a small software portfolio: commit history, notes, screenshots or demo clips, architecture notes, and final reflections that show how their thinking developed."
     ],
-    tags: ["Git", "Portfolio", "AI Coding"],
+    tags: ["Git", "Portfolio", "Codex"],
     readingTime: "3 min read",
     image: "/assets/screeps/screeps-06.jpg",
   }

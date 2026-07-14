@@ -44,7 +44,7 @@ export function topNav(active = "home", mode = "full") {
         ${mode === "checkout" ? `<span class="secure-dot"><i></i>Secure Checkout</span>` : `<div class="nav-links">${links}</div>`}
         <div class="nav-actions">
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Enroll Now</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Reserve Seats</a>`}
         </div>
       </nav>
     </header>
@@ -57,13 +57,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>Youth coding programs that turn AI, Git, JavaScript, and systems thinking into a world students can operate, explain, and improve.</p>
+          <p>A focused youth programming cohort that turns coding foundations, Git, APIs, automation, and Codex into systems students can operate, explain, and improve.</p>
         </div>
-        ${footerColumn("Path", [["AI Software Architect", "/programs/ai-software-architect"], ["Programs", "/programs"], ["Articles", "/articles"], ["Battle Day", "/league"]])}
+        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"], ["Demo Day", "/league"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Screeps screenshots courtesy of Screeps (screeps.com) &mdash; used editorially to describe the curriculum.</span>
+        <span>&copy; 2026 AutoNateAI. Youth programming cohorts for systems thinking, Git, APIs, automation, and AI-assisted development.</span>
       </div>
     </footer>
   `;
@@ -81,7 +81,7 @@ function footerColumn(title, items) {
 const SITE_NAME = "AutoNateAI";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches youth programming, critical thinking, Git, AI-assisted coding, and software architecture through Screeps, a live JavaScript strategy world.";
+  "AutoNateAI teaches youth programming, critical thinking, Git, APIs, automation, AI-assisted coding, and software architecture through a live six-week cohort.";
 
 export function pageShell({
   title,
@@ -141,13 +141,13 @@ export function programCard(program) {
       </a>
       <div class="card-body">
         <div class="card-title-row">
-          <span class="program-sequence">Program ${program.sequence}</span>
+          <span class="program-sequence">Cohort Program</span>
           <span class="status-pill ${available ? "live" : ""}">${statusLabel(program.status)}</span>
         </div>
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>
         <div class="card-meta">
-          <span>${icon("calendar_month")} ${program.durationWeeks || 3} weeks</span>
+          <span>${icon("calendar_month")} ${program.durationWeeks || 6} weeks</span>
           <b>${escapeHtml(program.badge)}</b>
         </div>
       </div>
@@ -162,7 +162,7 @@ export function offeringCard(offering, program) {
       <h3>${money(offering.price)}<small>${escapeHtml(offering.priceUnit || "")}</small></h3>
       <p>${escapeHtml(offering.meetingFrequency || "")}</p>
       ${offering.capacity ? `<p class="offering-capacity">${icon("group")} Capped at ${offering.capacity} students</p>` : ""}
-      <a class="primary-button full" href="/checkout?program=${program.handle}&offering=${offering.id}">Enroll &mdash; ${escapeHtml(offering.deliveryType)}</a>
+      <a class="primary-button full" href="/checkout?program=${program.handle}&offering=${offering.id}">Reserve Seat &mdash; ${escapeHtml(offering.deliveryType)}</a>
     </article>
   `;
 }

@@ -98,33 +98,33 @@ let index = 0;
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: program.badge || "AI Software Architect",
+    eyebrow: program.badge || "Youth Systems Programming",
     title: program.name,
-    footer: `AutoNateAI · ${program.durationWeeks || 3}-Week Program`,
+    footer: `AutoNateAI · ${program.durationWeeks || 6}-Week Program`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI Software Architect Path",
-  title: "Build, Dissect, Repeat with Screeps",
-  footer: "AutoNateAI · 6 Programs",
+  eyebrow: "Youth Systems Programming",
+  title: "Build Real Systems with Code, Git, APIs, and AI",
+  footer: "AutoNateAI · One Focused Youth Program",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "League / Tournament",
-  title: programsData.league?.season?.name || "AutoNateAI Screeps League",
-  footer: "AutoNateAI · Capture the Flag",
+  eyebrow: "Final Showcase",
+  title: programsData.league?.season?.name || "AutoNateAI Demo Day",
+  footer: "AutoNateAI · Student Project Showcase",
   outFile: path.join(outDir, "league.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI",
-  title: "Learn Software Architecture Inside a Living Screeps Colony",
+  title: "Youth Programming for Systems, Automation, and AI",
   footer: "AutoNateAI · AI-Assisted Development",
   outFile: path.join(outDir, "default.jpg"),
 });
