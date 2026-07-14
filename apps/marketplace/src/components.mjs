@@ -65,7 +65,7 @@ export function footer() {
           <p>A focused youth programming cohort that turns coding foundations, Git, APIs, automation, and Codex into systems students can operate, explain, and improve.</p>
         </div>
         ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"]])}
-        ${footerColumn("Company", [["About AutoNateAI", "/"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
+        ${footerColumn("Company", [["About AutoNateAI", "/about"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 AutoNateAI. Youth programming cohorts for systems thinking, Git, APIs, automation, and AI-assisted development.</span>

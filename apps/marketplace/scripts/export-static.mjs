@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   renderArticleDetail,
   renderArticles,
+  renderAbout,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -26,6 +27,7 @@ const routes = [
   ["index.html", renderHome(programsData)],
   ["programs/index.html", renderPrograms(programsData)],
   ["articles/index.html", renderArticles()],
+  ["about/index.html", renderAbout()],
   ["league/index.html", renderLeague(programsData)],
   ["checkout/index.html", renderCheckout(programsData)],
   ["success/index.html", renderSuccess(programsData)],

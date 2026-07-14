@@ -211,6 +211,142 @@ export function renderPrograms(data) {
   });
 }
 
+export function renderAbout() {
+  const values = [
+    ["Curiosity", "Students should leave with better questions, not just memorized answers."],
+    ["Systems", "We teach students to see inputs, state, feedback loops, constraints, and tradeoffs."],
+    ["Integrity", "AI is powerful, but students still need to understand, explain, and own their work."],
+    ["Creation", "The goal is to build, test, reflect, and improve, not passively consume technology."],
+  ];
+  const experience = [
+    ["University of Michigan", "B.S. Computer Science and Computer Security instructional aide"],
+    ["Microsoft Security", "Software developer experience on systems people depend on"],
+    ["Citi", "Engineering work inside financial technology environments"],
+    ["Veterans United", "AI software engineering for real organizational workflows"],
+    ["Atomic Object", "Senior software consulting across products, teams, and architecture decisions"],
+    ["Outlier", "Prompt engineering and AI workflow evaluation before it became mainstream"],
+  ];
+
+  const body = `
+    <main class="about-page">
+      <section class="about-hero">
+        <div>
+          <span class="kicker">${icon("psychology")} About AutoNateAI</span>
+          <h1>We teach students how to think like modern software engineers.</h1>
+          <p>AutoNateAI exists to develop exceptional thinkers through software engineering, AI, and systems design. Programming is more than writing code. It teaches students how to break down problems, design solutions, communicate ideas, and work with AI responsibly.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs">View the Program ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/articles">Read the Learning Model</a>
+          </div>
+        </div>
+        <aside class="about-founder-card">
+          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
+          <div>
+            <span class="kicker">Founder / Instructor</span>
+            <h2>Nathan Baker</h2>
+            <p>Computer Science, University of Michigan. Software and AI engineering experience across Microsoft, Citi, Veterans United, Atomic Object, and Outlier.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="about-mission">
+        <span class="kicker">${icon("architecture")} Mission</span>
+        <h2>Students should become architects, not just programmers.</h2>
+        <p>Many students learn syntax. Very few learn how software actually gets designed. Professional engineers spend a lot of time thinking: planning, debugging, communicating, decomposing problems, using Git, reviewing tradeoffs, and deciding what should be automated next. AutoNateAI closes that gap.</p>
+      </section>
+
+      <section class="section compact about-split">
+        <div>
+          <span class="kicker">${icon("verified")} Why families and organizations can trust the program</span>
+          <h2>Built from real engineering work, not a generic coding worksheet.</h2>
+          <p>For the last five years, Nathan has designed software systems, AI workflows, and software architectures used inside real organizations. Now AutoNateAI brings those same engineering methods, AI workflows, and systems thinking to the next generation.</p>
+          <p>Before founding AutoNateAI, Nathan also taught Computer Security at the University of Michigan as an instructional aide, leading office hours, lab sections, and mentoring students learning software security and networking.</p>
+        </div>
+        <div class="about-proof-list">
+          ${experience.map(([title, text]) => `<article><span>${icon("work_history")}</span><div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div></article>`).join("")}
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("school")} Teaching Philosophy</span>
+            <h2>Technology changes. Thinking lasts.</h2>
+            <p>Students are encouraged to experiment, prototype, question assumptions, design before coding, learn from mistakes, use AI responsibly, and communicate their ideas clearly.</p>
+          </div>
+          <a class="primary-button" href="/programs">Reserve Seats ${icon("arrow_forward")}</a>
+        </div>
+        <div class="value-grid about-value-grid">
+          <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Students learn to split large problems into smaller parts and explain how those parts work together.</p></article>
+          <article><span>${icon("bug_report")}</span><h3>Debugging</h3><p>They practice finding the real cause of a problem instead of guessing and hoping.</p></article>
+          <article><span>${icon("commit")}</span><h3>Git workflows</h3><p>They learn to save progress, read changes, recover working versions, and document decisions.</p></article>
+          <article><span>${icon("smart_toy")}</span><h3>AI collaboration</h3><p>They use AI as a thinking partner while staying responsible for the final code and explanation.</p></article>
+        </div>
+      </section>
+
+      <section class="about-logos">
+        <div>
+          <span class="kicker">${icon("groups")} Community and education work</span>
+          <h2>Experience across classrooms, companies, and youth initiatives.</h2>
+          <p>AutoNateAI's work is shaped by collaborations, workshops, outreach, and education initiatives involving universities, technology companies, churches, nonprofits, and community organizations. The focus is not logos. The focus is helping students think clearly and build with confidence.</p>
+        </div>
+        <div class="org-cloud">
+          ${["Grand Valley State University", "Black Boys Code", "Salesforce", "Microsoft", "Endless Opportunities", "Churches", "Community Organizations", "Youth Education Initiatives"].map((org) => `<span>${escapeHtml(org)}</span>`).join("")}
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("diamond")} Values</span>
+            <h2>The standards behind the work.</h2>
+          </div>
+        </div>
+        <div class="about-values">
+          ${values.map(([title, text]) => `<article><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join("")}
+        </div>
+      </section>
+
+      <section class="founder-letter">
+        <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
+        <h2>Let's build the next generation of thinkers.</h2>
+        <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, consulting, and education reinforced one lesson: the people who succeed are not always the people who memorize the most. They are the people who learn how to think.</p>
+        <p>AutoNateAI exists because students deserve to learn software the way modern engineers actually work: with planning, systems thinking, Git, debugging, communication, responsible AI use, and projects that feel alive.</p>
+        <p>If you are a parent, educator, student, or organization leader, I would love to build with you.</p>
+        <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
+      </section>
+
+      <section class="section compact about-faq">
+        <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
+        <div class="faq-grid">
+          <article><h3>Is this only for students who already code?</h3><p>No. The program is structured so students can build fundamentals while seeing how those fundamentals become a working system.</p></article>
+          <article><h3>How does AI fit into the class?</h3><p>Students use AI to ask better questions, inspect code, debug, and improve ideas. AI does not replace understanding.</p></article>
+          <article><h3>Why use Screeps?</h3><p>Screeps makes software visible. Students can see state, automation, feedback loops, failure, and strategy play out in a live world.</p></article>
+          <article><h3>Who is this built for?</h3><p>Parents, schools, churches, nonprofits, universities, and youth organizations that want students to learn durable technology habits.</p></article>
+        </div>
+      </section>
+
+      <section class="detail-enroll-band">
+        <div>
+          <span class="kicker">${icon("local_activity")} Current Program</span>
+          <h2>AI Systems Programming Lab</h2>
+          <p>A six-week youth programming cohort where students build a Screeps colony, learn systems thinking, use Git, collaborate with AI, and finish with a tournament capstone.</p>
+        </div>
+        <a class="primary-button" href="/programs">Explore the Program ${icon("arrow_forward")}</a>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "About AutoNateAI | Youth Programming and AI Systems Thinking",
+    active: "about",
+    body,
+    ogImage: "/assets/nathan-baker.jpeg",
+    description:
+      "AutoNateAI teaches students how to think like modern software engineers through software architecture, AI workflows, Git, debugging, and systems design.",
+  });
+}
+
 export function renderProgramDetail(data, program) {
   const related = data.programs.filter((p) => p.handle !== program.handle).slice(0, 3);
   const gallery = [shot(6), shot(7), shot(8)];
@@ -276,6 +412,22 @@ export function renderProgramDetail(data, program) {
           <article><img src="${shot(2)}" alt="Screeps room with active creeps" /><h3>Working colony bot</h3><p>Harvesters, upgraders, builders, spawn logic, Memory, and role-based behavior.</p></article>
           <article><img src="${shot(4)}" alt="Screeps room showing system growth" /><h3>Production habits</h3><p>Git commits, README notes, bug reports, diffs, and recoverable development checkpoints.</p></article>
           <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>Tournament-ready strategy</h3><p>Students tune their colony for AutoNateAI capture-the-flag and explain what they would scale next.</p></article>
+        </div>
+      </section>
+
+      <section class="program-instructor-section">
+        <div class="program-instructor-photo">
+          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder and instructor at AutoNateAI" />
+        </div>
+        <div>
+          <span class="kicker">${icon("verified")} About the Instructor</span>
+          <h2>Learn from an engineer who has built AI and software systems across Microsoft, Citi, Veterans United, and Atomic Object.</h2>
+          <p>Nathan Baker studied Computer Science at the University of Michigan and has spent the last five years building real software, AI workflows, and software architectures inside organizations where clarity and reliability matter.</p>
+          <p>He also taught Computer Security at the University of Michigan as an instructional aide. That mix of industry engineering and hands-on teaching shapes the program: students learn fundamentals, but they also learn how modern engineers plan, debug, use Git, collaborate with AI, and explain systems.</p>
+          <div class="button-row">
+            <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+            <a class="outline-button" href="/about">About AutoNateAI</a>
+          </div>
         </div>
       </section>
 
@@ -456,14 +608,14 @@ export function renderCheckout(data) {
             <b>$369</b>
           </div>
           <div class="form-stack payment-fields">
-            <label>Name on Card<input data-checkout-field="cardholderName" autocomplete="cc-name" placeholder="ALEX RIVERA" /></label>
-            <label>Purchaser Email<input data-checkout-field="buyerEmail" autocomplete="email" placeholder="alex@example.com" type="email" /></label>
+            <label>Name on Card<input data-checkout-field="cardholderName" autocomplete="cc-name" placeholder="Nathan Baker" /></label>
+            <label>Purchaser Email<input data-checkout-field="buyerEmail" autocomplete="email" placeholder="autonate.ai@gmail.com" type="email" /></label>
           </div>
           <div class="square-card-label">
             <strong>Card Info</strong>
             <span>Encrypted and processed by Square</span>
           </div>
-          <div class="square-card-container" data-square-card></div>
+          <div class="square-card-container" data-square-card><span>Loading secure card fields...</span></div>
         </section>
         <aside class="order-summary">
           <h2>Order Summary</h2>

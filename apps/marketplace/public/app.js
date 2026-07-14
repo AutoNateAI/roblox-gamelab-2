@@ -128,6 +128,7 @@ function loadScript(src) {
 async function setupSquareCard(config) {
   const container = document.querySelector("[data-square-card]");
   if (!container || !config.enabled) return;
+  container.innerHTML = "";
   const scriptUrl =
     config.environment === "production"
       ? "https://web.squarecdn.com/v1/square.js"
@@ -163,6 +164,9 @@ async function setupSquareCard(config) {
   await squareCard.attach("[data-square-card]");
   container.classList.add("ready");
   document.body.classList.add("square-enabled");
+  const completeButton = document.querySelector("[data-checkout-complete]");
+  completeButton?.classList.remove("disabled");
+  completeButton?.removeAttribute("aria-disabled");
 }
 
 const squareStatusEl = document.querySelector("[data-square-status]");
@@ -175,10 +179,15 @@ if (squareStatusEl) {
       squareStatusEl.innerHTML = config.enabled
         ? `<strong>Square payments ready</strong><span>${config.environment} environment connected. Enter card details below to complete enrollment.</span>`
         : `<strong>Square payment setup pending</strong><span>Add the ${config.environment} Square application ID, access token, and location ID to enable card payments. Use /api/square/locations after adding the access token to find the location ID.</span>`;
-      if (config.enabled) await setupSquareCard(config);
+      if (config.enabled) {
+        await setupSquareCard(config);
+      } else {
+        document.querySelector("[data-square-card]")?.classList.add("unavailable");
+      }
     })
     .catch(() => {
       squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>Checkout preview is still available, but payment configuration could not be checked.</span>`;
+      document.querySelector("[data-square-card]")?.classList.add("unavailable");
     });
 }
 
@@ -205,8 +214,14 @@ if (catalog && summaryEl) {
 
 const completeButton = document.querySelector("[data-checkout-complete]");
 completeButton?.addEventListener("click", async (event) => {
-  if (!squareCard || !squareConfig?.enabled || !selection.program || !selection.offering) return;
   event.preventDefault();
+  if (!squareCard || !squareConfig?.enabled || !selection.program || !selection.offering) {
+    if (squareStatusEl) {
+      squareStatusEl.classList.remove("ready");
+      squareStatusEl.innerHTML = `<strong>Card fields still loading</strong><span>Square has to finish loading before payment can be processed. Refresh the page if the card field does not appear.</span>`;
+    }
+    return;
+  }
   const checkoutFields = Object.fromEntries(
     Array.from(document.querySelectorAll("[data-checkout-field]")).map((field) => [
       field.dataset.checkoutField,

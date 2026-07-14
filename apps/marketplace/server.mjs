@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import {
   renderArticleDetail,
   renderArticles,
+  renderAbout,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -147,11 +148,12 @@ const server = createServer(async (request, response) => {
   const apiPath = marketplaceApiPath(url.pathname);
 
   try {
-    const pageRoutes = new Set(["/", "/programs", "/articles", "/league", "/checkout", "/success"]);
+    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       const renderers = {
         "/": renderHome,
+        "/about": renderAbout,
         "/programs": renderPrograms,
         "/articles": renderArticles,
         "/league": renderLeague,
