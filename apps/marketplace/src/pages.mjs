@@ -170,7 +170,7 @@ export function renderPrograms(data) {
           <p>A six-week virtual program where students learn JavaScript, Git, automation, and AI-assisted development by building a Screeps colony bot that ends in AutoNateAI capture-the-flag.</p>
         </div>
       </div>
-      ${programs.map((program) => programFeature(program, "program-page-feature", 7)).join("")}
+      ${programs.map((program) => programFeature(program, "program-page-feature", 6, true)).join("")}
     </main>
   `;
 
@@ -490,7 +490,7 @@ function paymentMethod(symbol, label, active = false) {
   return `<button class="payment-method ${active ? "active" : ""}">${icon(symbol)}<span>${label}</span></button>`;
 }
 
-function programFeature(program, extraClass = "", imageIndex = program.sequence + 1) {
+function programFeature(program, extraClass = "", imageIndex = program.sequence + 1, showOverlay = false) {
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$369";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
@@ -499,6 +499,15 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
     <article class="program-feature ${extraClass}">
       <a class="program-feature-media" href="/programs/${program.handle}">
         <img src="${shot(imageIndex)}" alt="Screeps colony system preview" />
+        ${
+          showOverlay
+            ? `<div class="program-media-callout">
+          <span>${icon("flag")} Tournament capstone</span>
+          <strong>Build the colony. Battle the code.</strong>
+          <p>Students finish by running their Screeps bots head-to-head in AutoNateAI capture-the-flag.</p>
+        </div>`
+            : ""
+        }
       </a>
       <div class="program-feature-body">
         <div class="program-feature-topline">
