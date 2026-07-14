@@ -26,6 +26,31 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
 
 syncThemeIcon();
 
+// --- Lightweight image carousel ---
+document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+  const main = carousel.querySelector("[data-carousel-main]");
+  const controls = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
+  if (!main || controls.length < 2) return;
+
+  let activeIndex = Math.max(
+    0,
+    controls.findIndex((control) => control.classList.contains("active")),
+  );
+
+  function showSlide(index) {
+    activeIndex = (index + controls.length) % controls.length;
+    const control = controls[activeIndex];
+    main.src = control.dataset.carouselSlide;
+    controls.forEach((item, itemIndex) => item.classList.toggle("active", itemIndex === activeIndex));
+  }
+
+  controls.forEach((control, index) => {
+    control.addEventListener("click", () => showSlide(index));
+  });
+
+  setInterval(() => showSlide(activeIndex + 1), 3000);
+});
+
 // --- Mock checkout / success: read ?program=&offering= against the embedded catalog ---
 function money(value) {
   if (value === null || value === undefined) return "—";
