@@ -559,9 +559,23 @@ h1 {
 
 .compete-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1fr);
+  grid-template-columns: minmax(460px, 1fr) minmax(0, 0.9fr);
   gap: clamp(28px, 4vw, 56px);
   align-items: center;
+}
+
+.compete-visual {
+  display: grid;
+  gap: 18px;
+}
+
+.compete-actions {
+  margin-top: 0;
+}
+
+.compete-actions .primary-button,
+.compete-actions .outline-button {
+  flex: 1 1 220px;
 }
 
 .compete-copy h2 {
