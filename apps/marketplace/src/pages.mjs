@@ -177,9 +177,19 @@ export function renderHome(data) {
     title: "AutoNateAI | Youth Systems Programming Lab",
     active: "home",
     body,
+    canonicalPath: "/",
     ogImage: "/assets/og/programs.jpg",
     description:
       "A 6-week youth programming program where students learn coding foundations, Git, APIs, automation, scalable systems thinking, and Codex-assisted development through Screeps.",
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "AutoNateAI",
+        "url": "https://autonateai.com",
+        "description": "AutoNateAI teaches youth programming, systems thinking, Git, APIs, automation, and responsible AI-assisted software development.",
+      },
+    ],
   });
 }
 
@@ -196,6 +206,7 @@ export function renderPrograms(data) {
     title: "Programs | AutoNateAI",
     active: "programs",
     body,
+    canonicalPath: "/programs",
     ogImage: "/assets/og/programs.jpg",
     description: path.description,
   });
@@ -331,9 +342,26 @@ export function renderAbout() {
     title: "About AutoNateAI | Youth Programming and AI Systems Thinking",
     active: "about",
     body,
+    canonicalPath: "/about",
     ogImage: "/assets/nathan-baker.jpeg",
     description:
       "AutoNateAI teaches students how to think like modern software engineers through software architecture, AI workflows, Git, debugging, and systems design.",
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Nathan Baker",
+        "jobTitle": "Founder and Instructor",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "AutoNateAI",
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Michigan",
+        },
+      },
+    ],
   });
 }
 
@@ -459,8 +487,31 @@ export function renderProgramDetail(data, program) {
     title: `${program.name} | AutoNateAI`,
     active: "programs",
     body,
+    canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": program.name,
+        "description": program.description,
+        "provider": {
+          "@type": "Organization",
+          "name": "AutoNateAI",
+          "sameAs": "https://autonateai.com",
+        },
+        "offers": offering
+          ? {
+              "@type": "Offer",
+              "url": `https://autonateai.com${checkoutHref}`,
+              "price": String(offering.price),
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+            }
+          : undefined,
+      },
+    ],
   });
 }
 
@@ -509,6 +560,7 @@ export function renderLeague(data) {
     title: "Tournament Day | AutoNateAI",
     active: "league",
     body,
+    canonicalPath: "/league",
     ogImage: "/assets/og/league.jpg",
     description: season?.winCondition || "",
   });
@@ -541,6 +593,7 @@ export function renderArticles() {
     title: "Articles | AutoNateAI",
     active: "articles",
     body,
+    canonicalPath: "/articles",
     ogImage: "/assets/og/default.jpg",
     description:
       "Articles, tutorials, and strategy notes about youth programming, AI-assisted development, Git, APIs, automation, and systems thinking.",
@@ -570,8 +623,26 @@ export function renderArticleDetail(article) {
     title: `${article.title} | AutoNateAI`,
     active: "articles",
     body,
+    canonicalPath: `/articles/${article.handle}`,
     ogImage: article.image,
     description: article.summary,
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.summary,
+        "image": `https://autonateai.com${article.image}`,
+        "author": {
+          "@type": "Organization",
+          "name": "AutoNateAI",
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AutoNateAI",
+        },
+      },
+    ],
   });
 }
 
@@ -622,7 +693,14 @@ export function renderCheckout(data) {
     ${dataScript(data)}
   `;
 
-  return pageShell({ title: "Checkout | AutoNateAI", active: "checkout", body, mode: "checkout" });
+  return pageShell({
+    title: "Checkout | AutoNateAI",
+    active: "checkout",
+    body,
+    mode: "checkout",
+    canonicalPath: "/checkout",
+    robots: "noindex,nofollow",
+  });
 }
 
 export function renderSuccess(data) {
@@ -673,7 +751,13 @@ export function renderSuccess(data) {
     ${dataScript(data)}
   `;
 
-  return pageShell({ title: "Enrollment Confirmed | AutoNateAI", active: "success", body });
+  return pageShell({
+    title: "Enrollment Confirmed | AutoNateAI",
+    active: "success",
+    body,
+    canonicalPath: "/success",
+    robots: "noindex,nofollow",
+  });
 }
 
 function dataScript(data) {

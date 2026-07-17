@@ -33,6 +33,14 @@ const routes = [
   ["success/index.html", renderSuccess(programsData)],
 ];
 
+function sitemapEntry(url, priority = "0.7") {
+  return `  <url>
+    <loc>${url}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 
@@ -65,6 +73,32 @@ await writeFile(
   JSON.stringify(programsData, null, 2),
 );
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
+const sitemapUrls = [
+  sitemapEntry("https://autonateai.com/", "1.0"),
+  sitemapEntry("https://autonateai.com/programs", "0.9"),
+  sitemapEntry("https://autonateai.com/about", "0.8"),
+  sitemapEntry("https://autonateai.com/articles", "0.7"),
+  ...programsData.programs.map((program) => sitemapEntry(`https://autonateai.com/programs/${program.handle}`, "0.9")),
+  ...articles.map((article) => sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6")),
+];
+await writeFile(
+  path.join(outDir, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.join("\n")}
+</urlset>
+`,
+);
+await writeFile(
+  path.join(outDir, "robots.txt"),
+  `User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /success
+
+Sitemap: https://autonateai.com/sitemap.xml
+`,
+);
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(

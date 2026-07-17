@@ -84,9 +84,19 @@ function footerColumn(title, items) {
 }
 
 const SITE_NAME = "AutoNateAI";
+const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
   "AutoNateAI teaches youth programming, critical thinking, Git, APIs, automation, AI-assisted coding, and software architecture through a live six-week cohort.";
+
+function absoluteUrl(value = "/") {
+  if (/^https?:\/\//.test(value)) return value;
+  return `${SITE_URL}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
+function jsonLd(data) {
+  return `<script type="application/ld+json">${JSON.stringify(data).replaceAll("</", "<\\/")}</script>`;
+}
 
 export function pageShell({
   title,
@@ -95,7 +105,36 @@ export function pageShell({
   mode = "full",
   ogImage = DEFAULT_OG_IMAGE,
   description = DEFAULT_DESCRIPTION,
+  canonicalPath = "/",
+  robots = "index,follow",
+  structuredData = [],
 }) {
+  const canonicalUrl = absoluteUrl(canonicalPath);
+  const baseStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AutoNateAI",
+      "url": SITE_URL,
+      "logo": absoluteUrl("/assets/og/default.jpg"),
+      "founder": {
+        "@type": "Person",
+        "name": "Nathan Baker",
+        "jobTitle": "Founder, AutoNateAI",
+      },
+      "sameAs": [
+        "https://autonateai.com/about",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AutoNateAI",
+      "url": SITE_URL,
+      "description": DEFAULT_DESCRIPTION,
+    },
+  ];
+
   return `<!doctype html>
     <html lang="en">
       <head>
@@ -103,15 +142,19 @@ export function pageShell({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>${title}</title>
         <meta name="description" content="${escapeHtml(description)}" />
-        <meta name="robots" content="index,follow" />
+        <meta name="robots" content="${escapeHtml(robots)}" />
+        <link rel="canonical" href="${canonicalUrl}" />
         <meta property="og:title" content="${escapeHtml(title)}" />
         <meta property="og:description" content="${escapeHtml(description)}" />
-        <meta property="og:image" content="${ogImage}" />
+        <meta property="og:url" content="${canonicalUrl}" />
+        <meta property="og:image" content="${absoluteUrl(ogImage)}" />
         <meta property="og:site_name" content="${SITE_NAME}" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="${escapeHtml(title)}" />
         <meta name="twitter:description" content="${escapeHtml(description)}" />
+        <meta name="twitter:image" content="${absoluteUrl(ogImage)}" />
+        ${[...baseStructuredData, ...structuredData].map((item) => jsonLd(item)).join("\n        ")}
         <script>
           (function () {
             var stored = localStorage.getItem("anai-theme");
