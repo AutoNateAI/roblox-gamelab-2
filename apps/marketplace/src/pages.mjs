@@ -372,48 +372,51 @@ export function renderProgramDetail(data, program) {
   const price = offering ? money(offering.price) : "$369";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
   const sessionWeeks = chunkSessions(program.sessions || [], 2);
+  const heroTitle =
+    program.handle === "ai-software-architect"
+      ? `<span class="hero-title-line">AI Systems</span><span class="hero-title-line">Programming Lab</span>`
+      : escapeHtml(program.name);
 
   const body = `
     <main class="product-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs">Programs</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
-      <section class="program-detail-hero">
-        <div class="product-gallery" data-carousel>
-          <img data-carousel-main src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" />
-          <div class="gallery-controls">
-            ${gallery.map((src, index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-carousel-slide="${src}" aria-label="Show Screeps screenshot ${index + 1}"></button>`).join("")}
+      <section class="home-hero program-detail-hero">
+        <div class="hero-bg"><img src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs">Programs</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
+            <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
+            <h1>${heroTitle}</h1>
+            <p>A six-week live cohort where you learn systems thinking by building a Screeps colony you can care about. Your JavaScript gathers resources, remembers state, automates decisions, recovers from failure, responds to hostile pressure, and prepares for competition, so real software ideas become visible instead of abstract.</p>
+            <div class="cohort-date-row">
+              ${cohortBadge(program)}
+              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for coding, Screeps strategy, build sessions, hackathons, league updates, and industry networking.</span>
+            </div>
+            <div class="button-row">
+              <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="#curriculum">View 12 Sessions</a>
+            </div>
           </div>
+          <aside class="hero-program-panel program-hero-panel">
+            <img src="${gallery[1]}" alt="Screeps tournament strategy preview" />
+            <div class="hero-panel-body">
+              <span class="kicker">${icon("sports_esports")} Program Path</span>
+              <h2>One bot. One repo. One tournament path.</h2>
+              <p>Build a working colony system, keep your decisions in Git, then tune a battle branch for AutoNateAI capture-the-flag and Phase 2 league play.</p>
+              <div class="hero-facts">
+                <span>${cohortCapacity(program)}</span>
+                <span>${program.durationWeeks || 6} weeks</span>
+                <span>Your Git repo</span>
+                <span>Codex coaching</span>
+              </div>
+            </div>
+          </aside>
         </div>
-        <aside class="buy-panel">
-          <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
-          <h1>${escapeHtml(program.name)}</h1>
-          <p>A six-week live cohort where you learn systems thinking by building a Screeps colony you can care about. Your JavaScript gathers resources, remembers state, automates decisions, recovers from failure, responds to hostile pressure, and prepares for competition, so real software ideas become visible instead of abstract.</p>
-          <div class="cohort-date-row compact">
-            ${cohortBadge(program)}
-            <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Every cohort gets a dedicated AutoNateAI Discord channel for coding, Screeps strategy, build sessions, hackathons, league updates, and industry-leader networking.</span>
-          </div>
-          <div class="detail-rating"><span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span><span>${program.durationWeeks || 6} weeks &middot; ${escapeHtml(program.liveSchedule || "Live cohort")}</span></div>
-          <div class="detail-cta-box">
-            <strong>${price}<small> per student</small></strong>
-            <a class="primary-button full" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
-            <a class="outline-button full" href="#curriculum">View 12 Sessions</a>
-          </div>
-          <div class="detail-fast-points">
-            <span>${cohortCapacity(program)}</span>
-            <span>Your Git repo</span>
-            <span>Dedicated Discord channel</span>
-            <span>Codex coaching</span>
-          </div>
-          <dl>
-            <dt>Best fit</dt><dd>High school students, college CS students, junior software engineers, career switchers, and tech-interested builders who want a structured path into coding, AI literacy, competition, community, and systems thinking.</dd>
-            <dt>You leave with</dt><dd>A working Screeps bot, Git history, architecture notes, and a tournament reflection that shows how your system performed.</dd>
-          </dl>
-        </aside>
       </section>
 
       <section class="detail-proof-strip">
         <a href="${checkoutHref}"><b>${price}</b><span>Full 6-week program</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
-        <a href="#curriculum"><b>25</b><span>Student max</span></a>
+        <a href="#curriculum"><b>25</b><span>Seat cohort</span></a>
         <a href="#outcomes"><b>Git</b><span>Your repo history</span></a>
       </section>
 
