@@ -181,6 +181,9 @@ export function renderHome(data) {
     ogImage: "/assets/og/programs.jpg",
     description:
       "A 4-week workforce systems program where developers and technical builders design colony systems, automate strategy, use Git and Codex responsibly, and battle in Screeps capture-the-flag.",
+    ogTitle: "Code the colony. Train the architect.",
+    ogDescription:
+      "A 4-week JavaScript + Codex cohort where builders design Screeps colonies, manage chaos with Git, and settle architecture debates in capture-the-flag.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -209,6 +212,9 @@ export function renderPrograms(data) {
     canonicalPath: "/programs",
     ogImage: "/assets/og/programs.jpg",
     description: path.description,
+    ogTitle: "No worksheets. Colonies that fight back.",
+    ogDescription:
+      "Build a Screeps colony with JavaScript and Codex, then find out whether your system can still think when the match gets messy.",
   });
 }
 
@@ -346,6 +352,9 @@ export function renderAbout() {
     ogImage: "/assets/nathan-baker.jpeg",
     description:
       "AutoNateAI teaches developers and technical builders to design systems, use AI responsibly, debug behavior, and prove their work through Screeps competition.",
+    ogTitle: "Meet the engineer behind the colony lab.",
+    ogDescription:
+      "AutoNateAI turns real engineering habits into a Screeps systems lab where builders design, debug, commit, and compete through code.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -493,6 +502,9 @@ export function renderProgramDetail(data, program) {
     canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
+    ogTitle: "AI Systems Programming Lab: your architecture has to survive.",
+    ogDescription:
+      "Use JavaScript and Codex to build a Screeps colony, tune the system in Git, and battle through capture-the-flag when another bot pushes back.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -566,6 +578,9 @@ export function renderLeague(data) {
     canonicalPath: "/league",
     ogImage: "/assets/og/league.jpg",
     description: season?.winCondition || "",
+    ogTitle: "Tournament Week: your code has to hold the flag.",
+    ogDescription:
+      "The capstone is code versus code: submit a battle branch, run your Screeps colony head-to-head, and explain what survived contact.",
   });
 }
 
@@ -600,6 +615,9 @@ export function renderArticles() {
     ogImage: "/assets/og/default.jpg",
     description:
       "Articles and strategy notes about Screeps, AI-assisted development, Git, automation, capture-the-flag competition, and systems thinking.",
+    ogTitle: "Field notes before the code battle.",
+    ogDescription:
+      "Read the Screeps mechanics, Git habits, Codex workflows, and system-design tradeoffs before your colony has to compete.",
   });
 }
 
@@ -629,6 +647,8 @@ export function renderArticleDetail(article) {
     canonicalPath: `/articles/${article.handle}`,
     ogImage: article.image,
     description: article.summary,
+    ogTitle: `${article.title} | Field Notes`,
+    ogDescription: article.summary,
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -703,6 +723,11 @@ export function renderCheckout(data) {
     mode: "checkout",
     canonicalPath: "/checkout",
     robots: "noindex,nofollow",
+    ogImage: "/assets/og/ai-software-architect.jpg",
+    description: "Reserve a seat in the AI Systems Programming Lab.",
+    ogTitle: "Reserve the seat. Build the battle branch.",
+    ogDescription:
+      "Secure your spot in the 4-week JavaScript + Codex cohort where the final exam is a Screeps capture-the-flag match.",
   });
 }
 
@@ -760,6 +785,11 @@ export function renderSuccess(data) {
     body,
     canonicalPath: "/success",
     robots: "noindex,nofollow",
+    ogImage: "/assets/og/ai-software-architect.jpg",
+    description: "Enrollment confirmed for the AI Systems Programming Lab.",
+    ogTitle: "Seat locked. Colony loading.",
+    ogDescription:
+      "Your AI Systems Programming Lab seat is reserved. Next comes setup, Git, Codex, colony design, and tournament prep.",
   });
 }
 

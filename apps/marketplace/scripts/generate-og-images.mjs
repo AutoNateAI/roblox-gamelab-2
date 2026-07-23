@@ -98,25 +98,25 @@ let index = 0;
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: program.badge || "Youth Systems Programming",
-    title: program.name,
-    footer: `AutoNateAI · ${program.durationWeeks || 6}-Week Program`,
+    eyebrow: "JavaScript + Codex + CTF",
+    title: "Build the Colony. Prove the System.",
+    footer: `AutoNateAI · ${program.durationWeeks || 4}-Week Systems Cohort`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Youth Systems Programming",
-  title: "Build Real Systems with Code, Git, APIs, and AI",
-  footer: "AutoNateAI · One Focused Youth Program",
+  eyebrow: "Workforce Systems Lab",
+  title: "No Worksheets. Colonies That Fight Back.",
+  footer: "AutoNateAI · JavaScript, Codex, Git, CTF",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Tournament Day",
-  title: programsData.league?.season?.name || "AutoNateAI Tournament Day",
+  eyebrow: "Tournament Week",
+  title: "Your Code Has to Hold the Flag.",
   footer: "AutoNateAI · Screeps Capture the Flag",
   outFile: path.join(outDir, "league.jpg"),
 });
@@ -124,8 +124,8 @@ await composite({
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI",
-  title: "Youth Programming for Systems, Automation, and AI",
-  footer: "AutoNateAI · AI-Assisted Development",
+  title: "Code the Colony. Train the Architect.",
+  footer: "JavaScript · Codex · Screeps CTF",
   outFile: path.join(outDir, "default.jpg"),
 });
 
