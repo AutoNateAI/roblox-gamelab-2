@@ -11,9 +11,10 @@ import {
   renderLeague,
   renderProgramDetail,
   renderSuccess,
+  renderTutorialDetail,
   renderTutorials,
 } from "../src/pages.mjs";
-import { articles } from "../src/data.mjs";
+import { articles, tutorials } from "../src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
@@ -59,6 +60,12 @@ for (const article of articles) {
   await writeFile(filePath, renderArticleDetail(article));
 }
 
+for (const tutorial of tutorials) {
+  const filePath = path.join(outDir, "tutorials", tutorial.handle, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderTutorialDetail(tutorial));
+}
+
 for (const program of programsData.programs) {
   const filePath = path.join(outDir, "programs", program.handle, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
@@ -84,6 +91,7 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/community", "0.8"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
   sitemapEntry("https://autonateai.com/articles", "0.7"),
+  ...tutorials.map((tutorial) => sitemapEntry(`https://autonateai.com/tutorials/${tutorial.handle}`, "0.6")),
   ...articles.map((article) => sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6")),
 ];
 await writeFile(
@@ -113,5 +121,5 @@ await writeFile(
 );
 
 console.log(
-  `Exported ${routes.length + programsData.programs.length + articles.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
+  `Exported ${routes.length + programsData.programs.length + articles.length + tutorials.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
 );
