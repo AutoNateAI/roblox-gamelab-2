@@ -162,7 +162,7 @@ export function renderHome(data) {
       <section class="newsletter">
         <div>
           <h2>Reserve your seat for the next cohort.</h2>
-          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is six weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
+          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is four weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
@@ -180,7 +180,7 @@ export function renderHome(data) {
     canonicalPath: "/",
     ogImage: "/assets/og/programs.jpg",
     description:
-      "A 6-week workforce systems program where code-familiar builders design colony systems, automate strategy, use Git and Codex responsibly, and battle in Screeps capture-the-flag.",
+      "A 4-week workforce systems program where developers and technical builders design colony systems, automate strategy, use Git and Codex responsibly, and battle in Screeps capture-the-flag.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -236,7 +236,7 @@ export function renderAbout() {
           <h1>We teach tech-minded builders how to think like modern software engineers.</h1>
           <p>AutoNateAI exists to develop exceptional thinkers through software engineering, AI, and systems design. Programming is more than writing code. It teaches you how to break down problems, design solutions, communicate ideas, and work with AI responsibly.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/programs/ai-software-architect">View the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/articles">Read the Learning Model</a>
           </div>
         </div>
@@ -275,7 +275,7 @@ export function renderAbout() {
             <h2>Technology changes. Thinking lasts.</h2>
             <p>Students are encouraged to experiment, prototype, question assumptions, design before coding, learn from mistakes, use AI responsibly, and communicate their ideas clearly.</p>
           </div>
-          <a class="primary-button" href="/programs">Reserve Seat ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/programs/ai-software-architect">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid about-value-grid">
           <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Learn to split large problems into smaller parts and explain how those parts work together.</p></article>
@@ -320,7 +320,7 @@ export function renderAbout() {
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
-          <article><h3>Is this for complete beginners?</h3><p>No. This is best for people who already understand code basics and want to become better at designing systems inside a live environment with components, constraints, resources, and competition.</p></article>
+          <article><h3>Is this for complete beginners?</h3><p>No. This is best for people who are comfortable reading and modifying code and want to become better at designing systems inside a live environment with components, constraints, resources, and competition.</p></article>
           <article><h3>How does AI fit into the class?</h3><p>You use AI to ask better questions, inspect code, debug, and improve ideas. AI does not replace understanding.</p></article>
           <article><h3>Why use Screeps?</h3><p>Screeps makes software visible. You can see state, automation, feedback loops, failure, hostile pressure, resources, and strategy play out in a live world.</p></article>
           <article><h3>Who is this built for?</h3><p>High school students, college CS students, junior software engineers, career switchers, and tech-interested builders who want durable strategic technology habits.</p></article>
@@ -331,9 +331,9 @@ export function renderAbout() {
         <div>
           <span class="kicker">${icon("local_activity")} Current Program</span>
           <h2>AI Systems Programming Lab</h2>
-          <p>A six-week workforce systems cohort where code-familiar builders design a Screeps colony, learn the game mechanics, automate strategy, use Git, collaborate with AI, and spend the final week in capture-the-flag tournament play.</p>
+          <p>A four-week workforce systems cohort where developers and technical builders design a Screeps colony, learn the game mechanics, automate strategy, use Git, collaborate with AI, and spend the final week in capture-the-flag tournament play.</p>
         </div>
-        <a class="primary-button" href="/programs">Explore the Program ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/programs/ai-software-architect">Explore the Program ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
@@ -383,17 +383,17 @@ export function renderProgramDetail(data, program) {
         <div class="hero-bg"><img src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs">Programs</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
+            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/ai-software-architect">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
             <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
             <h1>${heroTitle}</h1>
-            <p>A six-week live cohort for builders who already know code basics and want to become sharper system designers. You study the Screeps environment, learn its mechanics, compose colony components, automate decisions, and spend the final week battling your code against other colonies in capture-the-flag.</p>
+            <p>A four-week live cohort for developers and technical builders who want to become sharper system designers. You study the Screeps environment, learn its mechanics, compose colony components, automate decisions, and spend the final week battling your code against other colonies in capture-the-flag.</p>
             <div class="cohort-date-row">
               ${cohortBadge(program)}
               <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for coding, Screeps strategy, build sessions, hackathons, league updates, and industry networking.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="#curriculum">View 12 Sessions</a>
+              <a class="secondary-button" href="#curriculum">View 8 Sessions</a>
             </div>
           </div>
           <aside class="hero-program-panel program-hero-panel">
@@ -404,7 +404,7 @@ export function renderProgramDetail(data, program) {
               <p>Learn the mechanics, design the architecture, keep decisions in Git, then tune a battle branch where every move, defense, and resource decision comes from code.</p>
               <div class="hero-facts">
                 <span>${cohortCapacity(program)}</span>
-                <span>${program.durationWeeks || 6} weeks</span>
+                <span>${program.durationWeeks || 4} weeks</span>
                 <span>Your Git repo</span>
                 <span>Codex coaching</span>
               </div>
@@ -414,7 +414,7 @@ export function renderProgramDetail(data, program) {
       </section>
 
       <section class="detail-proof-strip">
-        <a href="${checkoutHref}"><b>${price}</b><span>Full 6-week program</span></a>
+        <a href="${checkoutHref}"><b>${price}</b><span>Full 4-week program</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
         <a href="#curriculum"><b>25</b><span>Seat cohort</span></a>
         <a href="#outcomes"><b>Git</b><span>Your repo history</span></a>
@@ -463,14 +463,14 @@ export function renderProgramDetail(data, program) {
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>12 sessions, grouped by the system you are designing.</h2><p>Because Screeps keeps running, you see the same pressures real software faces: unfamiliar environments, changing state, feedback loops, dependencies, automation, failure recovery, resource constraints, hostile actors, and performance under competition.</p></div>
+          <div><h2>8 sessions, grouped by the system you are designing.</h2><p>Because Screeps keeps running, you see the same pressures real software faces: unfamiliar environments, changing state, feedback loops, dependencies, automation, failure recovery, resource constraints, hostile actors, and performance under competition.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         <div class="week-grid">
           ${sessionWeeks.map((sessions, index) => weekCard(index, sessions)).join("")}
         </div>
         <div class="detail-bottom-cta">
-          <div><strong>Ready to join the cohort?</strong><span>Seats include all 12 live sessions, with the final week dedicated to tournament prep and capture-the-flag battles.</span></div>
+          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to tournament prep and capture-the-flag battles.</span></div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
       </section>
@@ -478,7 +478,7 @@ export function renderProgramDetail(data, program) {
       ${
         related.length
           ? `<section class="section compact">
-        <div class="section-head"><h2>Related cohorts</h2><a href="/programs">Back to program ${icon("arrow_forward")}</a></div>
+        <div class="section-head"><h2>Related cohorts</h2><a href="/programs/ai-software-architect">Back to program ${icon("arrow_forward")}</a></div>
         <div class="mini-grid">${related.map((p) => miniProgramCard(p)).join("")}</div>
       </section>`
           : ""
@@ -544,12 +544,12 @@ export function renderLeague(data) {
           <div><span>Format</span><b>${escapeHtml(season?.format || "TBD")}</b></div>
           <div><span>Entry Fee</span><b>Included</b></div>
           <div><span>Status</span><b class="status-pill ${available ? "live" : ""}">${statusLabel(season?.status)}</b></div>
-          <a class="primary-button full ${available ? "" : "disabled"}" href="/programs">${available ? "Reserve Seat" : "Register Interest"}</a>
+          <a class="primary-button full ${available ? "" : "disabled"}" href="/programs/ai-software-architect">${available ? "Reserve Seat" : "Register Interest"}</a>
         </aside>
       </section>
 
       <section class="section compact">
-        <div class="section-head"><div><h2>How it works</h2><p>The final week turns your colony architecture into head-to-head Screeps capture-the-flag. Phase 2 expands that tournament format into league play for builders who want to keep improving.</p></div><a class="primary-button" href="/programs">Get Seat ${icon("arrow_forward")}</a></div>
+        <div class="section-head"><div><h2>How it works</h2><p>The final week turns your colony architecture into head-to-head Screeps capture-the-flag. Phase 2 expands that tournament format into league play for builders who want to keep improving.</p></div><a class="primary-button" href="/programs/ai-software-architect">Get Seat ${icon("arrow_forward")}</a></div>
         <div class="league-how">
           <div><span class="material-symbols-outlined">account_tree</span><h3>Battle branch</h3><p>Submit a Git branch tuned for the tournament rules, game mechanics, resource map, and match server.</p></div>
           <div><span class="material-symbols-outlined">flag</span><h3>Capture the flag</h3><p>Colonies face off head-to-head. The bot has to move, defend, manage resources, make decisions, and react under pressure through code.</p></div>
@@ -667,7 +667,7 @@ export function renderCheckout(data) {
           <div class="checkout-product-strip">
             <div>
               <strong>AI Systems Programming Lab</strong>
-              <span>6 weeks · 12 live sessions · 25-seat cohort</span>
+              <span>4 weeks · 8 live sessions · 25-seat cohort</span>
             </div>
             <b>$369</b>
           </div>
@@ -723,7 +723,7 @@ export function renderSuccess(data) {
             <span class="kicker">Seat Reserved</span>
             <h2 data-success-program>Loading&hellip;</h2>
             <p>Onboarding, setup instructions, cohort workspace access, and the first live-session details are sent before the cohort begins.</p>
-            <a class="primary-button" href="/programs">View Program</a>
+            <a class="primary-button" href="/programs/ai-software-architect">View Program</a>
           </div>
         </article>
         <aside class="order-details">
@@ -787,9 +787,7 @@ function weekCard(index, sessions) {
   const weekMeta = [
     ["Environment and system map", "Read the Screeps world, identify available components, and map the signals your colony needs to understand."],
     ["Components and decisions", "Turn game mechanics into reusable behaviors and teach the colony to make choices when conditions change."],
-    ["Git and debugging", "Protect strategy experiments, investigate failures, and recover working versions when a live system breaks."],
-    ["APIs, Memory, and roles", "Connect game objects, persistent memory, and role-based design to how software systems communicate, remember, and divide work."],
-    ["Automation and Codex", "Use automation and AI support to improve the colony while staying responsible for the decisions your system makes."],
+    ["Codex-assisted colony builds", "Use Codex with Screeps API context to build project-grade colony subsystems while keeping the architecture explainable."],
     ["Tournament week", "Tune a battle branch, play capture-the-flag, and analyze how code-driven strategy performs against another colony."],
   ][index] || [`Week ${index + 1}`, "Keep improving the colony system."];
   const [title, summary] = weekMeta;
@@ -805,7 +803,7 @@ function weekCard(index, sessions) {
         ${sessions
           .map(
             (session) => `
-          <details>
+          <details open>
             <summary><b>${String(session.number).padStart(2, "0")}</b><span>${escapeHtml(session.name.replace(/^Session \d+:\s*/, ""))}</span></summary>
             <p>${escapeHtml(session.objectives)}</p>
             <div class="week-session-detail"><span><strong>Live:</strong> ${escapeHtml(session.liveActivity)}</span><span><strong>Homework:</strong> ${escapeHtml(session.homework)}</span></div>
@@ -840,7 +838,7 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
       <div class="program-feature-body">
         <div class="program-feature-topline">
           <span class="status-pill ${program.status === "Active" ? "live" : ""}">${statusLabel(program.status)}</span>
-          <span>${program.durationWeeks || 6} weeks &middot; 12 live sessions &middot; Virtual</span>
+          <span>${program.durationWeeks || 4} weeks &middot; ${(program.sessions || []).length || 8} live sessions &middot; Virtual</span>
         </div>
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>

@@ -49,7 +49,7 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Reserve Seat</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs/ai-software-architect">Reserve Seat</a>`}
         </div>
       </nav>
     </header>
@@ -62,9 +62,9 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>A focused workforce systems cohort where code-familiar builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
+          <p>A focused workforce systems cohort where developers and technical builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
         </div>
-        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"]])}
+        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Tournament Week", "/league"], ["Articles", "/articles"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/about"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
@@ -87,7 +87,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches code-familiar builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag.";
+  "AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;
@@ -195,7 +195,7 @@ export function programCard(program) {
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>
         <div class="card-meta">
-          <span>${icon("calendar_month")} ${program.durationWeeks || 6} weeks</span>
+          <span>${icon("calendar_month")} ${program.durationWeeks || 4} weeks</span>
           <b>${escapeHtml(program.badge)}</b>
         </div>
       </div>
