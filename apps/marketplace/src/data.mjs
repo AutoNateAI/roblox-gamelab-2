@@ -32,97 +32,97 @@ export const screepsScreenshots = [
 export const articles = [
   {
     handle: "coding-as-workforce-development",
-    title: "Coding as Workforce Development for Strategic Builders",
+    title: "Why System Design Practice Beats Another Syntax Course",
     category: "Strategy",
-    audience: "High school programmers, college CS students, junior SWEs, and technical builders",
+    audience: "Developers, CS students, junior SWEs, and technical builders",
     summary:
-      "The strongest technology training does more than introduce tools or syntax. It helps builders practice system design, communication, version control, and strategic follow-through.",
+      "The next step after writing code is learning how to design systems that make decisions, recover from failures, and explain their behavior under pressure.",
     body: [
-      "If you are preparing for the future of technical work, knowing code is only the starting point. You need a structured environment where you can practice the habits that show up later in real work: reading unfamiliar systems, testing strategy, recovering from mistakes, and explaining decisions.",
-      "The AI Systems Programming Lab uses Screeps because it makes those habits visible. If you model the environment poorly, the colony stalls. If you commit working code before experimenting, you can recover. If you use Codex without understanding the architecture, the room eventually exposes the gap.",
-      "That is why the program fits workforce development for developers and technical builders. You get a competitive shared challenge, but underneath that challenge you are practicing collaboration, technical communication, persistence, and systems thinking."
+      "A lot of builders can write features. The harder skill is knowing how those features should behave inside a changing environment. That is the gap this program is built around: not more isolated syntax practice, but better engineering judgment.",
+      "Screeps gives that judgment a place to show up. Your JavaScript controls a live colony with resources, roles, APIs, memory, hostile pressure, and tradeoffs. If the architecture is weak, the colony stalls. If the state model is sloppy, decisions drift. If a change breaks something, Git shows what changed and gives you a way back.",
+      "Codex matters because modern builders will work with AI. The point is not to let AI think for you. The point is to ask sharper questions, review generated code, protect working versions, and stay responsible for how the system behaves when the match starts."
     ],
-    tags: ["Workforce Development", "Systems Thinking", "Tech Careers"],
+    tags: ["System Design", "Codex", "Workforce Development"],
     readingTime: "4 min read",
     image: "/assets/screeps/screeps-05.jpg",
   },
   {
     handle: "why-tournament-day-matters",
-    title: "Why Tournament Day Changes the Energy",
+    title: "Why Tournament Week Makes the Learning Real",
     category: "Guide",
-    audience: "Builders preparing for competitive systems work",
+    audience: "Builders preparing for capture-the-flag competition",
     summary:
-      "Tournament week gives builders a real reason to care about mechanics, debugging, architecture, and strategy. Your code has to compete against someone else's code.",
+      "When your colony has to compete against someone else's code, architecture stops being theory and starts becoming proof.",
     body: [
-      "Tournament week changes the tone of the program because the work becomes public, playful, and real. You are not just turning in an assignment. You are preparing a colony to compete against another colony under AutoNateAI capture-the-flag rules.",
-      "That pressure makes the technical lessons matter. Git protects the battle branch. Debugging keeps the bot from freezing. Component design makes strategy easier to change. Memory helps the colony act with consistency. Automation determines whether the bot can keep moving when the match gets messy.",
-      "The result is a capstone you can talk about with substance. You can explain how you read the environment, what mechanics shaped your strategy, what broke, what worked, and what you would build next. Phase 2 extends this format into a league, giving serious builders a reason to keep iterating."
+      "Tournament week changes the work because the code has consequences. You are not submitting a static project. You are preparing a colony branch for capture-the-flag, where another coded system is trying to outbuild, outmaneuver, and outlast yours.",
+      "That pressure makes the lessons click. Mechanics matter because the match has rules. Debugging matters because frozen logic loses time. Git matters because your battle branch needs a stable checkpoint. Memory matters because the colony has to remember priorities. Architecture matters because strategy should be changeable without rewriting everything.",
+      "By the end, you can talk about your project like an engineer. You can explain the environment, the assumptions, the decisions, the failures, the fixes, and what happened when the system had to perform. Phase 2 turns that same format into league play, giving serious builders a reason to keep improving after the cohort ends."
     ],
-    tags: ["Tournament Day", "Screeps", "Competition"],
+    tags: ["Tournament Week", "Capture the Flag", "Screeps"],
     readingTime: "3 min read",
     image: "/assets/screeps/screeps-08.jpg",
   },
   {
     handle: "screeps-as-a-systems-lab",
-    title: "Why Screeps Works as a Systems Lab",
+    title: "Why Screeps Works as an AI Systems Lab",
     category: "Guide",
-    audience: "Tech-minded builders",
+    audience: "JavaScript builders learning system design",
     summary:
-      "Screeps lets you see software architecture in motion. Your JavaScript controls a live colony, so system-design choices become visible decisions, failures, and improvements.",
+      "Screeps makes software architecture visible: JavaScript controls the colony, APIs expose the world, and every design choice shows up in motion.",
     body: [
-      "Screeps is not just a game added onto a coding class. It is the environment where the software system lives. You write JavaScript that controls workers, manages energy, upgrades rooms, responds to threats, and decides what the colony should do next.",
-      "That makes architecture easier to inspect. Environment values become state. Game objects become components. Roles become a division of labor. Memory stores strategy across ticks. Git protects the last working version before you try a new approach.",
-      "The value is that you practice production-style thinking in a contained environment. You learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture before testing it during tournament week."
+      "Screeps is not a coding worksheet with a game theme. It is the world your software has to operate inside. Your code reads room objects, controls creeps, gathers energy, upgrades controllers, builds structures, reacts to threats, and decides what should happen next.",
+      "That makes abstract engineering ideas easier to see. The room becomes an environment model. Creeps become components with roles. Memory becomes persistent state. Spawn logic becomes a production pipeline. Hostile pressure becomes a test of whether your system can keep making useful decisions.",
+      "Adding Codex raises the bar instead of lowering it. You can move faster, but you still have to understand the APIs, review the plan, test the change, commit the working version, and explain why the colony behaves the way it does."
     ],
-    tags: ["Screeps", "Software Systems", "Youth Programming"],
+    tags: ["Screeps", "AI Systems", "JavaScript"],
     readingTime: "4 min read",
     image: "/assets/screeps/screeps-03.jpg",
   },
   {
     handle: "what-is-screeps",
-    title: "Why Students Build a Real System",
+    title: "Why Build a Colony Instead of Another App Clone",
     category: "Guide",
-    audience: "High school, college, and early-career builders",
+    audience: "Programmers who want a more serious project",
     summary:
-      "You become more sophisticated when code connects to one working system. Screeps gives data, APIs, automation, Git, mechanics, and strategy a reason to exist.",
+      "A colony gives every technical idea a job: APIs, automation, state, resource constraints, debugging, Git history, AI review, and strategy.",
     body: [
-      "Many people can write code but have not practiced designing a system inside someone else's environment. Screeps forces that next step: you have to understand the available components, the rules, the state, the resources, and the feedback loops before your code can make good decisions.",
-      "The AutoNateAI lab is built around that idea. You do not complete disconnected exercises. You build a project with inputs, decisions, outputs, data, version history, hostile pressure, resource constraints, automation opportunities, and tournament consequences.",
-      "That gives you a clearer outcome to show. At the end, you can show the code, explain the architecture, walk through Git history, describe how AI helped, and talk through what happened when your system battled someone else's."
+      "App clones can be useful, but they often hide the part of engineering that matters most: what should the system do when the environment changes? Screeps keeps that question in front of you because the colony is always running, spending resources, taking damage, filling jobs, and exposing weak assumptions.",
+      "That turns familiar tools into connected practice. JavaScript controls behavior. APIs reveal the world. Memory carries decisions forward. Git captures experiments. Codex helps plan and review changes. The game mechanics force you to decide what matters first.",
+      "The result is a project with a story. You can show the repo, explain the architecture, walk through the decisions, describe how AI helped, and point to what happened when your colony entered competition."
     ],
-    tags: ["Youth Programming", "Systems Thinking", "Project-Based Learning"],
+    tags: ["Portfolio Project", "Automation", "Screeps"],
     readingTime: "4 min read",
     image: "/assets/screeps/screeps-01.jpg",
   },
   {
     handle: "systems-thinking-through-code",
-    title: "Learning Systems Thinking Through Code",
+    title: "How Game Mechanics Become Software Architecture",
     category: "Strategy",
-    audience: "Future software, AI, automation, and data builders",
+    audience: "Builders training for AI, automation, and software roles",
     summary:
-      "A good coding program should help you understand feedback loops, constraints, resources, policies, hostile pressure, and tradeoffs. A real project gives those ideas something you can operate.",
+      "The mechanics are not decoration. They are the reason builders learn to model environments, design components, manage state, and make tradeoffs.",
     body: [
-      "Most people are told to learn coding as a list of concepts: variables, loops, functions, arrays. Those concepts matter, but the next level is learning how those pieces become architecture inside a real environment.",
-      "In the lab, a loop is not abstract. It is the colony checking for new work. A function is not only a syntax pattern. It is a reusable behavior. Data is not just a value. It is what the system remembers and acts on.",
-      "That is the bridge to real-world software architecture. Future jobs will be shaped by data, automations, AI, hostile actors, resources, policies, and economies. Builders who can ask better systems questions will be the ones trusted to run and improve them."
+      "The best part of Screeps is that the mechanics are doing real teaching. A resource shortage is not just a game problem. It is a capacity planning problem. A broken creep role is not just a bug. It is a component design problem. A hostile room is not just danger. It is a test of how your system reacts under pressure.",
+      "That is how code becomes architecture. A loop becomes the colony's operating rhythm. A function becomes reusable behavior. Memory becomes long-running state. A branch becomes a strategy experiment. Codex becomes a build partner that still needs direction, review, and constraints.",
+      "This is the kind of practice builders need for a world shaped by data, automations, AI, hostile actors, resources, policies, and economies. The strongest people will not be the ones who memorize the most syntax. They will be the ones who can read the system, reason through the tradeoffs, and make better decisions."
     ],
-    tags: ["Critical Thinking", "Software Architecture", "Education"],
+    tags: ["Software Architecture", "Strategy", "AI Systems"],
     readingTime: "5 min read",
     image: "/assets/screeps/screeps-04.jpg",
   },
   {
     handle: "why-git-matters-for-students",
-    title: "Why You Learn Git in the AI Systems Programming Lab",
+    title: "Why Git Matters When AI Is Moving Fast",
     category: "Tutorial",
-    audience: "Tech-minded builders",
+    audience: "Builders using Codex on real code",
     summary:
-      "Git helps you save progress, share code, compare changes, and build confidence as your idea evolves from a first script into a real project.",
+      "AI can help you move faster, but Git keeps the work understandable, recoverable, and ready for tournament pressure.",
     body: [
-      "When you build with AI, the code can change quickly. Git gives you a way to slow the process down and make the work understandable. Every commit becomes a checkpoint: what changed, why it changed, and whether it helped.",
-      "That is especially important when you use Codex. A small code change can fix a feature or break behavior somewhere else. Git gives you a path back to the last working version.",
-      "By the end of the program, you have more than a project. You have a small software portfolio: commit history, notes, screenshots or match clips, architecture notes, and tournament reflections that show how your thinking developed."
+      "Codex can help you change a system quickly. That is powerful, but it also means you need a way to keep the work grounded. Git gives every experiment a checkpoint: what changed, why it changed, and whether the colony improved.",
+      "In Screeps, that matters immediately. A spawn change can unlock growth or break your worker pipeline. A new role can make the colony smarter or drain energy at the wrong time. A tournament branch needs to be stable enough to battle, even while you keep testing better ideas.",
+      "By the end of the cohort, Git is not just a tool you learned because engineers use it. It is the record of your thinking: commits, diffs, recovery moments, architecture notes, and the path from first working colony to battle-ready system."
     ],
-    tags: ["Git", "Portfolio", "Codex"],
+    tags: ["Git", "Codex", "Tournament Branch"],
     readingTime: "3 min read",
     image: "/assets/screeps/screeps-06.jpg",
   }
