@@ -56,11 +56,11 @@ export function renderHome(data) {
         <div class="hero-content">
           <div class="hero-copy">
             <span class="kicker">${icon("terminal")} Workforce Systems Cohort</span>
-            <h1>Train for the strategic tech jobs that do not exist yet.</h1>
-            <p>Build inside Screeps, an online strategy world where JavaScript controls a live colony. You will write the systems that gather resources, survive hostile pressure, automate decisions, use AI responsibly, and adapt to changing rules. This is workforce development for tech-minded builders who want sharper judgment, not just more syntax.</p>
+            <h1>Build smarter systems with AI, then prove them in competition.</h1>
+            <p>Use JavaScript and AI to design a colony that can gather resources, make decisions, recover from failures, and compete in Screeps capture-the-flag. You will learn how to read a live environment, turn game mechanics into architecture, and explain why your system works under pressure.</p>
             <div class="cohort-date-row">
               ${cohortBadge(primaryProgram)}
-              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for coding help, Screeps strategy, build sessions, hackathons, and industry-leader networking.</span>
+              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for setup help, colony design questions, Codex review, tournament prep, and build support between sessions.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
@@ -68,16 +68,16 @@ export function renderHome(data) {
             </div>
           </div>
           <aside class="hero-program-panel">
-            <img src="${shot(3)}" alt="Screeps room showing a student-built colony system" />
+            <img src="${shot(3)}" alt="Screeps room showing a coded colony system" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What they build</span>
-              <h2>One colony. One repo. One tournament path.</h2>
-              <p>Turn game strategy into real software habits, then prepare for the AutoNateAI league where colonies battle head-to-head.</p>
+              <h2>Learn the mechanics. Design the system. Battle through code.</h2>
+              <p>Turn Screeps strategy into engineering habits, then prepare for AutoNateAI capture-the-flag where colonies battle head-to-head.</p>
               <div class="hero-facts">
-                <span>Strategic tech habits</span>
+                <span>System design practice</span>
                 <span>${cohortCapacity(primaryProgram)}</span>
                 <span>Screeps bot repo</span>
-                <span>Discord cohort channel</span>
+                <span>CTF tournament week</span>
               </div>
             </div>
           </aside>
@@ -95,9 +95,9 @@ export function renderHome(data) {
         </div>
         <div class="value-grid">
           <article><span>${icon("functions")}</span><h3>Code that operates</h3><p>Existing coding knowledge gets applied to live colony mechanics: creeps, spawns, sources, controllers, memory, terrain, and hostile pressure.</p></article>
-          <article><span>${icon("account_tree")}</span><h3>Git like builders</h3><p>Commit working bot versions, read diffs, recover from broken changes, and leave with a visible repo history.</p></article>
-          <article><span>${icon("hub")}</span><h3>APIs and automation</h3><p>Screeps game objects make API thinking concrete while spawn logic, roles, and Memory teach automation loops.</p></article>
-          <article><span>${icon("forum")}</span><h3>Discord cohort</h3><p>Every cohort gets a dedicated AutoNateAI Discord channel for coding questions, Screeps discussion, hackathons, and industry networking.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working bot versions, read diffs, recover from broken strategy changes, and leave with a visible repo history.</p></article>
+          <article><span>${icon("hub")}</span><h3>APIs and automation</h3><p>Screeps game objects make API thinking concrete while spawn logic, roles, Memory, and room state drive automation loops.</p></article>
+          <article><span>${icon("forum")}</span><h3>Cohort build support</h3><p>Use Discord for setup help, Codex review, colony design questions, tournament prep, and build support between live sessions.</p></article>
         </div>
       </section>
 
@@ -109,7 +109,7 @@ export function renderHome(data) {
               <div class="compete-callout">
                 <span>${icon("flag")} Tournament capstone</span>
                 <strong>Head-to-head colony battles</strong>
-                <p>Test whether your automation, debugging, and strategy can hold up when another bot is trying to win.</p>
+                <p>See whether your architecture can keep making good decisions when another coded colony is trying to win.</p>
               </div>
             </div>
             <div class="button-row compete-actions">
@@ -118,9 +118,9 @@ export function renderHome(data) {
             </div>
           </div>
           <div class="compete-copy">
-            <span class="kicker">${icon("emoji_events")} Learn, Build, Battle</span>
+            <span class="kicker">${icon("emoji_events")} Design, Build, Battle</span>
             <h2>Design a colony system, then battle against other people's systems.</h2>
-            <p>The course assumes you are already familiar with code. The work is learning how to read the Screeps environment, understand its mechanics, compose the available components, design roles, manage state, automate decisions, and improve the system before tournament week. By the end, you are not just showing a project. You are running a colony built from your own architecture.</p>
+            <p>This is for people who are comfortable reading and modifying code. The work is learning how to read the Screeps environment, understand its mechanics, compose the available components, design roles, manage state, automate decisions, and improve the system before tournament week. By the end, you are not just showing a project. You are running a colony built from your own architecture.</p>
             <div class="compete-curriculum">
               <article><b>01</b><span>Map the Screeps environment, mechanics, components, resources, and constraints.</span></article>
               <article><b>02</b><span>Design roles, state, memory, automation loops, and Git-backed strategy experiments.</span></article>
@@ -135,7 +135,7 @@ export function renderHome(data) {
         <div>
           <span class="kicker">${icon("flag")} Capstone</span>
           <h2>${escapeHtml(league.season?.name || "Tournament Day")}</h2>
-          <p>${escapeHtml(league.product?.cta || "")} Phase 1 gets you battle-ready. Phase 2 turns that work into a league where your logic, automation, and architecture have to hold up against other builders.</p>
+          <p>${escapeHtml(league.product?.cta || "")} The match makes the learning visible: your code has to read the room, manage resources, defend priorities, and keep making decisions while another colony pushes back.</p>
           <div class="stat-grid">
             <div><strong>${escapeHtml(league.season?.format || "TBD")}</strong><span>Format</span></div>
             <div><strong>Included</strong><span>Final Tournament</span></div>
@@ -151,8 +151,8 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("article")} Articles</span>
-            <h2>For builders who want to think in systems.</h2>
-            <p>These reads explain the bigger picture: why the game matters, why the code matters, and how the cohort builds strategic habits for a future shaped by data, automation, AI, policy, resources, economies, and hostile pressure.</p>
+            <h2>For builders who want sharper engineering judgment.</h2>
+            <p>These reads explain why Screeps works as a systems lab: the code controls real mechanics, the colony exposes weak assumptions, Git makes experiments recoverable, and competition proves whether the design holds up.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
@@ -167,7 +167,7 @@ export function renderHome(data) {
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
           </form>
-          <small>Screeps setup help, cohort workspace, Git repo guidance, and tournament-day support are included.</small>
+          <small>Screeps setup help, cohort workspace, Git repo guidance, Codex workflow support, and tournament-week support are included.</small>
         </div>
       </section>
     </main>
@@ -187,7 +187,7 @@ export function renderHome(data) {
         "@type": "EducationalOrganization",
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI teaches strategic software thinking, Git, APIs, automation, and responsible AI-assisted development for tech-minded builders.",
+        "description": "AutoNateAI teaches developers and technical builders to design software systems, use AI responsibly, and prove their architecture through Screeps competition.",
       },
     ],
   });
@@ -214,10 +214,10 @@ export function renderPrograms(data) {
 
 export function renderAbout() {
   const values = [
-    ["Curiosity", "Builders should leave with better questions, not just memorized answers."],
-    ["Systems", "We teach participants to see inputs, state, feedback loops, constraints, and tradeoffs."],
-    ["Integrity", "AI is powerful, but builders still need to understand, explain, and own their work."],
-    ["Creation", "The goal is to build, test, reflect, and improve, not passively consume technology."],
+    ["Curiosity", "Builders should leave with sharper questions about how a system behaves, not just answers about syntax."],
+    ["Systems", "We teach builders to see inputs, state, feedback loops, constraints, tradeoffs, and failure modes."],
+    ["Integrity", "AI is powerful, but builders still need to understand, test, explain, and own their work."],
+    ["Creation", "The goal is to build, battle-test, reflect, and improve, not passively consume technology."],
   ];
   const experience = [
     ["University of Michigan", "B.S. Computer Science and Computer Security instructional aide"],
@@ -233,8 +233,8 @@ export function renderAbout() {
       <section class="about-hero">
         <div>
           <span class="kicker">${icon("psychology")} About AutoNateAI</span>
-          <h1>We teach tech-minded builders how to think like modern software engineers.</h1>
-          <p>AutoNateAI exists to develop exceptional thinkers through software engineering, AI, and systems design. Programming is more than writing code. It teaches you how to break down problems, design solutions, communicate ideas, and work with AI responsibly.</p>
+          <h1>We teach builders how to design systems that survive contact with reality.</h1>
+          <p>AutoNateAI helps developers and technical builders practice the work behind good software: reading an environment, modeling state, designing components, using AI responsibly, testing assumptions, and explaining why the system behaves the way it does.</p>
           <div class="button-row">
             <a class="primary-button" href="/programs/ai-software-architect">View the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/articles">Read the Learning Model</a>
@@ -252,16 +252,16 @@ export function renderAbout() {
 
       <section class="about-mission">
         <span class="kicker">${icon("architecture")} Mission</span>
-        <h2>Become an architect, not just a programmer.</h2>
-        <p>Many people learn syntax. Fewer learn how software actually gets designed. Professional engineers spend a lot of time thinking: planning, debugging, communicating, decomposing problems, using Git, reviewing tradeoffs, and deciding what should be automated next. AutoNateAI closes that gap.</p>
+        <h2>Good code is not enough. The system has to work.</h2>
+        <p>Professional engineers spend a lot of time reading unfamiliar systems, identifying constraints, debugging behavior, communicating tradeoffs, using Git, and deciding what should be automated next. AutoNateAI turns those habits into a live practice environment where the design either works or the colony exposes the gap.</p>
       </section>
 
       <section class="section compact about-split">
         <div>
           <span class="kicker">${icon("verified")} Why the training is different</span>
-          <h2>Built from real engineering work, not a generic coding worksheet.</h2>
-          <p>For the last five years, Nathan has designed software systems, AI workflows, and software architectures used inside real organizations. AutoNateAI turns those same engineering methods into a practical training ground for people preparing for the next era of tech work.</p>
-          <p>Before founding AutoNateAI, Nathan also taught Computer Security at the University of Michigan as an instructional aide, leading office hours, lab sections, and mentoring students learning software security and networking.</p>
+          <h2>Built from real engineering work, not generic coding practice.</h2>
+          <p>For the last five years, Nathan has designed software systems, AI workflows, and software architectures used inside organizations where clarity, reliability, and communication matter. AutoNateAI turns those same engineering methods into a practical training ground.</p>
+          <p>Before founding AutoNateAI, Nathan also taught Computer Security at the University of Michigan as an instructional aide, leading office hours, lab sections, and mentoring students through software security, networking, and systems problems.</p>
         </div>
         <div class="about-proof-list">
           ${experience.map(([title, text]) => `<article><span>${icon("work_history")}</span><div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div></article>`).join("")}
@@ -272,24 +272,24 @@ export function renderAbout() {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("school")} Teaching Philosophy</span>
-            <h2>Technology changes. Thinking lasts.</h2>
-            <p>Students are encouraged to experiment, prototype, question assumptions, design before coding, learn from mistakes, use AI responsibly, and communicate their ideas clearly.</p>
+            <h2>Technology changes. Engineering judgment lasts.</h2>
+            <p>Builders practice reading the environment first, designing before changing code, using AI with context, testing the result, and explaining the tradeoffs behind their decisions.</p>
           </div>
           <a class="primary-button" href="/programs/ai-software-architect">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid about-value-grid">
-          <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Learn to split large problems into smaller parts and explain how those parts work together.</p></article>
-          <article><span>${icon("bug_report")}</span><h3>Debugging</h3><p>Practice finding the real cause of a problem instead of guessing and hoping.</p></article>
-          <article><span>${icon("commit")}</span><h3>Git workflows</h3><p>Learn to save progress, read changes, recover working versions, and document decisions.</p></article>
-          <article><span>${icon("smart_toy")}</span><h3>AI collaboration</h3><p>Use AI as a thinking partner while staying responsible for the final code and explanation.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Turn mechanics, components, state, and constraints into a system you can explain.</p></article>
+          <article><span>${icon("bug_report")}</span><h3>Debugging</h3><p>Find the real cause of broken behavior by reading logs, state, and what the system visibly does.</p></article>
+          <article><span>${icon("commit")}</span><h3>Git workflows</h3><p>Save strategy experiments, read diffs, recover working versions, and document design decisions.</p></article>
+          <article><span>${icon("smart_toy")}</span><h3>AI collaboration</h3><p>Use AI to plan and review changes while staying responsible for the architecture and final explanation.</p></article>
         </div>
       </section>
 
       <section class="about-logos">
         <div>
-          <span class="kicker">${icon("groups")} Community and education work</span>
-          <h2>Experience across classrooms, companies, and community tech initiatives.</h2>
-          <p>AutoNateAI's work is shaped by collaborations, workshops, outreach, and education initiatives involving universities, technology companies, and community technology programs. The focus is not logos. The focus is helping builders think clearly, compete intelligently, and build with confidence.</p>
+          <span class="kicker">${icon("groups")} Engineering and education work</span>
+          <h2>Experience across classrooms, companies, and technical training spaces.</h2>
+          <p>AutoNateAI's work is shaped by engineering practice, teaching, workshops, outreach, and technology initiatives involving universities, companies, and community programs. The focus is not logos. The focus is helping builders think clearly, use AI responsibly, and prove their decisions through working systems.</p>
         </div>
         <div class="org-cloud">
           ${["Grand Valley State University", "Black Boys Code", "Salesforce", "Microsoft", "Endless Opportunities", "Churches", "Community Organizations", "Youth Education Initiatives"].map((org) => `<span>${escapeHtml(org)}</span>`).join("")}
@@ -310,10 +310,10 @@ export function renderAbout() {
 
       <section class="founder-letter">
         <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
-        <h2>Let's build the next generation of strategic technologists.</h2>
-        <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, consulting, and education reinforced one lesson: the people who succeed are not always the people who memorize the most. They are the people who learn how to think.</p>
-        <p>AutoNateAI exists because tech-minded people deserve to learn software the way modern engineers actually work: with planning, systems thinking, Git, debugging, communication, responsible AI use, and projects that feel alive.</p>
-        <p>If you are preparing for a future in software, AI, automation, security, data, or technical leadership, I would love to build with you.</p>
+        <h2>Let's build stronger engineering judgment.</h2>
+        <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, consulting, and education reinforced one lesson: the strongest builders are not just the people who can write code. They are the people who can understand a system.</p>
+        <p>AutoNateAI exists because developers and technical builders deserve practice that feels closer to real engineering work: reading an environment, planning changes, using Git, debugging behavior, working with AI responsibly, and building projects that can fail in visible ways.</p>
+        <p>If you are preparing for software, AI, automation, security, data, or technical leadership, I would love to build with you.</p>
         <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
       </section>
 
@@ -321,9 +321,9 @@ export function renderAbout() {
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
           <article><h3>Is this for complete beginners?</h3><p>No. This is best for people who are comfortable reading and modifying code and want to become better at designing systems inside a live environment with components, constraints, resources, and competition.</p></article>
-          <article><h3>How does AI fit into the class?</h3><p>You use AI to ask better questions, inspect code, debug, and improve ideas. AI does not replace understanding.</p></article>
-          <article><h3>Why use Screeps?</h3><p>Screeps makes software visible. You can see state, automation, feedback loops, failure, hostile pressure, resources, and strategy play out in a live world.</p></article>
-          <article><h3>Who is this built for?</h3><p>High school students, college CS students, junior software engineers, career switchers, and tech-interested builders who want durable strategic technology habits.</p></article>
+          <article><h3>How does AI fit into the class?</h3><p>You use AI to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
+          <article><h3>Why use Screeps?</h3><p>Screeps makes software visible. You can see state, automation, feedback loops, failure, hostile pressure, resources, and strategy play out in a live world controlled by code.</p></article>
+          <article><h3>Who is this built for?</h3><p>High school programmers, college CS students, junior software engineers, career switchers, and technical builders who want stronger systems thinking and AI-assisted engineering habits.</p></article>
         </div>
       </section>
 
@@ -339,13 +339,13 @@ export function renderAbout() {
   `;
 
   return pageShell({
-    title: "About AutoNateAI | Youth Programming and AI Systems Thinking",
+    title: "About AutoNateAI | AI Systems Engineering Practice",
     active: "about",
     body,
     canonicalPath: "/about",
     ogImage: "/assets/nathan-baker.jpeg",
     description:
-      "AutoNateAI teaches tech-minded builders how to think like modern software engineers through software architecture, AI workflows, Git, debugging, and systems design.",
+      "AutoNateAI teaches developers and technical builders to design systems, use AI responsibly, debug behavior, and prove their work through Screeps competition.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -384,12 +384,12 @@ export function renderProgramDetail(data, program) {
         <div class="hero-content">
           <div class="hero-copy">
             <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/ai-software-architect">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
-            <span class="kicker">${icon("emoji_events")} Build, Commit, Compete</span>
+            <span class="kicker">${icon("emoji_events")} JavaScript + AI + CTF</span>
             <h1>${heroTitle}</h1>
-            <p>A four-week live cohort for developers and technical builders who want to become sharper system designers. You study the Screeps environment, learn its mechanics, compose colony components, automate decisions, and spend the final week battling your code against other colonies in capture-the-flag.</p>
+            <p>This is where coding starts feeling like systems engineering. Use JavaScript and Codex to design a Screeps colony that reads the room, gathers resources, assigns roles, fixes problems, and makes decisions on its own. Then take that colony into capture-the-flag and see how your architecture performs when another coded system pushes back.</p>
             <div class="cohort-date-row">
               ${cohortBadge(program)}
-              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for coding, Screeps strategy, build sessions, hackathons, league updates, and industry networking.</span>
+              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, Codex review, colony design questions, tournament prep, and build support between sessions.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
@@ -399,8 +399,8 @@ export function renderProgramDetail(data, program) {
           <aside class="hero-program-panel program-hero-panel">
             <img src="${gallery[1]}" alt="Screeps tournament strategy preview" />
             <div class="hero-panel-body">
-              <span class="kicker">${icon("sports_esports")} Program Path</span>
-              <h2>One environment. One colony system. One tournament week.</h2>
+              <span class="kicker">${icon("sports_esports")} What You Build</span>
+              <h2>A colony that has to think while the game keeps moving.</h2>
               <p>Learn the mechanics, design the architecture, keep decisions in Git, then tune a battle branch where every move, defense, and resource decision comes from code.</p>
               <div class="hero-facts">
                 <span>${cohortCapacity(program)}</span>
@@ -414,25 +414,25 @@ export function renderProgramDetail(data, program) {
       </section>
 
       <section class="detail-proof-strip">
-        <a href="${checkoutHref}"><b>${price}</b><span>Full 4-week program</span></a>
+        <a href="${checkoutHref}"><b>${price}</b><span>Full 4-week cohort</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
-        <a href="#curriculum"><b>25</b><span>Seat cohort</span></a>
-        <a href="#outcomes"><b>Git</b><span>Your repo history</span></a>
+        <a href="#curriculum"><b>8</b><span>Live build sessions</span></a>
+        <a href="#outcomes"><b>CTF</b><span>Tournament week</span></a>
       </section>
 
       <section class="section compact detail-sales-band" id="outcomes">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("architecture")} What Makes It Worth Buying</span>
-            <h2>You get a system to operate and proof of how you think.</h2>
-            <p>You do not just watch lessons or review syntax. You learn the environment, turn game mechanics into components, design roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony works under tournament pressure. Screeps makes system design visible because the system has to survive, gather resources, respond, and compete.</p>
+            <span class="kicker">${icon("architecture")} What Actually Changes</span>
+            <h2>You start seeing code as a living system, not a file of instructions.</h2>
+            <p>You learn the environment, turn game mechanics into components, design roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony works under pressure. Screeps makes system design visible because your code has to survive, gather resources, respond to changing conditions, and compete.</p>
           </div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="${shot(2)}" alt="Screeps room with active creeps" /><h3>Designed colony system</h3><p>Harvesters, upgraders, builders, spawn logic, Memory, role behavior, and decisions shaped by the environment.</p></article>
-          <article><img src="${shot(4)}" alt="Screeps room showing system growth" /><h3>Engineering habits</h3><p>Git commits, README notes, bug reports, diffs, architecture notes, and recoverable strategy experiments.</p></article>
-          <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>Tournament-week strategy</h3><p>Tune your colony for AutoNateAI capture-the-flag, then use Phase 2 league play as the next arena for improvement.</p></article>
+          <article><img src="${shot(2)}" alt="Screeps room with active creeps" /><h3>A colony with real behavior</h3><p>Harvesters, upgraders, builders, spawn logic, Memory, role behavior, and decisions shaped by the room.</p></article>
+          <article><img src="${shot(4)}" alt="Screeps room showing system growth" /><h3>AI-assisted engineering habits</h3><p>Use Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
+          <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>A tournament-ready branch</h3><p>Tune your colony for AutoNateAI capture-the-flag, then use Phase 2 league play as the next arena for improvement.</p></article>
         </div>
       </section>
 
@@ -444,7 +444,7 @@ export function renderProgramDetail(data, program) {
           <span class="kicker">${icon("verified")} About the Instructor</span>
           <h2>Learn from an engineer who has built AI and software systems across Microsoft, Citi, Veterans United, and Atomic Object.</h2>
           <p>Nathan Baker studied Computer Science at the University of Michigan and has spent the last five years building real software, AI workflows, and software architectures inside organizations where clarity and reliability matter.</p>
-          <p>He also taught Computer Security at the University of Michigan as an instructional aide. That mix of industry engineering and hands-on teaching shapes the program: you bring coding familiarity, then practice how modern engineers read environments, design systems, debug behavior, use Git, collaborate with AI, and explain tradeoffs.</p>
+          <p>He also taught Computer Security at the University of Michigan as an instructional aide. That mix of industry engineering and hands-on teaching shapes the program: you bring development experience, then practice how modern engineers read environments, design systems, debug behavior, use Git, collaborate with AI, and explain tradeoffs.</p>
           <div class="button-row">
             <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
             <a class="outline-button" href="/about">About AutoNateAI</a>
@@ -455,7 +455,7 @@ export function renderProgramDetail(data, program) {
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
-          <h2>${price} for the full program</h2>
+          <h2>${price} for the full 4-week cohort</h2>
           <p>${escapeHtml(program.cohortNote || "")} Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, dedicated AutoNateAI Discord access, and tournament-week support.</p>
         </div>
         <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
@@ -463,7 +463,7 @@ export function renderProgramDetail(data, program) {
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>8 sessions, grouped by the system you are designing.</h2><p>Because Screeps keeps running, you see the same pressures real software faces: unfamiliar environments, changing state, feedback loops, dependencies, automation, failure recovery, resource constraints, hostile actors, and performance under competition.</p></div>
+          <div><h2>8 sessions from environment mapping to tournament battles.</h2><p>Because Screeps keeps running, you see the same pressures real software faces: unfamiliar environments, changing state, feedback loops, dependencies, automation, failure recovery, resource constraints, hostile actors, and performance under competition.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         <div class="week-grid">
@@ -577,8 +577,8 @@ export function renderArticles() {
       <div class="page-toolbar">
         <div>
           <span class="kicker">${icon("article")} Articles / Tutorials / Strategy</span>
-          <h1>Learn the world before you enter it.</h1>
-          <p>Searchable, filterable content for tech-minded builders who want to understand systems-based programming, Git, APIs, automation, AI-assisted coding, and competitive strategy.</p>
+          <h1>Read the system before you battle in it.</h1>
+          <p>Strategy notes for builders using JavaScript, Codex, Git, and Screeps to design colonies that can operate, adapt, and compete in capture-the-flag.</p>
         </div>
       </div>
       ${featuredArticle ? featuredArticleCard(featuredArticle) : ""}
@@ -599,7 +599,7 @@ export function renderArticles() {
     canonicalPath: "/articles",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Articles, tutorials, and strategy notes about workforce systems programming, AI-assisted development, Git, APIs, automation, competition, and systems thinking.",
+      "Articles and strategy notes about Screeps, AI-assisted development, Git, automation, capture-the-flag competition, and systems thinking.",
   });
 }
 
@@ -830,7 +830,7 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
             ? `<div class="program-media-callout">
           <span>${icon("flag")} Tournament capstone</span>
           <strong>Build the colony. Battle the code.</strong>
-          <p>Students finish by running their Screeps bots head-to-head in AutoNateAI capture-the-flag.</p>
+          <p>Builders finish by running their Screeps colonies head-to-head in AutoNateAI capture-the-flag.</p>
         </div>`
             : ""
         }
@@ -844,7 +844,7 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
         <p>${escapeHtml(program.description)}</p>
         <div class="cohort-date-row compact">
           ${cohortBadge(program)}
-          <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord channel included for coding, Screeps, hackathons, and industry networking.</span>
+          <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, Codex review, colony design questions, tournament prep, and build support.</span>
         </div>
         <div class="program-feature-points">
           <span>Screeps colony bot</span>
