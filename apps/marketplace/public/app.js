@@ -99,7 +99,7 @@ function findSelection(catalog) {
 }
 
 function cohortCapacity(program, offering) {
-  return `${offering?.capacity || program?.offerings?.[0]?.capacity || 25} student max`;
+  return `${offering?.capacity || program?.offerings?.[0]?.capacity || 25}-seat cohort`;
 }
 
 const catalog = readCatalog();

@@ -49,7 +49,7 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Reserve Seats</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs">Reserve Seat</a>`}
         </div>
       </nav>
     </header>
@@ -62,13 +62,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>A focused youth programming cohort that turns coding foundations, Git, APIs, automation, and Codex into systems students can operate, explain, and improve.</p>
+          <p>A focused workforce systems cohort that turns coding foundations, Git, APIs, automation, and Codex into systems tech-minded builders can operate, explain, compete with, and improve.</p>
         </div>
         ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/about"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Youth programming cohorts for systems thinking, Git, APIs, automation, and AI-assisted development.</span>
+        <span>&copy; 2026 AutoNateAI. Workforce systems cohorts for strategic tech thinking, Git, APIs, automation, AI-assisted development, and tournament play.</span>
       </div>
     </footer>
   `;
@@ -87,7 +87,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches youth programming, critical thinking, Git, APIs, automation, AI-assisted coding, and software architecture through a live six-week cohort.";
+  "AutoNateAI teaches workforce systems programming, strategic thinking, Git, APIs, automation, AI-assisted coding, and software architecture through a live six-week cohort.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;
