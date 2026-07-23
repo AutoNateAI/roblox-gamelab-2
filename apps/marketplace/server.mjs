@@ -8,11 +8,13 @@ import {
   renderArticleDetail,
   renderArticles,
   renderAbout,
+  renderCommunity,
   renderCheckout,
   renderHome,
   renderLeague,
   renderProgramDetail,
   renderSuccess,
+  renderTutorials,
 } from "./src/pages.mjs";
 import { articles } from "./src/data.mjs";
 
@@ -147,7 +149,7 @@ const server = createServer(async (request, response) => {
   const apiPath = marketplaceApiPath(url.pathname);
 
   try {
-    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/league", "/checkout", "/success"]);
+    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/tutorials", "/community", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       if (url.pathname === "/programs") {
@@ -158,6 +160,8 @@ const server = createServer(async (request, response) => {
         "/": renderHome,
         "/about": renderAbout,
         "/articles": renderArticles,
+        "/tutorials": renderTutorials,
+        "/community": renderCommunity,
         "/league": renderLeague,
         "/checkout": renderCheckout,
         "/success": renderSuccess,

@@ -5,11 +5,13 @@ import {
   renderArticleDetail,
   renderArticles,
   renderAbout,
+  renderCommunity,
   renderCheckout,
   renderHome,
   renderLeague,
   renderProgramDetail,
   renderSuccess,
+  renderTutorials,
 } from "../src/pages.mjs";
 import { articles } from "../src/data.mjs";
 
@@ -26,6 +28,8 @@ const routes = [
   ["index.html", renderHome(programsData)],
   ["programs/index.html", renderProgramDetail(programsData, programsData.programs[0])],
   ["articles/index.html", renderArticles()],
+  ["tutorials/index.html", renderTutorials()],
+  ["community/index.html", renderCommunity()],
   ["about/index.html", renderAbout()],
   ["league/index.html", renderLeague(programsData)],
   ["checkout/index.html", renderCheckout(programsData)],
@@ -75,6 +79,9 @@ await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
   sitemapEntry("https://autonateai.com/programs/ai-software-architect", "0.9"),
+  sitemapEntry("https://autonateai.com/league", "0.8"),
+  sitemapEntry("https://autonateai.com/tutorials", "0.8"),
+  sitemapEntry("https://autonateai.com/community", "0.8"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
   sitemapEntry("https://autonateai.com/articles", "0.7"),
   ...articles.map((article) => sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6")),
@@ -100,7 +107,7 @@ Sitemap: https://autonateai.com/sitemap.xml
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | Youth Systems Programming Lab</title>",
+    "<title>AutoNateAI | Workforce Systems Programming Lab</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
