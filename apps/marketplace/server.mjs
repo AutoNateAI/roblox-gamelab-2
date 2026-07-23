@@ -12,7 +12,6 @@ import {
   renderHome,
   renderLeague,
   renderProgramDetail,
-  renderPrograms,
   renderSuccess,
 } from "./src/pages.mjs";
 import { articles } from "./src/data.mjs";
@@ -151,10 +150,13 @@ const server = createServer(async (request, response) => {
     const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
+      if (url.pathname === "/programs") {
+        html(response, 200, renderProgramDetail(programsData, programsData.programs[0]));
+        return;
+      }
       const renderers = {
         "/": renderHome,
         "/about": renderAbout,
-        "/programs": renderPrograms,
         "/articles": renderArticles,
         "/league": renderLeague,
         "/checkout": renderCheckout,

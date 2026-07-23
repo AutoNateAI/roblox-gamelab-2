@@ -9,7 +9,6 @@ import {
   renderHome,
   renderLeague,
   renderProgramDetail,
-  renderPrograms,
   renderSuccess,
 } from "../src/pages.mjs";
 import { articles } from "../src/data.mjs";
@@ -25,7 +24,7 @@ const programsData = JSON.parse(
 
 const routes = [
   ["index.html", renderHome(programsData)],
-  ["programs/index.html", renderPrograms(programsData)],
+  ["programs/index.html", renderProgramDetail(programsData, programsData.programs[0])],
   ["articles/index.html", renderArticles()],
   ["about/index.html", renderAbout()],
   ["league/index.html", renderLeague(programsData)],
@@ -75,10 +74,9 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
-  sitemapEntry("https://autonateai.com/programs", "0.9"),
+  sitemapEntry("https://autonateai.com/programs/ai-software-architect", "0.9"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
   sitemapEntry("https://autonateai.com/articles", "0.7"),
-  ...programsData.programs.map((program) => sitemapEntry(`https://autonateai.com/programs/${program.handle}`, "0.9")),
   ...articles.map((article) => sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6")),
 ];
 await writeFile(

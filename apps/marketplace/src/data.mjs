@@ -1,6 +1,6 @@
 export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
-  { label: "Program", href: "/programs", keys: ["programs"] },
+  { label: "Program", href: "/programs/ai-software-architect", keys: ["programs"] },
   { label: "About", href: "/about", keys: ["about"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
 ];
@@ -34,13 +34,13 @@ export const articles = [
     handle: "coding-as-workforce-development",
     title: "Coding as Workforce Development for Strategic Builders",
     category: "Strategy",
-    audience: "Code-familiar high school students, college CS students, junior SWEs, and tech-interested builders",
+    audience: "High school programmers, college CS students, junior SWEs, and technical builders",
     summary:
       "The strongest technology training does more than introduce tools or syntax. It helps builders practice system design, communication, version control, and strategic follow-through.",
     body: [
       "If you are preparing for the future of technical work, knowing code is only the starting point. You need a structured environment where you can practice the habits that show up later in real work: reading unfamiliar systems, testing strategy, recovering from mistakes, and explaining decisions.",
       "The AI Systems Programming Lab uses Screeps because it makes those habits visible. If you model the environment poorly, the colony stalls. If you commit working code before experimenting, you can recover. If you use Codex without understanding the architecture, the room eventually exposes the gap.",
-      "That is why the program fits workforce development for code-familiar builders. You get a competitive shared challenge, but underneath that challenge you are practicing collaboration, technical communication, persistence, and systems thinking."
+      "That is why the program fits workforce development for developers and technical builders. You get a competitive shared challenge, but underneath that challenge you are practicing collaboration, technical communication, persistence, and systems thinking."
     ],
     tags: ["Workforce Development", "Systems Thinking", "Tech Careers"],
     readingTime: "4 min read",
