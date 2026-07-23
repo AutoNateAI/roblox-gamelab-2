@@ -105,6 +105,8 @@ export function pageShell({
   mode = "full",
   ogImage = DEFAULT_OG_IMAGE,
   description = DEFAULT_DESCRIPTION,
+  ogTitle = title,
+  ogDescription = description,
   canonicalPath = "/",
   robots = "index,follow",
   structuredData = [],
@@ -144,15 +146,15 @@ export function pageShell({
         <meta name="description" content="${escapeHtml(description)}" />
         <meta name="robots" content="${escapeHtml(robots)}" />
         <link rel="canonical" href="${canonicalUrl}" />
-        <meta property="og:title" content="${escapeHtml(title)}" />
-        <meta property="og:description" content="${escapeHtml(description)}" />
+        <meta property="og:title" content="${escapeHtml(ogTitle)}" />
+        <meta property="og:description" content="${escapeHtml(ogDescription)}" />
         <meta property="og:url" content="${canonicalUrl}" />
         <meta property="og:image" content="${absoluteUrl(ogImage)}" />
         <meta property="og:site_name" content="${SITE_NAME}" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="${escapeHtml(title)}" />
-        <meta name="twitter:description" content="${escapeHtml(description)}" />
+        <meta name="twitter:title" content="${escapeHtml(ogTitle)}" />
+        <meta name="twitter:description" content="${escapeHtml(ogDescription)}" />
         <meta name="twitter:image" content="${absoluteUrl(ogImage)}" />
         ${[...baseStructuredData, ...structuredData].map((item) => jsonLd(item)).join("\n        ")}
         <script>
