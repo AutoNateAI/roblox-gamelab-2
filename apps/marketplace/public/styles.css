@@ -2930,21 +2930,49 @@ h1 {
 
   .about-hero {
     padding-top: 26px;
-  }
-
-  .about-founder-card img {
-    max-height: 420px;
-    min-height: 420px;
+    gap: 24px;
   }
 
   .about-founder-card {
-    min-height: 420px;
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .about-founder-card img {
+    display: block;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    object-position: center 24%;
   }
 
   .about-founder-card div {
+    left: 16px;
+    right: 16px;
     bottom: 16px;
-    width: calc(100% - 32px);
-    padding: 18px;
+    width: auto;
+    transform: none;
+    padding: 12px 14px;
+  }
+
+  .about-founder-card .kicker {
+    font-size: 10px;
+  }
+
+  .about-founder-card h2 {
+    margin: 4px 0;
+    font-size: 22px;
+  }
+
+  .about-founder-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    margin: 0;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 13px;
+    line-height: 1.35;
   }
 
   .founder-letter {
