@@ -62,7 +62,7 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>A focused workforce systems cohort that turns coding foundations, Git, APIs, automation, and Codex into systems tech-minded builders can operate, explain, compete with, and improve.</p>
+          <p>A focused workforce systems cohort where code-familiar builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
         </div>
         ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Cohort Details", "/programs"], ["Articles", "/articles"]])}
         ${footerColumn("Company", [["About AutoNateAI", "/about"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
@@ -87,7 +87,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches workforce systems programming, strategic thinking, Git, APIs, automation, AI-assisted coding, and software architecture through a live six-week cohort.";
+  "AutoNateAI teaches code-familiar builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

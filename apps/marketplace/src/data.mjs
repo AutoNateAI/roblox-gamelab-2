@@ -34,13 +34,13 @@ export const articles = [
     handle: "coding-as-workforce-development",
     title: "Coding as Workforce Development for Strategic Builders",
     category: "Strategy",
-    audience: "High school students, college CS students, junior SWEs, and tech-interested builders",
+    audience: "Code-familiar high school students, college CS students, junior SWEs, and tech-interested builders",
     summary:
-      "The strongest technology training does more than introduce tools. It helps builders practice focus, problem solving, communication, version control, and follow-through.",
+      "The strongest technology training does more than introduce tools or syntax. It helps builders practice system design, communication, version control, and strategic follow-through.",
     body: [
-      "If you are preparing for the future of technical work, you need more than exposure to JavaScript. You need a structured environment where you can practice the habits that show up later in real work: asking clearer questions, testing ideas, recovering from mistakes, and explaining decisions.",
-      "The AI Systems Programming Lab uses Screeps because it makes those habits visible. If you write unclear logic, the colony stalls. If you commit working code before experimenting, you can recover. If you use Codex without understanding the output, the room eventually exposes the gap.",
-      "That is why the program fits workforce development for tech-minded individuals. You get a fun shared challenge, but underneath that challenge you are practicing collaboration, technical communication, persistence, and systems thinking."
+      "If you are preparing for the future of technical work, knowing code is only the starting point. You need a structured environment where you can practice the habits that show up later in real work: reading unfamiliar systems, testing strategy, recovering from mistakes, and explaining decisions.",
+      "The AI Systems Programming Lab uses Screeps because it makes those habits visible. If you model the environment poorly, the colony stalls. If you commit working code before experimenting, you can recover. If you use Codex without understanding the architecture, the room eventually exposes the gap.",
+      "That is why the program fits workforce development for code-familiar builders. You get a competitive shared challenge, but underneath that challenge you are practicing collaboration, technical communication, persistence, and systems thinking."
     ],
     tags: ["Workforce Development", "Systems Thinking", "Tech Careers"],
     readingTime: "4 min read",
@@ -52,11 +52,11 @@ export const articles = [
     category: "Guide",
     audience: "Builders preparing for competitive systems work",
     summary:
-      "A tournament gives builders a real reason to care about debugging, architecture, and strategy. Your code has to compete against someone else's code.",
+      "Tournament week gives builders a real reason to care about mechanics, debugging, architecture, and strategy. Your code has to compete against someone else's code.",
     body: [
-      "Tournament Day changes the tone of the program because the work becomes public, playful, and real. You are not just turning in an assignment. You are preparing a colony to compete against another colony under AutoNateAI capture-the-flag rules.",
-      "That pressure makes the technical lessons matter. Git protects the battle branch. Debugging keeps the bot from freezing. Functions make strategy easier to change. Memory helps the colony act with consistency. Automation determines whether the bot can keep moving when the match gets messy.",
-      "The result is a capstone you can talk about with substance. You can explain what you tried, what broke, what worked, and what you would build next. Phase 2 extends this format into a league, giving serious builders a reason to keep iterating."
+      "Tournament week changes the tone of the program because the work becomes public, playful, and real. You are not just turning in an assignment. You are preparing a colony to compete against another colony under AutoNateAI capture-the-flag rules.",
+      "That pressure makes the technical lessons matter. Git protects the battle branch. Debugging keeps the bot from freezing. Component design makes strategy easier to change. Memory helps the colony act with consistency. Automation determines whether the bot can keep moving when the match gets messy.",
+      "The result is a capstone you can talk about with substance. You can explain how you read the environment, what mechanics shaped your strategy, what broke, what worked, and what you would build next. Phase 2 extends this format into a league, giving serious builders a reason to keep iterating."
     ],
     tags: ["Tournament Day", "Screeps", "Competition"],
     readingTime: "3 min read",
@@ -68,11 +68,11 @@ export const articles = [
     category: "Guide",
     audience: "Tech-minded builders",
     summary:
-      "Screeps lets you see software architecture in motion. Your JavaScript controls a live colony, so programming concepts become visible decisions, failures, and improvements.",
+      "Screeps lets you see software architecture in motion. Your JavaScript controls a live colony, so system-design choices become visible decisions, failures, and improvements.",
     body: [
       "Screeps is not just a game added onto a coding class. It is the environment where the software system lives. You write JavaScript that controls workers, manages energy, upgrades rooms, responds to threats, and decides what the colony should do next.",
-      "That makes abstract programming easier to understand. A variable can track state. A function can become a reusable creep behavior. A conditional can decide whether to harvest or transfer energy. Memory can store assignments across game ticks. Git can protect the last working version before you try a new strategy.",
-      "The value is that you practice production-style thinking in a contained environment. You learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture before testing it in a cohort tournament."
+      "That makes architecture easier to inspect. Environment values become state. Game objects become components. Roles become a division of labor. Memory stores strategy across ticks. Git protects the last working version before you try a new approach.",
+      "The value is that you practice production-style thinking in a contained environment. You learn to explain what the system does, inspect failures, ask Codex better questions, commit changes, and improve the architecture before testing it during tournament week."
     ],
     tags: ["Screeps", "Software Systems", "Youth Programming"],
     readingTime: "4 min read",
@@ -84,11 +84,11 @@ export const articles = [
     category: "Guide",
     audience: "High school, college, and early-career builders",
     summary:
-      "You learn faster when programming concepts connect to one working project. A real system gives variables, functions, data, APIs, automation, and Git a reason to exist.",
+      "You become more sophisticated when code connects to one working system. Screeps gives data, APIs, automation, Git, mechanics, and strategy a reason to exist.",
     body: [
-      "Many people are introduced to coding as a list of topics: variables, functions, conditionals, loops, and syntax. Those topics matter, but they become easier to retain when you can see how each piece helps a larger system work.",
-      "The AutoNateAI lab is built around that idea. You do not only complete disconnected exercises. You build a project with inputs, decisions, outputs, data, version history, hostile pressure, resource constraints, and automation opportunities.",
-      "That gives you a clearer outcome to show. At the end, you can show the code, explain the architecture, walk through Git history, and describe how AI helped without pretending the AI did all the thinking."
+      "Many people can write code but have not practiced designing a system inside someone else's environment. Screeps forces that next step: you have to understand the available components, the rules, the state, the resources, and the feedback loops before your code can make good decisions.",
+      "The AutoNateAI lab is built around that idea. You do not complete disconnected exercises. You build a project with inputs, decisions, outputs, data, version history, hostile pressure, resource constraints, automation opportunities, and tournament consequences.",
+      "That gives you a clearer outcome to show. At the end, you can show the code, explain the architecture, walk through Git history, describe how AI helped, and talk through what happened when your system battled someone else's."
     ],
     tags: ["Youth Programming", "Systems Thinking", "Project-Based Learning"],
     readingTime: "4 min read",
@@ -102,8 +102,8 @@ export const articles = [
     summary:
       "A good coding program should help you understand feedback loops, constraints, resources, policies, hostile pressure, and tradeoffs. A real project gives those ideas something you can operate.",
     body: [
-      "Most people are told to learn coding as a list of concepts: variables, loops, functions, arrays. Those concepts matter, but they become powerful when you can see why they are needed.",
-      "In the lab, a loop is not abstract. It is the system checking for new work. A function is not only a syntax pattern. It is a reusable behavior. Data is not just a value. It is what the system remembers and acts on.",
+      "Most people are told to learn coding as a list of concepts: variables, loops, functions, arrays. Those concepts matter, but the next level is learning how those pieces become architecture inside a real environment.",
+      "In the lab, a loop is not abstract. It is the colony checking for new work. A function is not only a syntax pattern. It is a reusable behavior. Data is not just a value. It is what the system remembers and acts on.",
       "That is the bridge to real-world software architecture. Future jobs will be shaped by data, automations, AI, hostile actors, resources, policies, and economies. Builders who can ask better systems questions will be the ones trusted to run and improve them."
     ],
     tags: ["Critical Thinking", "Software Architecture", "Education"],

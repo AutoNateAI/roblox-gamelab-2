@@ -282,6 +282,10 @@ h1 {
   line-height: 1.02;
 }
 
+.hero-title-line {
+  display: block;
+}
+
 .hero-content p {
   color: var(--on-variant);
   font-size: clamp(16px, 1.15vw, 19px);
@@ -1351,11 +1355,16 @@ h1 {
 
 .checkout-page,
 .success-page,
-.product-detail-page,
 .about-page {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 42px var(--margin) var(--section);
+}
+
+.product-detail-page {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 var(--section);
 }
 
 .about-hero {
@@ -1605,11 +1614,26 @@ h1 {
   color: var(--primary);
 }
 
-.product-detail,
-.program-detail-hero {
+.product-detail {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(380px, 0.85fr);
   gap: var(--gutter);
+}
+
+.program-detail-hero {
+  min-height: min(760px, calc(100vh - 72px));
+}
+
+.program-detail-hero .hero-bg img {
+  opacity: 0.28;
+}
+
+.program-hero-breadcrumbs {
+  margin: 0 0 22px;
+}
+
+.program-hero-panel {
+  align-self: center;
 }
 
 .product-gallery {
@@ -1756,6 +1780,15 @@ h1 {
   border: 1px solid var(--outline);
   background: var(--outline);
   margin: 18px 0 8px;
+}
+
+.product-detail-page > .detail-proof-strip,
+.product-detail-page > .program-instructor-section,
+.product-detail-page > .detail-enroll-band {
+  width: calc(100% - (var(--margin) * 2));
+  max-width: calc(var(--container-max) - (var(--margin) * 2));
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .detail-proof-strip a {
@@ -2756,10 +2789,21 @@ h1 {
     padding: 80px var(--margin) 48px;
   }
 
+  .program-detail-hero .hero-content {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100vw;
+    max-width: 100vw;
+  }
+
   .hero-copy,
   .hero-program-panel {
     max-width: none;
     min-width: 0;
+  }
+
+  .program-detail-hero .hero-copy {
+    width: calc(100vw - (var(--margin) * 2));
+    max-width: calc(100vw - (var(--margin) * 2));
   }
 
   .hero-content h1 {
@@ -2767,6 +2811,13 @@ h1 {
     line-height: 1.08;
     margin: 14px 0 16px;
     overflow-wrap: break-word;
+  }
+
+  .program-detail-hero .hero-content h1,
+  .program-detail-hero .hero-content p {
+    width: 100%;
+    max-width: calc(100vw - (var(--margin) * 2));
+    overflow-wrap: anywhere;
   }
 
   .hero-content p {
@@ -2916,9 +2967,19 @@ h1 {
     white-space: nowrap;
   }
 
+  .program-hero-breadcrumbs {
+    flex-wrap: wrap;
+    overflow: visible;
+    white-space: normal;
+  }
+
   .breadcrumbs b {
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .program-hero-breadcrumbs b {
+    overflow-wrap: anywhere;
   }
 
   .product-gallery > img {
@@ -3009,7 +3070,6 @@ h1 {
     padding: 20px;
   }
 
-  .product-detail-page,
   .programs-page,
   .articles-page,
   .article-page,
