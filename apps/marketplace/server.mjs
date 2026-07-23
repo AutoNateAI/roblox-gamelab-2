@@ -8,13 +8,16 @@ import {
   renderArticleDetail,
   renderArticles,
   renderAbout,
+  renderCommunity,
   renderCheckout,
   renderHome,
   renderLeague,
   renderProgramDetail,
   renderSuccess,
+  renderTutorialDetail,
+  renderTutorials,
 } from "./src/pages.mjs";
-import { articles } from "./src/data.mjs";
+import { articles, tutorials } from "./src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -147,7 +150,7 @@ const server = createServer(async (request, response) => {
   const apiPath = marketplaceApiPath(url.pathname);
 
   try {
-    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/league", "/checkout", "/success"]);
+    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/tutorials", "/community", "/league", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       if (url.pathname === "/programs") {
@@ -158,6 +161,8 @@ const server = createServer(async (request, response) => {
         "/": renderHome,
         "/about": renderAbout,
         "/articles": renderArticles,
+        "/tutorials": renderTutorials,
+        "/community": renderCommunity,
         "/league": renderLeague,
         "/checkout": renderCheckout,
         "/success": renderSuccess,
@@ -174,6 +179,17 @@ const server = createServer(async (request, response) => {
         return;
       }
       html(response, 200, renderArticleDetail(article));
+      return;
+    }
+
+    if (url.pathname.startsWith("/tutorials/")) {
+      const handle = url.pathname.split("/").filter(Boolean).at(-1);
+      const tutorial = tutorials.find((item) => item.handle === handle);
+      if (!tutorial) {
+        json(response, 404, { error: "Tutorial not found" });
+        return;
+      }
+      html(response, 200, renderTutorialDetail(tutorial));
       return;
     }
 

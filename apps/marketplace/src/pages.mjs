@@ -1,4 +1,5 @@
-import { articles, screepsScreenshots } from "./data.mjs";
+import { readFileSync } from "node:fs";
+import { articles, screepsScreenshots, tutorials } from "./data.mjs";
 import {
   escapeHtml,
   icon,
@@ -531,56 +532,257 @@ export function renderProgramDetail(data, program) {
 }
 
 export function renderLeague(data) {
-  const { league } = data;
-  const season = league.season;
-  const product = league.product;
-  const available = season?.status === "Active";
-
   const body = `
     <main class="league-page">
-      <header class="events-hero">
-        <img src="${shot(7)}" alt="Screeps arena combat" />
-        <div>
-          <span class="kicker">${icon("flag")} Tournament Day</span>
-          <h1>${escapeHtml(season?.name || "AutoNateAI Tournament Day")}</h1>
-          <p>${escapeHtml(product?.cta || "")}</p>
+      <section class="home-hero league-detail-hero">
+        <div class="hero-bg"><img src="${shot(7)}" alt="Screeps combat preview used as AutoNateAI league placeholder" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon("emoji_events")} AutoNateAI League / Coming Soon</span>
+          <h1>Code-versus-code, but the scoreboard cares how you think.</h1>
+          <p>The AutoNateAI League is where colony architecture becomes a season-long systems competition. Week 4 of the cohort is the mini taste: submit a battle branch, watch the code perform, and explain what survived. Phase 2 is the bigger arena for builders who want rankings, replays, awards, and real pressure on their ideas.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-software-architect">Join the Cohort ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/community">Join the Community</a>
+          </div>
         </div>
-      </header>
+        <aside class="hero-program-panel">
+          <img src="${shot(7)}" alt="Screeps combat preview used as AutoNateAI league placeholder" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("flag")} League Status</span>
+            <h2>Coming Soon</h2>
+            <p>Phase 2 will expand cohort tournament week into seasons, rankings, replays, strategy reviews, and league badges.</p>
+            <div class="hero-facts">
+              <span>Mini CTF in week 4</span>
+              <span>Phase 2 rollout</span>
+              <span>Ranked seasons</span>
+              <span>Replay reviews</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
 
       <section class="league-grid">
         <article class="league-rules">
-          <h2>What you compete with</h2>
-          <p>${escapeHtml(season?.winCondition || "TBD")}</p>
+          <span class="kicker">${icon("sports_esports")} The Format</span>
+          <h2>Autonomous colonies. Match pressure. Architecture on display.</h2>
+          <p>Your submission is a battle branch. Your bot has to gather, route, defend, adapt, and compete without you clicking around to save it. The match does not care that the code looked clean in the editor. The room asks the only question that matters: can the system keep making useful decisions?</p>
+          <p>The difference is what we score. Wins matter, but so does the thinking: how you reverse engineered the map, how cleanly the system is composed, how well it recovers from failure, and whether you can explain why your colony made the decisions it made.</p>
         </article>
         <aside class="league-facts">
-          <div><span>Format</span><b>${escapeHtml(season?.format || "TBD")}</b></div>
-          <div><span>Entry Fee</span><b>Included</b></div>
-          <div><span>Status</span><b class="status-pill ${available ? "live" : ""}">${statusLabel(season?.status)}</b></div>
-          <a class="primary-button full ${available ? "" : "disabled"}" href="/programs/ai-software-architect">${available ? "Reserve Seat" : "Register Interest"}</a>
+          <div><span>Week 4</span><b>Mini CTF</b></div>
+          <div><span>Phase 2</span><b>League Rollout</b></div>
+          <div><span>Mode</span><b>Code vs Code</b></div>
+          <div><span>Status</span><b class="status-pill">Coming Soon</b></div>
+          <a class="primary-button full" href="/community">Get League Updates</a>
         </aside>
       </section>
 
-      <section class="section compact">
-        <div class="section-head"><div><h2>How it works</h2><p>The final week turns your colony architecture into head-to-head Screeps capture-the-flag. Phase 2 expands that tournament format into league play for builders who want to keep improving.</p></div><a class="primary-button" href="/programs/ai-software-architect">Get Seat ${icon("arrow_forward")}</a></div>
-        <div class="league-how">
-          <div><span class="material-symbols-outlined">account_tree</span><h3>Battle branch</h3><p>Submit a Git branch tuned for the tournament rules, game mechanics, resource map, and match server.</p></div>
-          <div><span class="material-symbols-outlined">flag</span><h3>Capture the flag</h3><p>Colonies face off head-to-head. The bot has to move, defend, manage resources, make decisions, and react under pressure through code.</p></div>
-          <div><span class="material-symbols-outlined">emoji_events</span><h3>Strategy review</h3><p>Explain what worked, what broke, and how you would improve the next version of the colony.</p></div>
+      <section class="section compact league-section">
+        <div class="section-head"><div><span class="kicker">${icon("workspace_premium")} What You Can Win</span><h2>Not just best bot. Best mind at work.</h2><p>The league will reward the builder who wins the match and the builder whose system explains the future. Some people will dominate the map. Some will reverse engineer the rules. Some will debug the impossible bug before anyone else sees it.</p></div></div>
+        <div class="league-how league-awards">
+          <div><span class="material-symbols-outlined">psychology</span><h3>Best Systems Thinker</h3><p>For the builder who sees the whole board: resources, timing, failure modes, opponent pressure, and tradeoffs.</p></div>
+          <div><span class="material-symbols-outlined">travel_explore</span><h3>Reverse Engineer</h3><p>For the builder who reads the arena, infers the hidden rules, and turns unknowns into working strategy.</p></div>
+          <div><span class="material-symbols-outlined">bug_report</span><h3>Clutch Debugger</h3><p>For the builder who finds the real break, patches the right layer, and saves the branch before the clock runs out.</p></div>
+          <div><span class="material-symbols-outlined">account_tree</span><h3>Architecture Award</h3><p>For clean roles, readable state, useful abstractions, and code that can change without collapsing.</p></div>
+          <div><span class="material-symbols-outlined">conversion_path</span><h3>Automation Architect</h3><p>For the colony that keeps making sharp decisions after the room gets crowded, hostile, or expensive.</p></div>
+          <div><span class="material-symbols-outlined">flag</span><h3>Flag Pressure</h3><p>For the strategy that knows when to protect, chase, trade, retreat, or make the move that ends the match.</p></div>
+        </div>
+      </section>
+
+      <section class="league-gallery">
+        <img src="${shot(8)}" alt="Screeps room placeholder for AutoNateAI league map" />
+        <img src="${shot(5)}" alt="Screeps room placeholder for league strategy review" />
+        <img src="${shot(2)}" alt="Screeps room placeholder for colony automation" />
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "League | AutoNateAI",
+    active: "league",
+    body,
+    canonicalPath: "/league",
+    ogImage: "/assets/og/league.jpg",
+    description:
+      "The AutoNateAI League is the upcoming code-versus-code arena for colony systems, strategy reviews, rankings, and capture-the-flag competition.",
+    ogTitle: "AutoNateAI League: code-versus-code is coming.",
+    ogDescription:
+      "Week 4 is the mini taste. Phase 2 brings seasons, rankings, replays, and awards for the builders whose systems think under pressure.",
+  });
+}
+
+export function renderTutorials() {
+  const tracks = [...new Set(tutorials.map((tutorial) => tutorial.track))];
+  const body = `
+    <main class="tutorials-page">
+      <section class="home-hero tutorials-detail-hero">
+        <div class="hero-bg"><img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon("menu_book")} Screeps Tutorials</span>
+          <h1>Get your colony moving before you buy the cohort.</h1>
+          <p>This free player guide gets you moving before the cohort starts. Claim the room, ship the loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-software-architect">Take the Program ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/community">Ask in Discord</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("terminal")} Free Player Guide</span>
+            <h2>Setup is free. System judgment is the program.</h2>
+            <p>Start with Spawn1, roles, Memory, infrastructure, defense, and combat prep. Then bring that working colony into the cohort.</p>
+            <div class="hero-facts">
+              <span>5 guide docs</span>
+              <span>Copy-ready code</span>
+              <span>Local setup</span>
+              <span>Program pathway</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <div class="docs-layout">
+        <aside class="docs-sidebar">
+          <strong>Docs Path</strong>
+          <a href="#what-is-screeps">What is Screeps?</a>
+          ${tracks.map((track) => `<a href="#${slugify(track)}">${escapeHtml(track)}</a>`).join("")}
+          <a href="/programs/ai-software-architect">Full cohort</a>
+        </aside>
+        <div class="docs-content">
+          <section class="docs-panel" id="what-is-screeps">
+            <span class="kicker">${icon("terminal")} Start Here</span>
+            <h2>Screeps is a strategy world where JavaScript runs the colony.</h2>
+            <p>You do not click units around like a normal RTS. You write code that controls creeps, reads room objects, gathers resources, builds infrastructure, remembers state, and reacts every game tick. That makes it perfect for learning the difference between code that runs once and a system that keeps operating.</p>
+            <p>The free player guide below gets you playing and genuinely dangerous. The paid cohort goes deeper: architecture, Codex workflows, Git history, debugging under pressure, and tournament prep.</p>
+          </section>
+
+          ${tracks.map((track) => tutorialTrack(track)).join("")}
+        </div>
+      </div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Tutorials | AutoNateAI",
+    active: "tutorials",
+    body,
+    canonicalPath: "/tutorials",
+    ogImage: "/assets/og/default.jpg",
+    description:
+      "Free Screeps player guide for builders learning JavaScript colony automation, roles, Memory, infrastructure, defense, and competition prep.",
+    ogTitle: "Screeps tutorials before the system starts swinging back.",
+    ogDescription:
+      "Start with Spawn1, harvesters, roles, Memory, infrastructure, defense, and combat prep. Then bring that colony mindset into the cohort.",
+  });
+}
+
+export function renderTutorialDetail(tutorial) {
+  const markdown = readTutorialMarkdown(tutorial);
+  const body = `
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>${escapeHtml(tutorial.title)}</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Player Guide</strong>
+          ${tutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}</a>`).join("")}
+          <a href="/programs/ai-software-architect">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">${escapeHtml(tutorial.track)} / Tutorial ${escapeHtml(tutorial.episode)}</span>
+            <h1>${escapeHtml(tutorial.title)}</h1>
+            <p>${escapeHtml(tutorial.summary)}</p>
+            <div class="tag-row">${tutorial.outcomes.map((outcome) => `<span>${escapeHtml(outcome)}</span>`).join("")}</div>
+          </header>
+          <div class="markdown-body">${markdownToHtml(stripFirstHeading(markdown))}</div>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker">${icon("architecture")} Want the architecture layer?</span>
+              <h2>The free guide gets the colony moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this code into the AI Systems Programming Lab to practice Codex workflows, Git strategy, debugging under pressure, and capture-the-flag prep.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-software-architect">View the Program ${icon("arrow_forward")}</a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${tutorial.title} | AutoNateAI Tutorials`,
+    active: "tutorials",
+    body,
+    canonicalPath: `/tutorials/${tutorial.handle}`,
+    ogImage: `/assets/og/tutorial-${tutorial.handle}.jpg`,
+    description: tutorial.summary,
+    ogTitle: `${tutorial.title}: get the colony moving.`,
+    ogDescription: tutorial.summary,
+  });
+}
+
+export function renderCommunity() {
+  const body = `
+    <main class="community-page">
+      <section class="home-hero community-detail-hero">
+        <div class="hero-bg"><img src="${shot(4)}" alt="Screeps colony used as AutoNateAI community placeholder" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon("groups")} AutoNateAI Community</span>
+          <h1>A place to build, ask, debug, and talk strategy all day.</h1>
+          <p>The program is the structured path. The community is where the energy keeps moving: setup help, colony questions, Codex reviews, tournament talk, league updates, and the kind of build chatter that turns one stuck builder into ten sharper ones.</p>
+          <div class="button-row">
+            <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
+            <a class="secondary-button" href="/tutorials">Start Tutorials</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="${shot(4)}" alt="Screeps colony used as AutoNateAI community placeholder" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("forum")} Discord</span>
+            <h2>Join the build room.</h2>
+            <p>Come for setup. Stay for the build reviews, battle branches, strange bugs, and league prep.</p>
+            <div class="hero-facts">
+              <span>Setup help</span>
+              <span>Code review</span>
+              <span>Codex prompts</span>
+              <span>League updates</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <section class="section compact community-section">
+        <div class="section-head"><div><span class="kicker">${icon("forum")} What Happens There</span><h2>The lab does not go quiet between sessions.</h2><p>Builders need a place to compare notes while the colony is still breaking in interesting ways.</p></div></div>
+        <div class="league-how community-grid">
+          <div><span class="material-symbols-outlined">construction</span><h3>Setup Help</h3><p>Get unstuck on local setup, repo structure, first scripts, and the small configuration issues that can steal a whole afternoon.</p></div>
+          <div><span class="material-symbols-outlined">code_blocks</span><h3>Code Review</h3><p>Share snippets, ask why a creep is idle, and learn how to explain the bug instead of just staring at it.</p></div>
+          <div><span class="material-symbols-outlined">smart_toy</span><h3>Codex Prompts</h3><p>Practice asking AI for architecture help with enough context that the answer has a chance to be useful.</p></div>
+          <div><span class="material-symbols-outlined">sports_martial_arts</span><h3>Battle Prep</h3><p>Talk strategy, compare branches, and get ready for capture-the-flag without waiting for week 4.</p></div>
+          <div><span class="material-symbols-outlined">emoji_events</span><h3>League Updates</h3><p>Follow Phase 2 as the league grows from cohort capstone into rankings, replays, and regular matches.</p></div>
+          <div><span class="material-symbols-outlined">edit_note</span><h3>Builder Notes</h3><p>Post reflections, architecture notes, and lessons learned so the whole community gets sharper.</p></div>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Tournament Day | AutoNateAI",
-    active: "league",
+    title: "Community | AutoNateAI",
+    active: "community",
     body,
-    canonicalPath: "/league",
-    ogImage: "/assets/og/league.jpg",
-    description: season?.winCondition || "",
-    ogTitle: "Tournament Week: your code has to hold the flag.",
+    canonicalPath: "/community",
+    ogImage: "/assets/og/default.jpg",
+    description:
+      "Join the AutoNateAI Discord community for Screeps setup help, JavaScript colony questions, Codex reviews, tournament prep, and league updates.",
+    ogTitle: "The colony lab has a Discord now.",
     ogDescription:
-      "The capstone is code versus code: submit a battle branch, run your Screeps colony head-to-head, and explain what survived contact.",
+      "Get setup help, code review, Codex prompt practice, tournament talk, and league updates with the AutoNateAI community.",
   });
 }
 
@@ -791,6 +993,180 @@ export function renderSuccess(data) {
     ogDescription:
       "Your AI Systems Programming Lab seat is reserved. Next comes setup, Git, Codex, colony design, and tournament prep.",
   });
+}
+
+function slugify(value = "") {
+  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function readTutorialMarkdown(tutorial) {
+  try {
+    return readFileSync(tutorial.sourcePath, "utf8");
+  } catch {
+    return `# ${tutorial.title}\n\nThis tutorial source could not be loaded yet.`;
+  }
+}
+
+function stripFirstHeading(markdown = "") {
+  return markdown.replace(/^# .+\n+/, "");
+}
+
+function markdownToHtml(markdown = "") {
+  const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+  const html = [];
+  let paragraph = [];
+  let list = [];
+  let code = null;
+  let table = [];
+
+  function flushParagraph() {
+    if (!paragraph.length) return;
+    html.push(`<p>${inlineMarkdown(paragraph.join(" "))}</p>`);
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!list.length) return;
+    html.push(`<ul>${list.map((item) => `<li>${inlineMarkdown(item)}</li>`).join("")}</ul>`);
+    list = [];
+  }
+
+  function flushTable() {
+    if (!table.length) return;
+    const rows = table
+      .filter((row) => !/^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(row))
+      .map((row) => row.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim()));
+    if (rows.length) {
+      const [head, ...body] = rows;
+      html.push(`<div class="markdown-table"><table><thead><tr>${head.map((cell) => `<th>${inlineMarkdown(cell)}</th>`).join("")}</tr></thead><tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+    }
+    table = [];
+  }
+
+  for (const line of lines) {
+    const fence = line.match(/^```(\w+)?\s*$/);
+    if (fence) {
+      flushParagraph();
+      flushList();
+      flushTable();
+      if (code) {
+        html.push(codeBlockHtml(code));
+        code = null;
+      } else {
+        code = { lang: (fence[1] || "").toLowerCase(), lines: [] };
+      }
+      continue;
+    }
+
+    if (code) {
+      code.lines.push(line);
+      continue;
+    }
+
+    if (!line.trim()) {
+      flushParagraph();
+      flushList();
+      flushTable();
+      continue;
+    }
+
+    if (/^\|.+\|$/.test(line.trim())) {
+      flushParagraph();
+      flushList();
+      table.push(line);
+      continue;
+    }
+
+    const heading = line.match(/^(#{1,4})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      flushTable();
+      const level = Math.min(heading[1].length + 1, 5);
+      html.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
+      continue;
+    }
+
+    const bullet = line.match(/^\s*-\s+(.+)$/);
+    if (bullet) {
+      flushParagraph();
+      flushTable();
+      list.push(bullet[1]);
+      continue;
+    }
+
+    paragraph.push(line.trim());
+  }
+
+  flushParagraph();
+  flushList();
+  flushTable();
+  if (code) html.push(codeBlockHtml(code));
+  return html.join("\n");
+}
+
+function codeBlockHtml(code) {
+  const lang = code.lang || "text";
+  const raw = code.lines.join("\n");
+  const highlighted = ["js", "javascript"].includes(lang) ? highlightJavaScript(raw) : escapeHtml(raw);
+  return `<pre class="code-block language-${escapeHtml(lang)}"><code>${highlighted}</code></pre>`;
+}
+
+function highlightJavaScript(source = "") {
+  const placeholders = [];
+  let html = escapeHtml(source);
+  const stash = (className, value) => {
+    const token = `__ANAI_TOKEN_${placeholders.length}__`;
+    placeholders.push(`<span class="${className}">${value}</span>`);
+    return token;
+  };
+
+  html = html.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)/g, (match) => stash("token-string", match));
+  html = html.replace(/(\/\/[^\n]*)/g, (match) => stash("token-comment", match));
+  html = html.replace(/\b(const|let|var|function|return|if|else|for|in|of|new|class|module|exports|require|continue|break)\b/g, '<span class="token-keyword">$1</span>');
+  html = html.replace(/\b(Game|Memory|RoomPosition|FIND_[A-Z_]+|ERR_[A-Z_]+|RESOURCE_[A-Z_]+|STRUCTURE_[A-Z_]+|WORK|CARRY|MOVE|ATTACK|RANGED_ATTACK|HEAL|TOUGH|CLAIM)\b/g, '<span class="token-constant">$1</span>');
+  html = html.replace(/\b(\d+)\b/g, '<span class="token-number">$1</span>');
+
+  placeholders.forEach((value, index) => {
+    html = html.replace(`__ANAI_TOKEN_${index}__`, value);
+  });
+  return html;
+}
+
+function inlineMarkdown(value = "") {
+  return escapeHtml(value)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
+
+function tutorialTrack(track) {
+  const items = tutorials.filter((tutorial) => tutorial.track === track);
+  return `
+    <section class="docs-panel" id="${slugify(track)}">
+      <div class="docs-panel-head">
+        <span class="kicker">${escapeHtml(track)}</span>
+        <h2>${escapeHtml(track)}</h2>
+      </div>
+      <div class="tutorial-list">
+        ${items
+          .map(
+            (tutorial) => `
+          <article class="tutorial-row">
+            <div class="tutorial-index">${escapeHtml(tutorial.episode)}</div>
+            <div>
+              <h3><a href="/tutorials/${escapeHtml(tutorial.handle)}">${escapeHtml(tutorial.title)}</a></h3>
+              <p>${escapeHtml(tutorial.summary)}</p>
+              <div class="tag-row">${tutorial.outcomes.map((outcome) => `<span>${escapeHtml(outcome)}</span>`).join("")}</div>
+              <a class="tutorial-link" href="/tutorials/${escapeHtml(tutorial.handle)}">Open Tutorial ${icon("arrow_forward")}</a>
+            </div>
+          </article>
+        `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
 }
 
 function dataScript(data) {

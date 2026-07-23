@@ -64,8 +64,8 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>A focused workforce systems cohort where developers and technical builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
         </div>
-        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["Tournament Week", "/league"], ["Articles", "/articles"]])}
-        ${footerColumn("Company", [["About AutoNateAI", "/about"], ["Terms of Service", "#"], ["Privacy Policy", "#"], ["Contact", "#"]])}
+        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["League", "/league"], ["Tutorials", "/tutorials"]])}
+        ${footerColumn("Company", [["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 AutoNateAI. Workforce systems cohorts for strategic tech thinking, Git, APIs, automation, AI-assisted development, and tournament play.</span>
