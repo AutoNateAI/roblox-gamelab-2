@@ -1,0 +1,226 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Tutorials | AutoNateAI</title>
+        <meta name="description" content="Free Screeps player guide for builders learning JavaScript colony automation, roles, Memory, infrastructure, defense, and competition prep." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials" />
+        <meta property="og:title" content="Screeps tutorials before the system starts swinging back." />
+        <meta property="og:description" content="Start with Spawn1, harvesters, roles, Memory, infrastructure, defense, and combat prep. Then bring that colony mindset into the cohort." />
+        <meta property="og:url" content="https://autonateai.com/tutorials" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/default.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Screeps tutorials before the system starts swinging back." />
+        <meta name="twitter:description" content="Start with Spawn1, harvesters, roles, Memory, infrastructure, defense, and combat prep. Then bring that colony mindset into the cohort." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/default.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","url":"https://autonateai.com","logo":"https://autonateai.com/assets/og/default.jpg","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI"},"sameAs":["https://autonateai.com/about"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","url":"https://autonateai.com","description":"AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-software-architect">Program</a><a class="" href="/league">League</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="nav-cta" href="/programs/ai-software-architect">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorials-page">
+      <section class="home-hero tutorials-detail-hero">
+        <div class="hero-bg"><img src="/assets/screeps/screeps-01.jpg" alt="Screeps room used in AutoNateAI starter tutorials" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker"><span class="material-symbols-outlined">menu_book</span> Screeps Tutorials</span>
+          <h1>Get your colony moving before you buy the cohort.</h1>
+          <p>This free player guide gets you moving before the cohort starts. Claim the room, ship the loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-software-architect">Take the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="secondary-button" href="/community">Ask in Discord</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="/assets/screeps/screeps-01.jpg" alt="Screeps room used in AutoNateAI starter tutorials" />
+          <div class="hero-panel-body">
+            <span class="kicker"><span class="material-symbols-outlined">terminal</span> Free Player Guide</span>
+            <h2>Setup is free. System judgment is the program.</h2>
+            <p>Start with Spawn1, roles, Memory, infrastructure, defense, and combat prep. Then bring that working colony into the cohort.</p>
+            <div class="hero-facts">
+              <span>5 guide docs</span>
+              <span>Copy-ready code</span>
+              <span>Local setup</span>
+              <span>Program pathway</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <div class="docs-layout">
+        <aside class="docs-sidebar">
+          <strong>Docs Path</strong>
+          <a href="#what-is-screeps">What is Screeps?</a>
+          <a href="#start-here">Start Here</a><a href="#code-patterns">Code Patterns</a><a href="#systems">Systems</a><a href="#competition">Competition</a><a href="#reference">Reference</a>
+          <a href="/programs/ai-software-architect">Full cohort</a>
+        </aside>
+        <div class="docs-content">
+          <section class="docs-panel" id="what-is-screeps">
+            <span class="kicker"><span class="material-symbols-outlined">terminal</span> Start Here</span>
+            <h2>Screeps is a strategy world where JavaScript runs the colony.</h2>
+            <p>You do not click units around like a normal RTS. You write code that controls creeps, reads room objects, gathers resources, builds infrastructure, remembers state, and reacts every game tick. That makes it perfect for learning the difference between code that runs once and a system that keeps operating.</p>
+            <p>The free player guide below gets you playing and genuinely dangerous. The paid cohort goes deeper: architecture, Codex workflows, Git history, debugging under pressure, and tournament prep.</p>
+          </section>
+
+          
+    <section class="docs-panel" id="start-here">
+      <div class="docs-panel-head">
+        <span class="kicker">Start Here</span>
+        <h2>Start Here</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row">
+            <div class="tutorial-index">01</div>
+            <div>
+              <h3><a href="/tutorials/quickstart">Quickstart: Playing in 15 Minutes</a></h3>
+              <p>Claim a room, place Spawn1, spawn the first worker, and get the harvest-deliver loop running without turning setup into a side quest.</p>
+              <div class="tag-row"><span>Claim a room</span><span>Spawn Harvester1</span><span>Run the first loop</span></div>
+              <a class="tutorial-link" href="/tutorials/quickstart">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="code-patterns">
+      <div class="docs-panel-head">
+        <span class="kicker">Code Patterns</span>
+        <h2>Code Patterns</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row">
+            <div class="tutorial-index">02</div>
+            <div>
+              <h3><a href="/tutorials/core-loop-and-roles">Core Loop and Roles</a></h3>
+              <p>Move from one hardcoded harvester to source assignment, role modules, population-based spawning, and the first architecture that can scale.</p>
+              <div class="tag-row"><span>Assign sources</span><span>Split role files</span><span>Spawn by population</span></div>
+              <a class="tutorial-link" href="/tutorials/core-loop-and-roles">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="systems">
+      <div class="docs-panel-head">
+        <span class="kicker">Systems</span>
+        <h2>Systems</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row">
+            <div class="tutorial-index">03</div>
+            <div>
+              <h3><a href="/tutorials/infrastructure-and-scaling">Infrastructure and Scaling</a></h3>
+              <p>Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system.</p>
+              <div class="tag-row"><span>Plan roads</span><span>Split mining and hauling</span><span>Manage CPU</span></div>
+              <a class="tutorial-link" href="/tutorials/infrastructure-and-scaling">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="competition">
+      <div class="docs-panel-head">
+        <span class="kicker">Competition</span>
+        <h2>Competition</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row">
+            <div class="tutorial-index">04</div>
+            <div>
+              <h3><a href="/tutorials/combat-and-competing">Combat and Competing</a></h3>
+              <p>Use towers, ramparts, combat body math, defenders, NPC sparring waves, and scouting so the colony learns before another player teaches it the hard way.</p>
+              <div class="tag-row"><span>Run towers</span><span>Build defenders</span><span>Test pressure</span></div>
+              <a class="tutorial-link" href="/tutorials/combat-and-competing">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="reference">
+      <div class="docs-panel-head">
+        <span class="kicker">Reference</span>
+        <h2>Reference</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row">
+            <div class="tutorial-index">05</div>
+            <div>
+              <h3><a href="/tutorials/cheatsheet">Cheatsheet</a></h3>
+              <p>Keep the error codes, body costs, constants, and API one-liners close. You will look them up until your colony stops embarrassing you.</p>
+              <div class="tag-row"><span>Read error codes</span><span>Check body costs</span><span>Use API one-liners</span></div>
+              <a class="tutorial-link" href="/tutorials/cheatsheet">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+        </div>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A focused workforce systems cohort where developers and technical builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-software-architect">AI Systems Programming Lab</a></li><li><a href="/league">League</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Workforce systems cohorts for strategic tech thinking, Git, APIs, automation, AI-assisted development, and tournament play.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>
