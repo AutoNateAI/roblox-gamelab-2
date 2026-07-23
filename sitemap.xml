@@ -6,7 +6,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/programs</loc>
+    <loc>https://autonateai.com/programs/ai-software-architect</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -19,11 +19,6 @@
     <loc>https://autonateai.com/articles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/programs/ai-software-architect</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://autonateai.com/articles/coding-as-workforce-development</loc>
