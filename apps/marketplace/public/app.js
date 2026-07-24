@@ -26,6 +26,69 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
 
 syncThemeIcon();
 
+// --- Mermaid diagrams (lazy-loaded only when a tutorial page has one) ---
+const mermaidBlocks = Array.from(document.querySelectorAll("pre.mermaid"));
+if (mermaidBlocks.length) {
+  mermaidBlocks.forEach((block) => {
+    block.dataset.mermaidSource = block.textContent;
+  });
+  import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs").then(({ default: mermaid }) => {
+    const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
+    const darkVars = {
+      fontFamily: "JetBrains Mono, monospace",
+      background: "#0e141d",
+      primaryColor: "#121a24",
+      primaryBorderColor: "#3a4b5c",
+      primaryTextColor: "#eef2ee",
+      lineColor: "#f2b134",
+      secondaryColor: "#1a2430",
+      secondaryBorderColor: "#3a4b5c",
+      secondaryTextColor: "#eef2ee",
+      tertiaryColor: "#1a2430",
+      tertiaryBorderColor: "#3a4b5c",
+      tertiaryTextColor: "#eef2ee",
+      edgeLabelBackground: "#0e141d",
+      clusterBkg: "#0e141d",
+      clusterBorder: "#253141",
+      textColor: "#eef2ee",
+      nodeTextColor: "#eef2ee",
+    };
+    const lightVars = {
+      fontFamily: "JetBrains Mono, monospace",
+      background: "#eef1e8",
+      primaryColor: "#ffffff",
+      primaryBorderColor: "#aab5a2",
+      primaryTextColor: "#14181a",
+      lineColor: "#9a6c00",
+      secondaryColor: "#e2e8da",
+      secondaryBorderColor: "#aab5a2",
+      secondaryTextColor: "#14181a",
+      tertiaryColor: "#e2e8da",
+      tertiaryBorderColor: "#aab5a2",
+      tertiaryTextColor: "#14181a",
+      edgeLabelBackground: "#eef1e8",
+      clusterBkg: "#eef1e8",
+      clusterBorder: "#d7ddce",
+      textColor: "#14181a",
+      nodeTextColor: "#14181a",
+    };
+    function renderMermaid() {
+      mermaidBlocks.forEach((block) => {
+        block.removeAttribute("data-processed");
+        block.innerHTML = block.dataset.mermaidSource;
+      });
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "base",
+        themeVariables: isLight() ? lightVars : darkVars,
+      });
+      mermaid.run({ nodes: mermaidBlocks });
+    }
+    renderMermaid();
+    document.querySelector("[data-theme-toggle]")?.addEventListener("click", renderMermaid);
+  });
+}
+
 // --- Mobile navigation ---
 const mobileMenuToggle = document.querySelector("[data-mobile-menu-toggle]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");

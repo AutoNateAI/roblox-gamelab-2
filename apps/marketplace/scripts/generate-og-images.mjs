@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
-import { tutorials } from "../src/data.mjs";
+import { tutorialPacks, tutorials } from "../src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
@@ -131,13 +131,24 @@ await composite({
 });
 
 for (const tutorial of tutorials) {
+  const pack = tutorialPacks.find((item) => item.handle === tutorial.pack);
   await composite({
     screenshotFile: screenshotFor(index++),
     eyebrow: `Tutorial ${tutorial.episode} · ${tutorial.track}`,
     title: tutorial.title,
-    footer: "AutoNateAI · Free Screeps Player Guide",
+    footer: `AutoNateAI · ${pack?.title || "Free Player Guide"}`,
     outFile: path.join(outDir, `tutorial-${tutorial.handle}.jpg`),
   });
 }
 
-console.log(`Done. ${programsData.programs.length + tutorials.length + 3} OG images written to ${path.relative(rootDir, outDir)}`);
+for (const pack of tutorialPacks) {
+  await composite({
+    screenshotFile: screenshotFor(pack.heroShotIndex),
+    eyebrow: pack.tagline,
+    title: pack.title,
+    footer: "AutoNateAI · Free Tutorial Pack",
+    outFile: path.join(outDir, `tutorial-pack-${pack.handle}.jpg`),
+  });
+}
+
+console.log(`Done. ${programsData.programs.length + tutorials.length + tutorialPacks.length + 3} OG images written to ${path.relative(rootDir, outDir)}`);

@@ -633,7 +633,7 @@ export function renderTutorials() {
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Free Player Guides</span>
             <h2>Setup is free. System judgment is the program.</h2>
-            <p>Start with Screeps, then bring that working colony into the cohort. More packs, starting with JavaScript fundamentals, are on the way.</p>
+            <p>New to code? Start with AutoNate's story and learn JavaScript from zero. Already writing code? Jump straight into Screeps. Either way, you land in the same cohort-ready colony.</p>
             <div class="hero-facts">
               <span>${tutorialPacks.length} tutorial packs</span>
               <span>Copy-ready code</span>
@@ -729,7 +729,7 @@ export function renderTutorialPack(pack) {
     active: "tutorials",
     body,
     canonicalPath: `/tutorials/${pack.handle}`,
-    ogImage: "/assets/og/default.jpg",
+    ogImage: `/assets/og/tutorial-pack-${pack.handle}.jpg`,
     description: pack.summary,
     ogTitle: `${pack.title}: ${comingSoon ? "coming soon." : "start here."}`,
     ogDescription: pack.summary,
@@ -1155,6 +1155,18 @@ function markdownToHtml(markdown = "") {
       continue;
     }
 
+    const image = line.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)\s*$/);
+    if (image) {
+      flushParagraph();
+      flushList();
+      flushTable();
+      const [, alt, src, caption] = image;
+      html.push(
+        `<figure class="markdown-figure"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" />${caption ? `<figcaption>${inlineMarkdown(caption)}</figcaption>` : ""}</figure>`,
+      );
+      continue;
+    }
+
     const bullet = line.match(/^\s*-\s+(.+)$/);
     if (bullet) {
       flushParagraph();
@@ -1176,6 +1188,9 @@ function markdownToHtml(markdown = "") {
 function codeBlockHtml(code) {
   const lang = code.lang || "text";
   const raw = code.lines.join("\n");
+  if (lang === "mermaid") {
+    return `<pre class="mermaid">${escapeHtml(raw)}</pre>`;
+  }
   const highlighted = ["js", "javascript"].includes(lang) ? highlightJavaScript(raw) : escapeHtml(raw);
   return `<pre class="code-block language-${escapeHtml(lang)}"><code>${highlighted}</code></pre>`;
 }

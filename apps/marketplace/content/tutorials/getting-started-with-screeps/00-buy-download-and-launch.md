@@ -4,6 +4,8 @@
 
 Open Steam and search for **Screeps: World**. It's a one-time purchase, not a subscription — buying it unlocks the full client and your first CPU allotment. Click **Add to Cart**, check out, and let it drop into your Steam library.
 
+![The Screeps: World store page on Steam](/assets/tutorials/screeps/steam-store-page.jpg "store.steampowered.com/app/464350/Screeps_World")
+
 ## 2. Download and Install
 
 From your Steam Library, select Screeps: World and click **Install**. Pick an install location if prompted and wait for the download to finish. No extra launcher or account setup is required at this step — Steam handles the client.
@@ -15,6 +17,10 @@ Click **Play**. On first launch you'll be asked to sign in or create a Screeps a
 ## 4. Reach the World Map
 
 After sign-in, you should land on the **world map** — a grid of sectors and rooms, some owned, most empty. If you see the map and can pan/zoom around it, you're ready. This is the screen the next tutorial picks up from.
+
+![A Screeps room mid-game, showing a colony's layout and creeps at work](/assets/screeps/screeps-01.jpg "What a claimed, running room looks like")
+
+(Placeholder screenshot from the official Screeps site — swap in your own once you've claimed a room.)
 
 ## 5. Sanity Checks
 
