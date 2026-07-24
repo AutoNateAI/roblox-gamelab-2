@@ -1,6 +1,8 @@
 # Core Loop and Roles
 
-The single hardcoded harvester from the quickstart breaks the moment you add a second creep — both will pick the same source, pile up, and waste half their throughput. Everything in this file exists to fix that, permanently, in a way that scales to any number of creeps and jobs.
+AutoNate spawned a second creep feeling good about himself, and within about four ticks both of them were standing on top of the same source, elbowing each other out like it's the last open pump at a gas station on empty. Nothing was actually broken — the code ran fine, no errors, no red text. It was just dumb. Two creeps, one source, half the energy either of them could've been pulling if they'd split up. That's a special kind of frustrating: the thing works exactly as written, and "as written" just wasn't smart enough.
+
+This is the first real wall everybody hits, and it's a good one, because the fix isn't a trick — it's an actual architecture decision. The single hardcoded harvester from the quickstart breaks the moment you add a second creep — both will pick the same source, pile up, and waste half their throughput. Everything in this file exists to fix that, permanently, in a way that scales to any number of creeps and jobs.
 
 ## Source Assignment (Stop Creeps From Fighting Over One Source)
 
@@ -31,7 +33,7 @@ This assigns once and remembers — it doesn't recompute the best source every t
 
 ## The Role Pattern
 
-One script that branches on every possible job doesn't scale. Give every job its own file, exporting a `run(creep)` function, and dispatch by `creep.memory.role`.
+Sources sorted, gas station beef resolved. Next problem: every creep AutoNate spawns needs a job, and cramming "if it's a harvester do this, if it's an upgrader do that, if it's a builder do the other thing" into one giant script is exactly the kind of thing that feels fine at three creeps and turns into a nightmare at fifteen. This is the same lesson functions taught — one clean, trustworthy piece of logic you can call by name — just scaled up to entire jobs instead of single moves. One script that branches on every possible job doesn't scale. Give every job its own file, exporting a `run(creep)` function, and dispatch by `creep.memory.role`.
 
 **`role.harvester.js`** — general-purpose, harvest-and-deliver:
 
@@ -137,9 +139,11 @@ flowchart TD
 
 `main.js` never contains behavior itself, only dispatch. Adding a role later means a new file, one line in `ROLE_BODIES`/`POPULATION`, one `else if`.
 
+This is the moment it stopped feeling like AutoNate was just following steps in a guide and started feeling like he was actually designing something. Three role files, one dispatcher that doesn't care how many roles exist, a diagram he could draw on a napkin and hand to somebody else and they'd get it immediately. That's architecture. Nobody told him that word applied to him yet — he just noticed the code stopped fighting him.
+
 ## Population-Based Spawning
 
-Stop hardcoding creep names. Spawn by role count, with a body suited to each job:
+Naming creeps by hand gets old around creep number four, and manually typing `spawnCreep` every time one dies is a full-time job nobody's signing up for. Stop hardcoding creep names. Spawn by role count, with a body suited to each job:
 
 ```js
 const roleHarvester = require('role.harvester');
@@ -192,7 +196,7 @@ function spawnMissingRoles() {
 
 ## RCL and What It Unlocks
 
-Reaching a controller level only unlocks the *allowance* to build something — you still have to place and complete the construction site.
+Reaching a controller level only unlocks the allowance to build something — you still have to place and complete the construction site.
 
 | RCL | Extensions Allowed | Notable Unlock |
 | --- | --- | --- |
@@ -206,5 +210,7 @@ Reaching a controller level only unlocks the *allowance* to build something — 
 | 8 | 60 | Third spawn, observer, power spawn, nuker |
 
 Check current level: `Game.spawns.Spawn1.room.controller.level`. Check available spawn capacity (base 300 + 50 per completed extension): `Game.spawns.Spawn1.room.energyCapacityAvailable`.
+
+Squad's built, roles are clean, spawning handles itself. AutoNate leaned back and thought he was basically done. He was not basically done — his creeps were about to spend more time walking back and forth than actually working, and he had no idea yet.
 
 Next: `03-infrastructure-and-scaling.md`.

@@ -1,5 +1,7 @@
 # Infrastructure and Scaling
 
+AutoNate pulled up the room visual and actually watched his creeps for a few minutes instead of just trusting the numbers were going up. What he saw wasn't a colony — it was a commute. Harvesters walking all the way to a source, filling up, walking all the way back, over and over, spending more time in transit than actually working. It looked less like a factory and more like everybody late for the same train. That's the tell. Once you're staring at your own colony wondering why it feels slow even though nothing's technically wrong, you've found the next real problem to solve.
+
 Once the role pattern is running, the next bottleneck is always the same: creeps spending more time walking than working. This file covers the fixes, in the order they usually start mattering.
 
 ## Roads
@@ -23,7 +25,7 @@ A road costs `1` movement point per step instead of `2` on plains or `10` on swa
 
 ## Static Mining + Hauling (The Real Throughput Fix)
 
-Past a certain point, a general-purpose harvester (harvest + walk + deliver) is slower than splitting the job. A `WORK`-heavy creep plants itself on a source and never moves; a `CARRY`-heavy creep does nothing but ferry energy.
+Roads helped. Didn't fix it. AutoNate was still watching one creep try to do three jobs at once — mine, haul, repeat — and it clicked for him the same way the role pattern clicked back in the last chapter: stop asking one worker to be everything, split the job by what it actually is. Past a certain point, a general-purpose harvester (harvest + walk + deliver) is slower than splitting the job. A `WORK`-heavy creep plants itself on a source and never moves; a `CARRY`-heavy creep does nothing but ferry energy.
 
 Five `WORK` parts harvest `10` energy/tick — matching a source's average regeneration rate exactly, so nothing goes to waste:
 
@@ -92,7 +94,7 @@ Compare to one general-purpose creep doing all four steps itself, walking the wh
 
 ## CPU and Memory Discipline
 
-`room.find()` scans every object of that type; `findClosestByPath` runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.
+AutoNate checked his CPU bucket for the first time the same way he checks his phone battery at 4%, in public, with no charger — a little bit of panic he wasn't expecting to feel over a strategy game. Turns out it's the same anxiety either way. `room.find()` scans every object of that type; `findClosestByPath` runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.
 
 Check your actual cost:
 
@@ -117,7 +119,7 @@ function getSources(room) {
 module.exports = { getSources };
 ```
 
-A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that *must* survive a reset (like `creep.memory.sourceId`) belongs in `Memory` instead.
+A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that must survive a reset (like `creep.memory.sourceId`) belongs in `Memory` instead.
 
 ```mermaid
 flowchart TD
@@ -148,5 +150,7 @@ module.exports = roleReserver;
 ```
 
 `reserveController` has to be called every tick the creep is in range — a single reserver camped on the controller holds it indefinitely. List your exits with `Game.map.describeExits(roomName)` and check a target isn't already owned or reserved before committing creeps to it.
+
+AutoNate scouted one exit room out of pure curiosity and found a hostile creep just standing there, doing nothing to him, not even close to his territory — but very clearly not friendly. First real reminder that he's not playing in a sandbox by himself. Somebody, or something, else is out there. Time to stop optimizing for a world that's empty and start preparing for one that isn't.
 
 Next: `04-combat-and-competing.md`.

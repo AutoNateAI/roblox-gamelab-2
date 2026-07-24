@@ -1,5 +1,7 @@
 # Combat and Competing
 
+This is the chapter AutoNate actually bought the game for. The Virtual Battle Bot League isn't creeps peacefully harvesting energy in an empty room — it's two colonies going at it, and up to this point his has never had to defend a single thing. That hostile creep he spotted scouting last chapter is still out there somewhere, and eventually something like it is going to walk straight into his room and test everything he's built. He'd be lying if he said that thought didn't put a little static in his stomach. Good. That means it matters.
+
 This is the "get good enough to fight" file. It covers passive defense, the actual combat math, a working defender, and — the part most guides skip — how to test any of this against real NPCs on your own machine before you ever risk it against another player.
 
 ## Towers (Passive Defense That Needs Active Code)
@@ -28,7 +30,7 @@ Call `runTowers()` once per tick from your main loop. Requires RCL3. Keep it fue
 
 ## Rampart Tanking
 
-A creep standing *on top of* your own rampart can't be damaged from outside until the rampart's own hit points hit zero first. The rampart absorbs the hit; the creep underneath takes nothing. A freshly built rampart starts with barely any hit points — it protects nothing until something repairs it up. Build ramparts over your spawn and tower, then keep a builder or dedicated repairer feeding them energy.
+A creep standing on top of your own rampart can't be damaged from outside until the rampart's own hit points hit zero first. The rampart absorbs the hit; the creep underneath takes nothing. A freshly built rampart starts with barely any hit points — it protects nothing until something repairs it up. Build ramparts over your spawn and tower, then keep a builder or dedicated repairer feeding them energy.
 
 ## The Real Combat Numbers
 
@@ -91,7 +93,7 @@ function getPopulationTargets(room) {
 
 ## Testing Against Real NPCs, Locally, No Internet Required
 
-This is the part most guides can't give you, because it depends on infrastructure most setups don't have. This repo ships two ways to get real hostile contact without touching another player's colony.
+AutoNate's honest first attempt at defense got folded in about six ticks. No towers built yet, one lonely defender with the wrong body, a hostile wave that walked in and mopped the floor with him while he sat there like "wait, wait, hold on—" and it was already over. He closed the laptop, sulked for exactly five minutes, and came back with towers, ramparts, and a defender that actually made sense. That's the honest cycle: get humbled, get better, go again. Nobody's defense is clean the first time. This is the part most guides can't give you, because it depends on infrastructure most setups don't have. This repo ships two ways to get real hostile contact without touching another player's colony.
 
 **On-demand waves.** A local mod (`screeps-server/mods/sparring-ground.js`) exposes an HTTP endpoint that triggers the server's own invader-generation system:
 
@@ -132,5 +134,7 @@ function recordIntel(room) {
 ```
 
 Treat old entries as suspect, not certain — `Game.time - Memory.rooms[name].lastSeen` tells you how stale a given snapshot is.
+
+Towers wired up, ramparts holding, a defender that actually reacts instead of just standing there looking tough. AutoNate ran the sparring waves a few more times just to watch his own colony hold the line, and for the first time it didn't feel like luck. It felt like it was supposed to work — because he built it to.
 
 Next: `05-cheatsheet.md`.
