@@ -36,12 +36,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps</loc>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
