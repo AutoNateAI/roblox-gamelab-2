@@ -117,21 +117,30 @@ export function pageShell({
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "AutoNateAI",
+      "alternateName": ["Autonate AI", "Auto Nate AI"],
       "url": SITE_URL,
-      "logo": absoluteUrl("/assets/og/default.jpg"),
+      "logo": absoluteUrl("/assets/brand/logo-512.png"),
       "founder": {
         "@type": "Person",
         "name": "Nathan Baker",
         "jobTitle": "Founder, AutoNateAI",
+        "sameAs": [
+          "https://www.linkedin.com/in/nate-gpt-expert/",
+          "https://www.facebook.com/nate.baker.944",
+        ],
       },
       "sameAs": [
-        "https://autonateai.com/about",
+        "https://www.linkedin.com/company/autonate-ai",
+        "https://www.instagram.com/autonateai/",
+        "https://www.youtube.com/@autonate_ai",
+        "https://www.youtube.com/@AutoNate",
       ],
     },
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "AutoNateAI",
+      "alternateName": ["Autonate AI", "Auto Nate AI"],
       "url": SITE_URL,
       "description": DEFAULT_DESCRIPTION,
     },
@@ -146,6 +155,10 @@ export function pageShell({
         <meta name="description" content="${escapeHtml(description)}" />
         <meta name="robots" content="${escapeHtml(robots)}" />
         <link rel="canonical" href="${canonicalUrl}" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="${escapeHtml(ogTitle)}" />
         <meta property="og:description" content="${escapeHtml(ogDescription)}" />
         <meta property="og:url" content="${canonicalUrl}" />
