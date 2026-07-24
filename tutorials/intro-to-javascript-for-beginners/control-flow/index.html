@@ -3,23 +3,23 @@
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Conditionals and Loops | AutoNateAI Tutorials</title>
-        <meta name="description" content="if/else branching and for loops, including looping over Game.creeps and Memory.creeps without shooting yourself in the foot." />
+        <title>Reading the Room: Conditionals and Loops | AutoNateAI Tutorials</title>
+        <meta name="description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-        <meta property="og:title" content="Conditionals and Loops: get the colony moving." />
-        <meta property="og:description" content="if/else branching and for loops, including looping over Game.creeps and Memory.creeps without shooting yourself in the foot." />
+        <meta property="og:title" content="Reading the Room: Conditionals and Loops: get the colony moving." />
+        <meta property="og:description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow" />
         <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-control-flow.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Conditionals and Loops: get the colony moving." />
-        <meta name="twitter:description" content="if/else branching and for loops, including looping over Game.creeps and Memory.creeps without shooting yourself in the foot." />
+        <meta name="twitter:title" content="Reading the Room: Conditionals and Loops: get the colony moving." />
+        <meta name="twitter:description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
         <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-control-flow.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag."}</script>
@@ -51,29 +51,82 @@
   
         
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Conditionals and Loops</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Reading the Room: Conditionals and Loops</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 Why JavaScript (and Where It Runs) (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Variables, Types, and Values (soon)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Conditionals and Loops (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Functions and Scope (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 Objects, Arrays, and Data Shapes (soon)</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
           <header>
-            <span class="kicker">Control Flow / Tutorial 03 <span class="draft-tag">Coming Soon</span></span>
-            <h1>Conditionals and Loops</h1>
-            <p>if/else branching and for loops, including looping over Game.creeps and Memory.creeps without shooting yourself in the foot.</p>
-            <div class="tag-row"><span>Branch with if/else</span><span>Loop over collections</span><span>Avoid common traps</span></div>
+            <span class="kicker">Chapter 3 / Tutorial 03</span>
+            <h1>Reading the Room: Conditionals and Loops</h1>
+            <p>A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops.</p>
+            <div class="tag-row"><span>Branch with if/else</span><span>Loop with for</span><span>Avoid infinite loops</span></div>
           </header>
-          <div class="markdown-body"><p>A colony's logic is mostly branches and repetition: if the creep is full, deliver — otherwise, harvest; for every creep in memory, decide what it should do next. This lesson covers the two building blocks behind almost every line of colony code.</p>
-<p>This lesson is coming soon. Planned outline:</p>
-<ul><li><code>if</code> / <code>else if</code> / <code>else</code>, and reading conditions without tripping over them</li><li><code>for</code> and <code>for...in</code> loops, including looping over <code>Game.creeps</code> and <code>Memory.creeps</code></li><li>Early exits with <code>return</code> and <code>continue</code></li><li>Common mistakes: infinite loops, off-by-one errors, and mutating a list while looping over it</li></ul>
-<p>Want early access or have a topic you want covered? Ask in Discord.</p></div>
+          <div class="markdown-body"><p>Anybody who's ever walked into a room they didn't fully trust knows the skill AutoNate's about to learn. You don't just react — you read first. Who's here, what's the mood, what's the play. You size it up, and then you move. Somebody who reacts without reading gets caught out. Every time.</p>
+<p>Code needs that same instinct. A program that just runs top to bottom, no matter what's going on, isn't smart — it's just fast. What makes it smart is the ability to check something and respond differently depending on what it finds. In JavaScript, that's called a <strong>conditional</strong>. And once you can read the room, the next skill is doing the same drill over and over without getting bored or sloppy — that's a <strong>loop</strong>.</p>
+<p>These two ideas — decide, then repeat — are the engine behind almost everything a real program does. A Screeps colony reading its own energy level and deciding whether to build or defend? Conditional. A colony checking every single creep it owns, one after another, to see who needs a new job? Loop. You're about to learn both.</p>
+<h3>Coder's Corner: if / else</h3>
+<p>An <code>if</code> statement checks something and only runs its code when that something is true.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> energy = <span class="token-number">30</span>;
+
+<span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
+  console.log(&quot;Full tank. Run the hard drills.&quot;);
+}</code></pre>
+<p>That line only prints if <code>energy</code> is actually greater than <code>20</code>. Change <code>energy</code> to <code>5</code> and run it again — nothing prints, because the condition failed. The code inside the curly braces <code>{ }</code> only runs when the check passes.</p>
+<p>Most of the time, you want a plan for when the check doesn't pass, too. That's what <code>else</code> — and <code>else if</code>, for extra branches — are for:</p>
+<pre class="mermaid">flowchart TD
+  Start[&quot;Check energy&quot;] --&gt; Q{&quot;energy &gt; 20?&quot;}
+  Q --&gt;|Yes| A[&quot;Full tank.&lt;br/&gt;Run the hard drills.&quot;]
+  Q --&gt;|No| Q2{&quot;energy &gt; 5?&quot;}
+  Q2 --&gt;|Yes| B[&quot;Low but working.&lt;br/&gt;Keep the reps clean.&quot;]
+  Q2 --&gt;|No| C[&quot;Rest.&lt;br/&gt;Tomorrow you go again.&quot;]</pre>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
+  console.log(&quot;Full tank. Run the hard drills.&quot;);
+} <span class="token-keyword">else</span> <span class="token-keyword">if</span> (energy &gt; <span class="token-number">5</span>) {
+  console.log(&quot;Low but working. Keep the reps clean.&quot;);
+} <span class="token-keyword">else</span> {
+  console.log(&quot;Rest. Tomorrow you go again.&quot;);
+}</code></pre>
+<p>JavaScript checks each condition top to bottom and runs the first branch that matches, then skips the rest entirely. It's not evaluating all three — it's reading the room once and committing to a response.</p>
+<h3>Coder's Corner: Loops</h3>
+<p>A <code>for</code> loop runs the same block of code a set number of times. Think of it as your rep counter.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">let</span> rep = <span class="token-number">1</span>; rep &lt;= <span class="token-number">5</span>; rep++) {
+  console.log(<span class="token-string">`Rep ${rep}: still standing.`</span>);
+}</code></pre>
+<p>Break that down: <code>let rep = 1</code> starts your counter at one. <code>rep &lt;= 5</code> is the condition that's checked before every rep — as long as it's true, the loop keeps going. <code>rep++</code> bumps the counter up by one after each pass. The loop runs five times, printing &quot;Rep 1,&quot; &quot;Rep 2,&quot; all the way to &quot;Rep 5,&quot; and then stops the instant <code>rep &lt;= 5</code> turns false.</p>
+<p>Put the whole thing together:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// training.js</span>
+<span class="token-comment">// Reading the room, then running the play — over and over.</span>
+
+<span class="token-keyword">const</span> energy = <span class="token-number">30</span>;
+
+<span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
+  console.log(&quot;Full tank. Run the hard drills.&quot;);
+} <span class="token-keyword">else</span> <span class="token-keyword">if</span> (energy &gt; <span class="token-number">5</span>) {
+  console.log(&quot;Low but working. Keep the reps clean.&quot;);
+} <span class="token-keyword">else</span> {
+  console.log(&quot;Rest. Tomorrow you go again.&quot;);
+}
+
+<span class="token-keyword">for</span> (<span class="token-keyword">let</span> rep = <span class="token-number">1</span>; rep &lt;= <span class="token-number">5</span>; rep++) {
+  console.log(<span class="token-string">`Rep ${rep}: still standing.`</span>);
+}</code></pre>
+<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-training-loop.jpg" alt="VS Code showing training.js with an if/else chain and a for loop" loading="lazy" /><figcaption>training.js in VS Code</figcaption></figure>
+<p>Run it with <code>node training.js</code> and you'll see the room get read once, then five reps print in order.</p>
+<h3>The One Trap Everyone Falls Into</h3>
+<p>If your loop's condition never becomes false, it never stops. That's called an <strong>infinite loop</strong>, and it will lock up your program — sometimes your whole terminal — until you force it to quit (usually <code>Ctrl+C</code>). It happens to everyone eventually, usually from forgetting the <code>rep++</code> step, or writing a condition that can never be satisfied. If you ever run something and it just... doesn't stop, don't panic. Hit <code>Ctrl+C</code>, go back, and check that your loop actually has a way to end.</p>
+<h3>Try It Yourself</h3>
+<p>Change the <code>energy</code> value in <code>training.js</code> to something under <code>5</code> and rerun it — confirm you land on the &quot;Rest&quot; branch. Then change the loop to run <strong>8</strong> reps instead of 5 by editing the <code>rep &lt;= 5</code> condition. If you see 8 reps print instead of 5, you just controlled exactly how many times your program repeats itself. That's not a small thing. That's the difference between code that runs once and a system — like a Screeps colony — that keeps making the same good decision, tick after tick, for as long as it's alive.</p>
+<p>Next chapter, AutoNate stops repeating the same lines by hand and learns to package a move into something he can call by name, whenever he needs it.</p>
+<p>Next: <code>04-functions-and-scope.md</code> — Signature Moves.</p></div>
           <nav class="tutorial-pager">
-            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Variables, Types, and Values</span></a>
-            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope"><span><small>Next</small>Functions and Scope</span><span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Know Your Pockets: Variables, Types, and Values</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope"><span><small>Next</small>Signature Moves: Functions and Scope</span><span class="material-symbols-outlined">arrow_forward</span></a>
           </nav>
           <footer class="tutorial-next-step">
             <div>

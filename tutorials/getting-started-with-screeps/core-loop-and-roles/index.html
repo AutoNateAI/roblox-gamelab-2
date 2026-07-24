@@ -169,14 +169,14 @@
 };
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleBuilder;</code></pre>
 <p>Exclude <code>STRUCTURE_WALL</code> from repair targets on purpose — walls have hit-point maximums in the hundreds of millions, and a builder that tries to top one off will never do anything else again.</p>
-<pre class="code-block language-mermaid"><code>flowchart TD
+<pre class="mermaid">flowchart TD
     Main[&quot;main.js: loop()&quot;] --&gt; Clean[Clean up dead creep memory]
     Clean --&gt; Spawn[spawnMissingRoles]
     Spawn --&gt; Dispatch{&quot;creep.memory.role?&quot;}
     Dispatch -- harvester --&gt; RH[role.harvester.js]
     Dispatch -- upgrader --&gt; RU[role.upgrader.js]
     Dispatch -- builder --&gt; RB[role.builder.js]
-    Dispatch -- &quot;any future role&quot; --&gt; RN[role.*.js]</code></pre>
+    Dispatch -- &quot;any future role&quot; --&gt; RN[role.*.js]</pre>
 <p><code>main.js</code> never contains behavior itself, only dispatch. Adding a role later means a new file, one line in <code>ROLE_BODIES</code>/<code>POPULATION</code>, one <code>else if</code>.</p>
 <h3>Population-Based Spawning</h3>
 <p>Stop hardcoding creep names. Spawn by role count, with a body suited to each job:</p>

@@ -113,13 +113,13 @@
 };
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleDefender;</code></pre>
 <p>Suggested body: <code>[TOUGH, TOUGH, ATTACK, ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE, MOVE]</code> (530 energy). Both ranged and melee checks run independently — not <code>else if</code> — because a creep with both parts can land both hits in the same tick once it closes to range 1.</p>
-<pre class="code-block language-mermaid"><code>flowchart TD
+<pre class="mermaid">flowchart TD
     Tick([Defender tick]) --&gt; Hostile{Hostile present?}
     Hostile -- No --&gt; Rampart[Hold rampart tile]
     Hostile -- Yes --&gt; Range{Range to hostile}
     Range --&gt;|&quot;&lt;= 3&quot;| Ranged[&quot;rangedAttack (10 dmg)&quot;]
     Range --&gt;|&quot;&lt;= 1&quot;| Melee[&quot;attack (30 dmg)&quot;]
-    Range --&gt;|&quot;&gt; 1&quot;| Close[moveTo hostile]</code></pre>
+    Range --&gt;|&quot;&gt; 1&quot;| Close[moveTo hostile]</pre>
 <p>Make the population reactive instead of running a standing army against nothing:</p>
 <pre class="code-block language-js"><code><span class="token-keyword">function</span> getPopulationTargets(room) {
   <span class="token-keyword">const</span> hostileCount = room.find(<span class="token-constant">FIND_HOSTILE_CREEPS</span>).length;

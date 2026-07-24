@@ -76,29 +76,34 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/why-javascript</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/articles/coding-as-workforce-development</loc>

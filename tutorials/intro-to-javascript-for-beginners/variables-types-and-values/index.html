@@ -3,23 +3,23 @@
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Variables, Types, and Values | AutoNateAI Tutorials</title>
-        <meta name="description" content="const vs let, the core types, and arrays and objects as containers — the values every colony decision is built from." />
+        <title>Know Your Pockets: Variables, Types, and Values | AutoNateAI Tutorials</title>
+        <meta name="description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-        <meta property="og:title" content="Variables, Types, and Values: get the colony moving." />
-        <meta property="og:description" content="const vs let, the core types, and arrays and objects as containers — the values every colony decision is built from." />
+        <meta property="og:title" content="Know Your Pockets: Variables, Types, and Values: get the colony moving." />
+        <meta property="og:description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values" />
         <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-variables-types-and-values.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Variables, Types, and Values: get the colony moving." />
-        <meta name="twitter:description" content="const vs let, the core types, and arrays and objects as containers — the values every colony decision is built from." />
+        <meta name="twitter:title" content="Know Your Pockets: Variables, Types, and Values: get the colony moving." />
+        <meta name="twitter:description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
         <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-variables-types-and-values.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag."}</script>
@@ -51,29 +51,75 @@
   
         
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Variables, Types, and Values</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Know Your Pockets: Variables, Types, and Values</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 Why JavaScript (and Where It Runs) (soon)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Variables, Types, and Values (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Conditionals and Loops (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Functions and Scope (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 Objects, Arrays, and Data Shapes (soon)</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
           <header>
-            <span class="kicker">Fundamentals / Tutorial 02 <span class="draft-tag">Coming Soon</span></span>
-            <h1>Variables, Types, and Values</h1>
-            <p>const vs let, the core types, and arrays and objects as containers — the values every colony decision is built from.</p>
-            <div class="tag-row"><span>Declare values</span><span>Know the core types</span><span>Name things clearly</span></div>
+            <span class="kicker">Chapter 2 / Tutorial 02</span>
+            <h1>Know Your Pockets: Variables, Types, and Values</h1>
+            <p>Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding.</p>
+            <div class="tag-row"><span>Declare values</span><span>Know the core types</span><span>Read your own data</span></div>
           </header>
-          <div class="markdown-body"><p>Every decision a colony makes comes down to values stored somewhere: how much energy is in a room, whether a creep is full, what a spawn is named. This lesson covers how JavaScript holds onto those values.</p>
-<p>This lesson is coming soon. Planned outline:</p>
-<ul><li>Declaring values with <code>const</code> and <code>let</code>, and why Screeps code avoids <code>var</code></li><li>The core types: strings, numbers, booleans, <code>undefined</code>, and <code>null</code></li><li>Arrays and objects as containers for grouped values</li><li>Naming values so a future reader (including future you) can tell what they hold</li></ul>
-<p>Want early access or have a topic you want covered? Ask in Discord.</p></div>
+          <div class="markdown-body"><p>Before you step to anybody — before a fight, before a deal, before a match — you check what you're carrying. AutoNate learned that from his moms, actually, not from a game: &quot;Know what's in your pockets before you leave the house.&quot; Cash, keys, phone, ID. You don't leave without checking. You definitely don't get into something serious without checking.</p>
+<p>Code works the same way. Before your program can do anything useful, it needs somewhere to hold onto information — a name, a score, a decision it made a second ago that it needs to remember three lines later. In JavaScript, that &quot;somewhere to hold information&quot; is called a <strong>variable</strong>. And just like you'd never confuse your car keys for your ID, JavaScript needs to know what kind of information it's holding, too. That's called a <strong>type</strong>. Mix those up, and things break in ways that are confusing until suddenly they're not.</p>
+<p>This chapter, AutoNate learns to check his pockets.</p>
+<h3>Coder's Corner: Declaring a Variable</h3>
+<p>You create a variable with <code>const</code> or <code>let</code>. Here's the difference, and it matters:</p>
+<ul><li><code>const</code> means &quot;this value doesn't change.&quot; Once you set it, it's locked in.</li><li><code>let</code> means &quot;this value is allowed to change later.&quot;</li></ul>
+<p>Use <code>const</code> by default. Only reach for <code>let</code> when you actually know the value is going to update — like a score that goes up, or energy that drains over time. Locking things down with <code>const</code> when you can isn't being lazy — it's being disciplined. Fewer things that can quietly change on you means fewer surprises later.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> name = &quot;AutoNate&quot;;  <span class="token-comment">// this never changes</span>
+<span class="token-keyword">let</span> wins = <span class="token-number">0</span>;             <span class="token-comment">// this will change as he keeps winning</span></code></pre>
+<h3>The Core Types</h3>
+<p>JavaScript has a handful of basic types you'll use constantly. Here's the lineup:</p>
+<ul><li><strong>String</strong> — text, always wrapped in quotes. <code>&quot;AutoNate&quot;</code>, <code>'Rookie Division'</code></li><li><strong>Number</strong> — any number, whole or decimal, no quotes. <code>18</code>, <code>3.5</code></li><li><strong>Boolean</strong> — exactly one of two values: <code>true</code> or <code>false</code>. A yes-or-no switch.</li><li><strong>Array</strong> — an ordered list of values, wrapped in square brackets. <code>[&quot;laptop&quot;, &quot;notebook&quot;, &quot;grit&quot;]</code></li><li><strong>Object</strong> — a group of related facts, wrapped in curly braces, each one labeled. <code>{ wins: 0, losses: 0 }</code></li></ul>
+<pre class="mermaid">flowchart TD
+  T[&quot;JavaScript Types&quot;] --&gt; S[&quot;String&lt;br/&gt;text — &amp;quot;AutoNate&amp;quot;&quot;]
+  T --&gt; N[&quot;Number&lt;br/&gt;18, 3.5&quot;]
+  T --&gt; B[&quot;Boolean&lt;br/&gt;true / false&quot;]
+  T --&gt; A[&quot;Array&lt;br/&gt;an ordered list&quot;]
+  T --&gt; O[&quot;Object&lt;br/&gt;grouped, labeled facts&quot;]</pre>
+<p>Here's AutoNate checking his own pockets, one type at a time:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// inventory.js</span>
+<span class="token-comment">// Know what's in your pockets before you step to anybody.</span>
+
+<span class="token-keyword">const</span> name = &quot;AutoNate&quot;;       <span class="token-comment">// string  — text</span>
+<span class="token-keyword">const</span> age = <span class="token-number">18</span>;                <span class="token-comment">// number  — counts, math</span>
+<span class="token-keyword">const</span> isRookie = true;         <span class="token-comment">// boolean — yes or no</span>
+<span class="token-keyword">const</span> gear = [&quot;laptop&quot;, &quot;notebook&quot;, &quot;grit&quot;]; <span class="token-comment">// array — a list</span>
+<span class="token-keyword">const</span> stats = {                <span class="token-comment">// object — grouped facts</span>
+  wins: <span class="token-number">0</span>,
+  losses: <span class="token-number">0</span>,
+  focus: &quot;Agentic AI systems&quot;,
+};
+
+console.log(name, age, isRookie);
+console.log(gear[<span class="token-number">0</span>]);
+console.log(stats.focus);</code></pre>
+<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-inventory.jpg" alt="VS Code showing inventory.js with the five core JavaScript types" loading="lazy" /><figcaption>inventory.js in VS Code</figcaption></figure>
+<p>A couple things worth pointing out. <code>gear[0]</code> grabs the <strong>first</strong> item out of the array — in programming, counting starts at zero, not one. It feels wrong for about a week and then it feels completely normal forever. And <code>stats.focus</code> reaches inside the object using a dot, followed by the exact label — <code>focus</code> — you're asking for. That dot is you saying &quot;open that bag, hand me the thing labeled focus.&quot;</p>
+<p>Run it the same way you've been running everything:</p>
+<pre class="code-block language-bash"><code>node inventory.js</code></pre>
+<p>You'll see all three console.log lines print, pulling values out of every type you just declared.</p>
+<h3>Checking What You've Got</h3>
+<p>Sometimes you genuinely don't know what type something is — maybe it came from somewhere else in your code, or from user input. JavaScript gives you a tool for exactly that: <code>typeof</code>.</p>
+<pre class="code-block language-js"><code>console.log(typeof name);      <span class="token-comment">// &quot;string&quot;</span>
+console.log(typeof age);       <span class="token-comment">// &quot;number&quot;</span>
+console.log(typeof isRookie);  <span class="token-comment">// &quot;boolean&quot;</span></code></pre>
+<p>When you're not sure, ask. That's not a beginner move — that's what every developer does, at every level, constantly. The senior engineers just do it faster, because they've built the instinct for where things tend to go sideways.</p>
+<h3>Try It Yourself</h3>
+<p>Open <code>inventory.js</code> and add one more line to the <code>stats</code> object — maybe <code>nickname: &quot;The Architect&quot;</code> or a <code>rank</code> field. Then add a <code>console.log(stats.nickname)</code> (or whatever you named it) at the bottom and run the file again. If you see your new value print out, you just extended AutoNate's whole profile without breaking anything else. That's the confidence you're building — the ability to touch code and trust that you know exactly what changed.</p>
+<p>Next chapter, AutoNate has to actually start making decisions with what's in those pockets — not just holding information, but reacting to it.</p>
+<p>Next: <code>03-control-flow.md</code> — Reading the Room.</p></div>
           <nav class="tutorial-pager">
-            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/why-javascript"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Why JavaScript (and Where It Runs)</span></a>
-            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/control-flow"><span><small>Next</small>Conditionals and Loops</span><span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/why-javascript"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Vision: Why JavaScript (and Where It Runs)</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/control-flow"><span><small>Next</small>Reading the Room: Conditionals and Loops</span><span class="material-symbols-outlined">arrow_forward</span></a>
           </nav>
           <footer class="tutorial-next-step">
             <div>

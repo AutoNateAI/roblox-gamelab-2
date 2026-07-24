@@ -129,11 +129,11 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
 };
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleHauler;</code></pre>
 <p>Body suggestions: miner <code>[WORK, WORK, WORK, WORK, WORK, MOVE]</code> (550 energy), hauler <code>[CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]</code> (400 energy).</p>
-<pre class="code-block language-mermaid"><code>flowchart LR
+<pre class="mermaid">flowchart LR
     Source((&quot;Source&quot;)) --&gt;|harvest, never moves| Miner[Miner]
     Miner --&gt;|drops into| Container[Container]
     Container --&gt;|withdraw| Hauler[Hauler]
-    Hauler --&gt;|transfer| Extension[&quot;Extension / Spawn&quot;]</code></pre>
+    Hauler --&gt;|transfer| Extension[&quot;Extension / Spawn&quot;]</pre>
 <p>Compare to one general-purpose creep doing all four steps itself, walking the whole time — same total work, split so harvesting never stops to let a creep walk anywhere.</p>
 <h3>CPU and Memory Discipline</h3>
 <p><code>room.find()</code> scans every object of that type; <code>findClosestByPath</code> runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.</p>
@@ -153,10 +153,10 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
 }
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = { getSources };</code></pre>
 <p>A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that *must* survive a reset (like <code>creep.memory.sourceId</code>) belongs in <code>Memory</code> instead.</p>
-<pre class="code-block language-mermaid"><code>flowchart TD
+<pre class="mermaid">flowchart TD
     Data{New data to store} --&gt; Survive{Must survive a global reset?}
     Survive -- Yes --&gt; Mem[&quot;Memory — serialized every tick, costs CPU, persists&quot;]
-    Survive -- No --&gt; Cache[&quot;Plain object at module scope — free between ticks, wiped on reset&quot;]</code></pre>
+    Survive -- No --&gt; Cache[&quot;Plain object at module scope — free between ticks, wiped on reset&quot;]</pre>
 <h3>Multi-Room Basics</h3>
 <p><strong>Reserve, don't claim, for remote mining.</strong> Claiming a controller costs a permanent slot against your Global Control Level (GCL) — usually <code>1</code> for a new account, already spent on your home room. Reserving grants your creeps working rights in a room without taking ownership or costing GCL.</p>
 <pre class="code-block language-js"><code><span class="token-comment">// role.reserver.js — needs a CLAIM part (600 energy on its own, 650 with MOVE)</span>

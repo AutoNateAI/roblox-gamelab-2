@@ -3,23 +3,23 @@
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Functions and Scope | AutoNateAI Tutorials</title>
-        <meta name="description" content="Writing reusable functions, passing parameters and return values, and understanding what a function can and can't see." />
+        <title>Signature Moves: Functions and Scope | AutoNateAI Tutorials</title>
+        <meta name="description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-        <meta property="og:title" content="Functions and Scope: get the colony moving." />
-        <meta property="og:description" content="Writing reusable functions, passing parameters and return values, and understanding what a function can and can't see." />
+        <meta property="og:title" content="Signature Moves: Functions and Scope: get the colony moving." />
+        <meta property="og:description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope" />
         <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-functions-and-scope.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Functions and Scope: get the colony moving." />
-        <meta name="twitter:description" content="Writing reusable functions, passing parameters and return values, and understanding what a function can and can't see." />
+        <meta name="twitter:title" content="Signature Moves: Functions and Scope: get the colony moving." />
+        <meta name="twitter:description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
         <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-functions-and-scope.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag."}</script>
@@ -51,29 +51,77 @@
   
         
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Functions and Scope</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/intro-to-javascript-for-beginners">Intro to JavaScript for Beginners</a><span>/</span><b>Signature Moves: Functions and Scope</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 Why JavaScript (and Where It Runs) (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Variables, Types, and Values (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Conditionals and Loops (soon)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Functions and Scope (soon)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 Objects, Arrays, and Data Shapes (soon)</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
           <header>
-            <span class="kicker">Building Blocks / Tutorial 04 <span class="draft-tag">Coming Soon</span></span>
-            <h1>Functions and Scope</h1>
-            <p>Writing reusable functions, passing parameters and return values, and understanding what a function can and can't see.</p>
-            <div class="tag-row"><span>Write functions</span><span>Use params &amp; returns</span><span>Reason about scope</span></div>
+            <span class="kicker">Chapter 4 / Tutorial 04</span>
+            <h1>Signature Moves: Functions and Scope</h1>
+            <p>Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust.</p>
+            <div class="tag-row"><span>Write functions</span><span>Pass parameters</span><span>Understand scope</span></div>
           </header>
-          <div class="markdown-body"><p>The moment a colony has more than one creep role, you need functions: reusable behavior you can call by name instead of copy-pasting logic. This lesson covers writing them and understanding what they can and can't see.</p>
-<p>This lesson is coming soon. Planned outline:</p>
-<ul><li>Declaring functions, arrow functions, and when to reach for each</li><li>Parameters, return values, and functions that call other functions</li><li>Scope: what a variable inside a function can see, and what it can't</li><li>Turning a repeated block of colony logic into a named, reusable function</li></ul>
-<p>Want early access or have a topic you want covered? Ask in Discord.</p></div>
+          <div class="markdown-body"><p>Every fighter worth watching has a move they can throw the exact same way, every single time, under any amount of pressure. It's not luck when it lands — it's repetition. They built it once, in the gym, until it was clean. Now they don't think about it. They just throw it, and it works, on command, whenever the moment calls for it.</p>
+<p>That's exactly what a <strong>function</strong> is in JavaScript: a piece of logic you build once, give a name to, and can call on demand, forever, without rebuilding it from scratch every time. AutoNate's been writing code that runs top to bottom so far. Functions are the first real step toward writing code that's organized — code you can trust to behave the same way every time you call on it.</p>
+<h3>Coder's Corner: Declaring a Function</h3>
+<p>Here's the anatomy of a function:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> jab(power) {
+  <span class="token-keyword">return</span> <span class="token-string">`Jab thrown at ${power} power.`</span>;
+}</code></pre>
+<ul><li><code>function</code> tells JavaScript you're defining a reusable move.</li><li><code>jab</code> is the name — how you'll call on it later.</li><li><code>power</code> inside the parentheses is a <strong>parameter</strong> — a placeholder for whatever value gets handed in when the function is actually used.</li><li><code>return</code> hands a result back out, so whatever called the function can use it.</li></ul>
+<p>You call — or &quot;invoke&quot; — a function by writing its name followed by parentheses, with the real value inside:</p>
+<pre class="code-block language-js"><code>console.log(jab(<span class="token-number">10</span>));
+<span class="token-comment">// &quot;Jab thrown at 10 power.&quot;</span></code></pre>
+<p>That <code>10</code> is called an <strong>argument</strong> — the real value you're handing to the <code>power</code> parameter. Same move, different power every time you throw it. That's the whole point.</p>
+<h3>Combining Moves</h3>
+<p>Once you've got one clean move, you can build bigger moves out of it. Here's a function that throws <code>jab</code> multiple times in a row, once for every value in a list:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> combo(moves) {
+  <span class="token-keyword">return</span> moves.map(jab).join(&quot; -&gt; &quot;);
+}
+
+console.log(combo([<span class="token-number">5</span>, <span class="token-number">8</span>, <span class="token-number">10</span>]));
+<span class="token-comment">// &quot;Jab thrown at 5 power. -&gt; Jab thrown at 8 power. -&gt; Jab thrown at 10 power.&quot;</span></code></pre>
+<p><code>.map()</code> is a method that runs a function once for every item in an array and collects the results — you'll see it constantly once you start working with lists of things, which in Screeps means lists of creeps, structures, and resources. Don't worry about memorizing it cold right now; just notice the shape: a function built out of a smaller function, doing more with less code written by hand.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// moves.js</span>
+<span class="token-comment">// A move you can throw the same way, every single time.</span>
+
+<span class="token-keyword">function</span> jab(power) {
+  <span class="token-keyword">return</span> <span class="token-string">`Jab thrown at ${power} power.`</span>;
+}
+
+<span class="token-keyword">function</span> combo(moves) {
+  <span class="token-keyword">return</span> moves.map(jab).join(&quot; -&gt; &quot;);
+}
+
+console.log(jab(<span class="token-number">10</span>));
+console.log(combo([<span class="token-number">5</span>, <span class="token-number">8</span>, <span class="token-number">10</span>]));</code></pre>
+<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-signature-move.jpg" alt="VS Code showing moves.js with a jab function and a combo function that reuses it" loading="lazy" /><figcaption>moves.js in VS Code</figcaption></figure>
+<h3>Coder's Corner: Scope</h3>
+<p>Here's something that trips people up if nobody explains it early: a variable declared <strong>inside</strong> a function only exists inside that function. That's called <strong>scope</strong>. Once the function finishes running, that variable is gone — the outside world never had access to it in the first place.</p>
+<pre class="mermaid">flowchart TD
+  subgraph Outer[&quot;Outside the function&quot;]
+    O[&quot;const gymName = 'AutoNate's Gym'&quot;]
+    subgraph Inner[&quot;Inside jab()&quot;]
+      I[&quot;power exists here&quot;]
+    end
+  end
+  O --&gt;|&quot;visible inside&quot;| I
+  I -.-&gt;|&quot;NOT visible outside&quot;| O</pre>
+<p>Think of it like the gym. What happens in the sparring room, stays in the sparring room — the front desk doesn't automatically know every detail of every round. But the sparring room can see the gym rules posted at the front, because those apply everywhere. Variables declared outside a function are visible inside it. Variables declared inside a function stay local to that function, and disappear once it's done running.</p>
+<p>Why does this matter? Because it means your functions don't accidentally step on each other. You can name a variable <code>power</code> inside <code>jab</code> and a completely different variable <code>power</code> somewhere else in your code, and they will never collide. Every function gets its own clean space to work in. That's not a limitation — that's protection.</p>
+<h3>Try It Yourself</h3>
+<p>Add a second move to <code>moves.js</code> — maybe a function called <code>hook</code> that takes a <code>power</code> parameter and returns a different message. Then add it into the <code>combo</code> list alongside <code>jab</code> and see how the output changes. Once you can build a second move and know exactly how it'll behave without guessing, you've got the real skill this chapter was about: writing logic you can trust, on command, every time.</p>
+<p>Next chapter, AutoNate stops thinking in single moves and starts building the full playbook — the way real, organized information gets structured before it's ready for a real match.</p>
+<p>Next: <code>05-objects-arrays-and-data-shapes.md</code> — The Playbook.</p></div>
           <nav class="tutorial-pager">
-            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/control-flow"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Conditionals and Loops</span></a>
-            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes"><span><small>Next</small>Objects, Arrays, and Data Shapes</span><span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/control-flow"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Reading the Room: Conditionals and Loops</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes"><span><small>Next</small>The Playbook: Objects, Arrays, and Data Shapes</span><span class="material-symbols-outlined">arrow_forward</span></a>
           </nav>
           <footer class="tutorial-next-step">
             <div>
