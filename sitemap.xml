@@ -36,29 +36,69 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/quickstart</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/buy-download-and-launch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/core-loop-and-roles</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/quickstart</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/infrastructure-and-scaling</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/core-loop-and-roles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/combat-and-competing</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/cheatsheet</loc>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/combat-and-competing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/cheatsheet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/why-javascript</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://autonateai.com/articles/coding-as-workforce-development</loc>

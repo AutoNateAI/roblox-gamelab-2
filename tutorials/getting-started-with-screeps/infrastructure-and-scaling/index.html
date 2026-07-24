@@ -6,14 +6,14 @@
         <title>Infrastructure and Scaling | AutoNateAI Tutorials</title>
         <meta name="description" content="Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system." />
         <meta name="robots" content="index,follow" />
-        <link rel="canonical" href="https://autonateai.com/tutorials/infrastructure-and-scaling" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Infrastructure and Scaling: get the colony moving." />
         <meta property="og:description" content="Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system." />
-        <meta property="og:url" content="https://autonateai.com/tutorials/infrastructure-and-scaling" />
+        <meta property="og:url" content="https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling" />
         <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-infrastructure-and-scaling.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
@@ -51,11 +51,12 @@
   
         
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>Infrastructure and Scaling</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/getting-started-with-screeps">Getting Started with Screeps</a><span>/</span><b>Infrastructure and Scaling</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
-          <strong>Player Guide</strong>
-          <a class="" href="/tutorials/quickstart">01 Quickstart: Playing in 15 Minutes</a><a class="" href="/tutorials/core-loop-and-roles">02 Core Loop and Roles</a><a class="active" href="/tutorials/infrastructure-and-scaling">03 Infrastructure and Scaling</a><a class="" href="/tutorials/combat-and-competing">04 Combat and Competing</a><a class="" href="/tutorials/cheatsheet">05 Cheatsheet</a>
+          <strong>Getting Started with Screeps</strong>
+          <a class="" href="/tutorials/getting-started-with-screeps/buy-download-and-launch">00 Buy, Download, and Launch Screeps on Steam</a><a class="" href="/tutorials/getting-started-with-screeps/quickstart">01 Quickstart: Playing in 15 Minutes</a><a class="" href="/tutorials/getting-started-with-screeps/core-loop-and-roles">02 Core Loop and Roles</a><a class="active" href="/tutorials/getting-started-with-screeps/infrastructure-and-scaling">03 Infrastructure and Scaling</a><a class="" href="/tutorials/getting-started-with-screeps/combat-and-competing">04 Combat and Competing</a><a class="" href="/tutorials/getting-started-with-screeps/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
@@ -174,6 +175,10 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleReserver;</code></pre>
 <p><code>reserveController</code> has to be called every tick the creep is in range — a single reserver camped on the controller holds it indefinitely. List your exits with <code>Game.map.describeExits(roomName)</code> and check a target isn't already owned or reserved before committing creeps to it.</p>
 <p>Next: <code>04-combat-and-competing.md</code>.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/getting-started-with-screeps/core-loop-and-roles"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Core Loop and Roles</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/getting-started-with-screeps/combat-and-competing"><span><small>Next</small>Combat and Competing</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
