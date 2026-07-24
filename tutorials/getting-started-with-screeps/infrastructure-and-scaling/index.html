@@ -3,23 +3,23 @@
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Infrastructure and Scaling | AutoNateAI Tutorials</title>
-        <meta name="description" content="Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system." />
+        <title>Building the Machine: Infrastructure and Scaling | AutoNateAI Tutorials</title>
+        <meta name="description" content="Roads, containers, static mining, haulers, CPU discipline, caching — AutoNate stops babysitting the colony and starts engineering it." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-        <meta property="og:title" content="Infrastructure and Scaling: get the colony moving." />
-        <meta property="og:description" content="Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system." />
+        <meta property="og:title" content="Building the Machine: Infrastructure and Scaling: get the colony moving." />
+        <meta property="og:description" content="Roads, containers, static mining, haulers, CPU discipline, caching — AutoNate stops babysitting the colony and starts engineering it." />
         <meta property="og:url" content="https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling" />
         <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-infrastructure-and-scaling.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Infrastructure and Scaling: get the colony moving." />
-        <meta name="twitter:description" content="Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system." />
+        <meta name="twitter:title" content="Building the Machine: Infrastructure and Scaling: get the colony moving." />
+        <meta name="twitter:description" content="Roads, containers, static mining, haulers, CPU discipline, caching — AutoNate stops babysitting the colony and starts engineering it." />
         <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-infrastructure-and-scaling.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag."}</script>
@@ -51,11 +51,11 @@
   
         
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/getting-started-with-screeps">Getting Started with Screeps</a><span>/</span><b>Infrastructure and Scaling</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/getting-started-with-screeps">Getting Started with Screeps</a><span>/</span><b>Building the Machine: Infrastructure and Scaling</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Getting Started with Screeps</strong>
-          <a class="" href="/tutorials/getting-started-with-screeps/buy-download-and-launch">00 Buy, Download, and Launch Screeps on Steam</a><a class="" href="/tutorials/getting-started-with-screeps/quickstart">01 Quickstart: Playing in 15 Minutes</a><a class="" href="/tutorials/getting-started-with-screeps/core-loop-and-roles">02 Core Loop and Roles</a><a class="active" href="/tutorials/getting-started-with-screeps/infrastructure-and-scaling">03 Infrastructure and Scaling</a><a class="" href="/tutorials/getting-started-with-screeps/combat-and-competing">04 Combat and Competing</a><a class="" href="/tutorials/getting-started-with-screeps/cheatsheet">05 Cheatsheet</a>
+          <a class="" href="/tutorials/getting-started-with-screeps/buy-download-and-launch">00 Into the Arena: Buy, Download, and Launch Screeps on Steam</a><a class="" href="/tutorials/getting-started-with-screeps/quickstart">01 First Contact: Playing in 15 Minutes</a><a class="" href="/tutorials/getting-started-with-screeps/core-loop-and-roles">02 Building the Squad: Core Loop and Roles</a><a class="active" href="/tutorials/getting-started-with-screeps/infrastructure-and-scaling">03 Building the Machine: Infrastructure and Scaling</a><a class="" href="/tutorials/getting-started-with-screeps/combat-and-competing">04 Ready to Fight: Combat and Competing</a><a class="" href="/tutorials/getting-started-with-screeps/cheatsheet">05 The Notes on His Monitor: Cheatsheet</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -63,11 +63,12 @@
         <article class="tutorial-document">
           <header>
             <span class="kicker">Systems / Tutorial 03</span>
-            <h1>Infrastructure and Scaling</h1>
-            <p>Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system.</p>
+            <h1>Building the Machine: Infrastructure and Scaling</h1>
+            <p>Roads, containers, static mining, haulers, CPU discipline, caching — AutoNate stops babysitting the colony and starts engineering it.</p>
             <div class="tag-row"><span>Plan roads</span><span>Split mining and hauling</span><span>Manage CPU</span></div>
           </header>
-          <div class="markdown-body"><p>Once the role pattern is running, the next bottleneck is always the same: creeps spending more time walking than working. This file covers the fixes, in the order they usually start mattering.</p>
+          <div class="markdown-body"><p>AutoNate pulled up the room visual and actually watched his creeps for a few minutes instead of just trusting the numbers were going up. What he saw wasn't a colony — it was a commute. Harvesters walking all the way to a source, filling up, walking all the way back, over and over, spending more time in transit than actually working. It looked less like a factory and more like everybody late for the same train. That's the tell. Once you're staring at your own colony wondering why it feels slow even though nothing's technically wrong, you've found the next real problem to solve.</p>
+<p>Once the role pattern is running, the next bottleneck is always the same: creeps spending more time walking than working. This file covers the fixes, in the order they usually start mattering.</p>
 <h3>Roads</h3>
 <p>Plan roads along the path creeps are already walking, instead of guessing:</p>
 <pre class="code-block language-js"><code><span class="token-keyword">function</span> planRoadsTo(room, targetPos) {
@@ -82,7 +83,7 @@
 room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&gt; planRoadsTo(room, source.pos));</code></pre>
 <p>A road costs <code>1</code> movement point per step instead of <code>2</code> on plains or <code>10</code> on swamp — a one-time build cost for a permanent speed bonus.</p>
 <h3>Static Mining + Hauling (The Real Throughput Fix)</h3>
-<p>Past a certain point, a general-purpose harvester (harvest + walk + deliver) is slower than splitting the job. A <code>WORK</code>-heavy creep plants itself on a source and never moves; a <code>CARRY</code>-heavy creep does nothing but ferry energy.</p>
+<p>Roads helped. Didn't fix it. AutoNate was still watching one creep try to do three jobs at once — mine, haul, repeat — and it clicked for him the same way the role pattern clicked back in the last chapter: stop asking one worker to be everything, split the job by what it actually is. Past a certain point, a general-purpose harvester (harvest + walk + deliver) is slower than splitting the job. A <code>WORK</code>-heavy creep plants itself on a source and never moves; a <code>CARRY</code>-heavy creep does nothing but ferry energy.</p>
 <p>Five <code>WORK</code> parts harvest <code>10</code> energy/tick — matching a source's average regeneration rate exactly, so nothing goes to waste:</p>
 <pre class="code-block language-js"><code><span class="token-comment">// role.miner.js — stand on a container tile adjacent to the source, harvest forever</span>
 <span class="token-keyword">const</span> roleMiner = {
@@ -136,7 +137,7 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
     Hauler --&gt;|transfer| Extension[&quot;Extension / Spawn&quot;]</pre>
 <p>Compare to one general-purpose creep doing all four steps itself, walking the whole time — same total work, split so harvesting never stops to let a creep walk anywhere.</p>
 <h3>CPU and Memory Discipline</h3>
-<p><code>room.find()</code> scans every object of that type; <code>findClosestByPath</code> runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.</p>
+<p>AutoNate checked his CPU bucket for the first time the same way he checks his phone battery at 4%, in public, with no charger — a little bit of panic he wasn't expecting to feel over a strategy game. Turns out it's the same anxiety either way. <code>room.find()</code> scans every object of that type; <code>findClosestByPath</code> runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.</p>
 <p>Check your actual cost:</p>
 <pre class="code-block language-js"><code><span class="token-constant">Game</span>.cpu.getUsed()   <span class="token-comment">// this tick's usage so far</span>
 <span class="token-constant">Game</span>.cpu.limit       <span class="token-comment">// per-tick budget</span>
@@ -152,7 +153,7 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
   <span class="token-keyword">return</span> cache.sources[room.name].map((id) =&gt; <span class="token-constant">Game</span>.getObjectById(id));
 }
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = { getSources };</code></pre>
-<p>A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that *must* survive a reset (like <code>creep.memory.sourceId</code>) belongs in <code>Memory</code> instead.</p>
+<p>A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that must survive a reset (like <code>creep.memory.sourceId</code>) belongs in <code>Memory</code> instead.</p>
 <pre class="mermaid">flowchart TD
     Data{New data to store} --&gt; Survive{Must survive a global reset?}
     Survive -- Yes --&gt; Mem[&quot;Memory — serialized every tick, costs CPU, persists&quot;]
@@ -174,10 +175,11 @@ room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&g
 };
 <span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleReserver;</code></pre>
 <p><code>reserveController</code> has to be called every tick the creep is in range — a single reserver camped on the controller holds it indefinitely. List your exits with <code>Game.map.describeExits(roomName)</code> and check a target isn't already owned or reserved before committing creeps to it.</p>
+<p>AutoNate scouted one exit room out of pure curiosity and found a hostile creep just standing there, doing nothing to him, not even close to his territory — but very clearly not friendly. First real reminder that he's not playing in a sandbox by himself. Somebody, or something, else is out there. Time to stop optimizing for a world that's empty and start preparing for one that isn't.</p>
 <p>Next: <code>04-combat-and-competing.md</code>.</p></div>
           <nav class="tutorial-pager">
-            <a class="tutorial-pager-link prev" href="/tutorials/getting-started-with-screeps/core-loop-and-roles"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Core Loop and Roles</span></a>
-            <a class="tutorial-pager-link next" href="/tutorials/getting-started-with-screeps/combat-and-competing"><span><small>Next</small>Combat and Competing</span><span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="tutorial-pager-link prev" href="/tutorials/getting-started-with-screeps/core-loop-and-roles"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Building the Squad: Core Loop and Roles</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/getting-started-with-screeps/combat-and-competing"><span><small>Next</small>Ready to Fight: Combat and Competing</span><span class="material-symbols-outlined">arrow_forward</span></a>
           </nav>
           <footer class="tutorial-next-step">
             <div>
