@@ -32,13 +32,48 @@ export const screepsScreenshots = [
   "/assets/screeps/screeps-09.jpg",
 ];
 
+export const tutorialPacks = [
+  {
+    handle: "getting-started-with-screeps",
+    title: "Getting Started with Screeps",
+    tagline: "Free player guide",
+    summary:
+      "Buy the game, claim a room, ship the harvest loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.",
+    icon: "rocket_launch",
+    status: "Active",
+    heroShotIndex: 0,
+  },
+  {
+    handle: "intro-to-javascript-for-beginners",
+    title: "Intro to JavaScript for Beginners",
+    tagline: "Coming soon",
+    summary:
+      "The JavaScript fundamentals that power every Screeps colony: variables, control flow, functions, and the object/array shapes Memory is built from, before you ever touch the game.",
+    icon: "code",
+    status: "Coming Soon",
+    heroShotIndex: 3,
+  },
+];
+
 export const tutorials = [
+  {
+    handle: "buy-download-and-launch",
+    episode: "00",
+    title: "Buy, Download, and Launch Screeps on Steam",
+    track: "Start Here",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/00-buy-download-and-launch.md",
+    summary:
+      "Purchase Screeps: World on Steam, install the client, sign in, and land on the world map ready to claim your first room.",
+    outcomes: ["Buy on Steam", "Install & launch", "Reach the world map"],
+  },
   {
     handle: "quickstart",
     episode: "01",
     title: "Quickstart: Playing in 15 Minutes",
     track: "Start Here",
-    sourcePath: "../content/tutorials/01-quickstart.md",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/01-quickstart.md",
     summary:
       "Claim a room, place Spawn1, spawn the first worker, and get the harvest-deliver loop running without turning setup into a side quest.",
     outcomes: ["Claim a room", "Spawn Harvester1", "Run the first loop"],
@@ -48,7 +83,8 @@ export const tutorials = [
     episode: "02",
     title: "Core Loop and Roles",
     track: "Code Patterns",
-    sourcePath: "../content/tutorials/02-core-loop-and-roles.md",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/02-core-loop-and-roles.md",
     summary:
       "Move from one hardcoded harvester to source assignment, role modules, population-based spawning, and the first architecture that can scale.",
     outcomes: ["Assign sources", "Split role files", "Spawn by population"],
@@ -58,7 +94,8 @@ export const tutorials = [
     episode: "03",
     title: "Infrastructure and Scaling",
     track: "Systems",
-    sourcePath: "../content/tutorials/03-infrastructure-and-scaling.md",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/03-infrastructure-and-scaling.md",
     summary:
       "Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system.",
     outcomes: ["Plan roads", "Split mining and hauling", "Manage CPU"],
@@ -68,7 +105,8 @@ export const tutorials = [
     episode: "04",
     title: "Combat and Competing",
     track: "Competition",
-    sourcePath: "../content/tutorials/04-combat-and-competing.md",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/04-combat-and-competing.md",
     summary:
       "Use towers, ramparts, combat body math, defenders, NPC sparring waves, and scouting so the colony learns before another player teaches it the hard way.",
     outcomes: ["Run towers", "Build defenders", "Test pressure"],
@@ -78,10 +116,71 @@ export const tutorials = [
     episode: "05",
     title: "Cheatsheet",
     track: "Reference",
-    sourcePath: "../content/tutorials/05-cheatsheet.md",
+    pack: "getting-started-with-screeps",
+    sourcePath: "../content/tutorials/getting-started-with-screeps/05-cheatsheet.md",
     summary:
       "Keep the error codes, body costs, constants, and API one-liners close. You will look them up until your colony stops embarrassing you.",
     outcomes: ["Read error codes", "Check body costs", "Use API one-liners"],
+  },
+  {
+    handle: "why-javascript",
+    episode: "01",
+    title: "Why JavaScript (and Where It Runs)",
+    track: "Fundamentals",
+    pack: "intro-to-javascript-for-beginners",
+    sourcePath: "../content/tutorials/intro-to-javascript-for-beginners/01-why-javascript.md",
+    summary:
+      "What JavaScript is, why Screeps runs on it, and the difference between a script that runs once and a system that keeps running every tick.",
+    outcomes: ["Understand the language", "Set up a sandbox", "See where it's headed"],
+    draft: true,
+  },
+  {
+    handle: "variables-types-and-values",
+    episode: "02",
+    title: "Variables, Types, and Values",
+    track: "Fundamentals",
+    pack: "intro-to-javascript-for-beginners",
+    sourcePath: "../content/tutorials/intro-to-javascript-for-beginners/02-variables-types-and-values.md",
+    summary:
+      "const vs let, the core types, and arrays and objects as containers — the values every colony decision is built from.",
+    outcomes: ["Declare values", "Know the core types", "Name things clearly"],
+    draft: true,
+  },
+  {
+    handle: "control-flow",
+    episode: "03",
+    title: "Conditionals and Loops",
+    track: "Control Flow",
+    pack: "intro-to-javascript-for-beginners",
+    sourcePath: "../content/tutorials/intro-to-javascript-for-beginners/03-control-flow.md",
+    summary:
+      "if/else branching and for loops, including looping over Game.creeps and Memory.creeps without shooting yourself in the foot.",
+    outcomes: ["Branch with if/else", "Loop over collections", "Avoid common traps"],
+    draft: true,
+  },
+  {
+    handle: "functions-and-scope",
+    episode: "04",
+    title: "Functions and Scope",
+    track: "Building Blocks",
+    pack: "intro-to-javascript-for-beginners",
+    sourcePath: "../content/tutorials/intro-to-javascript-for-beginners/04-functions-and-scope.md",
+    summary:
+      "Writing reusable functions, passing parameters and return values, and understanding what a function can and can't see.",
+    outcomes: ["Write functions", "Use params & returns", "Reason about scope"],
+    draft: true,
+  },
+  {
+    handle: "objects-arrays-and-data-shapes",
+    episode: "05",
+    title: "Objects, Arrays, and Data Shapes",
+    track: "Building Blocks",
+    pack: "intro-to-javascript-for-beginners",
+    sourcePath: "../content/tutorials/intro-to-javascript-for-beginners/05-objects-arrays-and-data-shapes.md",
+    summary:
+      "Object literals, array methods like find/filter/map, and designing a Memory shape that stays readable as a colony grows.",
+    outcomes: ["Shape objects", "Use array methods", "Design Memory well"],
+    draft: true,
   },
 ];
 

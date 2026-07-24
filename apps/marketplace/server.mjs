@@ -15,9 +15,10 @@ import {
   renderProgramDetail,
   renderSuccess,
   renderTutorialDetail,
+  renderTutorialPack,
   renderTutorials,
 } from "./src/pages.mjs";
-import { articles, tutorials } from "./src/data.mjs";
+import { articles, tutorialPacks, tutorials } from "./src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -183,13 +184,24 @@ const server = createServer(async (request, response) => {
     }
 
     if (url.pathname.startsWith("/tutorials/")) {
-      const handle = url.pathname.split("/").filter(Boolean).at(-1);
-      const tutorial = tutorials.find((item) => item.handle === handle);
+      const segments = url.pathname.split("/").filter(Boolean);
+      const packHandle = segments[1];
+      const pack = tutorialPacks.find((item) => item.handle === packHandle);
+      if (!pack) {
+        json(response, 404, { error: "Tutorial pack not found" });
+        return;
+      }
+      if (segments.length === 2) {
+        html(response, 200, renderTutorialPack(pack));
+        return;
+      }
+      const tutorialHandle = segments[2];
+      const tutorial = tutorials.find((item) => item.pack === pack.handle && item.handle === tutorialHandle);
       if (!tutorial) {
         json(response, 404, { error: "Tutorial not found" });
         return;
       }
-      html(response, 200, renderTutorialDetail(tutorial));
+      html(response, 200, renderTutorialDetail(pack, tutorial));
       return;
     }
 

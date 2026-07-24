@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { articles, screepsScreenshots, tutorials } from "./data.mjs";
+import { articles, screepsScreenshots, tutorialPacks, tutorials } from "./data.mjs";
 import {
   escapeHtml,
   icon,
@@ -614,16 +614,15 @@ export function renderLeague(data) {
 }
 
 export function renderTutorials() {
-  const tracks = [...new Set(tutorials.map((tutorial) => tutorial.track))];
   const body = `
     <main class="tutorials-page">
       <section class="home-hero tutorials-detail-hero">
         <div class="hero-bg"><img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("menu_book")} Screeps Tutorials</span>
-          <h1>Get your colony moving before you buy the cohort.</h1>
-          <p>This free player guide gets you moving before the cohort starts. Claim the room, ship the loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.</p>
+          <span class="kicker">${icon("menu_book")} Tutorial Packs</span>
+          <h1>Get moving before you buy the cohort.</h1>
+          <p>Every pack is a free, self-contained path: claim the room, ship the loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think. Pick a pack below to see its lessons.</p>
           <div class="button-row">
             <a class="primary-button" href="/programs/ai-software-architect">Take the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/community">Ask in Discord</a>
@@ -632,11 +631,11 @@ export function renderTutorials() {
         <aside class="hero-program-panel">
           <img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("terminal")} Free Player Guide</span>
+            <span class="kicker">${icon("terminal")} Free Player Guides</span>
             <h2>Setup is free. System judgment is the program.</h2>
-            <p>Start with Spawn1, roles, Memory, infrastructure, defense, and combat prep. Then bring that working colony into the cohort.</p>
+            <p>Start with Screeps, then bring that working colony into the cohort. More packs, starting with JavaScript fundamentals, are on the way.</p>
             <div class="hero-facts">
-              <span>5 guide docs</span>
+              <span>${tutorialPacks.length} tutorial packs</span>
               <span>Copy-ready code</span>
               <span>Local setup</span>
               <span>Program pathway</span>
@@ -646,61 +645,130 @@ export function renderTutorials() {
         </div>
       </section>
 
+      <section class="section pack-catalog-section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("view_module")} Pick a Pack</span>
+            <h2>Each pack is a complete path, start to finish.</h2>
+            <p>Open a pack to see its lessons in order. New packs show up here as they ship.</p>
+          </div>
+        </div>
+        <div class="pack-grid">${tutorialPacks.map((pack) => packCard(pack)).join("")}</div>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Tutorial Packs | AutoNateAI",
+    active: "tutorials",
+    body,
+    canonicalPath: "/tutorials",
+    ogImage: "/assets/og/default.jpg",
+    description:
+      "Free tutorial packs for builders learning JavaScript fundamentals and Screeps colony automation, roles, Memory, infrastructure, defense, and competition prep.",
+    ogTitle: "Tutorial packs before the system starts swinging back.",
+    ogDescription:
+      "Start with Getting Started with Screeps, then Intro to JavaScript for Beginners. Free guides, real curriculum, before you join the cohort.",
+  });
+}
+
+export function renderTutorialPack(pack) {
+  const items = tutorials.filter((tutorial) => tutorial.pack === pack.handle);
+  const tracks = [...new Set(items.map((tutorial) => tutorial.track))];
+  const comingSoon = pack.status !== "Active";
+
+  const body = `
+    <main class="tutorials-page pack-page">
+      <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>${escapeHtml(pack.title)}</b></nav>
+      <section class="home-hero tutorials-detail-hero">
+        <div class="hero-bg"><img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon(pack.icon)} ${escapeHtml(pack.tagline)}</span>
+          <h1>${escapeHtml(pack.title)}</h1>
+          <p>${escapeHtml(pack.summary)}</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-software-architect">Take the Program ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/tutorials">All Packs</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("terminal")} This Pack</span>
+            <h2>${comingSoon ? "Lessons are in progress." : "Work through it in order."}</h2>
+            <p>${comingSoon ? "The outline below is locked in and full lessons are being written now." : "Each lesson builds on the last, from setup to competition-ready."}</p>
+            <div class="hero-facts">
+              <span>${items.length} lesson${items.length === 1 ? "" : "s"}</span>
+              <span>${escapeHtml(packStatusLabel(pack))}</span>
+              <span>Copy-ready code</span>
+              <span>Program pathway</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
       <div class="docs-layout">
         <aside class="docs-sidebar">
-          <strong>Docs Path</strong>
-          <a href="#what-is-screeps">What is Screeps?</a>
+          <strong>${escapeHtml(pack.title)}</strong>
           ${tracks.map((track) => `<a href="#${slugify(track)}">${escapeHtml(track)}</a>`).join("")}
+          <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Full cohort</a>
         </aside>
         <div class="docs-content">
-          <section class="docs-panel" id="what-is-screeps">
-            <span class="kicker">${icon("terminal")} Start Here</span>
-            <h2>Screeps is a strategy world where JavaScript runs the colony.</h2>
-            <p>You do not click units around like a normal RTS. You write code that controls creeps, reads room objects, gathers resources, builds infrastructure, remembers state, and reacts every game tick. That makes it perfect for learning the difference between code that runs once and a system that keeps operating.</p>
-            <p>The free player guide below gets you playing and genuinely dangerous. The paid cohort goes deeper: architecture, Codex workflows, Git history, debugging under pressure, and tournament prep.</p>
-          </section>
-
-          ${tracks.map((track) => tutorialTrack(track)).join("")}
+          ${comingSoon ? packStatusBanner() : ""}
+          ${tracks.map((track) => tutorialTrack(track, items.filter((item) => item.track === track), pack)).join("")}
         </div>
       </div>
     </main>
   `;
 
   return pageShell({
-    title: "Tutorials | AutoNateAI",
+    title: `${pack.title} | AutoNateAI Tutorials`,
     active: "tutorials",
     body,
-    canonicalPath: "/tutorials",
+    canonicalPath: `/tutorials/${pack.handle}`,
     ogImage: "/assets/og/default.jpg",
-    description:
-      "Free Screeps player guide for builders learning JavaScript colony automation, roles, Memory, infrastructure, defense, and competition prep.",
-    ogTitle: "Screeps tutorials before the system starts swinging back.",
-    ogDescription:
-      "Start with Spawn1, harvesters, roles, Memory, infrastructure, defense, and combat prep. Then bring that colony mindset into the cohort.",
+    description: pack.summary,
+    ogTitle: `${pack.title}: ${comingSoon ? "coming soon." : "start here."}`,
+    ogDescription: pack.summary,
   });
 }
 
-export function renderTutorialDetail(tutorial) {
+export function renderTutorialDetail(pack, tutorial) {
   const markdown = readTutorialMarkdown(tutorial);
+  const packTutorials = tutorials.filter((item) => item.pack === pack.handle);
+  const currentIndex = packTutorials.findIndex((item) => item.handle === tutorial.handle);
+  const prevTutorial = currentIndex > 0 ? packTutorials[currentIndex - 1] : null;
+  const nextTutorial = currentIndex >= 0 && currentIndex < packTutorials.length - 1 ? packTutorials[currentIndex + 1] : null;
   const body = `
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>${escapeHtml(tutorial.title)}</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/${pack.handle}">${escapeHtml(pack.title)}</a><span>/</span><b>${escapeHtml(tutorial.title)}</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
-          <strong>Player Guide</strong>
-          ${tutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}</a>`).join("")}
+          <strong>${escapeHtml(pack.title)}</strong>
+          ${packTutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${pack.handle}/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}${item.draft ? " (soon)" : ""}</a>`).join("")}
+          <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-software-architect">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
           <header>
-            <span class="kicker">${escapeHtml(tutorial.track)} / Tutorial ${escapeHtml(tutorial.episode)}</span>
+            <span class="kicker">${escapeHtml(tutorial.track)} / Tutorial ${escapeHtml(tutorial.episode)}${tutorial.draft ? ` <span class="draft-tag">Coming Soon</span>` : ""}</span>
             <h1>${escapeHtml(tutorial.title)}</h1>
             <p>${escapeHtml(tutorial.summary)}</p>
             <div class="tag-row">${tutorial.outcomes.map((outcome) => `<span>${escapeHtml(outcome)}</span>`).join("")}</div>
           </header>
           <div class="markdown-body">${markdownToHtml(stripFirstHeading(markdown))}</div>
+          ${
+            prevTutorial || nextTutorial
+              ? `<nav class="tutorial-pager">
+            ${prevTutorial ? `<a class="tutorial-pager-link prev" href="/tutorials/${pack.handle}/${escapeHtml(prevTutorial.handle)}">${icon("arrow_back")}<span><small>Previous</small>${escapeHtml(prevTutorial.title)}</span></a>` : "<span></span>"}
+            ${nextTutorial ? `<a class="tutorial-pager-link next" href="/tutorials/${pack.handle}/${escapeHtml(nextTutorial.handle)}"><span><small>Next</small>${escapeHtml(nextTutorial.title)}</span>${icon("arrow_forward")}</a>` : "<span></span>"}
+          </nav>`
+              : ""
+          }
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker">${icon("architecture")} Want the architecture layer?</span>
@@ -718,7 +786,7 @@ export function renderTutorialDetail(tutorial) {
     title: `${tutorial.title} | AutoNateAI Tutorials`,
     active: "tutorials",
     body,
-    canonicalPath: `/tutorials/${tutorial.handle}`,
+    canonicalPath: `/tutorials/${pack.handle}/${tutorial.handle}`,
     ogImage: `/assets/og/tutorial-${tutorial.handle}.jpg`,
     description: tutorial.summary,
     ogTitle: `${tutorial.title}: get the colony moving.`,
@@ -1140,8 +1208,7 @@ function inlineMarkdown(value = "") {
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 }
 
-function tutorialTrack(track) {
-  const items = tutorials.filter((tutorial) => tutorial.track === track);
+function tutorialTrack(track, items, pack) {
   return `
     <section class="docs-panel" id="${slugify(track)}">
       <div class="docs-panel-head">
@@ -1152,13 +1219,16 @@ function tutorialTrack(track) {
         ${items
           .map(
             (tutorial) => `
-          <article class="tutorial-row">
-            <div class="tutorial-index">${escapeHtml(tutorial.episode)}</div>
+          <article class="tutorial-row ${tutorial.draft ? "draft" : ""}">
+            <a class="tutorial-row-media" href="/tutorials/${pack.handle}/${escapeHtml(tutorial.handle)}">
+              <img src="${shot(Number(tutorial.episode) || 0)}" alt="" />
+              <span class="tutorial-index">${escapeHtml(tutorial.episode)}</span>
+            </a>
             <div>
-              <h3><a href="/tutorials/${escapeHtml(tutorial.handle)}">${escapeHtml(tutorial.title)}</a></h3>
+              <h3><a href="/tutorials/${pack.handle}/${escapeHtml(tutorial.handle)}">${escapeHtml(tutorial.title)}</a></h3>
               <p>${escapeHtml(tutorial.summary)}</p>
-              <div class="tag-row">${tutorial.outcomes.map((outcome) => `<span>${escapeHtml(outcome)}</span>`).join("")}</div>
-              <a class="tutorial-link" href="/tutorials/${escapeHtml(tutorial.handle)}">Open Tutorial ${icon("arrow_forward")}</a>
+              <div class="tag-row">${tutorial.outcomes.map((outcome) => `<span>${escapeHtml(outcome)}</span>`).join("")}${tutorial.draft ? `<span class="draft-tag">Coming Soon</span>` : ""}</div>
+              <a class="tutorial-link" href="/tutorials/${pack.handle}/${escapeHtml(tutorial.handle)}">${tutorial.draft ? "Preview Outline" : "Open Tutorial"} ${icon("arrow_forward")}</a>
             </div>
           </article>
         `,
@@ -1166,6 +1236,42 @@ function tutorialTrack(track) {
           .join("")}
       </div>
     </section>
+  `;
+}
+
+function packStatusLabel(pack) {
+  return pack.status === "Active" ? "Available Now" : "Coming Soon";
+}
+
+function packStatusBanner() {
+  return `
+    <div class="pack-status-banner">
+      <span class="kicker">${icon("hourglass_top")} Coming Soon</span>
+      <p>This pack's lessons are still being written. The outline below shows what's planned — check back soon, or ask in Discord for early access.</p>
+      <a class="outline-button" href="/community">Ask in Discord</a>
+    </div>
+  `;
+}
+
+function packCard(pack) {
+  const items = tutorials.filter((tutorial) => tutorial.pack === pack.handle);
+  const available = pack.status === "Active";
+  return `
+    <a class="pack-card ${available ? "" : "coming-soon"}" href="/tutorials/${pack.handle}">
+      <div class="pack-card-media">
+        <img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" />
+        <span class="status-pill ${available ? "live" : ""}">${packStatusLabel(pack)}</span>
+      </div>
+      <div class="pack-card-body">
+        <span class="kicker">${icon(pack.icon)} ${escapeHtml(pack.tagline)}</span>
+        <h3>${escapeHtml(pack.title)}</h3>
+        <p>${escapeHtml(pack.summary)}</p>
+        <div class="pack-card-meta">
+          <span>${icon("auto_stories")} ${items.length} lesson${items.length === 1 ? "" : "s"}</span>
+          <span class="pack-card-link">${available ? "View Pack" : "Preview Pack"} ${icon("arrow_forward")}</span>
+        </div>
+      </div>
+    </a>
   `;
 }
 
