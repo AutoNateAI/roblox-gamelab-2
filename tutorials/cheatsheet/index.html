@@ -62,7 +62,27 @@
             <p>Keep the error codes, body costs, constants, and API one-liners close. You will look them up until your colony stops embarrassing you.</p>
             <div class="tag-row"><span>Read error codes</span><span>Check body costs</span><span>Use API one-liners</span></div>
           </header>
-          <div class="markdown-body"><p>This tutorial source could not be loaded yet.</p></div>
+          <div class="markdown-body"><p>Quick lookups for things you'll otherwise re-Google every week for the first month.</p>
+<h3>Common Error Codes</h3>
+<div class="markdown-table"><table><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td><code>OK</code> — it worked</td></tr><tr><td><code>-1</code></td><td><code>ERR_NOT_OWNER</code></td></tr><tr><td><code>-2</code></td><td><code>ERR_NO_PATH</code></td></tr><tr><td><code>-3</code></td><td><code>ERR_NAME_EXISTS</code></td></tr><tr><td><code>-4</code></td><td><code>ERR_BUSY</code> (spawn is already spawning)</td></tr><tr><td><code>-5</code></td><td><code>ERR_NOT_FOUND</code></td></tr><tr><td><code>-6</code></td><td><code>ERR_NOT_ENOUGH_RESOURCES</code> / <code>ERR_NOT_ENOUGH_ENERGY</code></td></tr><tr><td><code>-7</code></td><td><code>ERR_INVALID_TARGET</code></td></tr><tr><td><code>-8</code></td><td><code>ERR_FULL</code></td></tr><tr><td><code>-9</code></td><td><code>ERR_NOT_IN_RANGE</code> — the one you'll handle constantly; usually means &quot;move closer, then retry&quot;</td></tr><tr><td><code>-10</code></td><td><code>ERR_INVALID_ARGS</code></td></tr><tr><td><code>-11</code></td><td><code>ERR_TIRED</code></td></tr><tr><td><code>-12</code></td><td><code>ERR_NO_BODYPART</code></td></tr></tbody></table></div>
+<h3>Body Part Costs</h3>
+<div class="markdown-table"><table><thead><tr><th>Part</th><th>Energy Cost</th><th>Effect</th></tr></thead><tbody><tr><td><code>MOVE</code></td><td>50</td><td>Reduces fatigue</td></tr><tr><td><code>WORK</code></td><td>100</td><td>Harvest 2/tick, build 5/tick, upgrade 1/tick, repair 100/tick</td></tr><tr><td><code>CARRY</code></td><td>50</td><td>50 capacity</td></tr><tr><td><code>ATTACK</code></td><td>80</td><td>30 melee damage/tick</td></tr><tr><td><code>RANGED_ATTACK</code></td><td>150</td><td>10 damage/tick at range ≤3</td></tr><tr><td><code>HEAL</code></td><td>250</td><td>12 hp/tick melee, 4 hp/tick ranged</td></tr><tr><td><code>CLAIM</code></td><td>600</td><td>Required for <code>claimController</code>/<code>reserveController</code></td></tr><tr><td><code>TOUGH</code></td><td>10</td><td>No action; 100 hp buffer</td></tr></tbody></table></div>
+<p>Max 50 body parts per creep. Spawn capacity (<code>room.energyCapacityAvailable</code>) caps what you can actually afford at once — see the RCL table in <code>02-core-loop-and-roles.md</code>.</p>
+<h3>API One-Liners You'll Type Constantly</h3>
+<pre class="code-block language-js"><code><span class="token-constant">Game</span>.spawns.Spawn1.room.controller.level              <span class="token-comment">// current RCL</span>
+<span class="token-constant">Game</span>.spawns.Spawn1.room.energyCapacityAvailable        <span class="token-comment">// max spawn capacity right now</span>
+<span class="token-constant">Game</span>.spawns.Spawn1.room.energyAvailable                <span class="token-comment">// energy sitting in spawn+extensions right now</span>
+<span class="token-constant">Game</span>.cpu.getUsed()                                      <span class="token-comment">// this tick's CPU so far</span>
+<span class="token-constant">Game</span>.cpu.bucket                                          <span class="token-comment">// banked CPU</span>
+<span class="token-constant">Game</span>.map.describeExits(roomName)                        <span class="token-comment">// adjacent room names by direction</span>
+<span class="token-constant">Game</span>.map.getRoomStatus(roomName)                        <span class="token-comment">// 'normal' | 'closed' | 'novice' | 'respawn'</span>
+room.find(<span class="token-constant">FIND_HOSTILE_CREEPS</span>)                          <span class="token-comment">// any hostile creep currently visible</span>
+room.getTerrain().get(x, y)                              <span class="token-comment">// 0 plain, 1 wall, 2 swamp</span>
+creep.getActiveBodyparts(<span class="token-constant">ATTACK</span>)                        <span class="token-comment">// live (non-destroyed) part count</span></code></pre>
+<h3>Structure Limits by RCL</h3>
+<p>See the full table in <code>02-core-loop-and-roles.md</code>. Containers are the exception — up to 5 allowed at any RCL, including RCL0.</p>
+<h3>Where to Go Deeper</h3>
+<p>Every pattern in this guide has a full episode in <code>docs/tutorials/</code> with checkpoints, troubleshooting, and the reasoning behind each design choice — start at <code>docs/tutorials/01-first-spawn-and-harvester.md</code> if you want the long version of any of this.</p></div>
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>

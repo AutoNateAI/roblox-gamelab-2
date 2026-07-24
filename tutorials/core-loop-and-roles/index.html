@@ -62,7 +62,169 @@
             <p>Move from one hardcoded harvester to source assignment, role modules, population-based spawning, and the first architecture that can scale.</p>
             <div class="tag-row"><span>Assign sources</span><span>Split role files</span><span>Spawn by population</span></div>
           </header>
-          <div class="markdown-body"><p>This tutorial source could not be loaded yet.</p></div>
+          <div class="markdown-body"><p>The single hardcoded harvester from the quickstart breaks the moment you add a second creep — both will pick the same source, pile up, and waste half their throughput. Everything in this file exists to fix that, permanently, in a way that scales to any number of creeps and jobs.</p>
+<h3>Source Assignment (Stop Creeps From Fighting Over One Source)</h3>
+<p>Assign each creep a source once, store it in <code>Memory</code>, and balance new assignments against what's already claimed:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> getAssignedSource(creep) {
+  <span class="token-keyword">if</span> (!creep.memory.sourceId) {
+    <span class="token-keyword">const</span> sources = creep.room.find(<span class="token-constant">FIND_SOURCES</span>);
+    <span class="token-keyword">const</span> claimCounts = {};
+    sources.forEach((source) =&gt; { claimCounts[source.id] = <span class="token-number">0</span>; });
+
+    <span class="token-keyword">for</span> (<span class="token-keyword">const</span> name <span class="token-keyword">in</span> <span class="token-constant">Game</span>.creeps) {
+      <span class="token-keyword">const</span> assignedId = <span class="token-constant">Game</span>.creeps[name].memory.sourceId;
+      <span class="token-keyword">if</span> (assignedId &amp;&amp; assignedId <span class="token-keyword">in</span> claimCounts) {
+        claimCounts[assignedId] += <span class="token-number">1</span>;
+      }
+    }
+
+    sources.sort((a, b) =&gt; claimCounts[a.id] - claimCounts[b.id]);
+    creep.memory.sourceId = sources[<span class="token-number">0</span>].id;
+  }
+  <span class="token-keyword">return</span> <span class="token-constant">Game</span>.getObjectById(creep.memory.sourceId);
+}</code></pre>
+<p>This assigns once and remembers — it doesn't recompute the best source every tick, which matters once CPU becomes a constraint (see <code>03-infrastructure-and-scaling.md</code>).</p>
+<h3>The Role Pattern</h3>
+<p>One script that branches on every possible job doesn't scale. Give every job its own file, exporting a <code>run(creep)</code> function, and dispatch by <code>creep.memory.role</code>.</p>
+<p><strong><code>role.harvester.js</code></strong> — general-purpose, harvest-and-deliver:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> roleHarvester = {
+  run(creep) {
+    <span class="token-keyword">if</span> (creep.store.getFreeCapacity() &gt; <span class="token-number">0</span>) {
+      <span class="token-keyword">const</span> source = this.getAssignedSource(creep);
+      <span class="token-keyword">if</span> (creep.harvest(source) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+        creep.moveTo(source, { visualizePathStyle: { stroke: <span class="token-string">'#ffaa00'</span> } });
+      }
+      <span class="token-keyword">return</span>;
+    }
+    <span class="token-keyword">const</span> spawn = <span class="token-constant">Game</span>.spawns.Spawn1;
+    <span class="token-keyword">if</span> (creep.transfer(spawn, <span class="token-constant">RESOURCE_ENERGY</span>) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(spawn, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+    }
+  },
+  getAssignedSource(creep) { /* see above */ },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleHarvester;</code></pre>
+<p><strong><code>role.upgrader.js</code></strong> — feeds the controller, toggles between harvesting and upgrading:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> roleUpgrader = {
+  run(creep) {
+    <span class="token-keyword">if</span> (creep.memory.upgrading &amp;&amp; creep.store[<span class="token-constant">RESOURCE_ENERGY</span>] === <span class="token-number">0</span>) {
+      creep.memory.upgrading = false;
+    }
+    <span class="token-keyword">if</span> (!creep.memory.upgrading &amp;&amp; creep.store.getFreeCapacity() === <span class="token-number">0</span>) {
+      creep.memory.upgrading = true;
+    }
+
+    <span class="token-keyword">if</span> (creep.memory.upgrading) {
+      <span class="token-keyword">const</span> controller = creep.room.controller;
+      <span class="token-keyword">if</span> (creep.upgradeController(controller) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+        creep.moveTo(controller, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+      }
+      <span class="token-keyword">return</span>;
+    }
+
+    <span class="token-keyword">const</span> source = creep.room.find(<span class="token-constant">FIND_SOURCES</span>)[<span class="token-number">0</span>];
+    <span class="token-keyword">if</span> (creep.harvest(source) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(source, { visualizePathStyle: { stroke: <span class="token-string">'#ffaa00'</span> } });
+    }
+  },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleUpgrader;</code></pre>
+<p><strong><code>role.builder.js</code></strong> — completes construction sites, falls back to repair, then to harvesting:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> roleBuilder = {
+  run(creep) {
+    <span class="token-keyword">if</span> (creep.memory.building &amp;&amp; creep.store[<span class="token-constant">RESOURCE_ENERGY</span>] === <span class="token-number">0</span>) {
+      creep.memory.building = false;
+    }
+    <span class="token-keyword">if</span> (!creep.memory.building &amp;&amp; creep.store.getFreeCapacity() === <span class="token-number">0</span>) {
+      creep.memory.building = true;
+    }
+
+    <span class="token-keyword">if</span> (creep.memory.building) {
+      <span class="token-keyword">const</span> site = creep.pos.findClosestByPath(<span class="token-constant">FIND_CONSTRUCTION_SITES</span>);
+      <span class="token-keyword">if</span> (site) {
+        <span class="token-keyword">if</span> (creep.build(site) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+          creep.moveTo(site, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+        }
+        <span class="token-keyword">return</span>;
+      }
+      <span class="token-keyword">const</span> damaged = creep.pos.findClosestByPath(<span class="token-constant">FIND_STRUCTURES</span>, {
+        filter: (s) =&gt; s.hits &lt; s.hitsMax &amp;&amp; s.structureType !== <span class="token-constant">STRUCTURE_WALL</span>,
+      });
+      <span class="token-keyword">if</span> (damaged &amp;&amp; creep.repair(damaged) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+        creep.moveTo(damaged, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+      }
+      <span class="token-keyword">return</span>;
+    }
+
+    <span class="token-keyword">const</span> source = creep.room.find(<span class="token-constant">FIND_SOURCES</span>)[<span class="token-number">0</span>];
+    <span class="token-keyword">if</span> (creep.harvest(source) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(source, { visualizePathStyle: { stroke: <span class="token-string">'#ffaa00'</span> } });
+    }
+  },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleBuilder;</code></pre>
+<p>Exclude <code>STRUCTURE_WALL</code> from repair targets on purpose — walls have hit-point maximums in the hundreds of millions, and a builder that tries to top one off will never do anything else again.</p>
+<pre class="code-block language-mermaid"><code>flowchart TD
+    Main[&quot;main.js: loop()&quot;] --&gt; Clean[Clean up dead creep memory]
+    Clean --&gt; Spawn[spawnMissingRoles]
+    Spawn --&gt; Dispatch{&quot;creep.memory.role?&quot;}
+    Dispatch -- harvester --&gt; RH[role.harvester.js]
+    Dispatch -- upgrader --&gt; RU[role.upgrader.js]
+    Dispatch -- builder --&gt; RB[role.builder.js]
+    Dispatch -- &quot;any future role&quot; --&gt; RN[role.*.js]</code></pre>
+<p><code>main.js</code> never contains behavior itself, only dispatch. Adding a role later means a new file, one line in <code>ROLE_BODIES</code>/<code>POPULATION</code>, one <code>else if</code>.</p>
+<h3>Population-Based Spawning</h3>
+<p>Stop hardcoding creep names. Spawn by role count, with a body suited to each job:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> roleHarvester = <span class="token-keyword">require</span>(<span class="token-string">'role.harvester'</span>);
+<span class="token-keyword">const</span> roleUpgrader = <span class="token-keyword">require</span>(<span class="token-string">'role.upgrader'</span>);
+<span class="token-keyword">const</span> roleBuilder = <span class="token-keyword">require</span>(<span class="token-string">'role.builder'</span>);
+
+<span class="token-keyword">const</span> ROLE_BODIES = {
+  harvester: [<span class="token-constant">WORK</span>, <span class="token-constant">CARRY</span>, <span class="token-constant">MOVE</span>],
+  upgrader: [<span class="token-constant">WORK</span>, <span class="token-constant">CARRY</span>, <span class="token-constant">MOVE</span>],
+  builder: [<span class="token-constant">WORK</span>, <span class="token-constant">CARRY</span>, <span class="token-constant">MOVE</span>],
+};
+
+<span class="token-keyword">const</span> POPULATION = {
+  harvester: <span class="token-number">2</span>,
+  upgrader: <span class="token-number">1</span>,
+  builder: <span class="token-number">1</span>,
+};
+
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span>.loop = <span class="token-keyword">function</span> () {
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> name <span class="token-keyword">in</span> <span class="token-constant">Memory</span>.creeps) {
+    <span class="token-keyword">if</span> (!<span class="token-constant">Game</span>.creeps[name]) delete <span class="token-constant">Memory</span>.creeps[name];
+  }
+
+  spawnMissingRoles();
+
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> name <span class="token-keyword">in</span> <span class="token-constant">Game</span>.creeps) {
+    <span class="token-keyword">const</span> creep = <span class="token-constant">Game</span>.creeps[name];
+    <span class="token-keyword">if</span> (creep.memory.role === <span class="token-string">'harvester'</span>) roleHarvester.run(creep);
+    <span class="token-keyword">else</span> <span class="token-keyword">if</span> (creep.memory.role === <span class="token-string">'upgrader'</span>) roleUpgrader.run(creep);
+    <span class="token-keyword">else</span> <span class="token-keyword">if</span> (creep.memory.role === <span class="token-string">'builder'</span>) roleBuilder.run(creep);
+  }
+};
+
+<span class="token-keyword">function</span> spawnMissingRoles() {
+  <span class="token-keyword">const</span> spawn = <span class="token-constant">Game</span>.spawns.Spawn1;
+  <span class="token-keyword">if</span> (spawn.spawning) <span class="token-keyword">return</span>;
+
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> role <span class="token-keyword">in</span> POPULATION) {
+    <span class="token-keyword">const</span> currentCount = _.filter(<span class="token-constant">Game</span>.creeps, (c) =&gt; c.memory.role === role).length;
+    <span class="token-keyword">if</span> (currentCount &lt; POPULATION[role]) {
+      <span class="token-keyword">const</span> name = <span class="token-string">`${role}${Game.time}`</span>;
+      spawn.spawnCreep(ROLE_BODIES[role], name, { memory: { role } });
+      <span class="token-keyword">break</span>;
+    }
+  }
+}</code></pre>
+<p><code>_</code> is lodash, available globally in the Screeps runtime — no <code>require</code> needed.</p>
+<h3>RCL and What It Unlocks</h3>
+<p>Reaching a controller level only unlocks the *allowance* to build something — you still have to place and complete the construction site.</p>
+<div class="markdown-table"><table><thead><tr><th>RCL</th><th>Extensions Allowed</th><th>Notable Unlock</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>Spawn only</td></tr><tr><td>2</td><td>5</td><td>Extensions, ramparts, walls</td></tr><tr><td>3</td><td>10</td><td>Towers</td></tr><tr><td>4</td><td>20</td><td>Storage</td></tr><tr><td>5</td><td>30</td><td>Links</td></tr><tr><td>6</td><td>40</td><td>Terminal, labs, extractor</td></tr><tr><td>7</td><td>50</td><td>Second spawn, factory</td></tr><tr><td>8</td><td>60</td><td>Third spawn, observer, power spawn, nuker</td></tr></tbody></table></div>
+<p>Check current level: <code>Game.spawns.Spawn1.room.controller.level</code>. Check available spawn capacity (base 300 + 50 per completed extension): <code>Game.spawns.Spawn1.room.energyCapacityAvailable</code>.</p>
+<p>Next: <code>03-infrastructure-and-scaling.md</code>.</p></div>
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>

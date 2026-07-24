@@ -62,7 +62,89 @@
             <p>Use towers, ramparts, combat body math, defenders, NPC sparring waves, and scouting so the colony learns before another player teaches it the hard way.</p>
             <div class="tag-row"><span>Run towers</span><span>Build defenders</span><span>Test pressure</span></div>
           </header>
-          <div class="markdown-body"><p>This tutorial source could not be loaded yet.</p></div>
+          <div class="markdown-body"><p>This is the &quot;get good enough to fight&quot; file. It covers passive defense, the actual combat math, a working defender, and — the part most guides skip — how to test any of this against real NPCs on your own machine before you ever risk it against another player.</p>
+<h3>Towers (Passive Defense That Needs Active Code)</h3>
+<p>A tower does nothing on its own. Every attack, heal, or repair has to come from your code, every tick:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> runTowers() {
+  <span class="token-keyword">const</span> towers = <span class="token-constant">Game</span>.spawns.Spawn1.room.find(<span class="token-constant">FIND_MY_STRUCTURES</span>, {
+    filter: { structureType: <span class="token-constant">STRUCTURE_TOWER</span> },
+  });
+
+  towers.forEach((tower) =&gt; {
+    <span class="token-keyword">const</span> hostile = tower.pos.findClosestByRange(<span class="token-constant">FIND_HOSTILE_CREEPS</span>);
+    <span class="token-keyword">if</span> (hostile) { tower.attack(hostile); <span class="token-keyword">return</span>; }
+
+    <span class="token-keyword">const</span> damaged = tower.pos.findClosestByRange(<span class="token-constant">FIND_MY_STRUCTURES</span>, {
+      filter: (s) =&gt; s.hits &lt; s.hitsMax,
+    });
+    <span class="token-keyword">if</span> (damaged) tower.repair(damaged);
+  });
+}</code></pre>
+<p>Call <code>runTowers()</code> once per tick from your main loop. Requires RCL3. Keep it fueled — route a hauler to top it off whenever its energy drops below half, ahead of extensions if it's actively firing.</p>
+<h3>Rampart Tanking</h3>
+<p>A creep standing *on top of* your own rampart can't be damaged from outside until the rampart's own hit points hit zero first. The rampart absorbs the hit; the creep underneath takes nothing. A freshly built rampart starts with barely any hit points — it protects nothing until something repairs it up. Build ramparts over your spawn and tower, then keep a builder or dedicated repairer feeding them energy.</p>
+<h3>The Real Combat Numbers</h3>
+<p>Every combat body part has a fixed, non-negotiable effect per tick:</p>
+<div class="markdown-table"><table><thead><tr><th>Part</th><th>Action</th><th>Effect</th></tr></thead><tbody><tr><td><code>ATTACK</code></td><td><code>creep.attack(target)</code></td><td>30 damage, melee range (1 tile)</td></tr><tr><td><code>RANGED_ATTACK</code></td><td><code>creep.rangedAttack(target)</code></td><td>10 damage, range 3</td></tr><tr><td><code>HEAL</code></td><td><code>creep.heal(target)</code></td><td>12 hp restored, melee range</td></tr><tr><td><code>HEAL</code></td><td><code>creep.rangedHeal(target)</code></td><td>4 hp restored, range 3</td></tr><tr><td><code>TOUGH</code></td><td>none</td><td>No action — 100 hp of buffer per part, its only job is to die last</td></tr></tbody></table></div>
+<p><code>ATTACK</code> hits harder per part than <code>RANGED_ATTACK</code>, but only at range 1 — a melee attacker eats ranged damage the whole way in. Neither part is strictly better; the tradeoff is the whole mechanic.</p>
+<h3>A Working Defender</h3>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> roleDefender = {
+  run(creep) {
+    <span class="token-keyword">const</span> hostile = creep.room.find(<span class="token-constant">FIND_HOSTILE_CREEPS</span>)[<span class="token-number">0</span>];
+
+    <span class="token-keyword">if</span> (!hostile) {
+      <span class="token-keyword">const</span> rampart = creep.room.find(<span class="token-constant">FIND_MY_STRUCTURES</span>, { filter: { structureType: <span class="token-constant">STRUCTURE_RAMPART</span> } })[<span class="token-number">0</span>];
+      <span class="token-keyword">if</span> (rampart &amp;&amp; !creep.pos.isEqualTo(rampart.pos)) {
+        creep.moveTo(rampart, { visualizePathStyle: { stroke: <span class="token-string">'#ff0000'</span> } });
+      }
+      <span class="token-keyword">return</span>;
+    }
+
+    <span class="token-keyword">const</span> range = creep.pos.getRangeTo(hostile);
+    <span class="token-keyword">if</span> (creep.getActiveBodyparts(<span class="token-constant">RANGED_ATTACK</span>) &gt; <span class="token-number">0</span> &amp;&amp; range &lt;= <span class="token-number">3</span>) creep.rangedAttack(hostile);
+    <span class="token-keyword">if</span> (creep.getActiveBodyparts(<span class="token-constant">ATTACK</span>) &gt; <span class="token-number">0</span> &amp;&amp; range &lt;= <span class="token-number">1</span>) creep.attack(hostile);
+    <span class="token-keyword">if</span> (range &gt; <span class="token-number">1</span>) creep.moveTo(hostile, { visualizePathStyle: { stroke: <span class="token-string">'#ff0000'</span> } });
+  },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleDefender;</code></pre>
+<p>Suggested body: <code>[TOUGH, TOUGH, ATTACK, ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE, MOVE]</code> (530 energy). Both ranged and melee checks run independently — not <code>else if</code> — because a creep with both parts can land both hits in the same tick once it closes to range 1.</p>
+<pre class="code-block language-mermaid"><code>flowchart TD
+    Tick([Defender tick]) --&gt; Hostile{Hostile present?}
+    Hostile -- No --&gt; Rampart[Hold rampart tile]
+    Hostile -- Yes --&gt; Range{Range to hostile}
+    Range --&gt;|&quot;&lt;= 3&quot;| Ranged[&quot;rangedAttack (10 dmg)&quot;]
+    Range --&gt;|&quot;&lt;= 1&quot;| Melee[&quot;attack (30 dmg)&quot;]
+    Range --&gt;|&quot;&gt; 1&quot;| Close[moveTo hostile]</code></pre>
+<p>Make the population reactive instead of running a standing army against nothing:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> getPopulationTargets(room) {
+  <span class="token-keyword">const</span> hostileCount = room.find(<span class="token-constant">FIND_HOSTILE_CREEPS</span>).length;
+  <span class="token-keyword">return</span> Object.assign({}, POPULATION, { defender: hostileCount &gt; <span class="token-number">0</span> ? <span class="token-number">2</span> : <span class="token-number">0</span> });
+}</code></pre>
+<h3>Testing Against Real NPCs, Locally, No Internet Required</h3>
+<p>This is the part most guides can't give you, because it depends on infrastructure most setups don't have. This repo ships two ways to get real hostile contact without touching another player's colony.</p>
+<p><strong>On-demand waves.</strong> A local mod (<code>screeps-server/mods/sparring-ground.js</code>) exposes an HTTP endpoint that triggers the server's own invader-generation system:</p>
+<pre class="code-block language-sh"><code>curl -X POST http://localhost:21025/local/api/sparring/wave \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;room&quot;: &quot;&lt;your-room-name&gt;&quot;}'</code></pre>
+<p>Run it as many times as you want. <code>scripts/sparring-loop.sh &lt;room&gt; &lt;waves&gt; &lt;delay&gt;</code> automates a repeated training loop — throw five waves at your colony ten seconds apart and see exactly where your defense breaks.</p>
+<p><strong>A standing rival colony.</strong> <code>screeps-server/config.yml</code> registers two real bot AIs (<code>screepsbot-zeswarm</code> and <code>screeps-bot-tooangel</code> — the latter has documented automatic-attack behavior). Place one into a room:</p>
+<pre class="code-block language-sh"><code>docker exec -it autonate-screeps screeps-launcher cli</code></pre>
+<pre class="code-block language-js"><code>bots.spawn(<span class="token-string">'tooangel'</span>, <span class="token-string">'&lt;unowned-room-name&gt;'</span>)</code></pre>
+<p>That gives you a real, persistent, autonomously-playing opponent — not a scripted wave, an actual colony making its own decisions nearby. Full details on both tools: <code>docs/local-screeps.md</code>.</p>
+<h3>Scouting Before You Commit</h3>
+<p>Send a cheap <code>[MOVE]</code>-only creep to visit candidate rooms and record what it finds, so you're deciding from data instead of a single glance:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> recordIntel(room) {
+  <span class="token-constant">Memory</span>.rooms = <span class="token-constant">Memory</span>.rooms || {};
+  <span class="token-constant">Memory</span>.rooms[room.name] = {
+    lastSeen: <span class="token-constant">Game</span>.time,
+    owner: room.controller &amp;&amp; room.controller.owner ? room.controller.owner.username : null,
+    reserved: room.controller &amp;&amp; room.controller.reservation ? room.controller.reservation.username : null,
+    sources: room.find(<span class="token-constant">FIND_SOURCES</span>).length,
+    hostileCount: room.find(<span class="token-constant">FIND_HOSTILE_CREEPS</span>).length,
+  };
+}</code></pre>
+<p>Treat old entries as suspect, not certain — <code>Game.time - Memory.rooms[name].lastSeen</code> tells you how stale a given snapshot is.</p>
+<p>Next: <code>05-cheatsheet.md</code>.</p></div>
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>

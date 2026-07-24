@@ -62,7 +62,114 @@
             <p>Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system.</p>
             <div class="tag-row"><span>Plan roads</span><span>Split mining and hauling</span><span>Manage CPU</span></div>
           </header>
-          <div class="markdown-body"><p>This tutorial source could not be loaded yet.</p></div>
+          <div class="markdown-body"><p>Once the role pattern is running, the next bottleneck is always the same: creeps spending more time walking than working. This file covers the fixes, in the order they usually start mattering.</p>
+<h3>Roads</h3>
+<p>Plan roads along the path creeps are already walking, instead of guessing:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> planRoadsTo(room, targetPos) {
+  <span class="token-keyword">const</span> spawn = <span class="token-constant">Game</span>.spawns.Spawn1;
+  <span class="token-keyword">const</span> path = room.findPath(spawn.pos, targetPos, { ignoreCreeps: true, swampCost: <span class="token-number">2</span> });
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> step <span class="token-keyword">of</span> path) {
+    room.createConstructionSite(step.x, step.y, <span class="token-constant">STRUCTURE_ROAD</span>);
+  }
+}
+
+<span class="token-keyword">const</span> room = <span class="token-constant">Game</span>.spawns.Spawn1.room;
+room.find(<span class="token-constant">FIND_SOURCES</span>).forEach((source) =&gt; planRoadsTo(room, source.pos));</code></pre>
+<p>A road costs <code>1</code> movement point per step instead of <code>2</code> on plains or <code>10</code> on swamp — a one-time build cost for a permanent speed bonus.</p>
+<h3>Static Mining + Hauling (The Real Throughput Fix)</h3>
+<p>Past a certain point, a general-purpose harvester (harvest + walk + deliver) is slower than splitting the job. A <code>WORK</code>-heavy creep plants itself on a source and never moves; a <code>CARRY</code>-heavy creep does nothing but ferry energy.</p>
+<p>Five <code>WORK</code> parts harvest <code>10</code> energy/tick — matching a source's average regeneration rate exactly, so nothing goes to waste:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// role.miner.js — stand on a container tile adjacent to the source, harvest forever</span>
+<span class="token-keyword">const</span> roleMiner = {
+  run(creep) {
+    <span class="token-keyword">if</span> (!creep.memory.sourceId) creep.memory.sourceId = assignSource(creep);
+    <span class="token-keyword">const</span> source = <span class="token-constant">Game</span>.getObjectById(creep.memory.sourceId);
+    <span class="token-keyword">if</span> (creep.harvest(source) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(source, { visualizePathStyle: { stroke: <span class="token-string">'#ffaa00'</span> } });
+    }
+  },
+};
+<span class="token-keyword">function</span> assignSource(creep) {
+  <span class="token-keyword">const</span> sources = creep.room.find(<span class="token-constant">FIND_SOURCES</span>);
+  <span class="token-keyword">const</span> claimed = _.map(<span class="token-constant">Game</span>.creeps, (c) =&gt; c.memory.sourceId).filter(Boolean);
+  <span class="token-keyword">const</span> open = sources.find((s) =&gt; !claimed.includes(s.id));
+  <span class="token-keyword">return</span> (open || sources[<span class="token-number">0</span>]).id;
+}
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleMiner;</code></pre>
+<p>A creep with no <code>CARRY</code> parts drops harvested energy at its feet. If a container sits under it, the energy goes into the container automatically instead of piling on the ground — build the container first (any RCL, up to 5 per room).</p>
+<pre class="code-block language-js"><code><span class="token-comment">// role.hauler.js — withdraw from containers, deliver to spawn/extensions</span>
+<span class="token-keyword">const</span> roleHauler = {
+  run(creep) {
+    <span class="token-keyword">if</span> (creep.memory.hauling &amp;&amp; creep.store[<span class="token-constant">RESOURCE_ENERGY</span>] === <span class="token-number">0</span>) creep.memory.hauling = false;
+    <span class="token-keyword">if</span> (!creep.memory.hauling &amp;&amp; creep.store.getFreeCapacity() === <span class="token-number">0</span>) creep.memory.hauling = true;
+
+    <span class="token-keyword">if</span> (creep.memory.hauling) {
+      <span class="token-keyword">const</span> target = creep.pos.findClosestByPath(<span class="token-constant">FIND_STRUCTURES</span>, {
+        filter: (s) =&gt; (s.structureType === <span class="token-constant">STRUCTURE_EXTENSION</span> || s.structureType === <span class="token-constant">STRUCTURE_SPAWN</span>)
+          &amp;&amp; s.store.getFreeCapacity(<span class="token-constant">RESOURCE_ENERGY</span>) &gt; <span class="token-number">0</span>,
+      });
+      <span class="token-keyword">if</span> (target &amp;&amp; creep.transfer(target, <span class="token-constant">RESOURCE_ENERGY</span>) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+        creep.moveTo(target, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+      }
+      <span class="token-keyword">return</span>;
+    }
+
+    <span class="token-keyword">const</span> container = creep.pos.findClosestByPath(<span class="token-constant">FIND_STRUCTURES</span>, {
+      filter: (s) =&gt; s.structureType === <span class="token-constant">STRUCTURE_CONTAINER</span> &amp;&amp; s.store[<span class="token-constant">RESOURCE_ENERGY</span>] &gt; <span class="token-number">0</span>,
+    });
+    <span class="token-keyword">if</span> (container &amp;&amp; creep.withdraw(container, <span class="token-constant">RESOURCE_ENERGY</span>) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(container, { visualizePathStyle: { stroke: <span class="token-string">'#ffaa00'</span> } });
+    }
+  },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleHauler;</code></pre>
+<p>Body suggestions: miner <code>[WORK, WORK, WORK, WORK, WORK, MOVE]</code> (550 energy), hauler <code>[CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]</code> (400 energy).</p>
+<pre class="code-block language-mermaid"><code>flowchart LR
+    Source((&quot;Source&quot;)) --&gt;|harvest, never moves| Miner[Miner]
+    Miner --&gt;|drops into| Container[Container]
+    Container --&gt;|withdraw| Hauler[Hauler]
+    Hauler --&gt;|transfer| Extension[&quot;Extension / Spawn&quot;]</code></pre>
+<p>Compare to one general-purpose creep doing all four steps itself, walking the whole time — same total work, split so harvesting never stops to let a creep walk anywhere.</p>
+<h3>CPU and Memory Discipline</h3>
+<p><code>room.find()</code> scans every object of that type; <code>findClosestByPath</code> runs real pathfinding. Both are cheap at three creeps and expensive at fifteen.</p>
+<p>Check your actual cost:</p>
+<pre class="code-block language-js"><code><span class="token-constant">Game</span>.cpu.getUsed()   <span class="token-comment">// this tick's usage so far</span>
+<span class="token-constant">Game</span>.cpu.limit       <span class="token-comment">// per-tick budget</span>
+<span class="token-constant">Game</span>.cpu.bucket      <span class="token-comment">// banked unused CPU from previous ticks</span></code></pre>
+<p>Cache anything that doesn't change tick to tick in a plain object at module scope — not in <code>Memory</code>, which gets fully serialized every tick regardless of whether you touched it:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> cache = {};
+
+<span class="token-keyword">function</span> getSources(room) {
+  cache.sources = cache.sources || {};
+  <span class="token-keyword">if</span> (!cache.sources[room.name]) {
+    cache.sources[room.name] = room.find(<span class="token-constant">FIND_SOURCES</span>).map((s) =&gt; s.id);
+  }
+  <span class="token-keyword">return</span> cache.sources[room.name].map((id) =&gt; <span class="token-constant">Game</span>.getObjectById(id));
+}
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = { getSources };</code></pre>
+<p>A plain object like this resets itself harmlessly on a global reset (a code push, an uncaught exception, a periodic engine refresh) — the next call just recomputes it once. Anything that *must* survive a reset (like <code>creep.memory.sourceId</code>) belongs in <code>Memory</code> instead.</p>
+<pre class="code-block language-mermaid"><code>flowchart TD
+    Data{New data to store} --&gt; Survive{Must survive a global reset?}
+    Survive -- Yes --&gt; Mem[&quot;Memory — serialized every tick, costs CPU, persists&quot;]
+    Survive -- No --&gt; Cache[&quot;Plain object at module scope — free between ticks, wiped on reset&quot;]</code></pre>
+<h3>Multi-Room Basics</h3>
+<p><strong>Reserve, don't claim, for remote mining.</strong> Claiming a controller costs a permanent slot against your Global Control Level (GCL) — usually <code>1</code> for a new account, already spent on your home room. Reserving grants your creeps working rights in a room without taking ownership or costing GCL.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// role.reserver.js — needs a CLAIM part (600 energy on its own, 650 with MOVE)</span>
+<span class="token-keyword">const</span> roleReserver = {
+  run(creep) {
+    <span class="token-keyword">const</span> targetRoom = <span class="token-constant">Memory</span>.remoteRoom;
+    <span class="token-keyword">if</span> (creep.room.name !== targetRoom) {
+      creep.moveTo(<span class="token-keyword">new</span> <span class="token-constant">RoomPosition</span>(<span class="token-number">25</span>, <span class="token-number">25</span>, targetRoom));
+      <span class="token-keyword">return</span>;
+    }
+    <span class="token-keyword">if</span> (creep.reserveController(creep.room.controller) === <span class="token-constant">ERR_NOT_IN_RANGE</span>) {
+      creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: <span class="token-string">'#ffffff'</span> } });
+    }
+  },
+};
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = roleReserver;</code></pre>
+<p><code>reserveController</code> has to be called every tick the creep is in range — a single reserver camped on the controller holds it indefinitely. List your exits with <code>Game.map.describeExits(roomName)</code> and check a target isn't already owned or reserved before committing creeps to it.</p>
+<p>Next: <code>04-combat-and-competing.md</code>.</p></div>
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
