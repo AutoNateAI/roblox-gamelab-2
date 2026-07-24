@@ -34,16 +34,6 @@ export const screepsScreenshots = [
 
 export const tutorialPacks = [
   {
-    handle: "getting-started-with-screeps",
-    title: "Getting Started with Screeps",
-    tagline: "Free player guide",
-    summary:
-      "Buy the game, claim a room, ship the harvest loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.",
-    icon: "rocket_launch",
-    status: "Active",
-    heroShotIndex: 0,
-  },
-  {
     handle: "intro-to-javascript-for-beginners",
     title: "Intro to JavaScript for Beginners",
     tagline: "Coming soon",
@@ -52,6 +42,16 @@ export const tutorialPacks = [
     icon: "code",
     status: "Coming Soon",
     heroShotIndex: 3,
+  },
+  {
+    handle: "getting-started-with-screeps",
+    title: "Getting Started with Screeps",
+    tagline: "Free player guide",
+    summary:
+      "Buy the game, claim a room, ship the harvest loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think.",
+    icon: "rocket_launch",
+    status: "Active",
+    heroShotIndex: 0,
   },
 ];
 
