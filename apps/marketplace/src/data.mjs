@@ -38,7 +38,7 @@ export const tutorials = [
     episode: "01",
     title: "Quickstart: Playing in 15 Minutes",
     track: "Start Here",
-    sourcePath: "/Users/autonate/code/anai-screeps/docs/player-guide/01-quickstart.md",
+    sourcePath: "../content/tutorials/01-quickstart.md",
     summary:
       "Claim a room, place Spawn1, spawn the first worker, and get the harvest-deliver loop running without turning setup into a side quest.",
     outcomes: ["Claim a room", "Spawn Harvester1", "Run the first loop"],
@@ -48,7 +48,7 @@ export const tutorials = [
     episode: "02",
     title: "Core Loop and Roles",
     track: "Code Patterns",
-    sourcePath: "/Users/autonate/code/anai-screeps/docs/player-guide/02-core-loop-and-roles.md",
+    sourcePath: "../content/tutorials/02-core-loop-and-roles.md",
     summary:
       "Move from one hardcoded harvester to source assignment, role modules, population-based spawning, and the first architecture that can scale.",
     outcomes: ["Assign sources", "Split role files", "Spawn by population"],
@@ -58,7 +58,7 @@ export const tutorials = [
     episode: "03",
     title: "Infrastructure and Scaling",
     track: "Systems",
-    sourcePath: "/Users/autonate/code/anai-screeps/docs/player-guide/03-infrastructure-and-scaling.md",
+    sourcePath: "../content/tutorials/03-infrastructure-and-scaling.md",
     summary:
       "Add roads, containers, static mining, haulers, CPU discipline, caching, and the first move from one-room bot to serious colony system.",
     outcomes: ["Plan roads", "Split mining and hauling", "Manage CPU"],
@@ -68,7 +68,7 @@ export const tutorials = [
     episode: "04",
     title: "Combat and Competing",
     track: "Competition",
-    sourcePath: "/Users/autonate/code/anai-screeps/docs/player-guide/04-combat-and-competing.md",
+    sourcePath: "../content/tutorials/04-combat-and-competing.md",
     summary:
       "Use towers, ramparts, combat body math, defenders, NPC sparring waves, and scouting so the colony learns before another player teaches it the hard way.",
     outcomes: ["Run towers", "Build defenders", "Test pressure"],
@@ -78,7 +78,7 @@ export const tutorials = [
     episode: "05",
     title: "Cheatsheet",
     track: "Reference",
-    sourcePath: "/Users/autonate/code/anai-screeps/docs/player-guide/05-cheatsheet.md",
+    sourcePath: "../content/tutorials/05-cheatsheet.md",
     summary:
       "Keep the error codes, body costs, constants, and API one-liners close. You will look them up until your colony stops embarrassing you.",
     outcomes: ["Read error codes", "Check body costs", "Use API one-liners"],

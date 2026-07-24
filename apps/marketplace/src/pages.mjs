@@ -1001,7 +1001,7 @@ function slugify(value = "") {
 
 function readTutorialMarkdown(tutorial) {
   try {
-    return readFileSync(tutorial.sourcePath, "utf8");
+    return readFileSync(new URL(tutorial.sourcePath, import.meta.url), "utf8");
   } catch {
     return `# ${tutorial.title}\n\nThis tutorial source could not be loaded yet.`;
   }
@@ -1121,8 +1121,8 @@ function highlightJavaScript(source = "") {
     return token;
   };
 
-  html = html.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)/g, (match) => stash("token-string", match));
   html = html.replace(/(\/\/[^\n]*)/g, (match) => stash("token-comment", match));
+  html = html.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)/g, (match) => stash("token-string", match));
   html = html.replace(/\b(const|let|var|function|return|if|else|for|in|of|new|class|module|exports|require|continue|break)\b/g, '<span class="token-keyword">$1</span>');
   html = html.replace(/\b(Game|Memory|RoomPosition|FIND_[A-Z_]+|ERR_[A-Z_]+|RESOURCE_[A-Z_]+|STRUCTURE_[A-Z_]+|WORK|CARRY|MOVE|ATTACK|RANGED_ATTACK|HEAL|TOUGH|CLAIM)\b/g, '<span class="token-constant">$1</span>');
   html = html.replace(/\b(\d+)\b/g, '<span class="token-number">$1</span>');
