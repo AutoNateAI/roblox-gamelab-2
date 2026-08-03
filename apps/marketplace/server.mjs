@@ -9,6 +9,7 @@ import {
   renderArticles,
   renderAbout,
   renderCommunity,
+  renderConsulting,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -151,7 +152,7 @@ const server = createServer(async (request, response) => {
   const apiPath = marketplaceApiPath(url.pathname);
 
   try {
-    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/tutorials", "/community", "/league", "/checkout", "/success"]);
+    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/tutorials", "/community", "/live-builds", "/consulting", "/checkout", "/success"]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       if (url.pathname === "/programs") {
@@ -164,7 +165,8 @@ const server = createServer(async (request, response) => {
         "/articles": renderArticles,
         "/tutorials": renderTutorials,
         "/community": renderCommunity,
-        "/league": renderLeague,
+        "/live-builds": renderLeague,
+        "/consulting": renderConsulting,
         "/checkout": renderCheckout,
         "/success": renderSuccess,
       };

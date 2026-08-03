@@ -1,106 +1,106 @@
 {
-  "generatedAt": "2026-07-13T00:00:00.000Z",
+  "generatedAt": "2026-08-02T00:00:00.000Z",
   "path": {
-    "id": "path-ai-software-architect",
-    "name": "Workforce Systems Programming",
-    "description": "A live workforce systems course where developers and technical builders use JavaScript and AI to design a Screeps colony, turn game mechanics into architecture, and prove the system in capture-the-flag competition.",
-    "targetAudience": "High school programmers, college CS students, junior software engineers, career switchers, and technical builders who are comfortable reading and modifying code and want to become more sophisticated systems thinkers.",
-    "difficulty": "Developer-oriented",
+    "id": "path-ai-agent-systems",
+    "name": "Software Systems with AI Agents",
+    "description": "A live program where builders use Claude Code, Codex, and other AI agents to design real software systems, then prove the work by shipping a real system for a real organization, sourced from an actual RFP.",
+    "targetAudience": "CS students, coding bootcamp participants, self-taught builders, and career switchers who want to become software system architects. No formal enrollment required, just comfort writing and reading code.",
+    "difficulty": "Beginner-to-intermediate, agent-assisted",
     "estimatedDuration": "4 weeks, 8 live sessions",
     "status": "Active"
   },
   "programs": [
     {
-      "id": "program-ai-software-architect-august-2026",
-      "handle": "ai-software-architect",
-      "name": "AI Systems Programming Lab",
-      "description": "A four-week live cohort where developers and technical builders use JavaScript and Codex to design a Screeps colony that gathers resources, makes decisions, recovers from failures, and battles other colonies in capture-the-flag.",
+      "id": "program-ai-agent-systems-august-2026",
+      "handle": "ai-agent-systems",
+      "name": "How to Create Software Systems with AI Agents",
+      "description": "A four-week live cohort where builders use Claude Code, Codex, and other AI agents to design real software systems: databases, APIs, and architecture, then ship a system built live for a real organization, sourced from an actual RFP.",
       "durationWeeks": 4,
       "sequence": 1,
-      "learningOutcomes": "Read a live software environment, model available components, design colony roles, manage state, automate resource decisions, debug live behavior, use Git and Codex responsibly, prepare tournament strategy, and explain why the system behaves the way it does.",
-      "projectSummary": "A Screeps colony system you design that can harvest energy, spawn creeps, assign roles, persist memory, recover from failures, respond to hostile pressure, adapt to resource constraints, and compete under capture-the-flag rules.",
-      "portfolioArtifact": "Your Git repository with Screeps bot code, commits, README notes, screenshots or match clips, architecture notes, tournament-week strategy notes, and a final reflection on what happened when your system battled other colonies.",
-      "badge": "Workforce Systems Programming",
-      "pathTags": ["Workforce Systems", "Systems Thinking", "Git", "APIs", "Automation", "Codex", "Competition"],
+      "learningOutcomes": "Set up and direct AI coding agents responsibly, engineer prompts and context for real projects, design relational and graph data models, build and query APIs, document architecture with Mermaid diagrams, review and debug AI-generated code, read and respond to a real RFP, and ship a working system for a real organization.",
+      "projectSummary": "A real software system you design and ship in response to an actual RFP or civic problem: a working data model, API, and application, built with AI agents and documented like production work.",
+      "portfolioArtifact": "Your Git repository with the shipped system, commits, architecture notes and Mermaid diagrams, the RFP research and outreach draft, and a final reflection on what the agents got right, what they got wrong, and what you fixed.",
+      "badge": "Software Systems with AI Agents",
+      "pathTags": ["AI Agents", "Claude Code", "Codex", "System Architecture", "Databases", "APIs", "Civic Tech"],
       "status": "Active",
-      "startDate": "2026-08-03",
-      "liveSchedule": "Tuesdays and Thursdays, 6:30 PM-8:30 PM Eastern",
-      "cohortNote": "New cohorts run every so often. The next cohort opens Monday, August 3, 2026. Live sessions begin Tuesday, August 4, 2026. Phase 2 league rollout follows after cohort tournaments are running.",
+      "startDate": "2026-08-17",
+      "liveSchedule": "Tuesdays 1:30 PM-3:00 PM CST and Thursdays 5:30 PM-7:00 PM CST",
+      "cohortNote": "New cohorts run every so often. The next cohort opens Monday, August 17, 2026. Live sessions begin Tuesday, August 18, 2026. The same Tuesday/Thursday build sessions keep running afterward in the AutoNateAI Discord as Live Builds, open to the whole community.",
       "sessions": [
         {
           "number": 1,
-          "name": "Session 1: Screeps Environment and System Map",
-          "date": "Tuesday, August 4, 2026",
-          "objectives": "Read Screeps as a programmable environment: rooms, creeps, spawns, sources, controllers, terrain, game ticks, state, and available actions.",
-          "liveActivity": "Set up the workspace, inspect the Screeps API surface, map the first room, and identify the signals a colony needs before it can make useful decisions.",
-          "homework": "Create an environment map that labels components, constraints, signals, and decisions the colony needs to understand."
+          "name": "Session 1: Meet Your AI Agents",
+          "date": "Tuesday, August 18, 2026",
+          "objectives": "Set up Claude Code and Codex as real collaborators and learn to point an agent at an unfamiliar codebase before asking it to change anything.",
+          "liveActivity": "Install and configure Claude Code and Codex, walk through a real repository together, and have an agent explain its architecture, entry points, and data flow back to you.",
+          "homework": "Use an agent to map a small existing codebase and write a short architecture note describing its components and how they connect."
         },
         {
           "number": 2,
-          "name": "Session 2: Component Architecture and Role Design",
-          "date": "Thursday, August 6, 2026",
-          "objectives": "Turn Screeps objects into a colony architecture with roles, behaviors, state, and priority rules.",
-          "liveActivity": "Design harvester, upgrader, builder, and logistics behaviors; connect them to Memory; and decide how the colony should route work each tick.",
-          "homework": "Implement or revise two role components and document their inputs, outputs, assumptions, and failure cases."
+          "name": "Session 2: Prompt and Context Engineering in Practice",
+          "date": "Thursday, August 20, 2026",
+          "objectives": "Apply prompt and context engineering to a real multi-file project: structure the ask, and give the agent only the context it actually needs.",
+          "liveActivity": "Take a real feature request, structure a prompt with role, task, and constraints, hand the agent the relevant files, and review the diff line by line.",
+          "homework": "Use an agent to implement one small feature in an existing project and document what context you gave it, what you accepted, and what you rejected."
         },
         {
           "number": 3,
-          "name": "Session 3: Decisions, State, and Colony Automation",
-          "date": "Tuesday, August 11, 2026",
-          "objectives": "Build decision loops that use state, resource signals, spawn capacity, and room priorities to keep the colony moving.",
-          "liveActivity": "Create spawn automation, role balancing, task switching, and fallback behavior for stuck or idle creeps.",
-          "homework": "Add one automation loop and document its trigger, expected effect, and failure mode."
+          "name": "Session 3: Databases and APIs",
+          "date": "Tuesday, August 25, 2026",
+          "objectives": "Design a relational schema for a real problem, wire up a simple API, and use an agent to scaffold both responsibly.",
+          "liveActivity": "Design tables, keys, and relationships for a sample system, build API endpoints against them, and query the data live.",
+          "homework": "Add one table and one API endpoint to a project, and write the query that answers a real question about the data."
         },
         {
           "number": 4,
-          "name": "Session 4: APIs, Interfaces, and Debugging",
-          "date": "Thursday, August 13, 2026",
-          "objectives": "Use the Screeps API deliberately by reading object contracts, method calls, return values, errors, and live room behavior.",
-          "liveActivity": "Inspect Game, Room, Creep, StructureSpawn, Source, Controller, Store, and Memory usage; debug broken behavior from logs and visible colony state.",
-          "homework": "Write an API note for one Screeps object or method and use it to fix or improve one colony behavior."
+          "name": "Session 4: System Architecture and Mermaid Diagrams",
+          "date": "Thursday, August 27, 2026",
+          "objectives": "Turn a working system into a diagram: use Mermaid to communicate architecture and organize services and components.",
+          "liveActivity": "Pick a real system, diagram it in Mermaid, identify its weak points, and talk through tradeoffs with an agent.",
+          "homework": "Produce a Mermaid architecture diagram for your own project and one paragraph explaining a tradeoff you made."
         },
         {
           "number": 5,
-          "name": "Session 5: AI Build Partner and Feature Planning",
-          "date": "Tuesday, August 18, 2026",
-          "objectives": "Use Codex as an architecture and implementation partner without surrendering judgment.",
-          "liveActivity": "Choose a feature path, prompt Codex with API-aware context, inspect generated code, test in Screeps, review diffs, and commit only explainable changes.",
-          "homework": "Use Codex to implement one approved improvement and write what changed, what was accepted, and what was rejected."
+          "name": "Session 5: Debugging and Reviewing AI-Generated Code",
+          "date": "Tuesday, September 1, 2026",
+          "objectives": "Build the habit of reviewing agent output like a senior engineer: reading diffs, running tests, and catching hallucinated logic.",
+          "liveActivity": "Review a batch of AI-generated changes live, find at least one real bug or hallucination, fix it, and commit the working version.",
+          "homework": "Review and correct one AI-generated change in your own project, documenting what was wrong and why."
         },
         {
           "number": 6,
-          "name": "Session 6: Colony Expansion Projects",
-          "date": "Thursday, August 20, 2026",
-          "objectives": "Build a project-grade colony subsystem that deepens architecture, API fluency, and tournament readiness.",
-          "liveActivity": "Select and build one colony project: smarter spawn planner, role scheduler, pathing/cost-matrix helper, repair-and-build planner, tower/defense controller, or energy logistics dashboard.",
-          "homework": "Finish the project branch, update the README with architecture notes, and identify how the subsystem changes tournament strategy."
+          "name": "Session 6: Reading a Real RFP With AI",
+          "date": "Thursday, September 3, 2026",
+          "objectives": "Find and read an actual government or foundation RFP, and use an agent to extract requirements, stakeholders, and constraints.",
+          "liveActivity": "Pull a live RFP, have an agent summarize it, and identify who issued it and what problem it's really asking to solve.",
+          "homework": "Find one real RFP or civic problem and write an agent-assisted summary of what it's asking for and who it would help."
         },
         {
           "number": 7,
-          "name": "Session 7: Tournament Week: Battle Branch and CTF Prep",
-          "date": "Tuesday, August 25, 2026",
-          "objectives": "Turn the colony architecture into a battle-ready branch for AutoNateAI capture-the-flag rules.",
-          "liveActivity": "Review mechanics, identify attack and defense priorities, tune the tournament branch, and decide what the bot should protect, chase, ignore, or optimize.",
-          "homework": "Finish the tournament branch and write a short strategy note explaining how your colony plans to win."
+          "name": "Session 7: Build Week Part 1 - Design and Start the Real System",
+          "date": "Tuesday, September 8, 2026",
+          "objectives": "Turn the researched RFP into an actual system design and start building it live.",
+          "liveActivity": "Design the architecture for the chosen system, scaffold the repository, and implement the first real feature with agent support.",
+          "homework": "Keep building: commit progress and update the architecture notes as the design changes."
         },
         {
           "number": 8,
-          "name": "Session 8: Tournament Week: Capture-the-Flag Battles",
-          "date": "Thursday, August 27, 2026",
-          "objectives": "Battle colonies head-to-head in AutoNateAI capture-the-flag, explain the architecture, review tradeoffs, and identify the next version for league-style improvement.",
-          "liveActivity": "Participants submit tournament branches, run Screeps capture-the-flag matches, watch code-driven colony strategies collide, and analyze how mechanics, state, automation, and architecture shaped the outcome.",
-          "homework": "Submit final repo link, Screeps match screenshots or clips, architecture notes, tournament reflection, and next-build plan."
+          "name": "Session 8: Build Week Part 2 - Ship It",
+          "date": "Thursday, September 10, 2026",
+          "objectives": "Finish a working version of the system, write it up, and identify who to contact about it.",
+          "liveActivity": "Finish the build, demo it live, and draft outreach identifying the people or organization who should see it.",
+          "homework": "Submit final repo link, architecture notes, a short system writeup, and the outreach draft."
         }
       ],
       "offerings": [
         {
-          "id": "offering-ai-software-architect-august-2026",
-          "name": "AI Systems Programming Lab - August Cohort",
+          "id": "offering-ai-agent-systems-august-2026",
+          "name": "How to Create Software Systems with AI Agents - August Cohort",
           "deliveryType": "Live Cohort",
-          "price": 369,
+          "price": 499,
           "priceUnit": "Per Student",
           "capacity": 25,
-          "meetingFrequency": "4 weeks, Tuesdays and Thursdays, 6:30 PM-8:30 PM Eastern",
+          "meetingFrequency": "4 weeks, Tuesdays 1:30-3:00 PM CST and Thursdays 5:30-7:00 PM CST",
           "status": "Active"
         }
       ]
@@ -108,18 +108,18 @@
   ],
   "league": {
     "product": {
-      "title": "AutoNateAI Tournament Day",
-      "cta": "The final week is AutoNateAI tournament week: builders tune battle branches, then play capture-the-flag inside Screeps where every move, defense, and resource decision comes from code.",
+      "title": "AutoNateAI Live Builds",
+      "cta": "Every Tuesday and Thursday the AutoNateAI team builds a real software system live in Discord, sourced from an actual RFP. No lecturing, just the build.",
       "price": null,
-      "status": "Included"
+      "status": "Ongoing"
     },
     "season": {
-      "name": "August Cohort Tournament Day",
-      "format": "AutoNateAI Screeps capture-the-flag",
-      "winCondition": "Participants submit battle-ready Screeps bot branches to the tournament server. Colonies go head-to-head under capture-the-flag rules while builders explain how their environment reading, component design, Git history, automation decisions, and strategy shaped the match.",
+      "name": "AutoNateAI Live Builds",
+      "format": "Live, Discord-only build sessions sourced from real RFPs",
+      "winCondition": "Every session ships real progress on a real system: read the RFP, research the organization behind it, design the architecture, and build in public. No scripts and no lecturing, just the system taking shape live, week after week.",
       "entryFee": null,
-      "startDate": "2026-08-25",
-      "endDate": "2026-08-27",
+      "startDate": "2026-08-18",
+      "endDate": null,
       "status": "Active"
     }
   }

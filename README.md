@@ -2,6 +2,10 @@
 
 Rojo-synced Roblox action prototype inspired by `input_repos/world-of-claudecraft`.
 
+## AutoNateAI GameLab
+
+AutoNateAI GameLab is a Roblox-based competitive skill progression marketplace. Players train through standalone practice quests, buy Field Manuals, enter live CTF events, join multi-week campaigns, and apply real-world skills through team-based gameplay.
+
 ## Studio Loop
 
 ```bash

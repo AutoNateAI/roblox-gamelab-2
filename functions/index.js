@@ -6,10 +6,10 @@ import { onRequest } from "firebase-functions/v2/https";
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp();
 
 const OFFERINGS = {
-  "ai-software-architect:offering-ai-software-architect-august-2026": {
-    programName: "AI Systems Programming Lab",
-    offeringName: "AI Systems Programming Lab - August Cohort",
-    amount: 36900,
+  "ai-agent-systems:offering-ai-agent-systems-august-2026": {
+    programName: "How to Create Software Systems with AI Agents",
+    offeringName: "How to Create Software Systems with AI Agents - August Cohort",
+    amount: 49900,
     currency: "USD",
   },
 };

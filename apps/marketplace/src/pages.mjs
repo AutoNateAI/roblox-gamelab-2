@@ -13,6 +13,13 @@ function shot(index) {
   return screepsScreenshots[index % screepsScreenshots.length];
 }
 
+function packMedia(pack, index) {
+  if (pack.heroShotIndex === undefined || pack.heroShotIndex === null) {
+    return `<div class="media-icon-tile"><span class="material-symbols-outlined">${escapeHtml(pack.icon)}</span></div>`;
+  }
+  return `<img src="${shot(index ?? pack.heroShotIndex)}" alt="" />`;
+}
+
 function formatDate(value) {
   if (!value) return "";
   return new Intl.DateTimeFormat("en-US", {
@@ -53,15 +60,15 @@ export function renderHome(data) {
   const body = `
     <main>
       <section class="home-hero">
-        <div class="hero-bg"><img src="${shot(0)}" alt="A Screeps room in progress" /></div>
+        <div class="hero-bg"><img src="${shot(0)}" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("terminal")} Workforce Systems Cohort</span>
-            <h1>Build smarter systems with AI, then prove them in competition.</h1>
-            <p>Use JavaScript and AI to design a colony that can gather resources, make decisions, recover from failures, and compete in Screeps capture-the-flag. You will learn how to read a live environment, turn game mechanics into architecture, and explain why your system works under pressure.</p>
+            <span class="kicker">${icon("terminal")} Software Systems, Built With AI Agents</span>
+            <h1>Become the system architect, not just the coder.</h1>
+            <p>AutoNateAI teaches CS students, bootcamp builders, and self-taught developers to design real software systems: databases, APIs, and architecture, directed with AI agents like Claude Code and Codex, and proven by shipping a real system for a real organization.</p>
             <div class="cohort-date-row">
               ${cohortBadge(primaryProgram)}
-              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for setup help, colony design questions, Codex review, tournament prep, and build support between sessions.</span>
+              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for setup help, architecture reviews, agent workflow coaching, and build support between sessions.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
@@ -69,16 +76,16 @@ export function renderHome(data) {
             </div>
           </div>
           <aside class="hero-program-panel">
-            <img src="${shot(3)}" alt="Screeps room showing a coded colony system" />
+            <img src="${shot(3)}" alt="" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What they build</span>
-              <h2>Learn the mechanics. Design the system. Battle through code.</h2>
-              <p>Turn Screeps strategy into engineering habits, then prepare for AutoNateAI capture-the-flag where colonies battle head-to-head.</p>
+              <h2>Read the problem. Design the system. Ship it for real.</h2>
+              <p>Turn a real RFP or civic problem into a working system, then use that habit for every system you build after the cohort ends.</p>
               <div class="hero-facts">
                 <span>System design practice</span>
                 <span>${cohortCapacity(primaryProgram)}</span>
-                <span>Screeps bot repo</span>
-                <span>CTF tournament week</span>
+                <span>Your Git repo</span>
+                <span>Live RFP build</span>
               </div>
             </div>
           </aside>
@@ -89,16 +96,16 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("public")} Why this works</span>
-            <h2>Screeps makes scalable software visible.</h2>
-            <p>Every system-design choice connects to a colony you can see: environment signals become state, game objects become components, roles become architecture, Git protects strategy experiments, and automation helps the colony scale under pressure.</p>
+            <h2>Real systems make architecture visible.</h2>
+            <p>Every design choice connects to a system you can see: requirements become data models, decisions become components, Git protects every experiment, and AI agents help you move faster without losing track of what you actually shipped.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid">
-          <article><span>${icon("functions")}</span><h3>Code that operates</h3><p>Existing coding knowledge gets applied to live colony mechanics: creeps, spawns, sources, controllers, memory, terrain, and hostile pressure.</p></article>
-          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working bot versions, read diffs, recover from broken strategy changes, and leave with a visible repo history.</p></article>
-          <article><span>${icon("hub")}</span><h3>APIs and automation</h3><p>Screeps game objects make API thinking concrete while spawn logic, roles, Memory, and room state drive automation loops.</p></article>
-          <article><span>${icon("forum")}</span><h3>Cohort build support</h3><p>Use Discord for setup help, Codex review, colony design questions, tournament prep, and build support between live sessions.</p></article>
+          <article><span>${icon("functions")}</span><h3>Code that ships</h3><p>Existing coding knowledge gets applied to a real system: databases, APIs, architecture, and the tradeoffs that come with a real organization depending on it.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working versions, read diffs, recover from broken changes, and leave with a visible repo history that explains the system.</p></article>
+          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Design relational and graph data models, build the API that serves them, and document how it fits together with Mermaid diagrams.</p></article>
+          <article><span>${icon("forum")}</span><h3>Cohort build support</h3><p>Use Discord for setup help, architecture reviews, agent workflow coaching, RFP research, and build support between live sessions.</p></article>
         </div>
       </section>
 
@@ -106,11 +113,11 @@ export function renderHome(data) {
         <div class="compete-layout">
           <div class="compete-visual">
             <div class="compete-media">
-              <img src="${shot(7)}" alt="Screeps battle with colonies competing" />
+              <img src="${shot(7)}" alt="" />
               <div class="compete-callout">
-                <span>${icon("flag")} Tournament capstone</span>
-                <strong>Head-to-head colony battles</strong>
-                <p>See whether your architecture can keep making good decisions when another coded colony is trying to win.</p>
+                <span>${icon("flag")} Live capstone</span>
+                <strong>A real system, built live</strong>
+                <p>See whether your architecture can hold up when a real organization is the one depending on it.</p>
               </div>
             </div>
             <div class="button-row compete-actions">
@@ -119,27 +126,27 @@ export function renderHome(data) {
             </div>
           </div>
           <div class="compete-copy">
-            <span class="kicker">${icon("emoji_events")} Design, Build, Battle</span>
-            <h2>Design a colony system, then battle against other people's systems.</h2>
-            <p>This is for people who are comfortable reading and modifying code. The work is learning how to read the Screeps environment, understand its mechanics, compose the available components, design roles, manage state, automate decisions, and improve the system before tournament week. By the end, you are not just showing a project. You are running a colony built from your own architecture.</p>
+            <span class="kicker">${icon("emoji_events")} Design, Build, Ship</span>
+            <h2>Design a real system, then ship it for a real organization.</h2>
+            <p>This is for people who are comfortable reading and writing code and want to get sharper at directing it. The work is learning to read an unfamiliar system, direct AI agents without losing the thread, design data models and APIs, document architecture, and turn a real RFP into a working, shipped system. By the end, you are not just showing a project. You are pointing at a real system you designed and built.</p>
             <div class="compete-curriculum">
-              <article><b>01</b><span>Map the Screeps environment, mechanics, components, resources, and constraints.</span></article>
-              <article><b>02</b><span>Design roles, state, memory, automation loops, and Git-backed strategy experiments.</span></article>
-              <article><b>03</b><span>Spend the final week tuning and battling a tournament branch in AutoNateAI capture-the-flag.</span></article>
+              <article><b>01</b><span>Set up Claude Code and Codex, and learn to engineer prompts and context for real projects.</span></article>
+              <article><b>02</b><span>Design databases and APIs, and document architecture with Mermaid diagrams.</span></article>
+              <article><b>03</b><span>Spend the final week reading a real RFP and shipping a system built live for a real organization.</span></article>
             </div>
           </div>
         </div>
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="${shot(6)}" alt="Screeps combat room" /></div>
+        <div class="spotlight-image"><img src="${shot(6)}" alt="" /></div>
         <div>
-          <span class="kicker">${icon("flag")} Capstone</span>
-          <h2>${escapeHtml(league.season?.name || "Tournament Day")}</h2>
-          <p>${escapeHtml(league.product?.cta || "")} The match makes the learning visible: your code has to read the room, manage resources, defend priorities, and keep making decisions while another colony pushes back.</p>
+          <span class="kicker">${icon("flag")} Ongoing</span>
+          <h2>${escapeHtml(league.season?.name || "Live Builds")}</h2>
+          <p>${escapeHtml(league.product?.cta || "")} It makes the learning visible: real code has to read the problem, manage tradeoffs, and keep making progress while the organization it's for is watching.</p>
           <div class="stat-grid">
-            <div><strong>${escapeHtml(league.season?.format || "TBD")}</strong><span>Format</span></div>
-            <div><strong>Included</strong><span>Final Tournament</span></div>
+            <div><strong>${escapeHtml(league.season?.format || "Tue/Thu, Discord")}</strong><span>Format</span></div>
+            <div><strong>Included</strong><span>Cohort Capstone</span></div>
           </div>
           <div class="button-row">
             <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
@@ -148,12 +155,23 @@ export function renderHome(data) {
         </div>
       </section>
 
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("business_center")} Where It Leads</span>
+            <h2>Live Builds are real AutoNateAI Consulting engagements.</h2>
+            <p>Every Live Build ships for a real organization. Builders who stand out get pulled onto real AutoNateAI Consulting engagements, or introduced directly to the partner organizations hiring for these skills. It's a real hiring pipeline, not a portfolio exercise.</p>
+          </div>
+          <a class="primary-button" href="/consulting">See How It Works ${icon("arrow_forward")}</a>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("article")} Articles</span>
             <h2>For builders who want sharper engineering judgment.</h2>
-            <p>These reads explain why Screeps works as a systems lab: the code controls real mechanics, the colony exposes weak assumptions, Git makes experiments recoverable, and competition proves whether the design holds up.</p>
+            <p>These reads explain why real systems make the best teacher: the code controls real outcomes, the system exposes weak assumptions, Git makes experiments recoverable, and shipping proves whether the design holds up.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
@@ -163,35 +181,35 @@ export function renderHome(data) {
       <section class="newsletter">
         <div>
           <h2>Reserve your seat for the next cohort.</h2>
-          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is four weeks, virtual, Tuesdays and Thursdays from 6:30 PM to 8:30 PM Eastern, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
+          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is four weeks, virtual, Tuesdays 1:30 PM-3:00 PM CST and Thursdays 5:30 PM-7:00 PM CST, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
           </form>
-          <small>Screeps setup help, cohort workspace, Git repo guidance, Codex workflow support, and tournament-week support are included.</small>
+          <small>Agent setup help, cohort workspace, Git repo guidance, architecture coaching, and RFP build support are included.</small>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "AutoNateAI | Workforce Systems Programming Lab",
+    title: "AutoNateAI | Software Systems With AI Agents",
     active: "home",
     body,
     canonicalPath: "/",
     ogImage: "/assets/og/programs.jpg",
     description:
-      "A 4-week workforce systems program where developers and technical builders design colony systems, automate strategy, use Git and Codex responsibly, and battle in Screeps capture-the-flag.",
-    ogTitle: "Code the colony. Train the architect.",
+      "A 4-week live program where CS students, bootcamp builders, and self-taught developers design real software systems with AI agents like Claude Code and Codex, then ship one for a real organization.",
+    ogTitle: "Design the system. Ship it for real.",
     ogDescription:
-      "A 4-week JavaScript + Codex cohort where builders design Screeps colonies, manage chaos with Git, and settle architecture debates in capture-the-flag.",
+      "A 4-week live cohort where builders design databases, APIs, and architecture with Claude Code and Codex, then ship a real system sourced from an actual RFP.",
     structuredData: [
       {
         "@context": "https://schema.org",
         "@type": "EducationalOrganization",
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI teaches developers and technical builders to design software systems, use AI responsibly, and prove their architecture through Screeps competition.",
+        "description": "AutoNateAI teaches developers and technical builders to design real software systems, direct AI agents responsibly, and prove their architecture by shipping real systems.",
       },
     ],
   });
@@ -213,9 +231,9 @@ export function renderPrograms(data) {
     canonicalPath: "/programs",
     ogImage: "/assets/og/programs.jpg",
     description: path.description,
-    ogTitle: "No worksheets. Colonies that fight back.",
+    ogTitle: "No worksheets. Real systems for real organizations.",
     ogDescription:
-      "Build a Screeps colony with JavaScript and Codex, then find out whether your system can still think when the match gets messy.",
+      "Design a real system with Claude Code and Codex, then find out whether it holds up when a real organization is depending on it.",
   });
 }
 
@@ -241,9 +259,9 @@ export function renderAbout() {
         <div>
           <span class="kicker">${icon("psychology")} About AutoNateAI</span>
           <h1>We teach builders how to design systems that survive contact with reality.</h1>
-          <p>AutoNateAI helps developers and technical builders practice the work behind good software: reading an environment, modeling state, designing components, using AI responsibly, testing assumptions, and explaining why the system behaves the way it does.</p>
+          <p>AutoNateAI helps CS students, bootcamp builders, and self-taught developers practice the work behind good software: reading an environment, modeling state, designing components, using AI agents responsibly, testing assumptions, and explaining why the system behaves the way it does.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-software-architect">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/articles">Read the Learning Model</a>
           </div>
         </div>
@@ -260,7 +278,8 @@ export function renderAbout() {
       <section class="about-mission">
         <span class="kicker">${icon("architecture")} Mission</span>
         <h2>Good code is not enough. The system has to work.</h2>
-        <p>Professional engineers spend a lot of time reading unfamiliar systems, identifying constraints, debugging behavior, communicating tradeoffs, using Git, and deciding what should be automated next. AutoNateAI turns those habits into a live practice environment where the design either works or the colony exposes the gap.</p>
+        <p>AutoNateAI's vision is that more people become system architects: not just software architects, but people who can design the systems around them, technical and civic alike. Software is the vehicle because AI now makes it fast and cheap to build. Professional engineers spend their time reading unfamiliar systems, identifying constraints, debugging behavior, communicating tradeoffs, using Git, and deciding what should be automated next. AutoNateAI turns those habits into a live practice environment where the design either works or the real system exposes the gap.</p>
+        <p>That practice environment is not hypothetical. <a href="/consulting">AutoNateAI Consulting</a> takes on real RFPs and real civic problems for real organizations, and Live Builds are how that work gets delivered: live, in public, in the AutoNateAI Discord. It's also how builders get hired, either onto real AutoNateAI Consulting engagements or introduced to the partner organizations looking for exactly these skills.</p>
       </section>
 
       <section class="section compact about-split">
@@ -282,7 +301,7 @@ export function renderAbout() {
             <h2>Technology changes. Engineering judgment lasts.</h2>
             <p>Builders practice reading the environment first, designing before changing code, using AI with context, testing the result, and explaining the tradeoffs behind their decisions.</p>
           </div>
-          <a class="primary-button" href="/programs/ai-software-architect">Reserve Seat ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/programs/ai-agent-systems">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid about-value-grid">
           <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Turn mechanics, components, state, and constraints into a system you can explain.</p></article>
@@ -327,35 +346,35 @@ export function renderAbout() {
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
-          <article><h3>Is this for complete beginners?</h3><p>No. This is best for people who are comfortable reading and modifying code and want to become better at designing systems inside a live environment with components, constraints, resources, and competition.</p></article>
-          <article><h3>How does AI fit into the class?</h3><p>You use AI to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
-          <article><h3>Why use Screeps?</h3><p>Screeps makes software visible. You can see state, automation, feedback loops, failure, hostile pressure, resources, and strategy play out in a live world controlled by code.</p></article>
-          <article><h3>Who is this built for?</h3><p>High school programmers, college CS students, junior software engineers, career switchers, and technical builders who want stronger systems thinking and AI-assisted engineering habits.</p></article>
+          <article><h3>Is this for complete beginners?</h3><p>The free tutorial packs start from zero. The paid program is best once you are comfortable reading and modifying code and want to get sharper at designing systems: data models, APIs, and architecture.</p></article>
+          <article><h3>How does AI fit into the class?</h3><p>You use agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
+          <article><h3>Why build real systems instead of exercises?</h3><p>A real RFP or civic problem makes tradeoffs visible in a way an exercise can't. You can see requirements, constraints, feedback, failure, and whether your design actually holds up.</p></article>
+          <article><h3>Who is this built for?</h3><p>CS students, coding bootcamp participants, self-taught builders, career switchers, and technical builders who want stronger systems thinking and AI-assisted engineering habits.</p></article>
         </div>
       </section>
 
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Current Program</span>
-          <h2>AI Systems Programming Lab</h2>
-          <p>A four-week workforce systems cohort where developers and technical builders design a Screeps colony, learn the game mechanics, automate strategy, use Git, collaborate with AI, and spend the final week in capture-the-flag tournament play.</p>
+          <h2>How to Create Software Systems with AI Agents</h2>
+          <p>A four-week live cohort where builders design databases, APIs, and architecture with Claude Code and Codex, use Git, and spend the final week shipping a real system for a real organization, sourced from an actual RFP.</p>
         </div>
-        <a class="primary-button" href="/programs/ai-software-architect">Explore the Program ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/programs/ai-agent-systems">Explore the Program ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "About AutoNateAI | AI Systems Engineering Practice",
+    title: "About AutoNateAI | AI-Agent Systems Engineering Practice",
     active: "about",
     body,
     canonicalPath: "/about",
     ogImage: "/assets/nathan-baker.jpeg",
     description:
-      "AutoNateAI teaches developers and technical builders to design systems, use AI responsibly, debug behavior, and prove their work through Screeps competition.",
-    ogTitle: "Meet the engineer behind the colony lab.",
+      "AutoNateAI teaches developers and technical builders to design systems, direct AI agents responsibly, debug behavior, and prove their work by shipping real systems.",
+    ogTitle: "Meet the engineer behind the program.",
     ogDescription:
-      "AutoNateAI turns real engineering habits into a Screeps systems lab where builders design, debug, commit, and compete through code.",
+      "AutoNateAI turns real engineering habits into a live practice ground where builders design, debug, commit, and ship real systems with AI agents.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -379,27 +398,24 @@ export function renderProgramDetail(data, program) {
   const related = data.programs.filter((p) => p.handle !== program.handle).slice(0, 3);
   const gallery = [shot(6), shot(7), shot(8)];
   const offering = program.offerings?.[0];
-  const price = offering ? money(offering.price) : "$369";
+  const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
   const sessionWeeks = chunkSessions(program.sessions || [], 2);
-  const heroTitle =
-    program.handle === "ai-software-architect"
-      ? `<span class="hero-title-line">AI Systems</span><span class="hero-title-line">Programming Lab</span>`
-      : escapeHtml(program.name);
+  const heroTitle = escapeHtml(program.name);
 
   const body = `
     <main class="product-detail-page">
       <section class="home-hero program-detail-hero">
-        <div class="hero-bg"><img src="${gallery[0]}" alt="${escapeHtml(program.name)} preview" /></div>
+        <div class="hero-bg"><img src="${gallery[0]}" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/ai-software-architect">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
-            <span class="kicker">${icon("emoji_events")} JavaScript + AI + CTF</span>
+            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/${program.handle}">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
+            <span class="kicker">${icon("emoji_events")} AI Agents + Systems + Real Impact</span>
             <h1>${heroTitle}</h1>
-            <p>This is where coding starts feeling like systems engineering. Use JavaScript and Codex to design a Screeps colony that reads the room, gathers resources, assigns roles, fixes problems, and makes decisions on its own. Then take that colony into capture-the-flag and see how your architecture performs when another coded system pushes back.</p>
+            <p>This is where coding starts feeling like systems engineering. Use Claude Code and Codex to design a real system: model the data, build the API, document the architecture, and make it hold up under real constraints. Then take that system into a real RFP and see how your architecture performs when a real organization is depending on it.</p>
             <div class="cohort-date-row">
               ${cohortBadge(program)}
-              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, Codex review, colony design questions, tournament prep, and build support between sessions.</span>
+              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, architecture reviews, agent workflow coaching, and build support between sessions.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
@@ -407,16 +423,16 @@ export function renderProgramDetail(data, program) {
             </div>
           </div>
           <aside class="hero-program-panel program-hero-panel">
-            <img src="${gallery[1]}" alt="Screeps tournament strategy preview" />
+            <img src="${gallery[1]}" alt="" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What You Build</span>
-              <h2>A colony that has to think while the game keeps moving.</h2>
-              <p>Learn the mechanics, design the architecture, keep decisions in Git, then tune a battle branch where every move, defense, and resource decision comes from code.</p>
+              <h2>A system that has to hold up while a real organization is watching.</h2>
+              <p>Learn the tools, design the architecture, keep decisions in Git, then ship a real system built live in response to an actual RFP.</p>
               <div class="hero-facts">
                 <span>${cohortCapacity(program)}</span>
                 <span>${program.durationWeeks || 4} weeks</span>
                 <span>Your Git repo</span>
-                <span>Codex coaching</span>
+                <span>Agent coaching</span>
               </div>
             </div>
           </aside>
@@ -427,7 +443,7 @@ export function renderProgramDetail(data, program) {
         <a href="${checkoutHref}"><b>${price}</b><span>Full 4-week cohort</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
         <a href="#curriculum"><b>8</b><span>Live build sessions</span></a>
-        <a href="#outcomes"><b>CTF</b><span>Tournament week</span></a>
+        <a href="#outcomes"><b>RFP</b><span>Live build week</span></a>
       </section>
 
       <section class="section compact detail-sales-band" id="outcomes">
@@ -435,14 +451,14 @@ export function renderProgramDetail(data, program) {
           <div>
             <span class="kicker">${icon("architecture")} What Actually Changes</span>
             <h2>You start seeing code as a living system, not a file of instructions.</h2>
-            <p>You learn the environment, turn game mechanics into components, design roles, automate decisions, debug failures, use Git checkpoints, and explain how the colony works under pressure. Screeps makes system design visible because your code has to survive, gather resources, respond to changing conditions, and compete.</p>
+            <p>You learn to direct AI agents deliberately, design data models and APIs, automate decisions, debug failures, use Git checkpoints, and explain how the system works under pressure. Building a real system for a real organization makes the design visible, because your code has to survive, serve real requirements, and respond to changing constraints.</p>
           </div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="${shot(2)}" alt="Screeps room with active creeps" /><h3>A colony with real behavior</h3><p>Harvesters, upgraders, builders, spawn logic, Memory, role behavior, and decisions shaped by the room.</p></article>
-          <article><img src="${shot(4)}" alt="Screeps room showing system growth" /><h3>AI-assisted engineering habits</h3><p>Use Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
-          <article><img src="${shot(8)}" alt="Screeps map and room systems" /><h3>A tournament-ready branch</h3><p>Tune your colony for AutoNateAI capture-the-flag, then use Phase 2 league play as the next arena for improvement.</p></article>
+          <article><img src="${shot(2)}" alt="" /><h3>A system with real behavior</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by real requirements.</p></article>
+          <article><img src="${shot(4)}" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
+          <article><img src="${shot(8)}" alt="" /><h3>A shot at getting hired</h3><p>Live Builds are real <a href="/consulting">AutoNateAI Consulting</a> engagements. Standout builders get pulled onto real work, or introduced to the partner organizations hiring for these skills.</p></article>
         </div>
       </section>
 
@@ -466,21 +482,21 @@ export function renderProgramDetail(data, program) {
         <div>
           <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
           <h2>${price} for the full 4-week cohort</h2>
-          <p>${escapeHtml(program.cohortNote || "")} Includes Screeps setup help, cohort workspace access, Git repo guidance, Codex workflow coaching, dedicated AutoNateAI Discord access, and tournament-week support.</p>
+          <p>${escapeHtml(program.cohortNote || "")} Includes agent setup help, cohort workspace access, Git repo guidance, architecture coaching, dedicated AutoNateAI Discord access, and live build-week support.</p>
         </div>
         <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
       </section>
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>8 sessions from environment mapping to tournament battles.</h2><p>Because Screeps keeps running, you see the same pressures real software faces: unfamiliar environments, changing state, feedback loops, dependencies, automation, failure recovery, resource constraints, hostile actors, and performance under competition.</p></div>
+          <div><h2>8 sessions from meeting your agents to shipping a real system.</h2><p>Because you're building against a real RFP, you see the same pressures real software faces: unfamiliar environments, changing requirements, dependencies, automation, failure recovery, resource constraints, and performance under real deadlines.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         <div class="week-grid">
           ${sessionWeeks.map((sessions, index) => weekCard(index, sessions)).join("")}
         </div>
         <div class="detail-bottom-cta">
-          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to tournament prep and capture-the-flag battles.</span></div>
+          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to shipping a real system for a real organization.</span></div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
       </section>
@@ -488,7 +504,7 @@ export function renderProgramDetail(data, program) {
       ${
         related.length
           ? `<section class="section compact">
-        <div class="section-head"><h2>Related cohorts</h2><a href="/programs/ai-software-architect">Back to program ${icon("arrow_forward")}</a></div>
+        <div class="section-head"><h2>Related cohorts</h2><a href="/programs/${program.handle}">Back to program ${icon("arrow_forward")}</a></div>
         <div class="mini-grid">${related.map((p) => miniProgramCard(p)).join("")}</div>
       </section>`
           : ""
@@ -503,9 +519,9 @@ export function renderProgramDetail(data, program) {
     canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
-    ogTitle: "AI Systems Programming Lab: your architecture has to survive.",
+    ogTitle: "Your architecture has to survive real requirements.",
     ogDescription:
-      "Use JavaScript and Codex to build a Screeps colony, tune the system in Git, and battle through capture-the-flag when another bot pushes back.",
+      "Use Claude Code and Codex to design a real system, tune it in Git, and ship it live for a real organization sourced from an actual RFP.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -532,31 +548,32 @@ export function renderProgramDetail(data, program) {
 }
 
 export function renderLeague(data) {
+  const league = data.league || {};
   const body = `
     <main class="league-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="${shot(7)}" alt="Screeps combat preview used as AutoNateAI league placeholder" /></div>
+        <div class="hero-bg"><img src="${shot(7)}" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("emoji_events")} AutoNateAI League / Coming Soon</span>
-          <h1>Code-versus-code, but the scoreboard cares how you think.</h1>
-          <p>The AutoNateAI League is where colony architecture becomes a season-long systems competition. Week 4 of the cohort is the mini taste: submit a battle branch, watch the code perform, and explain what survived. Phase 2 is the bigger arena for builders who want rankings, replays, awards, and real pressure on their ideas.</p>
+          <span class="kicker">${icon("emoji_events")} AutoNateAI Live Builds</span>
+          <h1>Real systems, built live. No lecturing, just the build.</h1>
+          <p>${escapeHtml(league.product?.cta || "")} Anyone in the AutoNateAI Discord can watch, ask questions, and follow along as the system takes shape.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-software-architect">Join the Cohort ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/community">Join the Community</a>
+            <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
+            <a class="secondary-button" href="/programs/ai-agent-systems">View the Program</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(7)}" alt="Screeps combat preview used as AutoNateAI league placeholder" />
+          <img src="${shot(7)}" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("flag")} League Status</span>
-            <h2>Coming Soon</h2>
-            <p>Phase 2 will expand cohort tournament week into seasons, rankings, replays, strategy reviews, and league badges.</p>
+            <span class="kicker">${icon("flag")} Schedule</span>
+            <h2>Tuesdays and Thursdays</h2>
+            <p>Tuesdays 1:30 PM-3:00 PM CST and Thursdays 5:30 PM-7:00 PM CST, live in the AutoNateAI Discord.</p>
             <div class="hero-facts">
-              <span>Mini CTF in week 4</span>
-              <span>Phase 2 rollout</span>
-              <span>Ranked seasons</span>
-              <span>Replay reviews</span>
+              <span>RFP-sourced</span>
+              <span>No lecturing</span>
+              <span>Discord-only</span>
+              <span>Open to everyone</span>
             </div>
           </div>
         </aside>
@@ -566,50 +583,129 @@ export function renderLeague(data) {
       <section class="league-grid">
         <article class="league-rules">
           <span class="kicker">${icon("sports_esports")} The Format</span>
-          <h2>Autonomous colonies. Match pressure. Architecture on display.</h2>
-          <p>Your submission is a battle branch. Your bot has to gather, route, defend, adapt, and compete without you clicking around to save it. The match does not care that the code looked clean in the editor. The room asks the only question that matters: can the system keep making useful decisions?</p>
-          <p>The difference is what we score. Wins matter, but so does the thinking: how you reverse engineered the map, how cleanly the system is composed, how well it recovers from failure, and whether you can explain why your colony made the decisions it made.</p>
+          <h2>A real RFP. A real build. No script.</h2>
+          <p>Every session starts with a real problem: an actual RFP or civic ask from a city, foundation, or organization. The team reads it, researches who's behind it, and starts designing a system live, in Discord, in front of anyone watching.</p>
+          <p>${escapeHtml(league.season?.winCondition || "")}</p>
+          <p>This isn't a simulation of real work. It <em>is</em> the real work: every Live Build is an actual <a href="/consulting">AutoNateAI Consulting</a> engagement, delivered in public. Builders who stand out get pulled onto real engagements, or introduced to the partner organizations hiring for these skills.</p>
         </article>
         <aside class="league-facts">
-          <div><span>Week 4</span><b>Mini CTF</b></div>
-          <div><span>Phase 2</span><b>League Rollout</b></div>
-          <div><span>Mode</span><b>Code vs Code</b></div>
-          <div><span>Status</span><b class="status-pill">Coming Soon</b></div>
-          <a class="primary-button full" href="/community">Get League Updates</a>
+          <div><span>Tue</span><b>1:30-3:00 PM CST</b></div>
+          <div><span>Thu</span><b>5:30-7:00 PM CST</b></div>
+          <div><span>Mode</span><b>${escapeHtml(league.season?.format || "Real RFP, Live Build")}</b></div>
+          <div><span>Status</span><b class="status-pill live">${escapeHtml(league.season?.status || "Active")}</b></div>
+          <a class="primary-button full" href="/community">Get Live Build Updates</a>
         </aside>
       </section>
 
       <section class="section compact league-section">
-        <div class="section-head"><div><span class="kicker">${icon("workspace_premium")} What You Can Win</span><h2>Not just best bot. Best mind at work.</h2><p>The league will reward the builder who wins the match and the builder whose system explains the future. Some people will dominate the map. Some will reverse engineer the rules. Some will debug the impossible bug before anyone else sees it.</p></div></div>
+        <div class="section-head"><div><span class="kicker">${icon("visibility")} What You'll See</span><h2>Not a highlight reel. The actual process.</h2><p>Every session is the real thing: real requirements, real dead ends, real fixes. Nothing is rehearsed and nothing is cut.</p></div></div>
         <div class="league-how league-awards">
-          <div><span class="material-symbols-outlined">psychology</span><h3>Best Systems Thinker</h3><p>For the builder who sees the whole board: resources, timing, failure modes, opponent pressure, and tradeoffs.</p></div>
-          <div><span class="material-symbols-outlined">travel_explore</span><h3>Reverse Engineer</h3><p>For the builder who reads the arena, infers the hidden rules, and turns unknowns into working strategy.</p></div>
-          <div><span class="material-symbols-outlined">bug_report</span><h3>Clutch Debugger</h3><p>For the builder who finds the real break, patches the right layer, and saves the branch before the clock runs out.</p></div>
-          <div><span class="material-symbols-outlined">account_tree</span><h3>Architecture Award</h3><p>For clean roles, readable state, useful abstractions, and code that can change without collapsing.</p></div>
-          <div><span class="material-symbols-outlined">conversion_path</span><h3>Automation Architect</h3><p>For the colony that keeps making sharp decisions after the room gets crowded, hostile, or expensive.</p></div>
-          <div><span class="material-symbols-outlined">flag</span><h3>Flag Pressure</h3><p>For the strategy that knows when to protect, chase, trade, retreat, or make the move that ends the match.</p></div>
+          <div><span class="material-symbols-outlined">travel_explore</span><h3>Reading the Ask</h3><p>A real RFP gets read, picked apart, and turned into a list of what actually needs to get built.</p></div>
+          <div><span class="material-symbols-outlined">smart_toy</span><h3>Agent-Directed Builds</h3><p>Real prompts, real context, real review of what the agent got right and what needed a fix.</p></div>
+          <div><span class="material-symbols-outlined">account_tree</span><h3>System Architecture</h3><p>Data model and API decisions made out loud, with the tradeoffs explained as they happen.</p></div>
+          <div><span class="material-symbols-outlined">bug_report</span><h3>Clutch Debugging</h3><p>The real bug, found live, fixed live, no cut scenes.</p></div>
+          <div><span class="material-symbols-outlined">forum</span><h3>Outreach</h3><p>Identifying who the system is actually for, and drafting the outreach to reach them.</p></div>
+          <div><span class="material-symbols-outlined">flag</span><h3>Ship Day</h3><p>The moment a system goes from "in progress" to something a real organization could actually use.</p></div>
         </div>
       </section>
 
       <section class="league-gallery">
-        <img src="${shot(8)}" alt="Screeps room placeholder for AutoNateAI league map" />
-        <img src="${shot(5)}" alt="Screeps room placeholder for league strategy review" />
-        <img src="${shot(2)}" alt="Screeps room placeholder for colony automation" />
+        <img src="${shot(8)}" alt="" />
+        <img src="${shot(5)}" alt="" />
+        <img src="${shot(2)}" alt="" />
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "League | AutoNateAI",
-    active: "league",
+    title: "Live Builds | AutoNateAI",
+    active: "live-builds",
     body,
-    canonicalPath: "/league",
-    ogImage: "/assets/og/league.jpg",
+    canonicalPath: "/live-builds",
+    ogImage: "/assets/og/live-builds.jpg",
     description:
-      "The AutoNateAI League is the upcoming code-versus-code arena for colony systems, strategy reviews, rankings, and capture-the-flag competition.",
-    ogTitle: "AutoNateAI League: code-versus-code is coming.",
+      "AutoNateAI Live Builds: every Tuesday and Thursday, the team builds a real software system live in Discord, sourced from an actual RFP. No lecturing, just the build.",
+    ogTitle: "AutoNateAI Live Builds: real systems, built live.",
     ogDescription:
-      "Week 4 is the mini taste. Phase 2 brings seasons, rankings, replays, and awards for the builders whose systems think under pressure.",
+      "Tuesdays 1:30-3:00 PM CST and Thursdays 5:30-7:00 PM CST, live in Discord. A real RFP, a real build, no script.",
+  });
+}
+
+export function renderConsulting(data) {
+  const primaryProgram = data.programs?.[0];
+  const checkoutHref = primaryProgram?.offerings?.[0]
+    ? `/checkout?program=${primaryProgram.handle}&offering=${primaryProgram.offerings[0].id}`
+    : "/programs/ai-agent-systems";
+
+  const body = `
+    <main class="league-page">
+      <section class="home-hero league-detail-hero">
+        <div class="hero-bg"><img src="${shot(2)}" alt="" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon("business_center")} AutoNateAI Consulting</span>
+          <h1>Real systems, delivered in public.</h1>
+          <p>AutoNateAI Consulting takes on real RFPs and civic problems for real organizations, and builds the system live, in Discord, with AI agents doing real work under real deadlines. Every Live Build is a real engagement, not a simulation of one.</p>
+          <div class="button-row">
+            <a class="primary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">Work With Us ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/live-builds">Watch a Live Build</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="${shot(2)}" alt="" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("apartment")} For Organizations</span>
+            <h2>Bring us a real problem.</h2>
+            <p>Cities, foundations, schools, and organizations bring AutoNateAI Consulting a real RFP or a real system to build. We design and ship it live, with the reasoning visible the whole way.</p>
+            <div class="hero-facts">
+              <span>RFP-sourced</span>
+              <span>AI-agent built</span>
+              <span>Delivered live</span>
+              <span>Real organizations</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("groups")} For Builders</span>
+            <h2>The program is how you get in the room.</h2>
+            <p>Every Live Build is also a hiring pipeline. Builders who stand out in the cohort and in Live Builds get pulled onto real AutoNateAI Consulting engagements, or introduced directly to the partner organizations hiring for these exact skills.</p>
+          </div>
+          <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+        </div>
+        <div class="compete-curriculum">
+          <article><b>01</b><span><strong>Train.</strong> The free tutorial packs and the live program teach the actual skills: AI agents, databases, APIs, and architecture.</span></article>
+          <article><b>02</b><span><strong>Prove it.</strong> Live Builds put your work in front of real organizations, live, in public. No portfolio padding, just real shipped systems.</span></article>
+          <article><b>03</b><span><strong>Get hired.</strong> Standout builders get pulled into real AutoNateAI Consulting engagements, or connected directly to partner organizations hiring for these skills.</span></article>
+        </div>
+      </section>
+
+      <section class="detail-enroll-band">
+        <div>
+          <span class="kicker">${icon("local_activity")} Ready to build the thing that gets you noticed?</span>
+          <h2>Start with a real system, not another exercise.</h2>
+          <p>Join the program, show up to Live Builds, and let real, shipped work make the case for you.</p>
+        </div>
+        <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Consulting | AutoNateAI",
+    active: "consulting",
+    body,
+    canonicalPath: "/consulting",
+    ogImage: "/assets/og/consulting.jpg",
+    description:
+      "AutoNateAI Consulting builds real software systems for real organizations, live and in public, and is the hiring pipeline behind the AutoNateAI program.",
+    ogTitle: "AutoNateAI Consulting: real systems, delivered in public.",
+    ogDescription:
+      "Real RFPs, real organizations, built live with AI agents. Standout builders get pulled onto real engagements or introduced to hiring partners.",
   });
 }
 
@@ -617,23 +713,23 @@ export function renderTutorials() {
   const body = `
     <main class="tutorials-page">
       <section class="home-hero tutorials-detail-hero">
-        <div class="hero-bg"><img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" /></div>
+        <div class="hero-bg"><img src="${shot(0)}" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("menu_book")} Tutorial Packs</span>
-          <h1>Get moving before you buy the cohort.</h1>
-          <p>Every pack is a free, self-contained path: claim the room, ship the loop, split the colony into roles, scale the economy, and learn enough combat to realize the game is really asking whether your system can think. Pick a pack below to see its lessons.</p>
+          <h1>Get moving before you go further.</h1>
+          <p>Every pack is a free, self-contained path following AutoNate: JavaScript from zero, a Screeps colony, prompt and context engineering, databases and graphs, and civics with agentic AI. Pick a pack below to see its lessons.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-software-architect">Take the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/programs/ai-agent-systems">Take the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/community">Ask in Discord</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(0)}" alt="Screeps room used in AutoNateAI starter tutorials" />
+          <img src="${shot(0)}" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Free Player Guides</span>
             <h2>Setup is free. System judgment is the program.</h2>
-            <p>New to code? Start with AutoNate's story and learn JavaScript from zero. Already writing code? Jump straight into Screeps. Either way, you land in the same cohort-ready colony.</p>
+            <p>New to code? Start with AutoNate's story and learn JavaScript from zero. Already writing code? Jump into whichever pack matches what you're stuck on. Either way, the packs build toward the same system-architect habits the live program practices.</p>
             <div class="hero-facts">
               <span>${tutorialPacks.length} tutorial packs</span>
               <span>Copy-ready code</span>
@@ -665,10 +761,10 @@ export function renderTutorials() {
     canonicalPath: "/tutorials",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Free tutorial packs for builders learning JavaScript fundamentals and Screeps colony automation, roles, Memory, infrastructure, defense, and competition prep.",
-    ogTitle: "Tutorial packs before the system starts swinging back.",
+      "Free tutorial packs for builders learning JavaScript fundamentals, Screeps colony automation, prompt and context engineering, databases and graphs, and civics with agentic AI.",
+    ogTitle: "Tutorial packs before you go further.",
     ogDescription:
-      "Start with Getting Started with Screeps, then Intro to JavaScript for Beginners. Free guides, real curriculum, before you join the cohort.",
+      "Start with AutoNate's story, then pick whichever pack matches what you're building next. Free guides, real curriculum, before you join the cohort.",
   });
 }
 
@@ -681,19 +777,19 @@ export function renderTutorialPack(pack) {
     <main class="tutorials-page pack-page">
       <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>${escapeHtml(pack.title)}</b></nav>
       <section class="home-hero tutorials-detail-hero">
-        <div class="hero-bg"><img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" /></div>
+        <div class="hero-bg">${packMedia(pack)}</div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon(pack.icon)} ${escapeHtml(pack.tagline)}</span>
           <h1>${escapeHtml(pack.title)}</h1>
           <p>${escapeHtml(pack.summary)}</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-software-architect">Take the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/programs/ai-agent-systems">Take the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/tutorials">All Packs</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" />
+          ${packMedia(pack)}
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} This Pack</span>
             <h2>${comingSoon ? "Lessons are in progress." : "Work through it in order."}</h2>
@@ -714,7 +810,7 @@ export function renderTutorialPack(pack) {
           <strong>${escapeHtml(pack.title)}</strong>
           ${tracks.map((track) => `<a href="#${slugify(track)}">${escapeHtml(track)}</a>`).join("")}
           <a href="/tutorials">All Packs</a>
-          <a href="/programs/ai-software-architect">Full cohort</a>
+          <a href="/programs/ai-agent-systems">Full cohort</a>
         </aside>
         <div class="docs-content">
           ${comingSoon ? packStatusBanner() : ""}
@@ -750,7 +846,7 @@ export function renderTutorialDetail(pack, tutorial) {
           <strong>${escapeHtml(pack.title)}</strong>
           ${packTutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${pack.handle}/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}${item.draft ? " (soon)" : ""}</a>`).join("")}
           <a href="/tutorials">All Packs</a>
-          <a href="/programs/ai-software-architect">Join the cohort</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
@@ -772,10 +868,10 @@ export function renderTutorialDetail(pack, tutorial) {
           <footer class="tutorial-next-step">
             <div>
               <span class="kicker">${icon("architecture")} Want the architecture layer?</span>
-              <h2>The free guide gets the colony moving. The cohort teaches the system to hold up.</h2>
-              <p>Bring this code into the AI Systems Programming Lab to practice Codex workflows, Git strategy, debugging under pressure, and capture-the-flag prep.</p>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
             </div>
-            <a class="primary-button" href="/programs/ai-software-architect">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
           </footer>
         </article>
       </div>
@@ -789,7 +885,7 @@ export function renderTutorialDetail(pack, tutorial) {
     canonicalPath: `/tutorials/${pack.handle}/${tutorial.handle}`,
     ogImage: `/assets/og/tutorial-${tutorial.handle}.jpg`,
     description: tutorial.summary,
-    ogTitle: `${tutorial.title}: get the colony moving.`,
+    ogTitle: `${tutorial.title}: keep the build moving.`,
     ogDescription: tutorial.summary,
   });
 }
@@ -798,28 +894,28 @@ export function renderCommunity() {
   const body = `
     <main class="community-page">
       <section class="home-hero community-detail-hero">
-        <div class="hero-bg"><img src="${shot(4)}" alt="Screeps colony used as AutoNateAI community placeholder" /></div>
+        <div class="hero-bg"><img src="${shot(4)}" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("groups")} AutoNateAI Community</span>
-          <h1>A place to build, ask, debug, and talk strategy all day.</h1>
-          <p>The program is the structured path. The community is where the energy keeps moving: setup help, colony questions, Codex reviews, tournament talk, league updates, and the kind of build chatter that turns one stuck builder into ten sharper ones.</p>
+          <h1>A place to build, ask, debug, and talk systems all day.</h1>
+          <p>The program is the structured path. The community is where the energy keeps moving: setup help, architecture questions, agent workflow reviews, RFP research, Live Build updates, and the kind of build chatter that turns one stuck builder into ten sharper ones.</p>
           <div class="button-row">
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
             <a class="secondary-button" href="/tutorials">Start Tutorials</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(4)}" alt="Screeps colony used as AutoNateAI community placeholder" />
+          <img src="${shot(4)}" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("forum")} Discord</span>
             <h2>Join the build room.</h2>
-            <p>Come for setup. Stay for the build reviews, battle branches, strange bugs, and league prep.</p>
+            <p>Come for setup. Stay for the build reviews, live RFP research, strange bugs, and Live Build updates.</p>
             <div class="hero-facts">
               <span>Setup help</span>
               <span>Code review</span>
-              <span>Codex prompts</span>
-              <span>League updates</span>
+              <span>Agent prompts</span>
+              <span>Live Build updates</span>
             </div>
           </div>
         </aside>
@@ -827,13 +923,13 @@ export function renderCommunity() {
       </section>
 
       <section class="section compact community-section">
-        <div class="section-head"><div><span class="kicker">${icon("forum")} What Happens There</span><h2>The lab does not go quiet between sessions.</h2><p>Builders need a place to compare notes while the colony is still breaking in interesting ways.</p></div></div>
+        <div class="section-head"><div><span class="kicker">${icon("forum")} What Happens There</span><h2>The lab does not go quiet between sessions.</h2><p>Builders need a place to compare notes while a real system is still breaking in interesting ways.</p></div></div>
         <div class="league-how community-grid">
           <div><span class="material-symbols-outlined">construction</span><h3>Setup Help</h3><p>Get unstuck on local setup, repo structure, first scripts, and the small configuration issues that can steal a whole afternoon.</p></div>
-          <div><span class="material-symbols-outlined">code_blocks</span><h3>Code Review</h3><p>Share snippets, ask why a creep is idle, and learn how to explain the bug instead of just staring at it.</p></div>
-          <div><span class="material-symbols-outlined">smart_toy</span><h3>Codex Prompts</h3><p>Practice asking AI for architecture help with enough context that the answer has a chance to be useful.</p></div>
-          <div><span class="material-symbols-outlined">sports_martial_arts</span><h3>Battle Prep</h3><p>Talk strategy, compare branches, and get ready for capture-the-flag without waiting for week 4.</p></div>
-          <div><span class="material-symbols-outlined">emoji_events</span><h3>League Updates</h3><p>Follow Phase 2 as the league grows from cohort capstone into rankings, replays, and regular matches.</p></div>
+          <div><span class="material-symbols-outlined">code_blocks</span><h3>Code Review</h3><p>Share snippets, ask why something is broken, and learn how to explain the bug instead of just staring at it.</p></div>
+          <div><span class="material-symbols-outlined">smart_toy</span><h3>Agent Prompts</h3><p>Practice asking AI agents for architecture help with enough context that the answer has a chance to be useful.</p></div>
+          <div><span class="material-symbols-outlined">travel_explore</span><h3>RFP Research</h3><p>Trade notes on real RFPs and civic problems worth building toward, before the next Live Build session.</p></div>
+          <div><span class="material-symbols-outlined">emoji_events</span><h3>Live Build Updates</h3><p>Follow along as Live Builds ship real systems, week after week, for real organizations.</p></div>
           <div><span class="material-symbols-outlined">edit_note</span><h3>Builder Notes</h3><p>Post reflections, architecture notes, and lessons learned so the whole community gets sharper.</p></div>
         </div>
       </section>
@@ -847,10 +943,10 @@ export function renderCommunity() {
     canonicalPath: "/community",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Join the AutoNateAI Discord community for Screeps setup help, JavaScript colony questions, Codex reviews, tournament prep, and league updates.",
-    ogTitle: "The colony lab has a Discord now.",
+      "Join the AutoNateAI Discord community for setup help, architecture questions, AI agent workflow reviews, RFP research, and Live Build updates.",
+    ogTitle: "The systems lab has a Discord.",
     ogDescription:
-      "Get setup help, code review, Codex prompt practice, tournament talk, and league updates with the AutoNateAI community.",
+      "Get setup help, code review, agent workflow practice, RFP research, and Live Build updates with the AutoNateAI community.",
   });
 }
 
@@ -862,13 +958,13 @@ export function renderArticles() {
       <div class="page-toolbar">
         <div>
           <span class="kicker">${icon("article")} Articles / Tutorials / Strategy</span>
-          <h1>Read the system before you battle in it.</h1>
-          <p>Strategy notes for builders using JavaScript, Codex, Git, and Screeps to design colonies that can operate, adapt, and compete in capture-the-flag.</p>
+          <h1>Read the system before you ship it.</h1>
+          <p>Strategy notes for builders using AI agents, Git, databases, and real systems thinking to design software that can operate, adapt, and hold up under real requirements.</p>
         </div>
       </div>
       ${featuredArticle ? featuredArticleCard(featuredArticle) : ""}
       <div class="content-tools">
-        <label>${icon("search")} <input type="search" placeholder="Search articles, strategy, Git, Screeps..." data-article-search /></label>
+        <label>${icon("search")} <input type="search" placeholder="Search articles, AI agents, systems, Git..." data-article-search /></label>
         <div class="filter-row" data-article-filters>
           ${["All", ...new Set(articles.map((article) => article.category))].map((category) => `<button type="button" data-filter="${escapeHtml(category)}">${escapeHtml(category)}</button>`).join("")}
         </div>
@@ -884,10 +980,10 @@ export function renderArticles() {
     canonicalPath: "/articles",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Articles and strategy notes about Screeps, AI-assisted development, Git, automation, capture-the-flag competition, and systems thinking.",
-    ogTitle: "Field notes before the code battle.",
+      "Articles and strategy notes about AI-assisted development, Git, automation, real systems, and software architecture.",
+    ogTitle: "Field notes before you ship.",
     ogDescription:
-      "Read the Screeps mechanics, Git habits, Codex workflows, and system-design tradeoffs before your colony has to compete.",
+      "Read the AI-agent workflows, Git habits, and system-design tradeoffs before your system has to hold up for real.",
   });
 }
 
@@ -940,6 +1036,8 @@ export function renderArticleDetail(article) {
 }
 
 export function renderCheckout(data) {
+  const program = data.programs?.[0];
+  const offering = program?.offerings?.[0];
   const body = `
     <main class="checkout-page">
       <div class="stepper">
@@ -949,17 +1047,17 @@ export function renderCheckout(data) {
         <section class="checkout-form">
           <span class="kicker">Secure seat reservation</span>
           <h1>Reserve your cohort seat</h1>
-          <p class="checkout-lede">You are reserving one seat in the AI Systems Programming Lab. Card payment is processed securely through Square; learner onboarding details come next after payment is confirmed.</p>
+          <p class="checkout-lede">You are reserving one seat in ${escapeHtml(program?.name || "the AutoNateAI program")}. Card payment is processed securely through Square; learner onboarding details come next after payment is confirmed.</p>
           <div class="square-status" data-square-status>
             <strong>Square payment setup pending</strong>
             <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
           </div>
           <div class="checkout-product-strip">
             <div>
-              <strong>AI Systems Programming Lab</strong>
-              <span>4 weeks · 8 live sessions · 25-seat cohort</span>
+              <strong>${escapeHtml(program?.name || "AutoNateAI Program")}</strong>
+              <span>${program?.durationWeeks || 4} weeks &middot; ${(program?.sessions || []).length || 8} live sessions &middot; ${offering?.capacity || 25}-seat cohort</span>
             </div>
-            <b>$369</b>
+            <b>${offering ? money(offering.price) : "$499"}</b>
           </div>
           <div class="form-stack payment-fields">
             <label>Name on Card<input data-checkout-field="cardholderName" autocomplete="cc-name" placeholder="Nathan Baker" /></label>
@@ -982,7 +1080,7 @@ export function renderCheckout(data) {
         </aside>
       </div>
     </main>
-    <footer class="minimal-footer">&copy; 2026 AutoNateAI. Workforce Systems Programming Lab.</footer>
+    <footer class="minimal-footer">&copy; 2026 AutoNateAI. Software systems, built with AI agents.</footer>
     ${dataScript(data)}
   `;
 
@@ -993,16 +1091,17 @@ export function renderCheckout(data) {
     mode: "checkout",
     canonicalPath: "/checkout",
     robots: "noindex,nofollow",
-    ogImage: "/assets/og/ai-software-architect.jpg",
-    description: "Reserve a seat in the AI Systems Programming Lab.",
-    ogTitle: "Reserve the seat. Build the battle branch.",
+    ogImage: `/assets/og/${program?.handle || "ai-agent-systems"}.jpg`,
+    description: `Reserve a seat in ${program?.name || "the AutoNateAI program"}.`,
+    ogTitle: "Reserve the seat. Ship the system.",
     ogDescription:
-      "Secure your spot in the 4-week JavaScript + Codex cohort where the final exam is a Screeps capture-the-flag match.",
+      "Secure your spot in the 4-week AI-agent systems cohort where the final exam is shipping a real system for a real organization.",
   });
 }
 
 export function renderSuccess(data) {
   const recommendations = data.programs.slice(0, 4);
+  const primaryProgram = data.programs?.[0];
 
   const body = `
     <main class="success-page">
@@ -1013,12 +1112,12 @@ export function renderSuccess(data) {
       </section>
       <section class="success-grid">
         <article class="access-card">
-          <img src="${shot(2)}" alt="Screeps colony" />
+          <img src="${shot(2)}" alt="" />
           <div>
             <span class="kicker">Seat Reserved</span>
             <h2 data-success-program>Loading&hellip;</h2>
             <p>Onboarding, setup instructions, cohort workspace access, and the first live-session details are sent before the cohort begins.</p>
-            <a class="primary-button" href="/programs/ai-software-architect">View Program</a>
+            <a class="primary-button" href="/programs/${primaryProgram?.handle || "ai-agent-systems"}">View Program</a>
           </div>
         </article>
         <aside class="order-details">
@@ -1055,11 +1154,11 @@ export function renderSuccess(data) {
     body,
     canonicalPath: "/success",
     robots: "noindex,nofollow",
-    ogImage: "/assets/og/ai-software-architect.jpg",
-    description: "Enrollment confirmed for the AI Systems Programming Lab.",
-    ogTitle: "Seat locked. Colony loading.",
+    ogImage: `/assets/og/${primaryProgram?.handle || "ai-agent-systems"}.jpg`,
+    description: `Enrollment confirmed for ${primaryProgram?.name || "the AutoNateAI program"}.`,
+    ogTitle: "Seat locked. Build loading.",
     ogDescription:
-      "Your AI Systems Programming Lab seat is reserved. Next comes setup, Git, Codex, colony design, and tournament prep.",
+      "Your seat is reserved. Next comes setup, Git, AI agents, system design, and a real RFP build.",
   });
 }
 
@@ -1236,7 +1335,7 @@ function tutorialTrack(track, items, pack) {
             (tutorial) => `
           <article class="tutorial-row ${tutorial.draft ? "draft" : ""}">
             <a class="tutorial-row-media" href="/tutorials/${pack.handle}/${escapeHtml(tutorial.handle)}">
-              <img src="${shot(Number(tutorial.episode) || 0)}" alt="" />
+              ${packMedia(pack, Number(tutorial.episode) || 0)}
               <span class="tutorial-index">${escapeHtml(tutorial.episode)}</span>
             </a>
             <div>
@@ -1274,7 +1373,7 @@ function packCard(pack) {
   return `
     <a class="pack-card ${available ? "" : "coming-soon"}" href="/tutorials/${pack.handle}">
       <div class="pack-card-media">
-        <img src="${shot(pack.heroShotIndex)}" alt="${escapeHtml(pack.title)} preview" />
+        ${packMedia(pack)}
         <span class="status-pill ${available ? "live" : ""}">${packStatusLabel(pack)}</span>
       </div>
       <div class="pack-card-body">
@@ -1312,11 +1411,11 @@ function chunkSessions(sessions, size) {
 
 function weekCard(index, sessions) {
   const weekMeta = [
-    ["Environment and system map", "Read the Screeps world, identify available components, and map the signals your colony needs to understand."],
-    ["Components and decisions", "Turn game mechanics into reusable behaviors and teach the colony to make choices when conditions change."],
-    ["Codex-assisted colony builds", "Use Codex with Screeps API context to build project-grade colony subsystems while keeping the architecture explainable."],
-    ["Tournament week", "Tune a battle branch, play capture-the-flag, and analyze how code-driven strategy performs against another colony."],
-  ][index] || [`Week ${index + 1}`, "Keep improving the colony system."];
+    ["Meet your AI agents", "Set up Claude Code and Codex, and practice engineering prompts and context for real projects."],
+    ["Databases, APIs, and architecture", "Design relational and graph data models, build APIs, and document the system with Mermaid diagrams."],
+    ["Review, debug, and research", "Review AI-generated code like an engineer, then find and read a real RFP with an agent's help."],
+    ["Build week", "Turn the researched RFP into a real system design, build it live, and ship it for a real organization."],
+  ][index] || [`Week ${index + 1}`, "Keep improving the system."];
   const [title, summary] = weekMeta;
 
   return `
@@ -1345,19 +1444,19 @@ function weekCard(index, sessions) {
 
 function programFeature(program, extraClass = "", imageIndex = program.sequence + 1, showOverlay = false) {
   const offering = program.offerings?.[0];
-  const price = offering ? money(offering.price) : "$369";
+  const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
 
   return `
     <article class="program-feature ${extraClass}">
       <a class="program-feature-media" href="/programs/${program.handle}">
-        <img src="${shot(imageIndex)}" alt="Screeps colony system preview" />
+        <img src="${shot(imageIndex)}" alt="" />
         ${
           showOverlay
             ? `<div class="program-media-callout">
-          <span>${icon("flag")} Tournament capstone</span>
-          <strong>Build the colony. Battle the code.</strong>
-          <p>Builders finish by running their Screeps colonies head-to-head in AutoNateAI capture-the-flag.</p>
+          <span>${icon("flag")} Live capstone</span>
+          <strong>Design the system. Ship it for real.</strong>
+          <p>Builders finish by shipping a real system, built live, in response to an actual RFP.</p>
         </div>`
             : ""
         }
@@ -1371,10 +1470,10 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
         <p>${escapeHtml(program.description)}</p>
         <div class="cohort-date-row compact">
           ${cohortBadge(program)}
-          <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, Codex review, colony design questions, tournament prep, and build support.</span>
+          <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, architecture reviews, agent workflow coaching, and build support.</span>
         </div>
         <div class="program-feature-points">
-          <span>Screeps colony bot</span>
+          <span>Real, shipped system</span>
           <span>Student Git repo</span>
           <span>${cohortCapacity(program)}</span>
           <span>Discord cohort channel</span>

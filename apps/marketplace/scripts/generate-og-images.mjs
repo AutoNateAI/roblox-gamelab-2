@@ -99,34 +99,42 @@ let index = 0;
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: "JavaScript + Codex + CTF",
-    title: "Build the Colony. Prove the System.",
-    footer: `AutoNateAI · ${program.durationWeeks || 4}-Week Systems Cohort`,
+    eyebrow: "AI Agents + Systems + Real Impact",
+    title: "Design the System. Ship It for Real.",
+    footer: `AutoNateAI · ${program.durationWeeks || 4}-Week Cohort`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Workforce Systems Lab",
-  title: "No Worksheets. Colonies That Fight Back.",
-  footer: "AutoNateAI · JavaScript, Codex, Git, CTF",
+  eyebrow: "Software Systems With AI Agents",
+  title: "No Worksheets. Real Systems for Real Organizations.",
+  footer: "AutoNateAI · Claude Code, Codex, Git, Real RFPs",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Tournament Week",
-  title: "Your Code Has to Hold the Flag.",
-  footer: "AutoNateAI · Screeps Capture the Flag",
-  outFile: path.join(outDir, "league.jpg"),
+  eyebrow: "AutoNateAI Live Builds",
+  title: "Real Systems, Built Live. No Script.",
+  footer: "AutoNateAI · Tuesdays and Thursdays, Discord",
+  outFile: path.join(outDir, "live-builds.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "AutoNateAI Consulting",
+  title: "Real Systems, Delivered in Public.",
+  footer: "AutoNateAI · Real RFPs, Real Organizations",
+  outFile: path.join(outDir, "consulting.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI",
-  title: "Code the Colony. Train the Architect.",
-  footer: "JavaScript · Codex · Screeps CTF",
+  title: "Become the System Architect, Not Just the Coder.",
+  footer: "Claude Code · Codex · Databases · APIs",
   outFile: path.join(outDir, "default.jpg"),
 });
 
@@ -143,7 +151,7 @@ for (const tutorial of tutorials) {
 
 for (const pack of tutorialPacks) {
   await composite({
-    screenshotFile: screenshotFor(pack.heroShotIndex),
+    screenshotFile: screenshotFor(pack.heroShotIndex ?? index++),
     eyebrow: pack.tagline,
     title: pack.title,
     footer: "AutoNateAI · Free Tutorial Pack",
@@ -151,4 +159,4 @@ for (const pack of tutorialPacks) {
   });
 }
 
-console.log(`Done. ${programsData.programs.length + tutorials.length + tutorialPacks.length + 3} OG images written to ${path.relative(rootDir, outDir)}`);
+console.log(`Done. ${programsData.programs.length + tutorials.length + tutorialPacks.length + 4} OG images written to ${path.relative(rootDir, outDir)}`);

@@ -49,7 +49,8 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs/ai-software-architect">Reserve Seat</a>`}
+          ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>`}
         </div>
       </nav>
     </header>
@@ -62,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>A focused workforce systems cohort where developers and technical builders design colonies, automate strategy, use Git and Codex responsibly, and compete through code.</p>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
         </div>
-        ${footerColumn("Program", [["AI Systems Programming Lab", "/programs/ai-software-architect"], ["League", "/league"], ["Tutorials", "/tutorials"]])}
-        ${footerColumn("Company", [["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
+        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["Live Builds", "/live-builds"], ["Consulting", "/consulting"], ["Tutorials", "/tutorials"]])}
+        ${footerColumn("Company", [["Discord", "https://discord.gg/4HkkuntdSs"], ["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Workforce systems cohorts for strategic tech thinking, Git, APIs, automation, AI-assisted development, and tournament play.</span>
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
       </div>
     </footer>
   `;
@@ -87,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches developers and technical builders to design software systems, automate strategy, use Git and Codex responsibly, and compete through Screeps capture-the-flag.";
+  "AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

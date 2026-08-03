@@ -6,6 +6,7 @@ import {
   renderArticles,
   renderAbout,
   renderCommunity,
+  renderConsulting,
   renderCheckout,
   renderHome,
   renderLeague,
@@ -33,7 +34,8 @@ const routes = [
   ["tutorials/index.html", renderTutorials()],
   ["community/index.html", renderCommunity()],
   ["about/index.html", renderAbout()],
-  ["league/index.html", renderLeague(programsData)],
+  ["live-builds/index.html", renderLeague(programsData)],
+  ["consulting/index.html", renderConsulting(programsData)],
   ["checkout/index.html", renderCheckout(programsData)],
   ["success/index.html", renderSuccess(programsData)],
 ];
@@ -92,8 +94,9 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
-  sitemapEntry("https://autonateai.com/programs/ai-software-architect", "0.9"),
-  sitemapEntry("https://autonateai.com/league", "0.8"),
+  sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.9"),
+  sitemapEntry("https://autonateai.com/live-builds", "0.8"),
+  sitemapEntry("https://autonateai.com/consulting", "0.8"),
   sitemapEntry("https://autonateai.com/tutorials", "0.8"),
   sitemapEntry("https://autonateai.com/community", "0.8"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
