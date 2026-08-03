@@ -76,6 +76,81 @@ function envValue(...keys) {
   return "";
 }
 
+const BOOKING_WINDOW_START_MINUTES = 8 * 60;
+const BOOKING_WINDOW_END_MINUTES = 18 * 60;
+const BOOKING_TIME_ZONE = "America/Chicago";
+
+// Converts a wall-clock date/time in `timeZone` into the real UTC instant it represents,
+// correctly accounting for DST, without a timezone library: render an initial UTC guess back
+// through the target zone, measure the drift from the intended wall time, and correct for it.
+function wallTimeToUtcMs(timeZone, y, mo, d, h, mi) {
+  const guessMs = Date.UTC(y, mo - 1, d, h, mi);
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date(guessMs));
+  const get = (type) => Number(parts.find((part) => part.type === type)?.value);
+  const renderedAsUtcMs = Date.UTC(get("year"), get("month") - 1, get("day"), get("hour") % 24, get("minute"));
+  return guessMs + (guessMs - renderedAsUtcMs);
+}
+
+// The booking form submits naive "YYYY-MM-DDTHH:mm" strings labeled as Central time.
+function parseFormSubmittedCentralMs(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(value || ""));
+  if (!match) return null;
+  const [y, mo, d, h, mi] = match.slice(1).map(Number);
+  return wallTimeToUtcMs(BOOKING_TIME_ZONE, y, mo, d, h, mi);
+}
+
+// Records read back from Airtable's dateTime fields are real ISO 8601 UTC instants (it does its
+// own correct, DST-aware conversion from the America/Chicago field config on write).
+function parseAirtableUtcMs(value) {
+  const ms = Date.parse(value || "");
+  return Number.isNaN(ms) ? null : ms;
+}
+
+function timeOfDayMinutes(value) {
+  const match = /T(\d{2}):(\d{2})/.exec(String(value || ""));
+  if (!match) return null;
+  return Number(match[1]) * 60 + Number(match[2]);
+}
+
+function bookingFitsBusinessHours(value, durationMinutes) {
+  const start = timeOfDayMinutes(value);
+  if (start === null) return false;
+  return start >= BOOKING_WINDOW_START_MINUTES && start + durationMinutes <= BOOKING_WINDOW_END_MINUTES;
+}
+
+function intervalsOverlap(startAMs, durationAMinutes, startBMs, durationBMinutes) {
+  const endAMs = startAMs + durationAMinutes * 60000;
+  const endBMs = startBMs + durationBMinutes * 60000;
+  return startAMs < endBMs && startBMs < endAMs;
+}
+
+async function findConflictingBooking({ apiKey, baseId, preferredDateTime, durationMinutes }) {
+  const proposedStartMs = parseFormSubmittedCentralMs(preferredDateTime);
+  const formula = encodeURIComponent("AND({Status}!='Cancelled',{Status}!='No-Show')");
+  const listResponse = await fetch(`https://api.airtable.com/v0/${baseId}/Bookings?filterByFormula=${formula}&pageSize=100`, {
+    headers: { authorization: `Bearer ${apiKey}` },
+  });
+  if (!listResponse.ok) {
+    throw new Error("Could not check the schedule for conflicts.");
+  }
+  const { records = [] } = await listResponse.json();
+  return records.find((record) => {
+    const effectiveTime = record.fields["Confirmed Date & Time"] || record.fields["Preferred Date & Time"];
+    const existingStartMs = parseAirtableUtcMs(effectiveTime);
+    const existingDuration = Number(record.fields["Duration (minutes)"]) || 0;
+    if (existingStartMs === null) return false;
+    return intervalsOverlap(proposedStartMs, durationMinutes, existingStartMs, existingDuration);
+  });
+}
+
 function squareSettings() {
   const selectedEnvironment = envValue("SQUARE_ENVIRONMENT", "SQUARE_ACTIVE_ENVIRONMENT", "MARKETPLACE_SQUARE_ENVIRONMENT");
   const environment = ["production", "prod", "live"].includes(selectedEnvironment.toLowerCase()) ? "production" : "sandbox";
@@ -329,6 +404,33 @@ const server = createServer(async (request, response) => {
         return;
       }
 
+      const durationMinutes = Number(duration);
+      const alternateDateTime = String(body.alternateDateTime || "").trim();
+      const preferredMs = parseFormSubmittedCentralMs(preferredDateTime);
+      if (preferredMs === null || preferredMs < Date.now()) {
+        json(response, 400, { error: "Preferred time must be a valid date and time in the future." });
+        return;
+      }
+      if (!bookingFitsBusinessHours(preferredDateTime, durationMinutes)) {
+        json(response, 400, { error: "Preferred time must start and end between 8:00 AM and 6:00 PM Central." });
+        return;
+      }
+      if (alternateDateTime && !bookingFitsBusinessHours(alternateDateTime, durationMinutes)) {
+        json(response, 400, { error: "Alternate time must start and end between 8:00 AM and 6:00 PM Central." });
+        return;
+      }
+
+      try {
+        const conflict = await findConflictingBooking({ apiKey, baseId, preferredDateTime, durationMinutes });
+        if (conflict) {
+          json(response, 409, { error: "That time is already booked. Please choose a different time." });
+          return;
+        }
+      } catch (error) {
+        json(response, 502, { error: error.message });
+        return;
+      }
+
       const fields = {
         "Full Name": name,
         "Email": email,
@@ -336,7 +438,7 @@ const server = createServer(async (request, response) => {
         "Call Type": callType,
         "Duration (minutes)": duration,
         "Preferred Date & Time": preferredDateTime,
-        "Alternate Date & Time": String(body.alternateDateTime || "").trim() || undefined,
+        "Alternate Date & Time": alternateDateTime || undefined,
         "Their Timezone": body.timezone || undefined,
         "What do you want out of this call?": String(body.goals || "").trim() || undefined,
         "Project / Organization Context": String(body.context || "").trim() || undefined,

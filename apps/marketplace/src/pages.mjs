@@ -690,7 +690,7 @@ export function renderConsulting(data) {
           <div>
             <span class="kicker">${icon("event")} Book a Call</span>
             <h2>Tell us what you're building.</h2>
-            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. We'll confirm your exact time by email.</p>
+            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday. Enter times below in Central Time — we'll confirm your exact slot by email.</p>
           </div>
         </div>
         <form class="form-stack booking-form" data-booking-form>
@@ -714,8 +714,8 @@ export function renderConsulting(data) {
             </label>
           </div>
           <div class="two-col">
-            <label>Preferred Date &amp; Time<input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
-            <label>Alternate Date &amp; Time<input data-booking-field="alternateDateTime" type="datetime-local" /></label>
+            <label>Preferred Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
+            <label>Alternate Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="alternateDateTime" type="datetime-local" /></label>
           </div>
           <div class="two-col">
             <label>Your Timezone
