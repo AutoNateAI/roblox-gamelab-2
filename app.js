@@ -404,6 +404,65 @@ studentInfoForm?.addEventListener("submit", async (event) => {
   }
 });
 
+// --- Consulting booking form ---
+const bookingForm = document.querySelector("[data-booking-form]");
+const bookingDurations = {
+  Discovery: ["15", "30"],
+  "Follow-up": ["30", "45", "60", "90", "120"],
+};
+
+function refreshBookingDurations() {
+  const callTypeField = bookingForm?.querySelector("[data-booking-call-type]");
+  const durationField = bookingForm?.querySelector("[data-booking-duration]");
+  if (!callTypeField || !durationField) return;
+  const options = bookingDurations[callTypeField.value] || [];
+  durationField.innerHTML = options.length
+    ? options.map((minutes) => `<option value="${minutes}">${minutes} min</option>`).join("")
+    : `<option value="">Pick a call type first</option>`;
+  durationField.disabled = options.length === 0;
+}
+
+bookingForm?.querySelector("[data-booking-call-type]")?.addEventListener("change", refreshBookingDurations);
+
+bookingForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const statusEl = bookingForm.querySelector("[data-booking-status]");
+  const submitButton = bookingForm.querySelector("button[type=submit]");
+  const fields = Object.fromEntries(
+    Array.from(bookingForm.querySelectorAll("[data-booking-field]")).map((field) => [
+      field.dataset.bookingField,
+      field.value.trim(),
+    ]),
+  );
+
+  if (!fields.name || !fields.email || !fields.callType || !fields.duration || !fields.preferredDateTime) {
+    if (statusEl) statusEl.textContent = "Fill in your name, email, call type, duration, and a preferred time.";
+    return;
+  }
+
+  submitButton?.setAttribute("disabled", "true");
+  if (statusEl) statusEl.textContent = "Sending your request...";
+
+  try {
+    const response = await fetch(`${marketplaceApiBase}/consulting/booking`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(fields),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || "Booking could not be submitted.");
+    bookingForm.reset();
+    refreshBookingDurations();
+    if (statusEl) {
+      statusEl.textContent = "Request sent. We'll confirm your time by email shortly.";
+    }
+  } catch (error) {
+    if (statusEl) statusEl.textContent = error.message;
+  } finally {
+    submitButton?.removeAttribute("disabled");
+  }
+});
+
 // --- Article search / category filters ---
 const articleSearch = document.querySelector("[data-article-search]");
 const articleGrid = document.querySelector("[data-article-grid]");

@@ -53,19 +53,19 @@
         
     <main class="league-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/screeps/screeps-03.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker"><span class="material-symbols-outlined">business_center</span> AutoNateAI Consulting</span>
           <h1>Real systems, delivered in public.</h1>
           <p>AutoNateAI Consulting takes on real RFPs and civic problems for real organizations, and builds the system live, in Discord, with AI agents doing real work under real deadlines. Every Live Build is a real engagement, not a simulation of one.</p>
           <div class="button-row">
-            <a class="primary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">Work With Us <span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="primary-button" href="#book">Book a Call <span class="material-symbols-outlined">arrow_forward</span></a>
             <a class="secondary-button" href="/live-builds">Watch a Live Build</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="/assets/screeps/screeps-03.jpg" alt="" />
+          <img src="/assets/landing/rfp-document.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker"><span class="material-symbols-outlined">apartment</span> For Organizations</span>
             <h2>Bring us a real problem.</h2>
@@ -95,6 +95,65 @@
           <article><b>02</b><span><strong>Prove it.</strong> Live Builds put your work in front of real organizations, live, in public. No portfolio padding, just real shipped systems.</span></article>
           <article><b>03</b><span><strong>Get hired.</strong> Standout builders get pulled into real AutoNateAI Consulting engagements, or connected directly to partner organizations hiring for these skills.</span></article>
         </div>
+      </section>
+
+      <section class="section compact" id="book">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">event</span> Book a Call</span>
+            <h2>Tell us what you're building.</h2>
+            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. We'll confirm your exact time by email.</p>
+          </div>
+        </div>
+        <form class="form-stack booking-form" data-booking-form>
+          <div class="two-col">
+            <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
+            <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
+          </div>
+          <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="City of Fairview" /></label>
+          <div class="two-col">
+            <label>Call Type
+              <select data-booking-field="callType" data-booking-call-type required>
+                <option value="">Select one</option>
+                <option value="Discovery">Discovery</option>
+                <option value="Follow-up">Follow-up</option>
+              </select>
+            </label>
+            <label>Duration
+              <select data-booking-field="duration" data-booking-duration required disabled>
+                <option value="">Pick a call type first</option>
+              </select>
+            </label>
+          </div>
+          <div class="two-col">
+            <label>Preferred Date &amp; Time<input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
+            <label>Alternate Date &amp; Time<input data-booking-field="alternateDateTime" type="datetime-local" /></label>
+          </div>
+          <div class="two-col">
+            <label>Your Timezone
+              <select data-booking-field="timezone">
+                <option value="CST">Central (CST)</option>
+                <option value="EST">Eastern (EST)</option>
+                <option value="MST">Mountain (MST)</option>
+                <option value="PST">Pacific (PST)</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>How did you hear about us?
+              <select data-booking-field="howHeard">
+                <option value="Website">Website</option>
+                <option value="Live Build">Live Build</option>
+                <option value="Referral">Referral</option>
+                <option value="RFP">RFP</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+          <label>What do you want out of this call?<textarea data-booking-field="goals" rows="3" placeholder="What decision or outcome are you hoping to walk away with?"></textarea></label>
+          <label>Project / Organization Context<textarea data-booking-field="context" rows="3" placeholder="What are you building, or what does the RFP ask for?"></textarea></label>
+          <button class="primary-button" type="submit">Request the Call <span class="material-symbols-outlined">arrow_forward</span></button>
+          <p class="fine-print" data-booking-status>Prefer email? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">autonate.ai@gmail.com</a>.</p>
+        </form>
       </section>
 
       <section class="detail-enroll-band">
