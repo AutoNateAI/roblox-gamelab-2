@@ -60,7 +60,7 @@ export function renderHome(data) {
   const body = `
     <main>
       <section class="home-hero">
-        <div class="hero-bg"><img src="${shot(0)}" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
             <span class="kicker">${icon("terminal")} Software Systems, Built With AI Agents</span>
@@ -76,7 +76,7 @@ export function renderHome(data) {
             </div>
           </div>
           <aside class="hero-program-panel">
-            <img src="${shot(3)}" alt="" />
+            <img src="/assets/landing/what-they-build.jpg" alt="A laptop showing a system architecture diagram next to a monitor with code" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What they build</span>
               <h2>Read the problem. Design the system. Ship it for real.</h2>
@@ -113,7 +113,7 @@ export function renderHome(data) {
         <div class="compete-layout">
           <div class="compete-visual">
             <div class="compete-media">
-              <img src="${shot(7)}" alt="" />
+              <img src="/assets/landing/design-build-ship.jpg" alt="A developer at a multi-monitor desk designing a system architecture diagram" />
               <div class="compete-callout">
                 <span>${icon("flag")} Live capstone</span>
                 <strong>A real system, built live</strong>
@@ -139,7 +139,7 @@ export function renderHome(data) {
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="${shot(6)}" alt="" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/live-builds-spotlight.jpg" alt="A team on a video call collaboratively building software, screen-sharing a system diagram and code" /></div>
         <div>
           <span class="kicker">${icon("flag")} Ongoing</span>
           <h2>${escapeHtml(league.season?.name || "Live Builds")}</h2>
