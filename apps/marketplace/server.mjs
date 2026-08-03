@@ -306,6 +306,62 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    if (apiPath === "/consulting/booking" && request.method === "POST") {
+      const apiKey = envValue("AIRTABLE_API_KEY");
+      const baseId = envValue("AIRTABLE_BASE_ID_CONSULTING");
+      if (!apiKey || !baseId) {
+        json(response, 503, { error: "Booking is not configured." });
+        return;
+      }
+
+      const body = await readRequestJson(request);
+      const name = String(body.name || "").trim();
+      const email = String(body.email || "").trim();
+      const callType = body.callType === "Follow-up" ? "Follow-up" : body.callType === "Discovery" ? "Discovery" : "";
+      const duration = String(body.duration || "").trim();
+      const preferredDateTime = String(body.preferredDateTime || "").trim();
+      const validDurations = callType === "Discovery" ? ["15", "30"] : ["30", "45", "60", "90", "120"];
+
+      if (!name || !email || !callType || !validDurations.includes(duration) || !preferredDateTime) {
+        json(response, 400, {
+          error: `Missing or invalid booking details. ${callType || "Each"} calls must be one of: ${validDurations.join(", ")} minutes.`,
+        });
+        return;
+      }
+
+      const fields = {
+        "Full Name": name,
+        "Email": email,
+        "Organization": String(body.organization || "").trim() || undefined,
+        "Call Type": callType,
+        "Duration (minutes)": duration,
+        "Preferred Date & Time": preferredDateTime,
+        "Alternate Date & Time": String(body.alternateDateTime || "").trim() || undefined,
+        "Their Timezone": body.timezone || undefined,
+        "What do you want out of this call?": String(body.goals || "").trim() || undefined,
+        "Project / Organization Context": String(body.context || "").trim() || undefined,
+        "How did you hear about us?": body.howHeard || undefined,
+        "Status": "Requested",
+      };
+
+      const airtableResponse = await fetch(`https://api.airtable.com/v0/${baseId}/Bookings`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "authorization": `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({ fields, typecast: true }),
+      });
+
+      const payload = await airtableResponse.json();
+      if (!airtableResponse.ok) {
+        json(response, airtableResponse.status, { error: payload.error?.message || "Booking failed." });
+        return;
+      }
+      json(response, 200, { ok: true });
+      return;
+    }
+
     if (url.pathname === "/programs.json") {
       json(response, 200, await readJson("data/marketplace/programs.json"));
       return;

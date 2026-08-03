@@ -14,6 +14,7 @@ function shot(index) {
 }
 
 function packMedia(pack, index) {
+  if (pack.heroImage) return `<img src="${pack.heroImage}" alt="" />`;
   if (pack.heroShotIndex === undefined || pack.heroShotIndex === null) {
     return `<div class="media-icon-tile"><span class="material-symbols-outlined">${escapeHtml(pack.icon)}</span></div>`;
   }
@@ -45,7 +46,7 @@ export function renderHome(data) {
   const featured = programs.slice(0, 1);
   const primaryProgram = featured[0];
   const primaryOffering = primaryProgram.offerings?.[0];
-  const primaryPrice = primaryOffering ? money(primaryOffering.price) : "$369";
+  const primaryPrice = primaryOffering ? money(primaryOffering.price) : "$499";
   const primaryCheckoutHref = primaryOffering
     ? `/checkout?program=${primaryProgram.handle}&offering=${primaryOffering.id}`
     : `/programs/${primaryProgram.handle}`;
@@ -220,7 +221,7 @@ export function renderPrograms(data) {
   const body = `
     <main class="programs-page">
 
-      ${programs.map((program) => programFeature(program, "program-page-feature", 6, true)).join("")}
+      ${programs.map((program) => programFeature(program, "program-page-feature", true)).join("")}
     </main>
   `;
 
@@ -396,7 +397,7 @@ export function renderAbout() {
 
 export function renderProgramDetail(data, program) {
   const related = data.programs.filter((p) => p.handle !== program.handle).slice(0, 3);
-  const gallery = [shot(6), shot(7), shot(8)];
+  const gallery = ["/assets/landing/hero-bg.jpg", "/assets/landing/what-they-build.jpg", "/assets/landing/agent-review.jpg"];
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
@@ -456,9 +457,9 @@ export function renderProgramDetail(data, program) {
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="${shot(2)}" alt="" /><h3>A system with real behavior</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by real requirements.</p></article>
-          <article><img src="${shot(4)}" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
-          <article><img src="${shot(8)}" alt="" /><h3>A shot at getting hired</h3><p>Live Builds are real <a href="/consulting">AutoNateAI Consulting</a> engagements. Standout builders get pulled onto real work, or introduced to the partner organizations hiring for these skills.</p></article>
+          <article><img src="/assets/landing/api-data-model.jpg" alt="" /><h3>A system with real behavior</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by real requirements.</p></article>
+          <article><img src="/assets/landing/agent-review.jpg" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
+          <article><img src="/assets/landing/live-builds-spotlight.jpg" alt="" /><h3>A shot at getting hired</h3><p>Live Builds are real <a href="/consulting">AutoNateAI Consulting</a> engagements. Standout builders get pulled onto real work, or introduced to the partner organizations hiring for these skills.</p></article>
         </div>
       </section>
 
@@ -552,7 +553,7 @@ export function renderLeague(data) {
   const body = `
     <main class="league-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="${shot(7)}" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("emoji_events")} AutoNateAI Live Builds</span>
@@ -564,7 +565,7 @@ export function renderLeague(data) {
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(7)}" alt="" />
+          <img src="/assets/landing/design-build-ship.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("flag")} Schedule</span>
             <h2>Tuesdays and Thursdays</h2>
@@ -610,9 +611,9 @@ export function renderLeague(data) {
       </section>
 
       <section class="league-gallery">
-        <img src="${shot(8)}" alt="" />
-        <img src="${shot(5)}" alt="" />
-        <img src="${shot(2)}" alt="" />
+        <img src="/assets/landing/rfp-document.jpg" alt="" />
+        <img src="/assets/landing/live-builds-spotlight.jpg" alt="" />
+        <img src="/assets/landing/agent-review.jpg" alt="" />
       </section>
     </main>
   `;
@@ -640,19 +641,19 @@ export function renderConsulting(data) {
   const body = `
     <main class="league-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="${shot(2)}" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("business_center")} AutoNateAI Consulting</span>
           <h1>Real systems, delivered in public.</h1>
           <p>AutoNateAI Consulting takes on real RFPs and civic problems for real organizations, and builds the system live, in Discord, with AI agents doing real work under real deadlines. Every Live Build is a real engagement, not a simulation of one.</p>
           <div class="button-row">
-            <a class="primary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">Work With Us ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="#book">Book a Call ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/live-builds">Watch a Live Build</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(2)}" alt="" />
+          <img src="/assets/landing/rfp-document.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("apartment")} For Organizations</span>
             <h2>Bring us a real problem.</h2>
@@ -684,6 +685,65 @@ export function renderConsulting(data) {
         </div>
       </section>
 
+      <section class="section compact" id="book">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("event")} Book a Call</span>
+            <h2>Tell us what you're building.</h2>
+            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. We'll confirm your exact time by email.</p>
+          </div>
+        </div>
+        <form class="form-stack booking-form" data-booking-form>
+          <div class="two-col">
+            <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
+            <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
+          </div>
+          <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="City of Fairview" /></label>
+          <div class="two-col">
+            <label>Call Type
+              <select data-booking-field="callType" data-booking-call-type required>
+                <option value="">Select one</option>
+                <option value="Discovery">Discovery</option>
+                <option value="Follow-up">Follow-up</option>
+              </select>
+            </label>
+            <label>Duration
+              <select data-booking-field="duration" data-booking-duration required disabled>
+                <option value="">Pick a call type first</option>
+              </select>
+            </label>
+          </div>
+          <div class="two-col">
+            <label>Preferred Date &amp; Time<input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
+            <label>Alternate Date &amp; Time<input data-booking-field="alternateDateTime" type="datetime-local" /></label>
+          </div>
+          <div class="two-col">
+            <label>Your Timezone
+              <select data-booking-field="timezone">
+                <option value="CST">Central (CST)</option>
+                <option value="EST">Eastern (EST)</option>
+                <option value="MST">Mountain (MST)</option>
+                <option value="PST">Pacific (PST)</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>How did you hear about us?
+              <select data-booking-field="howHeard">
+                <option value="Website">Website</option>
+                <option value="Live Build">Live Build</option>
+                <option value="Referral">Referral</option>
+                <option value="RFP">RFP</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+          <label>What do you want out of this call?<textarea data-booking-field="goals" rows="3" placeholder="What decision or outcome are you hoping to walk away with?"></textarea></label>
+          <label>Project / Organization Context<textarea data-booking-field="context" rows="3" placeholder="What are you building, or what does the RFP ask for?"></textarea></label>
+          <button class="primary-button" type="submit">Request the Call ${icon("arrow_forward")}</button>
+          <p class="fine-print" data-booking-status>Prefer email? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">autonate.ai@gmail.com</a>.</p>
+        </form>
+      </section>
+
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Ready to build the thing that gets you noticed?</span>
@@ -713,7 +773,7 @@ export function renderTutorials() {
   const body = `
     <main class="tutorials-page">
       <section class="home-hero tutorials-detail-hero">
-        <div class="hero-bg"><img src="${shot(0)}" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("menu_book")} Tutorial Packs</span>
@@ -725,7 +785,7 @@ export function renderTutorials() {
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(0)}" alt="" />
+          <img src="/assets/landing/learning-path.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Free Player Guides</span>
             <h2>Setup is free. System judgment is the program.</h2>
@@ -894,7 +954,7 @@ export function renderCommunity() {
   const body = `
     <main class="community-page">
       <section class="home-hero community-detail-hero">
-        <div class="hero-bg"><img src="${shot(4)}" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("groups")} AutoNateAI Community</span>
@@ -906,7 +966,7 @@ export function renderCommunity() {
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="${shot(4)}" alt="" />
+          <img src="/assets/landing/community-discord.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("forum")} Discord</span>
             <h2>Join the build room.</h2>
@@ -1112,7 +1172,7 @@ export function renderSuccess(data) {
       </section>
       <section class="success-grid">
         <article class="access-card">
-          <img src="${shot(2)}" alt="" />
+          <img src="/assets/landing/success-confirmed.jpg" alt="" />
           <div>
             <span class="kicker">Seat Reserved</span>
             <h2 data-success-program>Loading&hellip;</h2>
@@ -1389,10 +1449,14 @@ function packCard(pack) {
   `;
 }
 
+function programThumbnail(program) {
+  return program.handle === "ai-agent-systems" ? "/assets/landing/what-they-build.jpg" : shot(program.sequence);
+}
+
 function dataScript(data) {
   const withThumbnails = {
     ...data,
-    programs: data.programs.map((p) => ({ ...p, thumbnail: shot(p.sequence) })),
+    programs: data.programs.map((p) => ({ ...p, thumbnail: programThumbnail(p) })),
   };
   return `<script id="programs-data" type="application/json">${JSON.stringify(withThumbnails)}</script>`;
 }
@@ -1442,7 +1506,7 @@ function weekCard(index, sessions) {
   `;
 }
 
-function programFeature(program, extraClass = "", imageIndex = program.sequence + 1, showOverlay = false) {
+function programFeature(program, extraClass = "", showOverlay = false) {
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
@@ -1450,7 +1514,7 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
   return `
     <article class="program-feature ${extraClass}">
       <a class="program-feature-media" href="/programs/${program.handle}">
-        <img src="${shot(imageIndex)}" alt="" />
+        <img src="${programThumbnail(program)}" alt="" />
         ${
           showOverlay
             ? `<div class="program-media-callout">
@@ -1489,7 +1553,7 @@ function programFeature(program, extraClass = "", imageIndex = program.sequence 
 
 function miniProgramCard(program) {
   const cheapest = program.offerings?.[0];
-  return `<a class="mini-card" href="/programs/${program.handle}"><img src="${shot(program.sequence)}" alt="${escapeHtml(program.name)}" /><div><strong>${escapeHtml(program.name)}</strong><span>${escapeHtml(program.badge)}</span></div><b>${cheapest ? `${money(cheapest.price)}+` : "TBD"}</b></a>`;
+  return `<a class="mini-card" href="/programs/${program.handle}"><img src="${programThumbnail(program)}" alt="${escapeHtml(program.name)}" /><div><strong>${escapeHtml(program.name)}</strong><span>${escapeHtml(program.badge)}</span></div><b>${cheapest ? `${money(cheapest.price)}+` : "TBD"}</b></a>`;
 }
 
 function featuredArticleCard(article) {

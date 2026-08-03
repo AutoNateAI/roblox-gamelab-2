@@ -156,6 +156,61 @@ export const marketplaceApi = onRequest(
         return;
       }
 
+      if (request.method === "POST" && pathname === "/consulting/booking") {
+        const apiKey = envValue("AIRTABLE_API_KEY");
+        const baseId = envValue("AIRTABLE_BASE_ID_CONSULTING");
+        if (!apiKey || !baseId) {
+          sendJson(response, 503, { error: "Booking is not configured." });
+          return;
+        }
+
+        const body = request.body || {};
+        const name = cleanString(body.name);
+        const email = cleanString(body.email);
+        const callType = body.callType === "Follow-up" ? "Follow-up" : body.callType === "Discovery" ? "Discovery" : "";
+        const duration = cleanString(body.duration);
+        const preferredDateTime = cleanString(body.preferredDateTime);
+        const validDurations = callType === "Discovery" ? ["15", "30"] : ["30", "45", "60", "90", "120"];
+
+        if (!name || !email || !callType || !validDurations.includes(duration) || !preferredDateTime) {
+          sendJson(response, 400, {
+            error: `Missing or invalid booking details. ${callType || "Each"} calls must be one of: ${validDurations.join(", ")} minutes.`,
+          });
+          return;
+        }
+
+        const fields = {
+          "Full Name": name,
+          "Email": email,
+          "Organization": cleanString(body.organization) || undefined,
+          "Call Type": callType,
+          "Duration (minutes)": duration,
+          "Preferred Date & Time": preferredDateTime,
+          "Alternate Date & Time": cleanString(body.alternateDateTime) || undefined,
+          "Their Timezone": body.timezone || undefined,
+          "What do you want out of this call?": cleanString(body.goals) || undefined,
+          "Project / Organization Context": cleanString(body.context) || undefined,
+          "How did you hear about us?": body.howHeard || undefined,
+          "Status": "Requested",
+        };
+
+        const airtableResponse = await fetch(`https://api.airtable.com/v0/${baseId}/Bookings`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "authorization": `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({ fields, typecast: true }),
+        });
+        const payload = await airtableResponse.json();
+        if (!airtableResponse.ok) {
+          sendJson(response, airtableResponse.status, { error: payload.error?.message || "Booking failed." });
+          return;
+        }
+        sendJson(response, 200, { ok: true });
+        return;
+      }
+
       if (request.method === "POST" && pathname === "/enrollments") {
         const {
           studentName,
