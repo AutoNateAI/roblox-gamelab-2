@@ -1,0 +1,264 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Prompt and Context Engineering | AutoNateAI Tutorials</title>
+        <meta name="description" content="AutoNate's colony works, but hand-coding every behavior himself doesn't scale. He starts directing an AI agent and gets garbage back, until he learns that prompting and context are real skills, not just typing a question." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Prompt and Context Engineering: start here." />
+        <meta property="og:description" content="AutoNate's colony works, but hand-coding every behavior himself doesn't scale. He starts directing an AI agent and gets garbage back, until he learns that prompting and context are real skills, not just typing a question." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-pack-prompt-and-context-engineering.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Prompt and Context Engineering: start here." />
+        <meta name="twitter:description" content="AutoNate's colony works, but hand-coding every behavior himself doesn't scale. He starts directing an AI agent and gets garbage back, until he learns that prompting and context are real skills, not just typing a question." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-pack-prompt-and-context-engineering.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorials-page pack-page">
+      <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>Prompt and Context Engineering</b></nav>
+      <section class="home-hero tutorials-detail-hero">
+        <div class="hero-bg"><div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker"><span class="material-symbols-outlined">psychology</span> AutoNate Learns to Talk to the Machine</span>
+          <h1>Prompt and Context Engineering</h1>
+          <p>AutoNate's colony works, but hand-coding every behavior himself doesn't scale. He starts directing an AI agent and gets garbage back, until he learns that prompting and context are real skills, not just typing a question.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-agent-systems">Take the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="secondary-button" href="/tutorials">All Packs</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+          <div class="hero-panel-body">
+            <span class="kicker"><span class="material-symbols-outlined">terminal</span> This Pack</span>
+            <h2>Work through it in order.</h2>
+            <p>Each lesson builds on the last, from setup to competition-ready.</p>
+            <div class="hero-facts">
+              <span>6 lessons</span>
+              <span>Available Now</span>
+              <span>Copy-ready code</span>
+              <span>Program pathway</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <div class="docs-layout">
+        <aside class="docs-sidebar">
+          <strong>Prompt and Context Engineering</strong>
+          <a href="#chapter-0">Chapter 0</a><a href="#chapter-1">Chapter 1</a><a href="#chapter-2">Chapter 2</a><a href="#chapter-3">Chapter 3</a><a href="#chapter-4">Chapter 4</a><a href="#reference">Reference</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Full cohort</a>
+        </aside>
+        <div class="docs-content">
+          
+          
+    <section class="docs-panel" id="chapter-0">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 0</span>
+        <h2>Chapter 0</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">00</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">Garbage In, Garbage Out: Why Prompting Is a Skill</a></h3>
+              <p>AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart.</p>
+              <div class="tag-row"><span>See why prompting is a skill</span><span>Spot garbage-in, garbage-out</span><span>Set real expectations for agents</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-1">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 1</span>
+        <h2>Chapter 1</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">01</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">Give It the Room, Not Just the Ask: What Context Really Means</a></h3>
+              <p>Context isn't infinite. AutoNate learns what an agent actually sees, instructions, history, files, tool output, and why dumping everything on it backfires.</p>
+              <div class="tag-row"><span>Understand agent context</span><span>Know what's finite</span><span>Avoid context overload</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-2">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 2</span>
+        <h2>Chapter 2</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/structuring-the-ask">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">02</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/structuring-the-ask">Structuring the Ask: Role, Task, Constraints, Format</a></h3>
+              <p>Role, task, constraints, format, examples. AutoNate learns to structure a prompt instead of throwing a vague question at the wall and hoping.</p>
+              <div class="tag-row"><span>Structure a real prompt</span><span>Use constraints and examples</span><span>Iterate instead of settling</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/structuring-the-ask">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-3">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 3</span>
+        <h2>Chapter 3</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">03</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">Feeding It the Right Files: Practical Context Engineering</a></h3>
+              <p>More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right.</p>
+              <div class="tag-row"><span>Select relevant context</span><span>Avoid overload</span><span>Summarize instead of dumping</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-4">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 4</span>
+        <h2>Chapter 4</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">04</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</a></h3>
+              <p>Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time.</p>
+              <div class="tag-row"><span>Spot hallucinations</span><span>Handle ambiguity</span><span>Build a verify-first habit</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="reference">
+      <div class="docs-panel-head">
+        <span class="kicker">Reference</span>
+        <h2>Reference</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/prompt-and-context-engineering/cheatsheet">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">psychology</span></div>
+              <span class="tutorial-index">05</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/prompt-and-context-engineering/cheatsheet">Cheatsheet</a></h3>
+              <p>The prompt patterns and context-engineering checklist AutoNate actually keeps open in a tab.</p>
+              <div class="tag-row"><span>Reference prompt patterns</span><span>Run the context checklist</span><span>Catch common failures</span></div>
+              <a class="tutorial-link" href="/tutorials/prompt-and-context-engineering/cheatsheet">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+        </div>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

@@ -1,0 +1,157 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked | AutoNateAI Tutorials</title>
+        <meta name="description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked: keep the build moving." />
+        <meta property="og:description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-when-it-gets-it-wrong.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked: keep the build moving." />
+        <meta name="twitter:description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-when-it-gets-it-wrong.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/prompt-and-context-engineering">Prompt and Context Engineering</a><span>/</span><b>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Prompt and Context Engineering</strong>
+          <a class="" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">00 Garbage In, Garbage Out: Why Prompting Is a Skill</a><a class="" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">01 Give It the Room, Not Just the Ask: What Context Really Means</a><a class="" href="/tutorials/prompt-and-context-engineering/structuring-the-ask">02 Structuring the Ask: Role, Task, Constraints, Format</a><a class="" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">03 Feeding It the Right Files: Practical Context Engineering</a><a class="active" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">04 When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</a><a class="" href="/tutorials/prompt-and-context-engineering/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 4 / Tutorial 04</span>
+            <h1>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</h1>
+            <p>Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time.</p>
+            <div class="tag-row"><span>Spot hallucinations</span><span>Handle ambiguity</span><span>Build a verify-first habit</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate's good now. Genuinely — role, task, constraints, format, the right three files open and the dead ones archived, permission granted to ask instead of guess. His remote hauler's running, the scout's reporting clean, and for two straight days the agent's given him exactly what he asked for on close to the first try. He's starting to trust it the way he trusts a teammate who's been reliable for a while. That trust is about to get tested.</p>
+<p>He asks it to help repair walls automatically when they drop below a threshold, keeping the same careful role-task-constraints structure he's been using all pack. The agent writes back clean, confident code, references a method called <code>room.getRemoteSources()</code> to find repair targets efficiently, and explains it like it's a well-known part of the Screeps API. AutoNate, trusting the pattern that's worked all week, drops it straight into <code>main.js</code> without reading it line by line. The game throws an error the second the code runs: that method doesn't exist. Never did. The agent didn't lie to him on purpose — it produced something that sounded exactly like every real API method he'd ever shown it, fluent and specific and completely made up.</p>
+<p>That's a different failure than the ones from earlier chapters. This wasn't a vague prompt or a cluttered context window. He did everything right, and it still handed him something confidently wrong. Turns out that's not a bug he can prompt his way around entirely — it's a real, permanent property of the tool, and the last skill in this pack is learning to work with that instead of getting blindsided by it.</p>
+<h3>Coder's Corner: Hallucination, Ambiguity, and Ground Truth</h3>
+<p>Let's step out of the story for a second, because this is the one failure mode that no amount of good prompting fully removes — it just gets rarer and easier to catch.</p>
+<p><strong>Hallucination</strong> is when a model states something false with the exact same fluent confidence it uses for something true. It's not guessing out loud, hedging, or flagging uncertainty — it sounds identical either way. <code>room.getRemoteSources()</code> reads exactly like a real Screeps method because the model has seen thousands of real methods shaped just like it, and it's pattern-matching the shape, not checking a real API reference against your actual game.</p>
+<p><strong>Ambiguity</strong> is different — it's not the agent being wrong, it's you leaving a decision open that it then has to make for you, silently. Ask it to &quot;make the defender stronger&quot; and it has to pick: more hit points? more damage? more defenders? better targeting logic? It'll pick something and commit to it without telling you there were four other reasonable answers.</p>
+<p><strong>Ground truth</strong> is the real, checkable state of the world — what the actual Screeps API supports, what your actual files actually contain, what actually happens when the code actually runs. The agent's output is a claim about ground truth, not ground truth itself. Confidence in the sentence is not evidence about the world.</p>
+<p><strong>Verification</strong> is the habit that closes the gap: treating every agent output as a claim to check, not a fact to accept, before it goes anywhere near your live colony.</p>
+<pre class="mermaid">flowchart LR
+  Ask[&quot;You ask&lt;br/&gt;a question&quot;] --&gt; Out[&quot;Agent gives&lt;br/&gt;confident answer&quot;]
+  Out --&gt; Check{&quot;Verified against&lt;br/&gt;ground truth?&quot;}
+  Check --&gt;|No| Risk[&quot;Silent risk&lt;br/&gt;in your codebase&quot;]
+  Check --&gt;|Yes| Safe[&quot;Trusted&lt;br/&gt;and shipped&quot;]</pre>
+<p>The scary part isn't that hallucinations happen. It's that a hallucinated answer and a correct one look exactly the same from the outside. The only thing that tells them apart is you checking.</p>
+<h3>1. Spot the Confident Wrong Answer</h3>
+<p>The tell isn't tone — it's specificity dressed up as certainty with nothing backing it. <code>room.getRemoteSources()</code> sounded real because it was specific and matched the *shape* of real Screeps methods. AutoNate's new habit: any time the agent names a method, constant, or API call he doesn't personally recognize, he treats it as unverified until he's seen it in the actual docs or watched it run clean, not as a fact just because it was stated plainly.</p>
+<h3>2. Narrow the Ambiguity Before It Guesses For You</h3>
+<p>For the defender request, instead of &quot;make the defender stronger,&quot; he learns to close the open questions himself first:</p>
+<pre class="code-block language-text"><code>Make the defender stronger by adding a second RANGED_ATTACK
+part, staying within a 300-energy body cost. Don't change
+its targeting logic — that part's already working.</code></pre>
+<p>Now there's nothing left for the agent to silently decide on his behalf. If he doesn't know which answer he wants yet, that's fine too — but then the move is asking the agent to list the options first, not letting it quietly pick one.</p>
+<h3>3. Verify Before You Trust</h3>
+<p>New rule, no exceptions: nothing goes live without AutoNate reading the actual diff and running it somewhere safe first.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// roles/repairer.js</span>
+<span class="token-comment">// AutoNate reads every line before this touches his real colony —</span>
+<span class="token-comment">// including the ones that &quot;sound right.&quot;</span>
+<span class="token-keyword">function</span> findRepairTargets(room) {
+  <span class="token-keyword">return</span> room.find(<span class="token-constant">FIND_STRUCTURES</span>, {
+    filter: (s) =&gt; s.hits &lt; s.hitsMax * <span class="token-number">0</span>.<span class="token-number">5</span>,
+  });
+}</code></pre>
+<p>This version uses <code>room.find()</code> with a real filter — plain, boring, and correct, because it's built out of API AutoNate already knows is real, not a method that merely sounded plausible.</p>
+<h3>4. Build the Verification Habit</h3>
+<p>He starts running the same three-question check on anything the agent hands him before it ships: Do I recognize every method and constant it used? Did I actually read the diff, not just skim the summary? Did I run or simulate it before trusting it against the real colony? Three questions, ten seconds, and it would have caught the fake method before it ever touched <code>main.js</code>.</p>
+<h3>5. Sanity Checks</h3>
+<p>If the agent names an API method you don't recognize: don't assume it's real because it sounds real — check the actual docs before it ships.</p>
+<p>If a request has more than one reasonable interpretation: don't leave it open — decide and state it, or ask the agent to list the options instead of picking silently.</p>
+<p>If code runs clean but does something slightly off from what you wanted: that's ambiguity that slipped through — the prompt was under-specified somewhere, go back and tighten it.</p>
+<p>If you catch yourself pasting code straight in without reading it: stop. That's the exact habit that let <code>getRemoteSources()</code> through. Read the diff every time, no exceptions.</p>
+<p>AutoNate fixes the wall-repair code with real API calls in ten minutes flat once he actually reads what's in front of him instead of trusting the confidence in the sentence. No damage done — one clean error message, caught before it hit anything real. He's not scared of the tool now. He's just done handing it his trust for free. Earned trust, checked every time, is a whole different thing — and it's the last piece he needed.</p>
+<p>Next: <code>05-cheatsheet.md</code> — every pattern from this pack in one place, and where AutoNate takes it from here.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Feeding It the Right Files: Practical Context Engineering</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/cheatsheet"><span><small>Next</small>Cheatsheet</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

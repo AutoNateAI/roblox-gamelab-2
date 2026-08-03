@@ -1,0 +1,264 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Relational Databases and Graphs | AutoNateAI Tutorials</title>
+        <meta name="description" content="Builds, matches, roles, and results are scattered across files and memory. AutoNate builds a real database to track them: tables, SQL, and a graph model for when the relationships get too tangled for rows and columns." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Relational Databases and Graphs: start here." />
+        <meta property="og:description" content="Builds, matches, roles, and results are scattered across files and memory. AutoNate builds a real database to track them: tables, SQL, and a graph model for when the relationships get too tangled for rows and columns." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-pack-relational-databases-and-graphs.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Relational Databases and Graphs: start here." />
+        <meta name="twitter:description" content="Builds, matches, roles, and results are scattered across files and memory. AutoNate builds a real database to track them: tables, SQL, and a graph model for when the relationships get too tangled for rows and columns." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-pack-relational-databases-and-graphs.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorials-page pack-page">
+      <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>Relational Databases and Graphs</b></nav>
+      <section class="home-hero tutorials-detail-hero">
+        <div class="hero-bg"><div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker"><span class="material-symbols-outlined">database</span> AutoNate Builds the Scoreboard</span>
+          <h1>Relational Databases and Graphs</h1>
+          <p>Builds, matches, roles, and results are scattered across files and memory. AutoNate builds a real database to track them: tables, SQL, and a graph model for when the relationships get too tangled for rows and columns.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/programs/ai-agent-systems">Take the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+            <a class="secondary-button" href="/tutorials">All Packs</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+          <div class="hero-panel-body">
+            <span class="kicker"><span class="material-symbols-outlined">terminal</span> This Pack</span>
+            <h2>Work through it in order.</h2>
+            <p>Each lesson builds on the last, from setup to competition-ready.</p>
+            <div class="hero-facts">
+              <span>6 lessons</span>
+              <span>Available Now</span>
+              <span>Copy-ready code</span>
+              <span>Program pathway</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <div class="docs-layout">
+        <aside class="docs-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a href="#chapter-0">Chapter 0</a><a href="#chapter-1">Chapter 1</a><a href="#chapter-2">Chapter 2</a><a href="#chapter-3">Chapter 3</a><a href="#chapter-4">Chapter 4</a><a href="#reference">Reference</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Full cohort</a>
+        </aside>
+        <div class="docs-content">
+          
+          
+    <section class="docs-panel" id="chapter-0">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 0</span>
+        <h2>Chapter 0</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">00</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">The Missing Ledger: Why He Needs a Scoreboard</a></h3>
+              <p>Builds, matches, roles, and results are scattered across files and AutoNate's own memory. He learns why a real database beats another folder of notes.</p>
+              <div class="tag-row"><span>See why a database beats files</span><span>Compare memory vs storage</span><span>Frame the tracking problem</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-1">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 1</span>
+        <h2>Chapter 1</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">01</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">The Blueprint: Tables, Rows, and Relationships</a></h3>
+              <p>Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables.</p>
+              <div class="tag-row"><span>Design tables and keys</span><span>Model one-to-many relationships</span><span>Think in rows, not files</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-2">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 2</span>
+        <h2>Chapter 2</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">02</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">Talking to the Data: Asking Questions with SQL</a></h3>
+              <p>SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back.</p>
+              <div class="tag-row"><span>Write SELECT and WHERE</span><span>Join related tables</span><span>Group data into answers</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-3">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 3</span>
+        <h2>Chapter 3</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">03</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">The Web Under the Table: When Relationships Get Tangled</a></h3>
+              <p>Some relationships don't fit neatly in rows. AutoNate meets graphs: nodes, edges, and when a graph beats a table.</p>
+              <div class="tag-row"><span>Understand nodes and edges</span><span>Know when to reach for a graph</span><span>Traverse a simple graph</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="chapter-4">
+      <div class="docs-panel-head">
+        <span class="kicker">Chapter 4</span>
+        <h2>Chapter 4</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/building-the-monitor">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">04</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/building-the-monitor">The Scoreboard Comes Alive: Building the Monitor</a></h3>
+              <p>Queries become a real tracker. AutoNate turns raw rows into a monitor that actually tells him what's working.</p>
+              <div class="tag-row"><span>Aggregate real data</span><span>Build a simple monitor</span><span>Turn queries into insight</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/building-the-monitor">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section class="docs-panel" id="reference">
+      <div class="docs-panel-head">
+        <span class="kicker">Reference</span>
+        <h2>Reference</h2>
+      </div>
+      <div class="tutorial-list">
+        
+          <article class="tutorial-row ">
+            <a class="tutorial-row-media" href="/tutorials/relational-databases-and-graphs/cheatsheet">
+              <div class="media-icon-tile"><span class="material-symbols-outlined">database</span></div>
+              <span class="tutorial-index">05</span>
+            </a>
+            <div>
+              <h3><a href="/tutorials/relational-databases-and-graphs/cheatsheet">Cheatsheet</a></h3>
+              <p>The SQL syntax and graph vocabulary AutoNate keeps looking up until it finally sticks.</p>
+              <div class="tag-row"><span>Reference SQL syntax</span><span>Know core graph terms</span><span>Query with confidence</span></div>
+              <a class="tutorial-link" href="/tutorials/relational-databases-and-graphs/cheatsheet">Open Tutorial <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  
+        </div>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

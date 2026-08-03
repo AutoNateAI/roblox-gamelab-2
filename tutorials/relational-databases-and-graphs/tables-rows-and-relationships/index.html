@@ -1,0 +1,159 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Blueprint: Tables, Rows, and Relationships | AutoNateAI Tutorials</title>
+        <meta name="description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/tables-rows-and-relationships" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Blueprint: Tables, Rows, and Relationships: keep the build moving." />
+        <meta property="og:description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/tables-rows-and-relationships" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-tables-rows-and-relationships.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Blueprint: Tables, Rows, and Relationships: keep the build moving." />
+        <meta name="twitter:description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-tables-rows-and-relationships.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/relational-databases-and-graphs">Relational Databases and Graphs</a><span>/</span><b>The Blueprint: Tables, Rows, and Relationships</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="active" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 1 / Tutorial 01</span>
+            <h1>The Blueprint: Tables, Rows, and Relationships</h1>
+            <p>Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables.</p>
+            <div class="tag-row"><span>Design tables and keys</span><span>Model one-to-many relationships</span><span>Think in rows, not files</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate grabbed a notebook — an actual paper one, which felt almost funny given what he was about to build — and started listing every fact he needed to remember about his colonies. Name. Which room it lived in. Every match it had played. Who it played against. Whether it won. What roles were on the field when it did. He kept writing &quot;and it needs to connect back to—&quot; over and over, and somewhere around the fifth line he realized he wasn't describing a list. He was describing a web of related facts, and no single flat list was going to hold all of it without repeating itself into a mess.</p>
+<p>That's exactly the shape a relational database is built for. Not one giant list with every fact crammed into every row — a set of focused, separate tables, each one holding one kind of thing well, linked together by a shared piece of information. Colonies over here. Matches over there. A thread connecting them, so you can always walk from one to the other. This chapter is AutoNate building that structure for real, for the first time — not sketching it in a notebook, but writing it as actual SQL that a real database will hold onto.</p>
+<h3>Coder's Corner: The Relational Model</h3>
+<p>A <strong>relational database</strong> stores information in <strong>tables</strong> — think of a table like a spreadsheet with strict rules about what goes in each column. Every table holds one kind of thing: a <code>colonies</code> table holds colonies, a <code>matches</code> table holds matches. Nothing gets mixed together.</p>
+<p>Each individual entry in a table is called a <strong>row</strong> — one specific colony, one specific match. Each table has <strong>columns</strong>, and every row in that table has a value for every column, in the same shape every time. That consistency is the whole point: once you know the shape of a table, you know exactly what every row in it looks like.</p>
+<p>Every table needs a <strong>primary key</strong> — a column (usually <code>id</code>) that uniquely identifies each row, so no two rows are ever confused for each other, even if every other column happens to match. Screeps has two creeps named &quot;Bob&quot; sometimes; a primary key never has that problem, because the database assigns it and guarantees it's unique.</p>
+<p>The connective tissue is the <strong>foreign key</strong> — a column in one table that stores the primary key of a row in another table, creating a link between them. When a <code>matches</code> row has a <code>colony_id</code> column holding the value <code>3</code>, that's the database saying &quot;this match belongs to the colony whose id is 3.&quot; That link is what turns a pile of separate tables into one connected system.</p>
+<h3>1. Design the <code>colonies</code> Table</h3>
+<p>Every match, every build, every role AutoNate tracks needs to trace back to a colony. So that's the table he built first — the anchor everything else points to.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE colonies (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  room TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+<p><code>id</code> is the primary key — the database hands out a new one automatically every time a row is inserted, so AutoNate never has to invent one himself and never has to worry about a collision. <code>name</code> and <code>room</code> are <code>NOT NULL</code> on purpose: a colony with no name or no room isn't a real record, it's a mistake, and the database refuses to let a mistake in quietly.</p>
+<h3>2. Design the <code>matches</code> Table</h3>
+<p>A match doesn't exist on its own — it always belongs to a colony. That relationship gets encoded directly in the table, through a foreign key.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE matches (
+  id INTEGER PRIMARY KEY,
+  colony_id INTEGER NOT NULL REFERENCES colonies(id),
+  opponent TEXT NOT NULL,
+  result TEXT NOT NULL CHECK (result IN ('win', 'loss')),
+  ticks INTEGER,
+  played_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+<p><code>colony_id REFERENCES colonies(id)</code> is the foreign key — it says &quot;every value in this column must be a real id that exists in the <code>colonies</code> table.&quot; Try inserting a match with <code>colony_id = 99</code> when no colony <code>99</code> exists, and the database rejects it outright. That's not the database being difficult. That's the database refusing to let AutoNate's own data lie to him.</p>
+<h3>3. Design the <code>roles</code> Table and See the Pattern Repeat</h3>
+<p>A match, in turn, has roles fielded during it — how many harvesters, how many builders, what they actually did. Same pattern as before: a table that belongs to the table above it.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE roles (
+  id INTEGER PRIMARY KEY,
+  match_id INTEGER NOT NULL REFERENCES matches(id),
+  role_name TEXT NOT NULL,
+  count INTEGER NOT NULL,
+  energy_harvested INTEGER DEFAULT 0
+);</code></pre>
+<p>Now step back and look at what got built: <code>colonies</code> → <code>matches</code> → <code>roles</code>, each one linked to the one before it by a foreign key. This is a <strong>one-to-many relationship</strong>, repeated twice: one colony can have many matches, and one match can have many role entries — but each match belongs to exactly one colony, and each role entry belongs to exactly one match. That &quot;one parent, many children&quot; pattern is the workhorse of relational design. Almost everything you'll ever model breaks down into some version of it.</p>
+<pre class="mermaid">flowchart LR
+  A[&quot;colonies&lt;br/&gt;id, name, room&quot;] --&gt; B[&quot;matches&lt;br/&gt;id, colony_id, opponent, result&quot;]
+  B --&gt; C[&quot;roles&lt;br/&gt;id, match_id, role_name, count&quot;]</pre>
+<p>Read that left to right and it tells the whole story: a colony has matches, a match has roles fielded in it. Every arrow is a foreign key. Follow the arrows backward from any <code>roles</code> row and you can answer &quot;which colony was this, and did it win&quot; without ever touching a text file again.</p>
+<h3>4. Sanity Checks</h3>
+<ul><li>If an insert gets rejected with a foreign key error: check that the id you're referencing actually exists in the parent table first — you likely tried to attach a match to a colony that was never created, or mistyped the id.</li><li>If you're not sure whether something needs its own table or just another column: ask whether it can repeat. A colony has one name, so <code>name</code> is a column. A colony can have many matches, so <code>matches</code> needs its own table.</li><li>If two rows look identical except you can't tell them apart: that's what the primary key is for — it's unique even when every other value matches exactly.</li><li>If a query returns nothing when you expect rows: double-check the foreign key value you're filtering on actually matches what's stored — a <code>colony_id</code> of <code>3</code> and <code>&quot;3&quot;</code> are not automatically the same thing everywhere.</li></ul>
+<p>Three tables, two clean relationships, and for the first time AutoNate had a structure that couldn't quietly go inconsistent on him. The notebook stayed closed after that.</p>
+<p>Next: <code>02-asking-questions-with-sql.md</code> — where those tables stop just sitting there and start answering questions.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Missing Ledger: Why He Needs a Scoreboard</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql"><span><small>Next</small>Talking to the Data: Asking Questions with SQL</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

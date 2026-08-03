@@ -6,12 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/programs/ai-software-architect</loc>
+    <loc>https://autonateai.com/programs/ai-agent-systems</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/league</loc>
+    <loc>https://autonateai.com/live-builds</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/consulting</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -42,6 +47,21 @@
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/getting-started-with-screeps</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -102,6 +122,96 @@
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/structuring-the-ask</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/feeding-it-the-right-files</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/prompt-and-context-engineering/cheatsheet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/tables-rows-and-relationships</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/asking-questions-with-sql</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/when-relationships-get-tangled</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/building-the-monitor</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/relational-databases-and-graphs/cheatsheet</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/zooming-out-to-the-city</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/what-is-an-agentic-system</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/researching-the-room</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/from-insight-to-system</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/tutorials/civics-and-agentic-ai/cheatsheet</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

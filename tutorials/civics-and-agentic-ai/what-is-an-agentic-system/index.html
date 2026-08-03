@@ -1,0 +1,151 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Not Just a Chatbot: What Is an Agentic System | AutoNateAI Tutorials</title>
+        <meta name="description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/civics-and-agentic-ai/what-is-an-agentic-system" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Not Just a Chatbot: What Is an Agentic System: keep the build moving." />
+        <meta property="og:description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/civics-and-agentic-ai/what-is-an-agentic-system" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-what-is-an-agentic-system.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Not Just a Chatbot: What Is an Agentic System: keep the build moving." />
+        <meta name="twitter:description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-what-is-an-agentic-system.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/civics-and-agentic-ai">Civics and Agentic AI</a><span>/</span><b>Not Just a Chatbot: What Is an Agentic System</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Civics and Agentic AI</strong>
+          <a class="" href="/tutorials/civics-and-agentic-ai/zooming-out-to-the-city">00 Past the Walls: Zooming Out to the City</a><a class="active" href="/tutorials/civics-and-agentic-ai/what-is-an-agentic-system">01 Not Just a Chatbot: What Is an Agentic System</a><a class="" href="/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai">02 The Fine Print: Reading an RFP with AI</a><a class="" href="/tutorials/civics-and-agentic-ai/researching-the-room">03 Know Who You're Talking To: Researching the Room</a><a class="" href="/tutorials/civics-and-agentic-ai/from-insight-to-system">04 The Sketch on the Napkin: From Insight to System</a><a class="" href="/tutorials/civics-and-agentic-ai/cheatsheet">05 The Notes Before the Live Build: Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 1 / Tutorial 01</span>
+            <h1>Not Just a Chatbot: What Is an Agentic System</h1>
+            <p>An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal.</p>
+            <div class="tag-row"><span>Define agentic vs single-shot</span><span>Understand planning and tool use</span><span>Recognize multi-step autonomy</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate had used an AI agent plenty by now — that's half of what made his colony code and his database possible. But every time before this, the shape was the same: he'd ask something, it would answer, and then he'd read the answer and decide what to do next himself. Ask, answer, his move. Ask, answer, his move. It worked. It also meant he was the one doing every bit of the actual work of moving a project forward, one exchange at a time, forever.</p>
+<p>Then he watched the Discord announcement's linked clip of a past Tuesday build, and something looked different. Somebody typed one instruction — something like &quot;read this RFP and pull out every requirement&quot; — and then just... waited. No follow-up question after every line. No copy-pasting the next chunk in by hand. The agent kept working, checked its own output, and came back with a finished list. One instruction. Many steps. Nobody babysitting it between them.</p>
+<p>That's the line this chapter draws, and it's a real one, not a marketing word. Everything AutoNate had done with AI up to now was a single-shot exchange — smart, useful, but bounded to one question and one answer. What he was looking at now was something else: a system that could take a goal, break it into steps, use tools to act on those steps, check its own results, and keep going without him re-prompting it at every turn. That's what an <strong>agentic system</strong> is. Understanding the difference is the whole hinge this pack swings on.</p>
+<h3>Coder's Corner: Agent vs. Single-Shot Prompt</h3>
+<p>A <strong>single-shot prompt</strong> is one question in, one answer out. You ask &quot;what does RCL mean in Screeps,&quot; it tells you, done. The thinking about what to do with that answer is entirely on you.</p>
+<p>An <strong>agent</strong> is different in three specific ways:</p>
+<ul><li><strong>Planning</strong> — given a goal instead of a single question, an agent breaks it into a sequence of smaller steps on its own, instead of waiting for you to hand it the steps one at a time.</li><li><strong>Tool use</strong> — an agent isn't limited to generating text. It can call real tools: read a file, run a search, write a document, query a database. The text it generates becomes actions it can actually take.</li><li><strong>Multi-step autonomy</strong> — after each action, an agent observes what happened and decides the next move itself, looping through plan-act-observe until the goal is met, instead of stopping to ask you after every single step.</li></ul>
+<p>None of that means unsupervised. It means the loop between steps doesn't require you standing there refilling the prompt box every ten seconds. You set the goal and the guardrails. It does the repetitive middle part.</p>
+<pre class="mermaid">flowchart LR
+  Q[&quot;One question&quot;] --&gt; A[&quot;One answer, done&quot;]
+  G[&quot;One goal&quot;] --&gt; L[&quot;Plan → Act → Observe&lt;br/&gt;repeat until done&quot;]
+  L --&gt; R[&quot;Result, ready for review&quot;]</pre>
+<p>Same starting move — you telling the AI what you want — but a completely different shape of what happens after you hit enter.</p>
+<h3>1. Spot the Difference Between a Question and a Goal</h3>
+<p>&quot;What's the deadline on this RFP?&quot; is a question. One answer ends it. &quot;Read this RFP and tell me everything a proposal would need to include, with sources for each claim&quot; is a goal — it requires finding information, organizing it, and checking it, which is naturally several steps, not one. If what you're asking for can't be answered in a single sentence without more digging first, you're handing over a goal, not a question, whether you meant to or not.</p>
+<h3>2. Give the Agent Tools, Not Just Words</h3>
+<p>An agent without tools is just a single-shot prompt wearing a longer explanation. The actual power shows up when it can act — read a real file, run a real search, write a real output — instead of only generating a description of what it *would* do.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// rfp-agent.js — one goal, not one question</span>
+<span class="token-keyword">const</span> result = await agent.run({
+  goal: &quot;Read fairview-rfp.txt, list every requirement, and flag anything unclear.&quot;,
+  tools: [readFile, writeNotes],
+});</code></pre>
+<p>That <code>tools</code> array is the whole difference. Take the tools away and you've got a chatbot describing a plan instead of one carrying it out.</p>
+<pre class="mermaid">flowchart TD
+  Goal[&quot;Goal set by you&quot;] --&gt; Plan[&quot;Agent plans the steps&quot;]
+  Plan --&gt; Act[&quot;Agent acts — calls a tool&quot;]
+  Act --&gt; Observe[&quot;Agent observes the result&quot;]
+  Observe --&gt; Done{&quot;Goal met?&quot;}
+  Done -- No --&gt; Plan
+  Done -- Yes --&gt; Finish[&quot;Hands result back to you&quot;]</pre>
+<p>Follow that loop and you'll notice the human — you — only shows up twice: setting the goal, and reviewing what comes back. Everything in the middle runs on its own.</p>
+<h3>3. Let It Check Its Own Work, Then You Check It Too</h3>
+<p>A good agent doesn't just act once and stop — it re-reads its own output against the goal before calling itself done. That's part of the loop, not a separate step. But &quot;the agent checked itself&quot; is not the same as &quot;it's correct.&quot; An agent that misreads a requirement will confidently misreport it, in complete sentences, with total conviction. Directing an agent well — which AutoNate already learned the hard way — means the loop ends with you, reviewing the result against the actual source document, every time. Autonomy inside the loop. Accountability outside it.</p>
+<h3>4. Sanity Checks</h3>
+<ul><li>If an agent stops after one step and waits for you to prompt it again: you likely gave it a question, not a goal — reframe what you asked for as an outcome, not a single fact.</li><li>If the output looks complete but something feels off: check it against the original source directly. An agent that sounds confident isn't automatically an agent that's correct.</li><li>If you're not sure whether a task needs an agent or a single prompt: ask whether it requires more than one real step to finish. One step, use a question. Several connected steps, hand it a goal.</li><li>If this still feels theoretical: it stops being theoretical the moment you actually hand an agent a real RFP and watch it work through one — which is exactly what's next.</li></ul>
+<p>AutoNate reread that clip one more time. Not because he still didn't get it — because he finally did, and he wanted to watch it again knowing what he was looking at.</p>
+<p>Next: <code>02-reading-an-rfp-with-ai.md</code> — pointing that exact loop at the Fairview document he'd only skimmed so far.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/civics-and-agentic-ai/zooming-out-to-the-city"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Past the Walls: Zooming Out to the City</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai"><span><small>Next</small>The Fine Print: Reading an RFP with AI</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

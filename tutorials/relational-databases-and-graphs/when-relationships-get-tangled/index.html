@@ -1,0 +1,162 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Web Under the Table: When Relationships Get Tangled | AutoNateAI Tutorials</title>
+        <meta name="description" content="Some relationships don't fit neatly in rows. AutoNate meets graphs: nodes, edges, and when a graph beats a table." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/when-relationships-get-tangled" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Web Under the Table: When Relationships Get Tangled: keep the build moving." />
+        <meta property="og:description" content="Some relationships don't fit neatly in rows. AutoNate meets graphs: nodes, edges, and when a graph beats a table." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/when-relationships-get-tangled" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-when-relationships-get-tangled.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Web Under the Table: When Relationships Get Tangled: keep the build moving." />
+        <meta name="twitter:description" content="Some relationships don't fit neatly in rows. AutoNate meets graphs: nodes, edges, and when a graph beats a table." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-when-relationships-get-tangled.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/relational-databases-and-graphs">Relational Databases and Graphs</a><span>/</span><b>The Web Under the Table: When Relationships Get Tangled</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="active" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 3 / Tutorial 03</span>
+            <h1>The Web Under the Table: When Relationships Get Tangled</h1>
+            <p>Some relationships don't fit neatly in rows. AutoNate meets graphs: nodes, edges, and when a graph beats a table.</p>
+            <div class="tag-row"><span>Understand nodes and edges</span><span>Know when to reach for a graph</span><span>Traverse a simple graph</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate tried to model something new: which builds beat which other builds. Not colonies, not matches — the actual strategies. His three-hauler rush build beat the turtle-defense build. The turtle-defense build beat the all-in-attacker build. And the all-in-attacker build, infuriatingly, beat the three-hauler rush build right back. He sat there staring at that for a solid minute, because his gut said &quot;just add a <code>beats</code> column to the builds table,&quot; and his gut was wrong. A build doesn't beat one other build — it beats several, gets beaten by several others, and the whole thing loops back on itself. There's no clean &quot;one parent, many children&quot; shape here. It's a mess of everything pointing at everything.</p>
+<p>That's the moment tables stop being the right tool. Not because SQL broke — because the shape of the problem changed. Tables are built for clean hierarchies: one colony, many matches; one match, many roles. But some relationships aren't hierarchies at all. They're webs. Teammates who've scrimmaged each other. Build strategies that counter each other in a loop, not a line. Skills that depend on other skills in ways that branch and reconnect. Forcing a web into strict rows and foreign keys works for a while and then starts fighting you — endless join tables, columns that reference the same table they live in, queries that need to hop five relationships deep just to answer something simple. AutoNate needed a different mental model, and this chapter is him finding it.</p>
+<h3>Coder's Corner: Nodes, Edges, and Graphs</h3>
+<p>A <strong>graph</strong>, in this sense, has nothing to do with a bar chart. It's a way of modeling things and the connections between them, without forcing those connections into a strict hierarchy.</p>
+<ul><li>A <strong>node</strong> is a single thing — a build, a colony, an opponent. Same idea as a row, just without the assumption that it only belongs to one parent.</li><li>An <strong>edge</strong> is a connection between two nodes — &quot;this build counters that build,&quot; &quot;this colony scrimmaged that colony.&quot; Edges can point in a direction (build A beats build B doesn't automatically mean build B beats build A), and any node can connect to any number of other nodes, in any pattern, including loops back on itself.</li><li>A <strong>traversal</strong> is the act of walking the graph — starting at one node and following edges outward to see what connects to what, possibly several steps deep. &quot;What beats what beats this build&quot; is a two-step traversal.</li></ul>
+<p>The difference that matters: a table assumes a predictable shape ahead of time — a match belongs to exactly one colony. A graph makes no such assumption. Any node can connect to any other node, however many times, in whatever direction. That flexibility is exactly what a tangled web of counters, teammates, or dependencies needs.</p>
+<h3>1. Spot When a Table Stops Working</h3>
+<p>The tell is almost always the same: you find yourself wanting to add a column that references the same table it's in, or you need a join table just to represent &quot;this thing relates to several of these other things, which also relate back.&quot; AutoNate's <code>beats</code> idea was exactly that — a build relating to other rows in its own <code>builds</code> table, with no limit on how many, and no rule against cycles. That's the signal. When a relationship needs to point at more of the same kind of thing, in a loop, without a clean parent-child direction — reach for a graph model, not another foreign key.</p>
+<h3>2. Model It as a Graph</h3>
+<p>Instead of jamming the relationship into <code>builds</code>, AutoNate modeled it as two simple structures: nodes and edges, kept as their own tables purely because that's a convenient way to store a graph — the mental model is still nodes and edges, not parent-and-child rows.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE build_nodes (
+  id INTEGER PRIMARY KEY,
+  build_name TEXT NOT NULL
+);
+
+CREATE TABLE counters_edges (
+  id INTEGER PRIMARY KEY,
+  from_build_id INTEGER NOT NULL REFERENCES build_nodes(id),
+  to_build_id INTEGER NOT NULL REFERENCES build_nodes(id),
+  note TEXT
+);</code></pre>
+<p>Every row in <code>counters_edges</code> is one edge: &quot;the build at <code>from_build_id</code> counters the build at <code>to_build_id</code>.&quot; Nothing stops <code>to_build_id</code> from eventually leading back around to <code>from_build_id</code> through other rows — the loop AutoNate ran into is just... allowed. That's the entire point.</p>
+<pre class="mermaid">flowchart LR
+  Rush[&quot;Three-Hauler Rush&quot;] --&gt;|counters| Turtle[&quot;Turtle Defense&quot;]
+  Turtle --&gt;|counters| AllIn[&quot;All-In Attacker&quot;]
+  AllIn --&gt;|counters| Rush</pre>
+<p>Follow the arrows and the loop is right there, drawn instead of fought against. No column had to lie about being a clean hierarchy. The shape of the diagram matches the actual shape of the problem — which is the whole test for whether a graph is the right call.</p>
+<h3>3. Traverse It: Ask &quot;What Beats What Beats Me&quot;</h3>
+<p>The payoff of modeling it this way is that questions that would've needed a pile of self-joins in the table version become a straightforward walk across edges.</p>
+<pre class="code-block language-sql"><code>-- direct counters to the Rush build
+SELECT to_build.build_name
+FROM counters_edges
+JOIN build_nodes AS from_build ON counters_edges.from_build_id = from_build.id
+JOIN build_nodes AS to_build ON counters_edges.to_build_id = to_build.id
+WHERE from_build.build_name = 'Three-Hauler Rush';
+
+-- one step further: what counters what counters the Rush build
+SELECT next_hop.build_name
+FROM counters_edges AS hop1
+JOIN counters_edges AS hop2 ON hop1.to_build_id = hop2.from_build_id
+JOIN build_nodes AS next_hop ON hop2.to_build_id = next_hop.id
+JOIN build_nodes AS start ON hop1.from_build_id = start.id
+WHERE start.build_name = 'Three-Hauler Rush';</code></pre>
+<p>That second query is a two-step <strong>traversal</strong> — start at one node, follow an edge, then follow another edge from there. Dedicated graph databases have cleaner syntax for walking many steps like this, but the concept is identical no matter what tool you're in: start somewhere, follow the edges, see what you reach. For AutoNate's scale — a few dozen builds, a modest web of counters — plain SQL edges are plenty. He doesn't need new infrastructure. He needed a different way to think about the shape of the relationship, and that's what actually changed here.</p>
+<h3>4. Sanity Checks</h3>
+<ul><li>If you're building a join table with three or more foreign keys just to represent one relationship: stop and ask whether this is actually a web, not a hierarchy — that's usually the graph signal.</li><li>If a relationship can legitimately loop back on itself (A relates to B relates to C relates to A): tables can technically store that, but a graph mental model makes it obvious instead of hidden in a self-referencing column.</li><li>If a traversal query needs more than two or three hops: that's the point where a dedicated graph database or graph library starts paying for itself — plain SQL joins get unwieldy past a few hops deep.</li><li>If you're not sure whether something is a graph problem or just a normal one-to-many: ask whether any node can connect to many others of the same kind, in multiple directions, without a natural &quot;parent.&quot; If yes, it's a graph.</li></ul>
+<p>He didn't throw away the tables from the last two chapters — colonies and matches are still exactly the right shape for what they hold. He just stopped forcing every relationship into that same shape, and started picking the right one per problem. That distinction alone was worth the whole chapter.</p>
+<p>Next: <code>04-building-the-monitor.md</code> — where all of this, tables and graph both, turns into something AutoNate actually looks at.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Talking to the Data: Asking Questions with SQL</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/building-the-monitor"><span><small>Next</small>The Scoreboard Comes Alive: Building the Monitor</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

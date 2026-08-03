@@ -1,0 +1,166 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Fine Print: Reading an RFP with AI | AutoNateAI Tutorials</title>
+        <meta name="description" content="AutoNate points an agent at a real RFP and pulls out what actually matters: requirements, constraints, and stakes." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Fine Print: Reading an RFP with AI: keep the build moving." />
+        <meta property="og:description" content="AutoNate points an agent at a real RFP and pulls out what actually matters: requirements, constraints, and stakes." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-reading-an-rfp-with-ai.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Fine Print: Reading an RFP with AI: keep the build moving." />
+        <meta name="twitter:description" content="AutoNate points an agent at a real RFP and pulls out what actually matters: requirements, constraints, and stakes." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-reading-an-rfp-with-ai.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/civics-and-agentic-ai">Civics and Agentic AI</a><span>/</span><b>The Fine Print: Reading an RFP with AI</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Civics and Agentic AI</strong>
+          <a class="" href="/tutorials/civics-and-agentic-ai/zooming-out-to-the-city">00 Past the Walls: Zooming Out to the City</a><a class="" href="/tutorials/civics-and-agentic-ai/what-is-an-agentic-system">01 Not Just a Chatbot: What Is an Agentic System</a><a class="active" href="/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai">02 The Fine Print: Reading an RFP with AI</a><a class="" href="/tutorials/civics-and-agentic-ai/researching-the-room">03 Know Who You're Talking To: Researching the Room</a><a class="" href="/tutorials/civics-and-agentic-ai/from-insight-to-system">04 The Sketch on the Napkin: From Insight to System</a><a class="" href="/tutorials/civics-and-agentic-ai/cheatsheet">05 The Notes Before the Live Build: Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 2 / Tutorial 02</span>
+            <h1>The Fine Print: Reading an RFP with AI</h1>
+            <p>AutoNate points an agent at a real RFP and pulls out what actually matters: requirements, constraints, and stakes.</p>
+            <div class="tag-row"><span>Summarize a real RFP</span><span>Extract requirements</span><span>Identify constraints</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate had the Fairview RFP open again — &quot;Youth Recreation Program Registration &amp; Waitlist System,&quot; twelve pages, city seal on the front. He'd skimmed it once already and understood the shape: parks department, registration problem, some kind of system needed. What he didn't have was the actual list. What exactly did they need built. What would disqualify a proposal outright. What the budget ceiling was. What day it was due. All of that was in there, technically, buried in formatting that looked like it was fighting him on purpose.</p>
+<p>Old AutoNate would've read all twelve pages top to bottom, highlighter in hand, and hoped he didn't miss anything in paragraph nine while he was busy paying attention to paragraph three. That's not a knock on him — that's just what reading a dense document by hand actually costs. But he'd just spent a whole chapter learning what an agent with a goal and real tools could do that a single question couldn't. This was the first real chance to point that at something that mattered.</p>
+<h3>Coder's Corner: Requirements vs. Constraints</h3>
+<p>Before handing the document to an agent, it helps to know what you're actually asking it to pull out, because &quot;summarize this&quot; is too vague to be useful.</p>
+<ul><li>A <strong>requirement</strong> is something the system has to do — &quot;the system must let a parent register a child for a program online.&quot; Requirements describe function.</li><li>A <strong>constraint</strong> is a boundary the proposal has to stay inside — a budget ceiling, a technology restriction, an accessibility standard, a deadline. Constraints don't describe what the system does; they describe what any valid answer is allowed to look like.</li><li><strong>Deliverables</strong> are the concrete things handed over at the end — working software, documentation, a training session, a support window.</li><li><strong>Eligibility</strong> is who's even allowed to submit a proposal in the first place — sometimes wide open, sometimes restricted to certain kinds of vendors.</li></ul>
+<p>Mixing these up is an easy way to build something technically impressive that still gets tossed for missing a budget cap or an accessibility standard buried on page eight.</p>
+<h3>1. Get the Document Somewhere the Agent Can Actually Read It</h3>
+<p>Save the RFP as plain text or keep the PDF local — either way, the agent needs direct access to the actual source, not your memory of skimming it once.</p>
+<pre class="code-block language-bash"><code>agent run &quot;load fairview-rfp.txt and confirm it's readable before we go further&quot;</code></pre>
+<p>Small step, easy to skip, and skipping it is exactly how you end up debugging a summary of a document the agent never actually opened.</p>
+<h3>2. Hand It a Goal, Not a Vague &quot;Summarize This&quot;</h3>
+<p>&quot;Summarize this&quot; produces a summary. It doesn't produce something you can act on. Ask for structure instead — requirements, constraints, deliverables, deadline, each one labeled, each one traceable back to where it came from in the document.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// rfp-extract.js — structure, not just a paragraph</span>
+<span class="token-keyword">const</span> extract = await agent.run({
+  goal: <span class="token-string">`Read fairview-rfp.txt and produce structured JSON with:
+    requirements (what the system must do),
+    constraints (budget, tech, deadline, accessibility),
+    deliverables, and eligibility.
+    Cite the page or section for each item.`</span>,
+  tools: [readFile, writeJson],
+});</code></pre>
+<p>Output that comes back might look something like this:</p>
+<pre class="code-block language-json"><code>{
+  &quot;requirements&quot;: [
+    &quot;Parents register children for programs online&quot;,
+    &quot;System shows real-time capacity per program&quot;,
+    &quot;Waitlist auto-fills open spots in submission order&quot;
+  ],
+  &quot;constraints&quot;: [
+    &quot;Budget ceiling: $45,000&quot;,
+    &quot;Must meet WCAG 2.1 AA accessibility&quot;,
+    &quot;Proposals due by the stated deadline, no extensions&quot;
+  ],
+  &quot;deliverables&quot;: [
+    &quot;Working system&quot;,
+    &quot;90-day post-launch support&quot;,
+    &quot;Staff training session&quot;
+  ]
+}</code></pre>
+<p>That's not the document rewritten shorter. That's the document turned into something you can actually build a proposal against, and — down the line — a database schema against too.</p>
+<pre class="mermaid">flowchart TD
+  RFP[&quot;fairview-rfp.txt&quot;] --&gt; Agent[&quot;Agent: extract &amp; structure&quot;]
+  Agent --&gt; JSON[&quot;requirements.json&quot;]
+  JSON --&gt; Human[&quot;AutoNate: verify against source&quot;]</pre>
+<h3>3. Verify the Extraction Against the Actual Source</h3>
+<p>This is the part that doesn't get to be optional. An agent that misreads &quot;budget not to exceed $45,000&quot; as a target instead of a ceiling will say it just as confidently either way. AutoNate learned this the expensive way back when he was first directing an agent on his colony code — confidence in the output was never proof the output was right. Pull up the source page for every item in that JSON at least once and check it says what the agent claims it says. Ten minutes of checking now beats a proposal built on a misread constraint later.</p>
+<h3>4. Flag What's Actually Unclear</h3>
+<p>A good extraction doesn't pretend the document is cleaner than it is. Some RFPs genuinely leave things ambiguous — a requirement that contradicts a budget line, a deadline stated two different ways in two different sections. Ask the agent to flag anything like that explicitly instead of quietly picking one interpretation and moving on. Those flags become real questions, and real questions are exactly what a proposal's clarification period exists for.</p>
+<h3>5. Sanity Checks</h3>
+<ul><li>If the extracted JSON looks suspiciously clean and has zero flagged ambiguities: that's a reason to check closer, not a reason to relax — real RFPs almost always have at least one rough edge.</li><li>If a requirement and a constraint got mixed into the same list: split them back out by hand — the distinction matters once you're actually designing against them.</li><li>If you can't find where in the source document a claimed item came from: don't trust it until you do. No citation, no confidence.</li><li>If the whole document still feels overwhelming even after extraction: that's normal for a first RFP — the extraction doesn't remove the reading, it removes the *re-reading*.</li></ul>
+<p>AutoNate had a document now instead of a wall of text — twelve pages compressed into a list he could actually work from, every line traceable back to where it came from. He still didn't know one thing, though: who Fairview Parks and Rec actually was, and what was really driving this ask.</p>
+<p>Next: <code>03-researching-the-room.md</code> — finding out who's actually on the other side of the document.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/civics-and-agentic-ai/what-is-an-agentic-system"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Not Just a Chatbot: What Is an Agentic System</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/civics-and-agentic-ai/researching-the-room"><span><small>Next</small>Know Who You're Talking To: Researching the Room</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

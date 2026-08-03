@@ -1,0 +1,135 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Missing Ledger: Why He Needs a Scoreboard | AutoNateAI Tutorials</title>
+        <meta name="description" content="Builds, matches, roles, and results are scattered across files and AutoNate's own memory. He learns why a real database beats another folder of notes." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Missing Ledger: Why He Needs a Scoreboard: keep the build moving." />
+        <meta property="og:description" content="Builds, matches, roles, and results are scattered across files and AutoNate's own memory. He learns why a real database beats another folder of notes." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-why-he-needs-a-scoreboard.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Missing Ledger: Why He Needs a Scoreboard: keep the build moving." />
+        <meta name="twitter:description" content="Builds, matches, roles, and results are scattered across files and AutoNate's own memory. He learns why a real database beats another folder of notes." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-why-he-needs-a-scoreboard.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/relational-databases-and-graphs">Relational Databases and Graphs</a><span>/</span><b>The Missing Ledger: Why He Needs a Scoreboard</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a class="active" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 0 / Tutorial 00</span>
+            <h1>The Missing Ledger: Why He Needs a Scoreboard</h1>
+            <p>Builds, matches, roles, and results are scattered across files and AutoNate's own memory. He learns why a real database beats another folder of notes.</p>
+            <div class="tag-row"><span>See why a database beats files</span><span>Compare memory vs storage</span><span>Frame the tracking problem</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate opened four files trying to answer one question: did the three-harvester build actually beat the two-harvester-one-hauler build, or did it just look that way because the third match happened to be against a weaker opponent? He had <code>notes.txt</code>, a <code>matches-old.txt</code> he forgot he'd renamed, a Discord DM to himself with a screenshot of a scoreboard from two weeks back, and his own memory, which was already starting to blur three different Tuesday-night sessions into one. He knew the answer was in there somewhere. He just couldn't get to it without twenty minutes of archaeology first.</p>
+<p>That's the wall this pack is about. Not a code wall — a bookkeeping wall. AutoNate can prompt an AI agent well now; he learned that the hard way, one bad handoff at a time, and it changed how fast he moves. He can spin up a new colony behavior, test it, tweak it, and try again in a fraction of the time it used to take. But speed without memory is just a faster way to forget things. He's rebuilding roles he already tried and abandoned. He's re-losing to opponent patterns he already beat once and never wrote down how. Every session starts a little bit blind, because nothing he learned last week survived past his own recall of it.</p>
+<p>Here's the part that stings a little: this isn't a Screeps problem. This is every builder's problem, the second the project gets past &quot;small enough to hold in your head.&quot; Athletes keep game film. Traders keep a ledger. Every serious operation, gaming or otherwise, ends up needing the same thing — a durable record of what happened, that you can actually ask questions of later. AutoNate doesn't have that yet. He has vibes and scattered text files. This chapter is where he stops trusting his memory and starts trusting a system built to remember for him.</p>
+<h3>Coder's Corner: What a Database Actually Is</h3>
+<p>Before AutoNate builds anything, he needs to understand what he's about to build, and why a text file or an in-memory object won't cut it. Three options, three very different deals:</p>
+<ul><li>A <strong>plain file</strong> — like his <code>notes.txt</code> — stores whatever text you put in it, in whatever shape you last left it in. Nothing stops you from writing &quot;3 harvesters, won I think&quot; one day and &quot;harvesterx3 - W&quot; the next. There's no structure enforcing consistency, and no way to ask it a question — you can only read it top to bottom and hope you spot the pattern yourself.</li><li>An <strong>in-memory object</strong> — a JavaScript object living in <code>Memory</code> or a running script — is fast and structured, but it's temporary. It exists only while the program is running, or as long as whatever storage mechanism (like Screeps' <code>Memory</code>, which does persist between ticks but lives inside the game's own sandbox) keeps it around. It's not built for you to query from outside, sort by outcome, or connect to a match log spanning months.</li><li>A <strong>database</strong> is software built specifically to store structured, related information permanently, and to let you ask precise questions of it — not &quot;read everything and eyeball it,&quot; but &quot;give me every match where the result was a loss and the opponent was named Vex-7.&quot; It enforces shape (every row of a given kind has the same fields), it survives restarts, and it's built from the ground up to be <strong>queried</strong> — asked questions of, in a language designed exactly for that.</li></ul>
+<p>That third option is what AutoNate's missing. Not a fancier notebook. A system that remembers precisely, and answers back when he asks it something.</p>
+<pre class="mermaid">flowchart LR
+  A[&quot;notes.txt&lt;br/&gt;free text, no structure&quot;] --&gt; B[&quot;20 minutes of scrolling&lt;br/&gt;to find one match&quot;]
+  C[&quot;colonies.db&lt;br/&gt;structured, queryable&quot;] --&gt; D[&quot;one query&lt;br/&gt;exact answer, seconds&quot;]</pre>
+<p>Same information, two completely different relationships to it. One makes AutoNate do the remembering. The other does the remembering for him, so he can spend his time on the actual decision — which build to run next — instead of the archaeology required just to get back to square one.</p>
+<h3>1. Name the Real Cost</h3>
+<p>Before writing a line of database code, AutoNate sat down and counted what scattered notes were actually costing him. Every rebuild without a record meant re-testing something he'd already ruled out. Every League match without a logged result meant he couldn't say, with a straight face, whether his win rate was improving or he was just having a good week. The cost wasn't dramatic — no crash, no red error text — it was slow bleed. Time spent re-deriving conclusions he'd already earned once.</p>
+<h3>2. Rule Out the Easy Fixes</h3>
+<p>The tempting move is to &quot;just organize the notes better.&quot; A cleaner text file. A spreadsheet, maybe, since at least that has columns. Both are real improvements over chaos, and worth using for genuinely small stuff. But neither one scales past a certain point, and both share the same core weakness: no real way to ask a precise, combined question — &quot;show me every match this colony lost against a rusher opponent, sorted by tick count&quot; — without a human doing the filtering by hand, every single time. A database exists specifically to make that kind of question a one-line ask instead of a scavenger hunt.</p>
+<h3>3. Decide What the Scoreboard Needs to Hold</h3>
+<p>AutoNate sketched what a real record of his work would need to track, before touching any tooling: which colony, which build was running, which match it played, what the result was, and what role composition was in the field when it happened. That list — a small set of related facts that all point back to each other — is the exact shape a <strong>relational database</strong> is built to hold. Colonies relate to matches. Matches relate to the roles that fought them. Nothing here is one flat list; it's a web of connected facts, and that's precisely the problem the next chapter solves.</p>
+<h3>4. Sanity Checks</h3>
+<ul><li>If you're not sure whether you actually need a database yet: ask whether you've ever re-derived something you already knew, because you couldn't find where you wrote it down. If yes, you need one.</li><li>If a spreadsheet feels like enough: it might be, for now — but the moment you want to ask a question that spans two different sheets (&quot;which matches used this build, and how did they do&quot;), you've already outgrown it.</li><li>If <code>Memory</code> in Screeps feels like it should be enough: remember it lives inside the game's sandbox, isn't built for outside querying, and isn't the tool for a running historical record across sessions and colonies.</li><li>If this all feels abstract: it stops being abstract the moment you have your first real table with real rows in it, which is exactly what's next.</li></ul>
+<p>AutoNate closed the four files, all at once, and didn't reopen any of them. Not because the information in them stopped mattering — because it was about to live somewhere that could actually answer him back.</p>
+<p>Next: <code>01-tables-rows-and-relationships.md</code> — where AutoNate builds the actual structure his scoreboard runs on.</p></div>
+          <nav class="tutorial-pager">
+            <span></span>
+            <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships"><span><small>Next</small>The Blueprint: Tables, Rows, and Relationships</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

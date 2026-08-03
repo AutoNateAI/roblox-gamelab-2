@@ -1,0 +1,153 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Sketch on the Napkin: From Insight to System | AutoNateAI Tutorials</title>
+        <meta name="description" content="Research becomes architecture. AutoNate sketches a real system in response to a real civic problem, diagram and all." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/civics-and-agentic-ai/from-insight-to-system" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Sketch on the Napkin: From Insight to System: keep the build moving." />
+        <meta property="og:description" content="Research becomes architecture. AutoNate sketches a real system in response to a real civic problem, diagram and all." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/civics-and-agentic-ai/from-insight-to-system" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-from-insight-to-system.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Sketch on the Napkin: From Insight to System: keep the build moving." />
+        <meta name="twitter:description" content="Research becomes architecture. AutoNate sketches a real system in response to a real civic problem, diagram and all." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-from-insight-to-system.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/civics-and-agentic-ai">Civics and Agentic AI</a><span>/</span><b>The Sketch on the Napkin: From Insight to System</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Civics and Agentic AI</strong>
+          <a class="" href="/tutorials/civics-and-agentic-ai/zooming-out-to-the-city">00 Past the Walls: Zooming Out to the City</a><a class="" href="/tutorials/civics-and-agentic-ai/what-is-an-agentic-system">01 Not Just a Chatbot: What Is an Agentic System</a><a class="" href="/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai">02 The Fine Print: Reading an RFP with AI</a><a class="" href="/tutorials/civics-and-agentic-ai/researching-the-room">03 Know Who You're Talking To: Researching the Room</a><a class="active" href="/tutorials/civics-and-agentic-ai/from-insight-to-system">04 The Sketch on the Napkin: From Insight to System</a><a class="" href="/tutorials/civics-and-agentic-ai/cheatsheet">05 The Notes Before the Live Build: Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 4 / Tutorial 04</span>
+            <h1>The Sketch on the Napkin: From Insight to System</h1>
+            <p>Research becomes architecture. AutoNate sketches a real system in response to a real civic problem, diagram and all.</p>
+            <div class="tag-row"><span>Sketch a system from research</span><span>Diagram a real architecture</span><span>Connect insight to design</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate had three things on the table now: a structured list of requirements pulled straight from the RFP, a set of hard constraints — budget, accessibility, deadline — and a real picture of who was actually behind the ask and who'd actually be stuck using it. Three separate pieces of paper, in a sense, none of them a system yet. Just insight. The kind of insight that feels good to have and useless if it never turns into something you could actually hand somebody.</p>
+<p>He thought about the moment, chapters ago in his colony, when three role files and a dispatcher stopped feeling like following steps and started feeling like actually designing something. Nobody had told him the word &quot;architecture&quot; applied to what he was doing back then — he just noticed the code stopped fighting him once the shape was right. This was the exact same feeling, aimed at something real for the first time. He wasn't writing a Screeps role anymore. He was sketching a system for actual families trying to sign a kid up for summer basketball. Different stakes. Same instinct.</p>
+<h3>Coder's Corner: What &quot;System Architecture&quot; Actually Means Here</h3>
+<p>A <strong>system architecture</strong> is the shape of how a piece of software is put together — not the code itself, but the map of its pieces and how they connect. Same idea as the role-and-dispatcher diagram from the colony work, just pointed at a bigger kind of building.</p>
+<ul><li>The <strong>data model</strong> is what gets stored and how the pieces relate — this is exactly the relational thinking from <code>colonies.db</code>, just applied to programs and families instead of colonies and matches.</li><li>A <strong>pipeline</strong> is the path information travels through the system, step by step, from where it enters to where it ends up.</li><li>An <strong>interface</strong> is wherever a human actually touches the system — a registration form, a staff dashboard, a text message.</li><li>An <strong>agent's role in a system</strong> isn't always the whole system — often it's one piece, doing one job well, like triaging a waitlist, the same way a miner or hauler role does one job well inside a bigger colony.</li></ul>
+<p>None of this requires you to actually build the thing yet. It requires you to be able to draw it clearly enough that someone else could look at the sketch and understand exactly what you're proposing.</p>
+<h3>1. Map the Data Model First</h3>
+<p>Before anything else, figure out what the system actually needs to remember — the same question that opened the database pack, just aimed at Fairview instead of a colony. A program has sessions and a capacity. A family registers for a program. If a program's full, that registration becomes a waitlist entry instead. Sound familiar? It's the same one-to-many shape as <code>colonies</code> → <code>matches</code> → <code>roles</code>, just wearing different names.</p>
+<pre class="mermaid">flowchart LR
+  Programs[&quot;programs&lt;br/&gt;id, name, capacity&quot;] --&gt; Registrations[&quot;registrations&lt;br/&gt;id, program_id, family_id, status&quot;]
+  Families[&quot;families&lt;br/&gt;id, name, contact&quot;] --&gt; Registrations
+  Registrations --&gt; Waitlist[&quot;waitlist_entries&lt;br/&gt;id, registration_id, position&quot;]</pre>
+<p>Read it the same way as any colony diagram: follow the arrows and you can answer real questions — which families are waitlisted for which program, in what order — without a human doing the counting by hand.</p>
+<h3>2. Map the Pipeline, Including Where an Agent Actually Fits</h3>
+<p>A data model on its own doesn't do anything. The pipeline is what moves information through it — and this is where the agentic piece from earlier chapters earns its spot, doing one specific job instead of being a vague &quot;AI-powered&quot; bullet point on a slide.</p>
+<pre class="mermaid">flowchart TD
+  Family[&quot;Family submits registration&quot;] --&gt; API[&quot;Registration form&quot;]
+  API --&gt; DB[(&quot;programs / registrations /&lt;br/&gt;waitlist_entries&quot;)]
+  DB --&gt; Full{&quot;Program full?&quot;}
+  Full -- No --&gt; Confirm[&quot;Confirmed spot&quot;]
+  Full -- Yes --&gt; Waitlist[&quot;Added to waitlist&quot;]
+  Waitlist --&gt; Agent[&quot;Agent: watches for open spots,&lt;br/&gt;notifies next family in order&quot;]
+  Agent --&gt; Notify[&quot;SMS / email to family&quot;]</pre>
+<p>That agent box is doing exactly one job: watching the waitlist and the registration table, and when a spot opens up, notifying the next family in line without a staff member manually checking a spreadsheet every morning. That's the actual pain point AutoNate found back in the research chapter, solved by one clearly-scoped piece, not a vague promise that &quot;AI will handle it.&quot;</p>
+<h3>3. Write the One-Page Sketch</h3>
+<p>A proposal doesn't need to be the whole system, built. It needs to be a clear enough sketch that Fairview can look at it and trust the team behind it understands the actual problem. One page: the data model, the pipeline, which pieces are automated and which involve a human, and a plain-language note on how it respects the budget ceiling and the accessibility constraint from the RFP.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// proposal-outline.js — insight becomes a document, not just a diagram</span>
+<span class="token-keyword">const</span> outline = await agent.run({
+  goal: <span class="token-string">`Using requirements.json, org-research.md, and the sketched data model,
+    draft a one-page proposal outline: problem statement, proposed system,
+    data model summary, what's automated vs. manual, and cost estimate
+    within the stated budget ceiling.`</span>,
+  tools: [readFile, writeDoc],
+});</code></pre>
+<p>That's not the finished proposal. It's the sketch on the napkin, typed up clean enough to hand to someone. Which is exactly the artifact a live Tuesday or Thursday build session in the Discord starts from — a real RFP, read, researched, and sketched, ready to actually build against, out loud, together.</p>
+<h3>4. Sanity Checks</h3>
+<ul><li>If the data model has a table for every single field instead of grouping related facts: step back and ask what actually repeats — that's the test that separates a real table from a column that belongs somewhere else.</li><li>If the pipeline diagram has an agent box doing five different vague things: split it — a clear system has agents doing one well-defined job each, not one agent quietly doing everything.</li><li>If the sketch doesn't obviously respect the budget or accessibility constraints from the RFP: that's not a detail to fix later, that's a proposal that gets tossed before anyone reads the good parts.</li><li>If it still feels like a lot to hold at once: it is, the first time — that's exactly why this gets built live, with a team, instead of alone in a tab at 11pm.</li></ul>
+<p>Three chapters of reading, researching, and now this — a real sketch, for a real department, built out of skills that started with a struggling harvester and a <code>console.log</code>. AutoNate looked at the diagram on his screen and, for the first time all pack, didn't feel like a kid pretending to understand something. He understood it.</p>
+<p>Next: <code>05-cheatsheet.md</code> — the vocabulary and the checklist, so the next real RFP doesn't start from zero.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/civics-and-agentic-ai/researching-the-room"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Know Who You're Talking To: Researching the Room</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/civics-and-agentic-ai/cheatsheet"><span><small>Next</small>The Notes Before the Live Build: Cheatsheet</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

@@ -1,0 +1,136 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Cheatsheet | AutoNateAI Tutorials</title>
+        <meta name="description" content="The SQL syntax and graph vocabulary AutoNate keeps looking up until it finally sticks." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/cheatsheet" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Cheatsheet: keep the build moving." />
+        <meta property="og:description" content="The SQL syntax and graph vocabulary AutoNate keeps looking up until it finally sticks." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/cheatsheet" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-cheatsheet.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Cheatsheet: keep the build moving." />
+        <meta name="twitter:description" content="The SQL syntax and graph vocabulary AutoNate keeps looking up until it finally sticks." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-cheatsheet.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/relational-databases-and-graphs">Relational Databases and Graphs</a><span>/</span><b>Cheatsheet</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="active" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Reference / Tutorial 05</span>
+            <h1>Cheatsheet</h1>
+            <p>The SQL syntax and graph vocabulary AutoNate keeps looking up until it finally sticks.</p>
+            <div class="tag-row"><span>Reference SQL syntax</span><span>Know core graph terms</span><span>Query with confidence</span></div>
+          </header>
+          <div class="markdown-body"><p>Every builder ends up with a sticky note, a second monitor, or a browser tab they never close. This is AutoNate's version for the scoreboard — the SQL syntax he still looks up without shame, and the handful of graph terms that took a chapter to click but only a sentence to remember once they did. Quick lookups for things you'll otherwise re-Google every week for the first month.</p>
+<h3>SQL Quick Reference</h3>
+<div class="markdown-table"><table><thead><tr><th>Clause</th><th>Purpose</th><th>Example</th></tr></thead><tbody><tr><td><code>SELECT</code></td><td>Choose which columns come back</td><td><code>SELECT name, room FROM colonies;</code></td></tr><tr><td><code>SELECT *</code></td><td>Choose every column</td><td><code>SELECT * FROM matches;</code></td></tr><tr><td><code>WHERE</code></td><td>Filter which rows qualify</td><td><code>WHERE result = 'win'</code></td></tr><tr><td><code>JOIN ... ON</code></td><td>Pull matching rows together across tables via a foreign key</td><td><code>JOIN colonies ON matches.colony_id = colonies.id</code></td></tr><tr><td><code>GROUP BY</code></td><td>Collapse many rows into one summary row per category</td><td><code>GROUP BY role_name</code></td></tr><tr><td><code>ORDER BY</code></td><td>Sort the results</td><td><code>ORDER BY played_at DESC</code></td></tr><tr><td><code>LIMIT</code></td><td>Cap how many rows come back</td><td><code>LIMIT 10</code></td></tr><tr><td><code>COUNT()</code></td><td>Count rows (or distinct values)</td><td><code>COUNT(DISTINCT matches.id)</code></td></tr><tr><td><code>SUM()</code></td><td>Add up a numeric column</td><td><code>SUM(energy_harvested)</code></td></tr><tr><td><code>CASE WHEN ... THEN ... ELSE ... END</code></td><td>Turn a condition into a value you can aggregate</td><td><code>SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END)</code></td></tr><tr><td><code>CREATE TABLE</code></td><td>Define a new table and its columns</td><td><code>CREATE TABLE matches (...)</code></td></tr><tr><td><code>CREATE VIEW</code></td><td>Save a query as a reusable, always-current lookup</td><td><code>CREATE VIEW role_win_counts AS SELECT ...</code></td></tr><tr><td><code>REFERENCES</code></td><td>Declare a foreign key link to another table's primary key</td><td><code>colony_id INTEGER REFERENCES colonies(id)</code></td></tr><tr><td><code>NOT NULL</code></td><td>Refuse to insert a row missing this value</td><td><code>name TEXT NOT NULL</code></td></tr></tbody></table></div>
+<pre class="code-block language-sql"><code>-- the general shape almost every real query follows
+SELECT columns
+FROM table
+JOIN other_table ON table.foreign_key = other_table.id
+WHERE condition
+GROUP BY column
+ORDER BY column DESC
+LIMIT number;</code></pre>
+<h3>Graph Glossary</h3>
+<div class="markdown-table"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>Node</strong></td><td>A single thing in the graph — a build, a colony, an opponent. Same idea as a row, without an assumed single parent.</td></tr><tr><td><strong>Edge</strong></td><td>A connection between two nodes, e.g. &quot;this build counters that build.&quot; Can point in a direction, and any node can connect to any number of others.</td></tr><tr><td><strong>Directed edge</strong></td><td>An edge that only counts one way — A beats B doesn't imply B beats A.</td></tr><tr><td><strong>Cycle</strong></td><td>A path of edges that loops back to where it started — like Rush beating Turtle beating All-In beating Rush again. Tables fight this; graphs expect it.</td></tr><tr><td><strong>Traversal</strong></td><td>Walking the graph — starting at one node and following edges outward, one or more steps, to see what connects to what.</td></tr><tr><td><strong>Hop</strong></td><td>One step of a traversal — one edge followed. A &quot;two-hop&quot; question is &quot;what beats what beats this.&quot;</td></tr></tbody></table></div>
+<h3>Where SQL Fits vs. Where a Graph Fits</h3>
+<div class="markdown-table"><table><thead><tr><th>If the relationship is...</th><th>Reach for...</th></tr></thead><tbody><tr><td>One parent, many children, no loops (a colony's matches)</td><td>A table with a foreign key</td></tr><tr><td>A web where anything can connect to anything, possibly in loops (build counters)</td><td>Nodes and edges</td></tr><tr><td>You mostly filter, sort, and total up numbers</td><td>SQL aggregation (<code>GROUP BY</code>, <code>SUM</code>, <code>COUNT</code>)</td></tr><tr><td>You mostly ask &quot;what connects to what, how many steps away&quot;</td><td>Graph traversal</td></tr></tbody></table></div>
+<h3>Where to Go Deeper</h3>
+<p>Every pattern in this cheatsheet has a full chapter behind it, with the reasoning, the failure modes, and the exact query that got AutoNate to the answer — start back at <code>00-why-he-needs-a-scoreboard.md</code> if you want the long version of any of this.</p>
+<h3>The Part Where AutoNate Looks Back</h3>
+<p>A few chapters ago, AutoNate's entire record of his own work was four text files and a memory that couldn't be trusted past a week. Now he's got real tables holding every match he's played, real queries that answer in seconds what used to take twenty minutes of scrolling, a graph model for the relationships that never fit neatly into rows, and a scoreboard script he runs out of habit before every match — not because he has to, but because not knowing stopped being something he was willing to accept.</p>
+<p>That's the actual shift underneath all the SQL syntax: he stopped relying on memory and vibes, and started relying on a system built to remember precisely and answer honestly. Databases, tables, foreign keys, graphs — none of that was ever really the point. The point was building something that tells him the truth about his own work, whether or not the truth is flattering.</p>
+<p>If you've followed AutoNate since his first <code>console.log</code>, through the colony that learned to hold a line, through learning to actually direct an AI agent instead of fighting it — you watched him build the muscle this pack finally gave him somewhere to put. And if you landed here first, with no backstory at all: that's fine too. Everything in this pack stands on its own; you didn't miss a prerequisite, you just met him mid-story.</p>
+<p>Either way, here's where he's headed next. The tables, the queries, the prompting instincts, the whole habit of turning scattered information into something structured and truthful — none of that has to stay locked inside a game. The next pack takes those exact same skills and points them somewhere bigger: real civic problems, real data, an AI agent doing real work, out past the arena entirely. AutoNate spent three packs learning to build and remember inside a game. Next, he finds out what the same skills are worth outside of one.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/building-the-monitor"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Scoreboard Comes Alive: Building the Monitor</span></a>
+            <span></span>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

@@ -1,0 +1,172 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Talking to the Data: Asking Questions with SQL | AutoNateAI Tutorials</title>
+        <meta name="description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/asking-questions-with-sql" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Talking to the Data: Asking Questions with SQL: keep the build moving." />
+        <meta property="og:description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/asking-questions-with-sql" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-asking-questions-with-sql.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Talking to the Data: Asking Questions with SQL: keep the build moving." />
+        <meta name="twitter:description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-asking-questions-with-sql.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/relational-databases-and-graphs">Relational Databases and Graphs</a><span>/</span><b>Talking to the Data: Asking Questions with SQL</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Relational Databases and Graphs</strong>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="active" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 2 / Tutorial 02</span>
+            <h1>Talking to the Data: Asking Questions with SQL</h1>
+            <p>SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back.</p>
+            <div class="tag-row"><span>Write SELECT and WHERE</span><span>Join related tables</span><span>Group data into answers</span></div>
+          </header>
+          <div class="markdown-body"><p>Tables built, first dozen matches logged in — and AutoNate hit the wall he honestly should have seen coming. He had the data now. He didn't have a way to ask it anything. Staring at three tables full of rows doesn't answer &quot;which role wins the most&quot; any better than staring at a text file did, unless you're willing to count by hand and hope you don't lose track around row forty. He'd fixed the storage problem in the last chapter. He hadn't touched the actual question he started this whole pack to answer.</p>
+<p>That's what SQL is for. Not a separate skill bolted onto the database — the actual language the database speaks, built specifically for asking it precise questions and getting precise answers back. AutoNate already knew, from the last chapter, how his data was shaped: colonies, matches, roles, linked by foreign keys. Now he needed the vocabulary to reach into that shape and pull exact answers out of it. This chapter is him learning to talk to his own data.</p>
+<h3>Coder's Corner: SQL as a Question-Asking Language</h3>
+<p><strong>SQL</strong> (Structured Query Language) is how you talk to a relational database. It's not a general-purpose programming language like JavaScript — it doesn't have loops or functions in the way you're used to. It's built around one core idea: describe the data you want, and let the database figure out how to go get it.</p>
+<p>Four pieces of vocabulary cover almost everything AutoNate needed:</p>
+<ul><li><strong>SELECT</strong> — which columns you want back. <code>SELECT name, room</code> gets you those two columns; <code>SELECT *</code> gets you every column.</li><li><strong>WHERE</strong> — which rows qualify. <code>WHERE result = 'loss'</code> filters down to only the rows matching that condition, exactly the way an <code>if</code> statement filters which lines of code run.</li><li><strong>JOIN</strong> — how to pull matching rows together from two different tables, using the foreign key link between them, so a query can reach across the whole structure instead of staying stuck in one table.</li><li><strong>GROUP BY</strong> — how to collapse many rows into one summary row per category, usually paired with a count or a sum, so you go from &quot;every individual row&quot; to &quot;one number per group.&quot;</li></ul>
+<h3>1. Start Simple: SELECT and WHERE</h3>
+<p>The most basic real question: show every match this specific colony has lost.</p>
+<pre class="code-block language-sql"><code>SELECT opponent, ticks, played_at
+FROM matches
+WHERE colony_id = 1 AND result = 'loss';</code></pre>
+<p>Read it the way you'd say it out loud: &quot;give me the opponent, ticks, and date, from the matches table, where the colony is id 1 and the result is a loss.&quot; That's the whole mental model for <code>SELECT</code> and <code>WHERE</code> — pick your columns, then narrow your rows. No archaeology, no scrolling. The database does the filtering.</p>
+<h3>2. Reach Across Tables with JOIN</h3>
+<p>That query only touches <code>matches</code>. But AutoNate's real questions almost always span two tables — he needs the colony's name, which lives in <code>colonies</code>, attached to match results, which live in <code>matches</code>. That's exactly what <code>JOIN</code> is for.</p>
+<pre class="code-block language-sql"><code>SELECT colonies.name, matches.opponent, matches.result
+FROM matches
+JOIN colonies ON matches.colony_id = colonies.id
+WHERE matches.result = 'win'
+ORDER BY matches.played_at DESC;</code></pre>
+<p><code>JOIN colonies ON matches.colony_id = colonies.id</code> is the database walking the foreign key link from the last chapter — matching every <code>matches</code> row to the one <code>colonies</code> row it belongs to, using the exact relationship that was built into the schema on purpose. Nothing about this query works if the foreign key wasn't there; the join has nothing to walk across.</p>
+<h3>3. Answer the Real Question with GROUP BY</h3>
+<p>Here's the question that started this whole pack: which role wins the most matches. Answering it means joining all three tables, filtering down to wins, and then collapsing everything into one summary row per role.</p>
+<pre class="code-block language-sql"><code>SELECT roles.role_name, COUNT(DISTINCT matches.id) AS wins
+FROM roles
+JOIN matches ON roles.match_id = matches.id
+WHERE matches.result = 'win'
+GROUP BY roles.role_name
+ORDER BY wins DESC;</code></pre>
+<p><code>GROUP BY roles.role_name</code> tells the database &quot;stop giving me one row per match — give me one row per role instead, and roll everything else up underneath it.&quot; <code>COUNT(DISTINCT matches.id)</code> counts how many distinct winning matches each role showed up in. Run this and AutoNate doesn't get a hunch anymore — he gets an actual ranked answer, sourced straight from every match he's logged, not from whichever three sessions he happened to remember clearly.</p>
+<pre class="mermaid">flowchart TD
+  Q[&quot;Which role wins the most?&quot;] --&gt; J[&quot;JOIN roles + matches&lt;br/&gt;on match_id&quot;]
+  J --&gt; W[&quot;WHERE result = 'win'&quot;]
+  W --&gt; G[&quot;GROUP BY role_name&quot;]
+  G --&gt; A[&quot;Ranked answer:&lt;br/&gt;hauler: 9 wins&lt;br/&gt;builder: 6 wins&quot;]</pre>
+<p>Four small pieces of vocabulary, stacked in order, and a question that used to take twenty minutes of manual counting now takes one query and a fraction of a second.</p>
+<h3>4. Query It from a Script, Not Just a Terminal</h3>
+<p>The terminal's fine for exploring, but AutoNate wants this answer available from code, so it can eventually feed a real dashboard.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// scripts/role-win-report.js</span>
+<span class="token-keyword">const</span> Database = <span class="token-keyword">require</span>(<span class="token-string">'better-sqlite3'</span>);
+<span class="token-keyword">const</span> db = <span class="token-keyword">new</span> Database(<span class="token-string">'data/scoreboard.db'</span>);
+
+<span class="token-keyword">const</span> rows = db.prepare(<span class="token-string">`
+  SELECT roles.role_name, COUNT(DISTINCT matches.id) AS wins
+  FROM roles
+  JOIN matches ON roles.match_id = matches.id
+  WHERE matches.result = 'win'
+  GROUP BY roles.role_name
+  ORDER BY wins DESC
+`</span>).all();
+
+console.log(rows);</code></pre>
+<p>Run it, same as everything else he's run all pack:</p>
+<pre class="code-block language-bash"><code>node scripts/role-win-report.js</code></pre>
+<p>Same SQL, just handed to the database from JavaScript instead of typed by hand — this is the bridge between &quot;I can ask my data a question&quot; and &quot;my code can ask my data a question,&quot; which matters a lot once you get to the next chapter and beyond.</p>
+<h3>5. Sanity Checks</h3>
+<ul><li>If a <code>JOIN</code> returns fewer rows than expected: check that every <code>match_id</code> or <code>colony_id</code> you're joining on actually has a matching row on the other side — a mistyped or missing foreign key value silently drops that row from the results.</li><li>If <code>GROUP BY</code> throws an error about a column not being in the group or an aggregate: every plain column in your <code>SELECT</code> needs to either be in the <code>GROUP BY</code> list or wrapped in an aggregate like <code>COUNT()</code> — SQL won't guess which row's value to show for an ungrouped column.</li><li>If results seem to include duplicates you didn't expect: check whether a <code>JOIN</code> multiplied rows — a match with three role entries joined to one match row produces three result rows, which is correct, but easy to misread as a bug.</li><li>If nothing comes back at all: run the query without the <code>WHERE</code> clause first, confirm rows exist, then add the filter back one condition at a time.</li></ul>
+<p>He ran that role report four times in a row just because he could. Haulers, it turned out, were quietly carrying his win rate the whole time — he never would have guessed that from memory.</p>
+<p>Next: <code>03-when-relationships-get-tangled.md</code> — where a table stops being the right tool, and something else takes over.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Blueprint: Tables, Rows, and Relationships</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled"><span><small>Next</small>The Web Under the Table: When Relationships Get Tangled</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

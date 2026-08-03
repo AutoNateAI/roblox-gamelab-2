@@ -1,0 +1,146 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Garbage In, Garbage Out: Why Prompting Is a Skill | AutoNateAI Tutorials</title>
+        <meta name="description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Garbage In, Garbage Out: Why Prompting Is a Skill: keep the build moving." />
+        <meta property="og:description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-why-prompting-is-a-skill.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Garbage In, Garbage Out: Why Prompting Is a Skill: keep the build moving." />
+        <meta name="twitter:description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-why-prompting-is-a-skill.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/prompt-and-context-engineering">Prompt and Context Engineering</a><span>/</span><b>Garbage In, Garbage Out: Why Prompting Is a Skill</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Prompt and Context Engineering</strong>
+          <a class="active" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">00 Garbage In, Garbage Out: Why Prompting Is a Skill</a><a class="" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">01 Give It the Room, Not Just the Ask: What Context Really Means</a><a class="" href="/tutorials/prompt-and-context-engineering/structuring-the-ask">02 Structuring the Ask: Role, Task, Constraints, Format</a><a class="" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">03 Feeding It the Right Files: Practical Context Engineering</a><a class="" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">04 When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</a><a class="" href="/tutorials/prompt-and-context-engineering/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 0 / Tutorial 00</span>
+            <h1>Garbage In, Garbage Out: Why Prompting Is a Skill</h1>
+            <p>AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart.</p>
+            <div class="tag-row"><span>See why prompting is a skill</span><span>Spot garbage-in, garbage-out</span><span>Set real expectations for agents</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate's colony held the line. Harvesters harvesting, haulers hauling, a tower that actually swings its aim at whatever crosses the wall, roads laid out like he planned them instead of like he panicked and slapped them down at 2am. The Virtual Battle Bot League is real now, not a rumor from a stream — it's a bracket with his name pending, and creeps that keep running whether he's watching or not. He should feel finished. He doesn't.</p>
+<p>Because the second he opens a fresh room to start a second colony — stacking rooms is exactly what the league rewards — every single line of what got him this far has to get written again. Roles. Spawn logic. Defense. Except this time double it, because remote mining, room reservation, and a real defender rotation are things his current colony still doesn't have and desperately needs. Hand-typing every <code>if</code> statement that got him this far took weeks. He doesn't have weeks per room. He's got maybe a weekend before somebody else in the bracket claims the room he's eyeing.</p>
+<p>That's the week AutoNate hears about coding agents — not autocomplete, not a chatbot in a browser tab, but something that sits right inside his editor and terminal, reads his actual files, and can write and run code on his say-so. People are calling it a superpower. His cousin's calling it &quot;basically cheating.&quot; AutoNate, being AutoNate, opens it up that same night expecting to just tell it what he wants and watch a whole army of new roles appear.</p>
+<p>It does not go that way.</p>
+<h3>1. Type Fast, Get Nothing Good</h3>
+<p>He types the first thing that comes to mind: &quot;make my colony better.&quot; Hits enter. Watches the agent think for a few seconds, then confidently rewrite half his <code>main.js</code>, introduce a role called <code>upgrader2</code> that duplicates logic already sitting in <code>upgrader.js</code>, and delete a comment he'd left himself as a reminder about a CPU bug he hadn't fixed yet. Nothing's broken exactly. Nothing's better either. It's just... different, in ways he didn't ask for and can't fully explain.</p>
+<p>He tries again: &quot;no, fix the harvester.&quot; The agent asks which harvester — he's got three files with harvester logic scattered across three different weeks of learning. He didn't know that was a real question until it asked. He picks one. It &quot;fixes&quot; a bug that wasn't there and misses the one that is.</p>
+<pre class="code-block language-text"><code>AutoNate: make my colony better
+
+Agent: I've updated main.js and added upgrader2.js with
+an improved upgrade routine.
+
+AutoNate: ...that's not what I wanted</code></pre>
+<h3>Coder's Corner: What Is an AI Coding Agent, Anyway?</h3>
+<p>Let's step out of the story for a second, because you're about to spend five chapters directing one of these things and it helps to know what's actually happening under the hood.</p>
+<p>An <strong>agent</strong> here isn't magic and it isn't a search engine. It's a <strong>model</strong> — a large language model, trained on a huge pile of text and code — wired up to <strong>tools</strong>: the ability to read a file, edit a file, run a terminal command, and see the result. You give it a <strong>prompt</strong>, which is just the instruction you type. It reads that prompt, reads whatever else it's been given (more on that next chapter), and produces an action: an edit, a new file, a command to run.</p>
+<p>Here's the part that trips people up: the model doesn't know your project. It doesn't remember your colony from last week. It doesn't know that <code>harvester.js</code> is the old one you stopped trusting and <code>harvester2.js</code> is the one that's live. It only knows what's sitting in front of it *right now* — the prompt, the files it's been pointed at, whatever's already happened in this same conversation. Everything else is invisible to it, no matter how obvious it feels to you.</p>
+<pre class="mermaid">flowchart LR
+  You[&quot;You type&lt;br/&gt;a prompt&quot;] --&gt; Agent[&quot;Agent reads prompt&lt;br/&gt;+ whatever context it has&quot;]
+  Agent --&gt; Action[&quot;Agent edits files&lt;br/&gt;or runs commands&quot;]
+  Action --&gt; You2[&quot;You review&lt;br/&gt;the result&quot;]</pre>
+<p>That loop only works if what goes in on the left is actually good. A vague prompt with no context produces a confident, fluent, completely wrong answer just as easily as it produces a great one — the agent doesn't hesitate either way. That's the whole lesson of this pack: <strong>garbage in, garbage out</strong> isn't a warning about the agent being bad. It's a warning about you skipping a skill you didn't know you needed.</p>
+<h3>2. Name What Actually Went Wrong</h3>
+<p>AutoNate stops and looks at what actually happened. He didn't tell the agent which file. He didn't tell it what &quot;better&quot; meant — faster harvesting? fewer bugs? more roles? He didn't tell it what to leave alone. He assumed &quot;it's smart, it'll figure out what I mean,&quot; the same way he once assumed the Screeps API would just know what he meant before he learned to read error codes instead of guessing.</p>
+<p>Same lesson, new tool. Quick isn't the same as trained. He got fast at typing questions. He never got trained at asking them.</p>
+<h3>3. Sanity Checks</h3>
+<p>If the agent changes files you didn't expect: you didn't scope the ask — say exactly which file, and tell it explicitly not to touch the rest.</p>
+<p>If it invents a role or function you never asked for: your prompt described a feeling (&quot;better&quot;) instead of a task — restate it as something you could verify pass or fail.</p>
+<p>If you get a different answer every time you ask the same vague thing: that's not the agent being unreliable, that's you leaving it to guess — the fix is a sharper prompt, not a different tool.</p>
+<p>If you're tempted to just do it by hand instead: fair, but that's the wall you're trying to get past — the skill is learnable, and that's what the rest of this pack is for.</p>
+<p>AutoNate closes his laptop that night more annoyed at himself than at the tool. He didn't get burned by bad tech. He got burned by a bad ask. Fine. If asking well is the skill, he'll train it like every other one.</p>
+<p>Next: <code>01-give-it-the-room-not-just-the-ask.md</code> — what &quot;context&quot; actually means to an agent, and why you can't just dump everything and hope.</p></div>
+          <nav class="tutorial-pager">
+            <span></span>
+            <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask"><span><small>Next</small>Give It the Room, Not Just the Ask: What Context Really Means</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>

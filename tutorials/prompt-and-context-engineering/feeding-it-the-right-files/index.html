@@ -1,0 +1,152 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Feeding It the Right Files: Practical Context Engineering | AutoNateAI Tutorials</title>
+        <meta name="description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/feeding-it-the-right-files" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Feeding It the Right Files: Practical Context Engineering: keep the build moving." />
+        <meta property="og:description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
+        <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/feeding-it-the-right-files" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-feeding-it-the-right-files.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Feeding It the Right Files: Practical Context Engineering: keep the build moving." />
+        <meta name="twitter:description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-feeding-it-the-right-files.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "dark";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Home</a><a class="" href="/programs/ai-agent-systems">Program</a><a class="" href="/live-builds">Live Builds</a><a class="" href="/consulting">Consulting</a><a class="active" href="/tutorials">Tutorials</a><a class="" href="/community">Community</a><a class="" href="/about">About</a><a class="" href="/articles">Articles</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="tutorial-detail-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/prompt-and-context-engineering">Prompt and Context Engineering</a><span>/</span><b>Feeding It the Right Files: Practical Context Engineering</b></nav>
+      <div class="tutorial-detail-layout">
+        <aside class="docs-sidebar tutorial-detail-sidebar">
+          <strong>Prompt and Context Engineering</strong>
+          <a class="" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill">00 Garbage In, Garbage Out: Why Prompting Is a Skill</a><a class="" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask">01 Give It the Room, Not Just the Ask: What Context Really Means</a><a class="" href="/tutorials/prompt-and-context-engineering/structuring-the-ask">02 Structuring the Ask: Role, Task, Constraints, Format</a><a class="active" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files">03 Feeding It the Right Files: Practical Context Engineering</a><a class="" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong">04 When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</a><a class="" href="/tutorials/prompt-and-context-engineering/cheatsheet">05 Cheatsheet</a>
+          <a href="/tutorials">All Packs</a>
+          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/community">Ask in Discord</a>
+        </aside>
+        <article class="tutorial-document">
+          <header>
+            <span class="kicker">Chapter 3 / Tutorial 03</span>
+            <h1>Feeding It the Right Files: Practical Context Engineering</h1>
+            <p>More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right.</p>
+            <div class="tag-row"><span>Select relevant context</span><span>Avoid overload</span><span>Summarize instead of dumping</span></div>
+          </header>
+          <div class="markdown-body"><p>AutoNate's prompts are sharper now — role, task, constraints, format, and he doesn't flinch at asking for a second pass instead of a full restart. But the next job is bigger than one file. He wants remote mining: a hauler that leaves his colony, works a source in a neighboring room, and hauls energy home to fuel the second colony he's trying to stand up. That touches <code>spawnManager.js</code>, a brand-new <code>remoteHauler.js</code>, <code>roles/harvester.js</code> as a reference pattern, and probably how he's tracking memory for the remote room.</p>
+<p>He doesn't know exactly which of those the agent needs, so he opens all of them — plus two old experiment files he forgot he still had lying around, plus a notes file from back when he was first learning <code>find()</code>. Figures more open tabs can't hurt.</p>
+<p>It can. The agent doesn't error out, it just gets mushy. It half-updates <code>spawnManager.js</code> in a way that almost matches his real pattern, references a variable name from the dead experiment file like it's still live, and blends two different eras of his own coding style into one file that follows neither. He recognizes the shape of this mistake immediately — it's the same &quot;stuff everything in and hope&quot; move from the context chapter, just applied at the level of picking files instead of pasting text.</p>
+<h3>Coder's Corner: Signal vs Noise in Context</h3>
+<p>Let's step out of the story for a second. Knowing that context is finite (last chapter) only gets you halfway. The actual skill is choosing what goes into that finite space — and that comes down to four ideas.</p>
+<p><strong>Signal</strong> — the information that actually changes what the agent should do. The pattern in <code>harvester.js</code> it should mimic. The naming convention already in use across <code>roles/</code>.</p>
+<p><strong>Noise</strong> — everything else sitting in the window that doesn't change the answer but still costs space and pulls attention. Old dead files. Unrelated roles. A notes file from three weeks ago.</p>
+<p><strong>Relevance</strong> — not &quot;related to Screeps in general,&quot; but &quot;actually needed for this specific task.&quot; A file can be genuinely part of your project and still be pure noise for the thing you're asking right now.</p>
+<p><strong>Retrieval</strong> — the actual skill here: picking exactly what's relevant instead of everything available. This is the real work of context engineering. Not writing more context. Choosing better context.</p>
+<pre class="mermaid">flowchart TD
+  All[&quot;Every File&lt;br/&gt;in the Project&quot;] --&gt; Q{&quot;Needed for&lt;br/&gt;THIS task?&quot;}
+  Q --&gt;|Yes| Signal[&quot;Signal&lt;br/&gt;open it&quot;]
+  Q --&gt;|No| Noise[&quot;Noise&lt;br/&gt;leave it closed&quot;]</pre>
+<p>AutoNate's mistake wasn't opening too little. It was opening without asking that middle question first. Every file he adds to the conversation should earn its place, the same way every part on a creep's body has to earn its energy cost.</p>
+<h3>1. Point It at Only What the Task Touches</h3>
+<p>Second attempt, same remote mining task. He closes the dead experiments and the old notes file, and opens exactly three: <code>spawnManager.js</code> (where the new spawn logic goes), <code>roles/harvester.js</code> (the pattern to follow), and a new empty <code>roles/remoteHauler.js</code> (where the output goes). Nothing else. The agent's first draft this time matches his existing style on the first try — because the only style it could see was the real one.</p>
+<h3>2. Cut the Dead Weight Before You Start</h3>
+<p>That means actually deleting or archiving the old experiment files, not just ignoring them. A file sitting in the project is a file that might get opened by accident, referenced by a search, or pulled in &quot;to be thorough.&quot; AutoNate starts keeping a <code>/archive</code> folder for anything he's not using but isn't ready to lose — out of the way, out of the context, still on disk if he ever wants it back.</p>
+<pre class="code-block language-bash"><code>mkdir archive
+mv scout-v1.js upgrader-experiment.js archive/</code></pre>
+<h3>3. Summarize Instead of Paste</h3>
+<p>Some files are too big to open in full and still leave room for anything else — a sprawling <code>main.js</code> that's grown for weeks, or a long console log from a bad tick. Instead of pasting the whole thing, he asks the agent to work from a summary first.</p>
+<pre class="code-block language-text"><code>Here's my main.js — it's long. Before we touch anything,
+summarize what it currently does in six bullet points so
+I can confirm you've got the right picture.</code></pre>
+<p>If the summary's wrong, he's caught a misunderstanding before it turns into a bad edit — for the cost of one extra message, not a rewritten file.</p>
+<h3>4. Let It Ask Instead of Guess</h3>
+<p>The other half of practical context engineering is admitting you don't always know what's relevant either. AutoNate starts adding one line to bigger asks:</p>
+<pre class="code-block language-text"><code>If you're missing a file you need to do this properly,
+ask me for it before you start instead of guessing.</code></pre>
+<p>Small permission, big payoff. The agent that used to invent a variable name from a dead file now stops and asks which memory structure he's actually using for remote rooms — instead of assuming and getting it wrong three files deep.</p>
+<h3>5. Sanity Checks</h3>
+<p>If the agent blends old and new patterns in one file: it had too many examples open at once and couldn't tell which one was current — close everything but the real pattern and try again.</p>
+<p>If it references something that doesn't exist in your live code: check what's still open in the conversation — a dead file's probably still sitting in context, feeding it stale information.</p>
+<p>If a big file eats the whole conversation: don't paste it whole — ask for a summary first, then hand over only the section that's actually relevant.</p>
+<p>If you genuinely don't know which file matters: say that out loud to the agent and let it ask you questions before it starts guessing on your behalf.</p>
+<p>AutoNate's remote hauler ships clean on the second real attempt — three files open, the rest out of the room, one extra sentence giving the agent permission to ask instead of guess. The colony's building faster than he is now, which is exactly the point. It just took learning what to hand it, not just how much.</p>
+<p>Next: <code>04-when-it-gets-it-wrong.md</code> — what to do when a good prompt with good context still comes back wrong.</p></div>
+          <nav class="tutorial-pager">
+            <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/structuring-the-ask"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Structuring the Ask: Role, Task, Constraints, Format</span></a>
+            <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong"><span><small>Next</small>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</span><span class="material-symbols-outlined">arrow_forward</span></a>
+          </nav>
+          <footer class="tutorial-next-step">
+            <div>
+              <span class="kicker"><span class="material-symbols-outlined">architecture</span> Want the architecture layer?</span>
+              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
+              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+            </div>
+            <a class="primary-button" href="/programs/ai-agent-systems">View the Program <span class="material-symbols-outlined">arrow_forward</span></a>
+          </footer>
+        </article>
+      </div>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+        </div>
+        
+    <div>
+      <h5>Program</h5>
+      <ul><li><a href="/programs/ai-agent-systems">How to Create Software Systems with AI Agents</a></li><li><a href="/live-builds">Live Builds</a></li><li><a href="/consulting">Consulting</a></li><li><a href="/tutorials">Tutorials</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/community">Community</a></li><li><a href="/about">About AutoNateAI</a></li><li><a href="/articles">Articles</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>
