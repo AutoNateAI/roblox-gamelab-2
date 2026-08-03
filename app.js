@@ -424,6 +424,21 @@ function refreshBookingDurations() {
 
 bookingForm?.querySelector("[data-booking-call-type]")?.addEventListener("change", refreshBookingDurations);
 
+const BOOKING_WINDOW_START_MINUTES = 8 * 60;
+const BOOKING_WINDOW_END_MINUTES = 18 * 60;
+
+function bookingTimeOfDayMinutes(datetimeLocalValue) {
+  const match = /T(\d{2}):(\d{2})/.exec(datetimeLocalValue || "");
+  if (!match) return null;
+  return Number(match[1]) * 60 + Number(match[2]);
+}
+
+function bookingFitsBusinessHours(datetimeLocalValue, durationMinutes) {
+  const start = bookingTimeOfDayMinutes(datetimeLocalValue);
+  if (start === null) return true;
+  return start >= BOOKING_WINDOW_START_MINUTES && start + durationMinutes <= BOOKING_WINDOW_END_MINUTES;
+}
+
 bookingForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const statusEl = bookingForm.querySelector("[data-booking-status]");
@@ -437,6 +452,16 @@ bookingForm?.addEventListener("submit", async (event) => {
 
   if (!fields.name || !fields.email || !fields.callType || !fields.duration || !fields.preferredDateTime) {
     if (statusEl) statusEl.textContent = "Fill in your name, email, call type, duration, and a preferred time.";
+    return;
+  }
+
+  const durationMinutes = Number(fields.duration) || 0;
+  if (!bookingFitsBusinessHours(fields.preferredDateTime, durationMinutes)) {
+    if (statusEl) statusEl.textContent = "Preferred time must start and end between 8:00 AM and 6:00 PM Central.";
+    return;
+  }
+  if (fields.alternateDateTime && !bookingFitsBusinessHours(fields.alternateDateTime, durationMinutes)) {
+    if (statusEl) statusEl.textContent = "Alternate time must start and end between 8:00 AM and 6:00 PM Central.";
     return;
   }
 
