@@ -1,7 +1,7 @@
-import { navItems, screepsScreenshots } from "./data.mjs";
+import { navItems, sceneShots } from "./data.mjs";
 
 function cardShot(program) {
-  return screepsScreenshots[(program.sequence || 0) % screepsScreenshots.length];
+  return sceneShots[(program.sequence || 0) % sceneShots.length];
 }
 
 export function money(value) {
@@ -211,7 +211,7 @@ export function programCard(program) {
         <h3>${escapeHtml(program.name)}</h3>
         <p>${escapeHtml(program.description)}</p>
         <div class="card-meta">
-          <span>${icon("calendar_month")} ${program.durationWeeks || 4} weeks</span>
+          <span>${icon("calendar_month")} ${program.durationWeeks || 2} weeks</span>
           <b>${escapeHtml(program.badge)}</b>
         </div>
       </div>

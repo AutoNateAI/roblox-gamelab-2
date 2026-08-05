@@ -1,67 +1,117 @@
 # Cheatsheet
 
-Every builder ends up with a sticky note, a second monitor, or a browser tab they never close. This is AutoNate's version for the scoreboard — the SQL syntax he still looks up without shame, and the handful of graph terms that took a chapter to click but only a sentence to remember once they did. Quick lookups for things you'll otherwise re-Google every week for the first month.
+Every builder ends up with a sticky note, a second monitor, or a browser tab they never close. This is the AutoNateAI version — the SQL Nate and Kai still look up without shame while building the studio's own system of record, and the handful of graph terms that took a whole chapter to click but one sentence to remember afterward. Quick lookups for the things you'd otherwise re-search every week for a month.
 
 ## SQL Quick Reference
 
 | Clause | Purpose | Example |
 | --- | --- | --- |
-| `SELECT` | Choose which columns come back | `SELECT name, room FROM colonies;` |
-| `SELECT *` | Choose every column | `SELECT * FROM matches;` |
-| `WHERE` | Filter which rows qualify | `WHERE result = 'win'` |
-| `JOIN ... ON` | Pull matching rows together across tables via a foreign key | `JOIN colonies ON matches.colony_id = colonies.id` |
-| `GROUP BY` | Collapse many rows into one summary row per category | `GROUP BY role_name` |
-| `ORDER BY` | Sort the results | `ORDER BY played_at DESC` |
+| `SELECT` | Choose which columns come back | `SELECT name, org FROM people;` |
+| `SELECT *` | Choose every column | `SELECT * FROM ideas;` |
+| `WHERE` | Filter which rows qualify (runs *before* grouping) | `WHERE verdict = 'would_use'` |
+| `JOIN ... ON` | Pull matching rows together across tables via a foreign key | `JOIN people ON feedback.person_id = people.id` |
+| `LEFT JOIN` | Same, but keep left-side rows even with no match (fills `NULL`) | `LEFT JOIN feedback ON feedback.idea_id = ideas.id` |
+| `GROUP BY` | Collapse many rows into one summary row per category | `GROUP BY ideas.title` |
+| `HAVING` | Filter the *grouped* rows, after aggregation | `HAVING COUNT(DISTINCT person_id) >= 2` |
+| `ORDER BY` | Sort the results | `ORDER BY given_at DESC` |
 | `LIMIT` | Cap how many rows come back | `LIMIT 10` |
-| `COUNT()` | Count rows (or distinct values) | `COUNT(DISTINCT matches.id)` |
-| `SUM()` | Add up a numeric column | `SUM(energy_harvested)` |
-| `CASE WHEN ... THEN ... ELSE ... END` | Turn a condition into a value you can aggregate | `SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END)` |
-| `CREATE TABLE` | Define a new table and its columns | `CREATE TABLE matches (...)` |
-| `CREATE VIEW` | Save a query as a reusable, always-current lookup | `CREATE VIEW role_win_counts AS SELECT ...` |
-| `REFERENCES` | Declare a foreign key link to another table's primary key | `colony_id INTEGER REFERENCES colonies(id)` |
+| `DISTINCT` | Drop duplicate result rows | `SELECT DISTINCT dest.name` |
+| `COUNT(*)` | Count **rows** in the group | `COUNT(*) AS statements` |
+| `COUNT(col)` | Count rows where `col` is not `NULL` | `COUNT(feedback.id) AS feedback_count` |
+| `COUNT(DISTINCT col)` | Count unique values — unique *people*, not mentions | `COUNT(DISTINCT person_id)` |
+| `SUM()` | Add up a numeric column | `SUM(minutes_spent)` |
+| `MAX()` / `MIN()` | Largest / smallest in the group | `MAX(feedback.given_at)` |
+| `CASE WHEN ... THEN ... ELSE ... END` | Turn a condition into a value you can aggregate | `SUM(CASE WHEN verdict = 'would_use' THEN 1 ELSE 0 END)` |
+| `COALESCE(a, b)` | First non-`NULL` value — a fallback | `COALESCE(MAX(given_at), first_met_at)` |
+| `NULLIF(x, 0)` | `NULL` when `x` is zero — guards divide-by-zero | `total / NULLIF(COUNT(id), 0)` |
+| `NOT EXISTS (...)` | Keep rows with no matching row in a subquery | `AND NOT EXISTS (SELECT 1 FROM intros WHERE ...)` |
+| `CREATE TABLE` | Define a new table and its columns | `CREATE TABLE feedback (...)` |
+| `CREATE VIEW` | Save a query as a reusable, always-current lookup | `CREATE VIEW idea_interest AS SELECT ...` |
+| `DROP VIEW IF EXISTS` | Views can't be edited in place — drop, then recreate | `DROP VIEW IF EXISTS idea_interest;` |
+| `CREATE INDEX` | Speed up repeated lookups on a column | `CREATE INDEX intros_from_idx ON intros(from_person_id);` |
+| `REFERENCES` | Declare a foreign key link to another table's primary key | `person_id INTEGER REFERENCES people(id)` |
 | `NOT NULL` | Refuse to insert a row missing this value | `name TEXT NOT NULL` |
+| `UNIQUE` | Refuse a duplicate value in this column | `email TEXT UNIQUE` |
+| `CHECK (...)` | Refuse a value outside an allowed set or condition | `CHECK (verdict IN ('would_use','interesting','not_for_me'))` |
+| `PRAGMA foreign_keys = ON` | **SQLite only, per connection** — actually enforce foreign keys | `db.pragma('foreign_keys = ON')` |
 
 ```sql
 -- the general shape almost every real query follows
 SELECT columns
 FROM table
-JOIN other_table ON table.foreign_key = other_table.id
-WHERE condition
+LEFT JOIN other_table ON table.id = other_table.foreign_key
+WHERE row_level_condition
 GROUP BY column
+HAVING aggregate_condition
 ORDER BY column DESC
 LIMIT number;
 ```
+
+The database evaluates that in a specific order, and knowing it explains most confusing errors: **pick rows (`WHERE`) → group them (`GROUP BY`) → filter the groups (`HAVING`) → sort (`ORDER BY`) → cap (`LIMIT`).**
+
+## The Five Queries That Lie Without Erroring
+
+These are the ones that cost real time, because nothing breaks — you just get a confident wrong number and act on it.
+
+| Symptom | Cause | Fix |
+| --- | --- | --- |
+| A count is too high | `COUNT(*)` after a join counts joined rows, not distinct things. Three statements from one person read as three people. | `COUNT(DISTINCT person_id)`, and name the column after what you actually counted |
+| A count of `0` shows as `1` | `COUNT(*)` on an unmatched `LEFT JOIN` row still sees one row | `COUNT(right_table.column)` — it skips `NULL` |
+| Rows vanish from a report | Inner `JOIN` drops parents with no children | `LEFT JOIN` |
+| A percentage is all zeroes | Integer division: `3 / 7` is `0` | Multiply by `100.0`, not `100` |
+| A constraint you wrote never fires | SQLite parses foreign keys but ignores them by default | `PRAGMA foreign_keys = ON` on **every** connection |
+
+The habit underneath all five: after writing any query that produces a number you plan to act on, ask where that number is from and check one row of it by hand. Declared and enforced are different things; typed and meant are different things.
+
+## Schema Design Rules of Thumb
+
+| Question | Answer |
+| --- | --- |
+| Column or its own table? | Can it repeat? One name per person → column. Many pieces of feedback per person → table. |
+| What should the primary key be? | A meaningless `id` the database generates. Never an email, phone, username, or company name — real-world values change, get reused, or turn out to be missing. |
+| Where does a unique email go, then? | On a `UNIQUE` column, not on the primary key. Uniqueness and identity are two different jobs. |
+| How do I link two tables many-to-many? | A junction table in the middle with a foreign key to each side. Never a single column. |
+| Where do facts *about a relationship* go? | On the relationship's own row — venue, date, note. Not on either end. |
 
 ## Graph Glossary
 
 | Term | Meaning |
 | --- | --- |
-| **Node** | A single thing in the graph — a build, a colony, an opponent. Same idea as a row, without an assumed single parent. |
-| **Edge** | A connection between two nodes, e.g. "this build counters that build." Can point in a direction, and any node can connect to any number of others. |
-| **Directed edge** | An edge that only counts one way — A beats B doesn't imply B beats A. |
-| **Cycle** | A path of edges that loops back to where it started — like Rush beating Turtle beating All-In beating Rush again. Tables fight this; graphs expect it. |
-| **Traversal** | Walking the graph — starting at one node and following edges outward, one or more steps, to see what connects to what. |
-| **Hop** | One step of a traversal — one edge followed. A "two-hop" question is "what beats what beats this." |
+| **Node** | A single thing in the graph — a person, an idea, an org. Same idea as a row, without an assumed single parent. Often a table you already have. |
+| **Edge** | A connection between two nodes, stored as a row with a foreign key to each end. Can carry its own attributes (when, where, why). |
+| **Directed edge** | An edge that only counts one way — Marcus will introduce you to Dana doesn't mean Dana will introduce you to Marcus. |
+| **Self-join** | Joining a table to itself with two aliases, needed because both ends of an edge live in the same table. |
+| **Cycle** | A path of edges that loops back to where it started. Tables fight this; graphs expect it. |
+| **Traversal** | Walking the graph — start at a node, follow edges outward, one or more steps. |
+| **Hop** | One step of a traversal. "Who can reach her, two hops out" is a two-hop question. |
+| **Visited set** | The record of nodes already seen during a traversal. Without it, a cycle makes the walk run forever. Non-negotiable. |
+| **Recursive CTE** | `WITH RECURSIVE` — a SQL query that feeds its own output back into itself, for traversals of unknown depth. Needs a depth cap *and* a visited set. |
 
 ## Where SQL Fits vs. Where a Graph Fits
 
 | If the relationship is... | Reach for... |
 | --- | --- |
-| One parent, many children, no loops (a colony's matches) | A table with a foreign key |
-| A web where anything can connect to anything, possibly in loops (build counters) | Nodes and edges |
-| You mostly filter, sort, and total up numbers | SQL aggregation (`GROUP BY`, `SUM`, `COUNT`) |
-| You mostly ask "what connects to what, how many steps away" | Graph traversal |
+| One parent, many children, no loops (an idea's feedback) | A table with a foreign key |
+| Many-to-many, but still flat (people ↔ ideas via feedback) | A junction table |
+| A web where anything can connect to anything, possibly in loops (who can introduce whom) | Nodes and edges |
+| You mostly filter, sort, and total up numbers | SQL aggregation — `GROUP BY`, `COUNT`, `SUM` |
+| You mostly ask "what connects to what, and how many steps away" | Graph traversal — self-joins, or `WITH RECURSIVE` |
+| Five-plus hops, weighted paths, constant traversal | A dedicated graph database starts earning its keep |
 
 ## Where to Go Deeper
 
-Every pattern in this cheatsheet has a full chapter behind it, with the reasoning, the failure modes, and the exact query that got AutoNate to the answer — start back at `00-why-he-needs-a-scoreboard.md` if you want the long version of any of this.
+Every line in this cheatsheet has a full chapter behind it, with the reasoning, the failure mode, and the exact query that produced the wrong answer first — start back at `00-why-he-needs-a-scoreboard.md` for the long version of any of it.
 
-## The Part Where AutoNate Looks Back
+## The Part Where They Look Back
 
-A few chapters ago, AutoNate's entire record of his own work was four text files and a memory that couldn't be trusted past a week. Now he's got real tables holding every match he's played, real queries that answer in seconds what used to take twenty minutes of scrolling, a graph model for the relationships that never fit neatly into rows, and a scoreboard script he runs out of habit before every match — not because he has to, but because not knowing stopped being something he was willing to accept.
+Five chapters ago, everything Nate and Kai knew about their own studio lived in two phone notes, a paper notebook, and a shared memory that had already merged three separate Tuesdays into one Tuesday that never happened. They had two entries for the same person and hadn't noticed for a month.
 
-That's the actual shift underneath all the SQL syntax: he stopped relying on memory and vibes, and started relying on a system built to remember precisely and answer honestly. Databases, tables, foreign keys, graphs — none of that was ever really the point. The point was building something that tells him the truth about his own work, whether or not the truth is flattering.
+Now there's a `people` table where identity is a stable id instead of an email that changes jobs. An `ideas` table where `status` can only be one of four words, because the database enforces the agreement neither of them would have kept at 1am. A `feedback` table that ties a specific statement to a specific person on a specific night. An `intros` edge table holding the tangle of who can reach whom, cycles and all. Two views and a script that print the whole picture in eight seconds.
 
-If you've followed AutoNate since his first `console.log`, through the colony that learned to hold a line, through learning to actually direct an AI agent instead of fighting it — you watched him build the muscle this pack finally gave him somewhere to put. And if you landed here first, with no backstory at all: that's fine too. Everything in this pack stands on its own; you didn't miss a prerequisite, you just met him mid-story.
+The syntax was never the point. The point is that a system of record tells you things you would not have chosen to notice. It told them four ideas on the board had never been said out loud to another human, including the one Nate had privately decided was next. It told them Tomas Reyes had gone forty-one days without a reply after giving them the best objection anyone raised all spring. Neither of those facts was flattering, and neither would have surfaced from memory, because memory is a story you tell yourself and a database is not.
 
-Either way, here's where he's headed next. The tables, the queries, the prompting instincts, the whole habit of turning scattered information into something structured and truthful — none of that has to stay locked inside a game. The next pack takes those exact same skills and points them somewhere bigger: real civic problems, real data, an AI agent doing real work, out past the arena entirely. AutoNate spent three packs learning to build and remember inside a game. Next, he finds out what the same skills are worth outside of one.
+That's also the discipline underneath Kai's most annoying, most valuable habit. *Where's that from?* is not skepticism for its own sake — it's the question that caught a count of seven that was really five, a foreign key that was never enforced, a traversal that recommended introducing Kai to Kai, and a receipt scanner that had somehow received feedback from nobody. Every one of those ran without erroring. Every one of them would have been believed.
+
+If you've been following Nate and Kai from the beginning — the deal made in the back room of Grindstone Coffee, learning to code, learning to direct an AI agent instead of arguing with it — this is the pack where the studio stopped being two people with opinions and became two people with records. And if you landed here first, with no backstory: nothing was missed. Everything in this pack stands on its own. You just met them mid-story.
+
+Here's where it goes next. The tables, the queries, the graph, the habit of turning scattered conversation into something structured and checkable — none of that has to stay pointed at their own backlog. The next pack aims the same skills at something with actual weight outside the studio: a real open solicitation from the City of Fairview, real civic language neither of them could parse cold, and an AI agent doing real work on a real deadline. Kai has read more of those documents than anyone should have to. For the first time, that turns out to be the rarest skill in the room.
