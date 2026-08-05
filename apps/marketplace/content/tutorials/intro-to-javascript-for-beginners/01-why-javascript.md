@@ -1,68 +1,165 @@
 # The Vision: Why JavaScript (and Where It Runs)
 
-Gear's on. Now AutoNate's got a question that's bigger than any install screen: what is he actually learning, and why this and not something else?
+Quick catch-up if you're just walking in: **Nate** is a self-taught builder with fourteen unfinished projects and zero users. **Kai** does grant work in Fairview and once watched a program she got funded run on a shared spreadsheet that broke every six weeks. They met at the Fairview Founders Table — a monthly builder meetup in the back room of Grindstone Coffee — and made a deal to build one real thing together instead of two half-things apart. They have four weeks until Demo Night, which is the next Founders Table, eight minutes each, one VGA projector.
 
-He goes back to the stream from last night, this time really watching instead of just hyped. Every bot in the Virtual Battle Bot League is running the same language under the hood: **JavaScript**. Not because it's the only option out there — there's a hundred ways to build software — but because JavaScript is the one language that shows up almost everywhere you look. It's what runs behind nearly every website you've ever opened. It's what runs servers, apps, and — the part that matters most right now — it's exactly what the Virtual Battle Bot League runs on. Learn this one language well, and you're not just learning to play a game. You're learning the language the whole internet runs on.
+Last chapter they installed Node.js and VS Code on Kai's laptop. This chapter is the question she asked in the parking lot afterward, holding the door of her car open, not getting in:
 
-AutoNate's cousin used to say something that stuck with him: "You don't have to be from money to be from somewhere." Same energy here. You don't need a computer science degree or a fancy laptop to start. You need the willingness to sit with something confusing until it isn't anymore. That's it. That's the actual prerequisite.
+"What am I actually learning? Not 'coding.' Specifically. Which one, and why that one."
+
+Nate said "JavaScript" and she said "why," and he said "because it's what I know," and she looked at him over the top of the car door until he said, "okay, that's not a reason, hang on."
+
+So here's the real reason, which he texted her at 11:40 that night in four messages, and which we're going to unpack properly.
 
 ## Coder's Corner: One Language, Three Places It Lives
 
-JavaScript runs in three places you'll care about, and it's worth knowing the difference so nothing catches you off guard later.
+JavaScript is worth learning first for one specific, unglamorous reason: it is the only language that runs in all three of the places a small team building software today actually needs to work.
 
-**In the browser.** This is where JavaScript was born — making buttons click, forms submit, pages update without a full reload. If you've ever seen a website change without the page flashing white and reloading, that's JavaScript at work.
+**In the browser.** This is where JavaScript was born and where it has no competition. Every dropdown that opens, every form that validates before you hit submit, every page that updates without flashing white and reloading — that's JavaScript. If the thing you're building has a screen someone clicks on, JavaScript is running it. There is no version of this where you pick something else.
 
-**In Node.js**, which you just installed. This lets JavaScript run directly on your machine, no browser required. That's what you did in the last chapter when you ran `node hello-autonate.js`.
+**On a server, through Node.js** — the thing you installed last chapter. Node lets the same language run directly on a machine, no browser involved: reading and writing files, handling web requests, talking to a database, running on a schedule at 3am while nobody's watching. Before Node existed you learned one language for the browser and a completely different one for the server. Now you can learn one and work on both ends of a real system.
 
-**Inside Screeps**, which is the one you're actually here for. Your Screeps colony is a JavaScript program that the Screeps servers run for you automatically, over and over, forever — once every "tick." You don't click a button to make your colony act. You write code once, and it keeps running, making the same decisions, tick after tick, whether you're watching or asleep.
+**In AI-agent tooling.** This is the part that matters most for where Nate and Kai are headed. The overwhelming majority of the tooling for building with AI agents — the SDKs, the MCP servers, the orchestration frameworks, the little glue scripts that make an agent actually useful instead of just impressive — ships in JavaScript/TypeScript first, or exclusively. (TypeScript is JavaScript with a type-checking layer bolted on top; learn JavaScript and you're most of the way there.) Knowing this language is the difference between reading about agent systems and building one.
 
 ```mermaid
 flowchart TD
-  JS["JavaScript<br/>(one language)"] --> Browser["In the Browser<br/>buttons, forms, pages"]
-  JS --> Node["In Node.js<br/>your machine, scripts, servers"]
-  JS --> Screeps["Inside Screeps<br/>your colony, every tick"]
+  JS["JavaScript<br/>(one language)"] --> Browser["In the browser<br/>buttons, forms, screens"]
+  JS --> Node["In Node.js<br/>files, servers, scheduled jobs"]
+  JS --> Agents["In AI-agent tooling<br/>SDKs, MCP servers, glue code"]
 ```
 
-That last one — "every tick" — is the whole reason this game is such a good teacher. Most code you'll write as a beginner runs once and stops. You run it, it does its thing, it's done. A Screeps colony is different. It runs continuously, over and over, and it has to keep making good decisions without you sitting there holding its hand. That's a completely different kind of thinking, and it's exactly the kind of thinking real software engineers get paid for. You're not just learning to code. You're learning to build things that run on their own.
+One language, three rooms. That's the entire pitch. It's not that JavaScript is the most elegant language ever designed — it isn't, and people will tell you so at length. It's that it's the one with a door into every room you need to be in.
 
-## Run It and Watch It Talk
+## The Question That Broke Nate's Brain a Little
 
-Let's prove the "runs on its own, keeps talking to you" idea right now. Create a new file in VS Code called `autonate.js`:
+Kai wrote **Q4** on the legal pad the next evening, at her kitchen table, VS Code open.
+
+"You keep saying 'JavaScript' and 'Node' like they're the same word. Are they the same thing?"
+
+"Yeah, Node's just JavaScript."
+
+"Then why does it have a different name?"
+
+Silence. The specific silence of someone realizing they've been using two words interchangeably for six years without ever checking whether that was allowed.
+
+"Okay, actually — let me check that one."
+
+Here's the real answer, and it's worth getting straight now because it prevents about a dozen confusing errors later.
+
+**JavaScript is the language.** The rules of the language — what `const` means, how a `for` loop works, what `+` does — are written down in a formal standard called **ECMAScript**, maintained by a committee, updated once a year. That standard defines the grammar and a small set of built-ins (`Math`, `JSON`, `Array`, and so on). That's it. The standard does not say anything about files, or networks, or web pages.
+
+**A runtime is a program that executes that language and hands it superpowers.** Node.js is a runtime. Chrome is a runtime. Both of them actually use the *same* engine underneath — V8, built by Google — to execute the language part. What differs is what each one hands you on top:
+
+- The browser hands you `document` (the page), `window`, `fetch`, `localStorage`, and the ability to draw things on a screen. It does **not** hand you the ability to read a file off the user's hard drive, on purpose, because that would be a catastrophe.
+- Node hands you `fs` (the filesystem), `process`, `http`, and access to the machine it's running on. It does **not** hand you `document`, because there is no page. There's no screen. There's a terminal and a hard drive.
+
+So "JavaScript" is the language and "Node" is one place it runs. They're not synonyms. And you can prove all of this in about fifteen seconds, which is exactly what Kai asked for, because "where's that from?" is not a rhetorical question when she says it.
+
+## Prove It Yourself
+
+Create a new file called `where-it-runs.js`:
 
 ```js
-// autonate.js
-// AutoNate's first move: check what the system gave him.
+// where-it-runs.js
+// Same language. Different room. Different furniture.
 
-const fighter = {
-  name: "AutoNate",
-  age: 18,
-  weightClass: "Rookie Division",
-  wins: 0,
-  goal: "Virtual Battle Bot League",
-};
+console.log("--- what this runtime gave me ---");
 
-function announce(fighter) {
-  console.log(`${fighter.name}, ${fighter.age}, stepping up from ${fighter.weightClass}.`);
-  console.log(`Record: ${fighter.wins} wins. Eyes on: ${fighter.goal}.`);
-}
+// Part of the LANGUAGE. Exists literally everywhere JavaScript runs.
+console.log("Math:", typeof Math);
+console.log("JSON:", typeof JSON);
 
-announce(fighter);
+// Given to you by the BROWSER. Not by the language.
+console.log("document:", typeof document);
+console.log("window:", typeof window);
+
+// Given to you by NODE. Not by the language.
+console.log("process:", typeof process);
+console.log("Node version:", process.version);
 ```
 
-Don't worry yet about every piece of that — `const`, the curly braces, the backticks. You'll learn every one of those in the next few chapters, piece by piece. Right now, just run it:
+Run it:
 
 ```bash
-node autonate.js
+node where-it-runs.js
 ```
 
-![Terminal running node autonate.js and printing AutoNate's fighter stats](/assets/tutorials/js/term-fighter-announce.jpg "node autonate.js")
+You'll get something very close to this:
 
-You should see AutoNate's stats print straight back at you. That's a program describing itself, out loud, because you told it to. That's the whole trick behind everything from a Screeps colony announcing "low on energy" to a video game character saying their own name. Somebody wrote a `console.log()` and meant it.
+```
+--- what this runtime gave me ---
+Math: object
+JSON: object
+document: undefined
+window: undefined
+process: object
+Node version: v22.14.0
+```
+
+Read that output slowly, because it's the whole lesson in six lines. `Math` and `JSON` are there — they're part of the language, so they come with you everywhere. `document` and `window` are `undefined` — not an error, not a crash, just *absent*, because there is no web page here and Node was never going to pretend otherwise. And `process` is there, because Node is running on a real machine and is happy to tell you about it.
+
+If you pasted the identical file into a browser's developer console, you'd get the exact mirror image: `document` and `window` would be objects, and `process` would be `undefined`. Same language. Different furniture.
+
+> **`typeof` on an undefined name doesn't crash.** This is a genuine quirk worth knowing: normally, referencing a variable that doesn't exist throws a `ReferenceError`. But `typeof someNameThatDoesNotExist` is special-cased in the language to return the string `"undefined"` instead of blowing up. That's exactly why it's the safe way to ask "do I have this?" — which is what we just did.
+
+Kai underlined `document: undefined` twice. "So when a tutorial online says 'just add this to your page' and it doesn't work in my terminal —"
+
+"— it's because it was written for the browser and you're in Node. Yeah." Nate rubbed his face. "That's like a solid third of everything I struggled with when I started, and I never actually knew why until right now."
+
+## Now Make It Say Something Real
+
+Same loop as last chapter — write it, run it, read it back. Make a file called `project.js`:
+
+```js
+// project.js
+// What we're building, stated out loud, so it's harder to quietly abandon.
+
+const project = {
+  team: ["Nate", "Kai"],
+  building: "an idea tracker for the Founders Table",
+  language: "JavaScript",
+  weeksLeft: 4,
+  shipped: false,
+};
+
+function statusReport(p) {
+  console.log(`${p.team.join(" + ")} are building ${p.building}.`);
+  console.log(`Language: ${p.language}. Weeks left: ${p.weeksLeft}.`);
+  console.log(`Shipped: ${p.shipped ? "yes" : "not yet"}.`);
+}
+
+statusReport(project);
+```
+
+```bash
+node project.js
+```
+
+Don't worry about every piece of that yet — `const`, the curly braces, the backticks, the question mark. You'll learn every single one of those in the next four chapters, in order, on purpose. Right now just notice that it ran, and that the output describes the thing they actually agreed to do.
+
+Which, for the record, was a compromise. Kai's real idea — the one she came in with — was a signup and roster system for Fairview's youth programs, the thing that should have existed instead of `FINAL_v3_USE THIS ONE.xlsx`. Nate did the math out loud on a napkin and said four weeks, two people, one of whom learned what a terminal was on Thursday, was not that. So they scoped down hard: build an **idea tracker for the Founders Table itself** — every idea anyone pitches at the meetup, who pitched it, how many people wanted it. Small. Boring. Finishable.
+
+"It's not the thing," Kai said.
+
+"It's not the thing," Nate agreed. "It's proof we can finish a thing. Then we build the thing."
+
+She wrote that on the legal pad without a question number next to it.
 
 ## Try It Yourself
 
-Open `autonate.js` back up and change a few values — the `name`, the `weightClass`, maybe bump `wins` up to `3`. Save it, run `node autonate.js` again, and watch the output change to match. That's the loop: change the code, run it, read what came back. You're going to do that ten thousand times over the course of your career. Might as well get good at it now.
+Open `project.js` and change a few values — swap `weeksLeft` down to `3`, flip `shipped` to `true`, add your own name to the `team` array. Save, rerun, watch the output change to match. Then break it on purpose: delete the `p.` in front of `p.language` and run it again. You'll get a `ReferenceError` telling you exactly which name it couldn't find. Read the error. Getting comfortable reading errors instead of flinching at them is worth more than any single piece of syntax in this pack.
 
-Next chapter, AutoNate learns to actually understand what's sitting in that `fighter` object — what a string is, what a number is, and why the difference matters more than you'd think.
+## Sanity Checks
+
+- **`process is not defined`.** You ran the file in a browser console instead of Node. Run it with `node where-it-runs.js` in a terminal.
+- **`document is not defined`** (a real error, not the string `"undefined"`). You dropped the `typeof` and referenced `document` directly. `typeof document` is safe; bare `document` throws in Node.
+- **Your Node version prints something other than v22.** Completely fine. Any current LTS release runs everything in this pack.
+- **You get `SyntaxError: Invalid or unexpected token` on the backtick lines.** Backticks (`` ` ``) are not single quotes. They're the key above Tab on most keyboards. Template literals only work with backticks.
+- **The output prints but the values look wrong.** Confirm you saved the file first. Node runs what's on disk, not what's on your screen.
+
+Nate's last text that night, at 11:52: *ok so if we're doing this for real we need a name. thinking Nitrocold. like nitro cold brew. because we move fast and we're*
+
+Kai's reply, at 11:53: *No. It sounds like a decongestant.*
+
+Next chapter, Kai finds out what's actually inside that `project` object — and finds a bug in Nate's vote-counting code that he'd been staring at for twenty minutes.
 
 Next: `02-variables-types-and-values.md` — Know Your Pockets.

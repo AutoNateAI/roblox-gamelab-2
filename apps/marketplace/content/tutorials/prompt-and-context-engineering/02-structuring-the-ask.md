@@ -1,26 +1,44 @@
 # Structuring the Ask: Role, Task, Constraints, Format
 
-The context problem is mostly handled. AutoNate's learned to open exactly the files that matter and leave the rest closed, to summarize instead of dumping raw logs, to treat the agent's attention like a budget instead of something bottomless. So the next prompt should go fine, right?
+Nate and Kai are two people in Fairview building a studio together and learning, this month, to direct an AI coding agent at a real repo instead of hand-writing every line. He's self-taught and quick on the keyboard; she spent ten years writing grant proposals and program scopes for a mid-size city and cannot let an unsourced claim go by. They've got the context problem mostly handled now — open the files that matter, leave the rest closed, don't dump a nine-hundred-line install log into the room and call it help.
 
-He asks for a scout — a creep that checks out nearby rooms so he can plan a second colony without walking the map himself, room by room. Types: "add a scout that explores nearby rooms." The agent obliges immediately. Writes `scout.js`, wires it into the spawn logic, and within a few ticks he's got a creep wandering the map. Except that's exactly what it's doing — wandering. No route, no memory of where it's already been, no way to tell AutoNate what it found once it got there. It walked straight into a room with a hostile tower and died before it reported back a single useful thing.
+So the next one should go fine.
 
-Not garbage. Worse, almost — it's plausible. It runs, it doesn't error, and it does something in the general shape of what he asked for. That's the trap: a vague ask doesn't usually get you an obvious failure. It gets you something that looks close enough that you don't notice it's wrong until it's already cost you a creep.
+The job is real and it's overdue: nineteen people signed a paper sheet at Founders Table Demo Night, Kai typed them into a CSV, and every day they don't follow up is a day those nineteen people forget who they were talking to. They need a module that turns signups into draft emails. Nate types:
 
-He pulls the prompt back up and reads it the way his old boxing coach used to read back a bad combo: what did you actually tell it to do? "Explores nearby rooms." That's not a task. That's a vibe.
+```text
+add follow-up emails for the signup sheet
+```
+
+The agent obliges instantly. Writes a file. Wires it up. Nate runs it and nineteen drafts print to the terminal, formatted, addressed, grammatical.
+
+And they're wrong in a way that takes a full minute to see. Every draft is identical except the name, so it reads like a mail merge from a dentist. It emails all nineteen, including the four people who explicitly did not check the contact box, which Kai points out is not a style problem, it's a *don't do that* problem. Nobody's actual idea appears anywhere. And it sends live — there is no dry-run, no preview, nothing between `node index.js` and nineteen real humans getting a real email.
+
+Not garbage. Worse than garbage, almost. It's *plausible*. It runs, it doesn't error, and it does something in the general shape of what he asked for, which is exactly why he almost didn't look closely.
+
+Kai reads the prompt off the screen out loud. "'Add follow-up emails for the signup sheet.'"
+
+"Yeah."
+
+"Nate, that's a wish."
+
+She pulls her own laptop over, opens a folder she has not opened since she left her old job, and finds a scope of work she wrote for a city youth-programs contract in 2023. Sets it next to his one-line prompt.
+
+"This is the same document," she says. "Yours is just missing everything."
 
 ## Coder's Corner: Anatomy of a Prompt
 
-Let's step out of the story for a second. There's a pattern good prompts share, and once you see it you'll notice every bad prompt is missing at least one piece of it.
+Step out of the story for a second. There's a pattern good prompts share, and once you can see it you'll notice that every bad prompt is missing at least one piece.
 
-**Role** — who the agent should act as for this task. You're not switching to a different program by saying this, you're aiming the one you've got. "Act like a careful Screeps engineer reviewing an existing codebase" pulls noticeably different behavior out of a model than saying nothing at all.
+**Role** — who the agent should act as for this task. You are not switching to a different program by saying this; you're aiming the one you have. "Act as a careful engineer reviewing an existing codebase, not a rewriter" pulls measurably different behavior out of a model than saying nothing, because it changes what kind of text the response is a plausible continuation of.
 
-**Task** — the specific, checkable thing you want. Not "explores nearby rooms" — that's an outcome with no shape to it. "Visits each room adjacent to my colony exactly once, logs whether it has hostile structures, and returns home when done" — that's a task you can actually verify happened or didn't.
+**Task** — the specific, checkable thing you want. Not "add follow-up emails" — that's an outcome with no edges. "Given an array of signup objects, return an array of `{to, subject, body}` drafts, one per person who consented" is a task you can verify happened or didn't.
 
-**Constraints** — the rules it has to work inside. Don't touch existing files. Stay under a CPU budget. Match the naming pattern already used in `roles/`. Constraints are what stop a technically-correct answer from being a practically-useless one.
+**Constraints** — the rules it has to work inside. Don't touch existing files. Don't add dependencies. Match the naming pattern already used in `lib/`. Constraints are what stop a technically-correct answer from being a practically-useless one.
 
-**Format** — the shape you want the response back in. A new file, or a change to an existing one? Should it explain its plan before writing code, or just write it? Do you want the full file, or a description of the diff?
+**Format** — the shape you want back. A new file or a diff to an existing one? Should it explain its plan before writing code, or just write it? Full file or just the changed function?
 
-**Example** *(optional but strong)* — a small snippet showing what "right" looks like. Nothing narrows a guess faster than one concrete example sitting next to the ask.
+**Example** *(optional but powerful)* — a small snippet showing what "right" looks like. Nothing collapses the space of guesses faster than one concrete sample sitting next to the ask.
 
 ```mermaid
 flowchart LR
@@ -30,79 +48,155 @@ flowchart LR
   F --> O["Sharper Output"]
 ```
 
-None of this is exotic. You already do a version of it everywhere else in life — you don't ask a corner man to "make me better," you tell him what round it is, what you're worried about, and what you need to hear in the fifteen seconds you've got. Same move here.
+Skip a row and the agent does not skip it. It fills it in silently, on its own terms, using the average of everything it has ever seen. Every unstated decision is still a decision — you just didn't make it.
 
-## 1. Give It a Role
+## 1. Kai Teaches This One
 
-AutoNate's second try starts with a sentence he wouldn't have thought to write the day before:
+This is the part where the person who has never shipped a line of production code turns out to have been doing this professionally for a decade.
+
+"Every scope of work I ever wrote had the same five sections," Kai says, "because every one of them had to survive somebody hostile reading it later." She writes them on the whiteboard, in order, and draws an arrow from each one to the prompt anatomy next to it.
+
+| Her old section | What it did | Prompt equivalent |
+| --- | --- | --- |
+| *Contractor Qualifications* | Who we're addressing and what stance we expect from them | **Role** |
+| *Deliverables* | The concrete things that must exist at the end | **Task** |
+| *Out of Scope* | What we are explicitly not paying for | **Constraints** |
+| *Submission Requirements* | Page limits, section order, file format | **Format** |
+| *Attachment A* | A sample of a past accepted response | **Example** |
+
+"The section that saved me the most," she says, tapping the third row, "was never Deliverables. It was Out of Scope. Every single time. Because a vendor who doesn't know what they're not supposed to do will absolutely do it, invoice you for it, and be *correct*, because you never wrote it down."
+
+Nate looks at his prompt. Then at `lib/`, which now contains a file the agent generated called `emailSender.js` that reaches out to the network at import time.
+
+"I never told it not to send."
+
+"You never told it there was such a thing as not sending."
+
+He also, she notes, named his own draft of the module `lib/haymaker.js`, after a punch, for reasons he defends for ninety seconds and then abandons. That goes in Out of Scope too.
+
+## 2. Build It Back, One Row at a Time
+
+They rewrite the ask in front of each other, section by section. **Role** first:
 
 ```text
-You're a careful Screeps engineer reviewing an existing
-colony codebase. Don't rewrite working code — only add
-what's asked.
+You're a careful Node.js engineer working inside an existing
+small codebase. Prefer boring, readable code. Don't refactor
+anything you weren't asked to touch.
 ```
 
-Small thing. But it changes the agent's whole posture — less "let me improve everything I see," more "let me do exactly this and nothing else."
+Small thing. It changes the whole posture — less "let me improve everything I can see," more "let me do this one thing and stop."
 
-## 2. Name the Actual Task
-
-Then the task, specific enough that he could check it himself:
+Then **Task**, specific enough that either of them could grade it:
 
 ```text
-Add a new role, scout.js, following the pattern used in
-harvester.js. It should visit each room adjacent to my
-current room exactly once, log whether FIND_HOSTILE_STRUCTURES
-returns anything, then return to my colony and stay idle.
+Task: add lib/followups.js exporting one function,
+draftFollowups(signups). It takes an array of signup objects
+with fields firstName, email, idea, and consent. It returns an
+array of { to, subject, body } objects — one per signup where
+consent === 'yes' and email is non-empty. It does not send
+anything.
 ```
 
-## 3. Set the Constraints and the Format
+Then **Constraints** and **Format**, which cost four sentences and prevent about four hours:
 
 ```text
-Constraints: don't modify any existing file. Keep CPU
-usage low — no pathing recalculated every tick.
-Format: give me the full new file, then a one-line summary
-of how to spawn it from the console.
+Constraints: no new dependencies. No network calls anywhere in
+this file — drafting only, sending is a separate concern. Pure
+function: no reading files, no writing files, no console output.
+Match the existing style in lib/ — CommonJS, module.exports at
+the bottom, files named for what they do.
+
+Format: give me the complete new file, then three bullets on
+how you'd test it. No changes to any other file.
 ```
 
-Same request, four sentences longer, and the difference in what comes back isn't subtle. The scout the agent writes this time has a route, a memory of visited rooms, and a `console.log` that actually tells AutoNate something useful when it gets home.
+Same request. Four sentences longer. The difference in what comes back is not subtle:
 
 ```js
-// roles/scout.js
-// What a scoped, structured prompt actually produced.
-module.exports.run = function (creep) {
-  if (!creep.memory.visited) creep.memory.visited = [];
+// lib/followups.js
+// Produced by a structured ask: role, task, constraints, format.
 
-  const target = Game.rooms[creep.memory.targetRoom];
-  if (target && creep.room.name === creep.memory.targetRoom) {
-    const hostiles = target.find(FIND_HOSTILE_STRUCTURES).length > 0;
-    console.log(`AutoNate scout: ${creep.room.name} hostile structures: ${hostiles}`);
-    creep.memory.visited.push(creep.room.name);
-    creep.memory.targetRoom = null;
-  }
-};
+const SUBJECT_PREFIX = 'Founders Table follow-up';
+
+function buildBody(name, idea) {
+  return (
+    `Hey ${name} — Nate and Kai here, from Founders Table.\n\n` +
+    `You mentioned ${idea}. We're picking three of these to actually ` +
+    `build before next month's Demo Night, and yours is on the short list.\n\n` +
+    `Worth twenty minutes on a call?\n\n— AutoNateAI`
+  );
+}
+
+function draftFollowups(signups) {
+  return signups
+    .filter((s) => s.consent === 'yes' && s.email)
+    .map((s) => ({
+      to: s.email,
+      subject: `${SUBJECT_PREFIX} — ${s.firstName}`,
+      body: buildBody(s.firstName, s.idea),
+    }));
+}
+
+module.exports = { draftFollowups };
 ```
 
-## 4. Iterate Instead of Accepting the First Answer
+Nineteen rows in, fifteen drafts out, four people who didn't consent quietly not in the list, and nothing anywhere in the file that can reach the internet.
 
-It's not perfect yet — the first version reports hostile structures but not hostile creeps, which matters more for AutoNate's purposes right now. Old AutoNate would've either lived with it or scrapped the whole thing and started over. New move: treat the first output as a draft, not a verdict.
+## 3. Treat the First Answer as a Draft, Not a Verdict
+
+It is still not right, and this is the step people skip.
+
+Nate runs it against the real CSV and three of the drafts open with `Hey  —`. Two people wrote initials only. One wrote their company name in the first-name column. Kai's row has an idea field that's just the word "same," because she was writing fast at a folding table.
+
+Old Nate would have either lived with it or thrown the whole thing out and started over from zero. The move is neither:
 
 ```text
-Good start. Also log FIND_HOSTILE_CREEPS in each room,
-same format as the structure check.
+Good — keep everything else exactly as is. Two fixes:
+1. If firstName is missing or blank, use "there" instead, so
+   the greeting reads "Hey there —".
+2. If idea is missing, blank, or shorter than 4 characters,
+   drop the sentence about it entirely rather than printing an
+   empty one.
+Show me only the changed function.
 ```
 
-One more pass, and it's exactly what he needed. Iterating on a working draft is faster than re-explaining the whole task from zero every time something's slightly off — and it keeps the constraints from the first ask intact instead of risking them getting lost in a rewrite.
+One pass. Done. Iterating on a working draft is faster than re-explaining the task from scratch, and — this is the real reason — it keeps the constraints from the first ask intact. Start over and "no network calls" is a coin flip again.
+
+## 4. Say What "Done" Looks Like Before You Start
+
+The last thing Kai adds is the one Nate never would have thought of, and it's straight out of a procurement document: acceptance criteria. Not "what should it do," but "what will I check to decide it's finished."
+
+```text
+Before you write anything, list the 3-5 checks you'd expect
+this to pass. I'll confirm them, then you implement.
+```
+
+The agent comes back with: consented-only filtering, blank-name fallback, no I/O, stable output length, no mutation of the input array. Kai adds a sixth (emails must be trimmed and lowercased, because the CSV is full of human typing) and *then* lets it write.
+
+Thirty seconds of agreement up front, and now "is it done" is a question with an answer instead of a vibe. This is also — though neither of them says it out loud — precisely how you evaluate a proposal.
 
 ## 5. Sanity Checks
 
-If the output "looks right" but does something different than you meant: your task was described as a feeling, not a checkable outcome — rewrite it as something you could grade pass or fail.
+If the output "looks right" but does something different from what you meant: your task was a feeling, not a checkable outcome. Rewrite it as something you could grade pass or fail.
 
-If the agent rewrites things you never asked it to touch: you skipped the role or constraints — tell it explicitly what's off-limits before it starts.
+If the agent does something destructive or irreversible you never asked for: you skipped constraints. The most valuable sentence in any prompt is usually the one about what *not* to do.
 
-If you're not sure what shape the answer should come back in: you skipped format — say so up front, it costs one sentence and saves a rewrite.
+If it rewrites files you never mentioned: state the blast radius explicitly — "no changes to any other file" — before it starts, not after.
 
-If the first answer's close but not quite right: don't start over — tell it exactly what's off and let it revise. That's usually faster and safer than a fresh attempt from scratch.
+If you're not sure what shape the answer should come back in: that's format, and it costs one sentence. Say "full file" or "just the changed function" and stop getting the wrong one.
 
-AutoNate's scout comes home this time. Route walked, rooms logged, hostiles flagged, zero casualties. Four sentences of structure did what a whole evening of vague asks couldn't. He's starting to get why people call this a skill and not a trick.
+If the first answer is close but not quite: don't restart. Tell it exactly what's off and say "keep everything else the same." Restarting loses every constraint you already won.
 
-Next: `03-feeding-it-the-right-files.md` — what to actually hand the agent, and what to leave out.
+If you can't write acceptance criteria for your own request: that's not a prompting problem, that's you not knowing what you want yet. Fix that first — it's cheaper in a sentence than in a file.
+
+The follow-ups go out Thursday. Fifteen of them, personalized, from a function that structurally cannot send anything on its own. Four sentences of structure did what an entire evening of vague asking could not, and Nate spends the walk home slightly irritated that the best prompt engineer he knows learned it from bureaucratic PDFs.
+
+"You know this is just RFP writing," he says.
+
+"I know."
+
+"Like exactly."
+
+"I *know*, Nate."
+
+Next: `03-feeding-it-the-right-files.md` — what to actually hand the agent, what to archive, and how to stop it copying from code you abandoned in March.

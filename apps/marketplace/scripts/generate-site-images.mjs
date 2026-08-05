@@ -60,6 +60,16 @@ const images = [
     size: "1536x1024",
     prompt: `An abstract illustration of a simple civic building silhouette, like a courthouse, connected by glowing amber circuit lines to a small network of AI agent nodes, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
   },
+  {
+    file: "tutorial-pack-intro-to-javascript-for-beginners.jpg",
+    size: "1536x1024",
+    prompt: `An abstract illustration of a glowing amber terminal cursor blinking beside a curly-brace bracket shape that opens into a small constellation of connected nodes, like a single line of code branching into a whole system, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
+  },
+  {
+    file: "hero-panel-two-builders.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic wide shot of two empty modern desk setups facing each other in a dark studio, each with a glowing monitor showing a faint code editor and system diagram, warm amber accent lighting, a shared whiteboard between them with faint glowing sketch lines, cinematic. ${STYLE} No people, no readable text — an empty scene meant to have characters composited in later.`,
+  },
 ];
 
 async function generateImage({ file, size, prompt }) {

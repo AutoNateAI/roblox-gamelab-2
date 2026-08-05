@@ -8,7 +8,7 @@ import { tutorialPacks, tutorials } from "../src/data.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
 const publicDir = path.join(rootDir, "apps/marketplace/public");
-const screepsDir = path.join(publicDir, "assets/screeps");
+const scenesDir = path.join(publicDir, "assets/scenes");
 const outDir = path.join(publicDir, "assets/og");
 
 const WIDTH = 1200;
@@ -78,13 +78,13 @@ async function composite({ screenshotFile, eyebrow, title, footer, outFile }) {
   console.log(`  -> ${path.relative(rootDir, outFile)}`);
 }
 
-const screenshots = (await readdir(screepsDir)).filter((f) => f.endsWith(".jpg")).sort();
+const screenshots = (await readdir(scenesDir)).filter((f) => f.endsWith(".jpg") && f.startsWith("scene-")).sort();
 if (!screenshots.length) {
-  throw new Error(`No Screeps screenshots found in ${screepsDir}`);
+  throw new Error(`No scene images found in ${scenesDir}`);
 }
 
 function screenshotFor(index) {
-  return path.join(screepsDir, screenshots[index % screenshots.length]);
+  return path.join(scenesDir, screenshots[index % screenshots.length]);
 }
 
 await mkdir(outDir, { recursive: true });
@@ -101,7 +101,7 @@ for (const program of programsData.programs) {
     screenshotFile: screenshotFor(index++),
     eyebrow: "AI Agents + Systems + Real Impact",
     title: "Design the System. Ship It for Real.",
-    footer: `AutoNateAI · ${program.durationWeeks || 4}-Week Cohort`,
+    footer: `AutoNateAI · ${program.durationWeeks || 2}-Week Cohort`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
@@ -118,7 +118,7 @@ await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI Live Builds",
   title: "Real Systems, Built Live. No Script.",
-  footer: "AutoNateAI · Tuesdays and Thursdays, Discord",
+  footer: "AutoNateAI · Saturdays 10-12 CST, Discord",
   outFile: path.join(outDir, "live-builds.jpg"),
 });
 
@@ -145,7 +145,7 @@ for (const tutorial of tutorials) {
     eyebrow: `Tutorial ${tutorial.episode} · ${tutorial.track}`,
     title: tutorial.title,
     footer: `AutoNateAI · ${pack?.title || "Free Player Guide"}`,
-    outFile: path.join(outDir, `tutorial-${tutorial.handle}.jpg`),
+    outFile: path.join(outDir, `tutorial-${tutorial.pack}-${tutorial.handle}.jpg`),
   });
 }
 
