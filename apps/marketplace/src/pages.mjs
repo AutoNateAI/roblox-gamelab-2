@@ -172,8 +172,8 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("business_center")} Where It Leads</span>
-            <h2>Live Builds are real AutoNateAI Consulting engagements.</h2>
-            <p>Every Live Build ships for a real organization. Builders who stand out get pulled onto real AutoNateAI Consulting engagements, or introduced directly to the partner organizations hiring for these skills. It's a real hiring pipeline, not a portfolio exercise.</p>
+            <h2>Live Builds prove the skill. Consulting is where it becomes client work.</h2>
+            <p>Live Builds are public practice against real, RFP-shaped problems, every Saturday. AutoNateAI Consulting is the separate, private practice where that same engineering discipline builds real custom software for organizations who hire us. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client work, or a partner organization hiring for these skills.</p>
           </div>
           <a class="primary-button" href="/consulting">See How It Works ${icon("arrow_forward")}</a>
         </div>
@@ -292,7 +292,7 @@ export function renderAbout() {
         <span class="kicker">${icon("architecture")} Mission</span>
         <h2>Good code is not enough. The system has to work.</h2>
         <p>AutoNateAI's vision is that more people become system architects: not just software architects, but people who can design the systems around them, technical and civic alike. Software is the vehicle because AI now makes it fast and cheap to build. Professional engineers spend their time reading unfamiliar systems, identifying constraints, debugging behavior, communicating tradeoffs, using Git, and deciding what should be automated next. AutoNateAI turns those habits into a live practice environment where the design either works or the real system exposes the gap.</p>
-        <p>That practice environment is not hypothetical. <a href="/consulting">AutoNateAI Consulting</a> takes on real RFPs and real civic problems for real organizations, and Live Builds are how that work gets delivered: live, in public, in the AutoNateAI Discord. It's also how builders get hired, either onto real AutoNateAI Consulting engagements or introduced to the partner organizations looking for exactly these skills.</p>
+        <p>That practice environment is not hypothetical. Live Builds put real, RFP-shaped problems in front of the community every Saturday, live, in public, in the AutoNateAI Discord. <a href="/consulting">AutoNateAI Consulting</a> is the separate, private practice where that same discipline builds real custom software for organizations who hire us, across industries. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client work, or a partner organization hiring for these skills.</p>
       </section>
 
       <section class="spotlight-section">
@@ -425,7 +425,7 @@ export function renderProgramDetail(data, program) {
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
-  const sessionWeeks = chunkSessions(program.sessions || [], 2);
+  const sessionWeeks = chunkSessions(program.sessions || [], 4);
   const heroTitle = escapeHtml(program.name);
 
   const body = `
@@ -483,7 +483,7 @@ export function renderProgramDetail(data, program) {
         <div class="outcome-grid">
           <article><img src="/assets/landing/api-data-model.jpg" alt="" /><h3>A system with real behavior</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by real requirements.</p></article>
           <article><img src="/assets/landing/agent-review.jpg" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
-          <article><img src="/assets/landing/live-builds-spotlight.jpg" alt="" /><h3>A shot at getting hired</h3><p>Live Builds are real <a href="/consulting">AutoNateAI Consulting</a> engagements. Standout builders get pulled onto real work, or introduced to the partner organizations hiring for these skills.</p></article>
+          <article><img src="/assets/landing/live-builds-spotlight.jpg" alt="" /><h3>A shot at getting noticed</h3><p>Live Builds put your work in front of the community every Saturday. Standout builders get noticed — sometimes that means an introduction to real <a href="/consulting">AutoNateAI Consulting</a> client work, or a partner organization hiring for these skills.</p></article>
         </div>
       </section>
 
@@ -611,7 +611,7 @@ export function renderLeague(data) {
           <h2>A real RFP. A real build. No script.</h2>
           <p>Every session starts with a real problem: an actual RFP or civic ask from a city, foundation, or organization. The team reads it, researches who's behind it, and starts designing a system live, in Discord, in front of anyone watching.</p>
           <p>${escapeHtml(league.season?.winCondition || "")}</p>
-          <p>This isn't a simulation of real work. It <em>is</em> the real work: every Live Build is an actual <a href="/consulting">AutoNateAI Consulting</a> engagement, delivered in public. Builders who stand out get pulled onto real engagements, or introduced to the partner organizations hiring for these skills.</p>
+          <p>This isn't a simulation of real work: it's a real RFP, researched and designed against in public, live, with nothing cut. <a href="/consulting">AutoNateAI Consulting</a> is the separate, private practice where that same discipline builds real custom software for organizations who hire us. Builders who stand out in Live Builds get noticed — sometimes that means an introduction to real consulting client work, or a partner organization hiring for these skills.</p>
         </article>
         <aside class="league-facts">
           <div><span>Sat</span><b>10:00 AM-12:00 PM CST</b></div>
@@ -656,36 +656,102 @@ export function renderLeague(data) {
   });
 }
 
-export function renderConsulting(data) {
-  const primaryProgram = data.programs?.[0];
-  const checkoutHref = primaryProgram?.offerings?.[0]
-    ? `/checkout?program=${primaryProgram.handle}&offering=${primaryProgram.offerings[0].id}`
-    : "/programs/ai-agent-systems";
+const consultingIndustries = [
+  {
+    icon: "account_balance",
+    name: "Civic & Government",
+    hook: "Built on real RFP response work and the habit of reading procurement language most engineers skip.",
+    capabilities: [
+      "Public-facing registration, intake, and waitlist systems",
+      "RFP-responsive, proposal-ready system architecture",
+      "Program dashboards and reporting for accountability",
+      "Secure handling of resident and program data",
+    ],
+  },
+  {
+    icon: "payments",
+    name: "Financial Services & Fintech",
+    hook: "Shaped by engineering work inside Citi and Veterans United, where reliability and compliance aren't optional.",
+    capabilities: [
+      "Internal tooling for compliance-heavy workflows",
+      "Secure API integrations and data pipelines",
+      "AI-assisted document and underwriting workflows",
+      "Legacy system modernization",
+    ],
+  },
+  {
+    icon: "school",
+    name: "Education & Workforce Development",
+    hook: "Grounded in teaching Computer Security at the University of Michigan and running real technical programs.",
+    capabilities: [
+      "Cohort and program management systems",
+      "Mentorship and progress-tracking platforms",
+      "Curriculum and content delivery tools",
+      "Outcomes reporting and data systems",
+    ],
+  },
+  {
+    icon: "shield_lock",
+    name: "Enterprise Software & Security",
+    hook: "Built on security engineering at Microsoft and senior consulting across products and architecture at Atomic Object.",
+    capabilities: [
+      "Internal automation and AI-agent workflow tooling",
+      "Security-conscious architecture review",
+      "Legacy system audits and modernization roadmaps",
+      "Developer tooling and internal platforms",
+    ],
+  },
+  {
+    icon: "volunteer_activism",
+    name: "Nonprofits & Community Organizations",
+    hook: "The reason this consultancy exists: watching a funded program run on a spreadsheet that broke every few weeks, with nobody in the room who could fix it.",
+    capabilities: [
+      "Volunteer and donor management systems",
+      "Grant reporting and program-tracking tools",
+      "Custom tools that replace spreadsheet chaos",
+      "Lightweight intake, booking, and case-management systems",
+    ],
+  },
+];
 
+function industryCard(industry) {
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(industry.icon)}</div>
+      <h3>${escapeHtml(industry.name)}</h3>
+      <p class="industry-hook">${escapeHtml(industry.hook)}</p>
+      <ul class="industry-capabilities">
+        ${industry.capabilities.map((item) => `<li>${icon("check")}<span>${escapeHtml(item)}</span></li>`).join("")}
+      </ul>
+    </article>
+  `;
+}
+
+export function renderConsulting(data) {
   const body = `
-    <main class="league-page">
+    <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/design-build-ship.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("business_center")} AutoNateAI Consulting</span>
-          <h1>Real systems, delivered in public.</h1>
-          <p>Just met Nate at an event and got pointed here? Good — you're in the right place. Tell us what you're building below and lock in a real time. AutoNateAI Consulting takes on real RFPs and civic problems for real organizations, and builds the system live, in Discord, with AI agents doing real work under real deadlines. Every Live Build is a real engagement, not a simulation of one.</p>
+          <h1>Custom software, built by an engineer who ships.</h1>
+          <p>Just met Nate at an event and got pointed here? Good — you're in the right place. AutoNateAI Consulting designs and builds custom software for real organizations: real requirements, senior engineering judgment, and AI agents like Claude Code and Codex used to move faster without cutting corners. Tell us what you're building and book a real time below.</p>
           <div class="button-row">
             <a class="primary-button" href="#book">Book a Call ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/live-builds">Watch a Live Build</a>
+            <a class="secondary-button" href="/live-builds">See How We Build</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="/assets/landing/rfp-document.jpg" alt="" />
+          <img src="/assets/landing/api-data-model.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("apartment")} For Organizations</span>
-            <h2>Bring us a real problem.</h2>
-            <p>Cities, foundations, schools, and organizations bring AutoNateAI Consulting a real RFP or a real system to build. We design and ship it live, with the reasoning visible the whole way.</p>
+            <h2>Bring us the problem. We'll bring the system.</h2>
+            <p>Cities, foundations, schools, financial teams, and community organizations bring AutoNateAI Consulting a real problem to solve. We scope it, design it, and build it — privately, professionally, for you.</p>
             <div class="hero-facts">
-              <span>RFP-sourced</span>
-              <span>AI-agent built</span>
-              <span>Delivered live</span>
+              <span>Senior engineering</span>
+              <span>AI-agent accelerated</span>
+              <span>Fixed-scope delivery</span>
               <span>Real organizations</span>
             </div>
           </div>
@@ -693,89 +759,102 @@ export function renderConsulting(data) {
         </div>
       </section>
 
+      <section class="section industries-section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("apartment")} Industries</span>
+            <h2>Capabilities built from real experience, not a generic pitch.</h2>
+            <p>Every industry below maps to real work Nathan has actually done — not a services menu written to sound broad. Here's what that experience means for the systems your organization needs built.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${consultingIndustries.map((industry) => industryCard(industry)).join("")}</div>
+        <p class="industries-footnote">Don't see your industry listed? If the work runs on data, workflows, and decisions, we can probably help — <a href="#book">let's talk</a>.</p>
+      </section>
+
       <section class="section compact" id="book">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("event")} Book a Call</span>
             <h2>Tell us what you're building.</h2>
-            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday. Enter times below in Central Time — we'll confirm your exact slot by email.</p>
+            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring whether AutoNateAI Consulting is a fit. Follow-ups run 30, 45, 60, 90, or 120 minutes for engagements already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday.</p>
           </div>
         </div>
-        <form class="form-stack booking-form" data-booking-form>
-          <div class="two-col">
-            <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
-            <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
-          </div>
-          <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="City of Fairview" /></label>
-          <div class="two-col">
-            <label>Call Type
-              <select data-booking-field="callType" data-booking-call-type required>
-                <option value="">Select one</option>
-                <option value="Discovery">Discovery</option>
-                <option value="Follow-up">Follow-up</option>
-              </select>
-            </label>
-            <label>Duration
-              <select data-booking-field="duration" data-booking-duration required disabled>
-                <option value="">Pick a call type first</option>
-              </select>
-            </label>
-          </div>
-          <div class="two-col">
-            <label>Preferred Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
-            <label>Alternate Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="alternateDateTime" type="datetime-local" /></label>
-          </div>
-          <div class="two-col">
-            <label>Your Timezone
-              <select data-booking-field="timezone">
-                <option value="CST">Central (CST)</option>
-                <option value="EST">Eastern (EST)</option>
-                <option value="MST">Mountain (MST)</option>
-                <option value="PST">Pacific (PST)</option>
-                <option value="Other">Other</option>
-              </select>
-            </label>
-            <label>How did you hear about us?
-              <select data-booking-field="howHeard">
-                <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
-                <option value="Website">Website</option>
-                <option value="Live Build">Live Build</option>
-                <option value="Referral">Referral</option>
-                <option value="RFP">RFP</option>
-                <option value="Other">Other</option>
-              </select>
-            </label>
-          </div>
-          <label>What do you want out of this call?<textarea data-booking-field="goals" rows="3" placeholder="What decision or outcome are you hoping to walk away with?"></textarea></label>
-          <label>Project / Organization Context<textarea data-booking-field="context" rows="3" placeholder="What are you building, or what does the RFP ask for?"></textarea></label>
-          <button class="primary-button" type="submit">Request the Call ${icon("arrow_forward")}</button>
-          <p class="fine-print" data-booking-status>Prefer email? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">autonate.ai@gmail.com</a>.</p>
-        </form>
-      </section>
-
-      <section class="section compact">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("groups")} For Builders</span>
-            <h2>The program is also how you get in the room.</h2>
-            <p>Every Live Build is also a hiring pipeline. Builders who stand out in the cohort and in Live Builds get pulled onto real AutoNateAI Consulting engagements, or introduced directly to the partner organizations hiring for these exact skills.</p>
-          </div>
-          <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
-        </div>
-        <div class="compete-curriculum">
-          <article><b>01</b><span><strong>Train.</strong> The free tutorial packs and the live program teach the actual skills: AI agents, databases, APIs, and architecture.</span></article>
-          <article><b>02</b><span><strong>Prove it.</strong> Live Builds put your work in front of real organizations, live, in public. No portfolio padding, just real shipped systems.</span></article>
-          <article><b>03</b><span><strong>Get hired.</strong> Standout builders get pulled into real AutoNateAI Consulting engagements, or connected directly to partner organizations hiring for these skills.</span></article>
+        <div class="book-layout">
+          <form class="form-stack booking-card booking-form" data-booking-form>
+            <div class="two-col">
+              <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
+              <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
+            </div>
+            <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="City of Fairview" /></label>
+            <div class="two-col">
+              <label>Call Type
+                <select data-booking-field="callType" data-booking-call-type required>
+                  <option value="">Select one</option>
+                  <option value="Discovery">Discovery</option>
+                  <option value="Follow-up">Follow-up</option>
+                </select>
+              </label>
+              <label>Duration
+                <select data-booking-field="duration" data-booking-duration required disabled>
+                  <option value="">Pick a call type first</option>
+                </select>
+              </label>
+            </div>
+            <div class="two-col">
+              <label>Preferred Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
+              <label>Alternate Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="alternateDateTime" type="datetime-local" /></label>
+            </div>
+            <div class="two-col">
+              <label>Your Timezone
+                <select data-booking-field="timezone">
+                  <option value="CST">Central (CST)</option>
+                  <option value="EST">Eastern (EST)</option>
+                  <option value="MST">Mountain (MST)</option>
+                  <option value="PST">Pacific (PST)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+              <label>How did you hear about us?
+                <select data-booking-field="howHeard">
+                  <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
+                  <option value="Website">Website</option>
+                  <option value="Live Build">Live Build</option>
+                  <option value="Referral">Referral</option>
+                  <option value="RFP">RFP</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+            </div>
+            <label>What do you want out of this call?<textarea data-booking-field="goals" rows="3" placeholder="What decision or outcome are you hoping to walk away with?"></textarea></label>
+            <label>Project / Organization Context<textarea data-booking-field="context" rows="3" placeholder="What are you building, or what does the RFP ask for?"></textarea></label>
+            <button class="primary-button full" type="submit">Request the Call ${icon("arrow_forward")}</button>
+            <p class="fine-print" data-booking-status>Prefer email? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20Consulting%20inquiry">autonate.ai@gmail.com</a>.</p>
+          </form>
+          <aside class="book-sidebar">
+            <div class="book-sidebar-block">
+              <span class="kicker">${icon("checklist")} What happens next</span>
+              <ol>
+                <li>We read what you send — no auto-reply, an actual read.</li>
+                <li>You'll hear back within 1-2 business days to confirm a time.</li>
+                <li>We meet, scope the real problem, and you get a straight answer on fit and cost.</li>
+              </ol>
+            </div>
+            <div class="book-sidebar-block">
+              <span class="kicker">${icon("verified")} Background</span>
+              <p>Computer Science, University of Michigan. Software and AI engineering across Microsoft, Citi, Veterans United, Atomic Object, and Outlier.</p>
+              <a class="outline-button full" href="/about">About Nathan ${icon("arrow_forward")}</a>
+            </div>
+          </aside>
         </div>
       </section>
 
       <section class="detail-enroll-band">
         <div>
-          <span class="kicker">${icon("local_activity")} Ready to build the thing that gets you noticed?</span>
-          <h2>Start with a real system, not another exercise.</h2>
-          <p>Join the program, show up to Live Builds, and let real, shipped work make the case for you.</p>
+          <span class="kicker">${icon("local_activity")} Not ready to book yet?</span>
+          <h2>See the engineering process before you commit to anything.</h2>
+          <p>Watch how real systems get designed and built, live, every Saturday in the AutoNateAI Discord.</p>
         </div>
-        <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/live-builds">See Live Builds ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
@@ -787,10 +866,10 @@ export function renderConsulting(data) {
     canonicalPath: "/consulting",
     ogImage: "/assets/og/consulting.jpg",
     description:
-      "AutoNateAI Consulting builds real software systems for real organizations, live and in public, and is the hiring pipeline behind the AutoNateAI program.",
-    ogTitle: "AutoNateAI Consulting: real systems, delivered in public.",
+      "AutoNateAI Consulting builds custom software for real organizations across civic, financial, education, enterprise, and nonprofit industries, directed by senior engineering judgment and AI agents.",
+    ogTitle: "Custom software, built by an engineer who ships.",
     ogDescription:
-      "Real RFPs, real organizations, built live with AI agents. Standout builders get pulled onto real engagements or introduced to hiring partners.",
+      "Real requirements, senior engineering judgment, and AI agents used to move faster without cutting corners. Book a call to talk about what your organization needs built.",
   });
 }
 
@@ -1500,10 +1579,8 @@ function chunkSessions(sessions, size) {
 
 function weekCard(index, sessions) {
   const weekMeta = [
-    ["Meet your AI agents", "Set up Claude Code and Codex, and practice engineering prompts and context for real projects."],
-    ["Databases, APIs, and architecture", "Design relational and graph data models, build APIs, and document the system with Mermaid diagrams."],
-    ["Review, debug, and research", "Review AI-generated code like an engineer, then find and read a real RFP with an agent's help."],
-    ["Build week", "Turn the researched RFP into a real system design, build it live, and ship it for a real organization."],
+    ["Agents, prompting, databases, and architecture", "Set up Claude Code and Codex, engineer prompts and context for real projects, design relational and graph data models, build APIs, and document the system with Mermaid diagrams."],
+    ["Review, research, and the real build", "Review AI-generated code like an engineer, find and read a real RFP with an agent's help, then turn it into a real system design and ship it live for a real organization."],
   ][index] || [`Week ${index + 1}`, "Keep improving the system."];
   const [title, summary] = weekMeta;
 
