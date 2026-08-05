@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Talking to the Data: Asking Questions with SQL | AutoNateAI Tutorials</title>
-        <meta name="description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
+        <meta name="description" content="SELECT, WHERE, JOIN, GROUP BY. Nate and Kai learn to ask their own data a real question and get a real answer back." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/asking-questions-with-sql" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Talking to the Data: Asking Questions with SQL: keep the build moving." />
-        <meta property="og:description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
+        <meta property="og:description" content="SELECT, WHERE, JOIN, GROUP BY. Nate and Kai learn to ask their own data a real question and get a real answer back." />
         <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/asking-questions-with-sql" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-asking-questions-with-sql.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-relational-databases-and-graphs-asking-questions-with-sql.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Talking to the Data: Asking Questions with SQL: keep the build moving." />
-        <meta name="twitter:description" content="SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-asking-questions-with-sql.jpg" />
+        <meta name="twitter:description" content="SELECT, WHERE, JOIN, GROUP BY. Nate and Kai learn to ask their own data a real question and get a real answer back." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-relational-databases-and-graphs-asking-questions-with-sql.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Relational Databases and Graphs</strong>
-          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="active" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why They Need a Scoreboard</a><a class="" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="active" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,67 +65,100 @@
           <header>
             <span class="kicker">Chapter 2 / Tutorial 02</span>
             <h1>Talking to the Data: Asking Questions with SQL</h1>
-            <p>SELECT, WHERE, JOIN, GROUP BY. AutoNate learns to ask his own data a real question and get a real answer back.</p>
+            <p>SELECT, WHERE, JOIN, GROUP BY. Nate and Kai learn to ask their own data a real question and get a real answer back.</p>
             <div class="tag-row"><span>Write SELECT and WHERE</span><span>Join related tables</span><span>Group data into answers</span></div>
           </header>
-          <div class="markdown-body"><p>Tables built, first dozen matches logged in — and AutoNate hit the wall he honestly should have seen coming. He had the data now. He didn't have a way to ask it anything. Staring at three tables full of rows doesn't answer &quot;which role wins the most&quot; any better than staring at a text file did, unless you're willing to count by hand and hope you don't lose track around row forty. He'd fixed the storage problem in the last chapter. He hadn't touched the actual question he started this whole pack to answer.</p>
-<p>That's what SQL is for. Not a separate skill bolted onto the database — the actual language the database speaks, built specifically for asking it precise questions and getting precise answers back. AutoNate already knew, from the last chapter, how his data was shaped: colonies, matches, roles, linked by foreign keys. Now he needed the vocabulary to reach into that shape and pull exact answers out of it. This chapter is him learning to talk to his own data.</p>
+          <div class="markdown-body"><p>Nate and Kai are building a studio, AutoNateAI, and they've just finished putting their real operational records into a real database — three tables in a file called <code>studio.db</code>. <code>people</code> holds everyone they've met at the Fairview Founders Table meetup. <code>ideas</code> holds the running backlog. <code>feedback</code> holds what a specific person said about a specific idea, on a specific night, linked to both by foreign keys. Two weeks of back-filling later, they had about ninety rows of feedback in there.</p>
+<p>And then they sat and looked at it, and Nate said the quiet part. &quot;So... how do we find out which idea people actually want?&quot;</p>
+<p>Because having the data is not the same as being able to ask it anything. Ninety rows of feedback answers &quot;which idea should we build&quot; exactly as well as a phone note does, if the only tool you've got is scrolling and counting by hand and losing your place around row forty. The storage problem got fixed last chapter. The actual question — the one that started this whole thing — hadn't been touched.</p>
+<p>That's what SQL is for. It isn't a separate skill bolted onto a database; it's the language the database speaks, built for precisely this. This chapter is the two of them learning to talk to their own records — and one of the first answers they get back is confidently, cleanly wrong in a way that would have been very easy to act on.</p>
 <h3>Coder's Corner: SQL as a Question-Asking Language</h3>
-<p><strong>SQL</strong> (Structured Query Language) is how you talk to a relational database. It's not a general-purpose programming language like JavaScript — it doesn't have loops or functions in the way you're used to. It's built around one core idea: describe the data you want, and let the database figure out how to go get it.</p>
-<p>Four pieces of vocabulary cover almost everything AutoNate needed:</p>
-<ul><li><strong>SELECT</strong> — which columns you want back. <code>SELECT name, room</code> gets you those two columns; <code>SELECT *</code> gets you every column.</li><li><strong>WHERE</strong> — which rows qualify. <code>WHERE result = 'loss'</code> filters down to only the rows matching that condition, exactly the way an <code>if</code> statement filters which lines of code run.</li><li><strong>JOIN</strong> — how to pull matching rows together from two different tables, using the foreign key link between them, so a query can reach across the whole structure instead of staying stuck in one table.</li><li><strong>GROUP BY</strong> — how to collapse many rows into one summary row per category, usually paired with a count or a sum, so you go from &quot;every individual row&quot; to &quot;one number per group.&quot;</li></ul>
+<p><strong>SQL</strong> (Structured Query Language) is how you talk to a relational database. It's not a general-purpose language like JavaScript — no loops, no functions in the sense you're used to. It's built around one idea: *describe the data you want, and let the database work out how to go get it.*</p>
+<p>Five pieces of vocabulary cover almost everything:</p>
+<ul><li><strong>SELECT</strong> — which columns come back. <code>SELECT name, org</code> gets those two; <code>SELECT *</code> gets every column.</li><li><strong>WHERE</strong> — which rows qualify. <code>WHERE verdict = 'would_use'</code> narrows to rows matching that condition, the same way an <code>if</code> narrows which lines of code run. <code>WHERE</code> runs *before* any grouping happens.</li><li><strong>JOIN</strong> — how to pull matching rows together across two tables using the foreign key between them, so a query can reach across the whole structure instead of being stuck in one table.</li><li><strong>GROUP BY</strong> — how to collapse many rows into one summary row per category, almost always paired with a count or a sum. You go from &quot;every individual row&quot; to &quot;one number per group.&quot;</li><li><strong>HAVING</strong> — like <code>WHERE</code>, but it filters the *grouped* rows, after aggregation. <code>WHERE</code> can't see a <code>COUNT()</code> because the count doesn't exist yet when <code>WHERE</code> runs. <code>HAVING</code> can.</li></ul>
+<p>That last distinction trips up nearly everyone once. The order the database actually works in is: pick rows (<code>WHERE</code>) → group them (<code>GROUP BY</code>) → filter the groups (<code>HAVING</code>) → sort (<code>ORDER BY</code>).</p>
 <h3>1. Start Simple: SELECT and WHERE</h3>
-<p>The most basic real question: show every match this specific colony has lost.</p>
-<pre class="code-block language-sql"><code>SELECT opponent, ticks, played_at
-FROM matches
-WHERE colony_id = 1 AND result = 'loss';</code></pre>
-<p>Read it the way you'd say it out loud: &quot;give me the opponent, ticks, and date, from the matches table, where the colony is id 1 and the result is a loss.&quot; That's the whole mental model for <code>SELECT</code> and <code>WHERE</code> — pick your columns, then narrow your rows. No archaeology, no scrolling. The database does the filtering.</p>
+<p>The most basic real question: show everything one specific person has said, in their own words.</p>
+<pre class="code-block language-sql"><code>SELECT idea_id, verdict, note, given_at
+FROM feedback
+WHERE person_id = 4
+ORDER BY given_at DESC;</code></pre>
+<p>Read it out loud the way you'd say it: &quot;give me the idea, the verdict, the note, and the date, from the feedback table, where the person is id 4, newest first.&quot; That's the entire mental model for <code>SELECT</code> and <code>WHERE</code> — pick your columns, then narrow your rows. No scrolling, no archaeology. The database does the filtering.</p>
+<p>It's also immediately annoying, because <code>person_id = 4</code> requires you to already know that 4 is Priya. Which is what the next piece is for.</p>
 <h3>2. Reach Across Tables with JOIN</h3>
-<p>That query only touches <code>matches</code>. But AutoNate's real questions almost always span two tables — he needs the colony's name, which lives in <code>colonies</code>, attached to match results, which live in <code>matches</code>. That's exactly what <code>JOIN</code> is for.</p>
-<pre class="code-block language-sql"><code>SELECT colonies.name, matches.opponent, matches.result
-FROM matches
-JOIN colonies ON matches.colony_id = colonies.id
-WHERE matches.result = 'win'
-ORDER BY matches.played_at DESC;</code></pre>
-<p><code>JOIN colonies ON matches.colony_id = colonies.id</code> is the database walking the foreign key link from the last chapter — matching every <code>matches</code> row to the one <code>colonies</code> row it belongs to, using the exact relationship that was built into the schema on purpose. Nothing about this query works if the foreign key wasn't there; the join has nothing to walk across.</p>
-<h3>3. Answer the Real Question with GROUP BY</h3>
-<p>Here's the question that started this whole pack: which role wins the most matches. Answering it means joining all three tables, filtering down to wins, and then collapsing everything into one summary row per role.</p>
-<pre class="code-block language-sql"><code>SELECT roles.role_name, COUNT(DISTINCT matches.id) AS wins
-FROM roles
-JOIN matches ON roles.match_id = matches.id
-WHERE matches.result = 'win'
-GROUP BY roles.role_name
-ORDER BY wins DESC;</code></pre>
-<p><code>GROUP BY roles.role_name</code> tells the database &quot;stop giving me one row per match — give me one row per role instead, and roll everything else up underneath it.&quot; <code>COUNT(DISTINCT matches.id)</code> counts how many distinct winning matches each role showed up in. Run this and AutoNate doesn't get a hunch anymore — he gets an actual ranked answer, sourced straight from every match he's logged, not from whichever three sessions he happened to remember clearly.</p>
+<p>Real questions almost always span tables. The names live in <code>people</code>, the titles live in <code>ideas</code>, and the opinions live in <code>feedback</code> — and a useful answer needs all three at once.</p>
+<pre class="code-block language-sql"><code>SELECT people.name, ideas.title, feedback.verdict, feedback.note
+FROM feedback
+JOIN people ON feedback.person_id = people.id
+JOIN ideas  ON feedback.idea_id  = ideas.id
+WHERE feedback.verdict = 'would_use'
+ORDER BY feedback.given_at DESC;</code></pre>
+<p>Each <code>JOIN ... ON</code> is the database walking a foreign key from the last chapter — matching every <code>feedback</code> row to the one <code>people</code> row and the one <code>ideas</code> row it belongs to, using relationships that were designed into the schema on purpose. None of this works if the foreign keys aren't there; the join has nothing to walk across.</p>
+<p>Nate ran it and read the output out loud, and it was the first time either of them had seen a month of scattered conversations lined up as one honest list. Priya Raghunathan, grant deadline tracker, *would_use*, &quot;only if it handles rolling deadlines, most of ours aren't annual.&quot; Marcus Oyelaran, no-show texter, *would_use*, &quot;I lose two chairs a week to this.&quot; Dana Whitfield, grant deadline tracker, *would_use*, &quot;would pay.&quot;</p>
+<p>&quot;Okay,&quot; Nate said. &quot;Okay okay okay. Watch THIS.&quot;</p>
+<h3>3. The Query That Lied</h3>
+<p>He wanted the headline number: which idea has the most people who'd use it.</p>
+<pre class="code-block language-sql"><code>-- Nate's version. Looks right. Is not right.
+SELECT ideas.title, COUNT(*) AS people_who_want_it
+FROM feedback
+JOIN ideas ON feedback.idea_id = ideas.id
+WHERE feedback.verdict = 'would_use'
+GROUP BY ideas.title
+ORDER BY people_who_want_it DESC;</code></pre>
+<p>Grant deadline tracker: <strong>7</strong>. Everything else in the single digits, well behind. Nate was already talking about what they'd build first.</p>
+<p>Kai was still reading. &quot;Seven people said they'd use it.&quot;</p>
+<p>&quot;Seven people said they'd use it.&quot;</p>
+<p>&quot;Name them.&quot;</p>
+<p>He couldn't. He could name four. She pulled up the raw feedback rows for that idea and there it was: Dana had said *would_use* on it three separate times, at three separate Founders Tables, because she is enthusiastic and because Nate kept re-pitching it to her. Three rows. One human. The number wasn't seven people, it was seven *statements* — and the column he'd named <code>people_who_want_it</code> was a claim the query never actually made.</p>
+<p>This is the most common silent bug in SQL, and it's silent precisely because nothing breaks. <code>COUNT(*)</code> counts rows. After a join and a filter, &quot;rows&quot; and &quot;distinct real-world things&quot; are not the same population, and the query has no idea which one you meant. It answered the question you typed. You just typed a different question than the one in your head.</p>
+<pre class="code-block language-sql"><code>-- what he actually meant
+SELECT
+  ideas.title,
+  COUNT(DISTINCT feedback.person_id) AS people_who_want_it,
+  COUNT(*) AS times_said
+FROM feedback
+JOIN ideas ON feedback.idea_id = ideas.id
+WHERE feedback.verdict = 'would_use'
+GROUP BY ideas.title
+HAVING COUNT(DISTINCT feedback.person_id) &gt;= 2
+ORDER BY people_who_want_it DESC;</code></pre>
+<p><code>GROUP BY ideas.title</code> tells the database &quot;stop giving me one row per feedback; give me one row per idea, and roll everything else up underneath it.&quot; <code>COUNT(DISTINCT feedback.person_id)</code> counts unique humans. <code>COUNT(*)</code> is kept alongside it, honestly labeled, because *how often* people bring something up is genuinely useful — it just isn't the same fact. And <code>HAVING</code> drops any idea only one person ever endorsed, which cannot be done in <code>WHERE</code>, because at the time <code>WHERE</code> runs there is no count yet to compare against.</p>
+<p>Grant deadline tracker, re-run: <strong>5 people, 7 statements</strong>. Still first. Still the right call. But five and seven are different numbers, and the version of Nate who never got asked to name them would have gone into the next month quoting seven.</p>
+<p>&quot;That,&quot; Kai said, &quot;is the entire reason I ask where things are from.&quot;</p>
 <pre class="mermaid">flowchart TD
-  Q[&quot;Which role wins the most?&quot;] --&gt; J[&quot;JOIN roles + matches&lt;br/&gt;on match_id&quot;]
-  J --&gt; W[&quot;WHERE result = 'win'&quot;]
-  W --&gt; G[&quot;GROUP BY role_name&quot;]
-  G --&gt; A[&quot;Ranked answer:&lt;br/&gt;hauler: 9 wins&lt;br/&gt;builder: 6 wins&quot;]</pre>
-<p>Four small pieces of vocabulary, stacked in order, and a question that used to take twenty minutes of manual counting now takes one query and a fraction of a second.</p>
+  Q[&quot;Which idea do people want most?&quot;] --&gt; J[&quot;JOIN feedback + ideas&lt;br/&gt;on idea_id&quot;]
+  J --&gt; W[&quot;WHERE verdict = 'would_use'&quot;]
+  W --&gt; G[&quot;GROUP BY ideas.title&quot;]
+  G --&gt; H[&quot;HAVING distinct people &gt;= 2&quot;]
+  H --&gt; A[&quot;Ranked answer:&lt;br/&gt;grant tracker: 5 people / 7 mentions&lt;br/&gt;no-show texter: 3 people / 3 mentions&quot;]</pre>
+<p>Five small pieces of vocabulary, stacked in order, and a question that used to take an evening of arguing takes a fraction of a second — with the added benefit that the answer can be checked instead of believed.</p>
 <h3>4. Query It from a Script, Not Just a Terminal</h3>
-<p>The terminal's fine for exploring, but AutoNate wants this answer available from code, so it can eventually feed a real dashboard.</p>
-<pre class="code-block language-js"><code><span class="token-comment">// scripts/role-win-report.js</span>
+<p>The terminal is fine for exploring, but this answer needs to be available to code so it can eventually feed something they look at without typing.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// scripts/idea-demand-report.js</span>
 <span class="token-keyword">const</span> Database = <span class="token-keyword">require</span>(<span class="token-string">'better-sqlite3'</span>);
-<span class="token-keyword">const</span> db = <span class="token-keyword">new</span> Database(<span class="token-string">'data/scoreboard.db'</span>);
+<span class="token-keyword">const</span> db = <span class="token-keyword">new</span> Database(<span class="token-string">'data/studio.db'</span>);
+db.pragma(<span class="token-string">'foreign_keys = ON'</span>);
 
 <span class="token-keyword">const</span> rows = db.prepare(<span class="token-string">`
-  SELECT roles.role_name, COUNT(DISTINCT matches.id) AS wins
-  FROM roles
-  JOIN matches ON roles.match_id = matches.id
-  WHERE matches.result = 'win'
-  GROUP BY roles.role_name
-  ORDER BY wins DESC
-`</span>).all();
+  SELECT
+    ideas.title,
+    COUNT(DISTINCT feedback.person_id) AS people_who_want_it,
+    COUNT(*) AS times_said
+  FROM feedback
+  JOIN ideas ON feedback.idea_id = ideas.id
+  WHERE feedback.verdict = ?
+  GROUP BY ideas.title
+  ORDER BY people_who_want_it DESC
+`</span>).all(<span class="token-string">'would_use'</span>);
 
-console.log(rows);</code></pre>
-<p>Run it, same as everything else he's run all pack:</p>
-<pre class="code-block language-bash"><code>node scripts/role-win-report.js</code></pre>
-<p>Same SQL, just handed to the database from JavaScript instead of typed by hand — this is the bridge between &quot;I can ask my data a question&quot; and &quot;my code can ask my data a question,&quot; which matters a lot once you get to the next chapter and beyond.</p>
+console.table(rows);</code></pre>
+<pre class="code-block language-bash"><code>node scripts/idea-demand-report.js</code></pre>
+<p>Two things to notice. The <code>PRAGMA</code> is back, because foreign key enforcement in SQLite is per-connection — a new script is a new connection, and forgetting it here means this script happily tolerates data the other one would reject. And <code>verdict = ?</code> with the value passed to <code>.all()</code> is a <strong>parameterized query</strong>: the value travels separately from the SQL text, so it can never be interpreted as SQL. Build queries by pasting strings together and you've written a SQL injection bug. Use <code>?</code> and you haven't. There is no situation where the string-pasting version is worth it.</p>
+<p>Nate named the file <code>haymaker.js</code> first. It survived nine minutes.</p>
 <h3>5. Sanity Checks</h3>
-<ul><li>If a <code>JOIN</code> returns fewer rows than expected: check that every <code>match_id</code> or <code>colony_id</code> you're joining on actually has a matching row on the other side — a mistyped or missing foreign key value silently drops that row from the results.</li><li>If <code>GROUP BY</code> throws an error about a column not being in the group or an aggregate: every plain column in your <code>SELECT</code> needs to either be in the <code>GROUP BY</code> list or wrapped in an aggregate like <code>COUNT()</code> — SQL won't guess which row's value to show for an ungrouped column.</li><li>If results seem to include duplicates you didn't expect: check whether a <code>JOIN</code> multiplied rows — a match with three role entries joined to one match row produces three result rows, which is correct, but easy to misread as a bug.</li><li>If nothing comes back at all: run the query without the <code>WHERE</code> clause first, confirm rows exist, then add the filter back one condition at a time.</li></ul>
-<p>He ran that role report four times in a row just because he could. Haulers, it turned out, were quietly carrying his win rate the whole time — he never would have guessed that from memory.</p>
-<p>Next: <code>03-when-relationships-get-tangled.md</code> — where a table stops being the right tool, and something else takes over.</p></div>
+<ul><li>If a count looks too high: check whether you're counting rows or counting things. <code>COUNT(*)</code> after a join counts joined rows — use <code>COUNT(DISTINCT some_id)</code> when you mean unique people, ideas, or events, and name the column after whatever you actually counted.</li><li>If a <code>JOIN</code> returns fewer rows than expected: some rows on the left have no match on the right, and a plain (inner) <code>JOIN</code> drops them silently. If you want them kept with empty values, you want <code>LEFT JOIN</code> — which comes up in chapter 4.</li><li>If <code>GROUP BY</code> errors about a column not being grouped or aggregated: every plain column in your <code>SELECT</code> must either appear in the <code>GROUP BY</code> list or be wrapped in an aggregate like <code>COUNT()</code>. SQL won't guess which row's value to show you.</li><li>If you try to filter on a <code>COUNT()</code> inside <code>WHERE</code> and it fails: that's <code>HAVING</code>'s job. <code>WHERE</code> runs before grouping, so the aggregate doesn't exist yet.</li><li>If results include duplicates you didn't expect: check whether a join multiplied rows. One idea with three feedback rows joined to one idea row produces three result rows — correct behavior, easy to misread as a bug, and the exact thing that inflated Nate's seven.</li><li>If nothing comes back at all: drop the <code>WHERE</code> clause, confirm rows exist, then add conditions back one at a time.</li></ul>
+<p>They ran the corrected report four times in a row, mostly because they could. The grant deadline tracker held. Priya's note about rolling deadlines turned out to be the single most useful sentence anyone had said to them all year, and it had been sitting in a notebook for six weeks doing nothing.</p>
+<p>Next: <code>03-when-relationships-get-tangled.md</code> — where Kai asks a question about her own contact list that tables genuinely cannot answer.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Blueprint: Tables, Rows, and Relationships</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled"><span><small>Next</small>The Web Under the Table: When Relationships Get Tangled</span><span class="material-symbols-outlined">arrow_forward</span></a>

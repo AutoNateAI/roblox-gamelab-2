@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Garbage In, Garbage Out: Why Prompting Is a Skill | AutoNateAI Tutorials</title>
-        <meta name="description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
+        <meta name="description" content="Hand-coding everything doesn't scale for two people building a studio. Kai over-trusts the first AI agent output; Nate refuses to use it out of pride. They both get burned before the real lesson lands." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Garbage In, Garbage Out: Why Prompting Is a Skill: keep the build moving." />
-        <meta property="og:description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
+        <meta property="og:description" content="Hand-coding everything doesn't scale for two people building a studio. Kai over-trusts the first AI agent output; Nate refuses to use it out of pride. They both get burned before the real lesson lands." />
         <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-why-prompting-is-a-skill.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-why-prompting-is-a-skill.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Garbage In, Garbage Out: Why Prompting Is a Skill: keep the build moving." />
-        <meta name="twitter:description" content="AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-why-prompting-is-a-skill.jpg" />
+        <meta name="twitter:description" content="Hand-coding everything doesn't scale for two people building a studio. Kai over-trusts the first AI agent output; Nate refuses to use it out of pride. They both get burned before the real lesson lands." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-why-prompting-is-a-skill.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,41 +65,79 @@
           <header>
             <span class="kicker">Chapter 0 / Tutorial 00</span>
             <h1>Garbage In, Garbage Out: Why Prompting Is a Skill</h1>
-            <p>AutoNate's hand-coded colony doesn't scale anymore. He turns to an AI agent for help, gets garbage back, and learns fast that garbage in still means garbage out, even when the machine is smart.</p>
+            <p>Hand-coding everything doesn't scale for two people building a studio. Kai over-trusts the first AI agent output; Nate refuses to use it out of pride. They both get burned before the real lesson lands.</p>
             <div class="tag-row"><span>See why prompting is a skill</span><span>Spot garbage-in, garbage-out</span><span>Set real expectations for agents</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate's colony held the line. Harvesters harvesting, haulers hauling, a tower that actually swings its aim at whatever crosses the wall, roads laid out like he planned them instead of like he panicked and slapped them down at 2am. The Virtual Battle Bot League is real now, not a rumor from a stream — it's a bracket with his name pending, and creeps that keep running whether he's watching or not. He should feel finished. He doesn't.</p>
-<p>Because the second he opens a fresh room to start a second colony — stacking rooms is exactly what the league rewards — every single line of what got him this far has to get written again. Roles. Spawn logic. Defense. Except this time double it, because remote mining, room reservation, and a real defender rotation are things his current colony still doesn't have and desperately needs. Hand-typing every <code>if</code> statement that got him this far took weeks. He doesn't have weeks per room. He's got maybe a weekend before somebody else in the bracket claims the room he's eyeing.</p>
-<p>That's the week AutoNate hears about coding agents — not autocomplete, not a chatbot in a browser tab, but something that sits right inside his editor and terminal, reads his actual files, and can write and run code on his say-so. People are calling it a superpower. His cousin's calling it &quot;basically cheating.&quot; AutoNate, being AutoNate, opens it up that same night expecting to just tell it what he wants and watch a whole army of new roles appear.</p>
-<p>It does not go that way.</p>
-<h3>1. Type Fast, Get Nothing Good</h3>
-<p>He types the first thing that comes to mind: &quot;make my colony better.&quot; Hits enter. Watches the agent think for a few seconds, then confidently rewrite half his <code>main.js</code>, introduce a role called <code>upgrader2</code> that duplicates logic already sitting in <code>upgrader.js</code>, and delete a comment he'd left himself as a reminder about a CPU bug he hadn't fixed yet. Nothing's broken exactly. Nothing's better either. It's just... different, in ways he didn't ask for and can't fully explain.</p>
-<p>He tries again: &quot;no, fix the harvester.&quot; The agent asks which harvester — he's got three files with harvester logic scattered across three different weeks of learning. He didn't know that was a real question until it asked. He picks one. It &quot;fixes&quot; a bug that wasn't there and misses the one that is.</p>
-<pre class="code-block language-text"><code>AutoNate: make my colony better
+          <div class="markdown-body"><p>Nate and Kai are two people in Fairview building a studio together — Nate self-taught and fast, Kai out of a decade of civic grant work and allergic to any claim without a receipt. They met at the Founders Table, a monthly builder meetup in the back room at Grindstone Coffee, and they've spent the last few weeks hand-writing every line of the thing they're building. Demo Night went fine. That's the problem.</p>
+<p>Fine means nineteen people wrote their names on a paper signup sheet, and nineteen people are now sitting in a spreadsheet expecting to hear something back. Fine means four of those nineteen described a problem they'd pay to have solved. Fine means there are four weeks until the next Demo Night and a to-do list that Nate has estimated, out loud, twice, at &quot;like a weekend,&quot; and Kai has estimated, silently, correctly, at three.</p>
+<p>So on Monday night, at Kai's kitchen table, with a container of leftover birria between them and the laptop turned so they can both see it, they open a coding agent for the first time and actually mean it. Not autocomplete. Not a chatbot in a browser tab. The kind that sits in the editor and the terminal, reads their actual files, and writes and runs code on their say-so.</p>
+<p>It goes badly for both of them. It goes badly in two completely different directions, which is somehow worse.</p>
+<h3>1. Nate Types Fast and Gets Nothing Good</h3>
+<p>Nate goes first, because Nate always goes first.</p>
+<p>&quot;Okay, okay — watch this,&quot; he says, and types: <code>clean up the codebase</code>. Enter. Four seconds of the agent thinking. Then a wall of green and red.</p>
+<p>It rewrites about half of <code>index.js</code> in a style neither of them uses. It adds a file called <code>lib/scoreIdeas.js</code> that does, as far as Kai can tell by reading both files side by side, exactly what <code>lib/score.js</code> already did. And somewhere in the churn it quietly deletes a comment Nate had left himself three weeks ago:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// TODO: this breaks if two people sign up with the same email</span></code></pre>
+<p>Nothing is broken, exactly. Nothing is better, either. It's just *different*, in ways he didn't ask for and can't fully account for.</p>
+<p>&quot;What did you tell it to do?&quot; Kai asks.</p>
+<p>&quot;Clean up the codebase.&quot;</p>
+<p>&quot;Which part.&quot;</p>
+<p>&quot;...The codebase.&quot;</p>
+<p>He tries again — <code>no, fix the scoring</code> — and the agent asks him which scoring, because there are now two files that could plausibly be it, one of which it created ninety seconds ago. Nate stares at the question like it's been rude to him.</p>
+<pre class="code-block language-text"><code>Nate: clean up the codebase
 
-Agent: I've updated main.js and added upgrader2.js with
-an improved upgrade routine.
+Agent: I've refactored index.js and extracted the scoring
+logic into lib/scoreIdeas.js for clarity.
 
-AutoNate: ...that's not what I wanted</code></pre>
+Nate: that's not what I wanted
+
+Agent: Understood — what would you like me to change?
+
+Nate: [closes laptop]</code></pre>
+<p>His conclusion, delivered while pulling the laptop back toward himself: it's a toy. He can write this by hand. He's *been* writing this by hand. He writes it by hand all weekend, and it's fine, and it takes fourteen hours, and Kai does not say anything about it until Wednesday.</p>
+<h3>2. Kai Believes the First Answer</h3>
+<p>Kai's turn goes differently, which is to say it goes badly for a full ninety minutes before anyone notices.</p>
+<p>She asks a good question — genuinely good, better-formed than anything Nate typed: *what's the standard directory structure for a Node.js project?* Their repo, at this point, is nine files in a heap at the root plus a <code>lib/</code> folder Nate made because he liked the word.</p>
+<p>The agent answers immediately and beautifully. <code>src/</code> for source. <code>bin/</code> for executables. <code>test/</code> for tests. <code>config/</code> for configuration. <code>docs/</code> for documentation. Clean prose, confident sentences, the phrase *&quot;the standard Node.js project layout&quot;* sitting right there in the second paragraph like a citation.</p>
+<p>Kai — who has read enough RFPs to know that the word &quot;standard&quot; is load-bearing — moves every single file to match. It takes her an hour and a half. She's proud of it. She fixes eleven <code>require</code> paths by hand, learns what a relative path is on the way, and considers the evening a win right up until Nate pulls the repo and it doesn't start.</p>
+<p>&quot;Whose standard?&quot; he says.</p>
+<p>&quot;It said it was the standard.&quot;</p>
+<p>&quot;Said where?&quot;</p>
+<p>And that's the moment, and she hears it, and it lands hard — because *where's that from* is her line. It's the thing she says. She has spent ten years catching people who wrote &quot;studies show&quot; without naming a study, &quot;best practices indicate&quot; without indicating anything. She can smell an unsourced claim in a forty-page PDF from across a room.</p>
+<p>She has, it turns out, absolutely no reflexes for a <code>mkdir</code>.</p>
+<p>Because here's the actual truth of it: <strong>Node.js has no official project layout.</strong> None. npm and Node care about exactly one file, <code>package.json</code>, and whether its <code>main</code> or <code>exports</code> field points at something real. Everything else — <code>src/</code>, <code>lib/</code>, <code>bin/</code> — is convention, and popular convention, and genuinely reasonable convention, but not a rule anybody enforces. The agent had seen a hundred thousand repos and described their average. Kai heard a standard because it was written in the voice a standard is written in.</p>
+<p>&quot;It didn't lie to me,&quot; she says.</p>
+<p>&quot;It kind of lied to you.&quot;</p>
+<p>&quot;It described a *tendency* in the tone of a *specification*.&quot; She writes that down. It ends up on the whiteboard.</p>
 <h3>Coder's Corner: What Is an AI Coding Agent, Anyway?</h3>
-<p>Let's step out of the story for a second, because you're about to spend five chapters directing one of these things and it helps to know what's actually happening under the hood.</p>
-<p>An <strong>agent</strong> here isn't magic and it isn't a search engine. It's a <strong>model</strong> — a large language model, trained on a huge pile of text and code — wired up to <strong>tools</strong>: the ability to read a file, edit a file, run a terminal command, and see the result. You give it a <strong>prompt</strong>, which is just the instruction you type. It reads that prompt, reads whatever else it's been given (more on that next chapter), and produces an action: an edit, a new file, a command to run.</p>
-<p>Here's the part that trips people up: the model doesn't know your project. It doesn't remember your colony from last week. It doesn't know that <code>harvester.js</code> is the old one you stopped trusting and <code>harvester2.js</code> is the one that's live. It only knows what's sitting in front of it *right now* — the prompt, the files it's been pointed at, whatever's already happened in this same conversation. Everything else is invisible to it, no matter how obvious it feels to you.</p>
+<p>Step out of the story for a second, because you're about to spend five chapters directing one of these things and it helps enormously to know what's actually happening under the hood.</p>
+<p>An <strong>agent</strong> here isn't magic and it isn't a search engine. It's a <strong>model</strong> — a large language model, trained on an enormous pile of text and code — wired up to <strong>tools</strong>: the ability to read a file, edit a file, run a terminal command, and see what came back. You give it a <strong>prompt</strong>, which is just the instruction you type. It reads that prompt, reads whatever else has been put in front of it, and produces an action: an edit, a new file, a command to run.</p>
+<p>What the model is fundamentally doing is predicting plausible continuations. That is not an insult — it's why it's good. Plausible continuations of &quot;write me a function that dedupes a list&quot; are usually correct functions, because correct functions are what that sentence is usually followed by in the real world. But it means fluency and accuracy are produced by the same machinery, and they come out sounding identical.</p>
+<p>Here's the part that trips everyone up: <strong>the model does not know your project.</strong> It doesn't remember last week. It doesn't know <code>score-old.js</code> is the dead one and <code>lib/score.js</code> is live. It only knows what's sitting in front of it *right now* — your prompt, the files it's been pointed at, and whatever has already happened in this same conversation. Everything else is invisible to it, no matter how obvious it feels to you.</p>
 <pre class="mermaid">flowchart LR
   You[&quot;You type&lt;br/&gt;a prompt&quot;] --&gt; Agent[&quot;Agent reads prompt&lt;br/&gt;+ whatever context it has&quot;]
   Agent --&gt; Action[&quot;Agent edits files&lt;br/&gt;or runs commands&quot;]
   Action --&gt; You2[&quot;You review&lt;br/&gt;the result&quot;]</pre>
-<p>That loop only works if what goes in on the left is actually good. A vague prompt with no context produces a confident, fluent, completely wrong answer just as easily as it produces a great one — the agent doesn't hesitate either way. That's the whole lesson of this pack: <strong>garbage in, garbage out</strong> isn't a warning about the agent being bad. It's a warning about you skipping a skill you didn't know you needed.</p>
-<h3>2. Name What Actually Went Wrong</h3>
-<p>AutoNate stops and looks at what actually happened. He didn't tell the agent which file. He didn't tell it what &quot;better&quot; meant — faster harvesting? fewer bugs? more roles? He didn't tell it what to leave alone. He assumed &quot;it's smart, it'll figure out what I mean,&quot; the same way he once assumed the Screeps API would just know what he meant before he learned to read error codes instead of guessing.</p>
-<p>Same lesson, new tool. Quick isn't the same as trained. He got fast at typing questions. He never got trained at asking them.</p>
-<h3>3. Sanity Checks</h3>
-<p>If the agent changes files you didn't expect: you didn't scope the ask — say exactly which file, and tell it explicitly not to touch the rest.</p>
-<p>If it invents a role or function you never asked for: your prompt described a feeling (&quot;better&quot;) instead of a task — restate it as something you could verify pass or fail.</p>
-<p>If you get a different answer every time you ask the same vague thing: that's not the agent being unreliable, that's you leaving it to guess — the fix is a sharper prompt, not a different tool.</p>
-<p>If you're tempted to just do it by hand instead: fair, but that's the wall you're trying to get past — the skill is learnable, and that's what the rest of this pack is for.</p>
-<p>AutoNate closes his laptop that night more annoyed at himself than at the tool. He didn't get burned by bad tech. He got burned by a bad ask. Fine. If asking well is the skill, he'll train it like every other one.</p>
-<p>Next: <code>01-give-it-the-room-not-just-the-ask.md</code> — what &quot;context&quot; actually means to an agent, and why you can't just dump everything and hope.</p></div>
+<p>That loop only works if what goes in on the left is good, and if what comes out on the right actually gets reviewed. A vague prompt with no context produces a confident, fluent, completely wrong answer exactly as readily as it produces a great one. The agent does not hesitate differently in the two cases. There is no tell in the tone.</p>
+<p>Which is the whole lesson of this pack: <strong>garbage in, garbage out</strong> isn't a complaint about the tool being bad. It's a warning about a skill you didn't know you were missing on both ends.</p>
+<h3>3. Name What Actually Went Wrong</h3>
+<p>Wednesday, back at the kitchen table, they do the postmortem properly — Kai's format, because Kai has run a lot of postmortems and Nate has run zero.</p>
+<p><strong>Nate's failure was the ask.</strong> He never said which file. He never said what &quot;clean&quot; meant — fewer lines? faster? better named? He never said what to leave alone. He assumed *it's smart, it'll figure out what I mean*, which is the same assumption that made him hate error messages for the first year he was learning to code. And then, having gotten a bad result from a bad ask, he concluded the tool was the problem and spent fourteen hours proving he didn't need it — which proved nothing, because he already knew he could write it by hand. That was never the question. Three weeks was the question.</p>
+<p><strong>Kai's failure was the trust.</strong> Her ask was fine. What she skipped was the step she never skips anywhere else: asking where the answer came from before acting on it. Code arrives looking like citation. It's specific, it's formatted, it has the confident flatness of documentation. Prose that's bluffing usually *feels* like prose that's bluffing. Code that's bluffing looks exactly like code.</p>
+<p>&quot;So mine is I don't ask well,&quot; Nate says.</p>
+<p>&quot;And mine is I don't check.&quot;</p>
+<p>&quot;And we both got the same bad Monday.&quot;</p>
+<p>&quot;Different bad Monday. Same root.&quot;</p>
+<p>She writes two lines on the whiteboard, and they stay there for the rest of this pack:</p>
+<pre class="code-block language-text"><code>Say exactly what you want.
+Then go find out if you got it.</code></pre>
+<h3>4. Sanity Checks</h3>
+<p>If the agent changes files you didn't expect: you didn't scope the ask. Name the exact file, and say explicitly what's off-limits.</p>
+<p>If it invents a function or module you never asked for: your prompt described a feeling (&quot;clean,&quot; &quot;better,&quot; &quot;improved&quot;) instead of a task. Restate it as something you could grade pass or fail.</p>
+<p>If you get a different answer every time you ask the same vague thing: that's not the agent being unreliable, that's you leaving it to guess. The fix is a sharper prompt, not a different tool.</p>
+<p>If an answer contains the words &quot;standard,&quot; &quot;best practice,&quot; or &quot;the recommended way&quot;: treat those as claims, not facts. Ask where it's from. Sometimes there's a real spec behind it. Often there's a popularity contest.</p>
+<p>If you're tempted to just do it by hand instead: fair, and you probably can, and that's exactly the wall. Doing it by hand is a decision about *this* task. Learning to direct the tool is a decision about the next hundred.</p>
+<p>Nate reopens the laptop that night more annoyed at himself than at the tool. Kai deletes <code>config/</code> and <code>docs/</code>, which were empty, and keeps <code>test/</code>, which she has decided to earn. Neither of them got burned by bad technology. One of them got burned by a bad ask and one of them got burned by free trust, and both of those are things a person can get better at.</p>
+<p>Next: <code>01-give-it-the-room-not-just-the-ask.md</code> — what &quot;context&quot; actually means to an agent, and why it will happily explain a file it has never seen.</p></div>
           <nav class="tutorial-pager">
             <span></span>
             <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask"><span><small>Next</small>Give It the Room, Not Just the Ask: What Context Really Means</span><span class="material-symbols-outlined">arrow_forward</span></a>

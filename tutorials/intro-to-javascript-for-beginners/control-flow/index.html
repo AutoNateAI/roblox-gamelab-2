@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Reading the Room: Conditionals and Loops | AutoNateAI Tutorials</title>
-        <meta name="description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
+        <meta name="description" content="Their idea list from Founders Table is a mess of sticky notes. Nate and Kai learn to make decisions with if/else and drill the same move on repeat with loops, sorting the list for real." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Reading the Room: Conditionals and Loops: keep the build moving." />
-        <meta property="og:description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
+        <meta property="og:description" content="Their idea list from Founders Table is a mess of sticky notes. Nate and Kai learn to make decisions with if/else and drill the same move on repeat with loops, sorting the list for real." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/control-flow" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-control-flow.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-control-flow.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Reading the Room: Conditionals and Loops: keep the build moving." />
-        <meta name="twitter:description" content="A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-control-flow.jpg" />
+        <meta name="twitter:description" content="Their idea list from Founders Table is a mess of sticky notes. Nate and Kai learn to make decisions with if/else and drill the same move on repeat with loops, sorting the list for real." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-control-flow.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 The Deal: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,65 +65,198 @@
           <header>
             <span class="kicker">Chapter 3 / Tutorial 03</span>
             <h1>Reading the Room: Conditionals and Loops</h1>
-            <p>A fighter who can't read the room gets caught out. AutoNate learns to make decisions with if/else and drill the same move on repeat with loops.</p>
+            <p>Their idea list from Founders Table is a mess of sticky notes. Nate and Kai learn to make decisions with if/else and drill the same move on repeat with loops, sorting the list for real.</p>
             <div class="tag-row"><span>Branch with if/else</span><span>Loop with for</span><span>Avoid infinite loops</span></div>
           </header>
-          <div class="markdown-body"><p>Anybody who's ever walked into a room they didn't fully trust knows the skill AutoNate's about to learn. You don't just react — you read first. Who's here, what's the mood, what's the play. You size it up, and then you move. Somebody who reacts without reading gets caught out. Every time.</p>
-<p>Code needs that same instinct. A program that just runs top to bottom, no matter what's going on, isn't smart — it's just fast. What makes it smart is the ability to check something and respond differently depending on what it finds. In JavaScript, that's called a <strong>conditional</strong>. And once you can read the room, the next skill is doing the same drill over and over without getting bored or sloppy — that's a <strong>loop</strong>.</p>
-<p>These two ideas — decide, then repeat — are the engine behind almost everything a real program does. A Screeps colony reading its own energy level and deciding whether to build or defend? Conditional. A colony checking every single creep it owns, one after another, to see who needs a new job? Loop. You're about to learn both.</p>
+          <div class="markdown-body"><p>Catching you up: <strong>Nate</strong> is a self-taught builder who has never finished anything anyone else used. <strong>Kai</strong> writes grants in Fairview, started coding three weeks ago, and keeps a numbered list of questions on a legal pad. They met at the Fairview Founders Table — a monthly builder meetup in the back of Grindstone Coffee — and are building an idea tracker for that meetup, to be shown at Demo Night in two and a half weeks.</p>
+<p>Wednesday night. Ruthanne, who is retired and comes to the Founders Table mostly for the company, had left half a grocery store sheet cake on the counter that read <strong>HAPPY RETIREMEN</strong> — the T had been cut off with the first slice and nobody had the heart to mention it. Nate was eating it directly off the plastic lid.</p>
+<p>On the table: five ideas from last month's meetup, and no agreement about which one they'd actually build a tracker *for* first.</p>
+<pre class="code-block language-text"><code>Youth program signups that aren't a spreadsheet   Kai       4 votes
+Tool library checkout                             Marisol   3 votes
+Restaurant supply co-op ordering                  Priya     2 votes
+Founders Table RSVP                               Nate      1 vote
+Bus route delay text alerts                       Dev       0 votes</code></pre>
+<p>&quot;We should just sort them,&quot; Nate said.</p>
+<p>&quot;We should *triage* them,&quot; Kai said. &quot;Sorting is a list. Triage is a decision with a rule behind it. If somebody at Demo Night asks why we picked one, 'it was at the top' is not an answer.&quot;</p>
+<p>Which is how they ended up writing their first conditional.</p>
 <h3>Coder's Corner: if / else</h3>
-<p>An <code>if</code> statement checks something and only runs its code when that something is true.</p>
-<pre class="code-block language-js"><code><span class="token-keyword">const</span> energy = <span class="token-number">30</span>;
+<p>An <code>if</code> statement checks something and runs its block only when that something is true.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> votes = <span class="token-number">4</span>;
 
-<span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
-  console.log(&quot;Full tank. Run the hard drills.&quot;);
+<span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) {
+  console.log(&quot;Strong signal. Build this.&quot;);
 }</code></pre>
-<p>That line only prints if <code>energy</code> is actually greater than <code>20</code>. Change <code>energy</code> to <code>5</code> and run it again — nothing prints, because the condition failed. The code inside the curly braces <code>{ }</code> only runs when the check passes.</p>
-<p>Most of the time, you want a plan for when the check doesn't pass, too. That's what <code>else</code> — and <code>else if</code>, for extra branches — are for:</p>
+<p>That prints only when <code>votes</code> is 4 or more. Change it to <code>1</code>, rerun, nothing happens — the condition failed, so the code inside the curly braces <code>{ }</code> was skipped entirely. Not errored. Skipped.</p>
+<p>Most of the time you want a plan for the other cases too. That's <code>else if</code> and <code>else</code>:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) {
+  console.log(&quot;Strong signal. Build this.&quot;);
+} <span class="token-keyword">else</span> <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span>) {
+  console.log(&quot;Real interest. Keep on the list.&quot;);
+} <span class="token-keyword">else</span> {
+  console.log(&quot;Needs a champion. Ask about it first.&quot;);
+}</code></pre>
+<p>JavaScript reads those top to bottom, runs the <strong>first</strong> branch that matches, and skips every remaining branch without even evaluating it. It's not scoring all three and picking a winner — it commits to the first true thing it finds and leaves.</p>
+<p>That ordering is load-bearing. If you wrote <code>votes &gt;= 2</code> first, then <code>votes &gt;= 4</code> would be unreachable forever, because 4 is also greater than 2. Broad conditions go last. Always.</p>
 <pre class="mermaid">flowchart TD
-  Start[&quot;Check energy&quot;] --&gt; Q{&quot;energy &gt; 20?&quot;}
-  Q --&gt;|Yes| A[&quot;Full tank.&lt;br/&gt;Run the hard drills.&quot;]
-  Q --&gt;|No| Q2{&quot;energy &gt; 5?&quot;}
-  Q2 --&gt;|Yes| B[&quot;Low but working.&lt;br/&gt;Keep the reps clean.&quot;]
-  Q2 --&gt;|No| C[&quot;Rest.&lt;br/&gt;Tomorrow you go again.&quot;]</pre>
-<pre class="code-block language-js"><code><span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
-  console.log(&quot;Full tank. Run the hard drills.&quot;);
-} <span class="token-keyword">else</span> <span class="token-keyword">if</span> (energy &gt; <span class="token-number">5</span>) {
-  console.log(&quot;Low but working. Keep the reps clean.&quot;);
-} <span class="token-keyword">else</span> {
-  console.log(&quot;Rest. Tomorrow you go again.&quot;);
-}</code></pre>
-<p>JavaScript checks each condition top to bottom and runs the first branch that matches, then skips the rest entirely. It's not evaluating all three — it's reading the room once and committing to a response.</p>
-<h3>Coder's Corner: Loops</h3>
-<p>A <code>for</code> loop runs the same block of code a set number of times. Think of it as your rep counter.</p>
-<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">let</span> rep = <span class="token-number">1</span>; rep &lt;= <span class="token-number">5</span>; rep++) {
-  console.log(<span class="token-string">`Rep ${rep}: still standing.`</span>);
-}</code></pre>
-<p>Break that down: <code>let rep = 1</code> starts your counter at one. <code>rep &lt;= 5</code> is the condition that's checked before every rep — as long as it's true, the loop keeps going. <code>rep++</code> bumps the counter up by one after each pass. The loop runs five times, printing &quot;Rep 1,&quot; &quot;Rep 2,&quot; all the way to &quot;Rep 5,&quot; and then stops the instant <code>rep &lt;= 5</code> turns false.</p>
-<p>Put the whole thing together:</p>
-<pre class="code-block language-js"><code><span class="token-comment">// training.js</span>
-<span class="token-comment">// Reading the room, then running the play — over and over.</span>
-
-<span class="token-keyword">const</span> energy = <span class="token-number">30</span>;
-
-<span class="token-keyword">if</span> (energy &gt; <span class="token-number">20</span>) {
-  console.log(&quot;Full tank. Run the hard drills.&quot;);
-} <span class="token-keyword">else</span> <span class="token-keyword">if</span> (energy &gt; <span class="token-number">5</span>) {
-  console.log(&quot;Low but working. Keep the reps clean.&quot;);
-} <span class="token-keyword">else</span> {
-  console.log(&quot;Rest. Tomorrow you go again.&quot;);
+  Start[&quot;An idea from&lt;br/&gt;the meetup&quot;] --&gt; Q{&quot;votes &gt;= 4?&quot;}
+  Q --&gt;|Yes| A[&quot;Strong signal.&lt;br/&gt;Build this.&quot;]
+  Q --&gt;|No| Q2{&quot;votes &gt;= 2?&quot;}
+  Q2 --&gt;|Yes| B[&quot;Real interest.&lt;br/&gt;Keep on the list.&quot;]
+  Q2 --&gt;|No| C[&quot;Needs a champion.&lt;br/&gt;Ask about it first.&quot;]</pre>
+<p>The comparison operators you'll use constantly:</p>
+<pre class="code-block language-js"><code>votes &gt; <span class="token-number">3</span>     <span class="token-comment">// greater than</span>
+votes &gt;= <span class="token-number">3</span>    <span class="token-comment">// greater than or equal to</span>
+votes &lt; <span class="token-number">3</span>     <span class="token-comment">// less than</span>
+votes &lt;= <span class="token-number">3</span>    <span class="token-comment">// less than or equal to</span>
+votes === <span class="token-number">3</span>   <span class="token-comment">// equal to</span>
+votes !== <span class="token-number">3</span>   <span class="token-comment">// not equal to</span></code></pre>
+<p>And you can combine conditions:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span> &amp;&amp; owner !== &quot;Nate&quot;) {
+  console.log(&quot;Somebody <span class="token-keyword">else</span> wants this, which is the point.&quot;);
 }
 
-<span class="token-keyword">for</span> (<span class="token-keyword">let</span> rep = <span class="token-number">1</span>; rep &lt;= <span class="token-number">5</span>; rep++) {
-  console.log(<span class="token-string">`Rep ${rep}: still standing.`</span>);
+<span class="token-keyword">if</span> (votes === <span class="token-number">0</span> || owner === undefined) {
+  console.log(&quot;Something is missing here.&quot;);
+}
+
+<span class="token-keyword">if</span> (!ready) {
+  console.log(&quot;Not ready.&quot;);
 }</code></pre>
-<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-training-loop.jpg" alt="VS Code showing training.js with an if/else chain and a for loop" loading="lazy" /><figcaption>training.js in VS Code</figcaption></figure>
-<p>Run it with <code>node training.js</code> and you'll see the room get read once, then five reps print in order.</p>
+<p><code>&amp;&amp;</code> is AND — both sides must be true. <code>||</code> is OR — either side. <code>!</code> flips a true to false and back.</p>
+<h3>Q11: Why Are There Two Different Equals</h3>
+<p>Kai spotted it in a Stack Overflow answer Nate had copied a line from.</p>
+<p>&quot;You wrote three equals signs. That answer uses two. Which is right?&quot;</p>
+<p>&quot;Both work.&quot;</p>
+<p>&quot;That's not what I asked.&quot;</p>
+<p>It is genuinely not what she asked, and &quot;both work&quot; is how people ship bugs for years. Here's the real difference:</p>
+<p>**<code>===</code> (strict equality) compares type *and* value.** If the types differ, it's <code>false</code>, end of story.</p>
+<p><strong><code>==</code> (loose equality) converts one side to match the other, then compares.</strong> JavaScript will bend over backwards to find a way to call two things equal.</p>
+<pre class="code-block language-js"><code>console.log(<span class="token-number">3</span> === <span class="token-number">3</span>);       <span class="token-comment">// true</span>
+console.log(&quot;<span class="token-number">3</span>&quot; === <span class="token-number">3</span>);     <span class="token-comment">// false  ← a string is not a number</span>
+console.log(&quot;<span class="token-number">3</span>&quot; == <span class="token-number">3</span>);      <span class="token-comment">// true   ← the string got converted first</span>
+
+console.log(<span class="token-number">0</span> == &quot;&quot;);         <span class="token-comment">// true   ← both convert to 0. yes, really.</span>
+console.log(<span class="token-number">0</span> == &quot;<span class="token-number">0</span>&quot;);        <span class="token-comment">// true</span>
+console.log(&quot;&quot; == &quot;<span class="token-number">0</span>&quot;);       <span class="token-comment">// false  ← so equality isn't even transitive here</span>
+console.log(null == undefined); <span class="token-comment">// true</span>
+console.log(null === undefined); <span class="token-comment">// false</span></code></pre>
+<p>Read those last four again. <code>0 == &quot;&quot;</code> is true. <code>0 == &quot;0&quot;</code> is true. But <code>&quot;&quot; == &quot;0&quot;</code> is false. <code>==</code> breaks the basic property you'd expect from equality — if A equals B and B equals C, A should equal C. It doesn't, because each comparison converts differently.</p>
+<p><strong>Use <code>===</code> and <code>!==</code>. Always.</strong> There is one narrow exception some people like — <code>x == null</code> as a shorthand for &quot;is it <code>null</code> or <code>undefined</code>&quot; — and you can just write that out longhand instead. The rule with no exceptions is easier to hold than the rule with one.</p>
+<p>&quot;So the answer you copied was wrong?&quot;</p>
+<p>&quot;The answer I copied *happened to work* because both sides were already numbers,&quot; Nate said. &quot;Which is worse, honestly.&quot;</p>
+<p>Kai wrote <strong>&quot;<code>==</code> works until it doesn't, and then it's a Tuesday&quot;</strong> on the whiteboard, under the permanent ghost of <strong>IS THIS THING ON?</strong>.</p>
+<h3>Coder's Corner: Loops</h3>
+<p>Five ideas. You could write five <code>if</code> chains by hand. You should not.</p>
+<p>A <strong><code>for</code> loop</strong> runs a block a set number of times:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">let</span> i = <span class="token-number">0</span>; i &lt; <span class="token-number">5</span>; i++) {
+  console.log(<span class="token-string">`Pass number ${i}`</span>);
+}</code></pre>
+<p>Three parts, separated by semicolons:</p>
+<ul><li><code>let i = 0</code> — the counter, created once, before anything runs.</li><li><code>i &lt; 5</code> — checked <strong>before every pass</strong>. True, run the block. False, stop.</li><li><code>i++</code> — runs <strong>after every pass</strong>. Adds one to <code>i</code>. (<code>i++</code> is shorthand for <code>i = i + 1</code>.)</li></ul>
+<p>It prints <code>Pass number 0</code> through <code>Pass number 4</code> — five passes, starting at zero, because array indexes start at zero and starting your counter there means <code>i</code> lines up with <code>list[i]</code>.</p>
+<p>When you're walking through an array and don't care about the index number, <strong><code>for...of</code></strong> is cleaner:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> founders = [&quot;Nate&quot;, &quot;Kai&quot;];
+
+<span class="token-keyword">for</span> (<span class="token-keyword">const</span> person <span class="token-keyword">of</span> founders) {
+  console.log(<span class="token-string">`${person} is in this.`</span>);
+}</code></pre>
+<p>Same loop, no counter to get wrong. <code>const person</code> is fine there even though it changes each pass — each iteration creates a fresh <code>person</code>, it's never reassigned within a pass.</p>
+<h3>Putting It Together</h3>
+<p>Make a file called <code>triage.js</code>:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// triage.js</span>
+<span class="token-comment">// Five ideas from the Founders Table. One rule, applied to all of them.</span>
+
+<span class="token-keyword">const</span> ideas = [
+  { title: &quot;Youth program signups&quot;, owner: &quot;Kai&quot;, votes: <span class="token-number">4</span> },
+  { title: &quot;Tool library checkout&quot;, owner: &quot;Marisol&quot;, votes: <span class="token-number">3</span> },
+  { title: &quot;Restaurant supply co-op&quot;, owner: &quot;Priya&quot;, votes: <span class="token-number">2</span> },
+  { title: &quot;Founders Table RSVP&quot;, owner: &quot;Nate&quot;, votes: <span class="token-number">1</span> },
+  { title: &quot;Bus delay text alerts&quot;, owner: &quot;Dev&quot;, votes: <span class="token-number">0</span> },
+];
+
+<span class="token-keyword">for</span> (<span class="token-keyword">const</span> idea <span class="token-keyword">of</span> ideas) {
+  <span class="token-keyword">if</span> (idea.votes &gt;= <span class="token-number">4</span>) {
+    console.log(<span class="token-string">`BUILD    ${idea.title} (${idea.owner}, ${idea.votes})`</span>);
+  } <span class="token-keyword">else</span> <span class="token-keyword">if</span> (idea.votes &gt;= <span class="token-number">2</span>) {
+    console.log(<span class="token-string">`SHORTLIST ${idea.title} (${idea.owner}, ${idea.votes})`</span>);
+  } <span class="token-keyword">else</span> {
+    console.log(<span class="token-string">`ASK      ${idea.title} (${idea.owner}, ${idea.votes})`</span>);
+  }
+}</code></pre>
+<pre class="code-block language-bash"><code>node triage.js</code></pre>
+<pre class="code-block language-text"><code>BUILD    Youth program signups (Kai, 4)
+SHORTLIST Tool library checkout (Marisol, 3)
+SHORTLIST Restaurant supply co-op (Priya, 2)
+ASK      Founders Table RSVP (Nate, 1)
+ASK      Bus delay text alerts (Dev, 0)</code></pre>
+<p>Five ideas, one rule, no manual sorting, and a defensible answer if anyone asks why. Add a sixth idea to the array and the rule applies to it automatically — that's the whole reason this is better than doing it by hand.</p>
+<h3>Where Dev's Idea Went</h3>
+<p>Then Nate got clever, which is a thing he does about forty minutes into any session.</p>
+<p>&quot;We don't need to print the dead ones. Let's filter first.&quot; He rewrote the top of the loop:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">const</span> idea <span class="token-keyword">of</span> ideas) {
+  <span class="token-keyword">if</span> (idea.votes) {                    <span class="token-comment">// ← the bug</span>
+    console.log(<span class="token-string">`${idea.title}: ${idea.votes}`</span>);
+  }
+}</code></pre>
+<p>Output:</p>
+<pre class="code-block language-text"><code>Youth program signups: 4
+Tool library checkout: 3
+Restaurant supply co-op: 2
+Founders Table RSVP: 1</code></pre>
+<p>Four lines. Kai counted them twice.</p>
+<p>&quot;Where's Dev's?&quot;</p>
+<p>&quot;Dev's what?&quot;</p>
+<p>&quot;The bus alerts. It's in the array. I watched you type it. Where's that from?&quot;</p>
+<p>Nate scrolled up. The object was right there. <code>{ title: &quot;Bus delay text alerts&quot;, owner: &quot;Dev&quot;, votes: 0 }</code>. Present, correct, and invisible.</p>
+<p>Here's what happened, and it is one of the most common real bugs in JavaScript.</p>
+<p>When you put a value inside <code>if (...)</code> that isn't already <code>true</code> or <code>false</code>, JavaScript converts it to a boolean. Most values become <code>true</code>. A short, specific list becomes <code>false</code>. Those are called <strong>falsy</strong> values, and there are exactly eight:</p>
+<pre class="code-block language-js"><code>false
+<span class="token-number">0</span>
+-<span class="token-number">0</span>
+0n         <span class="token-comment">// BigInt zero</span>
+&quot;&quot;         <span class="token-comment">// empty string</span>
+null
+undefined
+NaN</code></pre>
+<p><strong>Everything else is truthy.</strong> Including things that look empty:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (&quot;<span class="token-number">0</span>&quot;)  console.log(&quot;truthy&quot;);   <span class="token-comment">// prints — non-empty string</span>
+<span class="token-keyword">if</span> ([])   console.log(&quot;truthy&quot;);   <span class="token-comment">// prints — an empty array is still an array</span>
+<span class="token-keyword">if</span> ({})   console.log(&quot;truthy&quot;);   <span class="token-comment">// prints — an empty object is still an object</span>
+<span class="token-keyword">if</span> (&quot; &quot;)  console.log(&quot;truthy&quot;);   <span class="token-comment">// prints — a space is a character</span></code></pre>
+<p><code>idea.votes</code> was <code>0</code>. <code>0</code> is falsy. So <code>if (idea.votes)</code> asked &quot;does this idea have votes?&quot; and JavaScript answered the question Nate actually typed, which was &quot;is this number something other than zero?&quot;</p>
+<p>Dev's idea has zero votes because he pitched it last, at 8:52, while people were already putting their coats on. And then the code deleted him a second time.</p>
+<p>The fix is to say what you mean:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">const</span> idea <span class="token-keyword">of</span> ideas) {
+  <span class="token-keyword">if</span> (idea.votes &gt; <span class="token-number">0</span>) {              <span class="token-comment">// ← &quot;has at least one vote&quot;</span>
+    console.log(<span class="token-string">`${idea.title}: ${idea.votes}`</span>);
+  }
+}</code></pre>
+<p>Or, if what you actually wanted was &quot;does this field exist at all&quot;:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (idea.votes !== undefined) {
+  <span class="token-comment">// present, even if it's zero</span>
+}</code></pre>
+<p>Those are three genuinely different questions — *is it nonzero*, *does it exist*, and *is it truthy* — and <code>if (idea.votes)</code> blurs all three into one. Bare truthiness checks are fine on things that can't legitimately be <code>0</code> or <code>&quot;&quot;</code>. They are a trap on counts, prices, quantities, scores, and any text field a person might reasonably leave blank.</p>
+<p>&quot;So it wasn't wrong,&quot; Kai said. &quot;It was answering a different question than the one you asked.&quot;</p>
+<p>&quot;It was answering exactly the question I typed.&quot; Nate scraped the last frosting off the lid. &quot;Which is the only question it can answer.&quot;</p>
+<p>She wrote <strong>Q13</strong> and then, next to it, just: *&quot;Zero is a real number and the computer will not defend it for you.&quot;*</p>
+<p>Then she went and put Dev's idea back in the printed list, at the bottom, marked ASK, with a note to actually go ask him about it at Demo Night.</p>
 <h3>The One Trap Everyone Falls Into</h3>
-<p>If your loop's condition never becomes false, it never stops. That's called an <strong>infinite loop</strong>, and it will lock up your program — sometimes your whole terminal — until you force it to quit (usually <code>Ctrl+C</code>). It happens to everyone eventually, usually from forgetting the <code>rep++</code> step, or writing a condition that can never be satisfied. If you ever run something and it just... doesn't stop, don't panic. Hit <code>Ctrl+C</code>, go back, and check that your loop actually has a way to end.</p>
+<p>If a loop's condition never becomes false, it never stops.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// DO NOT RUN THIS</span>
+<span class="token-keyword">for</span> (<span class="token-keyword">let</span> i = <span class="token-number">0</span>; i &lt; <span class="token-number">5</span>; i--) {   <span class="token-comment">// i-- goes the wrong direction. i &lt; 5 is always true.</span>
+  console.log(i);
+}</code></pre>
+<p>That's an <strong>infinite loop</strong>. It will spray output until you stop it or your terminal falls over. Press <strong>Ctrl+C</strong> to kill it. This happens to everyone, usually from a counter going the wrong way, a forgotten <code>i++</code>, or a condition that can never be satisfied. If you run something and it just doesn't stop: Ctrl+C, then check that your loop has a way to end.</p>
 <h3>Try It Yourself</h3>
-<p>Change the <code>energy</code> value in <code>training.js</code> to something under <code>5</code> and rerun it — confirm you land on the &quot;Rest&quot; branch. Then change the loop to run <strong>8</strong> reps instead of 5 by editing the <code>rep &lt;= 5</code> condition. If you see 8 reps print instead of 5, you just controlled exactly how many times your program repeats itself. That's not a small thing. That's the difference between code that runs once and a system — like a Screeps colony — that keeps making the same good decision, tick after tick, for as long as it's alive.</p>
-<p>Next chapter, AutoNate stops repeating the same lines by hand and learns to package a move into something he can call by name, whenever he needs it.</p>
+<p>Open <code>triage.js</code> and:</p>
+<p>1. Change the <code>&gt;= 4</code> threshold to <code>&gt;= 3</code> and confirm two ideas now land in BUILD. 2. Swap the order of the first two branches — put <code>&gt;= 2</code> first — rerun, and watch the BUILD branch become permanently unreachable. Then put it back. That's the &quot;broad conditions go last&quot; rule, felt rather than read. 3. Add a sixth idea with <code>votes: 0</code> and confirm it still shows up under ASK. If it disappears, you've reintroduced the truthiness bug, which means you now know how to both cause and fix it.</p>
+<h3>Sanity Checks</h3>
+<ul><li><strong>A branch never runs.</strong> An earlier condition is catching it. Read them top to bottom in order and find the one that matches first.</li><li><strong>A record silently vanished.</strong> Look for a bare <code>if (someValue)</code> where the value could legitimately be <code>0</code>, <code>&quot;&quot;</code>, <code>null</code>, or <code>NaN</code>. Replace it with the comparison you actually meant.</li><li><strong>Two things that look equal aren't.</strong> You're comparing a string to a number. <code>console.log(typeof a, typeof b)</code> before the comparison, then fix the type — not the operator.</li><li><strong><code>SyntaxError: Unexpected token '{'</code>.</strong> Usually a missing <code>)</code> at the end of an <code>if</code> condition, or a stray semicolon after it: <code>if (x); { ... }</code> parses as an empty <code>if</code> followed by an unrelated block, and runs the block every single time. Nasty, silent, real.</li><li><strong>The loop runs one time too many or too few.</strong> Off-by-one. Check <code>&lt;</code> versus <code>&lt;=</code> against where your counter starts. Starting at <code>0</code> with <code>&lt; length</code> is correct; starting at <code>0</code> with <code>&lt;= length</code> walks off the end.</li></ul>
+<p>Nate stacked the plastic lid on the recycling. &quot;Okay. What about Sheet Cake Studio.&quot;</p>
+<p>&quot;You're naming us after what's in the room.&quot;</p>
+<p>&quot;Everything is named after what was in the room. That's where names come from.&quot;</p>
+<p>&quot;Then be in a better room,&quot; Kai said.</p>
+<p>Next chapter: they've now typed the same three-line format block six times in two files, and Kai is done watching it happen.</p>
 <p>Next: <code>04-functions-and-scope.md</code> — Signature Moves.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Know Your Pockets: Variables, Types, and Values</span></a>

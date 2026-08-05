@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>The Playbook: Objects, Arrays, and Data Shapes | AutoNateAI Tutorials</title>
-        <meta name="description" content="Before AutoNate can register for his first real match, he needs a playbook — a way to organize everything he knows. Objects, arrays, and the exact shape Screeps' Memory expects." />
+        <meta name="description" content="Before Demo Night, Nate and Kai need a playbook: a way to organize everything they've built. Objects, arrays, real data shapes — and the name their studio finally lands on." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="The Playbook: Objects, Arrays, and Data Shapes: keep the build moving." />
-        <meta property="og:description" content="Before AutoNate can register for his first real match, he needs a playbook — a way to organize everything he knows. Objects, arrays, and the exact shape Screeps' Memory expects." />
+        <meta property="og:description" content="Before Demo Night, Nate and Kai need a playbook: a way to organize everything they've built. Objects, arrays, real data shapes — and the name their studio finally lands on." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-objects-arrays-and-data-shapes.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-objects-arrays-and-data-shapes.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="The Playbook: Objects, Arrays, and Data Shapes: keep the build moving." />
-        <meta name="twitter:description" content="Before AutoNate can register for his first real match, he needs a playbook — a way to organize everything he knows. Objects, arrays, and the exact shape Screeps' Memory expects." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-objects-arrays-and-data-shapes.jpg" />
+        <meta name="twitter:description" content="Before Demo Night, Nate and Kai need a playbook: a way to organize everything they've built. Objects, arrays, real data shapes — and the name their studio finally lands on." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-objects-arrays-and-data-shapes.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 The Deal: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,56 +65,236 @@
           <header>
             <span class="kicker">Chapter 5 / Tutorial 05</span>
             <h1>The Playbook: Objects, Arrays, and Data Shapes</h1>
-            <p>Before AutoNate can register for his first real match, he needs a playbook — a way to organize everything he knows. Objects, arrays, and the exact shape Screeps' Memory expects.</p>
-            <div class="tag-row"><span>Shape objects</span><span>Use array methods</span><span>Build a Memory-ready roster</span></div>
+            <p>Before Demo Night, Nate and Kai need a playbook: a way to organize everything they've built. Objects, arrays, real data shapes — and the name their studio finally lands on.</p>
+            <div class="tag-row"><span>Shape objects</span><span>Use array methods</span><span>Build a real data-backed roster</span></div>
           </header>
-          <div class="markdown-body"><p>This is it — the last chapter before AutoNate stops training in the mirror and steps into an actual room. He's got his gear. He knows how to hold information and check what kind it is. He can read a situation and decide. He's got moves he trusts. What he needs now is a <strong>playbook</strong> — one organized place that holds everything he knows about his own squad, so he's not scrambling to remember it mid-match.</p>
-<p>In JavaScript, that playbook is built out of the same two building blocks you've already met — objects and arrays — just combined and nested until they can hold something real. This is the exact skill that matters most once you step into Screeps, because Screeps hands your colony a giant, structured object called <code>Memory</code>, and your entire job is organizing what goes inside it.</p>
+          <div class="markdown-body"><p>Last chapter of the pack, so: <strong>Nate</strong> is a self-taught builder whose <code>~/projects</code> folder holds fourteen unfinished things, eleven named after food. <strong>Kai</strong> writes grants in Fairview, started coding five weeks ago, and keeps a numbered list of questions on a yellow legal pad — she's on Q19. They met at the Fairview Founders Table, a monthly builder meetup in the back of Grindstone Coffee, and made a deal to build one real thing together. Demo Night is tomorrow. Eight minutes each. One VGA projector.</p>
+<p>They have working code. What they don't have is a <strong>shape</strong> — one organized structure that holds everything the tracker knows, instead of five loose objects and three files that each assume something slightly different.</p>
+<p>&quot;If someone else picked this up,&quot; Kai said, &quot;could they tell what the data is supposed to look like?&quot;</p>
+<p>Nate scrolled through <code>format.js</code>, then <code>triage.js</code>, then <code>backlog.js</code>, where the same five ideas existed in three subtly different formats.</p>
+<p>&quot;No.&quot;</p>
+<p>&quot;Then that's tonight.&quot;</p>
 <h3>Coder's Corner: Nesting Objects and Arrays</h3>
-<p>You already know an object groups labeled facts, and an array holds an ordered list. The real power shows up when you put them inside each other.</p>
-<pre class="code-block language-js"><code><span class="token-constant">Memory</span>.roster = {
-  harvesters: [&quot;H1&quot;, &quot;H2&quot;],
-  builders: [&quot;B1&quot;],
-  defenders: [],
+<p>You already know an object groups labeled facts and an array holds an ordered list. The real power shows up when you put them inside each other.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> backlog = {
+  meetup: &quot;Fairview Founders Table&quot;,
+  updated: &quot;<span class="token-number">2026</span>-<span class="token-number">03</span>-<span class="token-number">15</span>&quot;,
+  ideas: [
+    { title: &quot;Youth program signups&quot;, owner: &quot;Kai&quot;, votes: <span class="token-number">4</span>, tags: [&quot;civic&quot;, &quot;forms&quot;] },
+    { title: &quot;Tool library checkout&quot;, owner: &quot;Marisol&quot;, votes: <span class="token-number">3</span>, tags: [&quot;inventory&quot;] },
+    { title: &quot;Restaurant supply co-op&quot;, owner: &quot;Priya&quot;, votes: <span class="token-number">2</span>, tags: [&quot;ordering&quot;] },
+    { title: &quot;Founders Table RSVP&quot;, owner: &quot;Nate&quot;, votes: <span class="token-number">1</span>, tags: [] },
+    { title: &quot;Bus delay text alerts&quot;, owner: &quot;Dev&quot;, votes: <span class="token-number">0</span>, tags: [&quot;civic&quot;, &quot;sms&quot;] },
+  ],
 };</code></pre>
-<p>Read that slowly. <code>Memory.roster</code> is an <strong>object</strong>. Inside it, each label — <code>harvesters</code>, <code>builders</code>, <code>defenders</code> — points to an <strong>array</strong> of names. That's a playbook: one structure, clearly labeled, holding everything you need to know about who's on the squad and what role they're playing. Notice <code>defenders</code> is an empty array, <code>[]</code> — that's not a mistake or a placeholder to delete later. It's AutoNate honestly saying &quot;I don't have anyone on defense yet,&quot; which is exactly the kind of information a real system needs to know, not just the good news.</p>
-<h3>Working With the Shape You Built</h3>
-<p>Once your data has a shape, you can write functions that work with that shape — same as any function you've written so far, just reaching into something more structured.</p>
-<pre class="code-block language-js"><code><span class="token-keyword">function</span> countSquad(roster) {
-  <span class="token-keyword">return</span> Object.values(roster).flat().length;
+<p>Read that structure top down. <code>backlog</code> is an <strong>object</strong>. Two of its fields are plain strings. The third, <code>ideas</code>, is an <strong>array</strong> — and every item in that array is itself an <strong>object</strong>, and one of *that* object's fields, <code>tags</code>, is another array.</p>
+<pre class="mermaid">flowchart TD
+  B[&quot;backlog&lt;br/&gt;(object)&quot;] --&gt; M[&quot;meetup&lt;br/&gt;(string)&quot;]
+  B --&gt; U[&quot;updated&lt;br/&gt;(string)&quot;]
+  B --&gt; I[&quot;ideas&lt;br/&gt;(array)&quot;]
+  I --&gt; I0[&quot;[0] Youth program signups&quot;]
+  I --&gt; I1[&quot;[1] Tool library checkout&quot;]
+  I --&gt; I2[&quot;[2] Restaurant supply co-op&quot;]
+  I0 --&gt; T0[&quot;tags: ['civic', 'forms']&quot;]
+  I0 --&gt; V0[&quot;votes: 4&quot;]</pre>
+<p>That's a tree, and you walk it one step at a time, alternating dots for labels and brackets for positions:</p>
+<pre class="code-block language-js"><code>console.log(backlog.meetup);              <span class="token-comment">// &quot;Fairview Founders Table&quot;</span>
+console.log(backlog.ideas.length);        <span class="token-comment">// 5</span>
+console.log(backlog.ideas[<span class="token-number">0</span>].title);      <span class="token-comment">// &quot;Youth program signups&quot;</span>
+console.log(backlog.ideas[<span class="token-number">0</span>].tags[<span class="token-number">1</span>]);    <span class="token-comment">// &quot;forms&quot;</span>
+console.log(backlog.ideas[<span class="token-number">4</span>].tags);       <span class="token-comment">// [&quot;civic&quot;, &quot;sms&quot;]</span></code></pre>
+<p><strong>Dot for a name you know. Brackets for a position, or for a name you're holding in a variable:</strong></p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> field = &quot;owner&quot;;
+console.log(backlog.ideas[<span class="token-number">0</span>][field]);   <span class="token-comment">// &quot;Kai&quot; — bracket notation with a variable</span>
+console.log(backlog.ideas[<span class="token-number">0</span>].field);    <span class="token-comment">// undefined — looked for a literal key &quot;field&quot;</span></code></pre>
+<p>Notice <code>tags: []</code> on the RSVP idea. That's not a placeholder to fill in later — it's the data honestly saying &quot;this one has no tags,&quot; which is different from not knowing, and different from the field being missing. Same discipline as <code>votes: 0</code> and <code>builtBy: null</code>. <strong>Empty on purpose is real information.</strong></p>
+<p>And when you're not sure a branch exists at all, <strong>optional chaining</strong> keeps you from crashing:</p>
+<pre class="code-block language-js"><code>console.log(backlog.ideas[<span class="token-number">9</span>]);           <span class="token-comment">// undefined</span>
+console.log(backlog.ideas[<span class="token-number">9</span>].title);     <span class="token-comment">// ❌ TypeError: Cannot read properties of undefined</span>
+console.log(backlog.ideas[<span class="token-number">9</span>]?.title);    <span class="token-comment">// undefined — the ?. short-circuits safely</span></code></pre>
+<p><code>?.</code> means &quot;if the thing on the left is <code>null</code> or <code>undefined</code>, stop here and give me <code>undefined</code> instead of throwing.&quot; It's for the places where missing data is expected, not for papering over data you were supposed to have.</p>
+<h3>Walking the Shape</h3>
+<p>Once your data has a consistent shape, you can write small functions that work on that shape and keep working as the details change.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> totalVotes(list) {
+  <span class="token-keyword">return</span> list.reduce((sum, idea) =&gt; sum + idea.votes, <span class="token-number">0</span>);
 }
 
-console.log(<span class="token-string">`Squad size: ${countSquad(Memory.roster)}`</span>);</code></pre>
-<p><code>Object.values(roster)</code> grabs every array inside the object — <code>[&quot;H1&quot;, &quot;H2&quot;]</code>, <code>[&quot;B1&quot;]</code>, <code>[]</code> — as a list of lists. <code>.flat()</code> collapses that list of lists into one single flat list: <code>[&quot;H1&quot;, &quot;H2&quot;, &quot;B1&quot;]</code>. <code>.length</code> counts how many names ended up in it. Three lines, and you've got a live headcount of your entire roster, no matter how it changes later. You don't have to memorize <code>Object.values</code> and <code>.flat()</code> today — just notice the pattern: once your data has a clear, consistent shape, you can write small functions that reliably work with that shape, every time, no matter how the details inside it change.</p>
-<pre class="code-block language-js"><code><span class="token-comment">// roster.js</span>
-<span class="token-comment">// The playbook: every creep on the roster, organized by role.</span>
+<span class="token-keyword">function</span> allTags(list) {
+  <span class="token-keyword">return</span> list.map((idea) =&gt; idea.tags).flat();
+}
 
-<span class="token-constant">Memory</span>.roster = {
-  harvesters: [&quot;H1&quot;, &quot;H2&quot;],
-  builders: [&quot;B1&quot;],
-  defenders: [],
+console.log(totalVotes(backlog.ideas));  <span class="token-comment">// 10</span>
+console.log(allTags(backlog.ideas));     <span class="token-comment">// [&quot;civic&quot;,&quot;forms&quot;,&quot;inventory&quot;,&quot;ordering&quot;,&quot;civic&quot;,&quot;sms&quot;]</span></code></pre>
+<p><code>.reduce()</code> walks the array carrying a running value with it. That <code>0</code> at the end is the starting value; <code>sum</code> is what you had, <code>idea</code> is the current item, and whatever you return becomes the new <code>sum</code> for the next pass. It's the general-purpose &quot;boil a list down to one thing&quot; tool.</p>
+<p><code>.map((idea) =&gt; idea.tags)</code> produces an array of arrays — <code>[[&quot;civic&quot;,&quot;forms&quot;], [&quot;inventory&quot;], ...]</code> — and <code>.flat()</code> collapses one level of that nesting into a single flat list. (Note the arrow function wrapper, for exactly the reason chapter 04 covered: <code>.map</code> passes three arguments, so passing a function bare can surprise you.)</p>
+<p><code>Object.keys()</code>, <code>Object.values()</code>, and <code>Object.entries()</code> do the same walking job for objects instead of arrays:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> idea = backlog.ideas[<span class="token-number">0</span>];
+
+console.log(Object.keys(idea));     <span class="token-comment">// [&quot;title&quot;, &quot;owner&quot;, &quot;votes&quot;, &quot;tags&quot;]</span>
+console.log(Object.values(idea));   <span class="token-comment">// [&quot;Youth program signups&quot;, &quot;Kai&quot;, 4, [&quot;civic&quot;,&quot;forms&quot;]]</span>
+
+<span class="token-keyword">for</span> (<span class="token-keyword">const</span> [field, value] <span class="token-keyword">of</span> Object.entries(idea)) {
+  console.log(<span class="token-string">`${field}: ${value}`</span>);
+}</code></pre>
+<p><code>Object.entries()</code> gives you an array of <code>[key, value]</code> pairs, and <code>const [field, value]</code> pulls both out in one line — that's <strong>destructuring</strong>, and it shows up everywhere once you start reading real code.</p>
+<h3>Reshaping the Data</h3>
+<p>The move you'll make constantly is turning one shape into a more useful shape. Grouping ideas by who pitched them:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> groupByOwner(list) {
+  <span class="token-keyword">const</span> groups = {};
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> idea <span class="token-keyword">of</span> list) {
+    <span class="token-keyword">if</span> (!groups[idea.owner]) {
+      groups[idea.owner] = [];
+    }
+    groups[idea.owner].push(idea.title);
+  }
+  <span class="token-keyword">return</span> groups;
+}
+
+console.log(groupByOwner(backlog.ideas));
+<span class="token-comment">// { Kai: [&quot;Youth program signups&quot;], Marisol: [...], Priya: [...], ... }</span></code></pre>
+<p><strong>Q20</strong>, and it's a good one: &quot;That's a bare truthiness check. You told me those were a trap.&quot;</p>
+<p>They are, in chapter 03, on counts. Here it's safe, and the reason is specific: <code>groups[idea.owner]</code> can only ever be one of two things — <code>undefined</code> (we haven't seen this person yet) or an array (we have). And <strong>every array is truthy</strong>, including an empty one. There is no falsy value this expression can legitimately produce, so the check can't eat real data.</p>
+<p>That's the actual rule, stated properly: a bare truthiness check is fine when the value's *possible* range doesn't include a meaningful falsy value, and dangerous the moment it does. Not &quot;never use it.&quot; &quot;Know what can be in there.&quot;</p>
+<p>&quot;Fine,&quot; Kai said, and wrote it down anyway, because &quot;fine&quot; and &quot;documented&quot; are not in conflict for her.</p>
+<h3>The One That Almost Broke the Handout</h3>
+<p>Kai wanted two things printed for Demo Night: a <strong>top three</strong> by votes, and the <strong>full list in pitch order</strong>, because Dev pitched last and she was not letting the ordering erase him twice.</p>
+<p>Nate wrote the top three in about eleven seconds:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> topThree(list) {
+  <span class="token-keyword">return</span> list.sort((a, b) =&gt; b.votes - a.votes).slice(<span class="token-number">0</span>, <span class="token-number">3</span>);
+}
+
+console.log(topThree(backlog.ideas));
+console.log(renderBacklog(backlog.ideas));   <span class="token-comment">// the full list, pitch order</span></code></pre>
+<p>The top three came out perfect. The full list came out sorted by votes.</p>
+<p>&quot;That's not pitch order.&quot;</p>
+<p>&quot;I didn't sort that one. I sorted a copy.&quot;</p>
+<p>&quot;Where's that from?&quot;</p>
+<p>He said &quot;because functions get a copy,&quot; and then he heard himself say it, and this is the one that actually mattered.</p>
+<p><strong>Objects and arrays are handed to functions by reference, not by copy.</strong> When you pass <code>backlog.ideas</code> into <code>topThree</code>, the parameter <code>list</code> is not a duplicate of the array — it's a second name pointing at the exact same array in memory. Anything the function does to it, it does to the original.</p>
+<p>And <code>.sort()</code> <strong>sorts in place</strong>. It rearranges the array you gave it and returns *that same array*, which is why it feels like it made a copy — you get an array back, so it looks like a new one. It isn't.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> nums = [<span class="token-number">3</span>, <span class="token-number">1</span>, <span class="token-number">2</span>];
+<span class="token-keyword">const</span> sorted = nums.sort();
+
+console.log(sorted);           <span class="token-comment">// [1, 2, 3]</span>
+console.log(nums);             <span class="token-comment">// [1, 2, 3]   ← the original changed too</span>
+console.log(sorted === nums);  <span class="token-comment">// true        ← they are literally the same array</span></code></pre>
+<p>Some array methods mutate, some don't, and there's no hint in the name. Worth knowing cold:</p>
+<div class="markdown-table"><table><thead><tr><th>Returns a <strong>new</strong> array</th><th><strong>Mutates</strong> the original</th></tr></thead><tbody><tr><td><code>.map()</code></td><td><code>.sort()</code></td></tr><tr><td><code>.filter()</code></td><td><code>.reverse()</code></td></tr><tr><td><code>.slice()</code></td><td><code>.splice()</code></td></tr><tr><td><code>.concat()</code></td><td><code>.push()</code> / <code>.pop()</code></td></tr><tr><td><code>[...spread]</code></td><td><code>.shift()</code> / <code>.unshift()</code></td></tr></tbody></table></div>
+<p>The fix is to copy first, with the <strong>spread</strong> operator:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> topThree(list) {
+  <span class="token-keyword">return</span> [...list].sort((a, b) =&gt; b.votes - a.votes).slice(<span class="token-number">0</span>, <span class="token-number">3</span>);
+}</code></pre>
+<p><code>[...list]</code> builds a brand new array containing the same items. <code>.sort()</code> then rearranges the copy and leaves the original alone.</p>
+<p>One honest caveat, because it will bite you eventually: <strong>that's a shallow copy.</strong> The new array is new; the objects *inside* it are still the same objects. Reorder the copy all day, the original is fine. But <code>copy[0].votes = 99</code> changes the original idea too, because <code>copy[0]</code> and <code>list[0]</code> are the same object.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> copy = [...backlog.ideas];
+copy.sort((a, b) =&gt; b.votes - a.votes);
+console.log(backlog.ideas[<span class="token-number">0</span>].title);   <span class="token-comment">// still &quot;Youth program signups&quot; ✅</span>
+
+copy[<span class="token-number">0</span>].votes = <span class="token-number">99</span>;
+console.log(backlog.ideas.find((i) =&gt; i.title === &quot;Youth program signups&quot;).votes);
+<span class="token-comment">// 99  ← same object, reached by a different name</span></code></pre>
+<p>Kai read that twice. &quot;So a copy of a list of things is a new list pointing at the old things.&quot;</p>
+<p>&quot;Yeah.&quot;</p>
+<p>&quot;That's a really important sentence and nobody says it.&quot;</p>
+<p>Also worth knowing before it surprises you: <strong><code>.sort()</code> with no comparator sorts as text.</strong></p>
+<pre class="code-block language-js"><code>console.log([<span class="token-number">10</span>, <span class="token-number">9</span>, <span class="token-number">100</span>].sort());              <span class="token-comment">// [10, 100, 9]  ← alphabetical on &quot;10&quot;,&quot;100&quot;,&quot;9&quot;</span>
+console.log([<span class="token-number">10</span>, <span class="token-number">9</span>, <span class="token-number">100</span>].sort((a, b) =&gt; a - b)); <span class="token-comment">// [9, 10, 100] ← numeric</span></code></pre>
+<p>Always pass a comparator for numbers. <code>(a, b) =&gt; a - b</code> is ascending; <code>(a, b) =&gt; b - a</code> is descending.</p>
+<h3>The Whole Thing</h3>
+<pre class="code-block language-js"><code><span class="token-comment">// playbook.js</span>
+<span class="token-comment">// One shape. Everything the tracker knows, in one place.</span>
+
+<span class="token-keyword">const</span> backlog = {
+  meetup: &quot;Fairview Founders Table&quot;,
+  updated: &quot;<span class="token-number">2026</span>-<span class="token-number">03</span>-<span class="token-number">15</span>&quot;,
+  ideas: [
+    { title: &quot;Youth program signups&quot;, owner: &quot;Kai&quot;, votes: <span class="token-number">4</span>, tags: [&quot;civic&quot;, &quot;forms&quot;] },
+    { title: &quot;Tool library checkout&quot;, owner: &quot;Marisol&quot;, votes: <span class="token-number">3</span>, tags: [&quot;inventory&quot;] },
+    { title: &quot;Restaurant supply co-op&quot;, owner: &quot;Priya&quot;, votes: <span class="token-number">2</span>, tags: [&quot;ordering&quot;] },
+    { title: &quot;Founders Table RSVP&quot;, owner: &quot;Nate&quot;, votes: <span class="token-number">1</span>, tags: [] },
+    { title: &quot;Bus delay text alerts&quot;, owner: &quot;Dev&quot;, votes: <span class="token-number">0</span>, tags: [&quot;civic&quot;, &quot;sms&quot;] },
+  ],
 };
 
-<span class="token-keyword">function</span> countSquad(roster) {
-  <span class="token-keyword">return</span> Object.values(roster).flat().length;
+<span class="token-keyword">function</span> triageLabel(votes) {
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) <span class="token-keyword">return</span> &quot;BUILD&quot;;
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span>) <span class="token-keyword">return</span> &quot;SHORTLIST&quot;;
+  <span class="token-keyword">return</span> &quot;ASK&quot;;
 }
 
-console.log(<span class="token-string">`Squad size: ${countSquad(Memory.roster)}`</span>);</code></pre>
-<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-squad-roster.jpg" alt="VS Code showing roster.js with a nested Memory.roster object and a countSquad function" loading="lazy" /><figcaption>roster.js in VS Code</figcaption></figure>
-<pre class="mermaid">flowchart TD
-  M[&quot;Memory.roster&quot;] --&gt; H[&quot;harvesters&quot;]
-  M --&gt; B[&quot;builders&quot;]
-  M --&gt; D[&quot;defenders&quot;]
-  H --&gt; H1[&quot;H1&quot;]
-  H --&gt; H2[&quot;H2&quot;]
-  B --&gt; B1[&quot;B1&quot;]</pre>
-<p>That diagram is the actual shape of the object you just built — a tree, branching from one root down into clearly labeled groups. This is exactly what <code>Memory</code> looks like in a real Screeps colony, except instead of three roles and three names, a serious colony's <code>Memory</code> might track dozens of creeps, room plans, energy targets, and defense priorities, all nested the same way, all reachable the same way — one dot, one label, at a time.</p>
-<h3>Why This Was the Whole Point</h3>
-<p>Every chapter in this pack was building toward this one moment, whether you noticed it or not. Variables taught you to hold a single fact. Types taught you to know what kind of fact it was. Conditionals and loops taught you to react and repeat. Functions taught you to package logic you trust. This chapter is where all of it comes together into something that can actually run a colony — organized data, checked with conditionals, looped over, managed by functions you wrote yourself.</p>
+<span class="token-keyword">function</span> formatIdea(idea) {
+  <span class="token-keyword">return</span> <span class="token-string">`${triageLabel(idea.votes).padEnd(10)} ${idea.title} (${idea.owner}, ${idea.votes})`</span>;
+}
+
+<span class="token-keyword">function</span> renderBacklog(list) {
+  <span class="token-keyword">return</span> list.map((idea) =&gt; formatIdea(idea)).join(&quot;\n&quot;);
+}
+
+<span class="token-keyword">function</span> topThree(list) {
+  <span class="token-keyword">return</span> [...list].sort((a, b) =&gt; b.votes - a.votes).slice(<span class="token-number">0</span>, <span class="token-number">3</span>);
+}
+
+<span class="token-keyword">function</span> totalVotes(list) {
+  <span class="token-keyword">return</span> list.reduce((sum, idea) =&gt; sum + idea.votes, <span class="token-number">0</span>);
+}
+
+<span class="token-keyword">function</span> byTag(list, tag) {
+  <span class="token-keyword">return</span> list.filter((idea) =&gt; idea.tags.includes(tag));
+}
+
+console.log(<span class="token-string">`${backlog.meetup} — updated ${backlog.updated}`</span>);
+console.log(<span class="token-string">`${backlog.ideas.length} ideas, ${totalVotes(backlog.ideas)} total votes\n`</span>);
+
+console.log(&quot;--- pitch order ---&quot;);
+console.log(renderBacklog(backlog.ideas));
+
+console.log(&quot;\n--- top three ---&quot;);
+console.log(renderBacklog(topThree(backlog.ideas)));
+
+console.log(&quot;\n--- civic ---&quot;);
+console.log(renderBacklog(byTag(backlog.ideas, &quot;civic&quot;)));</code></pre>
+<pre class="code-block language-bash"><code>node playbook.js</code></pre>
+<p>Every chapter in this pack is in that file. Variables hold the facts. Types keep the vote counts as numbers instead of <code>&quot;43&quot;</code>. Conditionals decide the label, without eating the zero. Loops and <code>.map()</code> apply one rule to every item. Functions mean the formatting rule exists once. And the shape at the top is what makes all of it possible — you can write <code>byTag</code> in one line only because every idea reliably has a <code>tags</code> array.</p>
+<p>That's the actual lesson of the pack, and it's why this chapter is last: <strong>get the shape right and the code gets small.</strong></p>
+<h3>Where the Name Came From</h3>
+<p>Eleven forty at night. Kai wanted one more thing: a function that takes the raw notes from a meetup — the sticky notes, the shorthand — and turns them into properly shaped idea objects, so next month nobody has to type this by hand.</p>
+<p>&quot;It automates the intake,&quot; Nate said, narrating himself, which he does. &quot;Watch. This is the whole studio in one function.&quot;</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> autoNate(rawNotes) {
+  <span class="token-keyword">return</span> rawNotes.map((note) =&gt; ({
+    title: note.text,
+    owner: note.from,
+    votes: Number(note.marks) || <span class="token-number">0</span>,
+    tags: [],
+  }));
+}
+
+<span class="token-keyword">const</span> shaped = automate(meetupNotes);</code></pre>
+<pre class="code-block language-text"><code>ReferenceError: automate is not defined</code></pre>
+<p>&quot;It's defined,&quot; Nate said. &quot;It's right there.&quot;</p>
+<p>Kai leaned in and read the definition out loud, one syllable at a time.</p>
+<p>&quot;<code>auto</code>. <code>Nate</code>.&quot;</p>
+<p>Silence.</p>
+<p>&quot;That's a typo,&quot; Nate said.</p>
+<p>&quot;Where's that from?&quot;</p>
+<p>&quot;It's a *typo*, my thumb—&quot;</p>
+<p>&quot;AutoNate,&quot; Kai said, testing it. Then: &quot;AutoNate AI.&quot;</p>
+<p>&quot;That's not—&quot;</p>
+<p>&quot;It's the only one you didn't propose,&quot; she said. &quot;That's how I know it's good.&quot;</p>
+<p>He wanted to argue. He'd pitched Bagel Logic, Nitrocold, Chili Crisp Labs, Sheet Cake Studio, and Overhand Right, and she had vetoed every single one inside four seconds. This one she said twice.</p>
+<p>He fixed the call to <code>autoNate(meetupNotes)</code> and it ran clean.</p>
+<p>Then he sat there looking at the terminal for a second longer than he needed to. Fourteen projects in that folder. Not one of them had ever had a person on the other side who'd notice if it broke. Tomorrow there'd be fourteen people in the back room of a coffee shop, and one of them was Dev, whose idea had zero votes and was on the list anyway, in pitch order, because Kai went back and put it there.</p>
+<p>&quot;Okay,&quot; he said. &quot;AutoNateAI.&quot;</p>
+<p>&quot;Write it on the board.&quot;</p>
+<p>He wrote it on the whiteboard, under the permanent ghost of <strong>IS THIS THING ON?</strong>, which — for the first time in seven years — read like it was asking about something specific.</p>
 <h3>Try It Yourself</h3>
-<p>Add a fourth role to <code>Memory.roster</code> — maybe <code>scouts: [&quot;S1&quot;]</code> — and run <code>countSquad</code> again. Confirm the number goes up by exactly one. That's not a toy exercise. That's the exact move you'll make constantly once you're building a real colony: extend the shape, trust the function still works, verify it did.</p>
-<p>AutoNate's ready. Gear installed, language understood, decisions made, moves built, playbook organized. The Virtual Battle Bot League isn't a stream he's watching anymore — it's the arena he's about to walk into, and the game everyone actually calls it by is <strong>Screeps</strong>.</p>
-<p>Next: head into the <strong>Getting Started with Screeps</strong> pack. Chapter 0 of that one starts the exact same way this one did — get your gear, then get in the room.</p></div>
+<p>Open <code>playbook.js</code> and:</p>
+<p>1. Add a sixth idea with <code>votes: 0</code> and an empty <code>tags</code> array. Confirm it appears in pitch order under ASK, and that <code>totalVotes</code> is unchanged. Zero-vote ideas must never disappear — that's the rule this project earned the hard way. 2. Write <code>groupByOwner(backlog.ideas)</code> from earlier and log it. Then write <code>Object.keys(groupByOwner(backlog.ideas)).length</code> to count distinct people. One line, real answer. 3. Break <code>topThree</code> on purpose: remove the <code>[...]</code> spread, run it, then log the pitch-order list right after. Watch the original reorder itself. Put the spread back. 4. Add a <code>notes</code> field to one idea, and print it with <code>?.</code> on an idea that doesn't have one. Confirm you get <code>undefined</code> instead of a crash.</p>
+<h3>Sanity Checks</h3>
+<ul><li><strong><code>TypeError: Cannot read properties of undefined (reading 'title')</code>.</strong> You walked one step too far — an index that doesn't exist, or a field that isn't there. Log the parent first: <code>console.log(backlog.ideas[9])</code>. If that's <code>undefined</code>, that's your step.</li><li><strong>Your original array changed and you never touched it.</strong> Something mutated it through a shared reference. Look for <code>.sort()</code>, <code>.reverse()</code>, <code>.splice()</code>, or <code>.push()</code> inside a function that received the array as a parameter. Copy with <code>[...list]</code> before mutating.</li><li><strong>A copy changed the original's contents anyway.</strong> Spread is a shallow copy — the objects inside are shared. If you need to edit them independently, copy each one too: <code>list.map((idea) =&gt; ({ ...idea }))</code>.</li><li><strong>Numbers sort into a nonsense order.</strong> You called <code>.sort()</code> without a comparator, so it sorted them as text. Pass <code>(a, b) =&gt; a - b</code>.</li><li><strong><code>.flat()</code> didn't flatten far enough.</strong> It only collapses one level by default. <code>.flat(2)</code> goes two deep, <code>.flat(Infinity)</code> goes all the way.</li><li><strong>A property is <code>undefined</code> and you're sure it's there.</strong> Check the spelling against <code>Object.keys(theObject)</code>. JavaScript returns <code>undefined</code> for a missing key instead of erroring, which makes typos in property names extremely quiet.</li><li><strong>You wrote <code>.map((x) =&gt; { title: x })</code> and got an array of <code>undefined</code>.</strong> Curly braces after an arrow are read as a function body, not an object. Wrap the object in parentheses: <code>.map((x) =&gt; ({ title: x }))</code>. That's the same trick used in <code>autoNate</code> above.</li></ul>
+<p>---</p>
+<p>You've got the whole toolkit now. Variables to hold a fact, types to know what kind of fact it is, conditionals to decide, loops to repeat, functions to package logic you trust, and data shapes to hold all of it in a form that doesn't fall apart when someone else opens the file.</p>
+<p>Demo Night is tomorrow. Eight minutes, one VGA projector, fourteen people in a back room, and a program that finally has a name.</p>
+<p>Next: head into the <strong>Prompt &amp; Context Engineering</strong> pack — where hand-writing every line stops scaling, and Nate and Kai find out that an AI agent will answer confidently whether or not it actually knows.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Signature Moves: Functions and Scope</span></a>
             <span></span>

@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Signature Moves: Functions and Scope | AutoNateAI Tutorials</title>
-        <meta name="description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
+        <meta name="description" content="Nate keeps copy-pasting the same five lines. Kai's process instincts finally win the argument: package logic into a function you can reuse and trust, a signature move you can throw the same way every time." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Signature Moves: Functions and Scope: keep the build moving." />
-        <meta property="og:description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
+        <meta property="og:description" content="Nate keeps copy-pasting the same five lines. Kai's process instincts finally win the argument: package logic into a function you can reuse and trust, a signature move you can throw the same way every time." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/functions-and-scope" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-functions-and-scope.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-functions-and-scope.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Signature Moves: Functions and Scope: keep the build moving." />
-        <meta name="twitter:description" content="Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-functions-and-scope.jpg" />
+        <meta name="twitter:description" content="Nate keeps copy-pasting the same five lines. Kai's process instincts finally win the argument: package logic into a function you can reuse and trust, a signature move you can throw the same way every time." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-functions-and-scope.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 The Deal: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,60 +65,200 @@
           <header>
             <span class="kicker">Chapter 4 / Tutorial 04</span>
             <h1>Signature Moves: Functions and Scope</h1>
-            <p>Every fighter needs a move they can throw the same way, every single time. AutoNate learns to package logic into functions he can reuse and trust.</p>
+            <p>Nate keeps copy-pasting the same five lines. Kai's process instincts finally win the argument: package logic into a function you can reuse and trust, a signature move you can throw the same way every time.</p>
             <div class="tag-row"><span>Write functions</span><span>Pass parameters</span><span>Understand scope</span></div>
           </header>
-          <div class="markdown-body"><p>Every fighter worth watching has a move they can throw the exact same way, every single time, under any amount of pressure. It's not luck when it lands — it's repetition. They built it once, in the gym, until it was clean. Now they don't think about it. They just throw it, and it works, on command, whenever the moment calls for it.</p>
-<p>That's exactly what a <strong>function</strong> is in JavaScript: a piece of logic you build once, give a name to, and can call on demand, forever, without rebuilding it from scratch every time. AutoNate's been writing code that runs top to bottom so far. Functions are the first real step toward writing code that's organized — code you can trust to behave the same way every time you call on it.</p>
+          <div class="markdown-body"><p>If you're landing here first: <strong>Nate</strong> is a self-taught builder with a folder full of projects nobody ever used. <strong>Kai</strong> writes grants in Fairview and started coding a month ago. They met at the Fairview Founders Table — a monthly builder meetup in the back room of Grindstone Coffee — and are building an idea tracker for that meetup, due at Demo Night, which is now nine days out.</p>
+<p>Sunday. Nate had brought two breakfast burritos and eaten one and a half of them before he opened the laptop. Kai was reading his code with the specific flat expression of a person who has reviewed a lot of documents.</p>
+<p>&quot;You've written this same block six times.&quot;</p>
+<p>&quot;It's three lines.&quot;</p>
+<p>&quot;It's three lines six times, and in two of them the spacing is different, and in one of them you spelled it <code>SHORTLST</code>.&quot; She turned the screen. &quot;Which one is right?&quot;</p>
+<p>Nate looked at it for a while.</p>
+<p>&quot;...The one with the spacing I like.&quot;</p>
+<p>&quot;Then that one should exist once,&quot; Kai said, &quot;and everything else should use it. That's not a coding thing. That's how you write anything. You don't retype the boilerplate on every grant application — you keep one version and you fix *that*.&quot;</p>
+<p>That's a function. She described it before she knew the word for it, which happens a lot.</p>
 <h3>Coder's Corner: Declaring a Function</h3>
-<p>Here's the anatomy of a function:</p>
-<pre class="code-block language-js"><code><span class="token-keyword">function</span> jab(power) {
-  <span class="token-keyword">return</span> <span class="token-string">`Jab thrown at ${power} power.`</span>;
+<p>A <strong>function</strong> is a piece of logic you write once, give a name, and call on demand — with different inputs, forever, without rebuilding it.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> triageLabel(votes) {
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) <span class="token-keyword">return</span> &quot;BUILD&quot;;
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span>) <span class="token-keyword">return</span> &quot;SHORTLIST&quot;;
+  <span class="token-keyword">return</span> &quot;ASK&quot;;
 }</code></pre>
-<ul><li><code>function</code> tells JavaScript you're defining a reusable move.</li><li><code>jab</code> is the name — how you'll call on it later.</li><li><code>power</code> inside the parentheses is a <strong>parameter</strong> — a placeholder for whatever value gets handed in when the function is actually used.</li><li><code>return</code> hands a result back out, so whatever called the function can use it.</li></ul>
-<p>You call — or &quot;invoke&quot; — a function by writing its name followed by parentheses, with the real value inside:</p>
-<pre class="code-block language-js"><code>console.log(jab(<span class="token-number">10</span>));
-<span class="token-comment">// &quot;Jab thrown at 10 power.&quot;</span></code></pre>
-<p>That <code>10</code> is called an <strong>argument</strong> — the real value you're handing to the <code>power</code> parameter. Same move, different power every time you throw it. That's the whole point.</p>
-<h3>Combining Moves</h3>
-<p>Once you've got one clean move, you can build bigger moves out of it. Here's a function that throws <code>jab</code> multiple times in a row, once for every value in a list:</p>
-<pre class="code-block language-js"><code><span class="token-keyword">function</span> combo(moves) {
-  <span class="token-keyword">return</span> moves.map(jab).join(&quot; -&gt; &quot;);
+<p>Piece by piece:</p>
+<ul><li><code>function</code> tells JavaScript you're defining one.</li><li><code>triageLabel</code> is the <strong>name</strong> — how you call it later.</li><li><code>votes</code> inside the parentheses is a <strong>parameter</strong> — a placeholder for whatever value gets handed in.</li><li><code>return</code> hands a result back out to whoever called it, and immediately stops the function. Nothing after a <code>return</code> in the same path ever runs.</li></ul>
+<p>You <strong>call</strong> (or &quot;invoke&quot;) it by writing its name with parentheses and a real value inside:</p>
+<pre class="code-block language-js"><code>console.log(triageLabel(<span class="token-number">4</span>));   <span class="token-comment">// &quot;BUILD&quot;</span>
+console.log(triageLabel(<span class="token-number">2</span>));   <span class="token-comment">// &quot;SHORTLIST&quot;</span>
+console.log(triageLabel(<span class="token-number">0</span>));   <span class="token-comment">// &quot;ASK&quot;</span></code></pre>
+<p>That <code>4</code> is an <strong>argument</strong> — the actual value you're handing to the <code>votes</code> parameter. Parameter is the slot; argument is what you put in it.</p>
+<p>Notice there's no <code>else</code> in that function. Because <code>return</code> exits immediately, if <code>votes &gt;= 4</code> was true you already left — the next line can't run. Early returns like that flatten a nested <code>if/else</code> chain into something you can read straight down.</p>
+<h3>Where the Value Went</h3>
+<p>Kai's first attempt to use it did not work, and the reason is the single most common thing that trips people up in this chapter.</p>
+<p>Nate had written his version like this:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// the broken version</span>
+<span class="token-keyword">function</span> triageLabel(votes) {
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) {
+    console.log(&quot;BUILD&quot;);
+  } <span class="token-keyword">else</span> <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span>) {
+    console.log(&quot;SHORTLIST&quot;);
+  } <span class="token-keyword">else</span> {
+    console.log(&quot;ASK&quot;);
+  }
 }
 
-console.log(combo([<span class="token-number">5</span>, <span class="token-number">8</span>, <span class="token-number">10</span>]));
-<span class="token-comment">// &quot;Jab thrown at 5 power. -&gt; Jab thrown at 8 power. -&gt; Jab thrown at 10 power.&quot;</span></code></pre>
-<p><code>.map()</code> is a method that runs a function once for every item in an array and collects the results — you'll see it constantly once you start working with lists of things, which in Screeps means lists of creeps, structures, and resources. Don't worry about memorizing it cold right now; just notice the shape: a function built out of a smaller function, doing more with less code written by hand.</p>
-<pre class="code-block language-js"><code><span class="token-comment">// moves.js</span>
-<span class="token-comment">// A move you can throw the same way, every single time.</span>
+<span class="token-keyword">const</span> label = triageLabel(<span class="token-number">4</span>);
+console.log(<span class="token-string">`${label} — Youth program signups`</span>);</code></pre>
+<p>Output:</p>
+<pre class="code-block language-text"><code>BUILD
+undefined — Youth program signups</code></pre>
+<p>&quot;It printed BUILD,&quot; Kai said. &quot;And then it printed <code>undefined</code>. It knows the answer and it won't tell me the answer.&quot;</p>
+<p><strong>Q16.</strong> This one is real and Nate had absolutely been papering over it for years by just... logging things where he needed them.</p>
+<p><code>console.log()</code> and <code>return</code> are not the same and are not related. <code>console.log()</code> <strong>prints text to your terminal</strong> — it's for you, the human, looking at the screen. <code>return</code> <strong>hands a value back to the code that called the function</strong> — it's for the program.</p>
+<p>And here's the part that makes it confusing: <strong>every function returns something.</strong> If you don't write a <code>return</code>, the function returns <code>undefined</code>. Silently. It doesn't warn you, because a function that only does something (rather than computes something) is perfectly legitimate.</p>
+<p>So the broken version printed &quot;BUILD&quot; to the screen — visible, reassuring, useless — and then handed back <code>undefined</code>, which is what landed in <code>label</code>.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> loud(x)  { console.log(x); }      <span class="token-comment">// returns undefined</span>
+<span class="token-keyword">function</span> useful(x) { <span class="token-keyword">return</span> x; }           <span class="token-comment">// returns x</span>
 
-<span class="token-keyword">function</span> jab(power) {
-  <span class="token-keyword">return</span> <span class="token-string">`Jab thrown at ${power} power.`</span>;
+console.log(loud(&quot;hi&quot;));    <span class="token-comment">// prints &quot;hi&quot;, then prints undefined</span>
+console.log(useful(&quot;hi&quot;));  <span class="token-comment">// prints &quot;hi&quot;</span></code></pre>
+<p>Rule of thumb: <strong>if you want to use the answer, <code>return</code> it. If you want to see the answer, log it.</strong> You can do both, but they're separate acts.</p>
+<p>&quot;So all your functions print instead of returning.&quot;</p>
+<p>&quot;A lot of my functions print instead of returning,&quot; Nate said.</p>
+<p>&quot;How do you use their answers?&quot;</p>
+<p>&quot;...I retype them.&quot;</p>
+<p>Kai wrote <strong>Q16: <code>console.log</code> shows you. <code>return</code> gives you.</strong> and then, underneath, in smaller letters: *six times.*</p>
+<h3>Building on It</h3>
+<p>Once one function is clean, build bigger things out of it.</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> formatIdea(idea) {
+  <span class="token-keyword">const</span> label = triageLabel(idea.votes);
+  <span class="token-keyword">return</span> <span class="token-string">`${label.padEnd(10)} ${idea.title} (${idea.owner}, ${idea.votes})`</span>;
+}</code></pre>
+<p><code>padEnd(10)</code> pads a string with spaces on the right until it's at least 10 characters long, so the columns line up. It's a real string method and it's exactly the kind of thing you find once and use forever.</p>
+<p>Now the whole file:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// format.js</span>
+<span class="token-comment">// One formatting rule. Written once. Used everywhere.</span>
+
+<span class="token-keyword">const</span> ideas = [
+  { title: &quot;Youth program signups&quot;, owner: &quot;Kai&quot;, votes: <span class="token-number">4</span> },
+  { title: &quot;Tool library checkout&quot;, owner: &quot;Marisol&quot;, votes: <span class="token-number">3</span> },
+  { title: &quot;Restaurant supply co-op&quot;, owner: &quot;Priya&quot;, votes: <span class="token-number">2</span> },
+  { title: &quot;Founders Table RSVP&quot;, owner: &quot;Nate&quot;, votes: <span class="token-number">1</span> },
+  { title: &quot;Bus delay text alerts&quot;, owner: &quot;Dev&quot;, votes: <span class="token-number">0</span> },
+];
+
+<span class="token-keyword">function</span> triageLabel(votes) {
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">4</span>) <span class="token-keyword">return</span> &quot;BUILD&quot;;
+  <span class="token-keyword">if</span> (votes &gt;= <span class="token-number">2</span>) <span class="token-keyword">return</span> &quot;SHORTLIST&quot;;
+  <span class="token-keyword">return</span> &quot;ASK&quot;;
 }
 
-<span class="token-keyword">function</span> combo(moves) {
-  <span class="token-keyword">return</span> moves.map(jab).join(&quot; -&gt; &quot;);
+<span class="token-keyword">function</span> formatIdea(idea) {
+  <span class="token-keyword">const</span> label = triageLabel(idea.votes);
+  <span class="token-keyword">return</span> <span class="token-string">`${label.padEnd(10)} ${idea.title} (${idea.owner}, ${idea.votes})`</span>;
 }
 
-console.log(jab(<span class="token-number">10</span>));
-console.log(combo([<span class="token-number">5</span>, <span class="token-number">8</span>, <span class="token-number">10</span>]));</code></pre>
-<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-signature-move.jpg" alt="VS Code showing moves.js with a jab function and a combo function that reuses it" loading="lazy" /><figcaption>moves.js in VS Code</figcaption></figure>
+<span class="token-keyword">function</span> renderBacklog(list) {
+  <span class="token-keyword">return</span> list.map(formatIdea).join(&quot;\n&quot;);
+}
+
+console.log(renderBacklog(ideas));</code></pre>
+<pre class="code-block language-bash"><code>node format.js</code></pre>
+<pre class="code-block language-text"><code>BUILD      Youth program signups (Kai, 4)
+SHORTLIST  Tool library checkout (Marisol, 3)
+SHORTLIST  Restaurant supply co-op (Priya, 2)
+ASK        Founders Table RSVP (Nate, 1)
+ASK        Bus delay text alerts (Dev, 0)</code></pre>
+<p>Three functions, each one small enough to hold in your head, each one built out of the one below it. <code>.map()</code> runs a function once for every item in an array and collects the results into a new array. <code>.join(&quot;\n&quot;)</code> glues those results into one string with a line break between each. You don't need to memorize either today — just notice the shape: <strong>small trustworthy piece, then a bigger piece made of those.</strong></p>
+<p>Fix the spacing rule and all five lines change. Fix the <code>SHORTLST</code> typo once and it's fixed everywhere. That's the entire return on writing a function.</p>
+<h3>Q17: The Columns Went Crooked</h3>
+<p>Then Nate got ambitious.</p>
+<p>&quot;What if the width is configurable.&quot; He added a second parameter with a <strong>default value</strong>:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> formatIdea(idea, width = <span class="token-number">10</span>) {
+  <span class="token-keyword">const</span> label = triageLabel(idea.votes);
+  <span class="token-keyword">return</span> <span class="token-string">`${label.padEnd(width)} ${idea.title} (${idea.owner}, ${idea.votes})`</span>;
+}</code></pre>
+<p>Default parameters are a genuinely good feature: call <code>formatIdea(idea)</code> and <code>width</code> is <code>10</code>; call <code>formatIdea(idea, 20)</code> and it's 20. Nothing wrong with the function.</p>
+<p>He reran <code>renderBacklog(ideas)</code>:</p>
+<pre class="code-block language-text"><code>BUILD Youth program signups (Kai, 4)
+SHORTLIST Tool library checkout (Marisol, 3)
+SHORTLIST Restaurant supply co-op (Priya, 2)
+ASK Founders Table RSVP (Nate, 1)
+ASK  Bus delay text alerts (Dev, 0)</code></pre>
+<p>&quot;The columns are gone.&quot;</p>
+<p>&quot;That's — the default is ten, it should still be ten, I didn't pass anything.&quot;</p>
+<p>&quot;You didn't pass anything,&quot; Kai said. &quot;Did <code>.map</code> pass anything?&quot;</p>
+<p>It did. <strong><code>.map()</code> calls your function with three arguments, not one: the element, the index, and the whole array.</strong> Most of the time you only use the first and never notice the other two exist. But <code>formatIdea</code> now has a second parameter — so <code>.map(formatIdea)</code> handed the *index* straight into <code>width</code>. Widths of <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>. The default never fired, because a default only applies when the argument is <code>undefined</code>, and the index is a perfectly real number.</p>
+<p>This is a classic. The most famous version of it:</p>
+<pre class="code-block language-js"><code>console.log([&quot;<span class="token-number">1</span>&quot;, &quot;<span class="token-number">2</span>&quot;, &quot;<span class="token-number">3</span>&quot;].map(parseInt));   <span class="token-comment">// [1, NaN, NaN]</span></code></pre>
+<p><code>parseInt</code> takes <code>(string, radix)</code>. <code>.map</code> feeds it the index as the radix. <code>parseInt(&quot;2&quot;, 1)</code> is nonsense — base 1 isn't a thing — so you get <code>NaN</code>.</p>
+<p>The fix is to stop passing the function by name and wrap it, so you control exactly what goes in:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">function</span> renderBacklog(list, width = <span class="token-number">10</span>) {
+  <span class="token-keyword">return</span> list.map((idea) =&gt; formatIdea(idea, width)).join(&quot;\n&quot;);
+}</code></pre>
+<p><code>(idea) =&gt; formatIdea(idea, width)</code> is an <strong>arrow function</strong> — a shorter way to write a small function inline. <code>(input) =&gt; result</code> is the whole shape. (Arrow functions also behave differently around a keyword called <code>this</code>, which you won't need for a while — just know that's the one real difference, not the syntax.)</p>
+<p>&quot;So passing a function by its name is a trap.&quot;</p>
+<p>&quot;Passing a function by its name is fine,&quot; Nate said, &quot;as long as you actually know how many arguments the caller is going to hand it. Which I did not.&quot;</p>
+<p>&quot;Which nobody does, the first time.&quot;</p>
+<p>&quot;Which nobody does the first time,&quot; he agreed.</p>
 <h3>Coder's Corner: Scope</h3>
-<p>Here's something that trips people up if nobody explains it early: a variable declared <strong>inside</strong> a function only exists inside that function. That's called <strong>scope</strong>. Once the function finishes running, that variable is gone — the outside world never had access to it in the first place.</p>
+<p>Here's the thing that prevents your functions from stepping on each other: <strong>a variable declared inside a function only exists inside that function.</strong> That's <strong>scope</strong>. When the function finishes, that variable is gone, and the outside world never had access to it at all.</p>
 <pre class="mermaid">flowchart TD
-  subgraph Outer[&quot;Outside the function&quot;]
-    O[&quot;const gymName = 'AutoNate's Gym'&quot;]
-    subgraph Inner[&quot;Inside jab()&quot;]
-      I[&quot;power exists here&quot;]
+  subgraph Outer[&quot;File scope&quot;]
+    O[&quot;const meetup = 'Founders Table'&quot;]
+    subgraph Inner[&quot;Inside formatIdea()&quot;]
+      I[&quot;const label = ...&lt;br/&gt;(only exists here)&quot;]
     end
   end
   O --&gt;|&quot;visible inside&quot;| I
   I -.-&gt;|&quot;NOT visible outside&quot;| O</pre>
-<p>Think of it like the gym. What happens in the sparring room, stays in the sparring room — the front desk doesn't automatically know every detail of every round. But the sparring room can see the gym rules posted at the front, because those apply everywhere. Variables declared outside a function are visible inside it. Variables declared inside a function stay local to that function, and disappear once it's done running.</p>
-<p>Why does this matter? Because it means your functions don't accidentally step on each other. You can name a variable <code>power</code> inside <code>jab</code> and a completely different variable <code>power</code> somewhere else in your code, and they will never collide. Every function gets its own clean space to work in. That's not a limitation — that's protection.</p>
+<p>Prove it:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// scope.js</span>
+<span class="token-keyword">const</span> meetup = &quot;Fairview Founders Table&quot;;
+
+<span class="token-keyword">function</span> describe(idea) {
+  <span class="token-keyword">const</span> line = <span class="token-string">`${idea.title} — pitched at ${meetup}`</span>;   <span class="token-comment">// ✅ can see meetup</span>
+  <span class="token-keyword">return</span> line;
+}
+
+console.log(describe({ title: &quot;Tool library checkout&quot; }));
+console.log(line);   <span class="token-comment">// ❌ ReferenceError: line is not defined</span></code></pre>
+<p>Inside can see out. Outside cannot see in. That direction is the whole rule.</p>
+<p>It means two functions can each have a variable called <code>label</code> and they will never collide:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> owner = &quot;the whole table&quot;;
+
+<span class="token-keyword">function</span> whoOwns(idea) {
+  <span class="token-keyword">const</span> owner = idea.owner;   <span class="token-comment">// a different, separate `owner`</span>
+  <span class="token-keyword">return</span> owner;
+}
+
+console.log(whoOwns({ owner: &quot;Dev&quot; }));   <span class="token-comment">// &quot;Dev&quot;</span>
+console.log(owner);                        <span class="token-comment">// &quot;the whole table&quot; — untouched</span></code></pre>
+<p>That's called <strong>shadowing</strong> — the inner <code>owner</code> hides the outer one for the length of the function, then the outer one is right where you left it. Not a bug. A guarantee.</p>
+<p>Scope isn't only about functions. <code>let</code> and <code>const</code> are <strong>block-scoped</strong>, meaning they're confined to whatever pair of curly braces they were declared in — including an <code>if</code> or a <code>for</code>:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">if</span> (true) {
+  <span class="token-keyword">const</span> secret = &quot;only <span class="token-keyword">in</span> here&quot;;
+}
+console.log(secret);   <span class="token-comment">// ReferenceError: secret is not defined</span></code></pre>
+<p>And this is where the promise from chapter 02 comes due. <code>var</code> — the old keyword — is <strong>not</strong> block-scoped. It leaks:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">for</span> (<span class="token-keyword">var</span> i = <span class="token-number">0</span>; i &lt; <span class="token-number">3</span>; i++) { /* ... */ }
+console.log(i);   <span class="token-comment">// 3   ← var escaped the loop it was declared in</span>
+
+<span class="token-keyword">for</span> (<span class="token-keyword">let</span> j = <span class="token-number">0</span>; j &lt; <span class="token-number">3</span>; j++) { /* ... */ }
+console.log(j);   <span class="token-comment">// ReferenceError: j is not defined   ← correct behavior</span></code></pre>
+<p>That leaking <code>i</code> is the source of a whole genre of confusing bugs, especially in loops that schedule work to happen later. <code>let</code> and <code>const</code> were added in 2015 specifically to fix it. This is why &quot;just use <code>const</code> and <code>let</code>&quot; isn't style advice — it's a different set of rules that behaves the way you'd expect.</p>
 <h3>Try It Yourself</h3>
-<p>Add a second move to <code>moves.js</code> — maybe a function called <code>hook</code> that takes a <code>power</code> parameter and returns a different message. Then add it into the <code>combo</code> list alongside <code>jab</code> and see how the output changes. Once you can build a second move and know exactly how it'll behave without guessing, you've got the real skill this chapter was about: writing logic you can trust, on command, every time.</p>
-<p>Next chapter, AutoNate stops thinking in single moves and starts building the full playbook — the way real, organized information gets structured before it's ready for a real match.</p>
+<p>Open <code>format.js</code> and:</p>
+<p>1. Add a <code>hoursOld</code> field to a couple of ideas, then write a function <code>isStale(idea)</code> that returns <code>true</code> when an idea is older than 720 hours. Use it inside <code>formatIdea</code> to append <code>&quot; [stale]&quot;</code>. 2. Deliberately reintroduce the bug: change your new function back to <code>console.log</code> instead of <code>return</code>, and watch <code>undefined</code> reappear in the output. Then fix it. Doing this on purpose once means you'll recognize it instantly at 1am later. 3. Try to <code>console.log</code> the <code>label</code> variable from inside <code>formatIdea</code> at the bottom of the file. Read the <code>ReferenceError</code>. That error is scope working correctly, not scope failing.</p>
+<h3>Sanity Checks</h3>
+<ul><li><strong>You're getting <code>undefined</code> where you expected a value.</strong> The function is missing a <code>return</code>, or has a <code>return</code> on some paths and not others. Check every branch.</li><li><strong><code>ReferenceError: x is not defined</code>.</strong> You're reaching for something declared inside a function or block from outside it. Move the declaration out, or return the value instead of reaching for it.</li><li><strong><code>TypeError: x is not a function</code>.</strong> Usually a typo in the name, or you defined it *below* the point where you call it using <code>const fn = () =&gt; {}</code> (those aren't hoisted — <code>function name() {}</code> declarations are, arrow functions assigned to <code>const</code> are not).</li><li><strong>A function works alone but misbehaves inside <code>.map()</code>.</strong> Check its argument count. <code>.map</code>, <code>.filter</code>, and <code>.forEach</code> all pass <code>(element, index, array)</code>. Wrap it in an arrow function to control what it receives.</li><li><strong>Your default parameter never kicks in.</strong> Defaults only apply when the argument is <code>undefined</code>. Passing <code>null</code>, <code>0</code>, or <code>&quot;&quot;</code> explicitly overrides the default with that value.</li><li><strong>Nothing prints and nothing errors.</strong> You defined a function and never called it. Adding <code>()</code> is required; <code>renderBacklog</code> on its own just references the function.</li></ul>
+<p>Nate finished the second burrito. &quot;Overhand Right.&quot;</p>
+<p>&quot;What?&quot;</p>
+<p>&quot;For the name. Overhand Right. Because it's the one move you throw the same way every time and it always—&quot;</p>
+<p>&quot;No.&quot;</p>
+<p>&quot;Signature move! That's the whole—&quot;</p>
+<p>&quot;I know what it is,&quot; Kai said. &quot;It sounds like a boxing gym in a strip mall. What are the other options.&quot;</p>
+<p>&quot;Bagel Logic's still on the board.&quot;</p>
+<p>Next chapter: nine days out, and their five ideas are still five loose objects in a file. Time to give the whole thing a shape — and, finally, a name.</p>
 <p>Next: <code>05-objects-arrays-and-data-shapes.md</code> — The Playbook.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/control-flow"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Reading the Room: Conditionals and Loops</span></a>

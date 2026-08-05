@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Feeding It the Right Files: Practical Context Engineering | AutoNateAI Tutorials</title>
-        <meta name="description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
+        <meta name="description" content="More files isn't more help. Nate and Kai practice handing an agent only what it actually needs to get a real change right." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/feeding-it-the-right-files" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Feeding It the Right Files: Practical Context Engineering: keep the build moving." />
-        <meta property="og:description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
+        <meta property="og:description" content="More files isn't more help. Nate and Kai practice handing an agent only what it actually needs to get a real change right." />
         <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/feeding-it-the-right-files" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-feeding-it-the-right-files.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-feeding-it-the-right-files.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Feeding It the Right Files: Practical Context Engineering: keep the build moving." />
-        <meta name="twitter:description" content="More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-feeding-it-the-right-files.jpg" />
+        <meta name="twitter:description" content="More files isn't more help. Nate and Kai practice handing an agent only what it actually needs to get a real change right." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-feeding-it-the-right-files.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,47 +65,113 @@
           <header>
             <span class="kicker">Chapter 3 / Tutorial 03</span>
             <h1>Feeding It the Right Files: Practical Context Engineering</h1>
-            <p>More files isn't more help. AutoNate practices handing an agent only what it actually needs to get a real change right.</p>
+            <p>More files isn't more help. Nate and Kai practice handing an agent only what it actually needs to get a real change right.</p>
             <div class="tag-row"><span>Select relevant context</span><span>Avoid overload</span><span>Summarize instead of dumping</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate's prompts are sharper now — role, task, constraints, format, and he doesn't flinch at asking for a second pass instead of a full restart. But the next job is bigger than one file. He wants remote mining: a hauler that leaves his colony, works a source in a neighboring room, and hauls energy home to fuel the second colony he's trying to stand up. That touches <code>spawnManager.js</code>, a brand-new <code>remoteHauler.js</code>, <code>roles/harvester.js</code> as a reference pattern, and probably how he's tracking memory for the remote room.</p>
-<p>He doesn't know exactly which of those the agent needs, so he opens all of them — plus two old experiment files he forgot he still had lying around, plus a notes file from back when he was first learning <code>find()</code>. Figures more open tabs can't hurt.</p>
-<p>It can. The agent doesn't error out, it just gets mushy. It half-updates <code>spawnManager.js</code> in a way that almost matches his real pattern, references a variable name from the dead experiment file like it's still live, and blends two different eras of his own coding style into one file that follows neither. He recognizes the shape of this mistake immediately — it's the same &quot;stuff everything in and hope&quot; move from the context chapter, just applied at the level of picking files instead of pasting text.</p>
+          <div class="markdown-body"><p>Nate and Kai are two people in Fairview building a studio, currently learning to direct an AI coding agent at their actual repo instead of hand-writing every line. He's self-taught and fast; she came out of a decade of civic grant work and treats every claim as unsourced until proven otherwise. Their prompts are sharp now — role, task, constraints, format, acceptance criteria before code — and they know context is a finite budget rather than a bottomless bag.</p>
+<p>Knowing the budget is finite is the easy half. Choosing what goes in it is the actual job, and the next task is the first one big enough to punish them for getting it wrong.</p>
+<p>They need to wire the follow-up drafter into the real program: read the Founders Table signup CSV off disk, run it through <code>draftFollowups()</code>, and print the results behind a <code>--dry-run</code> flag so nothing can go out by accident. That touches <code>index.js</code>, <code>lib/followups.js</code>, <code>lib/contacts.js</code>, and probably the CSV itself.</p>
+<p>Nate isn't sure which of those the agent needs, so he opens all of them. Plus <code>lib/score.js</code>, because it's right there. Plus <code>score-old.js</code>, which he has not run since March. Plus <code>scratch.js</code>, a 200-line file he wrote at 2am during the JavaScript pack that contains four different attempts at the same loop. Plus <code>notes/demo-night.md</code>, plus the whole <code>data/</code> folder. Figures more open tabs can't hurt.</p>
+<p>They can. The agent doesn't error — it gets *mushy*. It half-updates <code>index.js</code> in a shape that almost matches their real pattern. It imports <code>scoreIdeas()</code> from <code>score-old.js</code>, a function that has been dead for four months, as though it were live. It writes <code>lib/contacts.js</code> in the loose, comment-free, single-letter-variable style of <code>scratch.js</code>, because <code>scratch.js</code> was the largest JavaScript file in the room and it read like a style guide. And it invents a <code>config.contactsPath</code> setting because a line in <code>notes/demo-night.md</code> said *&quot;figure out where contacts live — config?&quot;*</p>
+<p>Kai reads the diff. &quot;It's writing like you at 2am.&quot;</p>
+<p>&quot;That's not—&quot;</p>
+<p>&quot;It's <code>const d = c.map(x =&gt; x.e)</code>. That's a direct quote from <code>scratch.js</code>.&quot;</p>
+<p>He recognizes the shape of this mistake immediately, because it's the same &quot;stuff everything in and hope&quot; move from two chapters ago, just moved up a level: instead of pasting too much text, he selected too many files.</p>
 <h3>Coder's Corner: Signal vs Noise in Context</h3>
-<p>Let's step out of the story for a second. Knowing that context is finite (last chapter) only gets you halfway. The actual skill is choosing what goes into that finite space — and that comes down to four ideas.</p>
-<p><strong>Signal</strong> — the information that actually changes what the agent should do. The pattern in <code>harvester.js</code> it should mimic. The naming convention already in use across <code>roles/</code>.</p>
-<p><strong>Noise</strong> — everything else sitting in the window that doesn't change the answer but still costs space and pulls attention. Old dead files. Unrelated roles. A notes file from three weeks ago.</p>
-<p><strong>Relevance</strong> — not &quot;related to Screeps in general,&quot; but &quot;actually needed for this specific task.&quot; A file can be genuinely part of your project and still be pure noise for the thing you're asking right now.</p>
-<p><strong>Retrieval</strong> — the actual skill here: picking exactly what's relevant instead of everything available. This is the real work of context engineering. Not writing more context. Choosing better context.</p>
+<p>Step out of the story. Knowing context is finite only gets you halfway. The actual skill is choosing what occupies that finite space, and it reduces to four ideas.</p>
+<p><strong>Signal</strong> — information that changes what the agent should do. The pattern in <code>lib/followups.js</code> it should mimic. The exact shape of a row in the CSV. The one function it needs to call.</p>
+<p><strong>Noise</strong> — everything else in the window that doesn't change the answer but still costs room and pulls attention. Dead files. Unrelated modules. A notes file full of questions you already answered in your head.</p>
+<p><strong>Relevance</strong> — not &quot;part of this project,&quot; but &quot;needed for *this specific task*.&quot; A file can be genuinely load-bearing in production and still be pure noise for the thing you're asking right now.</p>
+<p><strong>Retrieval</strong> — the actual craft: picking exactly what's relevant instead of everything available. This is what &quot;context engineering&quot; means in practice. Not writing more context. Choosing better context.</p>
 <pre class="mermaid">flowchart TD
   All[&quot;Every File&lt;br/&gt;in the Project&quot;] --&gt; Q{&quot;Needed for&lt;br/&gt;THIS task?&quot;}
-  Q --&gt;|Yes| Signal[&quot;Signal&lt;br/&gt;open it&quot;]
-  Q --&gt;|No| Noise[&quot;Noise&lt;br/&gt;leave it closed&quot;]</pre>
-<p>AutoNate's mistake wasn't opening too little. It was opening without asking that middle question first. Every file he adds to the conversation should earn its place, the same way every part on a creep's body has to earn its energy cost.</p>
+  Q --&gt;|Yes| Signal[&quot;Signal&lt;br/&gt;put it in the room&quot;]
+  Q --&gt;|No| Noise[&quot;Noise&lt;br/&gt;leave it out&quot;]</pre>
+<p>And one non-obvious consequence: <strong>dead code is worse than no code.</strong> An empty room makes the agent invent something, which is bad. A room full of abandoned experiments makes it copy something that looks legitimate, is internally consistent, and is four months out of date — which is worse, because it doesn't look like a guess.</p>
 <h3>1. Point It at Only What the Task Touches</h3>
-<p>Second attempt, same remote mining task. He closes the dead experiments and the old notes file, and opens exactly three: <code>spawnManager.js</code> (where the new spawn logic goes), <code>roles/harvester.js</code> (the pattern to follow), and a new empty <code>roles/remoteHauler.js</code> (where the output goes). Nothing else. The agent's first draft this time matches his existing style on the first try — because the only style it could see was the real one.</p>
+<p>Second attempt, same job. They close everything and open exactly three files:</p>
+<ul><li><code>index.js</code> — where the new wiring goes</li><li><code>lib/followups.js</code> — the function being called, and the style to match</li><li><code>data/founders-table.csv</code> — the actual data shape, all nineteen rows of it</li></ul>
+<p>Nothing else. No <code>score.js</code>, no notes, no <code>scratch.js</code>. The first draft comes back matching their real conventions on the first pass — because the only conventions in the room were the real ones.</p>
+<pre class="code-block language-js"><code><span class="token-comment">// index.js</span>
+<span class="token-keyword">const</span> { readFileSync } = <span class="token-keyword">require</span>(<span class="token-string">'node:fs'</span>);
+<span class="token-keyword">const</span> { draftFollowups } = <span class="token-keyword">require</span>(<span class="token-string">'./lib/followups'</span>);
+
+<span class="token-keyword">const</span> DRY_RUN = process.argv.includes(<span class="token-string">'--dry-run'</span>);
+
+<span class="token-keyword">function</span> loadSignups(path) {
+  <span class="token-keyword">const</span> [header, ...rows] = readFileSync(path, <span class="token-string">'utf8'</span>).trim().split(<span class="token-string">'\n'</span>);
+  <span class="token-keyword">const</span> cols = header.split(<span class="token-string">','</span>).map((c) =&gt; c.trim());
+  <span class="token-keyword">return</span> rows.map((line) =&gt; {
+    <span class="token-keyword">const</span> cells = line.split(<span class="token-string">','</span>).map((c) =&gt; c.trim());
+    <span class="token-keyword">return</span> Object.fromEntries(cols.map((c, i) =&gt; [c, cells[i] ?? <span class="token-string">''</span>]));
+  });
+}
+
+<span class="token-keyword">const</span> drafts = draftFollowups(loadSignups(<span class="token-string">'./data/founders-table.csv'</span>));
+
+<span class="token-keyword">if</span> (DRY_RUN) {
+  console.log(<span class="token-string">`${drafts.length} drafts (dry run, nothing sent):\n`</span>);
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> d <span class="token-keyword">of</span> drafts) console.log(<span class="token-string">`→ ${d.to}\n  ${d.subject}\n`</span>);
+} <span class="token-keyword">else</span> {
+  console.error(<span class="token-string">'Refusing to send. Sending is not implemented yet — use --dry-run.'</span>);
+  process.exit(<span class="token-number">1</span>);
+}</code></pre>
+<p>Note what it *didn't* do: no <code>config.contactsPath</code>, no dead import, no single-letter variables. Same model, same task, same day. Different room.</p>
 <h3>2. Cut the Dead Weight Before You Start</h3>
-<p>That means actually deleting or archiving the old experiment files, not just ignoring them. A file sitting in the project is a file that might get opened by accident, referenced by a search, or pulled in &quot;to be thorough.&quot; AutoNate starts keeping a <code>/archive</code> folder for anything he's not using but isn't ready to lose — out of the way, out of the context, still on disk if he ever wants it back.</p>
-<pre class="code-block language-bash"><code>mkdir archive
-mv scout-v1.js upgrader-experiment.js archive/</code></pre>
+<p>Closing a file is a decision you have to make every single session. Archiving it is a decision you make once.</p>
+<pre class="code-block language-bash"><code>mkdir -p archive
+git mv score-old.js scratch.js archive/
+git commit -m &quot;Archive dead experiments so they stop leaking into context&quot;</code></pre>
+<p>They also check what else is quietly sitting around waiting to get pulled in:</p>
+<pre class="code-block language-bash"><code># what's actually here, biggest first
+ls -laS
+
+# make sure the noisy stuff can never be committed or crawled
+cat .gitignore
+# node_modules/
+# .env
+# *.log</code></pre>
+<p><code>node_modules/</code> and lockfiles are the classic ambush — a single <code>package-lock.json</code> is more tokens than every file either of them has ever written, and an agent that decides to &quot;check the dependencies&quot; can burn the whole window before it starts.</p>
+<p>Kai's rule: if you're not willing to delete it, put it somewhere you'd never open by accident. <code>archive/</code> is not a graveyard, it's a quarantine.</p>
 <h3>3. Summarize Instead of Paste</h3>
-<p>Some files are too big to open in full and still leave room for anything else — a sprawling <code>main.js</code> that's grown for weeks, or a long console log from a bad tick. Instead of pasting the whole thing, he asks the agent to work from a summary first.</p>
-<pre class="code-block language-text"><code>Here's my main.js — it's long. Before we touch anything,
-summarize what it currently does in six bullet points so
-I can confirm you've got the right picture.</code></pre>
-<p>If the summary's wrong, he's caught a misunderstanding before it turns into a bad edit — for the cost of one extra message, not a rewritten file.</p>
+<p>Some files are too big to put in the room in full and still leave space for anything else. Instead of pasting, ask for a summary first and check it:</p>
+<pre class="code-block language-text"><code>notes/demo-night.md is long and mostly meeting scribbles.
+Before we change anything: summarize what's in it in six
+bullets, and flag anything that looks like a decision we
+actually made versus a question we never answered.</code></pre>
+<p>If the summary is wrong, they've caught a misunderstanding for the price of one message instead of one bad edit three files deep. If it's right, the summary can stay in the room and the file itself can leave.</p>
+<p>This works on logs too — the same move from the context chapter, applied deliberately instead of in a panic.</p>
 <h3>4. Let It Ask Instead of Guess</h3>
-<p>The other half of practical context engineering is admitting you don't always know what's relevant either. AutoNate starts adding one line to bigger asks:</p>
-<pre class="code-block language-text"><code>If you're missing a file you need to do this properly,
-ask me for it before you start instead of guessing.</code></pre>
-<p>Small permission, big payoff. The agent that used to invent a variable name from a dead file now stops and asks which memory structure he's actually using for remote rooms — instead of assuming and getting it wrong three files deep.</p>
-<h3>5. Sanity Checks</h3>
-<p>If the agent blends old and new patterns in one file: it had too many examples open at once and couldn't tell which one was current — close everything but the real pattern and try again.</p>
-<p>If it references something that doesn't exist in your live code: check what's still open in the conversation — a dead file's probably still sitting in context, feeding it stale information.</p>
-<p>If a big file eats the whole conversation: don't paste it whole — ask for a summary first, then hand over only the section that's actually relevant.</p>
-<p>If you genuinely don't know which file matters: say that out loud to the agent and let it ask you questions before it starts guessing on your behalf.</p>
-<p>AutoNate's remote hauler ships clean on the second real attempt — three files open, the rest out of the room, one extra sentence giving the agent permission to ask instead of guess. The colony's building faster than he is now, which is exactly the point. It just took learning what to hand it, not just how much.</p>
-<p>Next: <code>04-when-it-gets-it-wrong.md</code> — what to do when a good prompt with good context still comes back wrong.</p></div>
+<p>The other half of practical context engineering is admitting you don't always know what's relevant either. Nate starts appending one line to anything nontrivial:</p>
+<pre class="code-block language-text"><code>If you're missing a file you need to do this properly, ask me
+for it before you start instead of guessing.</code></pre>
+<p>Small permission, disproportionate payoff. The agent that used to invent <code>config.contactsPath</code> now stops and asks whether email addresses are stored in the CSV or somewhere else — which is a question Nate could answer in four seconds and the agent could only answer wrong.</p>
+<h3>5. Write the Context Down Once Instead of Re-Explaining It</h3>
+<p>The last thing they add is the one that actually changes their week. Every session, they were re-typing the same five facts: it's CommonJS, <code>lib/</code> is pure functions, <code>index.js</code> is the only file that does I/O, don't touch <code>archive/</code>. So Kai does what Kai does and writes the standing instructions to a file at the repo root, where the agent can pick them up every time:</p>
+<pre class="code-block language-md"><code># AutoNateAI — project context
+
+- Node 22, CommonJS, zero build step. `npm start -- --dry-run` runs it.
+- `lib/` holds pure functions only: no file I/O, no network, no console.
+- `index.js` is the ONLY file allowed to touch disk, argv, or stdout.
+- Files in `lib/` are named for what they do. Not after punches.
+- `data/founders-table.csv` is nineteen real people. Nothing sends
+  without an explicit flag, ever.
+- `archive/` is dead code kept for sentiment. Never read it, never
+  copy from it, never import from it.
+- If you need a file you don't have, ask. Don't infer it.</code></pre>
+<p>Different tools look for this under different filenames — <code>AGENTS.md</code> and <code>CLAUDE.md</code> are the two you'll run into most — so check what yours reads and name it accordingly. The value isn't the filename. It's that the durable facts about your project stop living in Nate's head and start living somewhere the agent can be handed them for free, every session, without either of them remembering to.</p>
+<p>Nate reads the last two lines twice. &quot;'Never read it, never copy from it.' That's kind of dark for a folder.&quot;</p>
+<p>&quot;It earned that.&quot;</p>
+<h3>6. Sanity Checks</h3>
+<p>If the agent blends two eras of your own code style: too many examples were in the room and it couldn't tell which was current. Close everything but the one true pattern.</p>
+<p>If it references a function or setting that doesn't exist in your live code: something stale is still in context. Check what's open, then archive what's dead — closing it this once won't help you next Tuesday.</p>
+<p>If a single file eats the whole conversation: don't paste it whole. Ask for a summary, verify the summary, then hand over only the section that matters.</p>
+<p>If you genuinely don't know which file is relevant: say that out loud and give it permission to ask. &quot;Ask before guessing&quot; is one sentence and it converts a silent wrong assumption into a question.</p>
+<p>If you're re-explaining the same project facts every session: stop. Put them in a project context file at the repo root and let the tool load them for you.</p>
+<p>If the agent starts reading <code>node_modules/</code>: interrupt it. Nothing good is in there, and it costs more room than your entire codebase.</p>
+<p>The dry run prints fifteen drafts, in order, with a line at the top saying nothing has been sent. Three files in the room, two files in quarantine, one context file doing the work Nate's memory used to do badly. The studio is finally moving faster than either of them can type, which was the entire point.</p>
+<p>It stays that way for about two days.</p>
+<p>Next: <code>04-when-it-gets-it-wrong.md</code> — a good prompt, the right files, and a function that does not exist anywhere in the world.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/structuring-the-ask"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Structuring the Ask: Role, Task, Constraints, Format</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong"><span><small>Next</small>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</span><span class="material-symbols-outlined">arrow_forward</span></a>

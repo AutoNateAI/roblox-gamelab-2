@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Not Just a Chatbot: What Is an Agentic System | AutoNateAI Tutorials</title>
-        <meta name="description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
+        <meta name="description" content="An agent isn't a one-shot answer machine. Nate and Kai learn what makes a system agentic: planning, tool use, and taking real steps toward a goal, for something with real stakes for the first time." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/civics-and-agentic-ai/what-is-an-agentic-system" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Not Just a Chatbot: What Is an Agentic System: keep the build moving." />
-        <meta property="og:description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
+        <meta property="og:description" content="An agent isn't a one-shot answer machine. Nate and Kai learn what makes a system agentic: planning, tool use, and taking real steps toward a goal, for something with real stakes for the first time." />
         <meta property="og:url" content="https://autonateai.com/tutorials/civics-and-agentic-ai/what-is-an-agentic-system" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-what-is-an-agentic-system.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-civics-and-agentic-ai-what-is-an-agentic-system.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Not Just a Chatbot: What Is an Agentic System: keep the build moving." />
-        <meta name="twitter:description" content="An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-what-is-an-agentic-system.jpg" />
+        <meta name="twitter:description" content="An agent isn't a one-shot answer machine. Nate and Kai learn what makes a system agentic: planning, tool use, and taking real steps toward a goal, for something with real stakes for the first time." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-civics-and-agentic-ai-what-is-an-agentic-system.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,46 +65,74 @@
           <header>
             <span class="kicker">Chapter 1 / Tutorial 01</span>
             <h1>Not Just a Chatbot: What Is an Agentic System</h1>
-            <p>An agent isn't a one-shot answer machine. AutoNate learns what makes a system agentic: planning, tool use, and taking real steps toward a goal.</p>
+            <p>An agent isn't a one-shot answer machine. Nate and Kai learn what makes a system agentic: planning, tool use, and taking real steps toward a goal, for something with real stakes for the first time.</p>
             <div class="tag-row"><span>Define agentic vs single-shot</span><span>Understand planning and tool use</span><span>Recognize multi-step autonomy</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate had used an AI agent plenty by now — that's half of what made his colony code and his database possible. But every time before this, the shape was the same: he'd ask something, it would answer, and then he'd read the answer and decide what to do next himself. Ask, answer, his move. Ask, answer, his move. It worked. It also meant he was the one doing every bit of the actual work of moving a project forward, one exchange at a time, forever.</p>
-<p>Then he watched the Discord announcement's linked clip of a past Tuesday build, and something looked different. Somebody typed one instruction — something like &quot;read this RFP and pull out every requirement&quot; — and then just... waited. No follow-up question after every line. No copy-pasting the next chunk in by hand. The agent kept working, checked its own output, and came back with a finished list. One instruction. Many steps. Nobody babysitting it between them.</p>
-<p>That's the line this chapter draws, and it's a real one, not a marketing word. Everything AutoNate had done with AI up to now was a single-shot exchange — smart, useful, but bounded to one question and one answer. What he was looking at now was something else: a system that could take a goal, break it into steps, use tools to act on those steps, check its own results, and keep going without him re-prompting it at every turn. That's what an <strong>agentic system</strong> is. Understanding the difference is the whole hinge this pack swings on.</p>
+          <div class="markdown-body"><p>Nate and Kai run a two-person studio called AutoNateAI, which is a name Kai approved only after vetoing &quot;Nate &amp; Kai's House of Code,&quot; &quot;Burrito Logic,&quot; and one option Nate still insists was good. Last chapter they found a live City of Fairview solicitation — RFP 26-118, a youth program registration and waitlist system — that happens to be the exact problem Kai spent a year of her old job losing sleep over. Forty-three pages. Real deadline. This chapter is the part where they figure out what kind of tool they're actually going to point at it.</p>
+<p>Sunday morning, same corner table. Nate has a laptop open, a file already created, and the specific energy of a man who started building before he finished reading.</p>
+<p>&quot;Okay okay okay. Watch this. One agent. I give it the PDF, I give it the internet, I say 'win us this contract,' and I go make coffee.&quot;</p>
+<p>&quot;What does it do when it's wrong on step two?&quot;</p>
+<p>Nate's hands stop over the keyboard.</p>
+<p>&quot;Because it's going to be wrong on step two,&quot; Kai says, not unkindly. &quot;Every document like this has a sentence in it that means the opposite of what it looks like it means. If it's wrong on step two and you're at the espresso machine, then steps three through nine are wrong in a way that looks completely finished.&quot;</p>
+<p>This is the whole hinge of the chapter, and it isn't a knock on agents. It's the difference between *what an agentic system is* and *what people sell it as*. Both of them had used AI plenty by now — most of what their studio runs on got built with an agent's help. But almost all of that had been the same shape: ask a thing, read the answer, decide the next move yourself. Ask, answer, your move. Ask, answer, your move. It works, and it means you are personally the connective tissue between every single step, forever.</p>
+<p>What they needed here was different, and it has a real definition, not a marketing one.</p>
 <h3>Coder's Corner: Agent vs. Single-Shot Prompt</h3>
-<p>A <strong>single-shot prompt</strong> is one question in, one answer out. You ask &quot;what does RCL mean in Screeps,&quot; it tells you, done. The thinking about what to do with that answer is entirely on you.</p>
-<p>An <strong>agent</strong> is different in three specific ways:</p>
-<ul><li><strong>Planning</strong> — given a goal instead of a single question, an agent breaks it into a sequence of smaller steps on its own, instead of waiting for you to hand it the steps one at a time.</li><li><strong>Tool use</strong> — an agent isn't limited to generating text. It can call real tools: read a file, run a search, write a document, query a database. The text it generates becomes actions it can actually take.</li><li><strong>Multi-step autonomy</strong> — after each action, an agent observes what happened and decides the next move itself, looping through plan-act-observe until the goal is met, instead of stopping to ask you after every single step.</li></ul>
-<p>None of that means unsupervised. It means the loop between steps doesn't require you standing there refilling the prompt box every ten seconds. You set the goal and the guardrails. It does the repetitive middle part.</p>
+<p>A <strong>single-shot prompt</strong> is one question in, one answer out. &quot;What's the submission deadline on this RFP?&quot; It answers. Done. Whatever you do with that answer is entirely on you.</p>
+<p>An <strong>agent</strong> differs in three specific, checkable ways:</p>
+<ul><li><strong>Planning</strong> — given a goal instead of a single question, it decomposes that goal into a sequence of smaller steps itself, rather than waiting for you to feed it the steps one at a time.</li><li><strong>Tool use</strong> — it isn't limited to producing text. It can call real capabilities: read a file, run a search, write a document, query a database. Its output becomes actions that change something outside the conversation.</li><li><strong>Multi-step autonomy</strong> — after each action it *observes* the result and decides the next move, looping through plan → act → observe until the goal is met or a stopping condition fires.</li></ul>
+<p>&quot;Agentic&quot; does not mean unsupervised, and it does not mean smart. It means the loop between steps doesn't require a human refilling the prompt box every ten seconds. You set the goal, the tools, and the guardrails. It does the repetitive middle.</p>
 <pre class="mermaid">flowchart LR
   Q[&quot;One question&quot;] --&gt; A[&quot;One answer, done&quot;]
   G[&quot;One goal&quot;] --&gt; L[&quot;Plan → Act → Observe&lt;br/&gt;repeat until done&quot;]
   L --&gt; R[&quot;Result, ready for review&quot;]</pre>
-<p>Same starting move — you telling the AI what you want — but a completely different shape of what happens after you hit enter.</p>
-<h3>1. Spot the Difference Between a Question and a Goal</h3>
-<p>&quot;What's the deadline on this RFP?&quot; is a question. One answer ends it. &quot;Read this RFP and tell me everything a proposal would need to include, with sources for each claim&quot; is a goal — it requires finding information, organizing it, and checking it, which is naturally several steps, not one. If what you're asking for can't be answered in a single sentence without more digging first, you're handing over a goal, not a question, whether you meant to or not.</p>
-<h3>2. Give the Agent Tools, Not Just Words</h3>
-<p>An agent without tools is just a single-shot prompt wearing a longer explanation. The actual power shows up when it can act — read a real file, run a real search, write a real output — instead of only generating a description of what it *would* do.</p>
+<p>Same opening move — you saying what you want — completely different shape to what happens after you hit enter.</p>
+<h3>1. Tell a Question and a Goal Apart</h3>
+<p>&quot;What's the deadline on this RFP?&quot; is a question. One lookup ends it.</p>
+<p>&quot;Read this RFP and every addendum, list everything a proposal has to include, mark which items are mandatory, and cite the page for each one&quot; is a goal. It requires finding things, organizing them, and checking them — several connected steps, not one.</p>
+<p>The test is mechanical: if answering requires digging first, and the digging changes what you dig for next, you've handed over a goal whether you meant to or not. One step, ask a question. Several dependent steps, set a goal.</p>
+<h3>2. Give It Tools, Not Just Words</h3>
+<p>An agent with no tools is a single-shot prompt wearing a longer explanation. The power shows up when it can act on real things instead of describing what it *would* do.</p>
 <pre class="code-block language-js"><code><span class="token-comment">// rfp-agent.js — one goal, not one question</span>
 <span class="token-keyword">const</span> result = await agent.run({
   goal: &quot;Read fairview-rfp.txt, list every requirement, and flag anything unclear.&quot;,
   tools: [readFile, writeNotes],
+  maxSteps: <span class="token-number">25</span>,
 });</code></pre>
-<p>That <code>tools</code> array is the whole difference. Take the tools away and you've got a chatbot describing a plan instead of one carrying it out.</p>
+<p>Nate had originally saved this file as <code>birria.js</code>, after lunch. It is now <code>rfp-agent.js</code>, after a short discussion.</p>
+<p>The exact API differs by framework — different SDKs spell this differently — but the shape is the same everywhere: a goal, a set of tools, and limits. A tool itself is just a function plus a description the model can actually understand:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> readFile = {
+  name: &quot;read_file&quot;,
+  description: &quot;Read a UTF-<span class="token-number">8</span> text file from the project directory and <span class="token-keyword">return</span> its contents.&quot;,
+  parameters: { path: &quot;string&quot; },
+  run: async ({ path }) =&gt; fs.readFile(resolveInsideProject(path), &quot;utf8&quot;),
+};</code></pre>
+<p>Two things in that snippet matter more than they look:</p>
+<p>The <strong>description</strong> is not a comment. It's the only thing the model has to decide *when* to reach for this tool. A vague description produces an agent that reaches for the wrong thing at the wrong time and then reasons confidently about the result.</p>
+<p>The <code>resolveInsideProject</code> wrapper is a <strong>guardrail</strong>. Give an agent a file-reading tool that can read anything on your disk, or a writing tool that can overwrite anything, and you have not built an assistant — you've built a very fast, very sincere intern with root access. Scope tools to the narrowest thing that does the job. Read-only where read-only is enough.</p>
 <pre class="mermaid">flowchart TD
   Goal[&quot;Goal set by you&quot;] --&gt; Plan[&quot;Agent plans the steps&quot;]
   Plan --&gt; Act[&quot;Agent acts — calls a tool&quot;]
   Act --&gt; Observe[&quot;Agent observes the result&quot;]
-  Observe --&gt; Done{&quot;Goal met?&quot;}
+  Observe --&gt; Done{&quot;Goal met?&lt;br/&gt;Step limit hit?&quot;}
   Done -- No --&gt; Plan
   Done -- Yes --&gt; Finish[&quot;Hands result back to you&quot;]</pre>
-<p>Follow that loop and you'll notice the human — you — only shows up twice: setting the goal, and reviewing what comes back. Everything in the middle runs on its own.</p>
-<h3>3. Let It Check Its Own Work, Then You Check It Too</h3>
-<p>A good agent doesn't just act once and stop — it re-reads its own output against the goal before calling itself done. That's part of the loop, not a separate step. But &quot;the agent checked itself&quot; is not the same as &quot;it's correct.&quot; An agent that misreads a requirement will confidently misreport it, in complete sentences, with total conviction. Directing an agent well — which AutoNate already learned the hard way — means the loop ends with you, reviewing the result against the actual source document, every time. Autonomy inside the loop. Accountability outside it.</p>
-<h3>4. Sanity Checks</h3>
-<ul><li>If an agent stops after one step and waits for you to prompt it again: you likely gave it a question, not a goal — reframe what you asked for as an outcome, not a single fact.</li><li>If the output looks complete but something feels off: check it against the original source directly. An agent that sounds confident isn't automatically an agent that's correct.</li><li>If you're not sure whether a task needs an agent or a single prompt: ask whether it requires more than one real step to finish. One step, use a question. Several connected steps, hand it a goal.</li><li>If this still feels theoretical: it stops being theoretical the moment you actually hand an agent a real RFP and watch it work through one — which is exactly what's next.</li></ul>
-<p>AutoNate reread that clip one more time. Not because he still didn't get it — because he finally did, and he wanted to watch it again knowing what he was looking at.</p>
-<p>Next: <code>02-reading-an-rfp-with-ai.md</code> — pointing that exact loop at the Fairview document he'd only skimmed so far.</p></div>
+<p>Follow that loop and notice where the human appears: setting the goal, and reviewing what comes back. Everything between runs on its own.</p>
+<h3>3. Every Loop Needs a Way to Stop</h3>
+<p>That <code>maxSteps: 25</code> isn't decoration. A loop that decides its own next move can also decide, quite reasonably, to keep going — re-reading, re-checking, refining a list that was fine four steps ago. Three things end a loop properly:</p>
+<ul><li><strong>A clear success condition.</strong> &quot;Produce a JSON file with these five keys&quot; is checkable. &quot;Understand the RFP&quot; is not, and an agent handed an uncheckable goal will circle it.</li><li><strong>A step or iteration cap</strong>, so a stuck loop fails fast and visibly instead of quietly grinding.</li><li><strong>A budget.</strong> Every step is another model call, which is real tokens, real latency, and real money. Multi-step autonomy is genuinely more expensive than one prompt, and the tradeoff is usually worth it — but it should be a decision, not a surprise on an invoice.</li></ul>
+<p>&quot;So it's a <code>while</code> loop with a break condition,&quot; Nate says.</p>
+<p>&quot;Is it?&quot;</p>
+<p>&quot;It's a <code>while</code> loop with a break condition and a personality.&quot;</p>
+<p>&quot;Write the break condition first, then.&quot;</p>
+<h3>4. It Checks Its Own Work. Then You Check It.</h3>
+<p>A well-built agent re-reads its own output against the goal before declaring itself done. That self-check is part of the loop and it genuinely catches things.</p>
+<p>It is also not the same as being correct.</p>
+<p>An agent that misreads a requirement will misreport it confidently, in complete sentences, with citations formatted beautifully. This is the failure mode that has burned both of them before — Kai by taking a fluent answer at face value because it *sounded* like it came from somewhere, Nate by refusing to check something he was sure he already knew. The habit that came out of it is one line long and it's the studio's whole engineering discipline: <strong>where's that from?</strong></p>
+<p>So the loop ends with a person. Autonomy inside the loop, accountability outside it. That's not a limitation you tolerate — on a document where a misread sentence costs a real department a real year, it's the entire reason the thing is trustworthy at all.</p>
+<h3>5. Sanity Checks</h3>
+<ul><li>If the agent stops after one step and waits: you gave it a question, not a goal. Restate what you want as an outcome, not a fact.</li><li>If it never stops: your success condition isn't checkable. Rewrite the goal so a machine can tell when it's met, and set a step cap.</li><li>If it used the wrong tool at the wrong time: fix the tool *description* before you touch the prompt. That's usually where the confusion lives.</li><li>If a tool can do more than the job needs: narrow it. Read-only beats read-write, one directory beats the whole disk.</li><li>If the output looks complete but something feels off: check it against the source directly. Confidence is a writing style, not evidence.</li><li>If you're not sure whether this needs an agent at all: count the dependent steps. One, prompt it. Several, build the loop.</li></ul>
+<p>Nate deleted the &quot;win us this contract&quot; goal and typed a much more boring one about reading a file and listing requirements with page citations. It was, objectively, a less cool sentence. It was also the first thing he'd built in a year that somebody outside the room was going to depend on.</p>
+<p>Next: <code>02-reading-an-rfp-with-ai.md</code> — pointing that loop at forty-three pages of language Nate cannot read yet.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/civics-and-agentic-ai/zooming-out-to-the-city"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Past the Walls: Zooming Out to the City</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/civics-and-agentic-ai/reading-an-rfp-with-ai"><span><small>Next</small>The Fine Print: Reading an RFP with AI</span><span class="material-symbols-outlined">arrow_forward</span></a>

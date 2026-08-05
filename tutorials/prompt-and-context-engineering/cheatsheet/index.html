@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Cheatsheet | AutoNateAI Tutorials</title>
-        <meta name="description" content="The prompt patterns and context-engineering checklist AutoNate actually keeps open in a tab." />
+        <meta name="description" content="The prompt patterns and context-engineering checklist Nate and Kai actually keep open in a tab." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/cheatsheet" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Cheatsheet: keep the build moving." />
-        <meta property="og:description" content="The prompt patterns and context-engineering checklist AutoNate actually keeps open in a tab." />
+        <meta property="og:description" content="The prompt patterns and context-engineering checklist Nate and Kai actually keep open in a tab." />
         <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/cheatsheet" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-cheatsheet.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-cheatsheet.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Cheatsheet: keep the build moving." />
-        <meta name="twitter:description" content="The prompt patterns and context-engineering checklist AutoNate actually keeps open in a tab." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-cheatsheet.jpg" />
+        <meta name="twitter:description" content="The prompt patterns and context-engineering checklist Nate and Kai actually keep open in a tab." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-cheatsheet.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,34 +65,74 @@
           <header>
             <span class="kicker">Reference / Tutorial 05</span>
             <h1>Cheatsheet</h1>
-            <p>The prompt patterns and context-engineering checklist AutoNate actually keeps open in a tab.</p>
+            <p>The prompt patterns and context-engineering checklist Nate and Kai actually keep open in a tab.</p>
             <div class="tag-row"><span>Reference prompt patterns</span><span>Run the context checklist</span><span>Catch common failures</span></div>
           </header>
-          <div class="markdown-body"><p>Every builder ends up with a sticky note, a second monitor, or a browser tab they never close. AutoNate's version is this file — the stuff he still checks before he hits enter, because a five-second pause here beats a rewritten file there. Quick lookups for the habits this pack was actually about.</p>
+          <div class="markdown-body"><p>Every team ends up with a sticky note, a second monitor, or a browser tab nobody's allowed to close. For Nate and Kai — two people in Fairview building a studio, one self-taught and fast, one out of a decade of grant work and constitutionally unable to accept an unsourced claim — it's a whiteboard in the corner of a kitchen and this file.</p>
+<p>This is the lookup version of everything in this pack: the patterns they actually keep open while directing an AI agent at real code. The reasoning behind each one is back in the chapters. This is just the part you check before you hit enter.</p>
+<h3>The Whiteboard</h3>
+<p>Four lines, written a week apart, in the order they got learned the hard way:</p>
+<pre class="code-block language-text"><code>Say exactly what you want.
+Then go find out if you got it.
+If it wasn't in the room, it didn't happen.
+Where's that from?</code></pre>
+<p>Everything below is footnotes on those.</p>
 <h3>Prompt Pattern Reference</h3>
-<div class="markdown-table"><table><thead><tr><th>Piece</th><th>What It Answers</th><th>Example</th></tr></thead><tbody><tr><td>Role</td><td>Who should the agent act as?</td><td>&quot;Act like a careful Screeps engineer reviewing existing code.&quot;</td></tr><tr><td>Task</td><td>What's the specific, checkable outcome?</td><td>&quot;Add <code>scout.js</code> that visits each adjacent room once and logs hostiles.&quot;</td></tr><tr><td>Constraints</td><td>What are the guardrails?</td><td>&quot;Don't modify existing files. Keep CPU usage low.&quot;</td></tr><tr><td>Format</td><td>What shape should the answer come back in?</td><td>&quot;Full new file, then a one-line spawn instruction.&quot;</td></tr><tr><td>Example *(optional)*</td><td>What does &quot;right&quot; look like?</td><td>A short snippet matching your existing style.</td></tr></tbody></table></div>
-<p>Skip a row and the agent fills it in silently, on its own terms, not yours.</p>
+<div class="markdown-table"><table><thead><tr><th>Piece</th><th>What It Answers</th><th>Example</th></tr></thead><tbody><tr><td>Role</td><td>Who should the agent act as?</td><td>&quot;You're a careful Node.js engineer in an existing codebase. Don't refactor what you weren't asked to touch.&quot;</td></tr><tr><td>Task</td><td>What's the specific, checkable outcome?</td><td>&quot;Add <code>lib/followups.js</code> exporting <code>draftFollowups(signups)</code> returning <code>{to, subject, body}</code> for consenting rows only.&quot;</td></tr><tr><td>Constraints</td><td>What are the guardrails, especially the *don'ts*?</td><td>&quot;No new dependencies. No network calls. No changes to any other file.&quot;</td></tr><tr><td>Format</td><td>What shape should the answer come back in?</td><td>&quot;Full new file, then three bullets on how you'd test it.&quot;</td></tr><tr><td>Example *(optional)*</td><td>What does &quot;right&quot; look like?</td><td>A short snippet in your actual house style.</td></tr></tbody></table></div>
+<p>Skip a row and the agent does not skip it — it fills the row in silently, using the average of everything it's ever seen. Every unstated decision is still a decision.</p>
+<p>Kai's version, from ten years of writing scopes of work: *the section that saves you is never Deliverables, it's Out of Scope.*</p>
 <h3>Context-Engineering Checklist</h3>
-<ul><li>Only open the files this specific task actually needs — not the whole project &quot;to be safe.&quot;</li><li>Archive or delete dead experiments instead of leaving them sitting in the room.</li><li>Summarize long files or logs before pasting them whole.</li><li>Tell the agent explicitly to ask for a file it's missing instead of guessing.</li><li>Start a fresh session for a new task instead of dragging a long, cluttered one forward.</li><li>Remember tool output (logs, command results) counts against the same budget as everything else.</li></ul>
+<ul><li>Put the file in the room before asking about the file. An agent with no information doesn't say &quot;I don't know&quot; — it produces the most plausible file with that name.</li><li>Open only what this specific task touches, not the whole project &quot;to be safe.&quot;</li><li>Archive dead experiments instead of closing them. Closing is a decision you re-make every session; archiving you make once.</li><li>Keep <code>node_modules/</code> and lockfiles out of reach. One lockfile can outweigh your entire codebase in tokens.</li><li>Summarize long files and logs, verify the summary, then drop the original.</li><li>Ask for filtered command output (&quot;only the failing lines&quot;) instead of raw dumps. Tool output costs the same as anything else and you didn't type it.</li><li>Tell it explicitly to ask for a missing file instead of guessing.</li><li>Start a fresh session for a new task instead of dragging a cluttered one along.</li><li>Write durable project facts once, in a context file at the repo root (<code>AGENTS.md</code>, <code>CLAUDE.md</code> — check what your tool reads), instead of re-typing them every session.</li></ul>
+<h3>The Ten-Second Verification Kit</h3>
+<p>Anything an agent names that you don't personally recognize, settle it with a command rather than a feeling:</p>
+<pre class="code-block language-bash"><code>npm view csv-parse                    # real package: metadata, versions, maintainer
+npm view csv-parser-sync              # E404: does not exist
+npm view &lt;package&gt; repository         # is there a real repo behind it?
+npm install &lt;package&gt; --ignore-scripts  # if you must install something unvetted</code></pre>
+<pre class="code-block language-bash"><code>node -e &quot;console.log(typeof [].flat)&quot;      # function → real
+node -e &quot;console.log(typeof [].uniqueBy)&quot;  # undefined → not a thing
+node --test                                # a passing test is ground truth; prose isn't</code></pre>
+<p>Before installing anything an agent suggested: check the publish date, the version count, and whether a repository is listed. A package published three weeks ago with one version and no repo isn't a dependency, it's a stranger — hallucinated package names get squatted on purpose.</p>
+<h3>The Three Questions Before Anything Ships</h3>
+<p>1. Do I recognize every method, package, and constant in this? Anything I don't, I check with one command. 2. Did I read the actual diff, or the summary of the diff? Only one of those runs. 3. Did I run it somewhere that can't hurt anybody? Dry run, test, scratch directory.</p>
+<p>Ten seconds, bounded. If verification is taking longer than writing it yourself, you've overcorrected into the other failure mode.</p>
 <h3>Common Failure Modes and Fixes</h3>
-<div class="markdown-table"><table><thead><tr><th>Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Agent edits files you didn't mention</td><td>Ask wasn't scoped</td><td>Name the exact file, state what's off-limits</td></tr><tr><td>Output &quot;kind of&quot; matches the ask</td><td>Task described a feeling, not an outcome</td><td>Rewrite as something checkable pass/fail</td></tr><tr><td>Agent blends old and new code styles</td><td>Too many conflicting files open at once</td><td>Close everything but the one true pattern</td></tr><tr><td>Agent references code that doesn't exist in your project</td><td>A stale or dead file is still in context</td><td>Check what's open, archive what's unused</td></tr><tr><td>Confident method or constant you don't recognize</td><td>Hallucination</td><td>Verify against real docs before it ships</td></tr><tr><td>Works, but not the way you meant</td><td>Ambiguity you left open</td><td>Decide the open question yourself, or ask it to list options</td></tr><tr><td>Session feels vague or forgetful</td><td>Context window crowded with old history</td><td>Start a new session for the new task</td></tr></tbody></table></div>
+<div class="markdown-table"><table><thead><tr><th>Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Edits files you never mentioned</td><td>Ask wasn't scoped</td><td>Name the file, state the blast radius: &quot;no changes to any other file&quot;</td></tr><tr><td>Output &quot;kind of&quot; matches the ask</td><td>Task described a feeling, not an outcome</td><td>Rewrite as something you could grade pass/fail</td></tr><tr><td>Confidently explains a file it's never seen</td><td>An empty context slot filled with plausible material</td><td>Put the file in the room, then ask again</td></tr><tr><td>Blends two eras of your own code style</td><td>Too many conflicting examples open</td><td>Close everything but the one true pattern</td></tr><tr><td>References code that doesn't exist in your project</td><td>Stale or dead file still in context</td><td>Archive it, don't just close it</td></tr><tr><td>Names a package or method you don't recognize</td><td>Hallucination — usually a chimera of two real things</td><td><code>npm view</code> / <code>typeof</code> it before it ships</td></tr><tr><td>Cites &quot;the standard&quot; or &quot;best practice&quot;</td><td>Describing a popular tendency in the voice of a spec</td><td>Ask where it's from. Sometimes there's a spec. Often there's a popularity contest.</td></tr><tr><td>Works, but not the way you meant</td><td>Ambiguity you left open</td><td>Decide the open questions yourself, or ask it to list them without picking</td></tr><tr><td>Session feels vague or forgetful</td><td>Window crowded with old history and tool output</td><td>Fresh session for the new task</td></tr><tr><td>Did something irreversible</td><td>You never said not to</td><td>The most valuable sentence in a prompt is usually about what *not* to do</td></tr></tbody></table></div>
 <h3>Prompt Templates Worth Keeping</h3>
-<pre class="code-block language-text"><code>You're acting as [role] on [project]. Task: [specific,
-checkable outcome]. Constraints: [what not to touch, any
-limits]. Format: [what shape you want back]. If you're
-missing a file you need, ask before guessing.</code></pre>
-<pre class="code-block language-text"><code>Before we change anything, summarize what [file] currently
-does in a few bullet points so I can confirm you've got
-the right picture.</code></pre>
-<pre class="code-block language-text"><code>Good start. Keep everything else the same, just also
-[the one specific thing that was off].</code></pre>
+<pre class="code-block language-text"><code>You're acting as [role] on [project]. Task: [specific, checkable
+outcome]. Constraints: [what not to touch, what not to add, any
+limits]. Format: [what shape you want back]. If you're missing a
+file you need, ask before guessing.</code></pre>
+<pre class="code-block language-text"><code>Before you write anything: list the 3-5 checks you'd expect this
+to pass, and any decisions this task requires that I haven't
+made. Don't pick for me. I'll confirm, then you implement.</code></pre>
+<pre class="code-block language-text"><code>Before you answer: list every file you have actually read in this
+conversation. If you haven't read [file], say so instead of
+guessing.</code></pre>
+<pre class="code-block language-text"><code>Summarize what [file] currently does in six bullets, and flag
+anything that looks like a decision we made versus a question we
+never answered.</code></pre>
+<pre class="code-block language-text"><code>Good start — keep everything else exactly as is. Just [the one
+specific thing that was off]. Show me only the changed function.</code></pre>
+<pre class="code-block language-text"><code>Run the tests. Don't paste the full output — only the failing
+lines, plus one sentence on what failed and where.</code></pre>
 <h3>Where to Go Deeper</h3>
-<p>Every habit in this cheatsheet has its full story earlier in this pack — start at <code>00-why-prompting-is-a-skill.md</code> if you want the reasoning behind any of it, not just the lookup.</p>
-<h3>The Part Where AutoNate Looks Back</h3>
-<p>A pack ago, AutoNate typed &quot;make my colony better&quot; into an agent and got a mess he didn't ask for and couldn't explain. Now he opens exactly the files a task needs, states the role and the task and the constraints before he ever hits enter, and reads every diff like it might be lying to him — because sometimes, fluently and confidently, it is. He's not writing every line of his colony by hand anymore. He's directing something that can write a lot of them for him, fast, as long as he tells it the truth about what he actually wants. That's not cheating. That's just a bigger lever, and he finally knows how to pull it.</p>
-<p>None of that happened in one sitting either. It happened one bad prompt at a time — one deleted comment, one made-up API method, one scout that walked into a tower before it learned to walk into a wall of context instead. Every mess taught him exactly what the next prompt needed that the last one didn't.</p>
-<p>If you've been with AutoNate since a <code>console.log</code> in a JavaScript pack, or since his first creep popped into existence on a Screeps world map — you already know he doesn't stay in one place for long. And if this is the first pack of his you've picked up, that's fine too. You don't need the backstory to have just learned everything he learned.</p>
-<p>Here's where he's actually stuck now: his colony's bigger, his roles are sharper, and the agent finally does what he asks — but he's got no real way to keep track of any of it. Which rooms are producing what. Which roles are actually pulling their weight. How his colony stacks up against whoever else is climbing the same bracket. Right now it's all just... in his head, and in scattered <code>console.log</code> lines that scroll off screen and disappear. That doesn't scale any better than hand-coding every role did. He's about to learn there's a whole different skill for holding onto information at scale — one that has nothing to do with prompts, and everything to do with keeping score.</p></div>
+<p>Every habit here has its full story earlier in the pack. Start at <code>00-why-prompting-is-a-skill.md</code> if you want the reasoning and not just the lookup — including the ninety minutes Kai spent reorganizing a repo to match a standard that doesn't exist.</p>
+<h3>The Part Where They Look Back</h3>
+<p>A month ago Nate typed &quot;clean up the codebase&quot; into an agent and got back a mess he didn't ask for, couldn't explain, and reacted to by refusing to use the thing for two days out of pride. The same week, Kai — who can find an unsourced claim in a forty-page PDF from across a room — restructured their entire project on the strength of one confident paragraph, because it arrived formatted as code and code doesn't *look* like it's bluffing.</p>
+<p>They failed in opposite directions and it was the same failure. He wouldn't say what he wanted. She wouldn't check what she got.</p>
+<p>Now: three files in the room and the dead ones quarantined. Role, task, constraints, format, and acceptance criteria agreed before a line gets written. A context file at the repo root doing the work Nate's memory used to do badly. And a three-word question that started as Kai's personality and is now, functionally, their build process.</p>
+<p>Neither of them writes every line by hand anymore. They direct something that can write a lot of them, fast — as long as they tell it the truth about what they actually want and go find out whether they got it. That's not cheating. It's just a bigger lever, and they finally know where to stand.</p>
+<p>None of it arrived in one sitting, either. It arrived one bad Friday at a time: one deleted TODO comment, one directory structure that wasn't a standard, one package name that had never existed anywhere on earth and was three keystrokes from being installed.</p>
+<h3>What They Still Can't Do</h3>
+<p>Here's where they're actually stuck, and it's not a prompting problem.</p>
+<p>Nineteen names on a CSV that started life as a paper sheet. Four of those people described a problem worth building. Two have replied. One introduced them to somebody else at Founders Table who isn't on the sheet at all, because she showed up late. There's a folder of meeting scribbles, a text thread, a whiteboard, and — the load-bearing system of record for an entire studio — Kai's memory of who said what in October.</p>
+<p>The follow-ups went out. Now they need to know who replied, which ideas came from whom, which ones overlap, and which introduction came through which person. A flat CSV can't answer any of those questions, and neither can a better prompt.</p>
+<p>&quot;We need to be able to *ask* our own information something,&quot; Kai says.</p>
+<p>&quot;Like a database.&quot;</p>
+<p>&quot;Like a database.&quot;</p>
+<p>There's a whole different skill for holding onto information at scale — one that has nothing to do with prompts and everything to do with structure, relationships, and being able to get an answer back out of the thing you put in.</p>
+<p>Next pack: <strong>The System of Record</strong> — relational databases and graphs, built on their own real data.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</span></a>
             <span></span>

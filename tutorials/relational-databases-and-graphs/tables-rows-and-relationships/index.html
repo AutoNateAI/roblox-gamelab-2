@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>The Blueprint: Tables, Rows, and Relationships | AutoNateAI Tutorials</title>
-        <meta name="description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
+        <meta name="description" content="Primary keys, foreign keys, one-to-many. Nate and Kai model their contacts, ideas, and feedback as real relational tables." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/relational-databases-and-graphs/tables-rows-and-relationships" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="The Blueprint: Tables, Rows, and Relationships: keep the build moving." />
-        <meta property="og:description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
+        <meta property="og:description" content="Primary keys, foreign keys, one-to-many. Nate and Kai model their contacts, ideas, and feedback as real relational tables." />
         <meta property="og:url" content="https://autonateai.com/tutorials/relational-databases-and-graphs/tables-rows-and-relationships" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-tables-rows-and-relationships.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-relational-databases-and-graphs-tables-rows-and-relationships.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="The Blueprint: Tables, Rows, and Relationships: keep the build moving." />
-        <meta name="twitter:description" content="Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-tables-rows-and-relationships.jpg" />
+        <meta name="twitter:description" content="Primary keys, foreign keys, one-to-many. Nate and Kai model their contacts, ideas, and feedback as real relational tables." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-relational-databases-and-graphs-tables-rows-and-relationships.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Relational Databases and Graphs</strong>
-          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why He Needs a Scoreboard</a><a class="active" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
+          <a class="" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard">00 The Missing Ledger: Why They Need a Scoreboard</a><a class="active" href="/tutorials/relational-databases-and-graphs/tables-rows-and-relationships">01 The Blueprint: Tables, Rows, and Relationships</a><a class="" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql">02 Talking to the Data: Asking Questions with SQL</a><a class="" href="/tutorials/relational-databases-and-graphs/when-relationships-get-tangled">03 The Web Under the Table: When Relationships Get Tangled</a><a class="" href="/tutorials/relational-databases-and-graphs/building-the-monitor">04 The Scoreboard Comes Alive: Building the Monitor</a><a class="" href="/tutorials/relational-databases-and-graphs/cheatsheet">05 Cheatsheet</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,56 +65,86 @@
           <header>
             <span class="kicker">Chapter 1 / Tutorial 01</span>
             <h1>The Blueprint: Tables, Rows, and Relationships</h1>
-            <p>Primary keys, foreign keys, one-to-many. AutoNate models his colonies and matches as real relational tables.</p>
+            <p>Primary keys, foreign keys, one-to-many. Nate and Kai model their contacts, ideas, and feedback as real relational tables.</p>
             <div class="tag-row"><span>Design tables and keys</span><span>Model one-to-many relationships</span><span>Think in rows, not files</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate grabbed a notebook — an actual paper one, which felt almost funny given what he was about to build — and started listing every fact he needed to remember about his colonies. Name. Which room it lived in. Every match it had played. Who it played against. Whether it won. What roles were on the field when it did. He kept writing &quot;and it needs to connect back to—&quot; over and over, and somewhere around the fifth line he realized he wasn't describing a list. He was describing a web of related facts, and no single flat list was going to hold all of it without repeating itself into a mess.</p>
-<p>That's exactly the shape a relational database is built for. Not one giant list with every fact crammed into every row — a set of focused, separate tables, each one holding one kind of thing well, linked together by a shared piece of information. Colonies over here. Matches over there. A thread connecting them, so you can always walk from one to the other. This chapter is AutoNate building that structure for real, for the first time — not sketching it in a notebook, but writing it as actual SQL that a real database will hold onto.</p>
+          <div class="markdown-body"><p>Nate and Kai run a two-person studio called AutoNateAI, and everything they know about their own business — who they've met at the Fairview Founders Table meetup, which ideas are still alive, what people actually said about them — currently lives across two phone notes, a paper notebook, and two unreliable memories. They've decided to fix that with a real database. This chapter is where the fixing starts, on a whiteboard, with a marker Kai will not let Nate hold.</p>
+<p>She'd drawn three boxes. <strong>PEOPLE. IDEAS. FEEDBACK.</strong> Nate kept trying to add arrows between them and she kept capping the marker before he could.</p>
+<p>&quot;Finish the boxes first. What's inside people.&quot;</p>
+<p>&quot;Name, what they do, email, when we met.&quot; He counted on his fingers. &quot;Oh — and every idea they gave feedback on.&quot;</p>
+<p>&quot;That's not inside the box. That's an arrow.&quot;</p>
+<p>She was right, and that distinction is the entire relational model in one sentence. A fact that belongs to one thing goes in that thing's row. A fact that connects two things gets its own place to live. Cram the arrows into the boxes and you end up with a <code>people</code> row containing a column called <code>feedback_stuff</code> full of comma-separated text that no query will ever be able to read. This chapter is them building the boxes properly, as real SQL that a real database will hold onto and enforce.</p>
 <h3>Coder's Corner: The Relational Model</h3>
-<p>A <strong>relational database</strong> stores information in <strong>tables</strong> — think of a table like a spreadsheet with strict rules about what goes in each column. Every table holds one kind of thing: a <code>colonies</code> table holds colonies, a <code>matches</code> table holds matches. Nothing gets mixed together.</p>
-<p>Each individual entry in a table is called a <strong>row</strong> — one specific colony, one specific match. Each table has <strong>columns</strong>, and every row in that table has a value for every column, in the same shape every time. That consistency is the whole point: once you know the shape of a table, you know exactly what every row in it looks like.</p>
-<p>Every table needs a <strong>primary key</strong> — a column (usually <code>id</code>) that uniquely identifies each row, so no two rows are ever confused for each other, even if every other column happens to match. Screeps has two creeps named &quot;Bob&quot; sometimes; a primary key never has that problem, because the database assigns it and guarantees it's unique.</p>
-<p>The connective tissue is the <strong>foreign key</strong> — a column in one table that stores the primary key of a row in another table, creating a link between them. When a <code>matches</code> row has a <code>colony_id</code> column holding the value <code>3</code>, that's the database saying &quot;this match belongs to the colony whose id is 3.&quot; That link is what turns a pile of separate tables into one connected system.</p>
-<h3>1. Design the <code>colonies</code> Table</h3>
-<p>Every match, every build, every role AutoNate tracks needs to trace back to a colony. So that's the table he built first — the anchor everything else points to.</p>
-<pre class="code-block language-sql"><code>CREATE TABLE colonies (
+<p>A <strong>relational database</strong> stores information in <strong>tables</strong> — think of a table as a spreadsheet with strict, enforced rules about what goes in each column. Every table holds exactly one kind of thing: a <code>people</code> table holds people, an <code>ideas</code> table holds ideas. Nothing gets mixed together.</p>
+<p>Each individual entry in a table is a <strong>row</strong> — one specific person, one specific idea. Each table has <strong>columns</strong>, and every row has a value for every column, in the same shape every time. That consistency is the point: once you know the shape of a table, you know exactly what every row in it looks like, forever, without opening it.</p>
+<p>Every table needs a <strong>primary key</strong> — a column (conventionally <code>id</code>) that uniquely identifies each row so no two rows can ever be confused, even if every other column happens to match. Two different people named Tomas Reyes are still two different rows, because the key says so.</p>
+<p>The connective tissue is the <strong>foreign key</strong> — a column in one table that holds the primary key of a row in another table, creating a real link between them. When a <code>feedback</code> row has <code>person_id = 3</code>, that's the database stating &quot;this feedback came from the person whose id is 3.&quot; That link is what turns a pile of separate tables into one connected system you can walk across.</p>
+<h3>1. Design the <code>people</code> Table</h3>
+<p>Everything else in the studio's records eventually traces back to a person, so that's the anchor table.</p>
+<p>Nate's opening move was confident and wrong. &quot;Email's the primary key. It's already unique, everyone's got one, and then I never have to look up an id.&quot;</p>
+<p>Kai didn't even argue the design point first. She just asked, &quot;What's Tomas's email?&quot;</p>
+<p>Tomas Reyes does not have an email. Tomas has an Instagram handle he gave Kai on the back of a receipt. Under Nate's schema, Tomas cannot be entered into the database at all — a person who exists in real life is unrepresentable because a column he doesn't have is the thing that identifies him.</p>
+<p>Then it got worse. Priya from the library had given Kai a work address in March and a personal one in June, because she changed jobs. Under an email primary key, &quot;Priya changed her email&quot; isn't an update — it's a new identity, and every row anywhere in the database that pointed at the old address is now pointing at a person who no longer exists.</p>
+<p>That's the rule worth carrying out of this chapter: <strong>don't use real-world data as a primary key.</strong> Emails, phone numbers, usernames, company names — they all look unique right up until they change, get reused, or turn out not to apply. Use a <strong>surrogate key</strong> instead: a meaningless id the database invents and guarantees, whose only job is to be stable.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE people (
   id INTEGER PRIMARY KEY,
   name TEXT NOT NULL,
-  room TEXT NOT NULL,
+  org TEXT,
+  email TEXT UNIQUE,
+  handle TEXT,
+  first_met_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+<p><code>id INTEGER PRIMARY KEY</code> in SQLite means the database hands out a new id automatically on every insert — no collisions, no invention required. <code>name</code> is <code>NOT NULL</code> because a person with no name isn't a record, it's a mistake, and the database should refuse a mistake rather than accept it quietly. <code>org</code> and <code>handle</code> are nullable on purpose: plenty of real people don't have either, and forcing a value would just produce a table full of <code>&quot;n/a&quot;</code>.</p>
+<p>Email still gets <code>UNIQUE</code>, which is the compromise that makes everyone happy. Two rows can't share an address — so the duplicate-Tomas problem gets caught the moment both entries have contact info — but email isn't carrying the weight of identity, so it's free to be missing or to change.</p>
+<h3>2. Design the <code>ideas</code> Table</h3>
+<p>The backlog is its own kind of thing, unrelated to any one person, so it gets its own box.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE ideas (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'backlog'
+    CHECK (status IN ('backlog', 'exploring', 'building', 'shelved')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );</code></pre>
-<p><code>id</code> is the primary key — the database hands out a new one automatically every time a row is inserted, so AutoNate never has to invent one himself and never has to worry about a collision. <code>name</code> and <code>room</code> are <code>NOT NULL</code> on purpose: a colony with no name or no room isn't a real record, it's a mistake, and the database refuses to let a mistake in quietly.</p>
-<h3>2. Design the <code>matches</code> Table</h3>
-<p>A match doesn't exist on its own — it always belongs to a colony. That relationship gets encoded directly in the table, through a foreign key.</p>
-<pre class="code-block language-sql"><code>CREATE TABLE matches (
+<p>The <code>CHECK</code> constraint is doing quiet, important work. Without it, <code>status</code> accepts anything, and six months from now the table contains <code>building</code>, <code>Building</code>, <code>in progress</code>, and one row that just says <code>yes</code>. Every query filtering on status is then silently wrong, and nothing ever tells you. A <code>CHECK</code> turns &quot;we agreed to only use these four words&quot; from a shared intention into a rule the database enforces on both of you at 1am.</p>
+<p>Nate wanted a fifth column called <code>vibe</code>. Kai asked what would ever be done with it. Nate said &quot;you'd read it,&quot; and heard how that sounded halfway through the sentence.</p>
+<h3>3. Design the <code>feedback</code> Table and See the Arrows Appear</h3>
+<p>Feedback is the arrow Kai wouldn't let him draw yet, and now it gets to exist. A piece of feedback is meaningless on its own — it needs a person who said it and an idea it's about.</p>
+<pre class="code-block language-sql"><code>CREATE TABLE feedback (
   id INTEGER PRIMARY KEY,
-  colony_id INTEGER NOT NULL REFERENCES colonies(id),
-  opponent TEXT NOT NULL,
-  result TEXT NOT NULL CHECK (result IN ('win', 'loss')),
-  ticks INTEGER,
-  played_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  idea_id INTEGER NOT NULL REFERENCES ideas(id),
+  person_id INTEGER NOT NULL REFERENCES people(id),
+  verdict TEXT NOT NULL
+    CHECK (verdict IN ('would_use', 'interesting', 'not_for_me')),
+  note TEXT,
+  given_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );</code></pre>
-<p><code>colony_id REFERENCES colonies(id)</code> is the foreign key — it says &quot;every value in this column must be a real id that exists in the <code>colonies</code> table.&quot; Try inserting a match with <code>colony_id = 99</code> when no colony <code>99</code> exists, and the database rejects it outright. That's not the database being difficult. That's the database refusing to let AutoNate's own data lie to him.</p>
-<h3>3. Design the <code>roles</code> Table and See the Pattern Repeat</h3>
-<p>A match, in turn, has roles fielded during it — how many harvesters, how many builders, what they actually did. Same pattern as before: a table that belongs to the table above it.</p>
-<pre class="code-block language-sql"><code>CREATE TABLE roles (
-  id INTEGER PRIMARY KEY,
-  match_id INTEGER NOT NULL REFERENCES matches(id),
-  role_name TEXT NOT NULL,
-  count INTEGER NOT NULL,
-  energy_harvested INTEGER DEFAULT 0
-);</code></pre>
-<p>Now step back and look at what got built: <code>colonies</code> → <code>matches</code> → <code>roles</code>, each one linked to the one before it by a foreign key. This is a <strong>one-to-many relationship</strong>, repeated twice: one colony can have many matches, and one match can have many role entries — but each match belongs to exactly one colony, and each role entry belongs to exactly one match. That &quot;one parent, many children&quot; pattern is the workhorse of relational design. Almost everything you'll ever model breaks down into some version of it.</p>
+<p><code>REFERENCES ideas(id)</code> and <code>REFERENCES people(id)</code> are the foreign keys. They declare that every value in those columns must be a real id that exists in the parent table.</p>
+<p>Two relationships are visible here, and they're the same shape twice. One idea can have many pieces of feedback, but each piece of feedback is about exactly one idea. One person can give many pieces of feedback, but each piece came from exactly one person. That &quot;one parent, many children&quot; pattern is the <strong>one-to-many relationship</strong>, and it's the workhorse of relational design — most things you'll ever model decompose into some version of it.</p>
+<p>There's a bonus in the shape, too. Because <code>feedback</code> points at both parents, it also connects them: through it, one person can be linked to many ideas *and* one idea to many people. A table that sits between two others like that is called a <strong>junction</strong> (or associative) table, and it's how relational databases express <strong>many-to-many</strong> relationships — never with a single column, always with a table in the middle.</p>
 <pre class="mermaid">flowchart LR
-  A[&quot;colonies&lt;br/&gt;id, name, room&quot;] --&gt; B[&quot;matches&lt;br/&gt;id, colony_id, opponent, result&quot;]
-  B --&gt; C[&quot;roles&lt;br/&gt;id, match_id, role_name, count&quot;]</pre>
-<p>Read that left to right and it tells the whole story: a colony has matches, a match has roles fielded in it. Every arrow is a foreign key. Follow the arrows backward from any <code>roles</code> row and you can answer &quot;which colony was this, and did it win&quot; without ever touching a text file again.</p>
-<h3>4. Sanity Checks</h3>
-<ul><li>If an insert gets rejected with a foreign key error: check that the id you're referencing actually exists in the parent table first — you likely tried to attach a match to a colony that was never created, or mistyped the id.</li><li>If you're not sure whether something needs its own table or just another column: ask whether it can repeat. A colony has one name, so <code>name</code> is a column. A colony can have many matches, so <code>matches</code> needs its own table.</li><li>If two rows look identical except you can't tell them apart: that's what the primary key is for — it's unique even when every other value matches exactly.</li><li>If a query returns nothing when you expect rows: double-check the foreign key value you're filtering on actually matches what's stored — a <code>colony_id</code> of <code>3</code> and <code>&quot;3&quot;</code> are not automatically the same thing everywhere.</li></ul>
-<p>Three tables, two clean relationships, and for the first time AutoNate had a structure that couldn't quietly go inconsistent on him. The notebook stayed closed after that.</p>
-<p>Next: <code>02-asking-questions-with-sql.md</code> — where those tables stop just sitting there and start answering questions.</p></div>
+  P[&quot;people&lt;br/&gt;id, name, org, email&quot;] --&gt; F[&quot;feedback&lt;br/&gt;id, person_id, idea_id, verdict&quot;]
+  I[&quot;ideas&lt;br/&gt;id, title, status&quot;] --&gt; F</pre>
+<p>Read the arrows and it tells the whole story: a person gives feedback, an idea receives feedback, and every arrow is a foreign key. Start at any <code>feedback</code> row and you can walk to exactly who said it and exactly what about, without opening a phone note ever again.</p>
+<h3>4. The Demo That Didn't Work</h3>
+<p>Nate wanted to show off the guardrail. &quot;Watch — I'm gonna try to insert feedback from person 99, who doesn't exist, and it's gonna reject it. Instantly. Boom.&quot;</p>
+<pre class="code-block language-sql"><code>INSERT INTO feedback (idea_id, person_id, verdict)
+VALUES (1, 99, 'would_use');</code></pre>
+<p>It inserted. No error, no complaint, one shiny new row of feedback from a person who has never existed.</p>
+<p>Kai looked at it for a second. &quot;You said it would refuse. Where's that from?&quot;</p>
+<p>It's from the documentation, and the documentation also has the part Nate skipped: <strong>SQLite does not enforce foreign keys by default.</strong> For backward-compatibility reasons the constraint is parsed, stored, and completely ignored unless you turn it on — and it's a per-connection setting, so it has to be turned on every single time you open the database, not once at creation.</p>
+<pre class="code-block language-sql"><code>PRAGMA foreign_keys = ON;</code></pre>
+<p>And from JavaScript, the same thing, on every connection:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> Database = <span class="token-keyword">require</span>(<span class="token-string">'better-sqlite3'</span>);
+<span class="token-keyword">const</span> db = <span class="token-keyword">new</span> Database(<span class="token-string">'data/studio.db'</span>);
+db.pragma(<span class="token-string">'foreign_keys = ON'</span>);</code></pre>
+<p>With that on, the bad insert fails loudly, the way Nate promised it would. This is worth internalizing beyond SQLite specifically: a constraint you declared is not the same as a constraint that's running. The only way to know which one you have is to try to violate it on purpose and watch what happens.</p>
+<p>They deleted the ghost row. Nate did not comment further on <code>mango.db</code>.</p>
+<h3>5. Sanity Checks</h3>
+<ul><li>If an insert gets rejected with a foreign key error: good — that's the constraint working. Check that the id you're referencing actually exists in the parent table; you probably attached feedback to an idea that was never created, or mistyped an id.</li><li>If a *bad* insert gets accepted and you expected rejection: you almost certainly forgot <code>PRAGMA foreign_keys = ON</code> on this connection. Constraints declared and constraints enforced are two different things.</li><li>If you're unsure whether something needs its own table or just another column: ask whether it can repeat. A person has one name, so <code>name</code> is a column. A person can give many pieces of feedback, so <code>feedback</code> needs its own table.</li><li>If you're tempted to make an email, phone number, or username the primary key: assume it will change or be missing, because eventually it will be both. Use a surrogate <code>id</code> and put <code>UNIQUE</code> on the real-world value instead.</li><li>If two rows look identical and you can't tell them apart: that's exactly what the primary key is for — it stays unique even when every other value matches.</li><li>If a query returns nothing when you expect rows: confirm the foreign key value you're filtering on matches what's actually stored. <code>3</code> and <code>&quot;3&quot;</code> are not interchangeable everywhere.</li></ul>
+<p>Three tables, two clean one-to-many relationships, one junction in the middle, and — after the pragma — a structure that can't quietly go inconsistent on them. Kai capped the marker for the last time and put it in her bag, which Nate correctly interpreted as permanent.</p>
+<p>Next: <code>02-asking-questions-with-sql.md</code> — where the tables stop just sitting there and start answering, and one of those answers turns out to be a lie.</p></div>
           <nav class="tutorial-pager">
-            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Missing Ledger: Why He Needs a Scoreboard</span></a>
+            <a class="tutorial-pager-link prev" href="/tutorials/relational-databases-and-graphs/why-he-needs-a-scoreboard"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Missing Ledger: Why They Need a Scoreboard</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/relational-databases-and-graphs/asking-questions-with-sql"><span><small>Next</small>Talking to the Data: Asking Questions with SQL</span><span class="material-symbols-outlined">arrow_forward</span></a>
           </nav>
           <footer class="tutorial-next-step">

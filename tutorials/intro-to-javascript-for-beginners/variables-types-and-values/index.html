@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Know Your Pockets: Variables, Types, and Values | AutoNateAI Tutorials</title>
-        <meta name="description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
+        <meta name="description" content="Before you build anything, you check your pockets. Kai learns to hold onto information with variables — and catches Nate's own casual code assuming &quot;42&quot; and 42 are the same thing." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Know Your Pockets: Variables, Types, and Values: keep the build moving." />
-        <meta property="og:description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
+        <meta property="og:description" content="Before you build anything, you check your pockets. Kai learns to hold onto information with variables — and catches Nate's own casual code assuming &quot;42&quot; and 42 are the same thing." />
         <meta property="og:url" content="https://autonateai.com/tutorials/intro-to-javascript-for-beginners/variables-types-and-values" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-variables-types-and-values.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-variables-types-and-values.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Know Your Pockets: Variables, Types, and Values: keep the build moving." />
-        <meta name="twitter:description" content="Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-variables-types-and-values.jpg" />
+        <meta name="twitter:description" content="Before you build anything, you check your pockets. Kai learns to hold onto information with variables — and catches Nate's own casual code assuming &quot;42&quot; and 42 are the same thing." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-intro-to-javascript-for-beginners-variables-types-and-values.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -56,7 +56,7 @@
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>Intro to JavaScript for Beginners</strong>
-          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 Suit Up: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
+          <a class="" href="/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode">00 The Deal: Installing Node.js and VS Code</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/why-javascript">01 The Vision: Why JavaScript (and Where It Runs)</a><a class="active" href="/tutorials/intro-to-javascript-for-beginners/variables-types-and-values">02 Know Your Pockets: Variables, Types, and Values</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/control-flow">03 Reading the Room: Conditionals and Loops</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/functions-and-scope">04 Signature Moves: Functions and Scope</a><a class="" href="/tutorials/intro-to-javascript-for-beginners/objects-arrays-and-data-shapes">05 The Playbook: Objects, Arrays, and Data Shapes</a>
           <a href="/tutorials">All Packs</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
@@ -65,58 +65,173 @@
           <header>
             <span class="kicker">Chapter 2 / Tutorial 02</span>
             <h1>Know Your Pockets: Variables, Types, and Values</h1>
-            <p>Before you build anything, you check your pockets. AutoNate learns to hold onto information with variables, and to recognize exactly what kind of information he's holding.</p>
-            <div class="tag-row"><span>Declare values</span><span>Know the core types</span><span>Read your own data</span></div>
+            <p>Before you build anything, you check your pockets. Kai learns to hold onto information with variables — and catches Nate's own casual code assuming &quot;42&quot; and 42 are the same thing.</p>
+            <div class="tag-row"><span>Declare values</span><span>Know the core types</span><span>Catch a type bug before it ships</span></div>
           </header>
-          <div class="markdown-body"><p>Before you step to anybody — before a fight, before a deal, before a match — you check what you're carrying. AutoNate learned that from his moms, actually, not from a game: &quot;Know what's in your pockets before you leave the house.&quot; Cash, keys, phone, ID. You don't leave without checking. You definitely don't get into something serious without checking.</p>
-<p>Code works the same way. Before your program can do anything useful, it needs somewhere to hold onto information — a name, a score, a decision it made a second ago that it needs to remember three lines later. In JavaScript, that &quot;somewhere to hold information&quot; is called a <strong>variable</strong>. And just like you'd never confuse your car keys for your ID, JavaScript needs to know what kind of information it's holding, too. That's called a <strong>type</strong>. Mix those up, and things break in ways that are confusing until suddenly they're not.</p>
-<p>This chapter, AutoNate learns to check his pockets.</p>
-<h3>Coder's Corner: Declaring a Variable</h3>
-<p>You create a variable with <code>const</code> or <code>let</code>. Here's the difference, and it matters:</p>
-<ul><li><code>const</code> means &quot;this value doesn't change.&quot; Once you set it, it's locked in.</li><li><code>let</code> means &quot;this value is allowed to change later.&quot;</li></ul>
-<p>Use <code>const</code> by default. Only reach for <code>let</code> when you actually know the value is going to update — like a score that goes up, or energy that drains over time. Locking things down with <code>const</code> when you can isn't being lazy — it's being disciplined. Fewer things that can quietly change on you means fewer surprises later.</p>
-<pre class="code-block language-js"><code><span class="token-keyword">const</span> name = &quot;AutoNate&quot;;  <span class="token-comment">// this never changes</span>
-<span class="token-keyword">let</span> wins = <span class="token-number">0</span>;             <span class="token-comment">// this will change as he keeps winning</span></code></pre>
+          <div class="markdown-body"><p>If you're just joining: <strong>Nate</strong> is a self-taught builder with a folder of fourteen abandoned side projects. <strong>Kai</strong> writes grants in Fairview and has never written a line of code before this month. They met at the Fairview Founders Table — a monthly builder meetup in the back of Grindstone Coffee — and agreed to build one real thing together: a tracker for every idea people pitch at that meetup. They have three and a half weeks until Demo Night.</p>
+<p>Saturday morning, back room, ten a.m. Nate had brought a jar of chili crisp and was putting it on a breakfast sandwich the coffee shop had not designed for that. Kai had the sticky notes from the last meetup spread across the table in five rows — every idea anyone pitched, and a hand-drawn tally of who said they'd use it.</p>
+<p>Nate had already typed the counts into a file. He had also been staring at that file for twenty minutes with an expression Kai would later describe as &quot;a man being lied to by furniture.&quot;</p>
+<p>&quot;The total is coming out wrong.&quot;</p>
+<p>&quot;How wrong?&quot;</p>
+<p>&quot;It says forty-three.&quot;</p>
+<p>Kai looked at the sticky notes. Four votes on hers. Three on Marisol's. &quot;It says forty-three.&quot;</p>
+<p>&quot;It says forty-three.&quot;</p>
+<p>We'll get to why in a minute. First, the thing that has to be true before that sentence makes any sense.</p>
+<h3>Coder's Corner: Variables</h3>
+<p>Before your program can do anything useful, it needs somewhere to hold information — a name, a count, a decision it made two lines ago that it needs to remember now. That &quot;somewhere&quot; is a <strong>variable</strong>.</p>
+<p>You create one with <code>const</code> or <code>let</code>:</p>
+<ul><li><code>const</code> means <strong>this name will always point at this value.</strong> You can't reassign it.</li><li><code>let</code> means <strong>this name is allowed to point at something else later.</strong></li></ul>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> meetup = &quot;Fairview Founders Table&quot;;  <span class="token-comment">// never changing</span>
+<span class="token-keyword">let</span> weeksLeft = <span class="token-number">4</span>;                          <span class="token-comment">// definitely changing</span>
+weeksLeft = <span class="token-number">3</span>;                              <span class="token-comment">// fine — that's what let is for</span></code></pre>
+<p>Use <code>const</code> by default. Only reach for <code>let</code> when you genuinely know the value is going to be reassigned — a countdown, a running total, a flag that flips. This isn't pedantry: every <code>const</code> is a promise to your future self that this name can't quietly become something else forty lines down. Fewer moving parts, fewer surprises.</p>
+<p>There's an older keyword, <code>var</code>, that you'll see in old tutorials and old code. It has scoping behavior that causes real bugs (we'll hit that in chapter 04). You never need it. Use <code>const</code> and <code>let</code>.</p>
 <h3>The Core Types</h3>
-<p>JavaScript has a handful of basic types you'll use constantly. Here's the lineup:</p>
-<ul><li><strong>String</strong> — text, always wrapped in quotes. <code>&quot;AutoNate&quot;</code>, <code>'Rookie Division'</code></li><li><strong>Number</strong> — any number, whole or decimal, no quotes. <code>18</code>, <code>3.5</code></li><li><strong>Boolean</strong> — exactly one of two values: <code>true</code> or <code>false</code>. A yes-or-no switch.</li><li><strong>Array</strong> — an ordered list of values, wrapped in square brackets. <code>[&quot;laptop&quot;, &quot;notebook&quot;, &quot;grit&quot;]</code></li><li><strong>Object</strong> — a group of related facts, wrapped in curly braces, each one labeled. <code>{ wins: 0, losses: 0 }</code></li></ul>
+<p>A variable holds a <strong>value</strong>, and every value in JavaScript has a <strong>type</strong> — what kind of thing it is, which determines what you're allowed to do with it. Here's the working lineup:</p>
+<ul><li><strong>String</strong> — text, always in quotes. <code>&quot;Marisol&quot;</code>, <code>'tool library'</code></li><li><strong>Number</strong> — any number, whole or decimal, no quotes. <code>4</code>, <code>3.5</code>, <code>0</code></li><li><strong>Boolean</strong> — exactly <code>true</code> or <code>false</code>. A yes-or-no switch.</li><li><strong>Array</strong> — an ordered list of values, in square brackets. <code>[&quot;Nate&quot;, &quot;Kai&quot;]</code></li><li><strong>Object</strong> — grouped, labeled facts, in curly braces. <code>{ votes: 4, owner: &quot;Kai&quot; }</code></li><li><strong><code>null</code></strong> — deliberately empty. &quot;There is no value here, and I meant that.&quot;</li><li><strong><code>undefined</code></strong> — not set. &quot;Nobody put anything here yet.&quot;</li></ul>
 <pre class="mermaid">flowchart TD
-  T[&quot;JavaScript Types&quot;] --&gt; S[&quot;String&lt;br/&gt;text — &amp;quot;AutoNate&amp;quot;&quot;]
-  T --&gt; N[&quot;Number&lt;br/&gt;18, 3.5&quot;]
-  T --&gt; B[&quot;Boolean&lt;br/&gt;true / false&quot;]
-  T --&gt; A[&quot;Array&lt;br/&gt;an ordered list&quot;]
-  T --&gt; O[&quot;Object&lt;br/&gt;grouped, labeled facts&quot;]</pre>
-<p>Here's AutoNate checking his own pockets, one type at a time:</p>
-<pre class="code-block language-js"><code><span class="token-comment">// inventory.js</span>
-<span class="token-comment">// Know what's in your pockets before you step to anybody.</span>
+  T[&quot;JavaScript values&quot;] --&gt; P[&quot;Primitives&lt;br/&gt;(a single value)&quot;]
+  T --&gt; O[&quot;Objects&lt;br/&gt;(a container of values)&quot;]
+  P --&gt; S[&quot;String&lt;br/&gt;&amp;quot;Marisol&amp;quot;&quot;]
+  P --&gt; N[&quot;Number&lt;br/&gt;4, 3.5, 0&quot;]
+  P --&gt; B[&quot;Boolean&lt;br/&gt;true / false&quot;]
+  P --&gt; U[&quot;null / undefined&quot;]
+  O --&gt; Ob[&quot;Object&lt;br/&gt;labeled facts&quot;]
+  O --&gt; A[&quot;Array&lt;br/&gt;an ordered list&quot;]</pre>
+<p>Notice the split in that diagram, because it's the real organizing idea. <strong>Primitives</strong> are single, indivisible values. <strong>Objects</strong> are containers that hold other values — and arrays are a specialized kind of object, which is going to matter in about ninety seconds.</p>
+<p>Here's the backlog, typed out properly:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// backlog.js</span>
+<span class="token-comment">// What's actually in our pockets.</span>
 
-<span class="token-keyword">const</span> name = &quot;AutoNate&quot;;       <span class="token-comment">// string  — text</span>
-<span class="token-keyword">const</span> age = <span class="token-number">18</span>;                <span class="token-comment">// number  — counts, math</span>
-<span class="token-keyword">const</span> isRookie = true;         <span class="token-comment">// boolean — yes or no</span>
-<span class="token-keyword">const</span> gear = [&quot;laptop&quot;, &quot;notebook&quot;, &quot;grit&quot;]; <span class="token-comment">// array — a list</span>
-<span class="token-keyword">const</span> stats = {                <span class="token-comment">// object — grouped facts</span>
-  wins: <span class="token-number">0</span>,
-  losses: <span class="token-number">0</span>,
-  focus: &quot;Agentic AI systems&quot;,
+<span class="token-keyword">const</span> meetup = &quot;Fairview Founders Table&quot;;   <span class="token-comment">// string</span>
+<span class="token-keyword">const</span> ideaCount = <span class="token-number">5</span>;                         <span class="token-comment">// number</span>
+<span class="token-keyword">const</span> readyForDemo = false;                  <span class="token-comment">// boolean</span>
+<span class="token-keyword">const</span> founders = [&quot;Nate&quot;, &quot;Kai&quot;];            <span class="token-comment">// array</span>
+<span class="token-keyword">const</span> topIdea = {                            <span class="token-comment">// object</span>
+  title: &quot;Youth program signups that aren't a spreadsheet&quot;,
+  owner: &quot;Kai&quot;,
+  votes: <span class="token-number">4</span>,
+  builtBy: null,                             <span class="token-comment">// nobody yet, and we know it</span>
 };
 
-console.log(name, age, isRookie);
-console.log(gear[<span class="token-number">0</span>]);
-console.log(stats.focus);</code></pre>
-<figure class="markdown-figure"><img src="/assets/tutorials/js/editor-inventory.jpg" alt="VS Code showing inventory.js with the five core JavaScript types" loading="lazy" /><figcaption>inventory.js in VS Code</figcaption></figure>
-<p>A couple things worth pointing out. <code>gear[0]</code> grabs the <strong>first</strong> item out of the array — in programming, counting starts at zero, not one. It feels wrong for about a week and then it feels completely normal forever. And <code>stats.focus</code> reaches inside the object using a dot, followed by the exact label — <code>focus</code> — you're asking for. That dot is you saying &quot;open that bag, hand me the thing labeled focus.&quot;</p>
-<p>Run it the same way you've been running everything:</p>
-<pre class="code-block language-bash"><code>node inventory.js</code></pre>
-<p>You'll see all three console.log lines print, pulling values out of every type you just declared.</p>
+console.log(meetup, ideaCount, readyForDemo);
+console.log(founders[<span class="token-number">0</span>]);
+console.log(topIdea.title);
+console.log(topIdea.votes);</code></pre>
+<pre class="code-block language-bash"><code>node backlog.js</code></pre>
+<p>Two things worth pointing at. <code>founders[0]</code> grabs the <strong>first</strong> item — counting starts at zero, not one. It feels wrong for about a week and then feels normal forever. And <code>topIdea.title</code> reaches into the object with a dot and the exact label you want. That dot is you saying &quot;open that container, hand me the thing labeled <code>title</code>.&quot;</p>
+<p>Also notice <code>builtBy: null</code>. That is not a placeholder to clean up later. It's the code honestly saying &quot;nobody is building this yet,&quot; which is real information a real system needs. Empty and unknown are different states, and <code>null</code> is how you say the first one on purpose.</p>
 <h3>Checking What You've Got</h3>
-<p>Sometimes you genuinely don't know what type something is — maybe it came from somewhere else in your code, or from user input. JavaScript gives you a tool for exactly that: <code>typeof</code>.</p>
-<pre class="code-block language-js"><code>console.log(typeof name);      <span class="token-comment">// &quot;string&quot;</span>
-console.log(typeof age);       <span class="token-comment">// &quot;number&quot;</span>
-console.log(typeof isRookie);  <span class="token-comment">// &quot;boolean&quot;</span></code></pre>
-<p>When you're not sure, ask. That's not a beginner move — that's what every developer does, at every level, constantly. The senior engineers just do it faster, because they've built the instinct for where things tend to go sideways.</p>
+<p>Sometimes you don't know what type a value is — it came from somewhere else, or from a file, or from a person. <code>typeof</code> tells you:</p>
+<pre class="code-block language-js"><code>console.log(typeof meetup);        <span class="token-comment">// &quot;string&quot;</span>
+console.log(typeof ideaCount);     <span class="token-comment">// &quot;number&quot;</span>
+console.log(typeof readyForDemo);  <span class="token-comment">// &quot;boolean&quot;</span>
+console.log(typeof topIdea);       <span class="token-comment">// &quot;object&quot;</span>
+console.log(typeof founders);      <span class="token-comment">// ...</span></code></pre>
+<p>Kai ran it, got to the last line, and stopped. <strong>Q7.</strong></p>
+<p>&quot;It says <code>founders</code> is an object.&quot;</p>
+<p>&quot;It says what?&quot;</p>
+<p>&quot;<code>typeof founders</code> returns <code>&quot;object&quot;</code>. Not <code>&quot;array&quot;</code>. You told me array was one of the types.&quot; She turned the laptop. &quot;Where's that from?&quot;</p>
+<p>Nate looked at it for a while.</p>
+<p>This one is real, and Nate had genuinely never thought about it, and the honest answer is: <strong>arrays are objects.</strong> JavaScript has exactly seven primitive types — string, number, boolean, <code>null</code>, <code>undefined</code>, plus two you won't touch for a long time (<code>bigint</code> and <code>symbol</code>) — and then *everything else* is an object. Arrays are objects with numeric keys and a <code>length</code> property and a pile of useful methods bolted on. Functions are objects too. So <code>typeof</code> can't distinguish an array from a plain object, because at the level <code>typeof</code> operates, there's nothing to distinguish.</p>
+<p>The way you actually check:</p>
+<pre class="code-block language-js"><code>console.log(Array.isArray(founders));   <span class="token-comment">// true</span>
+console.log(Array.isArray(topIdea));    <span class="token-comment">// false</span></code></pre>
+<p><code>Array.isArray()</code> exists precisely because <code>typeof</code> can't do this job. Use it when you need to know.</p>
+<p>And while we're in here, one more piece of genuine JavaScript wreckage worth knowing before it confuses you at midnight:</p>
+<pre class="code-block language-js"><code>console.log(typeof null);   <span class="token-comment">// &quot;object&quot;  ← this is a bug. From 1995. It's never being fixed.</span></code></pre>
+<p><code>null</code> is a primitive. <code>typeof null</code> returning <code>&quot;object&quot;</code> is a mistake in the original implementation that shipped, got depended on, and can now never be changed without breaking the web. It is not you. It has never been you.</p>
+<p>&quot;So the type list you gave me was simplified,&quot; Kai said.</p>
+<p>&quot;The type list I gave you was simplified,&quot; Nate said. &quot;It's the right list to *use*. It's just not the list the language actually has.&quot;</p>
+<p>She wrote both lists down. Separately.</p>
+<h3>The Forty-Three</h3>
+<p>Now the bug. Here's what Nate had actually typed, because he'd copy-pasted the tallies out of a text message he'd sent himself at the meetup:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// tally.js — the broken version</span>
+
+<span class="token-keyword">const</span> kaiVotes = &quot;<span class="token-number">4</span>&quot;;
+<span class="token-keyword">const</span> marisolVotes = &quot;<span class="token-number">3</span>&quot;;
+
+<span class="token-keyword">const</span> total = kaiVotes + marisolVotes;
+console.log(<span class="token-string">`Total votes: ${total}`</span>);   <span class="token-comment">// &quot;Total votes: 43&quot;</span></code></pre>
+<p><code>&quot;4&quot;</code> and <code>&quot;3&quot;</code> are <strong>strings</strong>. Text. They look like numbers to you because you're a person. To JavaScript they're characters, no different from <code>&quot;cat&quot;</code> and <code>&quot;dog&quot;</code>.</p>
+<p>And the <code>+</code> operator does two completely different jobs depending on what you hand it:</p>
+<ul><li>Given two numbers, it adds them. <code>4 + 3</code> → <code>7</code></li><li>Given a string on either side, it <strong>concatenates</strong> — glues them end to end. <code>&quot;4&quot; + &quot;3&quot;</code> → <code>&quot;43&quot;</code></li></ul>
+<p>That's it. That's the whole bug. Nate wasn't adding, he was gluing.</p>
+<p>The part that makes this genuinely nasty is that the other math operators don't behave the same way:</p>
+<pre class="code-block language-js"><code>console.log(&quot;<span class="token-number">4</span>&quot; + &quot;<span class="token-number">3</span>&quot;);   <span class="token-comment">// &quot;43&quot;    ← string concatenation</span>
+console.log(&quot;<span class="token-number">4</span>&quot; - &quot;<span class="token-number">3</span>&quot;);   <span class="token-comment">// 1       ← subtraction; no string meaning, so JS converts</span>
+console.log(&quot;<span class="token-number">4</span>&quot; * &quot;<span class="token-number">3</span>&quot;);   <span class="token-comment">// 12      ← same</span>
+console.log(&quot;<span class="token-number">10</span>&quot; / &quot;<span class="token-number">2</span>&quot;);  <span class="token-comment">// 5       ← same</span></code></pre>
+<p>Only <code>+</code> is overloaded, because only <code>+</code> has a meaning for text. Every other operator gives up and converts to numbers. So a bug like this can hide for a long time in code that mostly does multiplication and then explodes the first time someone adds something up.</p>
+<p><strong>Q8</strong>, immediately: &quot;Then how do you know when a number is a real number?&quot;</p>
+<p>Ask:</p>
+<pre class="code-block language-js"><code>console.log(typeof kaiVotes);   <span class="token-comment">// &quot;string&quot;  ← there it is</span></code></pre>
+<p>And convert on the way in:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// tally.js — fixed</span>
+
+<span class="token-keyword">const</span> kaiVotes = Number(&quot;<span class="token-number">4</span>&quot;);
+<span class="token-keyword">const</span> marisolVotes = Number(&quot;<span class="token-number">3</span>&quot;);
+
+console.log(typeof kaiVotes);            <span class="token-comment">// &quot;number&quot;</span>
+console.log(kaiVotes + marisolVotes);    <span class="token-comment">// 7</span></code></pre>
+<p><code>Number()</code> takes a value and converts it to a number. Its close cousin <code>parseInt()</code> does something slightly different, and the difference matters:</p>
+<pre class="code-block language-js"><code>console.log(Number(&quot;<span class="token-number">4</span>&quot;));          <span class="token-comment">// 4</span>
+console.log(Number(&quot;<span class="token-number">4</span> votes&quot;));    <span class="token-comment">// NaN   ← the whole string has to be a number</span>
+console.log(parseInt(&quot;<span class="token-number">4</span> votes&quot;, <span class="token-number">10</span>)); <span class="token-comment">// 4  ← reads from the front, stops at garbage</span>
+console.log(Number(&quot;&quot;));           <span class="token-comment">// 0     ← careful. empty string becomes zero.</span>
+console.log(Number(&quot;  <span class="token-number">7</span>  &quot;));      <span class="token-comment">// 7     ← whitespace is fine</span></code></pre>
+<p><code>Number()</code> is strict: the entire string has to look like a number or you get <code>NaN</code>. <code>parseInt()</code> is forgiving: it reads digits off the front and quits when it hits something that isn't one. That second argument, <code>10</code>, is the <strong>radix</strong> — the number base. Modern JavaScript defaults to base 10 for you, but passing it explicitly is a habit worth building, and every linter will ask you for it.</p>
+<p>Watch out for <code>Number(&quot;&quot;)</code> returning <code>0</code>. An empty input silently becoming zero is the source of a real category of bugs — a blank form field that turns into a legitimate-looking count.</p>
+<p>And then there's <code>NaN</code>, which stands for Not a Number, and which is — obviously —</p>
+<pre class="code-block language-js"><code>console.log(typeof NaN);        <span class="token-comment">// &quot;number&quot;</span>
+console.log(NaN === NaN);       <span class="token-comment">// false  ← NaN is not equal to itself</span>
+console.log(Number.isNaN(NaN)); <span class="token-comment">// true   ← this is how you actually check</span></code></pre>
+<p><code>NaN</code> is the value you get when a numeric operation fails. It's *typed* as a number because it's the result of number math that didn't work out. And it is famously not equal to itself, which is why comparing against it never works and <code>Number.isNaN()</code> exists.</p>
+<p>&quot;This language has a lot of scar tissue,&quot; Kai said.</p>
+<p>&quot;It's thirty years old and it can't break anything anyone already shipped.&quot; Nate scraped the last of the chili crisp out of the jar. &quot;Every weird thing in it is somebody's decision from 1997 that got permanent.&quot;</p>
+<h3>The Other Thing const Doesn't Do</h3>
+<p><strong>Q9</strong>, later that afternoon, and this one caught Nate flat.</p>
+<p>Kai had been editing the backlog object:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> topIdea = {
+  title: &quot;Youth program signups that aren't a spreadsheet&quot;,
+  owner: &quot;Kai&quot;,
+  votes: <span class="token-number">4</span>,
+};
+
+topIdea.votes = <span class="token-number">5</span>;
+console.log(topIdea.votes);   <span class="token-comment">// 5</span></code></pre>
+<p>&quot;You said <code>const</code> means it can't change.&quot;</p>
+<p>&quot;It — yeah.&quot;</p>
+<p>&quot;It changed.&quot;</p>
+<p>Nate stared at it. Then said the sentence that makes him worth learning from: &quot;Okay, actually, let me check that one.&quot;</p>
+<p><strong><code>const</code> prevents reassignment of the name. It does not freeze the value.</strong></p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> topIdea = { votes: <span class="token-number">4</span> };
+
+topIdea.votes = <span class="token-number">5</span>;      <span class="token-comment">// ✅ fine — changing what's INSIDE the object</span>
+topIdea = { votes: <span class="token-number">5</span> }; <span class="token-comment">// ❌ TypeError: Assignment to constant variable.</span></code></pre>
+<p>Think of <code>const</code> as a label welded onto a specific box. You can't move the label to a different box. Nobody said anything about what's in the box.</p>
+<p>For primitives this distinction never comes up, because there's nothing inside a <code>4</code> to change — which is exactly why it's so easy to hold the wrong mental model for years without getting caught. It only shows up the moment you <code>const</code> an object or an array:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> founders = [&quot;Nate&quot;, &quot;Kai&quot;];
+founders.push(&quot;Marisol&quot;);   <span class="token-comment">// ✅ fine — the array is still the same array</span>
+console.log(founders);      <span class="token-comment">// [&quot;Nate&quot;, &quot;Kai&quot;, &quot;Marisol&quot;]</span></code></pre>
+<p>If you genuinely need the contents locked too, that's a separate tool:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> locked = Object.freeze({ votes: <span class="token-number">4</span> });
+locked.votes = <span class="token-number">99</span>;
+console.log(locked.votes);   <span class="token-comment">// 4 — the change silently did nothing</span></code></pre>
+<p>(Silently. In non-strict mode it fails without complaining, which is its own small horror. You will rarely need <code>Object.freeze</code>. Know it exists.)</p>
+<p>Kai wrote it as one line on the legal pad and read it back out loud: *&quot;const locks the name, not the contents.&quot;*</p>
+<p>&quot;That's better than how I've ever said it,&quot; Nate admitted.</p>
 <h3>Try It Yourself</h3>
-<p>Open <code>inventory.js</code> and add one more line to the <code>stats</code> object — maybe <code>nickname: &quot;The Architect&quot;</code> or a <code>rank</code> field. Then add a <code>console.log(stats.nickname)</code> (or whatever you named it) at the bottom and run the file again. If you see your new value print out, you just extended AutoNate's whole profile without breaking anything else. That's the confidence you're building — the ability to touch code and trust that you know exactly what changed.</p>
-<p>Next chapter, AutoNate has to actually start making decisions with what's in those pockets — not just holding information, but reacting to it.</p>
+<p>Open <code>backlog.js</code> and add a second idea object — Marisol's tool library checkout system, three votes, owner <code>&quot;Marisol&quot;</code>. Then:</p>
+<p>1. <code>console.log</code> the sum of both ideas' votes and confirm you get <code>7</code> and not <code>&quot;43&quot;</code>. 2. Deliberately break it: wrap one of the vote counts in quotes, rerun, and watch the total go wrong. 3. Add <code>console.log(typeof idea.votes)</code> to find the broken one without guessing.</p>
+<p>That third step is the actual skill. Not &quot;avoid the bug&quot; — you won't — but &quot;locate the bug in one line instead of twenty minutes.&quot;</p>
+<h3>Sanity Checks</h3>
+<ul><li><strong>Your total is a glued-together string.</strong> At least one operand is a string. Run <code>typeof</code> on each one; wrap the culprit in <code>Number()</code>.</li><li><strong><code>TypeError: Assignment to constant variable.</code></strong> You tried to reassign a <code>const</code> name. Either you meant to change a property (<code>obj.thing = x</code>, no error) or you meant <code>let</code>.</li><li><strong><code>typeof myArray</code> says <code>&quot;object&quot;</code>.</strong> Correct and expected. Use <code>Array.isArray()</code>.</li><li><strong>Something is <code>NaN</code> and you can't figure out where it started.</strong> <code>console.log</code> each input's <code>typeof</code> before the math. <code>NaN</code> propagates — once it enters a chain of arithmetic, every result downstream is also <code>NaN</code>, so the first <code>NaN</code> is rarely where the symptom shows up.</li><li><strong>A value is <code>undefined</code> and you expected data.</strong> You asked an object for a label it doesn't have. <code>topIdea.vote</code> (no <code>s</code>) returns <code>undefined</code> rather than erroring, which is why typos in property names are so quiet. Check your spelling against the object.</li></ul>
+<p>Nate wiped down the table and stacked the sticky notes. &quot;New name idea. Chili Crisp Labs.&quot;</p>
+<p>&quot;You cannot name a company after a condiment.&quot;</p>
+<p>&quot;People name companies after fruit.&quot;</p>
+<p>&quot;That's *one* company,&quot; Kai said, &quot;and they didn't mean it.&quot;</p>
+<p>Next chapter: five ideas, three and a half weeks, and no way to decide what to build first — so they teach the program to triage.</p>
 <p>Next: <code>03-control-flow.md</code> — Reading the Room.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/intro-to-javascript-for-beginners/why-javascript"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>The Vision: Why JavaScript (and Where It Runs)</span></a>

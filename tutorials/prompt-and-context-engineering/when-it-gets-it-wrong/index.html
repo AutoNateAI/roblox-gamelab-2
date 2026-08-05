@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked | AutoNateAI Tutorials</title>
-        <meta name="description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
+        <meta name="description" content="Agents hallucinate. Nate almost ships a fix built on an API that doesn't exist — until Kai's &quot;where's that from?&quot; catches it. The habit that matters most: verify before you trust, every single time." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked: keep the build moving." />
-        <meta property="og:description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
+        <meta property="og:description" content="Agents hallucinate. Nate almost ships a fix built on an API that doesn't exist — until Kai's &quot;where's that from?&quot; catches it. The habit that matters most: verify before you trust, every single time." />
         <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/when-it-gets-it-wrong" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-when-it-gets-it-wrong.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-when-it-gets-it-wrong.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked: keep the build moving." />
-        <meta name="twitter:description" content="Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-when-it-gets-it-wrong.jpg" />
+        <meta name="twitter:description" content="Agents hallucinate. Nate almost ships a fix built on an API that doesn't exist — until Kai's &quot;where's that from?&quot; catches it. The habit that matters most: verify before you trust, every single time." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-when-it-gets-it-wrong.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,52 +65,161 @@
           <header>
             <span class="kicker">Chapter 4 / Tutorial 04</span>
             <h1>When It Gets It Wrong: Hallucination, Ambiguity, and Trusting Nothing You Haven't Checked</h1>
-            <p>Agents hallucinate. AutoNate builds the habit that matters most: verify before you trust, every single time.</p>
+            <p>Agents hallucinate. Nate almost ships a fix built on an API that doesn't exist — until Kai's &quot;where's that from?&quot; catches it. The habit that matters most: verify before you trust, every single time.</p>
             <div class="tag-row"><span>Spot hallucinations</span><span>Handle ambiguity</span><span>Build a verify-first habit</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate's good now. Genuinely — role, task, constraints, format, the right three files open and the dead ones archived, permission granted to ask instead of guess. His remote hauler's running, the scout's reporting clean, and for two straight days the agent's given him exactly what he asked for on close to the first try. He's starting to trust it the way he trusts a teammate who's been reliable for a while. That trust is about to get tested.</p>
-<p>He asks it to help repair walls automatically when they drop below a threshold, keeping the same careful role-task-constraints structure he's been using all pack. The agent writes back clean, confident code, references a method called <code>room.getRemoteSources()</code> to find repair targets efficiently, and explains it like it's a well-known part of the Screeps API. AutoNate, trusting the pattern that's worked all week, drops it straight into <code>main.js</code> without reading it line by line. The game throws an error the second the code runs: that method doesn't exist. Never did. The agent didn't lie to him on purpose — it produced something that sounded exactly like every real API method he'd ever shown it, fluent and specific and completely made up.</p>
-<p>That's a different failure than the ones from earlier chapters. This wasn't a vague prompt or a cluttered context window. He did everything right, and it still handed him something confidently wrong. Turns out that's not a bug he can prompt his way around entirely — it's a real, permanent property of the tool, and the last skill in this pack is learning to work with that instead of getting blindsided by it.</p>
+          <div class="markdown-body"><p>Nate and Kai are building a studio together out of Fairview — he's self-taught and quick on the keyboard, she spent ten years writing scopes of work for a mid-size city and has never once let a claim past her without asking where it came from. This month they've been learning to direct an AI coding agent at their real codebase, and by now they're good at it. Genuinely good. Role, task, constraints, format. Three files in the room and the dead ones quarantined in <code>archive/</code>. A project context file the agent picks up every session.</p>
+<p>For two straight days, it has given them exactly what they asked for on close to the first try. Nate has started trusting it the way you trust a teammate who hasn't missed yet.</p>
+<p>That trust is about to get tested on a Friday night, over a task so small neither of them thought to be careful.</p>
+<h3>1. The Function That Does Not Exist</h3>
+<p>The signup CSV has nineteen rows and eighteen people in it. Someone signed twice — once as <code>Shonda M.</code> and once as <code>shonda m</code> twenty minutes later, same email, one of them with a trailing space and a capital S. Nate's hand-rolled CSV splitter is also starting to creak on a row where somebody wrote their idea with a comma in it.</p>
+<p>So he asks for both at once, properly, the way he's learned:</p>
+<pre class="code-block language-text"><code>You're a careful Node.js engineer in this repo. Task: parse
+data/founders-table.csv robustly (quoted fields, commas inside
+values) and remove duplicate signups. Constraints: keep it in
+index.js, don't touch lib/. Format: full changed function, then
+a one-line note on anything you added.</code></pre>
+<p>Clean prompt. Right files open. The answer comes back in six seconds and it is beautiful:</p>
+<pre class="code-block language-js"><code><span class="token-keyword">const</span> { parseSync } = <span class="token-keyword">require</span>(<span class="token-string">'csv-parser-sync'</span>);
+
+<span class="token-keyword">function</span> loadSignups(path) {
+  <span class="token-keyword">const</span> rows = parseSync(readFileSync(path, <span class="token-string">'utf8'</span>), { headers: true });
+  <span class="token-keyword">return</span> rows.uniqueBy((r) =&gt; r.email);
+}</code></pre>
+<p>And the note underneath it, written in the calm register of documentation:</p>
+<p>&gt; Added <code>csv-parser-sync</code>, the synchronous companion to <code>csv-parser</code>, since we're reading a small file at startup and don't need the stream API. <code>Array.prototype.uniqueBy()</code> keeps the first occurrence of each key, which is what you want for signups.</p>
+<p>Nate reads it. It's *better* than what he would have written. It's two lines. He has <code>npm install csv-parser-sync</code> typed into the terminal and his finger on enter.</p>
+<p>Kai walks past with a plate of cold birria and stops.</p>
+<p>&quot;What's that.&quot;</p>
+<p>&quot;Sync CSV parser. It's the sync version of <code>csv-parser</code>.&quot;</p>
+<p>&quot;Where's that from?&quot;</p>
+<p>&quot;It said so.&quot; He points at the note, which is right there, in writing.</p>
+<p>Kai sets the plate down. &quot;That's not a source. That's a sentence.&quot;</p>
+<h3>2. Three Commands, Ten Seconds, Two Fabrications</h3>
+<p>She doesn't argue with him about it, which is the correct move and the one most people skip. She asks him to run three things.</p>
+<pre class="code-block language-bash"><code>npm view csv-parse</code></pre>
+<p>Real. Metadata, versions, a maintainer, a repo. It's the actual package, and it actually does have a synchronous entry point — <code>require('csv-parse/sync')</code> — which is exactly what makes the next result sting.</p>
+<pre class="code-block language-bash"><code>npm view csv-parser-sync</code></pre>
+<pre class="code-block language-text"><code>npm error code E404
+npm error 404 'csv-parser-sync@*' is not in this registry.</code></pre>
+<p>&quot;Huh,&quot; says Nate.</p>
+<pre class="code-block language-bash"><code>node -e &quot;console.log(typeof [].uniqueBy)&quot;
+# undefined
+node -e &quot;console.log(typeof [].flat)&quot;
+# function</code></pre>
+<p>Two fabrications, in six lines of code, inside an answer that was otherwise correct and well-reasoned. Neither of them flagged. Neither of them hedged. The note explaining them was more confident than most real documentation.</p>
+<p>And here's what makes them so good, which is the part worth actually understanding: <strong>they're both chimeras of real things.</strong></p>
+<p><code>csv-parser</code> is a real, popular, streaming CSV package. <code>csv-parse</code> is a different real package that genuinely does ship a sync API. Smash them together and <code>csv-parser-sync</code> is the most plausible package name in the world — it's what you'd guess the name was if you knew the ecosystem well but hadn't checked.</p>
+<p><code>uniqueBy</code> is the same trick. lodash has <code>_.uniqBy</code>. Ramda has <code>uniqBy</code>. JavaScript's own <code>Array.prototype.flat</code> was very nearly shipped as <code>flatten</code> and only got renamed because an older library had monkey-patched that exact name onto arrays and shipping it broke real websites. The language is *full* of near-misses like this. A model producing <code>uniqueBy</code> isn't being stupid. It's producing the name that should exist.</p>
+<p>&quot;It's not wrong about the shape,&quot; Kai says. &quot;It's wrong about the world.&quot;</p>
+<h3>3. The Part That Would Have Been Worse</h3>
+<p>Nate's first reaction is relief: 404, no harm done. Kai's is not, because Kai has sat through more than one procurement fraud training.</p>
+<p>&quot;The 404 is the good outcome,&quot; she says.</p>
+<p>Think about what nearly happened. He was about to run <code>npm install csv-parser-sync</code> on his own machine. <code>npm install</code> executes the package's install lifecycle scripts — <code>preinstall</code>, <code>install</code>, <code>postinstall</code> — as him, with his permissions, before he ever reads a line of it.</p>
+<p>The name didn't exist *this time*. But models hallucinate the same plausible names over and over, which means those names are predictable, which means someone can register them and wait. That has a name now: <strong>slopsquatting</strong> — typosquatting where the typo is made by the model instead of your fingers. You don't have to misspell anything. You just have to trust a package name you didn't verify.</p>
+<p>So the rule they write down isn't &quot;watch out for typos.&quot; It's stricter and it's easy:</p>
+<pre class="code-block language-bash"><code># before installing anything an agent suggested
+npm view &lt;package&gt;            # does it exist? who publishes it? how old?
+npm view &lt;package&gt; repository # is there a real repo behind it?
+
+# and if you must install something you haven't vetted
+npm install &lt;package&gt; --ignore-scripts</code></pre>
+<p>If a package was published three weeks ago, has one version, no repository field, and eleven downloads, that is not a dependency. That's a stranger.</p>
 <h3>Coder's Corner: Hallucination, Ambiguity, and Ground Truth</h3>
-<p>Let's step out of the story for a second, because this is the one failure mode that no amount of good prompting fully removes — it just gets rarer and easier to catch.</p>
-<p><strong>Hallucination</strong> is when a model states something false with the exact same fluent confidence it uses for something true. It's not guessing out loud, hedging, or flagging uncertainty — it sounds identical either way. <code>room.getRemoteSources()</code> reads exactly like a real Screeps method because the model has seen thousands of real methods shaped just like it, and it's pattern-matching the shape, not checking a real API reference against your actual game.</p>
-<p><strong>Ambiguity</strong> is different — it's not the agent being wrong, it's you leaving a decision open that it then has to make for you, silently. Ask it to &quot;make the defender stronger&quot; and it has to pick: more hit points? more damage? more defenders? better targeting logic? It'll pick something and commit to it without telling you there were four other reasonable answers.</p>
-<p><strong>Ground truth</strong> is the real, checkable state of the world — what the actual Screeps API supports, what your actual files actually contain, what actually happens when the code actually runs. The agent's output is a claim about ground truth, not ground truth itself. Confidence in the sentence is not evidence about the world.</p>
-<p><strong>Verification</strong> is the habit that closes the gap: treating every agent output as a claim to check, not a fact to accept, before it goes anywhere near your live colony.</p>
+<p>Step out of the story, because this is the one failure mode that no amount of good prompting removes. It gets rarer and it gets easier to catch. It does not go away.</p>
+<p><strong>Hallucination</strong> is a model stating something false with the identical fluent confidence it uses for something true. It is not guessing out loud, it is not hedging, it does not flag uncertainty — because internally there is no separate &quot;I know this&quot; pathway that lights up differently. The model is producing plausible continuations of your prompt. A plausible-looking API name is *precisely* the thing it is best in the world at generating. Unless you give it a way to look something up — real docs in context, a tool call, a command it actually runs — there is no lookup step happening at all.</p>
+<p><strong>Ambiguity</strong> is a different animal. That's not the agent being wrong, it's you leaving a decision open that it then makes for you, silently. &quot;Remove duplicate signups&quot; sounds specific and contains at least four unanswered questions: duplicate by what key? case-sensitively? keep the first row or the last one? what about a row with no email at all? It will pick an answer to every one of those and never mention that there were alternatives.</p>
+<p><strong>Ground truth</strong> is the real, checkable state of the world: what npm actually serves, what <code>Array.prototype</code> actually has on it, what your file actually contains, what actually happens when the code actually runs. An agent's output is a *claim about* ground truth. It is not ground truth. Confidence in a sentence is not evidence about the world.</p>
+<p><strong>Verification</strong> is the habit that closes the gap: treating every output as a claim to check rather than a fact to accept, before it goes anywhere near anything real.</p>
 <pre class="mermaid">flowchart LR
   Ask[&quot;You ask&lt;br/&gt;a question&quot;] --&gt; Out[&quot;Agent gives&lt;br/&gt;confident answer&quot;]
-  Out --&gt; Check{&quot;Verified against&lt;br/&gt;ground truth?&quot;}
+  Out --&gt; Check{&quot;Checked against&lt;br/&gt;ground truth?&quot;}
   Check --&gt;|No| Risk[&quot;Silent risk&lt;br/&gt;in your codebase&quot;]
   Check --&gt;|Yes| Safe[&quot;Trusted&lt;br/&gt;and shipped&quot;]</pre>
-<p>The scary part isn't that hallucinations happen. It's that a hallucinated answer and a correct one look exactly the same from the outside. The only thing that tells them apart is you checking.</p>
-<h3>1. Spot the Confident Wrong Answer</h3>
-<p>The tell isn't tone — it's specificity dressed up as certainty with nothing backing it. <code>room.getRemoteSources()</code> sounded real because it was specific and matched the *shape* of real Screeps methods. AutoNate's new habit: any time the agent names a method, constant, or API call he doesn't personally recognize, he treats it as unverified until he's seen it in the actual docs or watched it run clean, not as a fact just because it was stated plainly.</p>
-<h3>2. Narrow the Ambiguity Before It Guesses For You</h3>
-<p>For the defender request, instead of &quot;make the defender stronger,&quot; he learns to close the open questions himself first:</p>
-<pre class="code-block language-text"><code>Make the defender stronger by adding a second RANGED_ATTACK
-part, staying within a 300-energy body cost. Don't change
-its targeting logic — that part's already working.</code></pre>
-<p>Now there's nothing left for the agent to silently decide on his behalf. If he doesn't know which answer he wants yet, that's fine too — but then the move is asking the agent to list the options first, not letting it quietly pick one.</p>
-<h3>3. Verify Before You Trust</h3>
-<p>New rule, no exceptions: nothing goes live without AutoNate reading the actual diff and running it somewhere safe first.</p>
-<pre class="code-block language-js"><code><span class="token-comment">// roles/repairer.js</span>
-<span class="token-comment">// AutoNate reads every line before this touches his real colony —</span>
-<span class="token-comment">// including the ones that &quot;sound right.&quot;</span>
-<span class="token-keyword">function</span> findRepairTargets(room) {
-  <span class="token-keyword">return</span> room.find(<span class="token-constant">FIND_STRUCTURES</span>, {
-    filter: (s) =&gt; s.hits &lt; s.hitsMax * <span class="token-number">0</span>.<span class="token-number">5</span>,
+<p>The frightening part isn't that hallucinations happen. It's that a hallucinated answer and a correct answer look identical from the outside, in the same font, in the same tone, with the same amount of detail. The only thing that separates them is somebody checking.</p>
+<p>Including here, incidentally. Everything above is confident text on a screen. Run the three commands.</p>
+<h3>4. Close the Ambiguity Before It Closes It For You</h3>
+<p>With the fake parts stripped out, they still have Kai's four open questions, so they answer them instead of letting the agent answer them:</p>
+<pre class="code-block language-text"><code>Dedupe rule, decided: two rows are the same person if their
+email is equal after trimming whitespace and lowercasing. Keep
+the FIRST occurrence — the earlier signup has the better idea
+text. Rows with a blank email are dropped entirely, not kept
+and not merged. Do not dedupe on name; two people can share a
+name and one person spelled theirs two ways.</code></pre>
+<p>Now there is nothing left for it to quietly decide. And when you genuinely don't know which answer you want yet — which happens constantly — the move isn't to guess, it's this:</p>
+<pre class="code-block language-text"><code>Before implementing: list the decisions this task requires that
+I haven't made, with the options for each. Don't pick for me.</code></pre>
+<h3>5. The Fix, Which Is Boring</h3>
+<p>Here's what shipped, built entirely out of things they had personally confirmed exist:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// index.js</span>
+<span class="token-keyword">const</span> { readFileSync } = <span class="token-keyword">require</span>(<span class="token-string">'node:fs'</span>);
+<span class="token-keyword">const</span> { parse } = <span class="token-keyword">require</span>(<span class="token-string">'csv-parse/sync'</span>); <span class="token-comment">// verified: npm view csv-parse</span>
+
+<span class="token-keyword">function</span> loadSignups(path) {
+  <span class="token-keyword">return</span> parse(readFileSync(path, <span class="token-string">'utf8'</span>), {
+    columns: true,
+    skip_empty_lines: true,
+    trim: true,
   });
-}</code></pre>
-<p>This version uses <code>room.find()</code> with a real filter — plain, boring, and correct, because it's built out of API AutoNate already knows is real, not a method that merely sounded plausible.</p>
-<h3>4. Build the Verification Habit</h3>
-<p>He starts running the same three-question check on anything the agent hands him before it ships: Do I recognize every method and constant it used? Did I actually read the diff, not just skim the summary? Did I run or simulate it before trusting it against the real colony? Three questions, ten seconds, and it would have caught the fake method before it ever touched <code>main.js</code>.</p>
-<h3>5. Sanity Checks</h3>
-<p>If the agent names an API method you don't recognize: don't assume it's real because it sounds real — check the actual docs before it ships.</p>
-<p>If a request has more than one reasonable interpretation: don't leave it open — decide and state it, or ask the agent to list the options instead of picking silently.</p>
-<p>If code runs clean but does something slightly off from what you wanted: that's ambiguity that slipped through — the prompt was under-specified somewhere, go back and tighten it.</p>
-<p>If you catch yourself pasting code straight in without reading it: stop. That's the exact habit that let <code>getRemoteSources()</code> through. Read the diff every time, no exceptions.</p>
-<p>AutoNate fixes the wall-repair code with real API calls in ten minutes flat once he actually reads what's in front of him instead of trusting the confidence in the sentence. No damage done — one clean error message, caught before it hit anything real. He's not scared of the tool now. He's just done handing it his trust for free. Earned trust, checked every time, is a whole different thing — and it's the last piece he needed.</p>
-<p>Next: <code>05-cheatsheet.md</code> — every pattern from this pack in one place, and where AutoNate takes it from here.</p></div>
+}
+
+<span class="token-comment">// Two rows are the same person if their emails match after</span>
+<span class="token-comment">// trimming + lowercasing. First occurrence wins. Blanks dropped.</span>
+<span class="token-keyword">function</span> dedupeByEmail(rows) {
+  <span class="token-keyword">const</span> seen = <span class="token-keyword">new</span> Map();
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> row <span class="token-keyword">of</span> rows) {
+    <span class="token-keyword">const</span> key = (row.email || <span class="token-string">''</span>).trim().toLowerCase();
+    <span class="token-keyword">if</span> (!key) <span class="token-keyword">continue</span>;
+    <span class="token-keyword">if</span> (!seen.has(key)) seen.set(key, row);
+  }
+  <span class="token-keyword">return</span> [...seen.values()];
+}
+
+<span class="token-keyword">module</span>.<span class="token-keyword">exports</span> = { loadSignups, dedupeByEmail };</code></pre>
+<p><code>new Map()</code>, a <code>for</code> loop, and a spread. Plain, unclever, and correct — because every piece of it is API they already knew was real, rather than API that merely sounded like it should be.</p>
+<p>Then Kai makes him write the test, because a passing test is ground truth and an explanation is not:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// test/dedupe.test.js  —  run with: node --test</span>
+<span class="token-keyword">const</span> test = <span class="token-keyword">require</span>(<span class="token-string">'node:test'</span>);
+<span class="token-keyword">const</span> assert = <span class="token-keyword">require</span>(<span class="token-string">'node:assert'</span>);
+<span class="token-keyword">const</span> { dedupeByEmail } = <span class="token-keyword">require</span>(<span class="token-string">'../index.js'</span>);
+
+test(<span class="token-string">'dedupes case- and whitespace-insensitively, keeping the first'</span>, () =&gt; {
+  <span class="token-keyword">const</span> rows = [
+    { firstName: <span class="token-string">'Shonda M.'</span>, email: <span class="token-string">'Shonda@example.com '</span>, idea: <span class="token-string">'permit lookup'</span> },
+    { firstName: <span class="token-string">'shonda m'</span>, email: <span class="token-string">'shonda@example.com'</span>, idea: <span class="token-string">'same'</span> },
+    { firstName: <span class="token-string">'Dev'</span>, email: <span class="token-string">'dev@example.com'</span>, idea: <span class="token-string">'bus times'</span> },
+    { firstName: <span class="token-string">'No Email'</span>, email: <span class="token-string">''</span>, idea: <span class="token-string">'ghost'</span> },
+  ];
+  <span class="token-keyword">const</span> out = dedupeByEmail(rows);
+  assert.strictEqual(out.length, <span class="token-number">2</span>);
+  assert.strictEqual(out[<span class="token-number">0</span>].idea, <span class="token-string">'permit lookup'</span>);
+});</code></pre>
+<p>It passes. Nineteen rows, eighteen people, seventeen with usable emails.</p>
+<p>And then Nate goes quiet, scrolls up through the repo history, and finds the comment he wrote three weeks ago and let a vague prompt delete on the very first night:</p>
+<pre class="code-block language-js"><code><span class="token-comment">// TODO: this breaks if two people sign up with the same email</span></code></pre>
+<p>&quot;I already knew about this bug.&quot;</p>
+<p>&quot;You did.&quot;</p>
+<p>&quot;I told myself about it in writing and then let it get deleted and then almost fixed it with a package that doesn't exist.&quot;</p>
+<p>Kai takes the last of the birria. &quot;That's a whole month in one sentence.&quot;</p>
+<h3>6. Don't Overcorrect Into Uselessness</h3>
+<p>Nate spends Saturday morning refusing to accept anything the agent writes without reading every line four times, which takes longer than writing it himself, which is where he started a month ago. Kai shuts that down too.</p>
+<p>&quot;You're doing the pride thing again with extra steps.&quot;</p>
+<p>Verification is supposed to be <strong>cheap and bounded</strong>, not a mood. Three questions, ten seconds, on anything before it ships:</p>
+<p>1. <strong>Do I recognize every method, package, and constant in this?</strong> Anything I don't, I check with one command — not a vibe, a command. 2. <strong>Did I read the actual diff, or did I read the summary of the diff?</strong> Those are different documents and only one of them is what runs. 3. <strong>Did I run it somewhere that can't hurt anybody?</strong> <code>--dry-run</code>, a test, a scratch directory — before it touches nineteen real people's inboxes.</p>
+<p>That's it. That's the whole tax. It would have caught <code>csv-parser-sync</code> at question one, in under ten seconds, on a Friday, before the terminal was ever involved.</p>
+<p>The point was never to trust it less. It was to stop giving trust away for free, which is a thing you can do while still moving fast — and which Kai has been doing professionally since before either of them had a repo.</p>
+<h3>7. Sanity Checks</h3>
+<p>If the agent names a package, method, or constant you don't personally recognize: don't accept it because it sounds real. <code>npm view</code> it, or <code>node -e &quot;console.log(typeof ...)&quot;</code> it. Ten seconds.</p>
+<p>If it recommends installing something: check the publish date, the version count, and whether there's a real repository behind it before you run <code>npm install</code>. Hallucinated names get squatted.</p>
+<p>If a request has more than one reasonable interpretation: it will silently pick one. Either decide yourself and say so, or ask it to list the open decisions without picking.</p>
+<p>If code runs clean but does something subtly different from what you meant: that's ambiguity that got through, not a bug. Go back and find the sentence you didn't write.</p>
+<p>If you catch yourself pasting a diff in without reading it: stop. That's the exact habit that got <code>uniqueBy</code> a finger on the enter key.</p>
+<p>If verification is taking longer than writing the thing yourself: you've overcorrected. It's three questions and one command, not a full audit of every line.</p>
+<p>If you're not sure whether *this document* is telling you the truth about <code>csv-parse</code> or <code>Array.prototype.flat</code>: good. Go run it. That reflex is the entire deliverable of this chapter.</p>
+<p>The fix took eleven minutes once somebody actually looked. No damage, one 404, one test that now runs on every commit. Nate isn't scared of the tool and he isn't sulking about it either. He's just stopped handing it his trust for free — and earned trust, re-checked every time, turns out to be a completely different substance than the free kind.</p>
+<p>Kai writes the last line on the whiteboard, under the other three, and it's the same three words she's been saying since the coffee shop.</p>
+<pre class="code-block language-text"><code>Where's that from?</code></pre>
+<p>Next: <code>05-cheatsheet.md</code> — every pattern from this pack in one page, and the thing they still can't do.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/feeding-it-the-right-files"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Feeding It the Right Files: Practical Context Engineering</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/cheatsheet"><span><small>Next</small>Cheatsheet</span><span class="material-symbols-outlined">arrow_forward</span></a>

@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Give It the Room, Not Just the Ask: What Context Really Means | AutoNateAI Tutorials</title>
-        <meta name="description" content="Context isn't infinite. AutoNate learns what an agent actually sees, instructions, history, files, tool output, and why dumping everything on it backfires." />
+        <meta name="description" content="Context isn't infinite. Nate and Kai learn what an agent actually sees — instructions, history, files, tool output — the hard way, when it confidently answers about a file it was never shown." />
         <meta name="robots" content="index,follow" />
         <link rel="canonical" href="https://autonateai.com/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask" />
         <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
@@ -12,15 +12,15 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <meta property="og:title" content="Give It the Room, Not Just the Ask: What Context Really Means: keep the build moving." />
-        <meta property="og:description" content="Context isn't infinite. AutoNate learns what an agent actually sees, instructions, history, files, tool output, and why dumping everything on it backfires." />
+        <meta property="og:description" content="Context isn't infinite. Nate and Kai learn what an agent actually sees — instructions, history, files, tool output — the hard way, when it confidently answers about a file it was never shown." />
         <meta property="og:url" content="https://autonateai.com/tutorials/prompt-and-context-engineering/give-it-the-room-not-just-the-ask" />
-        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-give-it-the-room-not-just-the-ask.jpg" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-give-it-the-room-not-just-the-ask.jpg" />
         <meta property="og:site_name" content="AutoNateAI" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Give It the Room, Not Just the Ask: What Context Really Means: keep the build moving." />
-        <meta name="twitter:description" content="Context isn't infinite. AutoNate learns what an agent actually sees, instructions, history, files, tool output, and why dumping everything on it backfires." />
-        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-give-it-the-room-not-just-the-ask.jpg" />
+        <meta name="twitter:description" content="Context isn't infinite. Nate and Kai learn what an agent actually sees — instructions, history, files, tool output — the hard way, when it confidently answers about a file it was never shown." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/tutorial-prompt-and-context-engineering-give-it-the-room-not-just-the-ask.jpg" />
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations."}</script>
         <script>
@@ -65,41 +65,84 @@
           <header>
             <span class="kicker">Chapter 1 / Tutorial 01</span>
             <h1>Give It the Room, Not Just the Ask: What Context Really Means</h1>
-            <p>Context isn't infinite. AutoNate learns what an agent actually sees, instructions, history, files, tool output, and why dumping everything on it backfires.</p>
+            <p>Context isn't infinite. Nate and Kai learn what an agent actually sees — instructions, history, files, tool output — the hard way, when it confidently answers about a file it was never shown.</p>
             <div class="tag-row"><span>Understand agent context</span><span>Know what's finite</span><span>Avoid context overload</span></div>
           </header>
-          <div class="markdown-body"><p>AutoNate goes down a rabbit hole after last night's mess. Everyone posting good results with their agent keeps using this one word like it's the actual secret, not the prompt itself: <strong>context</strong>. He always figured context was just background info — the kind of thing you throw in if you're being polite about it. Turns out it's closer to what the agent is actually holding in its hands while it works, and it's got a limit, and every prompt he typed last night ignored that limit completely.</p>
-<p>He starts picturing it like fight night. You don't bring your whole gym into the ring corner between rounds — you bring the mouthguard, the water, the one thing your coach needs to say in fifteen seconds. Everything else stays outside the ropes, even if it's useful, because it doesn't fit and it doesn't matter for this round. An agent's working memory for a given request behaves the same way: finite room, and everything sitting in it costs space, whether it's helping or not.</p>
-<p>If that sounds like a technical detail you can skip past, it's not — it's the one idea the rest of this pack is built on. Get this chapter right and every prompt after it gets easier.</p>
+          <div class="markdown-body"><p>Nate and Kai are building a studio together out of Fairview — he's self-taught and fast, she came out of civic grant work and does not accept an answer without a source. They've just started directing an AI coding agent at their real repo instead of hand-writing everything, and their first night with it went badly enough in two directions that they made a rule about it. Everyone posting good results with these tools keeps using one word like it's the actual secret, and it isn't the prompt: <strong>context</strong>.</p>
+<p>Nate always figured context was background info. The stuff you throw in if you're being polite about it. It turns out to be closer to *what the agent is physically holding while it works* — and it has a hard limit, and every prompt either of them typed on Monday ignored that limit completely.</p>
+<p>If that sounds like a technical footnote you can skim past, it isn't. It's the one idea the rest of this pack sits on. Get this chapter solid and every prompt after it gets easier.</p>
+<h3>1. The File It Had Never Seen</h3>
+<p>Thursday. Nate has a real bug and he is, to his credit, using the tool.</p>
+<p>Their scoring module ranks the ideas people brought up at Founders Table so they can pick three to actually build. It's double-counting somebody. Nate types a genuinely decent question:</p>
+<pre class="code-block language-text"><code>Why is our scoring function double-counting ideas from the
+same person?</code></pre>
+<p>The agent answers in about two seconds, and the answer is *gorgeous*:</p>
+<pre class="code-block language-text"><code>The issue is in lib/score.js. Your scoreIdea() function sums
+the `votes` array before filtering by `submitterId`, so an
+idea submitted by someone who also voted on it gets credited
+twice. Move the filter above the reduce and the double-count
+goes away.</code></pre>
+<p>Nate says &quot;ohhh&quot; out loud. He is already reaching for the file. It's a real explanation of a real class of bug, it names their actual function, it names a plausible field, it prescribes a specific one-line fix.</p>
+<p>Kai, from the other side of the table, not even looking up: &quot;Where's that from?&quot;</p>
+<p>&quot;It's in <code>score.js</code>.&quot;</p>
+<p>&quot;Did you show it <code>score.js</code>?&quot;</p>
+<p>Pause. &quot;It's... in the project.&quot;</p>
+<p>&quot;So is my grocery list.&quot; She turns the laptop. &quot;Open the file.&quot;</p>
+<p>They open the file. There is no <code>votes</code> array. There is no <code>submitterId</code>. There is no <code>reduce</code>. <code>lib/score.js</code> is forty lines of <code>if</code> statements Nate wrote at 2am in the JavaScript pack and never touched again, and the actual double-count is because he compares names with <code>==</code> on a field that sometimes has a trailing space.</p>
+<p>The agent had never seen the file. Not once. It had been handed a sentence containing the words &quot;scoring function&quot; and &quot;double-counting&quot; and it wrote the most plausible bug in the world — a bug that lives in thousands of real codebases, described perfectly, in someone else's repo.</p>
+<p>&quot;It didn't read it,&quot; Nate says.</p>
+<p>&quot;It couldn't. You didn't give it to it.&quot;</p>
+<p>&quot;But it *answered*.&quot;</p>
+<p>&quot;That's the part you have to get used to.&quot;</p>
 <h3>Coder's Corner: What's Actually In the Context Window</h3>
-<p>Let's step out of the story for a second. This is the concept everything else in this pack leans on, so get it solid now.</p>
-<p>Every time you send a message to an agent, it isn't just reading your latest sentence. It's re-reading a whole bundle of text at once, called the <strong>context window</strong> — the total amount the model can &quot;see&quot; and reason over for that one request. That bundle is built from four kinds of ingredients:</p>
-<p><strong>System instructions</strong> — background rules the agent's been given about how to behave, before you ever typed anything. You usually don't write these yourself, but they're in there shaping the whole conversation underneath everything you say.</p>
-<p><strong>Conversation history</strong> — everything you and the agent have already said to each other in this session. Ask it to &quot;fix the same bug&quot; ten messages later and it's leaning on this to know what &quot;the same bug&quot; even refers to.</p>
-<p><strong>Files it can see</strong> — whatever you've opened, pointed it at, or let it read through its tools. If a file's never been shown to it, it doesn't exist as far as the agent's concerned, no matter how central it is to your project.</p>
-<p><strong>Tool output</strong> — the result of anything the agent ran: a file it read, a command it executed, an error message it got back. This one sneaks up on people, because it fills up fast. Read one huge log file and suddenly most of your context window is spent on text nobody's ever going to look at again.</p>
+<p>Step out of the story, because this is the concept everything else leans on.</p>
+<p>Every time you send a message to an agent, it is not just reading your latest sentence. It re-reads a whole bundle of text at once, called the <strong>context window</strong> — the total amount the model can see and reason over for that single request. That bundle is assembled from four ingredients:</p>
+<p><strong>System instructions</strong> — background rules the agent was given about how to behave, before you typed anything. You usually don't write these, but they're in there, shaping everything underneath.</p>
+<p><strong>Conversation history</strong> — everything you and the agent have already said in this session. Ask it to &quot;fix the same thing&quot; ten messages later and this is what tells it what &quot;the same thing&quot; means.</p>
+<p><strong>Files it can see</strong> — whatever you opened, pointed it at, or let it read with its tools. If a file has never been shown to it, that file does not exist as far as the agent is concerned, no matter how central it is to your project. This is the one that got Nate.</p>
+<p><strong>Tool output</strong> — the result of anything the agent ran: a file it read, a command it executed, an error it got back. This one sneaks up on people, because it fills up fast and you didn't type any of it.</p>
 <pre class="mermaid">flowchart TD
   CW[&quot;Context Window&lt;br/&gt;(finite space)&quot;] --&gt; SI[&quot;System Instructions&quot;]
   CW --&gt; CH[&quot;Conversation History&quot;]
   CW --&gt; F[&quot;Files It Can See&quot;]
   CW --&gt; TO[&quot;Tool Output&quot;]</pre>
-<p>All four compete for the same limited room. That's the part AutoNate missed last night — he assumed the agent could just see his whole project because the project existed. It can't. It sees exactly what's inside that window, and nothing outside it, ever.</p>
-<h3>1. Stop Assuming It Can See Everything</h3>
-<p>AutoNate opens his colony's file tree — a dozen-plus files by now: roles, spawn logic, a tower controller, a couple of old experiments he never got around to deleting. He'd been typing prompts assuming the agent had already scanned the whole thing, the way he had over weeks of building it. It hadn't. It only had whatever he'd opened or pointed it at in that session. First fix, before anything about wording: know what's actually in the room before you start talking.</p>
-<h3>2. Don't Just Dump Everything In</h3>
-<p>His first instinct after learning this is to overcorrect — paste every file into the chat &quot;just to be safe.&quot; Bad move, and not just because it's slow. A context window stuffed with fifteen files means the one line that actually matters is buried in noise, and the agent has to guess what's relevant same as it did when it had nothing at all. More context isn't automatically better context. It's a budget, not a bottomless bag.</p>
-<h3>3. Watch What Fills Up Without You Adding Anything</h3>
-<p>He runs a command through the agent that dumps a huge Screeps API error log, thinking it'll help it debug. It does — for that one message. But now a chunk of his context window is permanently spent on a wall of text he'll never need again, crowding out room for the rest of the conversation. Tool output counts against the same budget as everything else. He starts asking the agent to summarize long output for him instead of leaving the raw dump sitting in the window.</p>
-<pre class="code-block language-js"><code><span class="token-comment">// what AutoNate started asking for instead of a raw dump</span>
-<span class="token-comment">// &quot;Summarize this error log to just the lines mentioning</span>
-<span class="token-comment">// my own files, then tell me the most likely cause.&quot;</span></code></pre>
-<h3>4. Sanity Checks</h3>
-<p>If the agent seems to &quot;forget&quot; something from three messages ago: the conversation's gotten long enough that earlier context is getting crowded out — restate the important part instead of assuming it's still fully in view.</p>
-<p>If it confidently answers about a file it's never actually seen: you assumed visibility that wasn't there — point it at the file directly, don't rely on the project existing.</p>
-<p>If responses get slower or vaguer the longer a session runs: your context window's filling up with stale history and tool output — start a fresh session for a new task instead of dragging the old one along.</p>
-<p>If you're not sure what's in its context right now: ask it. Literally asking &quot;what files have you seen so far in this conversation&quot; is a legitimate move, not a cheat.</p>
-<p>AutoNate starts treating every prompt as two questions instead of one: what am I asking, and what does it actually need in the room to answer that well. Half the mess from last night wasn't a bad ask. It was an empty room.</p>
-<p>Next: <code>02-structuring-the-ask.md</code> — turning a vague ask into one that gets it right the first time.</p></div>
+<p>All four compete for the same finite room, and that room is measured in <strong>tokens</strong> — chunks of text roughly the size of a short word or a word fragment. A rough rule of thumb for English prose is about four characters per token; code, JSON, and log output usually run denser than that, so a file eats more of the window than its line count suggests.</p>
+<p>The critical thing is that an empty slot doesn't fail loudly. When the agent has no information about <code>lib/score.js</code>, it doesn't say &quot;I have not seen that file.&quot; It produces the most likely thing a file with that name would contain. Absence of context looks exactly like presence of context from where you're sitting.</p>
+<h3>2. Stop Assuming It Can See Everything</h3>
+<p>Kai's fix is procedural, which is how Kai fixes everything. Before you ask about a file, put the file in the room:</p>
+<pre class="code-block language-bash"><code># point it at the actual file, don't gesture at the project
+agent run &quot;read lib/score.js, then explain why it double-counts
+the same submitter&quot;</code></pre>
+<p>Or, if your tool works off open editor tabs, open the tab. The mechanism varies. The rule doesn't: <strong>the agent knows what it has been handed, and nothing else.</strong></p>
+<p>They re-run it with the file actually in context. The answer this time is short, boring, and correct — the trailing-space comparison, line 22 — and it does not include the word <code>reduce</code> anywhere.</p>
+<h3>3. Don't Just Dump Everything In</h3>
+<p>Nate's instinct, immediately: paste in the whole repo. Every file, every time, just to be safe.</p>
+<p>Bad move, and not just because it's slow. A context window stuffed with fifteen files means the one line that matters is buried in fourteen files of noise, and the agent has to guess what's relevant — which is the exact situation you were in when it had nothing. More context is not automatically better context.</p>
+<p>It's a budget, not a bottomless bag. Kai gets this one immediately, because it's the same reason you don't attach every document you own to a grant application. Somebody has to read it, and they will read the wrong part.</p>
+<h3>4. Watch What Fills Up Without You Adding Anything</h3>
+<p>Friday, Nate has the agent run <code>npm install</code> plus their handful of tests to check a dependency issue. It works. It also dumps about nine hundred lines of install log, deprecation warnings, and funding solicitations straight into the conversation.</p>
+<p>That output is now permanently sitting in the context window, crowding out room for everything after it, and neither of them will ever read a word of it again. Tool output counts against the same budget as everything else — and it's the sneakiest consumer, because you didn't type it and you don't see it as &quot;context.&quot;</p>
+<p>So he changes what he asks for:</p>
+<pre class="code-block language-text"><code>Run the tests. Don't paste the full output — give me only the
+lines for failing tests, plus a one-sentence summary of what
+failed and where.</code></pre>
+<p>Same information, a fraction of the room. This generalizes: any time you're about to have an agent read a huge log, a giant JSON blob, or a 6,000-line lockfile, ask for the filtered version instead of the whole thing.</p>
+<h3>5. Ask It What It Can Actually See</h3>
+<p>The last move is the cheapest and the least obvious: just ask.</p>
+<pre class="code-block language-text"><code>Before you answer: list every file you have actually read in
+this conversation. If you have not read lib/score.js, say so
+instead of guessing.</code></pre>
+<p>This is not a trick or a jailbreak, it's a legitimate diagnostic, and it converts the silent failure into a loud one. An agent that will happily invent <code>submitterId</code> when asked to explain a file will also, when asked directly, tell you it hasn't read anything. Nate now runs this as the first line of any session where he's confused about why the answers feel off.</p>
+<p>Kai adds a second line to the whiteboard, under Monday's two:</p>
+<pre class="code-block language-text"><code>If it wasn't in the room, it didn't happen.</code></pre>
+<h3>6. Sanity Checks</h3>
+<p>If the agent confidently describes a file it has never been shown: that's not a lie, that's an empty slot getting filled with plausible material. Hand it the file and ask again.</p>
+<p>If it seems to &quot;forget&quot; something from ten messages ago: the conversation has grown long enough that earlier material is getting crowded out. Restate the important part instead of assuming it's still fully in view.</p>
+<p>If responses get vaguer or slower the longer a session runs: your window is full of stale history and old tool output. Start a fresh session for a new task instead of dragging the old one along.</p>
+<p>If a single command dumps a wall of text: ask for the filtered or summarized version next time. Raw output is the most expensive, least useful thing you can put in the room.</p>
+<p>If you're not sure what it currently has: ask it to list what it's read. Ten seconds, and it turns a guess into a fact.</p>
+<p>Nate stops treating a prompt as one question and starts treating it as two: *what am I asking*, and *what does it need in the room to answer that honestly*. Half of Monday's mess was never a bad ask. It was a good ask shouted into an empty room, and the room answered anyway.</p>
+<p>Next: <code>02-structuring-the-ask.md</code> — Kai discovers she's been writing well-structured prompts for ten years and calling them something else.</p></div>
           <nav class="tutorial-pager">
             <a class="tutorial-pager-link prev" href="/tutorials/prompt-and-context-engineering/why-prompting-is-a-skill"><span class="material-symbols-outlined">arrow_back</span><span><small>Previous</small>Garbage In, Garbage Out: Why Prompting Is a Skill</span></a>
             <a class="tutorial-pager-link next" href="/tutorials/prompt-and-context-engineering/structuring-the-ask"><span><small>Next</small>Structuring the Ask: Role, Task, Constraints, Format</span><span class="material-symbols-outlined">arrow_forward</span></a>

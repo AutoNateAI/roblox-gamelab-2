@@ -46,11 +46,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://autonateai.com/tutorials/prompt-and-context-engineering</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -64,36 +59,6 @@
     <loc>https://autonateai.com/tutorials/civics-and-agentic-ai</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/buy-download-and-launch</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/quickstart</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/core-loop-and-roles</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/infrastructure-and-scaling</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/combat-and-competing</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/tutorials/getting-started-with-screeps/cheatsheet</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://autonateai.com/tutorials/intro-to-javascript-for-beginners/setup-node-and-vscode</loc>
@@ -221,17 +186,17 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/articles/why-tournament-day-matters</loc>
+    <loc>https://autonateai.com/articles/why-live-builds-make-it-real</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/articles/screeps-as-a-systems-lab</loc>
+    <loc>https://autonateai.com/articles/ai-agents-are-showing-up-in-civic-tech</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/articles/what-is-screeps</loc>
+    <loc>https://autonateai.com/articles/the-rfp-is-an-underrated-proving-ground</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -241,7 +206,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/articles/why-git-matters-for-students</loc>
+    <loc>https://autonateai.com/articles/why-git-matters-for-builders</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
