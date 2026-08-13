@@ -99,8 +99,8 @@ let index = 0;
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: "AI Agents + Systems + Real Impact",
-    title: "Design the System. Ship It for Real.",
+    eyebrow: "For First- and Second-Year CS Students",
+    title: "Build It. Simulate Who Uses It.",
     footer: `AutoNateAI · ${program.durationWeeks || 2}-Week Cohort`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
@@ -109,32 +109,32 @@ for (const program of programsData.programs) {
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "Software Systems With AI Agents",
-  title: "No Worksheets. Real Systems for Real Organizations.",
-  footer: "AutoNateAI · Claude Code, Codex, Git, Real RFPs",
+  title: "Design the System. Simulate the Population.",
+  footer: "AutoNateAI · Claude Code, Codex, Git, MatrAIx-Style Simulation",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI Live Builds",
-  title: "Real Systems, Built Live. No Script.",
+  title: "Real Systems, Real Simulations, Built Live.",
   footer: "AutoNateAI · Saturdays 10-12 CST, Discord",
   outFile: path.join(outDir, "live-builds.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AutoNateAI Consulting",
-  title: "Real Systems, Delivered in Public.",
-  footer: "AutoNateAI · Real RFPs, Real Organizations",
+  eyebrow: "AutoNateAI Consulting for Banks",
+  title: "Enterprise AI, Priced for Community Banks.",
+  footer: "AutoNateAI · Community & Regional Banks",
   outFile: path.join(outDir, "consulting.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI",
-  title: "Become the System Architect, Not Just the Coder.",
-  footer: "Claude Code · Codex · Databases · APIs",
+  title: "Software Systems. Simulated Populations.",
+  footer: "AutoNateAI · CS Students + Community Banks",
   outFile: path.join(outDir, "default.jpg"),
 });
 

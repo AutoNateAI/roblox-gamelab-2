@@ -9,6 +9,214 @@ export const navItems = [
   { label: "Articles", href: "/articles", keys: ["articles"] },
 ];
 
+// The 39 institutional affiliations behind MatrAIx (arXiv:2608.04205, Aug 2026) —
+// 93 researchers simulating 8.3B AI personas — collapse to 36 distinct universities
+// once you merge sub-schools (Harvard Business/Medical School, Wharton) into their
+// parent university. Used on the program page as evidence that frontier agentic-AI
+// research is already coming out of these schools' labs, faster than intro CS
+// sequences can teach it. `featured` marks Nathan's alma mater.
+export const targetUniversities = [
+  { name: "University of Michigan", featured: true },
+  { name: "Harvard University" },
+  { name: "Massachusetts Institute of Technology" },
+  { name: "Stanford University" },
+  { name: "University of California, Berkeley" },
+  { name: "Carnegie Mellon University" },
+  { name: "Princeton University" },
+  { name: "University of Pennsylvania" },
+  { name: "Cornell University" },
+  { name: "Columbia University" },
+  { name: "University of Southern California" },
+  { name: "Georgia Institute of Technology" },
+  { name: "University of Texas at Austin" },
+  { name: "University of Illinois Urbana-Champaign" },
+  { name: "Johns Hopkins University" },
+  { name: "University of Washington" },
+  { name: "University of Wisconsin-Madison" },
+  { name: "Purdue University" },
+  { name: "University of Oxford" },
+  { name: "New York University" },
+  { name: "Brown University" },
+  { name: "University of Toronto" },
+  { name: "The Ohio State University" },
+  { name: "Boston University" },
+  { name: "Pennsylvania State University" },
+  { name: "University of Maryland, College Park" },
+  { name: "University of California, San Diego" },
+  { name: "University of California, Irvine" },
+  { name: "University of California, Riverside" },
+  { name: "University of California, Santa Cruz" },
+  { name: "University at Buffalo" },
+  { name: "University of San Francisco" },
+  { name: "University of North Carolina at Chapel Hill" },
+  { name: "University of Pittsburgh" },
+  { name: "Arizona State University" },
+  { name: "Medical University of South Carolina" },
+];
+
+// Consulting offerings for AutoNateAI's community/regional banking vertical.
+// Each maps a real daily workflow stress inside a bank to what AutoNateAI does
+// about it, priced as fixed-scope engagements (not hourly), sized for a bank's
+// budget rather than an enterprise vendor contract.
+export const bankingOfferings = [
+  {
+    icon: "fact_check",
+    name: "Bank AI & Workflow Assessment",
+    hook: "Leadership knows AI probably matters. Nobody can point to where it actually pays off inside this bank.",
+    capabilities: [
+      "Interview lending, deposit, compliance, and ops teams",
+      "Map the real systems, data, and manual handoffs in use today",
+      "Model where AI and simulation create measurable ROI",
+      "Deliver a ranked, priced roadmap — not a slide deck of buzzwords",
+    ],
+    transformation: "“We should probably use AI” becomes a ranked list of specific, priced opportunities.",
+    priceLow: 7500,
+    priceHigh: 15000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "account_balance",
+    name: "Commercial Lending Intelligence",
+    hook: "Loan officers dig through financials, collateral files, and relationship notes by hand on every deal and every renewal.",
+    capabilities: [
+      "Simulate the lending workflow end to end before touching production",
+      "Build document extraction and portfolio-concentration dashboards",
+      "Flag renewal and concentration risk before it's a surprise",
+      "Decision-support tooling — the human still signs off",
+    ],
+    transformation: "Fragmented loan files become structured, searchable lending intelligence.",
+    priceLow: 15000,
+    priceHigh: 40000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "description",
+    name: "Document & Call Intelligence",
+    hook: "Employees read long loan packages, policy binders, and call notes that a machine could process in seconds.",
+    capabilities: [
+      "Classification and structured-extraction pipelines",
+      "PII-aware redaction and controlled data handling by design",
+      "Built on document/call-processing R&D from Veterans United's AI team",
+      "Human review built into every workflow, never bypassed",
+    ],
+    transformation: "Hours of manual document handling become minutes of reviewed, machine-assisted processing.",
+    priceLow: 12500,
+    priceHigh: 35000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "groups",
+    name: "Deposit & Customer Ops Intelligence",
+    hook: "Front-line staff bounce between three systems to answer one customer question.",
+    capabilities: [
+      "Analyze service and account workflows",
+      "Simulate customer journeys before you change anything live",
+      "Build internal assistants that surface the right context fast",
+      "Segment the accounts worth proactive outreach",
+    ],
+    transformation: "Reactive service becomes information-rich, faster service.",
+    priceLow: 12500,
+    priceHigh: 30000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "shield",
+    name: "Fraud & Risk Simulation Lab",
+    hook: "Your team finds out a workflow has a hole in it only after something has already slipped through.",
+    capabilities: [
+      "Build synthetic customer/employee scenarios and run them against real workflows",
+      "Surface failure points before they hit production",
+      "Anomaly and risk dashboards your team actually checks",
+      "Test process changes safely, without touching live customers",
+    ],
+    transformation: "Reactive risk management becomes controlled, repeatable scenario testing.",
+    priceLow: 15000,
+    priceHigh: 40000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "policy",
+    name: "Compliance & Policy Intelligence",
+    hook: "Someone always has to go find where a rule lives, then prove why a decision followed it.",
+    capabilities: [
+      "Evidence-linked policy search employees can actually trust",
+      "Controlled AI extraction that cites its source and abstains when unsure",
+      "Audit trails built in, not bolted on after the fact",
+      "Human approval stays in the loop on anything that matters",
+    ],
+    transformation: "“Where's that rule?” becomes traceable, defensible policy intelligence.",
+    priceLow: 15000,
+    priceHigh: 35000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "insights",
+    name: "Executive & Market Intelligence",
+    hook: "Leadership is reading a static quarterly report about a market that changes every week.",
+    capabilities: [
+      "Combine Census, economic, and local-industry data with your branch footprint",
+      "Model which local industries and employers are actually expanding",
+      "Simulate how a market or lending shift plays out before it happens",
+      "Living dashboards instead of a report that's stale by the time it's printed",
+    ],
+    transformation: "Scattered external data becomes a continuously updated model of the markets you serve.",
+    priceLow: 10000,
+    priceHigh: 25000,
+    priceUnit: "Fixed scope",
+  },
+  {
+    icon: "code",
+    name: "Custom Banking Software",
+    hook: "Your core system doesn't do the one thing your bank actually needs, and no vendor sells that module.",
+    capabilities: [
+      "Full-stack build: data model, API, front end, integrations",
+      "AI woven in where it earns its place, not everywhere",
+      "Built and tested against your actual workflow, not a generic template",
+      "Deployed, documented, and handed off cleanly",
+    ],
+    transformation: "A manual spreadsheet workaround becomes a purpose-built system your team actually trusts.",
+    priceLow: 25000,
+    priceHigh: 100000,
+    priceUnit: "Fixed scope, scaled to build",
+  },
+  {
+    icon: "handshake",
+    name: "Ongoing AI & Data Partner",
+    hook: "You don't need a full AI team on payroll. You do need someone who keeps finding what's next.",
+    capabilities: [
+      "Monthly research, simulation, and prototyping cycle",
+      "Engineering and analytics on retainer, not per-ticket",
+      "First look at everything AutoNateAI builds for other banks",
+      "Advisory access for leadership, not just a support inbox",
+    ],
+    transformation: "Occasional one-off projects become an outsourced AI and data capability.",
+    priceLow: 7500,
+    priceHigh: 20000,
+    priceUnit: "Per Month",
+  },
+];
+
+// Four-step engagement ladder shown above the offer grid on /consulting.
+export const bankEngagementLadder = [
+  { step: "Step 1", label: "Assessment" },
+  { step: "Step 2", label: "Pilot Engagement" },
+  { step: "Step 3", label: "Production Build" },
+  { step: "Step 4", label: "Ongoing Partner" },
+];
+
+// Limited-slot launch pricing on the Bank AI & Workflow Assessment. Update
+// slotsFilled by hand as Founding Bank Pilot partners sign; once slotsFilled
+// reaches slotsTotal, drop this section and the assessment card reverts to
+// standard pricing everywhere on the page.
+export const foundingBankPilot = {
+  region: "Southeast Missouri",
+  slotsTotal: 3,
+  slotsFilled: 0,
+  standardPrice: 12500,
+  pilotPrice: 6500,
+  offeringName: "Bank AI & Workflow Assessment",
+};
+
 export const badgeProgression = [
   "Explorer",
   "Builder",

@@ -3176,6 +3176,74 @@ pre.mermaid svg {
   font-weight: 700;
 }
 
+/* Program page: target-school badge cloud */
+
+.school-tag-row {
+  margin-top: 4px;
+  gap: 10px;
+}
+
+.school-tag-row span {
+  padding: 7px 10px;
+}
+
+.school-tag-row .school-featured {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Consulting: bank engagement ladder + offer cards */
+
+.bank-ladder-section .badge-strip {
+  margin-top: 8px;
+}
+
+.bank-ladder {
+  justify-content: center;
+}
+
+.offer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.offer-transform {
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--outline);
+  color: var(--on-surface);
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.offer-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.offer-price b {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.offer-price span {
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pilot-band h2 del {
+  color: var(--on-variant);
+  font-weight: 500;
+  margin-right: 8px;
+  text-decoration-color: color-mix(in srgb, var(--on-variant) 60%, transparent);
+}
+
 /* Consulting: book-a-call layout */
 
 .book-layout {

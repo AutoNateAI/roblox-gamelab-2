@@ -1,5 +1,14 @@
 import { readFileSync } from "node:fs";
-import { articles, sceneShots, tutorialPacks, tutorials } from "./data.mjs";
+import {
+  articles,
+  bankEngagementLadder,
+  bankingOfferings,
+  foundingBankPilot,
+  sceneShots,
+  targetUniversities,
+  tutorialPacks,
+  tutorials,
+} from "./data.mjs";
 import {
   escapeHtml,
   icon,
@@ -52,8 +61,8 @@ export function renderHome(data) {
     : `/programs/${primaryProgram.handle}`;
   const landingArticles = [
     "coding-as-workforce-development",
-    "why-live-builds-make-it-real",
     "systems-thinking-through-code",
+    "why-git-matters-for-builders",
   ]
     .map((handle) => articles.find((article) => article.handle === handle))
     .filter(Boolean);
@@ -61,15 +70,15 @@ export function renderHome(data) {
   const body = `
     <main>
       <section class="home-hero">
-        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/hero-simulation.jpg" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("groups")} A Community of Systems Developers</span>
-            <h1>Build production-worthy apps with agentic AI. Ship them with people who actually build.</h1>
-            <p>AutoNateAI is a community of systems developers who design and ship real applications using agentic AI workflows, directed with tools like Claude Code and Codex. Four free tutorial packs teach the pillars. A live cohort sharpens them. Live Builds prove them, every Saturday, live in Discord.</p>
+            <span class="kicker">${icon("hub")} Software Systems + Simulated Populations</span>
+            <h1>Don't just build the software. Simulate the people who'll use it.</h1>
+            <p>AutoNateAI trains first- and second-year CS students to build real software, then simulate the people who'll use it — reverse-engineered from MatrAIx's persona architecture. We sell that same discipline to community and regional banks as AutoNateAI Consulting.</p>
             <div class="cohort-date-row">
               ${cohortBadge(primaryProgram)}
-              <span>${escapeHtml(primaryProgram.cohortNote || "")} Each cohort is capped at ${cohortCapacity(primaryProgram)} and gets a dedicated AutoNateAI Discord channel for setup help, architecture reviews, agent workflow coaching, and build support between sessions.</span>
+              <span>${escapeHtml(primaryProgram.cohortNote || "")} Capped at ${cohortCapacity(primaryProgram)}.</span>
             </div>
             <div class="button-row">
               <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat for ${primaryPrice} ${icon("arrow_forward")}</a>
@@ -77,15 +86,15 @@ export function renderHome(data) {
             </div>
           </div>
           <aside class="hero-program-panel">
-            <img src="/assets/landing/nate-and-kai.jpg" alt="Nate and Kai, the two builders behind the AutoNateAI tutorial packs" />
+            <img src="/assets/landing/hero-simulation.jpg" alt="" />
             <div class="hero-panel-body">
-              <span class="kicker">${icon("auto_stories")} Meet Nate & Kai</span>
-              <h2>The story behind every tutorial pack — and the studio you're joining.</h2>
-              <p>Two builders, one real civic problem, four free packs that turn into the actual skills this community runs on. Read the story, then bring the same habits to your own system.</p>
+              <span class="kicker">${icon("account_tree")} Two Pillars, One Discipline</span>
+              <h2>Programming for CS students. Consulting for banks.</h2>
+              <p>Free tutorial packs and a live cohort train the skill. AutoNateAI Consulting sells it to the banks who hire us.</p>
               <div class="hero-facts">
                 <span>4 tutorial packs</span>
-                <span>100% free</span>
-                <span>One real throughline</span>
+                <span>2-week cohort</span>
+                <span>Bank consulting</span>
                 <span>Discord community</span>
               </div>
             </div>
@@ -98,7 +107,7 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("public")} Why this works</span>
             <h2>Real systems make architecture visible.</h2>
-            <p>Every design choice connects to a system you can see: requirements become data models, decisions become components, Git protects every experiment, and AI agents help you move faster without losing track of what you actually shipped.</p>
+            <p>Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. It's the same discipline whether you're a CS student shipping your first simulated population or a bank running one of our consulting offerings.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
@@ -106,7 +115,7 @@ export function renderHome(data) {
           <article><span>${icon("functions")}</span><h3>Code that ships</h3><p>Existing coding knowledge gets applied to a real system: databases, APIs, architecture, and the tradeoffs that come with a real organization depending on it.</p></article>
           <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working versions, read diffs, recover from broken changes, and leave with a visible repo history that explains the system.</p></article>
           <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Design relational and graph data models, build the API that serves them, and document how it fits together with Mermaid diagrams.</p></article>
-          <article><span>${icon("forum")}</span><h3>A real community</h3><p>Use Discord for setup help, architecture reviews, agent workflow coaching, RFP research, and Saturday Live Builds with other systems developers.</p></article>
+          <article><span>${icon("forum")}</span><h3>A real community</h3><p>Use Discord for setup help, architecture reviews, agent workflow coaching, simulation design, and Saturday Live Builds with other systems developers.</p></article>
         </div>
       </section>
 
@@ -141,11 +150,11 @@ export function renderHome(data) {
           <div class="compete-copy">
             <span class="kicker">${icon("emoji_events")} Design, Build, Ship</span>
             <h2>Design a real system, then ship it for a real organization.</h2>
-            <p>This is for people who are comfortable reading and writing code and want to get sharper at directing it. The work is learning to read an unfamiliar system, direct AI agents without losing the thread, design data models and APIs, document architecture, and turn a real RFP into a working, shipped system. By the end, you are not just showing a project. You are pointing at a real system you designed and built.</p>
+            <p>This is for builders who want to get sharper at directing AI agents: designing data models and APIs, documenting architecture, and reverse-engineering the persona architecture behind research like MatrAIx to build a simulated population. By the end, you're pointing at a real system you designed, built, and simulation-tested yourself.</p>
             <div class="compete-curriculum">
               <article><b>01</b><span>Set up Claude Code and Codex, and learn to engineer prompts and context for real projects.</span></article>
               <article><b>02</b><span>Design databases and APIs, and document architecture with Mermaid diagrams.</span></article>
-              <article><b>03</b><span>Spend the second week reading a real RFP and shipping a system built live for a real organization.</span></article>
+              <article><b>03</b><span>Spend the second week building a simulated population and shipping a system built live against it.</span></article>
             </div>
           </div>
         </div>
@@ -156,7 +165,7 @@ export function renderHome(data) {
         <div>
           <span class="kicker">${icon("flag")} Every Saturday</span>
           <h2>${escapeHtml(league.season?.name || "Live Builds")}</h2>
-          <p>${escapeHtml(league.product?.cta || "")} It makes the learning visible: real code has to read the problem, manage tradeoffs, and keep making progress while the organization it's for is watching. Come watch, ask questions, or build along.</p>
+          <p>${escapeHtml(league.product?.cta || "")} Come watch, ask questions, or build along as a real bank workflow and its simulated population take shape.</p>
           <div class="stat-grid">
             <div><strong>${escapeHtml(league.season?.format || "Sat 10-12 CST, Discord")}</strong><span>Format</span></div>
             <div><strong>Free</strong><span>Open to Everyone</span></div>
@@ -173,7 +182,7 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("business_center")} Where It Leads</span>
             <h2>Live Builds prove the skill. Consulting is where it becomes client work.</h2>
-            <p>Live Builds are public practice against real, RFP-shaped problems, every Saturday. AutoNateAI Consulting is the separate, private practice where that same engineering discipline builds real custom software for organizations who hire us. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client work, or a partner organization hiring for these skills.</p>
+            <p>Live Builds are public practice: building the simulated populations and software behind AutoNateAI's real banking consulting offerings, every Saturday. AutoNateAI Consulting is the separate, private practice where that same engineering discipline builds real custom software for the banks who hire us. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client work, or a partner organization hiring for these skills.</p>
           </div>
           <a class="primary-button" href="/consulting">See How It Works ${icon("arrow_forward")}</a>
         </div>
@@ -183,8 +192,8 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("article")} Articles</span>
-            <h2>For builders who want sharper engineering judgment.</h2>
-            <p>These reads explain why real systems make the best teacher: the code controls real outcomes, the system exposes weak assumptions, Git makes experiments recoverable, and shipping proves whether the design holds up.</p>
+            <h2>Research, impact reports, and build notes.</h2>
+            <p>We write up research on financial workflows and simulation, impact reports from our banking and sponsor partnerships, and behind-the-scenes notes on how these systems actually get built.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
         </div>
@@ -199,7 +208,7 @@ export function renderHome(data) {
             <input placeholder="Enter your email" type="email" />
             <button type="button">Request Info</button>
           </form>
-          <small>Agent setup help, cohort workspace, Git repo guidance, architecture coaching, and RFP build support are included.</small>
+          <small>Agent setup help, cohort workspace, Git repo guidance, architecture coaching, and simulation-build support are included.</small>
         </div>
       </section>
     </main>
@@ -212,10 +221,10 @@ export function renderHome(data) {
     canonicalPath: "/",
     ogImage: "/assets/og/programs.jpg",
     description:
-      "AutoNateAI is a community of systems developers building production-worthy apps with agentic AI workflows. Four free tutorial packs, a 2-week live cohort, and Saturday Live Builds in Discord.",
-    ogTitle: "Build production-worthy apps with agentic AI.",
+      "AutoNateAI is a community of systems developers who build production-worthy apps with agentic AI, then reverse-engineer the persona architecture behind research like MatrAIx to simulate the people who'll use them. Four free tutorial packs, a 2-week live cohort, and Saturday Live Builds in Discord.",
+    ogTitle: "Don't just build the software. Simulate the people who'll use it.",
     ogDescription:
-      "A community of systems developers, a 2-week live cohort, and Saturday Live Builds where builders design databases, APIs, and architecture with Claude Code and Codex, then ship a real system sourced from an actual RFP.",
+      "A community of systems developers, a 2-week live cohort, and Saturday Live Builds where builders design databases, APIs, and architecture with Claude Code and Codex, then build a simulated population — reverse-engineered from research like MatrAIx — and ship a real system against it.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -272,7 +281,7 @@ export function renderAbout() {
         <div>
           <span class="kicker">${icon("psychology")} About AutoNateAI</span>
           <h1>We teach builders how to design systems that survive contact with reality.</h1>
-          <p>AutoNateAI helps CS students, bootcamp builders, and self-taught developers practice the work behind good software: reading an environment, modeling state, designing components, using AI agents responsibly, testing assumptions, and explaining why the system behaves the way it does.</p>
+          <p>AutoNateAI helps first- and second-year CS students, bootcamp builders, and self-taught developers practice the work behind good software: reading an environment, modeling state, designing components, using AI agents responsibly, testing assumptions, and explaining why the system behaves the way it does.</p>
           <div class="button-row">
             <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/articles">Read the Learning Model</a>
@@ -292,7 +301,8 @@ export function renderAbout() {
         <span class="kicker">${icon("architecture")} Mission</span>
         <h2>Good code is not enough. The system has to work.</h2>
         <p>AutoNateAI's vision is that more people become system architects: not just software architects, but people who can design the systems around them, technical and civic alike. Software is the vehicle because AI now makes it fast and cheap to build. Professional engineers spend their time reading unfamiliar systems, identifying constraints, debugging behavior, communicating tradeoffs, using Git, and deciding what should be automated next. AutoNateAI turns those habits into a live practice environment where the design either works or the real system exposes the gap.</p>
-        <p>That practice environment is not hypothetical. Live Builds put real, RFP-shaped problems in front of the community every Saturday, live, in public, in the AutoNateAI Discord. <a href="/consulting">AutoNateAI Consulting</a> is the separate, private practice where that same discipline builds real custom software for organizations who hire us, across industries. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client work, or a partner organization hiring for these skills.</p>
+        <p>In August 2026, we reverse-engineered <a href="https://arxiv.org/abs/2608.04205" target="_blank" rel="noopener">MatrAIx</a> — the Harvard- and MIT-led system that simulates 8.3 billion AI personas — and built our own version of it. AutoNateAI doesn't just teach people to build software; it teaches them to simulate the borrowers, employees, and customers that software actually serves, and test against them before anything ships.</p>
+        <p>That practice environment is not hypothetical. Live Builds put real, simulation-driven bank workflows in front of the community every Saturday. <a href="/consulting">AutoNateAI Consulting</a> is the private practice where that same discipline builds real software for the banks who hire us — and standout builders get noticed.</p>
       </section>
 
       <section class="spotlight-section">
@@ -373,8 +383,8 @@ export function renderAbout() {
         <div class="faq-grid">
           <article><h3>Is this for complete beginners?</h3><p>The free tutorial packs start from zero. The paid program is best once you are comfortable reading and modifying code and want to get sharper at designing systems: data models, APIs, and architecture.</p></article>
           <article><h3>How does AI fit into the class?</h3><p>You use agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
-          <article><h3>Why build real systems instead of exercises?</h3><p>A real RFP or civic problem makes tradeoffs visible in a way an exercise can't. You can see requirements, constraints, feedback, failure, and whether your design actually holds up.</p></article>
-          <article><h3>Who is this built for?</h3><p>CS students, coding bootcamp participants, self-taught builders, career switchers, and technical builders who want stronger systems thinking and AI-assisted engineering habits.</p></article>
+          <article><h3>Why build real systems instead of exercises?</h3><p>A real bank workflow and the simulated population you build to test it make tradeoffs visible in a way an exercise can't. You can see requirements, constraints, feedback, failure, and whether your design actually holds up against the people who'd use it.</p></article>
+          <article><h3>Who is this built for?</h3><p>First- and second-year CS and CS-adjacent students, also open to coding bootcamp participants, self-taught builders, career switchers, and technical builders who want stronger systems thinking and AI-assisted engineering habits.</p></article>
         </div>
       </section>
 
@@ -382,7 +392,7 @@ export function renderAbout() {
         <div>
           <span class="kicker">${icon("local_activity")} Current Program</span>
           <h2>How to Create Software Systems with AI Agents</h2>
-          <p>A two-week live cohort, Monday through Thursday, where builders design databases, APIs, and architecture with Claude Code and Codex, use Git, and spend the second week shipping a real system for a real organization, sourced from an actual RFP.</p>
+          <p>A two-week live cohort, Monday through Thursday, where builders design databases, APIs, and architecture with Claude Code and Codex, use Git, and spend the second week building a simulated population, reverse-engineered from research like MatrAIx, and shipping a real system tested against it.</p>
         </div>
         <a class="primary-button" href="/programs/ai-agent-systems">Explore the Program ${icon("arrow_forward")}</a>
       </section>
@@ -396,10 +406,10 @@ export function renderAbout() {
     canonicalPath: "/about",
     ogImage: "/assets/nathan-baker.jpeg",
     description:
-      "AutoNateAI teaches developers and technical builders to design systems, direct AI agents responsibly, debug behavior, and prove their work by shipping real systems.",
+      "AutoNateAI teaches first- and second-year CS students to design systems and direct AI agents responsibly, then reverse-engineers the persona architecture behind research like MatrAIx to simulate who that software actually serves — the same discipline sold to community and regional banks as consulting.",
     ogTitle: "Meet the engineer behind the program.",
     ogDescription:
-      "AutoNateAI turns real engineering habits into a live practice ground where builders design, debug, commit, and ship real systems with AI agents.",
+      "Real engineering habits, a reverse-engineered MatrAIx-style simulation practice, and one discipline split two ways: training for CS students, consulting for community and regional banks.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -435,9 +445,9 @@ export function renderProgramDetail(data, program) {
         <div class="hero-content">
           <div class="hero-copy">
             <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/${program.handle}">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
-            <span class="kicker">${icon("emoji_events")} AI Agents + Systems + Real Impact</span>
+            <span class="kicker">${icon("school")} Built for First- and Second-Year CS Students</span>
             <h1>${heroTitle}</h1>
-            <p>This is where coding starts feeling like systems engineering. Use Claude Code and Codex to design a real system: model the data, build the API, document the architecture, and make it hold up under real constraints. Then take that system into a real RFP and see how your architecture performs when a real organization is depending on it.</p>
+            <p>Most intro CS sequences are still teaching syntax and test suites. This program gets you there years early: use Claude Code and Codex to design a real system, then reverse-engineer the persona architecture behind MatrAIx to build a simulated population and see how your system holds up against it.</p>
             <div class="cohort-date-row">
               ${cohortBadge(program)}
               <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, architecture reviews, agent workflow coaching, and build support between sessions.</span>
@@ -452,7 +462,7 @@ export function renderProgramDetail(data, program) {
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What You Build</span>
               <h2>A system that has to hold up while a real organization is watching.</h2>
-              <p>Learn the tools, design the architecture, keep decisions in Git, then ship a real system built live in response to an actual RFP.</p>
+              <p>Learn the tools, design the architecture, keep decisions in Git, then build the simulated population that tests your system and ship it live against them.</p>
               <div class="hero-facts">
                 <span>${cohortCapacity(program)}</span>
                 <span>${program.durationWeeks || 2} weeks</span>
@@ -468,7 +478,23 @@ export function renderProgramDetail(data, program) {
         <a href="${checkoutHref}"><b>${price}</b><span>Full ${program.durationWeeks || 2}-week cohort</span></a>
         <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
         <a href="#curriculum"><b>8</b><span>Live build sessions</span></a>
-        <a href="#outcomes"><b>RFP</b><span>Live build week</span></a>
+        <a href="#outcomes"><b>Sim</b><span>Simulated population week</span></a>
+      </section>
+
+      <section class="section compact school-proof-section" id="schools">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("public")} Where the Frontier Work Is Happening</span>
+            <h2>Researchers at your school are already building agentic AI. Your intro courses probably aren't, yet.</h2>
+            <p>In August 2026, 93 researchers across 39 institutional affiliations — MIT, Stanford, Harvard, Michigan, and dozens more — published <a href="https://arxiv.org/abs/2608.04205" target="_blank" rel="noopener">MatrAIx</a>, a system that simulates 8.3 billion AI personas to test how real products actually behave. That's the caliber of agentic-AI systems work already coming out of research labs at these schools. You don't have to wait for grad school, or for your curriculum to catch up, to start building with agents yourself.</p>
+          </div>
+        </div>
+        <div class="tag-row school-tag-row">
+          ${targetUniversities
+            .map((school) => `<span class="${school.featured ? "school-featured" : ""}">${escapeHtml(school.name)}</span>`)
+            .join("")}
+        </div>
+        <p class="industries-footnote">Nathan, who teaches this program, studied Computer Science at the University of Michigan — one of the 39.</p>
       </section>
 
       <section class="section compact detail-sales-band" id="outcomes">
@@ -476,14 +502,14 @@ export function renderProgramDetail(data, program) {
           <div>
             <span class="kicker">${icon("architecture")} What Actually Changes</span>
             <h2>You start seeing code as a living system, not a file of instructions.</h2>
-            <p>You learn to direct AI agents deliberately, design data models and APIs, automate decisions, debug failures, use Git checkpoints, and explain how the system works under pressure. Building a real system for a real organization makes the design visible, because your code has to survive, serve real requirements, and respond to changing constraints.</p>
+            <p>You learn to direct AI agents, design data models and APIs, debug failures, and use Git checkpoints. Then you go further than most programs: reverse-engineer the persona architecture behind MatrAIx, build a simulated population of the people who'd use your system, and ship against it.</p>
           </div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="/assets/landing/api-data-model.jpg" alt="" /><h3>A system with real behavior</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by real requirements.</p></article>
+          <article><img src="/assets/landing/api-data-model.jpg" alt="" /><h3>A system built for a real bank workflow</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by one of AutoNateAI's actual banking consulting offerings.</p></article>
           <article><img src="/assets/landing/agent-review.jpg" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
-          <article><img src="/assets/landing/live-builds-spotlight.jpg" alt="" /><h3>A shot at getting noticed</h3><p>Live Builds put your work in front of the community every Saturday. Standout builders get noticed — sometimes that means an introduction to real <a href="/consulting">AutoNateAI Consulting</a> client work, or a partner organization hiring for these skills.</p></article>
+          <article><img src="/assets/landing/live-builds-spotlight.jpg" alt="" /><h3>A simulated population you build yourself</h3><p>Reverse-engineer the persona-and-verifier pattern behind population-scale AI research like MatrAIx, then run your system against a synthetic population before it ships. Standout builders get noticed — sometimes that means real work on <a href="/consulting">AutoNateAI Consulting</a>'s banking offerings.</p></article>
         </div>
       </section>
 
@@ -514,14 +540,14 @@ export function renderProgramDetail(data, program) {
 
       <section class="section compact" id="curriculum">
         <div class="section-head">
-          <div><h2>8 sessions from meeting your agents to shipping a real system.</h2><p>Because you're building against a real RFP, you see the same pressures real software faces: unfamiliar environments, changing requirements, dependencies, automation, failure recovery, resource constraints, and performance under real deadlines.</p></div>
+          <div><h2>8 sessions from meeting your agents to shipping a real system.</h2><p>Because you're building a real bank workflow and the simulated population that tests it, you see the same pressures real software faces: unfamiliar environments, changing requirements, dependencies, automation, failure recovery, resource constraints, and performance under real deadlines.</p></div>
           <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
         </div>
         <div class="week-grid">
           ${sessionWeeks.map((sessions, index) => weekCard(index, sessions)).join("")}
         </div>
         <div class="detail-bottom-cta">
-          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to shipping a real system for a real organization.</span></div>
+          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to building your simulated population and shipping a real system against it.</span></div>
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
       </section>
@@ -544,9 +570,9 @@ export function renderProgramDetail(data, program) {
     canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
-    ogTitle: "Your architecture has to survive real requirements.",
+    ogTitle: "For first- and second-year CS students: your architecture has to survive a real simulated population.",
     ogDescription:
-      "Use Claude Code and Codex to design a real system, tune it in Git, and ship it live for a real organization sourced from an actual RFP.",
+      "Use Claude Code and Codex to design a real system, tune it in Git, then reverse-engineer the persona architecture behind MatrAIx to build a simulated population and ship it live against them.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -581,8 +607,8 @@ export function renderLeague(data) {
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("emoji_events")} AutoNateAI Live Builds</span>
-          <h1>Real systems, built live. No lecturing, just the build.</h1>
-          <p>${escapeHtml(league.product?.cta || "")} Anyone in the AutoNateAI Discord can watch, ask questions, and follow along as the system takes shape.</p>
+          <h1>Real systems, real simulations, built live.</h1>
+          <p>${escapeHtml(league.product?.cta || "")} Anyone in the Discord can watch, ask questions, and follow along.</p>
           <div class="button-row">
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
             <a class="secondary-button" href="/programs/ai-agent-systems">View the Program</a>
@@ -595,7 +621,7 @@ export function renderLeague(data) {
             <h2>Saturdays, 10 AM-12 PM CST</h2>
             <p>Every Saturday, 10:00 AM-12:00 PM CST, live in the AutoNateAI Discord. Pull up in the voice channel, or catch the replay after.</p>
             <div class="hero-facts">
-              <span>RFP-sourced</span>
+              <span>Simulation-driven</span>
               <span>No lecturing</span>
               <span>Discord-only</span>
               <span>Open to everyone</span>
@@ -608,15 +634,15 @@ export function renderLeague(data) {
       <section class="league-grid">
         <article class="league-rules">
           <span class="kicker">${icon("sports_esports")} The Format</span>
-          <h2>A real RFP. A real build. No script.</h2>
-          <p>Every session starts with a real problem: an actual RFP or civic ask from a city, foundation, or organization. The team reads it, researches who's behind it, and starts designing a system live, in Discord, in front of anyone watching.</p>
+          <h2>A real bank workflow. A real simulation. No script.</h2>
+          <p>Every session starts with one of AutoNateAI's real banking offerings — commercial lending intelligence, fraud simulation, whatever's next. The team designs a small simulated population for it, reverse-engineered from MatrAIx's persona architecture, then builds the software live in Discord.</p>
           <p>${escapeHtml(league.season?.winCondition || "")}</p>
-          <p>This isn't a simulation of real work: it's a real RFP, researched and designed against in public, live, with nothing cut. <a href="/consulting">AutoNateAI Consulting</a> is the separate, private practice where that same discipline builds real custom software for organizations who hire us. Builders who stand out in Live Builds get noticed — sometimes that means an introduction to real consulting client work, or a partner organization hiring for these skills.</p>
+          <p>It's a real simulated population and a real system, built in public with nothing cut. <a href="/consulting">AutoNateAI Consulting</a> is the private practice where that same discipline builds real software for the banks who hire us — and standout builders get noticed.</p>
         </article>
         <aside class="league-facts">
           <div><span>Sat</span><b>10:00 AM-12:00 PM CST</b></div>
           <div><span>Where</span><b>AutoNateAI Discord</b></div>
-          <div><span>Mode</span><b>${escapeHtml(league.season?.format || "Real RFP, Live Build")}</b></div>
+          <div><span>Mode</span><b>${escapeHtml(league.season?.format || "Simulation + Live Build")}</b></div>
           <div><span>Status</span><b class="status-pill live">${escapeHtml(league.season?.status || "Active")}</b></div>
           <a class="primary-button full" href="https://discord.gg/4HkkuntdSs">Join the Discord</a>
         </aside>
@@ -625,17 +651,17 @@ export function renderLeague(data) {
       <section class="section compact league-section">
         <div class="section-head"><div><span class="kicker">${icon("visibility")} What You'll See</span><h2>Not a highlight reel. The actual process.</h2><p>Every session is the real thing: real requirements, real dead ends, real fixes. Nothing is rehearsed and nothing is cut.</p></div></div>
         <div class="league-how league-awards">
-          <div><span class="material-symbols-outlined">travel_explore</span><h3>Reading the Ask</h3><p>A real RFP gets read, picked apart, and turned into a list of what actually needs to get built.</p></div>
+          <div><span class="material-symbols-outlined">travel_explore</span><h3>Picking the Workflow</h3><p>One of AutoNateAI's real banking offerings gets picked apart into what the software needs to do and who it needs to work for.</p></div>
           <div><span class="material-symbols-outlined">smart_toy</span><h3>Agent-Directed Builds</h3><p>Real prompts, real context, real review of what the agent got right and what needed a fix.</p></div>
           <div><span class="material-symbols-outlined">account_tree</span><h3>System Architecture</h3><p>Data model and API decisions made out loud, with the tradeoffs explained as they happen.</p></div>
           <div><span class="material-symbols-outlined">bug_report</span><h3>Clutch Debugging</h3><p>The real bug, found live, fixed live, no cut scenes.</p></div>
-          <div><span class="material-symbols-outlined">forum</span><h3>Outreach</h3><p>Identifying who the system is actually for, and drafting the outreach to reach them.</p></div>
-          <div><span class="material-symbols-outlined">flag</span><h3>Ship Day</h3><p>The moment a system goes from "in progress" to something a real organization could actually use.</p></div>
+          <div><span class="material-symbols-outlined">groups</span><h3>Persona Design</h3><p>A small simulated population takes shape: who they are, what they're trying to do, and how the system should respond.</p></div>
+          <div><span class="material-symbols-outlined">flag</span><h3>Ship Day</h3><p>The moment a system goes from "in progress" to something tested against its simulated population and ready to show a bank.</p></div>
         </div>
       </section>
 
       <section class="league-gallery">
-        <img src="/assets/landing/rfp-document.jpg" alt="" />
+        <img src="/assets/landing/hero-simulation.jpg" alt="" />
         <img src="/assets/landing/live-builds-spotlight.jpg" alt="" />
         <img src="/assets/landing/agent-review.jpg" alt="" />
       </section>
@@ -649,127 +675,118 @@ export function renderLeague(data) {
     canonicalPath: "/live-builds",
     ogImage: "/assets/og/live-builds.jpg",
     description:
-      "AutoNateAI Live Builds: every Saturday, 10 AM-12 PM CST, the community builds a real software system live in Discord, sourced from an actual RFP. No lecturing, just the build.",
-    ogTitle: "AutoNateAI Live Builds: real systems, built live.",
+      "AutoNateAI Live Builds: every Saturday, 10 AM-12 PM CST, the community builds real software systems and the simulated populations that test them, live in Discord, mapped to real AutoNateAI banking offerings.",
+    ogTitle: "AutoNateAI Live Builds: real systems, real simulations, built live.",
     ogDescription:
-      "Saturdays, 10:00 AM-12:00 PM CST, live in Discord. A real RFP, a real build, no script.",
+      "Saturdays, 10:00 AM-12:00 PM CST, live in Discord. A real bank workflow, a real simulated population, a real build, no script.",
   });
 }
 
-const consultingIndustries = [
-  {
-    icon: "account_balance",
-    name: "Civic & Government",
-    hook: "Built on real RFP response work and the habit of reading procurement language most engineers skip.",
-    capabilities: [
-      "Public-facing registration, intake, and waitlist systems",
-      "RFP-responsive, proposal-ready system architecture",
-      "Program dashboards and reporting for accountability",
-      "Secure handling of resident and program data",
-    ],
-  },
-  {
-    icon: "payments",
-    name: "Financial Services & Fintech",
-    hook: "Shaped by engineering work inside Citi and Veterans United, where reliability and compliance aren't optional.",
-    capabilities: [
-      "Internal tooling for compliance-heavy workflows",
-      "Secure API integrations and data pipelines",
-      "AI-assisted document and underwriting workflows",
-      "Legacy system modernization",
-    ],
-  },
-  {
-    icon: "school",
-    name: "Education & Workforce Development",
-    hook: "Grounded in teaching Computer Security at the University of Michigan and running real technical programs.",
-    capabilities: [
-      "Cohort and program management systems",
-      "Mentorship and progress-tracking platforms",
-      "Curriculum and content delivery tools",
-      "Outcomes reporting and data systems",
-    ],
-  },
-  {
-    icon: "shield_lock",
-    name: "Enterprise Software & Security",
-    hook: "Built on security engineering at Microsoft and senior consulting across products and architecture at Atomic Object.",
-    capabilities: [
-      "Internal automation and AI-agent workflow tooling",
-      "Security-conscious architecture review",
-      "Legacy system audits and modernization roadmaps",
-      "Developer tooling and internal platforms",
-    ],
-  },
-  {
-    icon: "volunteer_activism",
-    name: "Nonprofits & Community Organizations",
-    hook: "The reason this consultancy exists: watching a funded program run on a spreadsheet that broke every few weeks, with nobody in the room who could fix it.",
-    capabilities: [
-      "Volunteer and donor management systems",
-      "Grant reporting and program-tracking tools",
-      "Custom tools that replace spreadsheet chaos",
-      "Lightweight intake, booking, and case-management systems",
-    ],
-  },
-];
+function bankPriceRange(offering) {
+  const low = money(offering.priceLow);
+  const high = offering.priceHigh ? money(offering.priceHigh) : "";
+  return high ? `${low}&ndash;${high}` : low;
+}
 
-function industryCard(industry) {
+function bankOfferCard(offering) {
   return `
-    <article class="industry-card">
-      <div class="industry-card-icon">${icon(industry.icon)}</div>
-      <h3>${escapeHtml(industry.name)}</h3>
-      <p class="industry-hook">${escapeHtml(industry.hook)}</p>
+    <article class="industry-card offer-card">
+      <div class="industry-card-icon">${icon(offering.icon)}</div>
+      <h3>${escapeHtml(offering.name)}</h3>
+      <p class="industry-hook">${escapeHtml(offering.hook)}</p>
       <ul class="industry-capabilities">
-        ${industry.capabilities.map((item) => `<li>${icon("check")}<span>${escapeHtml(item)}</span></li>`).join("")}
+        ${offering.capabilities.map((item) => `<li>${icon("check")}<span>${escapeHtml(item)}</span></li>`).join("")}
       </ul>
+      <p class="offer-transform">${escapeHtml(offering.transformation)}</p>
+      <div class="offer-price"><b>${bankPriceRange(offering)}</b><span>${escapeHtml(offering.priceUnit)}</span></div>
     </article>
   `;
 }
 
+function bankLadderStrip() {
+  return `
+    <div class="badge-strip bank-ladder">
+      ${bankEngagementLadder
+        .map(
+          (step, index) => `
+            ${index > 0 ? `<div class="badge-connector"></div>` : ""}
+            <div class="badge-step"><span>${escapeHtml(step.step)}</span><b>${escapeHtml(step.label)}</b></div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 export function renderConsulting(data) {
+  const pilot = foundingBankPilot;
+  const slotsRemaining = Math.max(pilot.slotsTotal - pilot.slotsFilled, 0);
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
         <div class="hero-bg"><img src="/assets/landing/design-build-ship.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("business_center")} AutoNateAI Consulting</span>
-          <h1>Custom software, built by an engineer who ships.</h1>
-          <p>Just met Nate at an event and got pointed here? Good — you're in the right place. AutoNateAI Consulting designs and builds custom software for real organizations: real requirements, senior engineering judgment, and AI agents like Claude Code and Codex used to move faster without cutting corners. Tell us what you're building and book a real time below.</p>
+          <span class="kicker">${icon("account_balance")} AutoNateAI Consulting for Community &amp; Regional Banks</span>
+          <h1>Enterprise-grade AI systems, priced for a community bank's budget.</h1>
+          <p>AutoNateAI Consulting builds AI workflow intelligence, simulation, and custom software for community and regional banks — the institutions with real operational complexity but without a 125-person AI R&D team like the big national banks have. Nathan built AI research and document/call-processing systems inside Veterans United Home Loans' AI R&D team. Same caliber of engineering, scoped and priced for a bank your size.</p>
           <div class="button-row">
             <a class="primary-button" href="#book">Book a Call ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/live-builds">See How We Build</a>
+            <a class="secondary-button" href="#offerings">See What We Offer</a>
           </div>
         </div>
         <aside class="hero-program-panel">
           <img src="/assets/landing/api-data-model.jpg" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("apartment")} For Organizations</span>
-            <h2>Bring us the problem. We'll bring the system.</h2>
-            <p>Cities, foundations, schools, financial teams, and community organizations bring AutoNateAI Consulting a real problem to solve. We scope it, design it, and build it — privately, professionally, for you.</p>
+            <span class="kicker">${icon("apartment")} For Bank Leadership</span>
+            <h2>Bring us the workflow that's eating staff time. We'll show you what changes.</h2>
+            <p>Commercial lending, document review, deposit ops, compliance — we model how it actually works today, simulate what a change would do, then build it if the numbers hold up.</p>
             <div class="hero-facts">
-              <span>Senior engineering</span>
-              <span>AI-agent accelerated</span>
-              <span>Fixed-scope delivery</span>
-              <span>Real organizations</span>
+              <span>Fixed-scope pricing</span>
+              <span>PII-aware by design</span>
+              <span>Ex-Veterans United AI R&D</span>
+              <span>No enterprise-length contracts</span>
             </div>
           </div>
         </aside>
         </div>
       </section>
 
-      <section class="section industries-section">
+      <section class="section compact bank-ladder-section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("apartment")} Industries</span>
-            <h2>Capabilities built from real experience, not a generic pitch.</h2>
-            <p>Every industry below maps to real work Nathan has actually done — not a services menu written to sound broad. Here's what that experience means for the systems your organization needs built.</p>
+            <span class="kicker">${icon("route")} How Engagements Grow</span>
+            <h2>Most banking-AI vendors sell you a platform first. We start by studying how your bank actually works.</h2>
+            <p>Every relationship starts small and earns its way up: research your real workflow, run a scoped pilot, build the production system, then stay on as a standing AI and data partner if it's a fit.</p>
           </div>
         </div>
-        <div class="industry-grid">${consultingIndustries.map((industry) => industryCard(industry)).join("")}</div>
-        <p class="industries-footnote">Don't see your industry listed? If the work runs on data, workflows, and decisions, we can probably help — <a href="#book">let's talk</a>.</p>
+        ${bankLadderStrip()}
       </section>
+
+      <section class="section industries-section" id="offerings">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("apartment")} Offerings</span>
+            <h2>Our Nine Service Offerings</h2>
+            <p>Each one maps to a specific daily stress inside a bank, what we'd do about it, and a fixed price range for that scope.</p>
+          </div>
+        </div>
+        <div class="industry-grid offer-grid">${bankingOfferings.map((offering) => bankOfferCard(offering)).join("")}</div>
+        <p class="industries-footnote">Don't see your workflow listed? If it runs on data, documents, or decisions, we can probably help — <a href="#book">let's talk</a>.</p>
+      </section>
+
+      ${
+        slotsRemaining > 0
+          ? `<section class="detail-enroll-band pilot-band">
+        <div>
+          <span class="kicker">${icon("eco")} Founding Bank Pilot &mdash; ${escapeHtml(pilot.region)}</span>
+          <h2><del>${money(pilot.standardPrice)}</del> ${money(pilot.pilotPrice)} for the ${escapeHtml(pilot.offeringName)}</h2>
+          <p>Open to the first ${pilot.slotsTotal} community or regional banks in ${escapeHtml(pilot.region)} &mdash; ${pilot.slotsFilled} of ${pilot.slotsTotal} slots claimed. In exchange for founding pricing, partners get first access to every simulation we build and permission to use approved, anonymized results as a case study. Once all ${pilot.slotsTotal} slots are claimed, standard pricing takes over for everyone after.</p>
+        </div>
+        <a class="primary-button" href="#book">Claim a Founding Slot ${icon("arrow_forward")}</a>
+      </section>`
+          : ""
+      }
 
       <section class="section compact" id="book">
         <div class="section-head">
@@ -785,7 +802,7 @@ export function renderConsulting(data) {
               <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
               <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
             </div>
-            <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="City of Fairview" /></label>
+            <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="First State Community Bank" /></label>
             <div class="two-col">
               <label>Call Type
                 <select data-booking-field="callType" data-booking-call-type required>
@@ -818,6 +835,7 @@ export function renderConsulting(data) {
                 <select data-booking-field="howHeard">
                   <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
                   <option value="Website">Website</option>
+                  <option value="Founding Bank Pilot">Founding Bank Pilot</option>
                   <option value="Live Build">Live Build</option>
                   <option value="Referral">Referral</option>
                   <option value="RFP">RFP</option>
@@ -841,7 +859,7 @@ export function renderConsulting(data) {
             </div>
             <div class="book-sidebar-block">
               <span class="kicker">${icon("verified")} Background</span>
-              <p>Computer Science, University of Michigan. Software and AI engineering across Microsoft, Citi, Veterans United, Atomic Object, and Outlier.</p>
+              <p>Computer Science, University of Michigan. AI research and engineering inside Veterans United Home Loans' AI R&D team, plus financial-technology engineering at Citi and security engineering at Microsoft.</p>
               <a class="outline-button full" href="/about">About Nathan ${icon("arrow_forward")}</a>
             </div>
           </aside>
@@ -860,16 +878,16 @@ export function renderConsulting(data) {
   `;
 
   return pageShell({
-    title: "Consulting | AutoNateAI",
+    title: "Consulting for Community & Regional Banks | AutoNateAI",
     active: "consulting",
     body,
     canonicalPath: "/consulting",
     ogImage: "/assets/og/consulting.jpg",
     description:
-      "AutoNateAI Consulting builds custom software for real organizations across civic, financial, education, enterprise, and nonprofit industries, directed by senior engineering judgment and AI agents.",
-    ogTitle: "Custom software, built by an engineer who ships.",
+      "AutoNateAI Consulting builds AI workflow intelligence, simulation, and custom software for community and regional banks, priced fixed-scope and scoped to a bank's budget, not an enterprise vendor contract.",
+    ogTitle: "Enterprise-grade AI systems, priced for a community bank's budget.",
     ogDescription:
-      "Real requirements, senior engineering judgment, and AI agents used to move faster without cutting corners. Book a call to talk about what your organization needs built.",
+      "Nine fixed-scope offerings for community and regional banks, from workflow assessments to custom lending and compliance software, built by an engineer who worked inside Veterans United's AI R&D team.",
   });
 }
 
@@ -880,9 +898,9 @@ export function renderTutorials() {
         <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("menu_book")} Tutorial Packs</span>
-          <h1>Get moving before you go further.</h1>
-          <p>Every pack is a free, self-contained path following Nate and Kai as they build AutoNateAI: JavaScript from zero, prompt and context engineering, databases and graphs, and civics with agentic AI. Pick a pack below to see its lessons.</p>
+          <span class="kicker">${icon("menu_book")} Free for First- and Second-Year CS Students</span>
+          <h1>The reps your intro courses haven't gotten to yet.</h1>
+          <p>If you're a first- or second-year CS (or CS-adjacent) student, you're deep in syntax and problem sets, nowhere near agentic AI or shipping a real system yet. These four free packs close that gap: follow Nate and Kai build AutoNateAI from a meetup back room to a shipped system, covering JavaScript from zero, prompt and context engineering, databases and graphs, and reading a real ask like an engineer. No enrollment, no cost, just the reps your program hasn't gotten to.</p>
           <div class="button-row">
             <a class="primary-button" href="/programs/ai-agent-systems">Take the Program ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/community">Ask in Discord</a>
@@ -891,9 +909,9 @@ export function renderTutorials() {
         <aside class="hero-program-panel">
           <img src="/assets/landing/learning-path.jpg" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("terminal")} Free Player Guides</span>
+            <span class="kicker">${icon("terminal")} Built for Where You're At</span>
             <h2>Setup is free. System judgment is the program.</h2>
-            <p>New to code? Start with Nate and Kai's story and learn JavaScript from zero. Already writing code? Jump into whichever pack matches what you're stuck on. Either way, the packs build toward the same system-architect habits the live program practices.</p>
+            <p>New to code, or just past your first data structures course? Start with Nate and Kai's story and learn JavaScript from zero, or jump into whichever pack matches what your classes haven't covered yet. Either way, the packs build toward the same system-architect habits the live program practices.</p>
             <div class="hero-facts">
               <span>${tutorialPacks.length} tutorial packs</span>
               <span>Copy-ready code</span>
@@ -1121,9 +1139,9 @@ export function renderArticles() {
     <main class="articles-page">
       <div class="page-toolbar">
         <div>
-          <span class="kicker">${icon("article")} Articles / Tutorials / Strategy</span>
-          <h1>Read the system before you ship it.</h1>
-          <p>Strategy notes for builders using AI agents, Git, databases, and real systems thinking to design software that can operate, adapt, and hold up under real requirements.</p>
+          <span class="kicker">${icon("article")} Articles</span>
+          <h1>Systems notes for CS students and bank leaders.</h1>
+          <p>Written for first- and second-year CS students building real software, and for the community and regional banks putting AI to work responsibly. Expect research on financial workflows and simulation, impact reports from our banking and sponsor partnerships, and behind-the-scenes notes on how these systems actually get built.</p>
         </div>
       </div>
       ${featuredArticle ? featuredArticleCard(featuredArticle) : ""}
@@ -1144,10 +1162,10 @@ export function renderArticles() {
     canonicalPath: "/articles",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Articles and strategy notes about AI-assisted development, Git, automation, real systems, and software architecture.",
-    ogTitle: "Field notes before you ship.",
+      "Research on financial workflows and simulation, impact reports from our banking and sponsor partnerships, and build notes for CS students and bank leaders working with agentic AI.",
+    ogTitle: "Systems notes for CS students and bank leaders.",
     ogDescription:
-      "Read the AI-agent workflows, Git habits, and system-design tradeoffs before your system has to hold up for real.",
+      "Financial workflow research, banking and sponsor impact reports, and behind-the-scenes build notes — for CS students and the banks who hire us.",
   });
 }
 
@@ -1322,7 +1340,7 @@ export function renderSuccess(data) {
     description: `Enrollment confirmed for ${primaryProgram?.name || "the AutoNateAI program"}.`,
     ogTitle: "Seat locked. Build loading.",
     ogDescription:
-      "Your seat is reserved. Next comes setup, Git, AI agents, system design, and a real RFP build.",
+      "Your seat is reserved. Next comes setup, Git, AI agents, system design, and building your simulated population.",
   });
 }
 
@@ -1580,7 +1598,7 @@ function chunkSessions(sessions, size) {
 function weekCard(index, sessions) {
   const weekMeta = [
     ["Agents, prompting, databases, and architecture", "Set up Claude Code and Codex, engineer prompts and context for real projects, design relational and graph data models, build APIs, and document the system with Mermaid diagrams."],
-    ["Review, research, and the real build", "Review AI-generated code like an engineer, find and read a real RFP with an agent's help, then turn it into a real system design and ship it live for a real organization."],
+    ["Simulation, design, and the real build", "Review AI-generated code like an engineer, design a simulated population using the persona-and-verifier pattern behind MatrAIx, then turn it into a real system design and ship it live against them."],
   ][index] || [`Week ${index + 1}`, "Keep improving the system."];
   const [title, summary] = weekMeta;
 
@@ -1622,7 +1640,7 @@ function programFeature(program, extraClass = "", showOverlay = false) {
             ? `<div class="program-media-callout">
           <span>${icon("flag")} Live capstone</span>
           <strong>Design the system. Ship it for real.</strong>
-          <p>Builders finish by shipping a real system, built live, in response to an actual RFP.</p>
+          <p>Builders finish by shipping a real system, built live, tested against a simulated population they build themselves.</p>
         </div>`
             : ""
         }
