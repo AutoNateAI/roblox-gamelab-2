@@ -1295,7 +1295,7 @@ export function renderCommunity() {
 }
 
 export function renderArticles() {
-  const featuredArticle = articles.find((article) => article.handle === "systems-thinking-through-code");
+  const featuredArticle = articles.find((article) => article.handle === "why-southeast-missouri-businesses-need-internal-ai-capability");
   const listedArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
   const body = `
     <main class="articles-page">
