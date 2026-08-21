@@ -569,7 +569,7 @@ export const articles = [
     ],
     tags: ["Workforce Development", "Southeast Missouri", "Employers"],
     readingTime: "3 min read",
-    image: "/assets/landing/community-discord.jpg",
+    image: "/assets/landing/sikeston-article-internal-ai-capability.jpg",
   },
   {
     handle: "what-ai-workforce-readiness-looks-like-for-sikeston-students",
@@ -585,7 +585,7 @@ export const articles = [
     ],
     tags: ["Youth Programming", "Sikeston", "Workforce Development"],
     readingTime: "3 min read",
-    image: "/assets/landing/learning-path.jpg",
+    image: "/assets/landing/sikeston-article-workforce-readiness.jpg",
   },
   {
     handle: "coding-as-workforce-development",
@@ -601,7 +601,7 @@ export const articles = [
     ],
     tags: ["System Design", "AI Agents", "Workforce Development"],
     readingTime: "4 min read",
-    image: "/assets/landing/api-data-model.jpg",
+    image: "/assets/landing/sikeston-article-system-design.jpg",
   },
   {
     handle: "why-live-builds-make-it-real",

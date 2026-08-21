@@ -2917,6 +2917,23 @@ pre.mermaid svg {
   white-space: nowrap;
 }
 
+.checkout-product-strip em {
+  display: block;
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-style: normal;
+  margin-top: 8px;
+}
+
+/* Order summary panel: a dedicated, smaller heading size — without this it
+   inherits the sitewide clamp(30px, 3.6vw, 46px) h2 sizing meant for page
+   section headers, which badly wraps in a ~380px sidebar column. */
+.order-summary h2 {
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
 .square-status {
   display: grid;
   gap: 6px;
@@ -2925,6 +2942,13 @@ pre.mermaid svg {
   color: var(--on-variant);
   margin-bottom: 18px;
   padding: 16px;
+}
+
+/* Hidden by default (only unhidden via JS when something actually goes
+   wrong with card loading/payment) — .square-status's own `display: grid`
+   would otherwise beat the [hidden] attribute's UA display:none. */
+.square-status[hidden] {
+  display: none;
 }
 
 .square-status strong {
@@ -4544,4 +4568,27 @@ pre.mermaid svg {
   color: var(--on-variant);
   margin: 0 0 10px;
   line-height: 1.55;
+}
+
+/* Fix: .industry-grid's own repeat(3) rule is defined later in this file
+   than .pack-grid's repeat(2), so at equal specificity it was winning over
+   the dual-classed org-examples grid. Force it here, guaranteed last. */
+.org-examples-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 760px) {
+  .org-examples-grid {
+    display: flex !important;
+  }
+}
+
+/* On mobile, checkout order summary shows above the payment form — DOM
+   order stays form-first (so desktop's left/right column placement is
+   correct without any extra markup), this just flips the visual order
+   once .checkout-grid collapses to a single column. */
+@media (max-width: 760px) {
+  .checkout-grid .order-summary {
+    order: -1;
+  }
 }

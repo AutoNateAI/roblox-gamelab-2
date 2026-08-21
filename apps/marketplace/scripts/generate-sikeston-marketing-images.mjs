@@ -71,12 +71,27 @@ const images = [
   {
     file: "sikeston-org-system-dashboard.jpg",
     size: "1536x1024",
-    prompt: `A photorealistic medium shot inside the reference classroom: the man from the reference headshot sitting beside a professionally dressed adult (a stand-in for a local small-business owner), both leaning in and pointing at a laptop screen between them showing a clean internal business dashboard UI with bold red accent charts and highlights, both people genuinely engaged and pleased with what they're seeing, warm daylight, documentary style, shallow depth of field. ${STYLE} ${GUARDRAIL} The laptop screen's UI accent color must be a bold red (#c8102e family), not amber or orange.`,
+    prompt: `A photorealistic over-the-shoulder shot taken from BEHIND two people sitting side by side at a table in the reference classroom: the man from the reference headshot and a professionally dressed adult (a stand-in for a local small-business owner), seen mostly from behind/the side, both leaning toward the same open laptop directly in front of them and pointing at its screen. The camera is positioned behind and slightly to the side of them, over their shoulders, so the laptop screen — showing a clean internal business dashboard UI with bold red accent charts and highlights — is angled away from the camera and toward the two people, exactly the way a real laptop screen would face the people using it, not toward the viewer. Warm daylight, documentary style, shallow depth of field. ${STYLE} ${GUARDRAIL} The laptop screen's UI accent color must be a bold red (#c8102e family), not amber or orange. Do not show the screen face-on to the camera — it must be realistically angled toward the two people looking at it.`,
   },
   {
     file: "sikeston-agent-review.jpg",
     size: "1536x1024",
     prompt: `A photorealistic close-up shot inside the reference classroom of an adult builder (not necessarily the man from the reference headshot — can be one of the diverse students) intently reviewing code on a laptop screen showing a dark-themed code editor with a diff view and an AI chat panel open beside it, bold red highlight bars in the diff, focused and engaged expression, one hand on the trackpad, warm daylight softly lighting the scene, shallow depth of field, blurred classroom in the background. ${STYLE} The editor's highlight/accent color must be a bold red (#c8102e family), not amber or green.`,
+  },
+  {
+    file: "sikeston-article-internal-ai-capability.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium shot inside the reference classroom of a professionally dressed adult (a stand-in for a Southeast Missouri small-business owner, not the man from the reference headshot) sitting alone at a laptop, one hand on the keyboard, looking at the screen with a thoughtful, decisive expression, the screen showing a clean internal business dashboard UI with bold red accent charts and highlights, warm daylight, documentary editorial style, shallow depth of field, blurred classroom tables in the background. ${STYLE} The screen's UI accent color must be a bold red (#c8102e family), not amber or orange. No readable text.`,
+  },
+  {
+    file: "sikeston-article-workforce-readiness.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium shot inside the reference classroom of a young adult student (college-age, not the man from the reference headshot) sitting at a laptop with an open notebook beside it, engaged and focused expression, taking notes while looking at the laptop screen which shows a faint red-accented code editor, warm daylight, documentary editorial style, shallow depth of field, a couple of other diverse students blurred at nearby tables in the background. ${STYLE} Any on-screen accent color must be a bold red (#c8102e family), not amber. No readable text.`,
+  },
+  {
+    file: "sikeston-article-system-design.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium shot inside the reference classroom of the man from the reference headshot standing at a whiteboard or large wall monitor, sketching a simple system architecture diagram (boxes and connecting arrows) in bold red marker/red-accented lines, half-turned toward the diagram with one hand mid-gesture explaining it, engaged expression, warm daylight, documentary editorial style, blurred classroom tables with laptops in the foreground. ${STYLE} ${GUARDRAIL} The diagram lines/accents must be a bold red (#c8102e family), not amber. No readable text or labels in the diagram.`,
   },
 ];
 

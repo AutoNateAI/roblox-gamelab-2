@@ -705,7 +705,7 @@ export function renderForOrganizations(data) {
           <p>AI skills aren't only for technology companies. Missouri employers increasingly need technical talent across every industry. Sponsor employees to build internal tools your organization actually needs, or sponsor students from your school or nonprofit.</p>
           <div class="button-row">
             <a class="primary-button" href="#sponsorship">Sponsor Your Team ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="#book">Talk With AutoNateAI</a>
+            <a class="secondary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20question">Talk With AutoNateAI</a>
           </div>
         </div>
         <aside class="hero-program-panel">
@@ -736,6 +736,16 @@ export function renderForOrganizations(data) {
         <div class="industry-grid offer-grid">${sponsorshipTiers.map((tier) => sponsorshipTierCard(tier)).join("")}</div>
       </section>
 
+      <section class="section compact" id="build">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("build")} What Could You Build for Your Organization?</span>
+            <h2>Every participant brings a real project back to work on.</h2>
+          </div>
+        </div>
+        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
+      </section>
+
       <section class="section compact" id="pay">
         <div class="section-head">
           <div>
@@ -756,10 +766,7 @@ export function renderForOrganizations(data) {
               </div>
               <label>Contact Email<input data-sponsorship-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
             </div>
-            <div class="square-status" data-square-status>
-              <strong>Square payment setup pending</strong>
-              <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
-            </div>
+            <div class="square-status" data-square-status hidden></div>
             <div class="form-stack payment-fields">
               <label>Name on Card<input data-sponsorship-field="cardholderName" autocomplete="cc-name" placeholder="Jordan Rivera" /></label>
             </div>
@@ -768,13 +775,15 @@ export function renderForOrganizations(data) {
               <span>Encrypted and processed by Square</span>
             </div>
             <div class="square-card-container" data-square-card><span>Loading secure card fields...</span></div>
-            <p class="fine-print" data-sponsorship-status>Prefer to pay by invoice, or talk it through first? <a href="#book">Talk with AutoNateAI</a> or write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20invoice">autonate.ai@gmail.com</a>.</p>
+            <p class="fine-print" data-sponsorship-status>Prefer to pay by invoice, or have questions first? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20invoice">autonate.ai@gmail.com</a>.</p>
           </section>
           <aside class="order-summary">
             <h2>Order Summary</h2>
-            <div class="summary-items">
-              <div class="summary-item">
-                <div><strong>How to Create Software Systems with AI Agents</strong><span>In-person cohort &middot; Center Street Station, Sikeston, MO</span><em data-sponsorship-seats-label>1 seat &middot; $499 per seat</em></div>
+            <div class="checkout-product-strip">
+              <div>
+                <strong>AI Systems Cohort</strong>
+                <span>In-person &middot; Center Street Station, Sikeston, MO</span>
+                <em data-sponsorship-seats-label>1 seat &middot; $499 per seat</em>
               </div>
             </div>
             <div class="summary-line"><span>Subtotal</span><b data-sponsorship-total>$499</b></div>
@@ -790,111 +799,6 @@ export function renderForOrganizations(data) {
           <p data-sponsorship-success-detail>Payment received. We'll reach out to get your organization onboarded.</p>
           <p>Next: we work with your organization to get your sponsored builders added to the AutoNateAI Discord and started on the four free digital courses, so they walk into the first session already prepared.</p>
         </div>
-      </section>
-
-      <section class="section compact" id="build">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("build")} What Could You Build for Your Organization?</span>
-            <h2>Every participant brings a real project back to work on.</h2>
-          </div>
-        </div>
-        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
-      </section>
-
-      <section class="detail-enroll-band">
-        <div>
-          <span class="kicker">${icon("school")} Schools, Churches &amp; Community Organizations</span>
-          <h2>Ask about student sponsorships.</h2>
-          <p>Sponsor students from your school, youth program, or congregation into the youth technology development pathway. Outcomes, safeguards, and partnership details available on a call.</p>
-        </div>
-        <a class="primary-button" href="#book">Ask About Student Sponsorships ${icon("arrow_forward")}</a>
-      </section>
-
-      <section class="section compact" id="book">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("event")} Prefer to Talk First?</span>
-            <h2>Tell us about your team, school, or organization.</h2>
-            <p>Not ready to purchase seats yet, or need an invoice instead of a card payment? Discovery calls are 15 or 30 minutes and are for organizations exploring sponsorship. Follow-ups run 30, 45, 60, 90, or 120 minutes for partnerships already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday.</p>
-          </div>
-        </div>
-        <div class="book-layout">
-          <form class="form-stack booking-card booking-form" data-booking-form>
-            <div class="two-col">
-              <label>Name<input data-booking-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
-              <label>Email<input data-booking-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
-            </div>
-            <label>Organization<input data-booking-field="organization" autocomplete="organization" placeholder="Your business, school, or nonprofit" /></label>
-            <div class="two-col">
-              <label>Call Type
-                <select data-booking-field="callType" data-booking-call-type required>
-                  <option value="">Select one</option>
-                  <option value="Discovery">Discovery</option>
-                  <option value="Follow-up">Follow-up</option>
-                </select>
-              </label>
-              <label>Duration
-                <select data-booking-field="duration" data-booking-duration required disabled>
-                  <option value="">Pick a call type first</option>
-                </select>
-              </label>
-            </div>
-            <div class="two-col">
-              <label>Preferred Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="preferredDateTime" type="datetime-local" required /></label>
-              <label>Alternate Date &amp; Time <small>(Central Time, 8 AM-6 PM)</small><input data-booking-field="alternateDateTime" type="datetime-local" /></label>
-            </div>
-            <div class="two-col">
-              <label>Your Timezone
-                <select data-booking-field="timezone">
-                  <option value="CST">Central (CST)</option>
-                  <option value="EST">Eastern (EST)</option>
-                  <option value="MST">Mountain (MST)</option>
-                  <option value="PST">Pacific (PST)</option>
-                  <option value="Other">Other</option>
-                </select>
-              </label>
-              <label>How did you hear about us?
-                <select data-booking-field="howHeard">
-                  <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
-                  <option value="Website">Website</option>
-                  <option value="For Organizations page">For Organizations page</option>
-                  <option value="Discord">Discord</option>
-                  <option value="Referral">Referral</option>
-                  <option value="Other">Other</option>
-                </select>
-              </label>
-            </div>
-            <label>What do you want out of this call?<textarea data-booking-field="goals" rows="3" placeholder="What decision or outcome are you hoping to walk away with?"></textarea></label>
-            <label>Project / Organization Context<textarea data-booking-field="context" rows="3" placeholder="How many seats are you considering, and what would you want your team or students to build?"></textarea></label>
-            <button class="primary-button full" type="submit">Request the Call ${icon("arrow_forward")}</button>
-            <p class="fine-print" data-booking-status>Prefer email? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20For%20Organizations%20inquiry">autonate.ai@gmail.com</a>.</p>
-          </form>
-          <aside class="book-sidebar">
-            <div class="book-sidebar-block">
-              <span class="kicker">${icon("checklist")} What happens next</span>
-              <ol>
-                <li>We read what you send — no auto-reply, an actual read.</li>
-                <li>You'll hear back within 1-2 business days to confirm a time.</li>
-                <li>We meet, scope your team or students' goals, and you get a straight answer on fit and cost.</li>
-              </ol>
-            </div>
-            <div class="book-sidebar-block">
-              <span class="kicker">${icon("verified")} Background</span>
-              <p>Computer Science, University of Michigan. Software and AI engineering experience across Microsoft, Citi, Veterans United, and Atomic Object, now reinvested locally in Sikeston, MO.</p>
-              <a class="outline-button full" href="/about">About Nathan ${icon("arrow_forward")}</a>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="detail-enroll-band">
-        <div>
-          <span class="kicker">${icon("local_activity")} Sending just one person?</span>
-          <h2>Individuals can reserve a seat directly.</h2>
-          <p>No sponsorship needed — students and professionals can enroll themselves in the next cohort.</p>
-        </div>
-        <a class="primary-button" href="/programs/${primaryProgram?.handle || "ai-agent-systems"}">View the Program ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
@@ -1504,10 +1408,7 @@ export function renderCheckout(data) {
           <span class="kicker">Secure seat reservation</span>
           <h1>Reserve your cohort seat</h1>
           <p class="checkout-lede">You are reserving one seat in ${escapeHtml(program?.name || "the AutoNateAI program")}. Card payment is processed securely through Square; learner onboarding details come next after payment is confirmed.</p>
-          <div class="square-status" data-square-status>
-            <strong>Square payment setup pending</strong>
-            <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
-          </div>
+          <div class="square-status" data-square-status hidden></div>
           <div class="checkout-product-strip">
             <div>
               <strong>${escapeHtml(program?.name || "AutoNateAI Program")}</strong>

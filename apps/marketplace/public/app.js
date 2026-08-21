@@ -226,30 +226,33 @@ function markSquareUnavailable(message) {
   }
 }
 
+// Square's routine "payment setup pending / ready" status banner is gone from
+// the customer-facing checkout UI — this element (present but hidden by
+// default on both /checkout and /for-organizations) only surfaces if
+// something actually goes wrong, so a real failure is never silent.
 const squareStatusEl = document.querySelector("[data-square-status]");
 if (squareStatusEl) {
   fetchSquareConfig()
     .then(async (config) => {
       squareConfig = config;
-      squareStatusEl.classList.toggle("ready", Boolean(config.enabled));
-      squareStatusEl.innerHTML = config.enabled
-        ? `<strong>Square payments ready</strong><span>${config.environment} environment connected. Enter card details below to complete enrollment.</span>`
-        : `<strong>Square payment setup pending</strong><span>Add the ${config.environment} Square application ID, access token, and location ID to enable card payments. Use /api/square/locations after adding the access token to find the location ID.</span>`;
       if (config.enabled) {
         try {
           await setupSquareCard(config);
         } catch (error) {
           squareConfig = null;
-          squareStatusEl.classList.remove("ready");
-          squareStatusEl.innerHTML = `<strong>Card fields could not load</strong><span>${error.message || "Square could not mount the secure card field."}</span>`;
-          markSquareUnavailable("Card fields could not load. Refresh the page or check Square credentials.");
+          squareStatusEl.hidden = false;
+          squareStatusEl.innerHTML = `<strong>Card fields could not load</strong><span>${error.message || "Square could not mount the secure card field. Refresh the page, or contact us to complete this by invoice."}</span>`;
+          markSquareUnavailable("Card fields could not load. Refresh the page or contact us to complete this by invoice.");
         }
       } else {
-        markSquareUnavailable("Square payment setup is pending.");
+        squareStatusEl.hidden = false;
+        squareStatusEl.innerHTML = `<strong>Card payment is temporarily unavailable</strong><span>Contact us at autonate.ai@gmail.com and we'll get this sorted out.</span>`;
+        markSquareUnavailable("Card payment is temporarily unavailable — contact us to complete this by invoice.");
       }
     })
     .catch((error) => {
-      squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>${error.message || "Checkout preview is still available, but payment configuration could not be checked."}</span>`;
+      squareStatusEl.hidden = false;
+      squareStatusEl.innerHTML = `<strong>Square status unavailable</strong><span>${error.message || "Payment configuration could not be checked. Refresh the page, or contact us to complete this by invoice."}</span>`;
       markSquareUnavailable("Card fields are unavailable until Square status loads.");
     });
 }
@@ -280,7 +283,7 @@ completeButton?.addEventListener("click", async (event) => {
   event.preventDefault();
   if (!squareCard || !squareConfig?.enabled || !selection.program || !selection.offering) {
     if (squareStatusEl) {
-      squareStatusEl.classList.remove("ready");
+      squareStatusEl.hidden = false;
       squareStatusEl.innerHTML = `<strong>Card fields still loading</strong><span>Square has to finish loading before payment can be processed. Refresh the page if the card field does not appear.</span>`;
     }
     return;
@@ -294,7 +297,7 @@ completeButton?.addEventListener("click", async (event) => {
   const purchaserEmail = checkoutFields.buyerEmail || "";
   if (!checkoutFields.cardholderName || !purchaserEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(purchaserEmail)) {
     if (squareStatusEl) {
-      squareStatusEl.classList.remove("ready");
+      squareStatusEl.hidden = false;
       squareStatusEl.innerHTML = `<strong>Missing checkout details</strong><span>Add the name on card and a valid purchaser email before payment.</span>`;
     }
     return;
@@ -337,8 +340,8 @@ completeButton?.addEventListener("click", async (event) => {
     const paymentParam = paymentId ? `&payment=${encodeURIComponent(paymentId)}` : "";
     window.location.href = `/success?program=${selection.program.handle}&offering=${selection.offering.id}${paymentParam}`;
   } catch (error) {
-    squareStatusEl?.classList.remove("ready");
     if (squareStatusEl) {
+      squareStatusEl.hidden = false;
       squareStatusEl.innerHTML = `<strong>Payment failed</strong><span>${error.message}</span>`;
     }
     completeButton.removeAttribute("aria-busy");
