@@ -1,4 +1,4 @@
-import { readFile, readdir, mkdir } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Resvg } from "@resvg/resvg-js";
@@ -8,11 +8,29 @@ import { tutorialPacks, tutorials } from "../src/data.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
 const publicDir = path.join(rootDir, "apps/marketplace/public");
-const scenesDir = path.join(publicDir, "assets/scenes");
 const outDir = path.join(publicDir, "assets/og");
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+
+// Real Sikeston photography + the gpt-image-2 Sikeston composites (see
+// scripts/generate-sikeston-marketing-images.mjs), cycled as OG card
+// backgrounds — replaces the old dark amber scene-*.jpg abstract art now
+// that the site brand is light-mode-default, red/black/white.
+const BACKGROUND_POOL = [
+  "assets/sikeston/classroom-cohort.jpg",
+  "assets/landing/sikeston-hero-teaching.jpg",
+  "assets/sikeston/downtown-street.jpg",
+  "assets/landing/sikeston-mentoring.jpg",
+  "assets/landing/sikeston-group-collaboration.jpg",
+  "assets/sikeston/historic-downtown.jpg",
+  "assets/landing/sikeston-internal-tool-laptop.jpg",
+  "assets/landing/sikeston-organizations-handshake.jpg",
+].map((rel) => path.join(publicDir, rel));
+
+function screenshotFor(index) {
+  return BACKGROUND_POOL[index % BACKGROUND_POOL.length];
+}
 
 function escapeXml(value = "") {
   return String(value)
@@ -44,25 +62,30 @@ async function buildSvg({ screenshotFile, eyebrow, title, footer }) {
   const titleTspans = titleLines
     .map((line, i) => `<tspan x="72" dy="${i === 0 ? 0 : 62}">${escapeXml(line)}</tspan>`)
     .join("");
+  const titleBlockHeight = 150 + (titleLines.length - 1) * 62;
 
+  // Light/white card matching the site's default light theme: photo up top,
+  // fading to a solid off-white panel that carries the red-accented text.
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id="frame"><rect width="${WIDTH}" height="${HEIGHT}" /></clipPath>
         <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#060a12" stop-opacity="0.25" />
-          <stop offset="50%" stop-color="#060a12" stop-opacity="0.82" />
-          <stop offset="100%" stop-color="#060a12" stop-opacity="0.97" />
+          <stop offset="0%" stop-color="#fafaf8" stop-opacity="0.08" />
+          <stop offset="38%" stop-color="#fafaf8" stop-opacity="0.55" />
+          <stop offset="60%" stop-color="#fafaf8" stop-opacity="0.94" />
+          <stop offset="100%" stop-color="#fafaf8" stop-opacity="1" />
         </linearGradient>
       </defs>
+      <rect width="${WIDTH}" height="${HEIGHT}" fill="#fafaf8" />
       <g clip-path="url(#frame)">
         <image href="${dataUri}" x="0" y="0" width="${WIDTH}" height="${HEIGHT}" preserveAspectRatio="xMidYMid slice" />
         <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#fade)" />
       </g>
-      <rect x="0" y="0" width="${WIDTH}" height="8" fill="#f2b134" />
-      <text x="72" y="${HEIGHT - 210}" font-family="Menlo, Consolas, monospace" font-size="24" font-weight="700" letter-spacing="3" fill="#f2b134">${escapeXml(eyebrow.toUpperCase())}</text>
-      <text x="72" y="${HEIGHT - 150}" font-family="Helvetica, Arial, sans-serif" font-size="54" font-weight="800" fill="#f5f7f2">${titleTspans}</text>
-      <text x="72" y="${HEIGHT - 48}" font-family="Menlo, Consolas, monospace" font-size="22" font-weight="600" fill="#9fb3a6">${escapeXml(footer)}</text>
+      <rect x="0" y="0" width="${WIDTH}" height="8" fill="#c8102e" />
+      <text x="72" y="${HEIGHT - titleBlockHeight - 60}" font-family="Menlo, Consolas, monospace" font-size="24" font-weight="700" letter-spacing="3" fill="#af0e28">${escapeXml(eyebrow.toUpperCase())}</text>
+      <text x="72" y="${HEIGHT - titleBlockHeight}" font-family="Helvetica, Arial, sans-serif" font-size="54" font-weight="800" fill="#17130f">${titleTspans}</text>
+      <text x="72" y="${HEIGHT - 48}" font-family="Menlo, Consolas, monospace" font-size="22" font-weight="600" fill="#5c554c">${escapeXml(footer)}</text>
     </svg>
   `;
 }
@@ -78,55 +101,87 @@ async function composite({ screenshotFile, eyebrow, title, footer, outFile }) {
   console.log(`  -> ${path.relative(rootDir, outFile)}`);
 }
 
-const screenshots = (await readdir(scenesDir)).filter((f) => f.endsWith(".jpg") && f.startsWith("scene-")).sort();
-if (!screenshots.length) {
-  throw new Error(`No scene images found in ${scenesDir}`);
-}
-
-function screenshotFor(index) {
-  return path.join(scenesDir, screenshots[index % screenshots.length]);
-}
-
 await mkdir(outDir, { recursive: true });
 
 const programsData = JSON.parse(
   await readFile(path.join(rootDir, "data/marketplace/programs.json"), "utf8"),
 );
 
-console.log(`Generating OG images from ${screenshots.length} source screenshots...`);
+console.log(`Generating OG images from ${BACKGROUND_POOL.length} Sikeston source photos...`);
 
 let index = 0;
+
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: "For First- and Second-Year CS Students",
-    title: "Build It. Simulate Who Uses It.",
-    footer: `AutoNateAI · ${program.durationWeeks || 2}-Week Cohort`,
+    eyebrow: "In-Person AI Systems Training · Sikeston, MO",
+    title: "How to Create Software Systems with AI Agents",
+    footer: `AutoNateAI · ${program.durationWeeks || 2}-Week Cohort · Southeast Missouri`,
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Software Systems With AI Agents",
-  title: "Design the System. Simulate the Population.",
-  footer: "AutoNateAI · Claude Code, Codex, Git, MatrAIx-Style Simulation",
+  eyebrow: "Southeast Missouri AI Workforce Development",
+  title: "Building Southeast Missouri's AI Workforce",
+  footer: "AutoNateAI · AI, Coding & Technical Training in Sikeston, MO",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AutoNateAI Consulting for Banks",
-  title: "Enterprise AI, Priced for Community Banks.",
-  footer: "AutoNateAI · Community & Regional Banks",
+  eyebrow: "For Employers, Schools & Nonprofits",
+  title: "Sponsor Your Team's AI & Coding Training",
+  footer: "AutoNateAI · Workforce Development in Sikeston, MO",
+  outFile: path.join(outDir, "for-organizations.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "AI Consulting for Community & Regional Banks",
+  title: "Enterprise-Grade AI, Priced for Community Banks",
+  footer: "AutoNateAI · Southeast Missouri",
   outFile: path.join(outDir, "consulting.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AutoNateAI",
-  title: "Software Systems. Simulated Populations.",
-  footer: "AutoNateAI · CS Students + Community Banks",
+  eyebrow: "AI, Workforce & Systems",
+  title: "AI, Workforce & Systems in Southeast Missouri",
+  footer: "AutoNateAI · Research, Guides & Field Notes from Sikeston, MO",
+  outFile: path.join(outDir, "articles.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "Your Free On-Ramp",
+  title: "Start Building Before the Cohort Begins",
+  footer: "AutoNateAI · 4 Free Digital Courses · Sikeston, MO",
+  outFile: path.join(outDir, "courses.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "AutoNateAI Community",
+  title: "Free Courses, Live Program & Discord Support",
+  footer: "AutoNateAI Discord · Southeast Missouri",
+  outFile: path.join(outDir, "community.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "About AutoNateAI",
+  title: "AI Workforce Development, Built Locally in Sikeston",
+  footer: "AutoNateAI · Founder Nathan Baker · Southeast Missouri",
+  outFile: path.join(outDir, "about.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "Southeast Missouri AI Workforce Development",
+  title: "AI, Coding & Technical Training in Sikeston, MO",
+  footer: "AutoNateAI · Workforce Development Programming",
   outFile: path.join(outDir, "default.jpg"),
 });
 
@@ -134,9 +189,9 @@ for (const tutorial of tutorials) {
   const pack = tutorialPacks.find((item) => item.handle === tutorial.pack);
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: `Tutorial ${tutorial.episode} · ${tutorial.track}`,
+    eyebrow: `Free Course ${tutorial.episode} · ${tutorial.track}`,
     title: tutorial.title,
-    footer: `AutoNateAI · ${pack?.title || "Free Player Guide"}`,
+    footer: `AutoNateAI · ${pack?.title || "Free Digital Course"} · Sikeston, MO`,
     outFile: path.join(outDir, `tutorial-${tutorial.pack}-${tutorial.handle}.jpg`),
   });
 }
@@ -146,9 +201,9 @@ for (const pack of tutorialPacks) {
     screenshotFile: screenshotFor(pack.heroShotIndex ?? index++),
     eyebrow: pack.tagline,
     title: pack.title,
-    footer: "AutoNateAI · Free Tutorial Pack",
+    footer: "AutoNateAI · Free Digital Course · Sikeston, MO",
     outFile: path.join(outDir, `tutorial-pack-${pack.handle}.jpg`),
   });
 }
 
-console.log(`Done. ${programsData.programs.length + tutorials.length + tutorialPacks.length + 4} OG images written to ${path.relative(rootDir, outDir)}`);
+console.log(`Done. ${programsData.programs.length + 7 + tutorials.length + tutorialPacks.length} OG images written to ${path.relative(rootDir, outDir)}`);

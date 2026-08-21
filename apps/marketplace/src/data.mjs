@@ -39,12 +39,18 @@ export const organizationExamples = [
   },
 ];
 
-// Sponsorship pricing for employers sending more than one employee. Easy to edit —
-// these are launch-pricing defaults, not fixed forever.
+// Sponsorship pricing for employers/schools sending more than one seat. Flat
+// $499/seat (SPONSORSHIP_UNIT_PRICE_CENTS in server.mjs / functions/index.js
+// is the source of truth the payment endpoint actually charges — keep both
+// in sync if this ever changes). Easy to edit — launch-pricing defaults, not
+// fixed forever.
 export const sponsorshipTiers = [
-  { seats: 1, price: 499, label: "Sponsor 1 employee" },
-  { seats: 3, price: 1497, label: "Sponsor 3 employees" },
-  { seats: 5, price: 2495, label: "Sponsor 5 employees" },
+  { seats: 1, price: 499, label: "Sponsor 1 seat" },
+  { seats: 3, price: 1497, label: "Sponsor 3 seats" },
+  { seats: 5, price: 2495, label: "Sponsor 5 seats" },
+  { seats: 10, price: 4990, label: "Sponsor 10 seats" },
+  { seats: 15, price: 7485, label: "Sponsor 15 seats" },
+  { seats: 20, price: 9980, label: "Sponsor 20 seats" },
 ];
 
 // Five-year regional vision shown on the About page.

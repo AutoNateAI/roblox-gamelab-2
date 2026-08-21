@@ -6,13 +6,18 @@ import { onRequest } from "firebase-functions/v2/https";
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp();
 
 const OFFERINGS = {
-  "ai-agent-systems:offering-ai-agent-systems-august-2026": {
+  "ai-agent-systems:offering-ai-agent-systems-september-2026": {
     programName: "How to Create Software Systems with AI Agents",
-    offeringName: "How to Create Software Systems with AI Agents - August Cohort",
+    offeringName: "How to Create Software Systems with AI Agents - September Cohort",
     amount: 49900,
     currency: "USD",
   },
 };
+
+// $499/seat sponsorship pricing (For Organizations page) — same unit price
+// as the single-seat offering above, kept as its own constant since it's
+// charged by a dynamic seat count rather than a fixed program+offering pair.
+const SPONSORSHIP_UNIT_PRICE_CENTS = 49900;
 
 function envValue(...keys) {
   for (const key of keys) {
@@ -228,6 +233,83 @@ export const marketplaceApi = onRequest(
           }),
         });
         sendJson(response, squareResponse.ok ? 200 : squareResponse.status, payload);
+        return;
+      }
+
+      if (request.method === "POST" && pathname === "/square/sponsorship-payment") {
+        const settings = squareSettings();
+        if (!squareIsReady(settings)) {
+          sendJson(response, 503, { error: "Square is not configured." });
+          return;
+        }
+
+        const body = request.body || {};
+        const seats = Math.round(Number(body.seats));
+        const buyer = body.buyer || {};
+        const organization = cleanString(buyer.organization);
+        const contactName = cleanString(buyer.name);
+        const contactEmail = cleanString(buyer.email);
+        const cardholderName = cleanString(buyer.cardholderName);
+        if (!Number.isInteger(seats) || seats < 1 || seats > 200) {
+          sendJson(response, 400, { error: "Seats must be a whole number between 1 and 200." });
+          return;
+        }
+        if (!organization || !contactName || !contactEmail || !cardholderName || !body.sourceId) {
+          sendJson(response, 400, {
+            error: "Missing organization, contact details, cardholder name, or Square source token.",
+          });
+          return;
+        }
+
+        const noteParts = [
+          `AutoNateAI Sponsorship - ${seats} seat${seats === 1 ? "" : "s"}`,
+          `Organization: ${organization}`,
+          `Contact: ${contactName}`,
+          `Cardholder: ${cardholderName}`,
+        ];
+
+        const { response: squareResponse, payload } = await squareFetch(settings.paymentsUrl, settings, {
+          method: "POST",
+          body: JSON.stringify({
+            idempotency_key: randomUUID(),
+            source_id: body.sourceId,
+            location_id: settings.locationId,
+            amount_money: {
+              // Server-computed from seats — never trust a client-submitted amount.
+              amount: seats * SPONSORSHIP_UNIT_PRICE_CENTS,
+              currency: "USD",
+            },
+            buyer_email_address: contactEmail,
+            note: noteParts.join(" | "),
+            reference_id: `sponsorship:${seats}-seats`,
+          }),
+        });
+        sendJson(response, squareResponse.ok ? 200 : squareResponse.status, payload);
+        return;
+      }
+
+      if (request.method === "POST" && pathname === "/sponsorships") {
+        const body = request.body || {};
+        const organization = cleanString(body.organization);
+        const contactEmail = cleanString(body.contactEmail).toLowerCase();
+        if (!organization || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) {
+          sendJson(response, 400, { error: "Organization and a valid contact email are required." });
+          return;
+        }
+
+        const document = {
+          namespace: "autonateai-sponsorships",
+          source: "marketplace-for-organizations",
+          organization,
+          contactName: cleanString(body.contactName),
+          contactEmail,
+          seats: Number(body.seats) || 0,
+          amountPaid: Number(body.amountPaid) || 0,
+          paymentId: cleanString(body.paymentId),
+          createdAt: FieldValue.serverTimestamp(),
+        };
+        const docRef = await getFirestore(firebaseApp).collection("marketplace_sponsorships").add(document);
+        sendJson(response, 200, { ok: true, sponsorshipId: docRef.id });
         return;
       }
 

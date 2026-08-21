@@ -68,6 +68,16 @@ const images = [
     size: "1536x1024",
     prompt: `A photorealistic shot inside the reference classroom of the man from the reference headshot shaking hands with a professionally dressed adult (a stand-in for a local employer), both smiling, a laptop open on the table beside them showing a faint generic dashboard UI, warm daylight, documentary style. ${STYLE} ${GUARDRAIL}`,
   },
+  {
+    file: "sikeston-org-system-dashboard.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium shot inside the reference classroom: the man from the reference headshot sitting beside a professionally dressed adult (a stand-in for a local small-business owner), both leaning in and pointing at a laptop screen between them showing a clean internal business dashboard UI with bold red accent charts and highlights, both people genuinely engaged and pleased with what they're seeing, warm daylight, documentary style, shallow depth of field. ${STYLE} ${GUARDRAIL} The laptop screen's UI accent color must be a bold red (#c8102e family), not amber or orange.`,
+  },
+  {
+    file: "sikeston-agent-review.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic close-up shot inside the reference classroom of an adult builder (not necessarily the man from the reference headshot — can be one of the diverse students) intently reviewing code on a laptop screen showing a dark-themed code editor with a diff view and an AI chat panel open beside it, bold red highlight bars in the diff, focused and engaged expression, one hand on the trackpad, warm daylight softly lighting the scene, shallow depth of field, blurred classroom in the background. ${STYLE} The editor's highlight/accent color must be a bold red (#c8102e family), not amber or green.`,
+  },
 ];
 
 function guessMimeType(file) {
@@ -113,11 +123,16 @@ async function editImage({ file, size, prompt }) {
 
 await mkdir(outDir, { recursive: true });
 
-console.log(`Generating ${images.length} Sikeston marketing images with gpt-image-2 (image edit, multi-reference)...`);
+// ONLY="org-system,agent-review" node scripts/generate-sikeston-marketing-images.mjs
+// regenerates just the files whose name includes one of the comma-separated substrings.
+const filter = process.env.ONLY?.split(",").map((s) => s.trim()).filter(Boolean);
+const jobs = filter?.length ? images.filter((spec) => filter.some((f) => spec.file.includes(f))) : images;
+
+console.log(`Generating ${jobs.length} Sikeston marketing image${jobs.length === 1 ? "" : "s"} with gpt-image-2 (image edit, multi-reference)...`);
 
 // Validate the edit endpoint works with one image before spending the full batch.
-const [first, ...rest] = images;
-await editImage(first);
+const [first, ...rest] = jobs;
+if (first) await editImage(first);
 
 for (const image of rest) {
   await editImage(image);

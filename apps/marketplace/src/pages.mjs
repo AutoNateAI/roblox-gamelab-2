@@ -66,12 +66,12 @@ function orgExampleCard(example) {
 
 function sponsorshipTierCard(tier) {
   return `
-    <article class="offering-card">
+    <button type="button" class="offering-card tier-select-card" data-seat-tier="${tier.seats}">
       <span class="kicker">${tier.seats} seat${tier.seats === 1 ? "" : "s"}</span>
       <h3>${money(tier.price)}</h3>
       <p>${escapeHtml(tier.label)}</p>
-      <a class="primary-button full" href="#book">Talk With AutoNateAI ${icon("arrow_forward")}</a>
-    </article>
+      <span class="primary-button full">Select ${icon("arrow_forward")}</span>
+    </button>
   `;
 }
 
@@ -296,7 +296,7 @@ export function renderPrograms(data) {
   `;
 
   return pageShell({
-    title: "Programs | AutoNateAI",
+    title: "AI & Coding Training Program | Sikeston, MO | AutoNateAI",
     active: "programs",
     body,
     canonicalPath: "/programs",
@@ -481,7 +481,7 @@ export function renderAbout() {
     active: "about",
     body,
     canonicalPath: "/about",
-    ogImage: "/assets/nathan-baker.jpeg",
+    ogImage: "/assets/og/about.jpg",
     description:
       "AutoNateAI develops local people into AI and software systems builders. World-class experience across Michigan, Microsoft, Citi, Veterans United, and Atomic Object, now reinvested locally in Sikeston, MO.",
     ogTitle: "Meet the engineer behind the program.",
@@ -559,13 +559,13 @@ export function renderProgramDetail(data, program) {
       </section>
 
       <section class="section compact" id="who">
-        <div class="section-head">
+        <div class="section-head section-head-center">
           <div>
             <span class="kicker">${icon("groups")} Built for People Ready to Build</span>
             <h2>Students, professionals, and employer-sponsored employees, side by side.</h2>
           </div>
         </div>
-        <div class="value-grid">
+        <div class="value-grid audience-grid">
           <article><span>${icon("school")}</span><h3>Students with coding experience</h3><p>Go beyond syntax and learn how complete systems fit together.</p></article>
           <article><span>${icon("work")}</span><h3>Working professionals</h3><p>Learn to use AI agents, databases, APIs, and architecture to improve real organizational workflows.</p></article>
           <article><span>${icon("business_center")}</span><h3>Employer-sponsored employees</h3><p>Bring the capability back inside your organization. <a href="/for-organizations">See sponsorship options</a>.</p></article>
@@ -579,7 +579,7 @@ export function renderProgramDetail(data, program) {
             <h2>Everyone brings a real project. Here's what that can look like.</h2>
           </div>
         </div>
-        <div class="industry-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
+        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
       </section>
 
       <section class="section compact detail-enroll-band">
@@ -601,8 +601,8 @@ export function renderProgramDetail(data, program) {
           <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="" /><h3>A system built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by a real project for your employer, school, nonprofit, or a local business.</p></article>
-          <article><img src="/assets/landing/agent-review.jpg" alt="" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
+          <article><img src="/assets/landing/sikeston-org-system-dashboard.jpg" alt="A builder and a local business owner reviewing an internal dashboard built during an AutoNateAI cohort" /><h3>A system built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by a real project for your employer, school, nonprofit, or a local business.</p></article>
+          <article><img src="/assets/landing/sikeston-agent-review.jpg" alt="A builder reviewing AI-generated code changes in an AutoNateAI cohort" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
           <article><img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" /><h3>Real user scenarios you define yourself</h3><p>Define who the system needs to work for, then run your system against those scenarios before it ships. Standout builders get noticed — sometimes that means real work with <a href="/for-organizations">an AutoNateAI partner organization</a>.</p></article>
         </div>
       </section>
@@ -658,7 +658,7 @@ export function renderProgramDetail(data, program) {
   `;
 
   return pageShell({
-    title: `${program.name} | AutoNateAI`,
+    title: `${program.name} | Sikeston, MO | AutoNateAI`,
     active: "programs",
     body,
     canonicalPath: `/programs/${program.handle}`,
@@ -704,8 +704,8 @@ export function renderForOrganizations(data) {
           <h1>Develop technical capability inside your own team.</h1>
           <p>AI skills aren't only for technology companies. Missouri employers increasingly need technical talent across every industry. Sponsor employees to build internal tools your organization actually needs, or sponsor students from your school or nonprofit.</p>
           <div class="button-row">
-            <a class="primary-button" href="#book">Talk With AutoNateAI ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="#sponsorship">See Sponsorship Pricing</a>
+            <a class="primary-button" href="#sponsorship">Sponsor Your Team ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="#book">Talk With AutoNateAI</a>
           </div>
         </div>
         <aside class="hero-program-panel">
@@ -728,12 +728,68 @@ export function renderForOrganizations(data) {
       <section class="section" id="sponsorship">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("payments")} Sponsorship Pricing</span>
-            <h2>Don't force a superintendent and a self-enrolling student through the same checkout.</h2>
-            <p>Sponsor one employee, or a whole team. Every sponsored seat includes the full 2-week in-person cohort, agent setup help, Git repo guidance, architecture coaching, and dedicated AutoNateAI Discord access.</p>
+            <span class="kicker">${icon("payments")} Team &amp; Group Pricing</span>
+            <h2>Sponsor 1 seat or 20 — one purchase, done.</h2>
+            <p>Pick how many seats you're sponsoring below. Every seat includes the full 2-week in-person cohort, agent setup help, Git repo guidance, architecture coaching, and dedicated AutoNateAI Discord access. Need a different number? Enter it directly in the form.</p>
           </div>
         </div>
         <div class="industry-grid offer-grid">${sponsorshipTiers.map((tier) => sponsorshipTierCard(tier)).join("")}</div>
+      </section>
+
+      <section class="section compact" id="pay">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("shopping_cart")} Complete Your Sponsorship</span>
+            <h2>Purchase seats for your team, school, or organization.</h2>
+            <p>Card payment is processed securely through Square. Once payment is confirmed, we reach out to get your organization onboarded — your sponsored builders get added to the AutoNateAI Discord and started on the free digital courses to prepare for the class.</p>
+          </div>
+        </div>
+        <div class="checkout-grid sponsorship-checkout" data-sponsorship-form>
+          <section class="checkout-form">
+            <div class="form-stack payment-fields">
+              <label>Number of Seats
+                <input type="number" min="1" max="200" step="1" value="1" data-sponsorship-field="seats" data-sponsorship-seats />
+              </label>
+              <div class="two-col">
+                <label>Organization<input data-sponsorship-field="organization" autocomplete="organization" placeholder="Your business, school, or nonprofit" required /></label>
+                <label>Contact Name<input data-sponsorship-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
+              </div>
+              <label>Contact Email<input data-sponsorship-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
+            </div>
+            <div class="square-status" data-square-status>
+              <strong>Square payment setup pending</strong>
+              <span>Add Square credentials to enable live card payments. Until then, checkout stays in preview mode.</span>
+            </div>
+            <div class="form-stack payment-fields">
+              <label>Name on Card<input data-sponsorship-field="cardholderName" autocomplete="cc-name" placeholder="Jordan Rivera" /></label>
+            </div>
+            <div class="square-card-label">
+              <strong>Card Info</strong>
+              <span>Encrypted and processed by Square</span>
+            </div>
+            <div class="square-card-container" data-square-card><span>Loading secure card fields...</span></div>
+            <p class="fine-print" data-sponsorship-status>Prefer to pay by invoice, or talk it through first? <a href="#book">Talk with AutoNateAI</a> or write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20invoice">autonate.ai@gmail.com</a>.</p>
+          </section>
+          <aside class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="summary-items">
+              <div class="summary-item">
+                <div><strong>How to Create Software Systems with AI Agents</strong><span>In-person cohort &middot; Center Street Station, Sikeston, MO</span><em data-sponsorship-seats-label>1 seat &middot; $499 per seat</em></div>
+              </div>
+            </div>
+            <div class="summary-line"><span>Subtotal</span><b data-sponsorship-total>$499</b></div>
+            <div class="summary-line"><span>Transaction Fee</span><b>$0</b></div>
+            <div class="total-line"><span>Total</span><b data-sponsorship-total-2>$499</b></div>
+            <button type="button" class="primary-button full disabled" data-sponsorship-submit aria-disabled="true">Complete Purchase ${icon("arrow_forward")}</button>
+            <p class="fine-print">You'll get a confirmation on screen once payment clears. Our team follows up within 1-2 business days to start Discord onboarding.</p>
+          </aside>
+        </div>
+        <div class="sponsorship-success" data-sponsorship-success hidden>
+          <div class="success-mark">${icon("check_circle")}</div>
+          <h2>Sponsorship confirmed.</h2>
+          <p data-sponsorship-success-detail>Payment received. We'll reach out to get your organization onboarded.</p>
+          <p>Next: we work with your organization to get your sponsored builders added to the AutoNateAI Discord and started on the four free digital courses, so they walk into the first session already prepared.</p>
+        </div>
       </section>
 
       <section class="section compact" id="build">
@@ -743,7 +799,7 @@ export function renderForOrganizations(data) {
             <h2>Every participant brings a real project back to work on.</h2>
           </div>
         </div>
-        <div class="industry-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
+        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
       </section>
 
       <section class="detail-enroll-band">
@@ -758,9 +814,9 @@ export function renderForOrganizations(data) {
       <section class="section compact" id="book">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("event")} Talk With AutoNateAI</span>
+            <span class="kicker">${icon("event")} Prefer to Talk First?</span>
             <h2>Tell us about your team, school, or organization.</h2>
-            <p>Discovery calls are 15 or 30 minutes and are for organizations exploring sponsorship. Follow-ups run 30, 45, 60, 90, or 120 minutes for partnerships already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday.</p>
+            <p>Not ready to purchase seats yet, or need an invoice instead of a card payment? Discovery calls are 15 or 30 minutes and are for organizations exploring sponsorship. Follow-ups run 30, 45, 60, 90, or 120 minutes for partnerships already underway. Calls run 8:00 AM-6:00 PM Central, Monday-Friday.</p>
           </div>
         </div>
         <div class="book-layout">
@@ -844,11 +900,11 @@ export function renderForOrganizations(data) {
   `;
 
   return pageShell({
-    title: "For Organizations | AutoNateAI",
+    title: "Sponsor Employee & Student AI Training | Sikeston, MO | AutoNateAI",
     active: "for-organizations",
     body,
     canonicalPath: "/for-organizations",
-    ogImage: "/assets/og/default.jpg",
+    ogImage: "/assets/og/for-organizations.jpg",
     description:
       "Sponsor employees or students into AutoNateAI's in-person AI systems cohort in Sikeston, MO. Develop technical capability inside your own team, school, or nonprofit.",
     ogTitle: "Develop technical capability inside your own team.",
@@ -1085,7 +1141,7 @@ export function renderTutorials() {
           <img src="/assets/landing/learning-path.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Built for Where You're At</span>
-            <h2>Setup is free. System judgment is the program.</h2>
+            <h2>We get you ready for free, with our always-free pillar courses.</h2>
             <p>New to programming? Start with Nate and Kai's story and learn JavaScript from zero. Know some code already? Jump straight into whichever course matches what you're building next. Either way, these courses build toward the same system-architect habits the live cohort practices.</p>
             <div class="hero-facts">
               <span>${tutorialPacks.length} free digital courses</span>
@@ -1139,11 +1195,11 @@ export function renderTutorials() {
   `;
 
   return pageShell({
-    title: "Free Digital Courses | AutoNateAI",
+    title: "Free AI & Coding Courses | Southeast Missouri | AutoNateAI",
     active: "tutorials",
     body,
     canonicalPath: "/tutorials",
-    ogImage: "/assets/og/default.jpg",
+    ogImage: "/assets/og/courses.jpg",
     description:
       "Start building before the cohort begins. Four free digital courses teach JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI.",
     ogTitle: "Start building before the cohort begins.",
@@ -1321,13 +1377,13 @@ export function renderCommunity() {
   `;
 
   return pageShell({
-    title: "Community | AutoNateAI",
+    title: "Community & Discord Support | Sikeston, MO | AutoNateAI",
     active: "community",
     body,
     canonicalPath: "/community",
-    ogImage: "/assets/og/default.jpg",
+    ogImage: "/assets/og/community.jpg",
     description:
-      "Join the AutoNateAI Discord community for help with the four free courses, the live program, and any system you're building on your own.",
+      "Join the AutoNateAI Discord community in Sikeston, MO for help with the four free AI and coding courses, the in-person program, and any system you're building on your own — Southeast Missouri workforce development, all day, every day.",
     ogTitle: "The systems lab has a Discord.",
     ogDescription:
       "Get setup help, code review, agent workflow practice, and project help with the AutoNateAI community — open all day, every day.",
@@ -1339,14 +1395,30 @@ export function renderArticles() {
   const listedArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
   const body = `
     <main class="articles-page">
-      <div class="page-toolbar">
-        <div>
-          <span class="kicker">${icon("article")} Articles</span>
-          <h1>AI, Workforce &amp; Systems in Southeast Missouri.</h1>
-          <p>Research, practical guides, workforce insights, and field notes documenting how AI and software systems are changing the organizations and careers around us — written for students, working professionals, and the employers, schools, and nonprofits sponsoring them.</p>
+      <section class="home-hero articles-hero">
+        <div class="hero-bg">${featuredArticle ? `<img src="${featuredArticle.image}" alt="" />` : ""}</div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("article")} Articles</span>
+            <h1>AI, Workforce &amp; Systems in Southeast Missouri.</h1>
+            <p>Research, practical guides, workforce insights, and field notes documenting how AI and software systems are changing the organizations and careers around us — written for students, working professionals, and the employers, schools, and nonprofits sponsoring them.</p>
+            ${featuredArticle ? `<div class="button-row"><a class="primary-button" href="/articles/${featuredArticle.handle}">Read Featured Article ${icon("arrow_forward")}</a></div>` : ""}
+          </div>
+          ${
+            featuredArticle
+              ? `<aside class="hero-program-panel">
+            <img src="${featuredArticle.image}" alt="${escapeHtml(featuredArticle.title)}" />
+            <div class="hero-panel-body">
+              <span class="kicker">${icon("bookmark")} Featured &middot; ${escapeHtml(featuredArticle.category)} &middot; ${escapeHtml(featuredArticle.readingTime)}</span>
+              <h2>${escapeHtml(featuredArticle.title)}</h2>
+              <p>${escapeHtml(featuredArticle.summary)}</p>
+              <div class="hero-facts">${featuredArticle.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+            </div>
+          </aside>`
+              : ""
+          }
         </div>
-      </div>
-      ${featuredArticle ? featuredArticleCard(featuredArticle) : ""}
+      </section>
       <div class="content-tools">
         <label>${icon("search")} <input type="search" placeholder="Search articles, AI agents, systems, Git..." data-article-search /></label>
         <div class="filter-row" data-article-filters>
@@ -1358,11 +1430,11 @@ export function renderArticles() {
   `;
 
   return pageShell({
-    title: "Articles | AutoNateAI",
+    title: "AI & Workforce Development Articles | Southeast Missouri | AutoNateAI",
     active: "articles",
     body,
     canonicalPath: "/articles",
-    ogImage: "/assets/og/default.jpg",
+    ogImage: "/assets/og/articles.jpg",
     description:
       "Research, workforce insights, and field notes on how AI and software systems are changing the organizations and careers around Southeast Missouri.",
     ogTitle: "AI, Workforce & Systems in Southeast Missouri.",
@@ -1876,22 +1948,6 @@ function programFeature(program, extraClass = "", showOverlay = false) {
 function miniProgramCard(program) {
   const cheapest = program.offerings?.[0];
   return `<a class="mini-card" href="/programs/${program.handle}"><img src="${programThumbnail(program)}" alt="${escapeHtml(program.name)}" /><div><strong>${escapeHtml(program.name)}</strong><span>${escapeHtml(program.badge)}</span></div><b>${cheapest ? `${money(cheapest.price)}+` : "TBD"}</b></a>`;
-}
-
-function featuredArticleCard(article) {
-  return `
-    <article class="featured-article">
-      <a href="/articles/${article.handle}">
-        <img src="${article.image}" alt="${escapeHtml(article.title)}" />
-        <div>
-          <span class="kicker">Featured &middot; ${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
-          <h2>${escapeHtml(article.title)}</h2>
-          <p>${escapeHtml(article.summary)}</p>
-          <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-        </div>
-      </a>
-    </article>
-  `;
 }
 
 function articleCard(article) {

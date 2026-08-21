@@ -805,6 +805,14 @@ h1 {
   margin: 0 auto;
 }
 
+/* Three-card centered sections (e.g. Program page "Built for People Ready
+   to Build") — same idea as .pathway-grid, one column wider. */
+.audience-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 980px;
+  margin: 0 auto;
+}
+
 .value-grid article {
   border: 1px solid var(--outline);
   background: var(--surface);
@@ -4411,7 +4419,24 @@ pre.mermaid svg {
     padding: 0 20px 6px;
   }
 
-  .pack-grid .pack-card {
+  .pack-grid .pack-card,
+  .pack-grid .industry-card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  .audience-grid {
+    display: flex;
+    grid-template-columns: unset;
+    max-width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px 6px;
+  }
+
+  .audience-grid article {
     flex: 0 0 84%;
     scroll-snap-align: start;
   }
@@ -4448,4 +4473,75 @@ pre.mermaid svg {
   .program-feature {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- For Organizations: seat-tier selector + sponsorship checkout --- */
+.tier-select-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.tier-select-card:hover {
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--outline));
+}
+
+.tier-select-card.selected {
+  border-color: var(--primary-container);
+  box-shadow: inset 0 0 0 1px var(--primary-container);
+}
+
+.tier-select-card .primary-button {
+  pointer-events: none;
+  margin-top: 4px;
+}
+
+.sponsorship-checkout {
+  margin-top: 8px;
+}
+
+.primary-button.disabled,
+.primary-button[aria-disabled="true"] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.sponsorship-success {
+  max-width: 640px;
+  margin: 32px auto 0;
+  padding: 40px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  text-align: center;
+}
+
+.sponsorship-success .success-mark {
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent);
+  border-radius: 999px;
+  background: var(--secondary-soft);
+  color: var(--secondary);
+  margin: 0 auto 22px;
+}
+
+.sponsorship-success .success-mark .material-symbols-outlined {
+  font-size: 42px;
+  font-variation-settings: "FILL" 1;
+}
+
+.sponsorship-success h2 {
+  margin: 0 0 12px;
+}
+
+.sponsorship-success p {
+  color: var(--on-variant);
+  margin: 0 0 10px;
+  line-height: 1.55;
 }

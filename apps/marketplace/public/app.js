@@ -203,9 +203,13 @@ async function setupSquareCard(config) {
   await squareCard.attach("[data-square-card]");
   container.classList.add("ready");
   document.body.classList.add("square-enabled");
-  const completeButton = document.querySelector("[data-checkout-complete]");
-  completeButton?.classList.remove("disabled");
-  completeButton?.removeAttribute("aria-disabled");
+  // Whichever pay button this page has — single-seat checkout or the
+  // multi-seat sponsorship form — becomes clickable once the card field
+  // actually attaches.
+  document.querySelectorAll("[data-checkout-complete], [data-sponsorship-submit]").forEach((button) => {
+    button.classList.remove("disabled");
+    button.removeAttribute("aria-disabled");
+  });
 }
 
 async function fetchSquareConfig() {
@@ -518,3 +522,131 @@ filterButtons.forEach((button) => {
 
 filterButtons[0]?.classList.add("active");
 articleSearch?.addEventListener("input", filterArticles);
+
+// --- For Organizations: seat-based sponsorship checkout ---
+// Reuses the same Square SDK load/attach flow as the single-seat checkout
+// above (both pages declare a [data-square-status]/[data-square-card] pair,
+// so `squareCard`/`squareConfig` end up populated the same way here). The
+// server is always the source of truth for the charged amount — this
+// SPONSORSHIP_UNIT_PRICE is display-only, for the live total shown before
+// payment.
+const sponsorshipForm = document.querySelector("[data-sponsorship-form]");
+if (sponsorshipForm) {
+  const SPONSORSHIP_UNIT_PRICE = 499;
+  const seatsInput = sponsorshipForm.querySelector("[data-sponsorship-seats]");
+  const tierButtons = Array.from(document.querySelectorAll("[data-seat-tier]"));
+  const submitButton = document.querySelector("[data-sponsorship-submit]");
+  const statusEl = document.querySelector("[data-sponsorship-status]");
+  const successEl = document.querySelector("[data-sponsorship-success]");
+  const successDetailEl = document.querySelector("[data-sponsorship-success-detail]");
+
+  function currentSeats() {
+    const value = Math.round(Number(seatsInput?.value));
+    if (!Number.isFinite(value) || value < 1) return 1;
+    return Math.min(value, 200);
+  }
+
+  function syncTierSelection(seats) {
+    tierButtons.forEach((button) => {
+      button.classList.toggle("selected", Number(button.dataset.seatTier) === seats);
+    });
+  }
+
+  function recomputeTotal() {
+    const seats = currentSeats();
+    const total = seats * SPONSORSHIP_UNIT_PRICE;
+    document.querySelectorAll("[data-sponsorship-total], [data-sponsorship-total-2]").forEach((el) => {
+      el.textContent = money(total);
+    });
+    const label = document.querySelector("[data-sponsorship-seats-label]");
+    if (label) label.textContent = `${seats} seat${seats === 1 ? "" : "s"} · ${money(SPONSORSHIP_UNIT_PRICE)} per seat`;
+    syncTierSelection(seats);
+  }
+
+  tierButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (seatsInput) seatsInput.value = String(button.dataset.seatTier);
+      recomputeTotal();
+      document.querySelector("#pay")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  seatsInput?.addEventListener("input", recomputeTotal);
+  recomputeTotal();
+
+  submitButton?.addEventListener("click", async () => {
+    if (!squareCard || !squareConfig?.enabled) {
+      if (statusEl) statusEl.textContent = "Card fields still loading. Refresh the page if this does not clear in a few seconds.";
+      return;
+    }
+
+    const fields = Object.fromEntries(
+      Array.from(sponsorshipForm.querySelectorAll("[data-sponsorship-field]")).map((field) => [
+        field.dataset.sponsorshipField,
+        field.value.trim(),
+      ]),
+    );
+    const seats = currentSeats();
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email || "");
+    if (!fields.organization || !fields.name || !emailValid || !fields.cardholderName) {
+      if (statusEl) statusEl.textContent = "Add your organization, contact name, contact email, and the name on the card before paying.";
+      return;
+    }
+
+    submitButton.setAttribute("aria-busy", "true");
+    submitButton.classList.add("disabled");
+    submitButton.setAttribute("aria-disabled", "true");
+    const originalLabel = submitButton.innerHTML;
+    submitButton.innerHTML = "Processing...";
+
+    try {
+      const tokenResult = await squareCard.tokenize();
+      if (tokenResult.status !== "OK") {
+        throw new Error(tokenResult.errors?.[0]?.message || "Square could not tokenize the card.");
+      }
+      const response = await fetch(`${squareApiBase}/sponsorship-payment`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          sourceId: tokenResult.token,
+          seats,
+          buyer: fields,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error || payload.errors?.[0]?.detail || "Square payment failed.");
+      }
+
+      // Best-effort log for follow-up; payment already succeeded above regardless of this call.
+      fetch(`${marketplaceApiBase}/sponsorships`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          seats,
+          organization: fields.organization,
+          contactName: fields.name,
+          contactEmail: fields.email,
+          amountPaid: seats * SPONSORSHIP_UNIT_PRICE,
+          paymentId: payload.payment?.id || "",
+        }),
+      }).catch(() => {});
+
+      sponsorshipForm.hidden = true;
+      if (successEl) {
+        successEl.hidden = false;
+        if (successDetailEl) {
+          successDetailEl.textContent = `${seats} seat${seats === 1 ? "" : "s"} for ${fields.organization} — ${money(seats * SPONSORSHIP_UNIT_PRICE)} paid. A confirmation has gone to our team.`;
+        }
+        successEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } catch (error) {
+      if (statusEl) statusEl.textContent = error.message;
+    } finally {
+      submitButton.removeAttribute("aria-busy");
+      submitButton.classList.remove("disabled");
+      submitButton.removeAttribute("aria-disabled");
+      submitButton.innerHTML = originalLabel;
+    }
+  });
+}

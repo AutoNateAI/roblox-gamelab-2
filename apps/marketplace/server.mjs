@@ -381,6 +381,79 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    if (apiPath === "/square/sponsorship-payment" && request.method === "POST") {
+      const settings = squareSettings();
+      if (!squareIsReady(settings)) {
+        json(response, 503, { error: "Square is not configured." });
+        return;
+      }
+
+      const body = await readRequestJson(request);
+      const seats = Math.round(Number(body.seats));
+      const buyer = body.buyer || {};
+      const organization = String(buyer.organization || "").trim();
+      const contactName = String(buyer.name || "").trim();
+      const contactEmail = String(buyer.email || "").trim();
+      const cardholderName = String(buyer.cardholderName || "").trim();
+      if (!Number.isInteger(seats) || seats < 1 || seats > 200) {
+        json(response, 400, { error: "Seats must be a whole number between 1 and 200." });
+        return;
+      }
+      if (!organization || !contactName || !contactEmail || !cardholderName || !body.sourceId) {
+        json(response, 400, { error: "Missing organization, contact details, cardholder name, or Square source token." });
+        return;
+      }
+
+      // $499/seat, server-computed — never trust a client-submitted amount.
+      const unitPriceCents = 49900;
+      const noteParts = [
+        `AutoNateAI Sponsorship - ${seats} seat${seats === 1 ? "" : "s"}`,
+        `Organization: ${organization}`,
+        `Contact: ${contactName}`,
+        cardholderName ? `Cardholder: ${cardholderName}` : "",
+      ].filter(Boolean);
+
+      const squareResponse = await fetch(settings.paymentsUrl, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "authorization": `Bearer ${settings.accessToken}`,
+          "Square-Version": settings.apiVersion,
+        },
+        body: JSON.stringify({
+          idempotency_key: randomUUID(),
+          source_id: body.sourceId,
+          location_id: settings.locationId,
+          amount_money: {
+            amount: seats * unitPriceCents,
+            currency: "USD",
+          },
+          buyer_email_address: contactEmail || undefined,
+          note: noteParts.join(" | "),
+          reference_id: `sponsorship:${seats}-seats`,
+        }),
+      });
+
+      const payload = await squareResponse.json();
+      json(response, squareResponse.ok ? 200 : squareResponse.status, payload);
+      return;
+    }
+
+    if (apiPath === "/sponsorships" && request.method === "POST") {
+      // Local dev: just acknowledge receipt (no Firestore here). The deployed
+      // Firebase function is the one that actually persists this record.
+      const body = await readRequestJson(request);
+      console.log("Sponsorship logged (local dev, not persisted):", {
+        organization: body.organization,
+        contactEmail: body.contactEmail,
+        seats: body.seats,
+        amountPaid: body.amountPaid,
+        paymentId: body.paymentId,
+      });
+      json(response, 200, { ok: true });
+      return;
+    }
+
     if (apiPath === "/consulting/booking" && request.method === "POST") {
       const apiKey = envValue("AIRTABLE_API_KEY");
       const baseId = envValue("AIRTABLE_BASE_ID_CONSULTING");
