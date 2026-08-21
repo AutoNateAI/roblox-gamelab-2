@@ -8,6 +8,7 @@ import {
   renderCommunity,
   renderConsulting,
   renderCheckout,
+  renderForOrganizations,
   renderHome,
   renderLeague,
   renderProgramDetail,
@@ -36,6 +37,7 @@ const routes = [
   ["about/index.html", renderAbout()],
   ["live-builds/index.html", renderLeague(programsData)],
   ["consulting/index.html", renderConsulting(programsData)],
+  ["for-organizations/index.html", renderForOrganizations(programsData)],
   ["checkout/index.html", renderCheckout(programsData)],
   ["success/index.html", renderSuccess(programsData)],
 ];
@@ -97,6 +99,7 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.9"),
   sitemapEntry("https://autonateai.com/live-builds", "0.8"),
   sitemapEntry("https://autonateai.com/consulting", "0.8"),
+  sitemapEntry("https://autonateai.com/for-organizations", "0.9"),
   sitemapEntry("https://autonateai.com/tutorials", "0.8"),
   sitemapEntry("https://autonateai.com/community", "0.8"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
@@ -128,7 +131,7 @@ Sitemap: https://autonateai.com/sitemap.xml
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | Workforce Systems Programming Lab</title>",
+    "<title>AutoNateAI | Building Southeast Missouri's AI Workforce</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );

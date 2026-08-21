@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-08-05T00:00:00.000Z",
+  "generatedAt": "2026-08-21T00:00:00.000Z",
   "path": {
     "id": "path-ai-agent-systems",
     "name": "Software Systems with AI Agents",
-    "description": "A live program where builders use Claude Code, Codex, and other AI agents to design real software systems, then prove the work by building a simulated population to test it against — the same persona-and-verifier pattern behind population-scale AI research like MatrAIx — before shipping it live.",
-    "targetAudience": "First- and second-year CS and CS-adjacent students who want hands-on experience with AI coding agents before their coursework gets there, also open to coding bootcamp participants, self-taught builders, and career switchers who want to become software system architects. No formal enrollment required, just comfort writing and reading code.",
+    "description": "An in-person program in Sikeston, MO where students and working professionals use Claude Code, Codex, and other AI agents to design and ship a real software system for a real organization — their employer, school, nonprofit, or a local business.",
+    "targetAudience": "Students with some coding experience, working professionals who want to build internal tools, and employer- or school-sponsored participants. No formal enrollment required beyond comfort reading and writing basic code.",
     "difficulty": "Beginner-to-intermediate, agent-assisted",
-    "estimatedDuration": "2 weeks, 8 live sessions",
+    "estimatedDuration": "2 weeks, 8 live in-person sessions",
     "status": "Active"
   },
   "programs": [
     {
-      "id": "program-ai-agent-systems-august-2026",
+      "id": "program-ai-agent-systems-september-2026",
       "handle": "ai-agent-systems",
       "name": "How to Create Software Systems with AI Agents",
-      "description": "A two-week live cohort built for first- and second-year CS (and CS-adjacent) students, Monday through Thursday, where builders use Claude Code, Codex, and other AI agents to design real software systems: databases, APIs, and architecture. In the second week you reverse-engineer the persona-and-simulation architecture behind population-scale AI research like MatrAIx, build a small simulated population, and ship a system tested against it live, mapped to one of AutoNateAI's real banking consulting offerings.",
+      "description": "A two-week, in-person cohort in Sikeston, MO, Monday through Thursday, where builders use Claude Code, Codex, and other AI agents to design real software systems: databases, APIs, and architecture. In the second week, each participant builds toward a real organizational project — an internal tool for their employer, school, nonprofit, or a local business — testing it against a small set of real user scenarios before shipping it live.",
       "durationWeeks": 2,
       "sequence": 1,
-      "learningOutcomes": "Set up and direct AI coding agents responsibly, engineer prompts and context for real projects, design relational and graph data models, build and query APIs, document architecture with Mermaid diagrams, review and debug AI-generated code, design a simulated population using the persona-and-verifier pattern reverse-engineered from population-scale AI research, and ship a working system tested against that simulation.",
-      "projectSummary": "A real software system paired with the simulated population that tests it: a persona cohort and scenario set built the same way population-scale AI research like MatrAIx builds theirs, mapped to one of AutoNateAI's banking consulting offerings, plus a working data model, API, and application, built with AI agents and documented like production work.",
-      "portfolioArtifact": "Your Git repository with the shipped system, commits, architecture notes and Mermaid diagrams, your persona and scenario spec, the simulation findings, and a final reflection on what the agents got right, what they got wrong, and what you fixed.",
+      "learningOutcomes": "Set up and direct AI coding agents responsibly, engineer prompts and context for real projects, design relational and graph data models, build and query APIs, document architecture with Mermaid diagrams, review and debug AI-generated code, define real user scenarios to test a system against, and ship a working system for a real organization.",
+      "projectSummary": "A real internal tool or prototype built for your organizational project track — a small business, bank, school, or nonprofit — plus a working data model, API, and application, built with AI agents and documented like production work.",
+      "portfolioArtifact": "Your Git repository with the shipped system, commits, architecture notes and Mermaid diagrams, your user-scenario spec, the testing findings, and a final reflection on what the agents got right, what they got wrong, and what you fixed.",
       "badge": "Software Systems with AI Agents",
-      "pathTags": ["AI Agents", "Claude Code", "Codex", "System Architecture", "Databases", "APIs", "Agent Simulation"],
+      "pathTags": ["AI Agents", "Claude Code", "Codex", "System Architecture", "Databases", "APIs", "Workforce Development"],
       "status": "Active",
-      "startDate": "2026-08-17",
-      "liveSchedule": "Monday-Thursday, 6:00 PM-7:30 PM CST",
-      "cohortNote": "Next cohort: Monday, August 17, 2026, two weeks, Monday-Thursday, 6:00-7:30 PM CST. The same rhythm continues afterward as Saturday Live Builds, open to everyone.",
+      "startDate": "2026-09-14",
+      "liveSchedule": "Monday-Thursday, 6:00 PM-8:00 PM CST, in person at Center Street Station, Sikeston, MO",
+      "cohortNote": "Next cohort: Monday, September 14, 2026, two weeks, Monday-Thursday, 6:00-8:00 PM CST, in person at Center Street Station in Sikeston, MO. The same rhythm continues afterward as Saturday Live Builds, open to everyone.",
       "sessions": [
         {
           "number": 1,
           "name": "Session 1: Meet Your AI Agents",
-          "date": "Monday, August 17, 2026",
+          "date": "Monday, September 14, 2026",
           "objectives": "Set up Claude Code and Codex as real collaborators and learn to point an agent at an unfamiliar codebase before asking it to change anything.",
           "liveActivity": "Install and configure Claude Code and Codex, walk through a real repository together, and have an agent explain its architecture, entry points, and data flow back to you.",
           "homework": "Use an agent to map a small existing codebase and write a short architecture note describing its components and how they connect."
@@ -38,7 +38,7 @@
         {
           "number": 2,
           "name": "Session 2: Prompt and Context Engineering in Practice",
-          "date": "Tuesday, August 18, 2026",
+          "date": "Tuesday, September 15, 2026",
           "objectives": "Apply prompt and context engineering to a real multi-file project: structure the ask, and give the agent only the context it actually needs.",
           "liveActivity": "Take a real feature request, structure a prompt with role, task, and constraints, hand the agent the relevant files, and review the diff line by line.",
           "homework": "Use an agent to implement one small feature in an existing project and document what context you gave it, what you accepted, and what you rejected."
@@ -46,7 +46,7 @@
         {
           "number": 3,
           "name": "Session 3: Databases and APIs",
-          "date": "Wednesday, August 19, 2026",
+          "date": "Wednesday, September 16, 2026",
           "objectives": "Design a relational schema for a real problem, wire up a simple API, and use an agent to scaffold both responsibly.",
           "liveActivity": "Design tables, keys, and relationships for a sample system, build API endpoints against them, and query the data live.",
           "homework": "Add one table and one API endpoint to a project, and write the query that answers a real question about the data."
@@ -54,7 +54,7 @@
         {
           "number": 4,
           "name": "Session 4: System Architecture and Mermaid Diagrams",
-          "date": "Thursday, August 20, 2026",
+          "date": "Thursday, September 17, 2026",
           "objectives": "Turn a working system into a diagram: use Mermaid to communicate architecture and organize services and components.",
           "liveActivity": "Pick a real system, diagram it in Mermaid, identify its weak points, and talk through tradeoffs with an agent.",
           "homework": "Produce a Mermaid architecture diagram for your own project and one paragraph explaining a tradeoff you made."
@@ -62,45 +62,45 @@
         {
           "number": 5,
           "name": "Session 5: Debugging and Reviewing AI-Generated Code",
-          "date": "Monday, August 24, 2026",
+          "date": "Monday, September 21, 2026",
           "objectives": "Build the habit of reviewing agent output like a senior engineer: reading diffs, running tests, and catching hallucinated logic.",
           "liveActivity": "Review a batch of AI-generated changes live, find at least one real bug or hallucination, fix it, and commit the working version.",
           "homework": "Review and correct one AI-generated change in your own project, documenting what was wrong and why."
         },
         {
           "number": 6,
-          "name": "Session 6: Designing Your Simulated Population",
-          "date": "Tuesday, August 25, 2026",
-          "objectives": "Reverse-engineer the persona-and-verifier pattern behind population-scale AI simulation research like MatrAIx, and use it to define a small synthetic population for a real AutoNateAI banking offering.",
-          "liveActivity": "Pick one AutoNateAI banking consulting offering, define a cohort of persona agents for it (borrowers, loan officers, or customers), and draft the scenarios and verifiers they'll run through.",
-          "homework": "Write the persona schema and scenario spec for your simulated population: who they are, what they're trying to do, and how you'll know if the system handled it well."
+          "name": "Session 6: Picking Your Organizational Project",
+          "date": "Tuesday, September 22, 2026",
+          "objectives": "Choose the real organization you're building for — your employer, school, nonprofit, or a local business — and define who the system needs to work for.",
+          "liveActivity": "Pick a real internal workflow worth improving, define the real people who'd use the system (staff, customers, students, volunteers), and draft the scenarios that will tell you whether the system actually works for them.",
+          "homework": "Write a short user-scenario spec for your project: who they are, what they're trying to do, and how you'll know if the system handled it well."
         },
         {
           "number": 7,
           "name": "Session 7: Build Week Part 1 - Design and Start the System",
-          "date": "Wednesday, August 26, 2026",
-          "objectives": "Turn the persona cohort and scenario spec into a real system design, and start building both the software and the simulated agents that will test it, live.",
-          "liveActivity": "Design the architecture for the chosen system, scaffold the repository, wire up the first persona agent, and implement the first real feature with agent support.",
-          "homework": "Keep building: commit progress, expand the simulated population, and update the architecture notes as the design changes."
+          "date": "Wednesday, September 23, 2026",
+          "objectives": "Turn your organizational project and scenario spec into a real system design, and start building it, live.",
+          "liveActivity": "Design the architecture for the chosen system, scaffold the repository, and implement the first real feature with agent support.",
+          "homework": "Keep building: commit progress, and update the architecture notes as the design changes."
         },
         {
           "number": 8,
           "name": "Session 8: Build Week Part 2 - Ship It",
-          "date": "Thursday, August 27, 2026",
-          "objectives": "Finish a working version of the system, run your simulated population through it, and capture what the findings say about whether the design holds up.",
-          "liveActivity": "Finish the build, run the full persona cohort through it live, demo the findings, and write up what the simulation exposed.",
-          "homework": "Submit final repo link, architecture notes, your persona and scenario spec, the simulation findings, and a short system writeup."
+          "date": "Thursday, September 24, 2026",
+          "objectives": "Finish a working version of the system, test it against your real user scenarios, and capture what the testing says about whether the design holds up.",
+          "liveActivity": "Finish the build, run through the full scenario set live, demo the findings, and write up what testing exposed.",
+          "homework": "Submit final repo link, architecture notes, your user-scenario spec, the testing findings, and a short system writeup."
         }
       ],
       "offerings": [
         {
-          "id": "offering-ai-agent-systems-august-2026",
-          "name": "How to Create Software Systems with AI Agents - August Cohort",
-          "deliveryType": "Live Cohort",
+          "id": "offering-ai-agent-systems-september-2026",
+          "name": "How to Create Software Systems with AI Agents - September Cohort",
+          "deliveryType": "In-Person Cohort",
           "price": 499,
           "priceUnit": "Per Student",
-          "capacity": 25,
-          "meetingFrequency": "2 weeks, Monday-Thursday, 6:00-7:30 PM CST",
+          "capacity": 20,
+          "meetingFrequency": "2 weeks, Monday-Thursday, 6:00-8:00 PM CST, in person at Center Street Station, Sikeston, MO",
           "status": "Active"
         }
       ]
@@ -109,14 +109,14 @@
   "league": {
     "product": {
       "title": "AutoNateAI Live Builds",
-      "cta": "Every Saturday, 10:00 AM-12:00 PM CST, the AutoNateAI community builds real software and the simulated populations that test it, live in Discord, mapped to our banking offerings. No lecturing, just the build.",
+      "cta": "Every Saturday, 10:00 AM-12:00 PM CST, the AutoNateAI community builds real software for real organizational projects, live in Discord.",
       "price": null,
       "status": "Ongoing"
     },
     "season": {
       "name": "AutoNateAI Live Builds",
       "format": "Saturdays, 10:00 AM-12:00 PM CST, live in the AutoNateAI Discord",
-      "winCondition": "Every session ships real progress: design the persona cohort, build the architecture, wire up the simulation, watch the findings come back. No scripts, no lecturing — just the system and its population taking shape live.",
+      "winCondition": "Every session ships real progress: define who the system needs to work for, build the architecture, wire up the features, watch the testing findings come back. No scripts, no lecturing — just the system taking shape live.",
       "entryFee": null,
       "startDate": "2026-08-29",
       "endDate": null,

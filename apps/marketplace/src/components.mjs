@@ -63,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>A community and live program where builders become system architects: reading real environments, designing with AI agents like Claude Code and Codex, and shipping real systems in public.</p>
+          <p>Building Southeast Missouri's AI workforce: an in-person program in Sikeston, MO where students and professionals design real systems with AI agents like Claude Code and Codex, for real organizations.</p>
         </div>
-        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["Live Builds", "/live-builds"], ["Consulting", "/consulting"], ["Tutorials", "/tutorials"]])}
+        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["For Organizations", "/for-organizations"], ["Live Builds", "/live-builds"], ["Consulting", "/consulting"], ["Free Tutorials", "/tutorials"]])}
         ${footerColumn("Company", [["Discord", "https://discord.gg/4HkkuntdSs"], ["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Software system architecture, AI agents, databases and APIs, and live builds for real organizations.</span>
+        <span>&copy; 2026 AutoNateAI. Southeast Missouri AI workforce development, in person in Sikeston, MO.</span>
       </div>
     </footer>
   `;
@@ -88,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI teaches builders to become software system architects: designing real systems with AI agents like Claude Code and Codex, then shipping them live for real organizations.";
+  "AutoNateAI develops Southeast Missouri's AI and software workforce: an in-person program in Sikeston, MO where students and professionals design real systems with AI agents, then ship them for real organizations.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

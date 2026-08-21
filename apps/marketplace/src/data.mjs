@@ -1,57 +1,55 @@
 export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
   { label: "Program", href: "/programs/ai-agent-systems", keys: ["programs"] },
-  { label: "Live Builds", href: "/live-builds", keys: ["live-builds"] },
-  { label: "Consulting", href: "/consulting", keys: ["consulting"] },
-  { label: "Tutorials", href: "/tutorials", keys: ["tutorials"] },
-  { label: "Community", href: "/community", keys: ["community"] },
-  { label: "About", href: "/about", keys: ["about"] },
+  { label: "Free Tutorials", href: "/tutorials", keys: ["tutorials"] },
+  { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
+  { label: "About", href: "/about", keys: ["about"] },
 ];
 
-// The 39 institutional affiliations behind MatrAIx (arXiv:2608.04205, Aug 2026) —
-// 93 researchers simulating 8.3B AI personas — collapse to 36 distinct universities
-// once you merge sub-schools (Harvard Business/Medical School, Wharton) into their
-// parent university. Used on the program page as evidence that frontier agentic-AI
-// research is already coming out of these schools' labs, faster than intro CS
-// sequences can teach it. `featured` marks Nathan's alma mater.
-export const targetUniversities = [
-  { name: "University of Michigan", featured: true },
-  { name: "Harvard University" },
-  { name: "Massachusetts Institute of Technology" },
-  { name: "Stanford University" },
-  { name: "University of California, Berkeley" },
-  { name: "Carnegie Mellon University" },
-  { name: "Princeton University" },
-  { name: "University of Pennsylvania" },
-  { name: "Cornell University" },
-  { name: "Columbia University" },
-  { name: "University of Southern California" },
-  { name: "Georgia Institute of Technology" },
-  { name: "University of Texas at Austin" },
-  { name: "University of Illinois Urbana-Champaign" },
-  { name: "Johns Hopkins University" },
-  { name: "University of Washington" },
-  { name: "University of Wisconsin-Madison" },
-  { name: "Purdue University" },
-  { name: "University of Oxford" },
-  { name: "New York University" },
-  { name: "Brown University" },
-  { name: "University of Toronto" },
-  { name: "The Ohio State University" },
-  { name: "Boston University" },
-  { name: "Pennsylvania State University" },
-  { name: "University of Maryland, College Park" },
-  { name: "University of California, San Diego" },
-  { name: "University of California, Irvine" },
-  { name: "University of California, Riverside" },
-  { name: "University of California, Santa Cruz" },
-  { name: "University at Buffalo" },
-  { name: "University of San Francisco" },
-  { name: "University of North Carolina at Chapel Hill" },
-  { name: "University of Pittsburgh" },
-  { name: "Arizona State University" },
-  { name: "Medical University of South Carolina" },
+// Live Builds, Consulting, and Community are still real, working pages — just no
+// longer in the primary nav now that the site's one dominant story is regional AI
+// workforce development. They stay reachable from the footer and from in-page CTAs.
+
+// What a participant could build for their organizational project track, by org
+// type. Used on the Program page ("What could you build for your organization?")
+// and on the For Organizations page.
+export const organizationExamples = [
+  {
+    icon: "storefront",
+    org: "Small business",
+    chain: ["Customer follow-up system", "Reporting dashboard", "Internal knowledge assistant", "Workflow automation"],
+  },
+  {
+    icon: "account_balance",
+    org: "Bank",
+    chain: ["Internal research tool", "Document workflow", "Operational dashboard", "Customer-service prototype"],
+  },
+  {
+    icon: "school",
+    org: "School",
+    chain: ["Teacher resource system", "Student resource finder", "Administrative workflow prototype", "Approved-data dashboard"],
+  },
+  {
+    icon: "volunteer_activism",
+    org: "Nonprofit",
+    chain: ["Volunteer management", "Program tracking", "Reporting automation", "Resource navigation"],
+  },
+];
+
+// Sponsorship pricing for employers sending more than one employee. Easy to edit —
+// these are launch-pricing defaults, not fixed forever.
+export const sponsorshipTiers = [
+  { seats: 1, price: 499, label: "Sponsor 1 employee" },
+  { seats: 3, price: 1497, label: "Sponsor 3 employees" },
+  { seats: 5, price: 2495, label: "Sponsor 5 employees" },
+];
+
+// Five-year regional vision shown on the About page.
+export const regionalVision = [
+  { period: "2026-27", text: "Prove and scale the workforce-development model in Sikeston." },
+  { period: "Next", text: "Expand based on demonstrated demand throughout Southeast Missouri." },
+  { period: "Long term", text: "Build a regional network of trained facilitators, businesses, schools, and community organizations developing AI/software talent locally." },
 ];
 
 // Consulting offerings for AutoNateAI's community/regional banking vertical.
@@ -549,6 +547,38 @@ export const tutorials = [
 ];
 
 export const articles = [
+  {
+    handle: "why-southeast-missouri-businesses-need-internal-ai-capability",
+    title: "Why Southeast Missouri Businesses Need Internal AI Capability, Not Just AI Vendors",
+    category: "AI Workforce",
+    audience: "Business owners, bank leadership, and school and nonprofit administrators in Southeast Missouri",
+    summary:
+      "Missouri's 2026 Technology2030 report says technology talent is needed across every industry, not just tech companies. The fastest way to act on that locally is to build the capability inside your own team.",
+    body: [
+      "Missouri's Technology2030 report puts a number on something a lot of Southeast Missouri employers already sense: over 223,000 Missourians work in technology occupations, and a growing share of them work outside traditional tech companies. AI skills aren't a specialty department anymore. They're becoming a baseline capability, the same way spreadsheets did twenty years ago.",
+      "Buying a vendor platform solves a narrow problem for a while. It doesn't leave your organization with anyone who understands your own workflows well enough to extend, fix, or replace that tool when your needs change. The alternative is training people already inside your organization to build and maintain the internal tools themselves: a customer follow-up system, a reporting dashboard, a document workflow, an internal knowledge assistant.",
+      "That's the premise behind AutoNateAI's in-person cohort in Sikeston: bring an employee (or sponsor a few), and they leave with a real internal tool built for your organization, not a generic certificate. The capability stays local, and it stays with the people who already know how your business actually runs."
+    ],
+    tags: ["Workforce Development", "Southeast Missouri", "Employers"],
+    readingTime: "3 min read",
+    image: "/assets/landing/community-discord.jpg",
+  },
+  {
+    handle: "what-ai-workforce-readiness-looks-like-for-sikeston-students",
+    title: "What AI Workforce Readiness Could Look Like for Sikeston Students",
+    category: "Local Economy",
+    audience: "Parents, students, and educators in Sikeston and Southeast Missouri",
+    summary:
+      "Sikeston already has a workforce-development ecosystem connecting the Chamber, schools, SEMO, Three Rivers, and programs like SOAR. AI-agent systems training is a natural next rung on that same ladder.",
+    body: [
+      "Sikeston's Chamber of Commerce already treats workforce development as an economic-development priority, with existing relationships across local schools, SEMO, Three Rivers, and programs like SOAR. What's been missing locally is a hands-on, in-person path into AI and software systems work that doesn't require leaving the region or waiting for a college curriculum to catch up.",
+      "AutoNateAI's youth pathway is built for students who already have some coding experience and want to go further: designing data models and APIs, directing AI coding agents responsibly, and building a real system for a real local organization instead of another isolated class project. It's a two-week, in-person cohort, not a semester-long commitment, so it fits alongside school.",
+      "The bar for entry is a free on-ramp: four self-paced tutorial packs that teach JavaScript fundamentals, prompt and context engineering, and databases before a student ever sets foot in the cohort. A student, or a parent asking on their behalf, can try the material for free first and see if it's a fit before paying anything."
+    ],
+    tags: ["Youth Programming", "Sikeston", "Workforce Development"],
+    readingTime: "3 min read",
+    image: "/assets/landing/learning-path.jpg",
+  },
   {
     handle: "coding-as-workforce-development",
     title: "Why System Design Practice Beats Another Syntax Course",
