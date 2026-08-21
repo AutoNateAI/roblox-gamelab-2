@@ -1,46 +1,53 @@
+/* Sikeston brand: red, black, and white. Red (--primary / --primary-container)
+   is the single accent, used sparingly for kickers, links, borders, and button
+   fills. --secondary swaps poles by mode (near-black on light, near-white on
+   dark) instead of carrying its own hue, so status/checkmark accents stay
+   inside the red-black-white palette. Site now defaults to light mode (see
+   pageShell's inline theme script and app.js) — dark mode is still available
+   via the toggle. */
 :root,
-:root[data-theme="dark"] {
-  --background: #0a0e15;
-  --surface: #121a24;
-  --surface-low: #0e141d;
-  --surface-high: #1a2430;
-  --surface-highest: #24303e;
-  --on-surface: #eef2ee;
-  --on-variant: #93a69b;
-  --outline: #253141;
-  --outline-strong: #3a4b5c;
-  --primary: #f2b134;
-  --primary-bright: #ffce54;
-  --primary-container: #f2b134;
-  --on-primary: #1a1200;
-  --secondary: #6fbf73;
-  --secondary-soft: rgba(111, 191, 115, 0.14);
-  --error: #ef6a5f;
+:root[data-theme="light"] {
+  --background: #fafaf8;
+  --surface: #ffffff;
+  --surface-low: #f3f1ee;
+  --surface-high: #e8e4de;
+  --surface-highest: #d8d2c9;
+  --on-surface: #17130f;
+  --on-variant: #5c554c;
+  --outline: #e3ddd4;
+  --outline-strong: #b8afa2;
+  --primary: #af0e28;
+  --primary-bright: #d4142f;
+  --primary-container: #c8102e;
+  --on-primary: #ffffff;
+  --secondary: #17130f;
+  --secondary-soft: rgba(23, 19, 15, 0.06);
+  --error: #af0e28;
   --container-max: 1440px;
   --margin: 64px;
   --gutter: 24px;
   --section: 80px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-:root[data-theme="light"] {
-  --background: #f7f8f4;
-  --surface: #ffffff;
-  --surface-low: #eef1e8;
-  --surface-high: #e2e8da;
-  --surface-highest: #d4dccb;
-  --on-surface: #14181a;
-  --on-variant: #57635a;
-  --outline: #d7ddce;
-  --outline-strong: #aab5a2;
-  --primary: #9a6c00;
-  --primary-bright: #c98f00;
-  --primary-container: #f2b134;
-  --on-primary: #1a1200;
-  --secondary: #2f7d3f;
-  --secondary-soft: #dff0e0;
-  --error: #b3261e;
-  color-scheme: light;
+:root[data-theme="dark"] {
+  --background: #0a0908;
+  --surface: #151311;
+  --surface-low: #100f0d;
+  --surface-high: #1f1c19;
+  --surface-highest: #2b2723;
+  --on-surface: #f6f4f1;
+  --on-variant: #a49a8e;
+  --outline: #29241f;
+  --outline-strong: #423b33;
+  --primary: #ff5a63;
+  --primary-bright: #ff828a;
+  --primary-container: #c8102e;
+  --on-primary: #ffffff;
+  --secondary: #f6f4f1;
+  --secondary-soft: rgba(246, 244, 241, 0.1);
+  --error: #ff5a63;
+  color-scheme: dark;
 }
 
 * {
@@ -246,7 +253,7 @@ a {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.78fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.78fr);
   align-items: center;
   gap: clamp(28px, 4vw, 56px);
   width: 100%;
@@ -456,6 +463,15 @@ h1 {
   margin-bottom: 42px;
 }
 
+.section-head-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.section-head-center > div {
+  max-width: 640px;
+}
+
 .section h2,
 .section-head h2,
 .spotlight-section h2,
@@ -536,7 +552,7 @@ h1 {
 
 .program-feature {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
   gap: 0;
   overflow: hidden;
   border: 1px solid var(--outline);
@@ -660,7 +676,7 @@ h1 {
 
 .compete-layout {
   display: grid;
-  grid-template-columns: minmax(460px, 1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(320px, 1fr) minmax(280px, 0.9fr);
   gap: clamp(28px, 4vw, 56px);
   align-items: center;
 }
@@ -776,6 +792,17 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--gutter);
+}
+
+/* Two-card sections (e.g. home "Two Pathways"): always 2-up, centered, never
+   collapses to a single column — pairs with .value-grid on the same element
+   for the article/icon-chip styling, this block only overrides the grid
+   shape. Mobile carousel override lives at the end of the file so it wins
+   the cascade over the shared .value-grid mobile stacking rule. */
+.pathway-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .value-grid article {
@@ -1635,7 +1662,7 @@ h1 {
 
 .pack-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gutter);
 }
 
@@ -3687,10 +3714,6 @@ pre.mermaid svg {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .program-feature,
-  .program-detail-hero,
-  .hero-content,
-  .compete-layout,
   .league-hero,
   .community-hero,
   .docs-hero,
@@ -4367,5 +4390,62 @@ pre.mermaid svg {
 @media (max-width: 900px) {
   .admin-offering-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Mobile carousels: Four Courses grid + Two Pathways grid ---
+   Both stay a fixed 2-up grid at every width down to mobile, where they
+   switch to a horizontal swipe/scroll-snap carousel instead of stacking to
+   a single column. Appended here so these single-class selectors win over
+   the earlier grouped 760px stacking rules (.pack-grid / .value-grid) at
+   equal specificity via source order. */
+@media (max-width: 760px) {
+  .pack-grid {
+    display: flex;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--margin-mobile, 20px);
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px 6px;
+  }
+
+  .pack-grid .pack-card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  .pathway-grid {
+    display: flex;
+    grid-template-columns: unset;
+    max-width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px 6px;
+  }
+
+  .pathway-grid article {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+}
+
+/* --- Hero sections stay desktop-style two-column through tablet --- 
+   .hero-content / .compete-layout / .program-detail-hero / .program-feature
+   used to collapse to one column at the same 1120px breakpoint that swaps
+   the nav to a hamburger menu, which meant both tablet portrait AND
+   landscape (iPad-class widths) lost the desktop hero layout. Their hard
+   minmax()s were loosened above so two columns still fit comfortably down
+   to tablet widths; they now only stack on genuinely small (phone) screens
+   at the same 760px breakpoint the rest of the mobile layout uses. */
+@media (max-width: 760px) {
+  .hero-content,
+  .compete-layout,
+  .program-detail-hero .hero-content,
+  .program-feature {
+    grid-template-columns: 1fr;
   }
 }
