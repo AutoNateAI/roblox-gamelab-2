@@ -25,7 +25,7 @@
       "status": "Active",
       "startDate": "2026-09-14",
       "liveSchedule": "Monday-Thursday, 6:00 PM-8:00 PM CST, in person at Center Street Station, Sikeston, MO",
-      "cohortNote": "Next cohort: Monday, September 14, 2026, two weeks, Monday-Thursday, 6:00-8:00 PM CST, in person at Center Street Station in Sikeston, MO. The same rhythm continues afterward as Saturday Live Builds, open to everyone.",
+      "cohortNote": "Next cohort: Monday, September 14, 2026, two weeks, Monday-Thursday, 6:00-8:00 PM CST, in person at Center Street Station in Sikeston, MO. Free digital courses and Discord support are open before, during, and after the cohort.",
       "sessions": [
         {
           "number": 1,
@@ -105,22 +105,5 @@
         }
       ]
     }
-  ],
-  "league": {
-    "product": {
-      "title": "AutoNateAI Live Builds",
-      "cta": "Every Saturday, 10:00 AM-12:00 PM CST, the AutoNateAI community builds real software for real organizational projects, live in Discord.",
-      "price": null,
-      "status": "Ongoing"
-    },
-    "season": {
-      "name": "AutoNateAI Live Builds",
-      "format": "Saturdays, 10:00 AM-12:00 PM CST, live in the AutoNateAI Discord",
-      "winCondition": "Every session ships real progress: define who the system needs to work for, build the architecture, wire up the features, watch the testing findings come back. No scripts, no lecturing — just the system taking shape live.",
-      "entryFee": null,
-      "startDate": "2026-08-29",
-      "endDate": null,
-      "status": "Active"
-    }
-  }
+  ]
 }

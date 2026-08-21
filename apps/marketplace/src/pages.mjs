@@ -76,7 +76,7 @@ function sponsorshipTierCard(tier) {
 }
 
 export function renderHome(data) {
-  const { programs, league } = data;
+  const { programs } = data;
   const featured = programs.slice(0, 1);
   const primaryProgram = featured[0];
   const primaryOffering = primaryProgram.offerings?.[0];
@@ -85,9 +85,9 @@ export function renderHome(data) {
     ? `/checkout?program=${primaryProgram.handle}&offering=${primaryOffering.id}`
     : `/programs/${primaryProgram.handle}`;
   const landingArticles = [
+    "why-southeast-missouri-businesses-need-internal-ai-capability",
+    "what-ai-workforce-readiness-looks-like-for-sikeston-students",
     "coding-as-workforce-development",
-    "systems-thinking-through-code",
-    "why-git-matters-for-builders",
   ]
     .map((handle) => articles.find((article) => article.handle === handle))
     .filter(Boolean);
@@ -110,7 +110,7 @@ export function renderHome(data) {
               <a class="secondary-button" href="/for-organizations">Sponsor Your Team</a>
             </div>
             <div class="button-row">
-              <a class="outline-button" href="/tutorials">Prepare for the Program — Free Tutorials</a>
+              <a class="outline-button" href="/tutorials">Prepare for the Program — Free Courses</a>
             </div>
           </div>
           <aside class="hero-program-panel">
@@ -122,7 +122,7 @@ export function renderHome(data) {
               <div class="hero-facts">
                 <span>In person, Sikeston, MO</span>
                 <span>2-week cohort</span>
-                <span>4 free tutorial packs</span>
+                <span>4 free digital courses</span>
                 <span>Discord community</span>
               </div>
             </div>
@@ -131,13 +131,14 @@ export function renderHome(data) {
       </section>
 
       <section class="section">
-        <div class="section-head">
+        <div class="section-head section-head-center">
           <div>
-            <span class="kicker">${icon("route")} Two Pathways</span>
+            <span class="kicker">${icon("route")} Many Ways In</span>
             <h2>One regional mission, two ways in.</h2>
+            <p>There's no single "right" way to start — self-taught builder, sponsored employee, or sponsored student, everyone lands in the same in-person cohort at Center Street Station.</p>
           </div>
         </div>
-        <div class="value-grid">
+        <div class="value-grid pathway-grid">
           <article><span>${icon("work")}</span><h3>Professional Workforce Development</h3><p>Train employees to become internal AI/software builders capable of improving workflows, connecting existing tools, automating processes, and prototyping internal systems.</p></article>
           <article><span>${icon("school")}</span><h3>Youth Technology Development</h3><p>Give students real systems-building experience by teaching them to identify problems, design architecture, and build responsible software prototypes for real-world environments.</p></article>
         </div>
@@ -146,17 +147,17 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("public")} Why this works</span>
-            <h2>Real systems make architecture visible.</h2>
-            <p>Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. It's the same discipline whether you're a student shipping your first internal tool or an employee building for the organization that sent you.</p>
+            <span class="kicker">${icon("public")} Why This Works Here</span>
+            <h2>Real Sikeston organizations make architecture visible.</h2>
+            <p>Not a made-up case study — the business, school, or nonprofit you already know around town. Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. It's the same discipline whether you're a student shipping your first internal tool or an employee sent by the organization that's paying for your seat — and the system has to actually work for someone here, not just demo well.</p>
           </div>
           <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid">
-          <article><span>${icon("functions")}</span><h3>Code that ships</h3><p>Existing coding knowledge gets applied to a real system: databases, APIs, architecture, and the tradeoffs that come with a real organization depending on it.</p></article>
-          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working versions, read diffs, recover from broken changes, and leave with a visible repo history that explains the system.</p></article>
-          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Design relational and graph data models, build the API that serves them, and document how it fits together with Mermaid diagrams.</p></article>
-          <article><span>${icon("forum")}</span><h3>A real community</h3><p>Use Discord for setup help, architecture reviews, agent workflow coaching, and Saturday Live Builds with other builders — whether you're working through the free tutorials or the paid cohort.</p></article>
+          <article><span>${icon("functions")}</span><h3>Code built for someone local</h3><p>Existing coding knowledge gets applied to a real system for a real Southeast Missouri organization: databases, APIs, architecture, and the tradeoffs that come with an actual employer, school, or nonprofit depending on it.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working versions, read diffs, recover from broken changes, and leave Center Street Station with a repo history that explains exactly what you built and why.</p></article>
+          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Design relational and graph data models for your organization's actual data, build the API that serves them, and document how it fits together with Mermaid diagrams.</p></article>
+          <article><span>${icon("forum")}</span><h3>A community that outlasts the room</h3><p>The Discord is open all day, every day — setup help and architecture reviews with other Southeast Missouri builders, whether you're working through the free courses at home or sitting in the cohort in Sikeston.</p></article>
         </div>
       </section>
 
@@ -164,10 +165,11 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("auto_stories")} The Four Pillars</span>
-            <h2>Four free packs. The exact systems this community builds.</h2>
-            <p>Each pack is a standalone, story-driven guide following Nate and Kai as they build AutoNateAI from a meetup back room to a real, shipped system. Read one, or read all four for the full arc.</p>
+            <h2>Four free digital courses. What to work through before cohort night.</h2>
+            <p>Each course is a standalone, story-driven guide following Nate and Kai as they build AutoNateAI from a meetup back room to a real, shipped system. Read one, or read all four before your first Monday at Center Street Station.</p>
+            <p>These four pillars are the foundation the program builds on. Once you know them, the program teaches you to point that knowledge at a real problem — something local, or something personal — design a system that gets you through it better than however you're handling it now, and build that system out using the same technical principles, live.</p>
           </div>
-          <a class="primary-button" href="/tutorials">Browse Tutorials ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/tutorials">Browse Free Courses ${icon("arrow_forward")}</a>
         </div>
         <div class="pack-grid">${tutorialPacks.map((pack) => packCard(pack)).join("")}</div>
       </section>
@@ -179,8 +181,8 @@ export function renderHome(data) {
               <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="A laptop screen showing an internal business dashboard built during an AutoNateAI cohort" />
               <div class="compete-callout">
                 <span>${icon("flag")} Live capstone</span>
-                <strong>A real system, built live</strong>
-                <p>See whether your architecture can hold up when a real organization is the one depending on it.</p>
+                <strong>A real system, built live in Sikeston</strong>
+                <p>See whether your architecture can hold up when a real local organization is the one depending on it.</p>
               </div>
             </div>
             <div class="button-row compete-actions">
@@ -190,12 +192,12 @@ export function renderHome(data) {
           </div>
           <div class="compete-copy">
             <span class="kicker">${icon("emoji_events")} Design, Build, Ship</span>
-            <h2>Design a real system, then ship it for a real organization.</h2>
-            <p>This is for builders who want to get sharper at directing AI agents: designing data models and APIs, documenting architecture, and building a real internal tool for their employer, school, nonprofit, or a local business. By the end, you're pointing at a real system you designed, built, and tested yourself.</p>
+            <h2>Design a real system for a Sikeston organization, then ship it.</h2>
+            <p>This is for builders who want to get sharper at directing AI agents: designing data models and APIs, documenting architecture, and building a real internal tool for an employer, school, nonprofit, or small business you already know — the kind of organization down the street, not a hypothetical one in a textbook. By the end, you're pointing at a real system you designed, built, and tested yourself, in front of the people it was built for.</p>
             <div class="compete-curriculum">
               <article><b>01</b><span>Set up Claude Code and Codex, and learn to engineer prompts and context for real projects.</span></article>
               <article><b>02</b><span>Design databases and APIs, and document architecture with Mermaid diagrams.</span></article>
-              <article><b>03</b><span>Spend the second week building toward your organizational project and shipping a real system live.</span></article>
+              <article><b>03</b><span>Spend the second week building toward your organizational project and shipping a real system live at Center Street Station.</span></article>
             </div>
           </div>
         </div>
@@ -204,16 +206,16 @@ export function renderHome(data) {
       <section class="spotlight-section">
         <div class="spotlight-image"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="Nathan Baker shaking hands with a local employer partner in the Sikeston classroom" /></div>
         <div>
-          <span class="kicker">${icon("flag")} Every Saturday</span>
-          <h2>${escapeHtml(league.season?.name || "Live Builds")}</h2>
-          <p>${escapeHtml(league.product?.cta || "")} Come watch, ask questions, or build along as a real organizational project takes shape.</p>
+          <span class="kicker">${icon("forum")} Always-On Support</span>
+          <h2>The Discord doesn't close when class does.</h2>
+          <p>Get help with the four free courses, get help with the live program material, or get help designing and building a system you've already got an idea for — whether you've been through the courses, the program, or both. It's open all day, every day, not just during scheduled sessions.</p>
           <div class="stat-grid">
-            <div><strong>${escapeHtml(league.season?.format || "Sat 10-12 CST, Discord")}</strong><span>Format</span></div>
+            <div><strong>All day, every day</strong><span>Availability</span></div>
             <div><strong>Free</strong><span>Open to Everyone</span></div>
           </div>
           <div class="button-row">
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
-            <a class="outline-button" href="/live-builds">See How It Works</a>
+            <a class="outline-button" href="/tutorials">Start the Free Courses</a>
           </div>
         </div>
       </section>
@@ -265,7 +267,7 @@ export function renderHome(data) {
       "AutoNateAI trains students and professionals in Sikeston, MO to design software systems with AI, then apply those skills to real problems inside businesses, schools, and community organizations across Southeast Missouri.",
     ogTitle: "Building Southeast Missouri's AI Workforce.",
     ogDescription:
-      "An in-person cohort in Sikeston, MO, four free tutorial packs, and Saturday Live Builds where students and professionals design databases, APIs, and architecture with Claude Code and Codex, then ship a real system for a real organization.",
+      "An in-person cohort in Sikeston, MO, four free digital courses, and an always-on Discord where students and professionals design databases, APIs, and architecture with Claude Code and Codex, then ship a real system for a real organization.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -348,7 +350,7 @@ export function renderAbout() {
         <span class="kicker">${icon("architecture")} Mission</span>
         <h2>AutoNateAI develops local people into AI and software systems builders.</h2>
         <p>AI skills aren't only for technology companies. Missouri's 2026 Technology2030 report found more than 223,000 Missourians already work in technology occupations, many of them outside traditional tech companies, and calls for preparing Missouri's workforce and economy for AI. AutoNateAI is building that capability locally — training students and professionals to create, manage, and improve the systems used by the organizations and communities around them.</p>
-        <p>That practice is not hypothetical. Every cohort builds toward a real internal tool for a real organization: an employer, a school, a nonprofit, a local business. Saturday Live Builds keep that same discipline moving in public, in the Discord, every week.</p>
+        <p>That practice is not hypothetical. Every cohort builds toward a real internal tool for a real organization: an employer, a school, a nonprofit, a local business. The Discord keeps that same discipline moving every day in between — not just during scheduled sessions.</p>
       </section>
 
       <section class="spotlight-section">
@@ -364,13 +366,13 @@ export function renderAbout() {
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/nate-and-kai.jpg" alt="Nate and Kai, the two builders behind the AutoNateAI tutorial packs" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/nate-and-kai.jpg" alt="Nate and Kai, the two builders behind the AutoNateAI free digital courses" /></div>
         <div>
-          <span class="kicker">${icon("auto_stories")} The Free Tutorial Packs</span>
+          <span class="kicker">${icon("auto_stories")} The Free Digital Courses</span>
           <h2>The same mission, told as a story: meet Nate and Kai.</h2>
-          <p>The four free tutorial packs follow Nate and Kai, two builders founding a studio from a meetup back room to a real, shipped system, learning JavaScript, AI agents, databases, and civic tech along the way. It's the same engineering practice this page describes, just easier to actually finish reading.</p>
+          <p>The four free digital courses follow Nate and Kai, two builders founding a studio from a meetup back room to a real, shipped system, learning JavaScript, AI agents, databases, and civic tech along the way. It's the same engineering practice this page describes, just easier to actually finish reading.</p>
           <div class="button-row">
-            <a class="primary-button" href="/tutorials">Read the Tutorial Packs ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/tutorials">Take the Free Courses ${icon("arrow_forward")}</a>
           </div>
         </div>
       </section>
@@ -456,7 +458,7 @@ export function renderAbout() {
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
-          <article><h3>Is this for complete beginners?</h3><p>The free tutorial packs start from zero. The paid program is best once you are comfortable reading and modifying code and want to get sharper at designing systems: data models, APIs, and architecture.</p></article>
+          <article><h3>Is this for complete beginners?</h3><p>The free digital courses start from zero. The paid program is best once you are comfortable reading and modifying code and want to get sharper at designing systems: data models, APIs, and architecture.</p></article>
           <article><h3>How does AI fit into the class?</h3><p>You use agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
           <article><h3>Why build real systems instead of exercises?</h3><p>A real organizational project makes tradeoffs visible in a way an exercise can't. You can see requirements, constraints, feedback, failure, and whether your design actually holds up for the people who'd use it.</p></article>
           <article><h3>Who is this built for?</h3><p>Students with some coding experience, working professionals who want to build internal tools, and employer- or school-sponsored participants who want stronger systems thinking and AI-assisted engineering habits.</p></article>
@@ -690,90 +692,6 @@ export function renderProgramDetail(data, program) {
   });
 }
 
-export function renderLeague(data) {
-  const league = data.league || {};
-  const body = `
-    <main class="league-page">
-      <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/hero-bg.jpg" alt="" /></div>
-        <div class="hero-content">
-        <div class="hero-copy">
-          <span class="kicker">${icon("emoji_events")} AutoNateAI Live Builds</span>
-          <h1>Real systems for real organizations, built live.</h1>
-          <p>${escapeHtml(league.product?.cta || "")} Anyone in the Discord can watch, ask questions, and follow along.</p>
-          <div class="button-row">
-            <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
-            <a class="secondary-button" href="/programs/ai-agent-systems">View the Program</a>
-          </div>
-        </div>
-        <aside class="hero-program-panel">
-          <img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" />
-          <div class="hero-panel-body">
-            <span class="kicker">${icon("flag")} Schedule</span>
-            <h2>Saturdays, 10 AM-12 PM CST</h2>
-            <p>Every Saturday, 10:00 AM-12:00 PM CST, live in the AutoNateAI Discord. Pull up in the voice channel, or catch the replay after.</p>
-            <div class="hero-facts">
-              <span>Project-driven</span>
-              <span>No lecturing</span>
-              <span>Discord-only</span>
-              <span>Open to everyone</span>
-            </div>
-          </div>
-        </aside>
-        </div>
-      </section>
-
-      <section class="league-grid">
-        <article class="league-rules">
-          <span class="kicker">${icon("sports_esports")} The Format</span>
-          <h2>A real organizational project. No script.</h2>
-          <p>Every session starts with a real problem worth solving for a real organization — a small business, a bank, a school, a nonprofit. The team defines who the system needs to work for, then builds the software live in Discord.</p>
-          <p>${escapeHtml(league.season?.winCondition || "")}</p>
-          <p>It's a real system, built in public with nothing cut. Builders who show up and do strong work get noticed — sometimes that means an introduction to real client or partner work.</p>
-        </article>
-        <aside class="league-facts">
-          <div><span>Sat</span><b>10:00 AM-12:00 PM CST</b></div>
-          <div><span>Where</span><b>AutoNateAI Discord</b></div>
-          <div><span>Mode</span><b>${escapeHtml(league.season?.format || "Live Build")}</b></div>
-          <div><span>Status</span><b class="status-pill live">${escapeHtml(league.season?.status || "Active")}</b></div>
-          <a class="primary-button full" href="https://discord.gg/4HkkuntdSs">Join the Discord</a>
-        </aside>
-      </section>
-
-      <section class="section compact league-section">
-        <div class="section-head"><div><span class="kicker">${icon("visibility")} What You'll See</span><h2>Not a highlight reel. The actual process.</h2><p>Every session is the real thing: real requirements, real dead ends, real fixes. Nothing is rehearsed and nothing is cut.</p></div></div>
-        <div class="league-how league-awards">
-          <div><span class="material-symbols-outlined">travel_explore</span><h3>Picking the Project</h3><p>A real organizational problem gets picked apart into what the software needs to do and who it needs to work for.</p></div>
-          <div><span class="material-symbols-outlined">smart_toy</span><h3>Agent-Directed Builds</h3><p>Real prompts, real context, real review of what the agent got right and what needed a fix.</p></div>
-          <div><span class="material-symbols-outlined">account_tree</span><h3>System Architecture</h3><p>Data model and API decisions made out loud, with the tradeoffs explained as they happen.</p></div>
-          <div><span class="material-symbols-outlined">bug_report</span><h3>Clutch Debugging</h3><p>The real bug, found live, fixed live, no cut scenes.</p></div>
-          <div><span class="material-symbols-outlined">groups</span><h3>User Scenario Design</h3><p>A small set of real user scenarios takes shape: who they are, what they're trying to do, and how the system should respond.</p></div>
-          <div><span class="material-symbols-outlined">flag</span><h3>Ship Day</h3><p>The moment a system goes from "in progress" to something tested and ready to show the organization it was built for.</p></div>
-        </div>
-      </section>
-
-      <section class="league-gallery">
-        <img src="/assets/landing/sikeston-hero-teaching.jpg" alt="" />
-        <img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" />
-        <img src="/assets/landing/agent-review.jpg" alt="" />
-      </section>
-    </main>
-  `;
-
-  return pageShell({
-    title: "Live Builds | AutoNateAI",
-    active: "live-builds",
-    body,
-    canonicalPath: "/live-builds",
-    ogImage: "/assets/og/live-builds.jpg",
-    description:
-      "AutoNateAI Live Builds: every Saturday, 10 AM-12 PM CST, the community builds real software systems for real organizations, live in Discord.",
-    ogTitle: "AutoNateAI Live Builds: real systems for real organizations, built live.",
-    ogDescription:
-      "Saturdays, 10:00 AM-12:00 PM CST, live in Discord. A real organizational project, a real build, no script.",
-  });
-}
-
 export function renderForOrganizations(data) {
   const primaryProgram = data.programs?.[0];
   const body = `
@@ -885,7 +803,7 @@ export function renderForOrganizations(data) {
                   <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
                   <option value="Website">Website</option>
                   <option value="For Organizations page">For Organizations page</option>
-                  <option value="Live Build">Live Build</option>
+                  <option value="Discord">Discord</option>
                   <option value="Referral">Referral</option>
                   <option value="Other">Other</option>
                 </select>
@@ -1093,7 +1011,7 @@ export function renderConsulting(data) {
                   <option value="Met in Person / Networking Event">Met in Person / Networking Event</option>
                   <option value="Website">Website</option>
                   <option value="Founding Bank Pilot">Founding Bank Pilot</option>
-                  <option value="Live Build">Live Build</option>
+                  <option value="Discord">Discord</option>
                   <option value="Referral">Referral</option>
                   <option value="RFP">RFP</option>
                   <option value="Other">Other</option>
@@ -1127,9 +1045,9 @@ export function renderConsulting(data) {
         <div>
           <span class="kicker">${icon("local_activity")} Not ready to book yet?</span>
           <h2>See the engineering process before you commit to anything.</h2>
-          <p>Watch how real systems get designed and built, live, every Saturday in the AutoNateAI Discord.</p>
+          <p>Start with the four free digital courses, or drop into the Discord to see how real systems get designed and built.</p>
         </div>
-        <a class="primary-button" href="/live-builds">See Live Builds ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/tutorials">See the Free Courses ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
@@ -1168,9 +1086,9 @@ export function renderTutorials() {
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Built for Where You're At</span>
             <h2>Setup is free. System judgment is the program.</h2>
-            <p>New to programming? Start with Nate and Kai's story and learn JavaScript from zero. Know some code already? Jump straight into whichever pack matches what you're building next. Either way, the packs build toward the same system-architect habits the live cohort practices.</p>
+            <p>New to programming? Start with Nate and Kai's story and learn JavaScript from zero. Know some code already? Jump straight into whichever course matches what you're building next. Either way, these courses build toward the same system-architect habits the live cohort practices.</p>
             <div class="hero-facts">
-              <span>${tutorialPacks.length} tutorial packs</span>
+              <span>${tutorialPacks.length} free digital courses</span>
               <span>Copy-ready code</span>
               <span>Local setup</span>
               <span>Discord support included</span>
@@ -1183,8 +1101,9 @@ export function renderTutorials() {
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("signpost")} Pick Your Starting Point</span>
-            <h2>Wherever you're starting from, there's a pack for it.</h2>
+            <span class="kicker">${icon("route")} Many Ways In</span>
+            <h2>There's no single right way to start.</h2>
+            <p>Self-taught builder, working professional, sponsored employee, or sponsored student — these four courses are the on-ramp for all of it. They're the foundation the live program builds on: once you know the pillars, the program teaches you to point them at a real problem, design a system for it, and build that system out.</p>
           </div>
         </div>
         <div class="value-grid">
@@ -1198,27 +1117,38 @@ export function renderTutorials() {
       <section class="section pack-catalog-section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("view_module")} Pick a Pack</span>
-            <h2>Each pack is a complete path, start to finish.</h2>
-            <p>Open a pack to see its lessons in order. New packs show up here as they ship.</p>
+            <span class="kicker">${icon("view_module")} Pick a Course</span>
+            <h2>Each course is a complete path, start to finish.</h2>
+            <p>Open a course to see its lessons in order. New courses show up here as they ship.</p>
           </div>
         </div>
         <div class="pack-grid">${tutorialPacks.map((pack) => packCard(pack)).join("")}</div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("forum")} Help Whenever You Need It</span>
+            <h2>The Discord covers all of it — courses, program, and your own ideas.</h2>
+            <p>It's open all day, every day: setup and concept help for anyone working through the four free courses, architecture reviews and build support for anyone in the live program, and project help for builders who already know the pillars or the program and are stuck designing or building a system they came up with themselves.</p>
+          </div>
+          <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
+        </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Free Tutorials | AutoNateAI",
+    title: "Free Digital Courses | AutoNateAI",
     active: "tutorials",
     body,
     canonicalPath: "/tutorials",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Start building before the cohort begins. Four free learning paths teach JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI.",
+      "Start building before the cohort begins. Four free digital courses teach JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI.",
     ogTitle: "Start building before the cohort begins.",
     ogDescription:
-      "Start with Nate and Kai's story, then pick whichever pack matches what you're building next. Free guides, real curriculum, before you join the in-person cohort.",
+      "Start with Nate and Kai's story, then pick whichever course matches what you're building next. Free courses, real curriculum, before you join the in-person cohort.",
   });
 }
 
@@ -1229,7 +1159,7 @@ export function renderTutorialPack(pack) {
 
   const body = `
     <main class="tutorials-page pack-page">
-      <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><b>${escapeHtml(pack.title)}</b></nav>
+      <nav class="breadcrumbs pack-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Free Courses</a><span>/</span><b>${escapeHtml(pack.title)}</b></nav>
       <section class="home-hero tutorials-detail-hero">
         <div class="hero-bg">${packMedia(pack)}</div>
         <div class="hero-content">
@@ -1239,13 +1169,13 @@ export function renderTutorialPack(pack) {
           <p>${escapeHtml(pack.summary)}</p>
           <div class="button-row">
             <a class="primary-button" href="/programs/ai-agent-systems">Take the Program ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/tutorials">All Packs</a>
+            <a class="secondary-button" href="/tutorials">All Courses</a>
           </div>
         </div>
         <aside class="hero-program-panel">
           ${packMedia(pack)}
           <div class="hero-panel-body">
-            <span class="kicker">${icon("terminal")} This Pack</span>
+            <span class="kicker">${icon("terminal")} This Course</span>
             <h2>${comingSoon ? "Lessons are in progress." : "Work through it in order."}</h2>
             <p>${comingSoon ? "The outline below is locked in and full lessons are being written now." : "Each lesson builds on the last, from setup to competition-ready."}</p>
             <div class="hero-facts">
@@ -1263,7 +1193,7 @@ export function renderTutorialPack(pack) {
         <aside class="docs-sidebar">
           <strong>${escapeHtml(pack.title)}</strong>
           ${tracks.map((track) => `<a href="#${slugify(track)}">${escapeHtml(track)}</a>`).join("")}
-          <a href="/tutorials">All Packs</a>
+          <a href="/tutorials">All Courses</a>
           <a href="/programs/ai-agent-systems">Full cohort</a>
         </aside>
         <div class="docs-content">
@@ -1294,12 +1224,12 @@ export function renderTutorialDetail(pack, tutorial) {
   const nextTutorial = currentIndex >= 0 && currentIndex < packTutorials.length - 1 ? packTutorials[currentIndex + 1] : null;
   const body = `
     <main class="tutorial-detail-page">
-      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Tutorials</a><span>/</span><a href="/tutorials/${pack.handle}">${escapeHtml(pack.title)}</a><span>/</span><b>${escapeHtml(tutorial.title)}</b></nav>
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/tutorials">Free Courses</a><span>/</span><a href="/tutorials/${pack.handle}">${escapeHtml(pack.title)}</a><span>/</span><b>${escapeHtml(tutorial.title)}</b></nav>
       <div class="tutorial-detail-layout">
         <aside class="docs-sidebar tutorial-detail-sidebar">
           <strong>${escapeHtml(pack.title)}</strong>
           ${packTutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${pack.handle}/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}${item.draft ? " (soon)" : ""}</a>`).join("")}
-          <a href="/tutorials">All Packs</a>
+          <a href="/tutorials">All Courses</a>
           <a href="/programs/ai-agent-systems">Join the cohort</a>
           <a href="/community">Ask in Discord</a>
         </aside>
@@ -1353,10 +1283,10 @@ export function renderCommunity() {
         <div class="hero-copy">
           <span class="kicker">${icon("groups")} AutoNateAI Community</span>
           <h1>A place to build, ask, debug, and talk systems all day.</h1>
-          <p>The program is the structured path. The community is where the energy keeps moving: setup help, architecture questions, agent workflow reviews, organizational project research, Live Build updates, and the kind of build chatter that turns one stuck builder into ten sharper ones.</p>
+          <p>The four free courses and the in-person program are the structured path. The Discord is where the help never stops: setup and concept questions on the courses, architecture reviews and build support on the program, and project help for builders who already know the pillars and need to design or build something they came up with themselves.</p>
           <div class="button-row">
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
-            <a class="secondary-button" href="/tutorials">Start Tutorials</a>
+            <a class="secondary-button" href="/tutorials">Start the Free Courses</a>
           </div>
         </div>
         <aside class="hero-program-panel">
@@ -1364,12 +1294,12 @@ export function renderCommunity() {
           <div class="hero-panel-body">
             <span class="kicker">${icon("forum")} Discord</span>
             <h2>Join the build room.</h2>
-            <p>Come for setup. Stay for the build reviews, project research, strange bugs, and Live Build updates.</p>
+            <p>Come for setup on the courses. Stay for build reviews, project help, and strange bugs — any day of the week.</p>
             <div class="hero-facts">
               <span>Setup help</span>
               <span>Code review</span>
               <span>Agent prompts</span>
-              <span>Live Build updates</span>
+              <span>Project help</span>
             </div>
           </div>
         </aside>
@@ -1382,8 +1312,8 @@ export function renderCommunity() {
           <div><span class="material-symbols-outlined">construction</span><h3>Setup Help</h3><p>Get unstuck on local setup, repo structure, first scripts, and the small configuration issues that can steal a whole afternoon.</p></div>
           <div><span class="material-symbols-outlined">code_blocks</span><h3>Code Review</h3><p>Share snippets, ask why something is broken, and learn how to explain the bug instead of just staring at it.</p></div>
           <div><span class="material-symbols-outlined">smart_toy</span><h3>Agent Prompts</h3><p>Practice asking AI agents for architecture help with enough context that the answer has a chance to be useful.</p></div>
-          <div><span class="material-symbols-outlined">travel_explore</span><h3>Project Research</h3><p>Trade notes on real organizational problems worth building toward, before the next Live Build session.</p></div>
-          <div><span class="material-symbols-outlined">emoji_events</span><h3>Live Build Updates</h3><p>Follow along as Live Builds ship real systems, week after week, for real organizations.</p></div>
+          <div><span class="material-symbols-outlined">travel_explore</span><h3>Project Research</h3><p>Trade notes on real organizational problems worth building toward, whether it's for the program or something you're building on your own.</p></div>
+          <div><span class="material-symbols-outlined">auto_stories</span><h3>Course Help</h3><p>Ask questions on any of the four free courses — JavaScript, prompting, databases, or civics and agentic AI.</p></div>
           <div><span class="material-symbols-outlined">edit_note</span><h3>Builder Notes</h3><p>Post reflections, architecture notes, and lessons learned so the whole community gets sharper.</p></div>
         </div>
       </section>
@@ -1397,10 +1327,10 @@ export function renderCommunity() {
     canonicalPath: "/community",
     ogImage: "/assets/og/default.jpg",
     description:
-      "Join the AutoNateAI Discord community for setup help, architecture questions, AI agent workflow reviews, project research, and Live Build updates.",
+      "Join the AutoNateAI Discord community for help with the four free courses, the live program, and any system you're building on your own.",
     ogTitle: "The systems lab has a Discord.",
     ogDescription:
-      "Get setup help, code review, agent workflow practice, project research, and Live Build updates with the AutoNateAI community.",
+      "Get setup help, code review, agent workflow practice, and project help with the AutoNateAI community — open all day, every day.",
   });
 }
 
@@ -1815,7 +1745,7 @@ function packStatusBanner() {
   return `
     <div class="pack-status-banner">
       <span class="kicker">${icon("hourglass_top")} Coming Soon</span>
-      <p>This pack's lessons are still being written. The outline below shows what's planned — check back soon, or ask in Discord for early access.</p>
+      <p>This course's lessons are still being written. The outline below shows what's planned — check back soon, or ask in Discord for early access.</p>
       <a class="outline-button" href="/community">Ask in Discord</a>
     </div>
   `;
@@ -1836,7 +1766,7 @@ function packCard(pack) {
         <p>${escapeHtml(pack.summary)}</p>
         <div class="pack-card-meta">
           <span>${icon("auto_stories")} ${items.length} lesson${items.length === 1 ? "" : "s"}</span>
-          <span class="pack-card-link">${available ? "View Pack" : "Preview Pack"} ${icon("arrow_forward")}</span>
+          <span class="pack-card-link">${available ? "View Course" : "Preview Course"} ${icon("arrow_forward")}</span>
         </div>
       </div>
     </a>

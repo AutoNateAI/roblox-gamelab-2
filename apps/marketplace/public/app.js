@@ -12,12 +12,12 @@ window.addEventListener("scroll", () => {
 function syncThemeIcon() {
   const button = document.querySelector("[data-theme-toggle] .material-symbols-outlined");
   if (!button) return;
-  const theme = document.documentElement.getAttribute("data-theme") || "dark";
+  const theme = document.documentElement.getAttribute("data-theme") || "light";
   button.textContent = theme === "dark" ? "light_mode" : "dark_mode";
 }
 
 document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const current = document.documentElement.getAttribute("data-theme") || "light";
   const next = current === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
   localStorage.setItem("anai-theme", next);

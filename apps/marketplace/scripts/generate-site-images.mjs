@@ -12,7 +12,7 @@ if (!apiKey) {
 }
 
 const STYLE =
-  "Dark, cinematic, professional tech-editorial illustration style. Near-black background (#060a12), warm amber/gold accent glow (#f2b134), moody directional lighting, high detail, no readable text or logos anywhere in the image.";
+  "Dark, cinematic, professional tech-editorial illustration style. Near-black background (#060a12), bold red accent glow (#c8102e), moody directional lighting, high detail, no readable text or logos anywhere in the image.";
 
 const images = [
   {
@@ -48,22 +48,22 @@ const images = [
   {
     file: "tutorial-pack-prompt-and-context-engineering.jpg",
     size: "1536x1024",
-    prompt: `An abstract photo-realistic illustration of two speech-bubble shapes connected by a glowing amber neural network pattern, symbolizing a conversation between a person and an AI agent, dark near-black background, cinematic lighting. ${STYLE} No readable text, no faces.`,
+    prompt: `An abstract photo-realistic illustration of two speech-bubble shapes connected by a glowing red neural network pattern, symbolizing a conversation between a person and an AI agent, dark near-black background, cinematic lighting. ${STYLE} No readable text, no faces.`,
   },
   {
     file: "tutorial-pack-relational-databases-and-graphs.jpg",
     size: "1536x1024",
-    prompt: `An abstract illustration split between a grid of glowing amber database table rows on one side and a connected node-and-edge graph on the other, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no faces.`,
+    prompt: `An abstract illustration split between a grid of glowing red database table rows on one side and a connected node-and-edge graph on the other, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no faces.`,
   },
   {
     file: "tutorial-pack-civics-and-agentic-ai.jpg",
     size: "1536x1024",
-    prompt: `An abstract illustration of a simple civic building silhouette, like a courthouse, connected by glowing amber circuit lines to a small network of AI agent nodes, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
+    prompt: `An abstract illustration of a simple civic building silhouette, like a courthouse, connected by glowing red circuit lines to a small network of AI agent nodes, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
   },
   {
     file: "tutorial-pack-intro-to-javascript-for-beginners.jpg",
     size: "1536x1024",
-    prompt: `An abstract illustration of a glowing amber terminal cursor blinking beside a curly-brace bracket shape that opens into a small constellation of connected nodes, like a single line of code branching into a whole system, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
+    prompt: `An abstract illustration of a glowing red terminal cursor blinking beside a curly-brace bracket shape that opens into a small constellation of connected nodes, like a single line of code branching into a whole system, dark near-black background, cinematic tech-editorial style. ${STYLE} No readable text, no people.`,
   },
   {
     file: "hero-panel-two-builders.jpg",
@@ -99,8 +99,15 @@ async function generateImage({ file, size, prompt }) {
 }
 
 await mkdir(outDir, { recursive: true });
-console.log(`Generating ${images.length} site images with gpt-image-2 (in parallel)...`);
 
-await Promise.all(images.map((spec) => generateImage(spec)));
+// Optional filter for regenerating a subset (e.g. after a brand-color change):
+// ONLY="tutorial-pack" node scripts/generate-site-images.mjs regenerates just
+// the files whose name includes that substring.
+const filter = process.env.ONLY;
+const jobs = filter ? images.filter((spec) => spec.file.includes(filter)) : images;
+
+console.log(`Generating ${jobs.length} site image${jobs.length === 1 ? "" : "s"} with gpt-image-2 (in parallel)...`);
+
+await Promise.all(jobs.map((spec) => generateImage(spec)));
 
 console.log("Done.");

@@ -1,8 +1,8 @@
-# The Notes Before the Live Build: Cheatsheet
+# The Notes Before the Real Build: Cheatsheet
 
 This is the reference page for a four-chapter pack about responding to a real public solicitation with the help of AI agents. Nate and Kai — a builder and a former civic program coordinator, two people and a studio called AutoNateAI — spent it on City of Fairview RFP 26-118, a youth program registration and waitlist system. This file is what they'd want open in a tab the next time one lands, cold, with a deadline on it.
 
-Kai pinned it in the Discord with the message "read this before Saturday." Nate added a second message that just said "🌯". Neither of them removed the other one.
+Kai pinned it in the Discord with the message "read this before the next one lands." Nate added a second message that just said "🌯". Neither of them removed the other one.
 
 ## Agentic AI Vocabulary
 
@@ -79,12 +79,12 @@ That's the whole arc. Not "game skills transferred to real life." Just skills �
 
 ## The Part That Isn't a Chapter
 
-There's no chapter six. There's a Saturday.
+There's no chapter six. There's the Discord, and it doesn't close.
 
-**Every Saturday, 10 AM to 12 PM CST, in the AutoNateAI Discord**, we pull up a real solicitation — a real city, a real foundation, a real organization with a real problem — and work it in public. Read the document, verify the extraction, research the room, sketch the system, build the part we can build in two hours. Live. Including the parts where we're wrong, which is most of the interesting parts.
+**Bring the checklist, the habits, and whatever you're actually building** — a real internal tool for your own employer, your own school, an idea nobody's built yet — and the same people who wrote this pack are on the other side of the Discord, all day, helping. That's where these four free courses hand off to AutoNateAI's in-person program in Sikeston, and it's where the program hands off to whatever you build next.
 
-That's the whole description. It's not a course and there's nothing to prepare. It's two people who have done this exactly enough times to know how much they don't know, plus whoever shows up. Some Saturdays that's a lot of people and some Saturdays it's four. It runs either way.
+There's nothing to prepare beyond what's already in your head from these four packs. It's two people who have done this exactly enough times to know how much they don't know, plus whoever's in the Discord that day.
 
-Nate's spent a year building things nobody was waiting on. Kai spent three years watching a problem nobody in the room could fix. This Saturday there's a document on the screen with a real deadline on it, and both of those facts stop being true at the same time.
+Nate's spent a year building things nobody was waiting on. Kai spent three years watching a problem nobody in the room could fix. Somewhere there's a document with a real deadline on it, and both of those facts are about to stop being true at the same time.
 
-Bring coffee. We start at ten.
+Bring coffee. Come find us.

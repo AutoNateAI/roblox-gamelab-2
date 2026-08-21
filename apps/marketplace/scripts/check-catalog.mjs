@@ -25,10 +25,6 @@ for (const program of data.programs || []) {
   }
 }
 
-if (!data.league) {
-  errors.push("Missing league data.");
-}
-
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);

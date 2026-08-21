@@ -1,15 +1,17 @@
 export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
   { label: "Program", href: "/programs/ai-agent-systems", keys: ["programs"] },
-  { label: "Free Tutorials", href: "/tutorials", keys: ["tutorials"] },
+  { label: "Free Courses", href: "/tutorials", keys: ["tutorials"] },
   { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];
 
-// Live Builds, Consulting, and Community are still real, working pages — just no
-// longer in the primary nav now that the site's one dominant story is regional AI
-// workforce development. They stay reachable from the footer and from in-page CTAs.
+// Consulting and Community are still real, working pages — just no longer in the
+// primary nav now that the site's one dominant story is regional AI workforce
+// development. They stay reachable from the footer and from in-page CTAs.
+// Live Builds (the weekly Saturday event) has been decommissioned entirely in
+// favor of the always-on Discord + the four free courses + the in-person program.
 
 // What a participant could build for their organizational project track, by org
 // type. Used on the Program page ("What could you build for your organization?")
@@ -537,12 +539,12 @@ export const tutorials = [
   {
     handle: "cheatsheet",
     episode: "05",
-    title: "The Notes Before the Live Build: Cheatsheet",
+    title: "The Notes Before the Real Build: Cheatsheet",
     track: "Reference",
     pack: "civics-and-agentic-ai",
     sourcePath: "../content/tutorials/civics-and-agentic-ai/05-cheatsheet.md",
-    summary: "Agentic-AI vocabulary and the RFP research checklist Nate and Kai use every time a new one drops — right before their first real Live Build.",
-    outcomes: ["Reference agentic-AI terms", "Run the RFP checklist", "Get ready for Live Builds"],
+    summary: "Agentic-AI vocabulary and the RFP research checklist Nate and Kai use every time a new one drops — right before their first real system for a real organization.",
+    outcomes: ["Reference agentic-AI terms", "Run the RFP checklist", "Get ready for the program"],
   },
 ];
 
@@ -573,7 +575,7 @@ export const articles = [
     body: [
       "Sikeston's Chamber of Commerce already treats workforce development as an economic-development priority, with existing relationships across local schools, SEMO, Three Rivers, and programs like SOAR. What's been missing locally is a hands-on, in-person path into AI and software systems work that doesn't require leaving the region or waiting for a college curriculum to catch up.",
       "AutoNateAI's youth pathway is built for students who already have some coding experience and want to go further: designing data models and APIs, directing AI coding agents responsibly, and building a real system for a real local organization instead of another isolated class project. It's a two-week, in-person cohort, not a semester-long commitment, so it fits alongside school.",
-      "The bar for entry is a free on-ramp: four self-paced tutorial packs that teach JavaScript fundamentals, prompt and context engineering, and databases before a student ever sets foot in the cohort. A student, or a parent asking on their behalf, can try the material for free first and see if it's a fit before paying anything."
+      "The bar for entry is a free on-ramp: four self-paced digital courses that teach JavaScript fundamentals, prompt and context engineering, and databases before a student ever sets foot in the cohort. A student, or a parent asking on their behalf, can try the material for free first and see if it's a fit before paying anything."
     ],
     tags: ["Youth Programming", "Sikeston", "Workforce Development"],
     readingTime: "3 min read",
@@ -597,17 +599,17 @@ export const articles = [
   },
   {
     handle: "why-live-builds-make-it-real",
-    title: "Why Saturday Live Builds Make the Learning Real",
+    title: "Why the Discord Doesn't Close When Class Does",
     category: "Guide",
     audience: "Builders preparing to ship a real system",
     summary:
-      "When your system has to work for a real organization, architecture stops being theory and starts becoming proof.",
+      "The four free courses and the in-person program are the structured path. The Discord is where the learning keeps going every day in between.",
     body: [
-      "A Live Build changes the work because the code has consequences. Nobody is submitting a static project. The team is shipping a system in response to an actual RFP, live, where the reasoning is visible the whole way and a real organization is going to look at what got built and decide whether it's useful.",
-      "That pressure makes the lessons click. Requirements matter because a real ask has rules. Debugging matters because a broken flow loses trust in front of everyone watching. Git matters because the branch needs a stable checkpoint mid-build. Data modeling matters because the system has to remember what's true. Architecture matters because the design should be changeable without rewriting everything two weeks in.",
-      "By the end, a builder can talk about the project like an engineer: the environment, the assumptions, the decisions, the failures, the fixes, and what happened when the system had to perform for someone other than them. That's why AutoNateAI Live Builds run every Saturday, 10:00 AM-12:00 PM Central, live in the Discord — not as a one-time capstone, but as an ongoing rhythm that gives serious builders a reason to keep shipping."
+      "A course or a cohort session ends. The problem you're actually trying to solve for your employer, your school, or the idea you brought in yourself doesn't wait for the next one. That's the gap the AutoNateAI Discord is built to close: it's open all day, every day, not just during the two weeks you're enrolled.",
+      "It covers three things at once. Setup and concept help for anyone working through the four free courses. Architecture reviews, agent workflow coaching, and build support for people currently in the live program. And project help for builders who already know the four pillars, or have been through the program, and are stuck designing or building a real system they came up with on their own.",
+      "That's the actual shape of the learning: requirements matter because a real ask has rules, debugging matters because a broken flow loses trust, Git matters because the work needs a stable checkpoint mid-build. None of that has to wait for a scheduled session — it gets worked through live, in the Discord, whenever a builder actually hits the wall."
     ],
-    tags: ["Live Builds", "RFPs", "Shipping"],
+    tags: ["Discord", "Community", "Support"],
     readingTime: "3 min read",
     image: "/assets/landing/rfp-document.jpg",
   },
@@ -639,7 +641,7 @@ export const articles = [
       "That turns familiar tools into connected practice. Code controls behavior. APIs reveal the world. A database carries decisions forward. Git captures experiments. AI agents help plan and review changes. Real requirements force a builder to decide what matters first, instead of building whatever's fun that week.",
       "The result is a project with a story, not just a repo. You can show the RFP, explain the architecture, walk through the decisions, describe how the agent helped and where it got something wrong, and point to what happened when the system shipped for a real organization. That's a very different conversation than \"here's another to-do app.\""
     ],
-    tags: ["Portfolio Project", "RFPs", "Live Builds"],
+    tags: ["Portfolio Project", "RFPs", "Systems Design"],
     readingTime: "4 min read",
     image: "/assets/landing/what-they-build.jpg",
   },
@@ -668,10 +670,10 @@ export const articles = [
       "AI can help you move faster, but Git keeps the work understandable, recoverable, and ready for real deadlines.",
     body: [
       "AI agents can change a system quickly. That is powerful, but it also means a builder needs a way to keep the work grounded. Git gives every experiment a checkpoint: what changed, why it changed, and whether the system actually improved once you look at the diff instead of trusting the summary.",
-      "On a real build, that matters immediately. A schema change can unlock growth or break your API. A new feature can make the system smarter or drain time on the wrong thing. A Live Build branch needs to be stable enough to demo live, even while you keep testing better ideas on the side.",
+      "On a real build, that matters immediately. A schema change can unlock growth or break your API. A new feature can make the system smarter or drain time on the wrong thing. A build branch needs to be stable enough to demo live, even while you keep testing better ideas on the side.",
       "By the time a builder has shipped a real system this way, Git isn't just a tool they learned because engineers use it. It's the record of their thinking: commits, diffs, recovery moments, architecture notes, and the path from first working prototype to a system a real organization can actually use."
     ],
-    tags: ["Git", "AI Agents", "Live Builds"],
+    tags: ["Git", "AI Agents", "Systems Design"],
     readingTime: "3 min read",
     image: "/assets/landing/agent-review.jpg",
   }

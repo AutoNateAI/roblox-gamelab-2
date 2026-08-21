@@ -132,7 +132,7 @@ Then read every line of what comes back against the source, the way you did with
 
 The napkin got photographed and thrown away. The diagram went into a real document. Kai read the problem statement paragraph twice and didn't change a word of it, which from her is roughly a standing ovation.
 
-Then Nate said the thing he'd apparently been sitting on for a week: "What if we build the first version of it live. In the Discord. Saturday. Out loud, from the actual RFP, in front of whoever shows up."
+Then Nate said the thing he'd apparently been sitting on for a week: "What if we build the first version of it live. In the Discord. Out loud, from the actual RFP, in front of whoever shows up."
 
 Kai looked at him. "People will watch us be wrong."
 

@@ -116,14 +116,6 @@ await composite({
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AutoNateAI Live Builds",
-  title: "Real Systems, Real Simulations, Built Live.",
-  footer: "AutoNateAI · Saturdays 10-12 CST, Discord",
-  outFile: path.join(outDir, "live-builds.jpg"),
-});
-
-await composite({
-  screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI Consulting for Banks",
   title: "Enterprise AI, Priced for Community Banks.",
   footer: "AutoNateAI · Community & Regional Banks",
