@@ -93,6 +93,16 @@ const images = [
     size: "1536x1024",
     prompt: `A photorealistic medium shot inside the reference classroom of the man from the reference headshot standing at a whiteboard or large wall monitor, sketching a simple system architecture diagram (boxes and connecting arrows) in bold red marker/red-accented lines, half-turned toward the diagram with one hand mid-gesture explaining it, engaged expression, warm daylight, documentary editorial style, blurred classroom tables with laptops in the foreground. ${STYLE} ${GUARDRAIL} The diagram lines/accents must be a bold red (#c8102e family), not amber. No readable text or labels in the diagram.`,
   },
+  {
+    file: "sikeston-build-lab-live.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic wide shot inside the reference classroom during a live build session: the man from the reference headshot seated at a laptop that is wired to the large wall monitor, which shows a code editor split next to a simple internal dashboard UI with bold red accent charts, mid-conversation and gesturing toward the screen. Beside him sits a professionally dressed adult (a stand-in for a local business operator/guest), leaning in and engaged, as if co-presenting. A few diverse adult attendees are visible blurred in the foreground, watching attentively. Warm daylight, documentary editorial style, shallow depth of field. ${STYLE} ${GUARDRAIL} The wall monitor's UI accent color must be a bold red (#c8102e family), not amber. No readable text.`,
+  },
+  {
+    file: "sikeston-consulting-industries.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium-wide shot inside the reference classroom: the man from the reference headshot standing at the large wall monitor, sketching a simple systems architecture diagram (boxes and connecting arrows) in bold red marker/red-accented lines, half-turned toward a small mixed group of two professionally dressed adults (stand-ins for different local industries — not the man from the reference headshot) seated nearby and looking on with interest. Warm daylight, documentary editorial style, engaged expressions. ${STYLE} ${GUARDRAIL} The diagram lines/accents must be a bold red (#c8102e family), not amber. No readable text or labels in the diagram.`,
+  },
 ];
 
 function guessMimeType(file) {

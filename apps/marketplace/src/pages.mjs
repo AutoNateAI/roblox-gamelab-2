@@ -3,7 +3,10 @@ import {
   articles,
   bankEngagementLadder,
   bankingOfferings,
+  buildLabInfo,
+  buildLabSchedule,
   foundingBankPilot,
+  industries,
   organizationExamples,
   regionalVision,
   sceneShots,
@@ -60,6 +63,39 @@ function orgExampleCard(example) {
       <ul class="industry-capabilities">
         ${example.chain.map((step) => `<li>${icon("arrow_forward")}<span>${escapeHtml(step)}</span></li>`).join("")}
       </ul>
+    </article>
+  `;
+}
+
+function industryCard(industry) {
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(industry.icon)}</div>
+      <h3>${escapeHtml(industry.name)}</h3>
+      <p class="industry-hook">${escapeHtml(industry.tagline)}</p>
+      <ul class="industry-capabilities">
+        ${industry.workflows.map((step) => `<li>${icon("bolt")}<span>${escapeHtml(step)}</span></li>`).join("")}
+      </ul>
+    </article>
+  `;
+}
+
+function buildLabCard(slot, industryBySlug) {
+  const industry = industryBySlug.get(slot.industry);
+  if (!industry) return "";
+  return `
+    <article class="industry-card build-lab-card">
+      <div class="build-lab-time">
+        <span class="kicker">${icon("event")} ${escapeHtml(slot.day)}</span>
+        <strong>${escapeHtml(slot.time)}</strong>
+      </div>
+      <div class="industry-card-icon">${icon(industry.icon)}</div>
+      <h3>${escapeHtml(industry.name)}</h3>
+      <p class="industry-hook">"${escapeHtml(slot.topic)}"</p>
+      <div class="button-row">
+        <a class="primary-button" href="${slot.meetUrl}">Join on Meet ${icon("videocam")}</a>
+        <a class="outline-button" href="${slot.calendarUrl}">Add to Calendar</a>
+      </div>
     </article>
   `;
 }
@@ -217,6 +253,22 @@ export function renderHome(data) {
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
             <a class="outline-button" href="/tutorials">Start the Free Courses</a>
           </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("route")} How It All Connects</span>
+            <h2>Free courses. An in-person program. Internal tools. It's one system.</h2>
+            <p>The four free courses and the in-person program build the skill. AutoNateAI Consulting and the free weekly Industry Build Labs are the same skill, pointed at real Southeast Missouri organizations across nine industries — proof this works outside the classroom too.</p>
+          </div>
+        </div>
+        <div class="compete-curriculum">
+          <article><b>01</b><span><a href="/tutorials">Start free</a> — four self-paced digital courses build the fundamentals.</span></article>
+          <article><b>02</b><span><a href="/programs/ai-agent-systems">Go in person</a> — a 2-week Sikeston cohort, building a real system for a real organization.</span></article>
+          <article><b>03</b><span><a href="/events">See it live</a> — free weekly Industry Build Labs across nine regional industries.</span></article>
+          <article><b>04</b><span><a href="/consulting">Hire it out</a> — AutoNateAI Consulting builds the internal tool for you.</span></article>
         </div>
       </section>
 
@@ -853,45 +905,139 @@ function bankLadderStrip() {
   `;
 }
 
-export function renderConsulting(data) {
-  const pilot = foundingBankPilot;
-  const slotsRemaining = Math.max(pilot.slotsTotal - pilot.slotsFilled, 0);
+export function renderEvents() {
+  const industryBySlug = new Map(industries.map((industry) => [industry.slug, industry]));
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/design-build-ship.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/sikeston-build-lab-live.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("account_balance")} AutoNateAI Consulting for Community &amp; Regional Banks</span>
-          <h1>Enterprise-grade AI systems, priced for a community bank's budget.</h1>
-          <p>AutoNateAI Consulting builds AI workflow intelligence, simulation, and custom software for community and regional banks — the institutions with real operational complexity but without a 125-person AI R&D team like the big national banks have. Nathan built AI research and document/call-processing systems inside Veterans United Home Loans' AI R&D team. Same caliber of engineering, scoped and priced for a bank your size.</p>
+          <span class="kicker">${icon("event")} AutoNateAI Industry Build Labs</span>
+          <h1>We build a real internal tool live, every week, free.</h1>
+          <p>One local workflow. One hour. We build the system live — no slides, no theory-only session. ${escapeHtml(buildLabInfo.quarterLabel)} runs ${formatDate(buildLabInfo.startDate)} through ${formatDate(buildLabInfo.endDate)}, one session per regional industry, every week, over Google Meet.</p>
           <div class="button-row">
-            <a class="primary-button" href="#book">Book a Call ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="#offerings">See What We Offer</a>
+            <a class="primary-button" href="#schedule">See This Week's Schedule ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/consulting">Bring Us Your Workflow</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="/assets/landing/api-data-model.jpg" alt="" />
+          <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("apartment")} For Bank Leadership</span>
-            <h2>Bring us the workflow that's eating staff time. We'll show you what changes.</h2>
-            <p>Commercial lending, document review, deposit ops, compliance — we model how it actually works today, simulate what a change would do, then build it if the numbers hold up.</p>
+            <span class="kicker">${icon("route")} How a Build Lab Works</span>
+            <h2>${escapeHtml(buildLabInfo.format)}</h2>
             <div class="hero-facts">
-              <span>Fixed-scope pricing</span>
-              <span>PII-aware by design</span>
-              <span>Ex-Veterans United AI R&D</span>
-              <span>No enterprise-length contracts</span>
+              <span>Free, every week</span>
+              <span>Nine industries</span>
+              <span>Google Meet</span>
+              <span>Guest operators welcome</span>
             </div>
           </div>
         </aside>
         </div>
       </section>
 
+      <section class="section compact">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("route")} The Methodology, Live</span>
+            <h2>Research, architecture, build, refine — the same process every week.</h2>
+          </div>
+        </div>
+        <div class="compete-curriculum">
+          <article><b>01</b><span>Research the real workflow with ChatGPT — terminology, constraints, what actually happens today.</span></article>
+          <article><b>02</b><span>Architect the system with Claude — requirements, data model, system diagram.</span></article>
+          <article><b>03</b><span>Scaffold it with Codex — database, API, and a working UI, live.</span></article>
+          <article><b>04</b><span>Refine it with Claude Code, then open the floor — would this actually work inside your operation?</span></article>
+        </div>
+      </section>
+
+      <section class="section" id="schedule">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("calendar_month")} Weekly Schedule</span>
+            <h2>Nine industries, one session each, every week.</h2>
+            <p>Consistent day and time per industry so we can actually measure what's working — the schedule shifts only once real demand shows us it should. All times Central.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${buildLabSchedule.map((slot) => buildLabCard(slot, industryBySlug)).join("")}</div>
+      </section>
+
+      <section class="detail-enroll-band">
+        <div>
+          <span class="kicker">${icon("business_center")} Want this built for your organization?</span>
+          <h2>See a workflow like yours built live, then bring us the real one.</h2>
+          <p>Every Build Lab session doubles as a live demonstration of AutoNateAI Consulting's process. If you like what you see, bring us your actual workflow.</p>
+        </div>
+        <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Industry Build Labs | Free Weekly AI Live Builds | AutoNateAI",
+    active: "events",
+    body,
+    canonicalPath: "/events",
+    ogImage: "/assets/og/events.jpg",
+    description:
+      "AutoNateAI's free weekly Industry Build Labs: one Southeast Missouri industry workflow, built live into a real internal AI tool, every week, over Google Meet.",
+    ogTitle: "We build a real internal tool live, every week, free.",
+    ogDescription:
+      "Nine regional industries, one live-build session each per week: agriculture, automotive, construction, finance, government, graphic arts, healthcare, manufacturing, and tourism. Free, over Google Meet.",
+  });
+}
+
+export function renderConsulting(data) {
+  const pilot = foundingBankPilot;
+  const slotsRemaining = Math.max(pilot.slotsTotal - pilot.slotsFilled, 0);
+  const body = `
+    <main class="league-page consulting-page">
+      <section class="home-hero league-detail-hero">
+        <div class="hero-bg"><img src="/assets/landing/sikeston-consulting-industries.jpg" alt="" /></div>
+        <div class="hero-content">
+        <div class="hero-copy">
+          <span class="kicker">${icon("hub")} AutoNateAI Consulting</span>
+          <h1>We build the internal AI tools your business wishes existed.</h1>
+          <p>Your team knows the business. AutoNateAI knows intelligent systems. Together, we turn a real daily workflow — in agriculture, automotive, construction, finance, government, graphic arts, healthcare, manufacturing, or tourism — into an internal tool your own people can run and maintain. See it happen for free every week at the <a href="/events">Industry Build Labs</a>, or bring us your workflow directly.</p>
+          <div class="button-row">
+            <a class="primary-button" href="#book">Bring Us a Workflow ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="#industries">See the Nine Industries</a>
+          </div>
+        </div>
+        <aside class="hero-program-panel">
+          <img src="/assets/landing/api-data-model.jpg" alt="" />
+          <div class="hero-panel-body">
+            <span class="kicker">${icon("apartment")} How It Works</span>
+            <h2>Domain expertise + agentic AI = an internal tool your team owns.</h2>
+            <p>We research the workflow, architect the system, build it, and hand it off — with your own people capable of running and extending it, not waiting on a vendor.</p>
+            <div class="hero-facts">
+              <span>Fixed-scope pricing</span>
+              <span>Nine regional industries</span>
+              <span>Ex-Veterans United AI R&D</span>
+              <span>Free weekly build labs</span>
+            </div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <section class="section regional-industries-section" id="industries">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("map")} Nine Regional Industries</span>
+            <h2>The industries carrying Southeast Missouri's economy — and where internal AI tooling pays off inside each one.</h2>
+            <p>These are the same nine industries behind the weekly <a href="/events">Industry Build Labs</a>: real workflows, reverse-engineered or reimagined into working internal tools, live.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${industries.map((industry) => industryCard(industry)).join("")}</div>
+      </section>
+
       <section class="section compact bank-ladder-section">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("route")} How Engagements Grow</span>
-            <h2>Most banking-AI vendors sell you a platform first. We start by studying how your bank actually works.</h2>
+            <h2>Most AI vendors sell you a platform first. We start by studying how your organization actually works.</h2>
             <p>Every relationship starts small and earns its way up: research your real workflow, run a scoped pilot, build the production system, then stay on as a standing AI and data partner if it's a fit.</p>
           </div>
         </div>
@@ -901,8 +1047,14 @@ export function renderConsulting(data) {
       <section class="section industries-section" id="offerings">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("apartment")} Offerings</span>
-            <h2>Our Nine Service Offerings</h2>
+            <span class="kicker">${icon("apartment")} Finance &amp; Banking — Our Flagship Vertical</span>
+            <h2>The most fully scoped of the nine: nine fixed-price offerings for community and regional banks.</h2>
+            <p>Community and regional banks have real operational complexity but no 125-person AI R&D team like the national banks. Nathan built AI research and document/call-processing systems inside Veterans United Home Loans' AI R&D team — same caliber of engineering, scoped and priced for a bank your size. The other eight industries follow this same fixed-scope model once we've mapped your workflow.</p>
+          </div>
+        </div>
+        <div class="section-head" style="margin-top:0;">
+          <div>
+            <h3 style="margin:0;">Our Nine Banking Service Offerings</h3>
             <p>Each one maps to a specific daily stress inside a bank, what we'd do about it, and a fixed price range for that scope.</p>
           </div>
         </div>
@@ -1004,25 +1156,28 @@ export function renderConsulting(data) {
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Not ready to book yet?</span>
-          <h2>See the engineering process before you commit to anything.</h2>
-          <p>Start with the four free digital courses, or drop into the Discord to see how real systems get designed and built.</p>
+          <h2>Watch a real internal tool get built live, free, every week.</h2>
+          <p>The Industry Build Labs are the same methodology in public: a real workflow, researched and architected on the spot, built live, with an open floor for Q&amp;A. Or start with the four free digital courses to see the fundamentals first.</p>
         </div>
-        <a class="primary-button" href="/tutorials">See the Free Courses ${icon("arrow_forward")}</a>
+        <div class="button-row">
+          <a class="primary-button" href="/events">See the Build Lab Schedule ${icon("arrow_forward")}</a>
+          <a class="outline-button" href="/tutorials">See the Free Courses</a>
+        </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Consulting for Community & Regional Banks | AutoNateAI",
+    title: "AI Consulting for Southeast Missouri Businesses | AutoNateAI",
     active: "consulting",
     body,
     canonicalPath: "/consulting",
     ogImage: "/assets/og/consulting.jpg",
     description:
-      "AutoNateAI Consulting builds AI workflow intelligence, simulation, and custom software for community and regional banks, priced fixed-scope and scoped to a bank's budget, not an enterprise vendor contract.",
-    ogTitle: "Enterprise-grade AI systems, priced for a community bank's budget.",
+      "AutoNateAI Consulting builds internal AI tools for Southeast Missouri businesses across nine regional industries — agriculture, automotive, construction, finance, government, graphic arts, healthcare, manufacturing, and tourism.",
+    ogTitle: "We build the internal AI tools your business wishes existed.",
     ogDescription:
-      "Nine fixed-scope offerings for community and regional banks, from workflow assessments to custom lending and compliance software, built by an engineer who worked inside Veterans United's AI R&D team.",
+      "Nine regional industries, one methodology: research the workflow, architect the system, build it live, hand it off to a team that can run it. See it happen free every week at the Industry Build Labs.",
   });
 }
 

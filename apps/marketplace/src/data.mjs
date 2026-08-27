@@ -3,15 +3,227 @@ export const navItems = [
   { label: "Program", href: "/programs/ai-agent-systems", keys: ["programs"] },
   { label: "Free Courses", href: "/tutorials", keys: ["tutorials"] },
   { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations"] },
+  { label: "Consulting", href: "/consulting", keys: ["consulting"] },
+  { label: "Events", href: "/events", keys: ["events"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];
 
-// Consulting and Community are still real, working pages — just no longer in the
-// primary nav now that the site's one dominant story is regional AI workforce
-// development. They stay reachable from the footer and from in-page CTAs.
-// Live Builds (the weekly Saturday event) has been decommissioned entirely in
-// favor of the always-on Discord + the four free courses + the in-person program.
+// Community is still a real, working page — just not in the primary nav (reachable
+// from the footer and in-page CTAs). Consulting is back in primary nav now that it's
+// the connective tissue between the free courses, the in-person program, and the
+// weekly Industry Build Lab events — the site's full loop.
+// Live Builds (the old weekly Saturday event) has been decommissioned entirely in
+// favor of the always-on Discord + the four free courses + the in-person program +
+// the free weekly Industry Build Labs (see /events).
+
+// The nine regional industries AutoNateAI Consulting builds internal AI tooling
+// for, and the weekly free live-build sessions organized around them (see
+// buildLabSchedule below). Workflows are real patterns already in production
+// elsewhere (Cox Automotive's FleetMate estimator, hospital administrative-agent
+// deployments, construction takeoff/estimate agents, etc.) — the point on each
+// live build is to reverse-engineer or reimagine one for a Southeast Missouri
+// organization, live, in front of the audience.
+export const industries = [
+  {
+    slug: "government-economic-development",
+    icon: "account_balance",
+    name: "Government & Economic Development",
+    tagline: "Grants, RFPs, and constituent research that used to take a week.",
+    workflows: [
+      "Grant opportunity intelligence: match funding sources to strategic goals automatically",
+      "RFP-to-project-plan agents that turn a scope of work into requirements and a build plan",
+      "Economic-development research briefs assembled from public data in minutes, not days",
+    ],
+  },
+  {
+    slug: "agriculture",
+    icon: "agriculture",
+    name: "Agriculture",
+    tagline: "Equipment data and field records, turned into decisions.",
+    workflows: [
+      "Sensor and equipment anomaly detection with plain-language recommendations",
+      "Agronomic knowledge agents that answer questions against your own field history",
+      "Service and maintenance record intelligence for machinery and inventory",
+    ],
+  },
+  {
+    slug: "automotive",
+    icon: "directions_car",
+    name: "Automotive",
+    tagline: "From intake to estimate, without the manual lookup.",
+    workflows: [
+      "AI service advisor: symptoms in, structured repair-order draft out",
+      "Diagnostic and service-manual research agents technicians actually trust",
+      "Shop operations dashboards pulling scheduling, parts, and status into one view",
+    ],
+  },
+  {
+    slug: "construction",
+    icon: "construction",
+    name: "Construction",
+    tagline: "Estimating and bid intelligence, built on your own historical data.",
+    workflows: [
+      "RFP and bid-package analysis: requirements, risks, and deadlines extracted automatically",
+      "Estimate copilots that reference past jobs, change orders, and actual costs",
+      "Project document agents that keep specs, drawings, and submittals searchable",
+    ],
+  },
+  {
+    slug: "finance",
+    icon: "payments",
+    name: "Finance & Banking",
+    tagline: "AutoNateAI's most fully scoped vertical — see the full offer lineup below.",
+    workflows: [
+      "Commercial loan intake copilots that extract, flag, and draft the analyst memo",
+      "Document and call intelligence for compliance, underwriting, and servicing",
+      "Fraud and risk scenario simulation before a workflow change ever touches production",
+    ],
+  },
+  {
+    slug: "graphic-arts",
+    icon: "palette",
+    name: "Graphic Arts & Printing",
+    tagline: "Quoting, intake, and production scheduling that used to eat a whole afternoon.",
+    workflows: [
+      "Print quote and job-intake agents: artwork in, structured job and estimate out",
+      "File preflight and production-scheduling assistants",
+      "Customer communication and proof-approval workflow automation",
+    ],
+  },
+  {
+    slug: "healthcare",
+    icon: "local_hospital",
+    name: "Healthcare",
+    tagline: "Administrative workflows, not clinical decisions.",
+    workflows: [
+      "Administrative intake agents: referrals and paperwork routed to the right department",
+      "Policy and scheduling knowledge systems staff can actually query",
+      "Reporting automation that turns fragmented data into a real-time view",
+    ],
+  },
+  {
+    slug: "manufacturing",
+    icon: "precision_manufacturing",
+    name: "Manufacturing",
+    tagline: "Maintenance, SOPs, and production data, connected instead of siloed.",
+    workflows: [
+      "Maintenance intelligence agents: symptom in, relevant SOP and history out",
+      "SOP troubleshooting assistants built from your own manuals and tickets",
+      "Production/operations dashboards spanning otherwise-disconnected systems",
+    ],
+  },
+  {
+    slug: "tourism-hospitality",
+    icon: "explore",
+    name: "Tourism & Hospitality",
+    tagline: "Visitor experience and event intelligence for a growing tourism economy.",
+    workflows: [
+      "Visitor concierge agents: itineraries built from real local events and hours",
+      "Guest messaging and reservation-support automation",
+      "Event and attraction intelligence dashboards for planning and staffing",
+    ],
+  },
+];
+
+// AutoNateAI Industry Build Labs: free, live, 60-minute weekly sessions, one per
+// industry above, running through Q1 FY27 (per the AutoNateAI Planning OS Airtable:
+// Q1 FY27 "Prove" runs 2026-09-01 through 2026-11-30). Real, recurring Google
+// Calendar events on autonate.ai@gmail.com (public, with a Google Meet link).
+// Day/slot placement and the very first session's topic are launch defaults — easy
+// to move once real attendance data shows which industry/timeslot pairing works
+// best (see buildLabInfo.format for the session structure).
+export const buildLabSchedule = [
+  {
+    day: "Monday",
+    time: "12:00 PM CST",
+    industry: "government-economic-development",
+    topic: "Build a Grant Opportunity Intelligence System",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=aDNjcjF2dmN1ZjFtZDhyNGVmc2h0ZzU0MWNfMjAyNjA5MDdUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/efa-owvg-kwk",
+  },
+  {
+    day: "Tuesday",
+    time: "12:00 PM CST",
+    industry: "agriculture",
+    topic: "Build a Farm & Equipment Operations Agent",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=aHVpaW1vNWpmbnY2YjlkYnQwaGlsMWJiMzBfMjAyNjA5MDFUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/cfs-gwgu-ahb",
+  },
+  {
+    day: "Tuesday",
+    time: "4:30 PM CST",
+    industry: "automotive",
+    topic: "Build an AI Service Advisor",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=azZoYjZwYjI2MHRydG11MzBtcGN2dWZmYWtfMjAyNjA5MDFUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/qpj-usxy-pbv",
+  },
+  {
+    day: "Wednesday",
+    time: "12:00 PM CST",
+    industry: "finance",
+    topic: "Build a Commercial Loan Intake Copilot",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=bWg0Njg2cGc3YjZpbmpkcXU4dXRiMm8yNzRfMjAyNjA5MDJUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/kzq-ascq-jpg",
+  },
+  {
+    day: "Wednesday",
+    time: "4:30 PM CST",
+    industry: "healthcare",
+    topic: "Build a Healthcare Administrative Intake Agent",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=dDdxbDRsbzJzdG1ua2RjZjR0cWpyc3Q1ODhfMjAyNjA5MDJUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/euh-hjrx-dtr",
+  },
+  {
+    day: "Wednesday",
+    time: "6:00 PM CST",
+    industry: "manufacturing",
+    topic: "Build a Maintenance Intelligence Agent",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=YjQ1aTBmcTVydHEwMjJsbDlmdGxkcW5jbGtfMjAyNjA5MDJUMjMwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/dyw-okfw-cuu",
+  },
+  {
+    day: "Thursday",
+    time: "4:30 PM CST",
+    industry: "construction",
+    topic: "Build an RFP & Bid Intelligence Tool",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=bW05djN2YjJqaGZsc2JhYzVvcGtiaGFsbnNfMjAyNjA5MDNUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/oez-fvyb-qsf",
+  },
+  {
+    day: "Thursday",
+    time: "6:00 PM CST",
+    industry: "graphic-arts",
+    topic: "Build a Print Quote & Job Intake System",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=Y3N2ZWt1dXN0aDNyZGRqczBvajRxODVwYnNfMjAyNjA5MDNUMjMwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/pnx-diwa-ywu",
+  },
+  {
+    day: "Friday",
+    time: "12:00 PM CST",
+    industry: "tourism-hospitality",
+    topic: "Build a Sikeston Visitor Concierge Agent",
+    calendarUrl:
+      "https://www.google.com/calendar/event?eid=MGJjaG5wbmRoaGFjcm04aGxyNTk0bGRlZThfMjAyNjA5MDRUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
+    meetUrl: "https://meet.google.com/dom-pzac-ive",
+  },
+];
+
+export const buildLabInfo = {
+  quarterLabel: "Fall 2026",
+  startDate: "2026-09-01",
+  endDate: "2026-11-30",
+  format:
+    "60 minutes: the real workflow explained, a live build with ChatGPT for research, Claude for architecture, Codex to scaffold, and Claude Code to refine — then an open floor for Q&A.",
+};
 
 // What a participant could build for their organizational project track, by org
 // type. Used on the Program page ("What could you build for your organization?")

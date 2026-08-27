@@ -65,7 +65,7 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>Building Southeast Missouri's AI workforce: an in-person program in Sikeston, MO where students and professionals design real systems with AI agents like Claude Code and Codex, for real organizations.</p>
         </div>
-        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["For Organizations", "/for-organizations"], ["Consulting", "/consulting"], ["Free Courses", "/tutorials"]])}
+        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["For Organizations", "/for-organizations"], ["Consulting", "/consulting"], ["Industry Build Labs", "/events"], ["Free Courses", "/tutorials"]])}
         ${footerColumn("Company", [["Discord", "https://discord.gg/4HkkuntdSs"], ["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
       </div>
       <div class="footer-bottom">

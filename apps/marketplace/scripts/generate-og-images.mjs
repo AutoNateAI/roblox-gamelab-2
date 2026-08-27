@@ -139,10 +139,18 @@ await composite({
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI Consulting for Community & Regional Banks",
-  title: "Enterprise-Grade AI, Priced for Community Banks",
-  footer: "AutoNateAI · Southeast Missouri",
+  eyebrow: "AI Consulting for Southeast Missouri Businesses",
+  title: "We Build the Internal AI Tools Your Business Needs",
+  footer: "AutoNateAI · Nine Regional Industries · Southeast Missouri",
   outFile: path.join(outDir, "consulting.jpg"),
+});
+
+await composite({
+  screenshotFile: screenshotFor(index++),
+  eyebrow: "Free Weekly Live Builds",
+  title: "We Build a Real Internal Tool Live, Every Week",
+  footer: "AutoNateAI Industry Build Labs · Southeast Missouri",
+  outFile: path.join(outDir, "events.jpg"),
 });
 
 await composite({
@@ -206,4 +214,4 @@ for (const pack of tutorialPacks) {
   });
 }
 
-console.log(`Done. ${programsData.programs.length + 7 + tutorials.length + tutorialPacks.length} OG images written to ${path.relative(rootDir, outDir)}`);
+console.log(`Done. ${programsData.programs.length + 8 + tutorials.length + tutorialPacks.length} OG images written to ${path.relative(rootDir, outDir)}`);
