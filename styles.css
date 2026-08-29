@@ -1260,6 +1260,13 @@ h1 {
   line-height: 1.65;
 }
 
+.article-byline {
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  margin: 10px 0 0;
+}
+
 .article-detail > img {
   width: 100%;
   aspect-ratio: 16 / 8;
