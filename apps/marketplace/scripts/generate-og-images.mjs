@@ -114,26 +114,26 @@ let index = 0;
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: "In-Person AI Systems Training · Sikeston, MO",
-    title: "How to Create Software Systems with AI Agents",
-    footer: `AutoNateAI · ${program.durationWeeks || 2}-Week Cohort · Southeast Missouri`,
+    eyebrow: "Custom Business Training · Sikeston, MO",
+    title: "Custom AI & Development Training for Your Team",
+    footer: "AutoNateAI · Requested Team Training · Southeast Missouri",
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Southeast Missouri AI Workforce Development",
-  title: "Building Southeast Missouri's AI Workforce",
+  eyebrow: "AI Consulting & Development · Southeast Missouri",
+  title: "Enterprise-Grade AI Systems, at Southeast Missouri Prices",
   footer: "AutoNateAI · AI, Coding & Technical Training in Sikeston, MO",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "For Employers, Schools & Nonprofits",
-  title: "Sponsor Your Team's AI & Coding Training",
-  footer: "AutoNateAI · Workforce Development in Sikeston, MO",
+  eyebrow: "Requested Team Training",
+  title: "Custom AI & Development Training, Built Around Your Business",
+  footer: "AutoNateAI · Southeast Missouri",
   outFile: path.join(outDir, "for-organizations.jpg"),
 });
 
@@ -163,8 +163,8 @@ await composite({
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Your Free On-Ramp",
-  title: "Start Building Before the Cohort Begins",
+  eyebrow: "Free Course Library",
+  title: "Sharpen Your Technical Skills. Free.",
   footer: "AutoNateAI · 4 Free Digital Courses · Sikeston, MO",
   outFile: path.join(outDir, "courses.jpg"),
 });
@@ -172,7 +172,7 @@ await composite({
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI Community",
-  title: "Free Courses, Live Program & Discord Support",
+  title: "Free Courses & Discord Support",
   footer: "AutoNateAI Discord · Southeast Missouri",
   outFile: path.join(outDir, "community.jpg"),
 });
@@ -180,16 +180,16 @@ await composite({
 await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "About AutoNateAI",
-  title: "AI Workforce Development, Built Locally in Sikeston",
+  title: "AI Consulting & Development, Built Locally in Sikeston",
   footer: "AutoNateAI · Founder Nathan Baker · Southeast Missouri",
   outFile: path.join(outDir, "about.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Southeast Missouri AI Workforce Development",
-  title: "AI, Coding & Technical Training in Sikeston, MO",
-  footer: "AutoNateAI · Workforce Development Programming",
+  eyebrow: "AI Consulting & Development · Southeast Missouri",
+  title: "Enterprise-Grade AI Systems, at Southeast Missouri Prices",
+  footer: "AutoNateAI · Sikeston, MO",
   outFile: path.join(outDir, "default.jpg"),
 });
 

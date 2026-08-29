@@ -103,6 +103,16 @@ const images = [
     size: "1536x1024",
     prompt: `A photorealistic medium-wide shot inside the reference classroom: the man from the reference headshot standing at the large wall monitor, sketching a simple systems architecture diagram (boxes and connecting arrows) in bold red marker/red-accented lines, half-turned toward a small mixed group of two professionally dressed adults (stand-ins for different local industries — not the man from the reference headshot) seated nearby and looking on with interest. Warm daylight, documentary editorial style, engaged expressions. ${STYLE} ${GUARDRAIL} The diagram lines/accents must be a bold red (#c8102e family), not amber. No readable text or labels in the diagram.`,
   },
+  {
+    file: "sikeston-business-training-terminal.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic close-up, over-the-shoulder shot of a laptop screen on a table in the reference classroom, split-screen showing a dark-themed terminal window on one side and a code editor (VS Code style, with a visible AI chat/extension side panel) on the other, bold red accent highlights in both, a professionally dressed adult's hands on the keyboard (not the man from the reference headshot), blurred classroom softly out of focus in the background. ${STYLE} No faces visible in this shot. The UI accent color must be a bold red (#c8102e family), not amber or blue. No readable text.`,
+  },
+  {
+    file: "sikeston-nathan-consulting-portrait.jpg",
+    size: "1536x1024",
+    prompt: `A photorealistic medium shot of the man from the reference headshot sitting across a small table from a professionally dressed adult (a stand-in for a local business owner client, not based on any real specific individual), both looking at a laptop screen between them showing a faint internal dashboard UI with red accents, in a bright modern office/meeting-room setting (not the classroom — a small conference table, glass wall in the background), engaged consulting conversation, warm daylight, documentary editorial style, shallow depth of field. ${STYLE} ${GUARDRAIL} The laptop screen's UI accent color must be a bold red (#c8102e family), not amber. No readable text.`,
+  },
 ];
 
 function guessMimeType(file) {

@@ -3,14 +3,16 @@ import {
   articles,
   bankEngagementLadder,
   bankingOfferings,
+  businessTrainingCurriculum,
   buildLabInfo,
-  buildLabSchedule,
   foundingBankPilot,
   industries,
+  industryWeeks,
   organizationExamples,
   regionalVision,
   sceneShots,
   sponsorshipTiers,
+  toolsMenu,
   tutorialPacks,
   tutorials,
 } from "./data.mjs";
@@ -67,6 +69,28 @@ function orgExampleCard(example) {
   `;
 }
 
+function curriculumDayCard(day) {
+  return `
+    <article class="industry-card curriculum-day-card">
+      <span class="kicker">${icon("event")} ${escapeHtml(day.day)} &middot; ${escapeHtml(day.hours)}</span>
+      <h3>${escapeHtml(day.title)}</h3>
+      <ul class="industry-capabilities">
+        ${day.items.map((item) => `<li>${icon("arrow_forward")}<span>${escapeHtml(item)}</span></li>`).join("")}
+      </ul>
+    </article>
+  `;
+}
+
+function toolMenuCard(tool) {
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(tool.icon)}</div>
+      <h3>${escapeHtml(tool.name)}</h3>
+      <p class="industry-hook">${escapeHtml(tool.description)}</p>
+    </article>
+  `;
+}
+
 function industryCard(industry) {
   return `
     <article class="industry-card">
@@ -80,21 +104,52 @@ function industryCard(industry) {
   `;
 }
 
-function buildLabCard(slot, industryBySlug) {
-  const industry = industryBySlug.get(slot.industry);
+function shortDate(value) {
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
+}
+
+function dayName(value) {
+  return new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(new Date(`${value}T00:00:00`));
+}
+
+function weekRangeLabel(days) {
+  if (!days?.length) return "";
+  return `${shortDate(days[0].date)}–${shortDate(days[days.length - 1].date)}`;
+}
+
+// One "calendar" tile for an industry's spotlight week — the week range up top,
+// then its three build sessions (Tue/Wed/Thu, 11:30 AM Central) underneath.
+function industryWeekCalendarCard(week, industryBySlug, isNext = false) {
+  const industry = industryBySlug.get(week.industry);
   if (!industry) return "";
   return `
-    <article class="industry-card build-lab-card">
-      <div class="build-lab-time">
-        <span class="kicker">${icon("event")} ${escapeHtml(slot.day)}</span>
-        <strong>${escapeHtml(slot.time)}</strong>
+    <article class="industry-card week-calendar-card${isNext ? " week-calendar-next" : ""}">
+      <div class="week-calendar-head">
+        <div class="industry-card-icon">${icon(industry.icon)}</div>
+        <div>
+          ${isNext ? `<span class="kicker">${icon("bolt")} Up Next</span>` : ""}
+          <h3>${escapeHtml(industry.name)}</h3>
+          <span class="week-range">${weekRangeLabel(week.days)}</span>
+        </div>
       </div>
-      <div class="industry-card-icon">${icon(industry.icon)}</div>
-      <h3>${escapeHtml(industry.name)}</h3>
-      <p class="industry-hook">"${escapeHtml(slot.topic)}"</p>
-      <div class="button-row">
-        <a class="primary-button" href="${slot.meetUrl}">Join on Meet ${icon("videocam")}</a>
-        <a class="outline-button" href="${slot.calendarUrl}">Add to Calendar</a>
+      <div class="week-calendar-days">
+        ${week.days
+          .map(
+            (d) => `
+          <div class="week-calendar-day">
+            <div class="week-calendar-day-label">
+              <strong>${escapeHtml(dayName(d.date))}</strong>
+              <span>${escapeHtml(shortDate(d.date))} · 11:30 AM CST</span>
+            </div>
+            <p>"${escapeHtml(d.topic)}"</p>
+            <div class="button-row">
+              <a class="primary-button" href="${d.meetUrl}">Join ${icon("videocam")}</a>
+              <a class="outline-button" href="${d.calendarUrl}">Add to Calendar</a>
+            </div>
+          </div>
+        `,
+          )
+          .join("")}
       </div>
     </article>
   `;
@@ -113,13 +168,7 @@ function sponsorshipTierCard(tier) {
 
 export function renderHome(data) {
   const { programs } = data;
-  const featured = programs.slice(0, 1);
-  const primaryProgram = featured[0];
-  const primaryOffering = primaryProgram.offerings?.[0];
-  const primaryPrice = primaryOffering ? money(primaryOffering.price) : "$499";
-  const primaryCheckoutHref = primaryOffering
-    ? `/checkout?program=${primaryProgram.handle}&offering=${primaryOffering.id}`
-    : `/programs/${primaryProgram.handle}`;
+  const primaryProgram = programs?.[0];
   const landingArticles = [
     "why-southeast-missouri-businesses-need-internal-ai-capability",
     "what-ai-workforce-readiness-looks-like-for-sikeston-students",
@@ -131,35 +180,31 @@ export function renderHome(data) {
   const body = `
     <main>
       <section class="home-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-hero-teaching.jpg" alt="Nathan Baker teaching an in-person AutoNateAI cohort in Sikeston, Missouri" /></div>
+        <div class="hero-bg"><img src="/assets/landing/sikeston-consulting-industries.jpg" alt="Nathan Baker architecting a system for a Southeast Missouri business" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("hub")} Southeast Missouri AI Workforce Development</span>
-            <h1>Building Southeast Missouri's AI Workforce.</h1>
-            <p>AutoNateAI trains students and professionals to design software systems with AI — then apply those skills to real problems inside businesses, schools, and community organizations, starting in person in Sikeston, MO.</p>
-            <div class="cohort-date-row">
-              ${cohortBadge(primaryProgram)}
-              <span>${escapeHtml(primaryProgram.cohortNote || "")} Capped at ${cohortCapacity(primaryProgram)}.</span>
+            <span class="kicker">${icon("hub")} AI Consulting &amp; Development · Southeast Missouri</span>
+            <h1>Enterprise-grade AI systems, at Southeast Missouri prices.</h1>
+            <p>Agentic AI is democratizing access to engineering workflows that used to require a full in-house team. AutoNateAI brings that capability directly to Sikeston and the rest of Southeast Missouri — real internal tools, built fast, priced for a business your size, not an enterprise vendor contract.</p>
+            <div class="button-row">
+              <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="/for-organizations">Request Team Training</a>
             </div>
             <div class="button-row">
-              <a class="primary-button" href="${primaryCheckoutHref}">Explore Workforce Training ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/for-organizations">Sponsor Your Team</a>
-            </div>
-            <div class="button-row">
-              <a class="outline-button" href="/tutorials">Prepare for the Program — Free Courses</a>
+              <a class="outline-button" href="/tutorials">Free Course Library</a>
             </div>
           </div>
           <aside class="hero-program-panel">
             <img src="/assets/sikeston/downtown-street.jpg" alt="Historic downtown Sikeston, Missouri" />
             <div class="hero-panel-body">
-              <span class="kicker">${icon("map")} Two Pathways, One Regional Mission</span>
-              <h2>Professional workforce development. Youth technology development.</h2>
-              <p>Train employees to become internal AI/software builders, or give students real systems-building experience — both in the same in-person cohort, at Center Street Station in Sikeston.</p>
+              <span class="kicker">${icon("event")} See It Built, Live, Free</span>
+              <h2>Every week, we build a real internal tool for a different regional industry — live.</h2>
+              <p>No slides. A real workflow, researched and architected on the spot, built into working software, with an open floor for Q&amp;A.</p>
               <div class="hero-facts">
-                <span>In person, Sikeston, MO</span>
-                <span>2-week cohort</span>
-                <span>4 free digital courses</span>
-                <span>Discord community</span>
+                <span>Fixed-scope pricing</span>
+                <span>Built in Southeast Missouri</span>
+                <span>Free weekly live builds</span>
+                <span>Discord support included</span>
               </div>
             </div>
           </aside>
@@ -169,14 +214,16 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head section-head-center">
           <div>
-            <span class="kicker">${icon("route")} Many Ways In</span>
-            <h2>One regional mission, two ways in.</h2>
-            <p>There's no single "right" way to start — self-taught builder, sponsored employee, or sponsored student, everyone lands in the same in-person cohort at Center Street Station.</p>
+            <span class="kicker">${icon("route")} What We Offer</span>
+            <h2>Four ways to work with AutoNateAI.</h2>
+            <p>Whether you want us to build it, want your team trained to build it, want to watch it happen first, or want to learn the fundamentals yourself — there's a starting point here.</p>
           </div>
         </div>
-        <div class="value-grid pathway-grid">
-          <article><span>${icon("work")}</span><h3>Professional Workforce Development</h3><p>Train employees to become internal AI/software builders capable of improving workflows, connecting existing tools, automating processes, and prototyping internal systems.</p></article>
-          <article><span>${icon("school")}</span><h3>Youth Technology Development</h3><p>Give students real systems-building experience by teaching them to identify problems, design architecture, and build responsible software prototypes for real-world environments.</p></article>
+        <div class="value-grid">
+          <article><span>${icon("hub")}</span><h3>Consulting</h3><p>Bring us a real workflow. We research it, architect it, and build the internal tool — your team owns it when we're done.</p><a class="outline-button full" href="/consulting">Learn More ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("groups")}</span><h3>For Organizations</h3><p>A custom, on-site training engagement for your team — they leave with 3 real internal tools built for your business.</p><a class="outline-button full" href="/for-organizations">Learn More ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("event")}</span><h3>Industry Build Labs</h3><p>Free, live, every week — watch a real internal tool get built for a different regional industry, no cost to attend.</p><a class="outline-button full" href="/events">Learn More ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("auto_stories")}</span><h3>Free Courses</h3><p>A free library of technical courses for sharpening your own skills, with Discord support built in.</p><a class="outline-button full" href="/tutorials">Learn More ${icon("arrow_forward")}</a></article>
         </div>
       </section>
 
@@ -184,26 +231,26 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("public")} Why This Works Here</span>
-            <h2>Real Sikeston organizations make architecture visible.</h2>
-            <p>Not a made-up case study — the business, school, or nonprofit you already know around town. Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. It's the same discipline whether you're a student shipping your first internal tool or an employee sent by the organization that's paying for your seat — and the system has to actually work for someone here, not just demo well.</p>
+            <h2>Real Southeast Missouri organizations make architecture visible.</h2>
+            <p>Not a made-up case study — the business, school, or nonprofit you already know around town. Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. The system has to actually work for someone here, not just demo well — and agentic AI means we can build it for a fraction of what it used to cost.</p>
           </div>
-          <a class="primary-button" href="${primaryCheckoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid">
-          <article><span>${icon("functions")}</span><h3>Code built for someone local</h3><p>Existing coding knowledge gets applied to a real system for a real Southeast Missouri organization: databases, APIs, architecture, and the tradeoffs that come with an actual employer, school, or nonprofit depending on it.</p></article>
-          <article><span>${icon("account_tree")}</span><h3>Git like engineers</h3><p>Commit working versions, read diffs, recover from broken changes, and leave Center Street Station with a repo history that explains exactly what you built and why.</p></article>
-          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Design relational and graph data models for your organization's actual data, build the API that serves them, and document how it fits together with Mermaid diagrams.</p></article>
-          <article><span>${icon("forum")}</span><h3>A community that outlasts the room</h3><p>The Discord is open all day, every day — setup help and architecture reviews with other Southeast Missouri builders, whether you're working through the free courses at home or sitting in the cohort in Sikeston.</p></article>
+          <article><span>${icon("functions")}</span><h3>Built for someone local</h3><p>Every engagement is a real system for a real Southeast Missouri organization: databases, APIs, architecture, and the tradeoffs that come with an actual business depending on it.</p></article>
+          <article><span>${icon("account_tree")}</span><h3>Engineered like engineers</h3><p>Working versions committed, diffs reviewed, changes recoverable — a repo history that explains exactly what was built and why, not a black box.</p></article>
+          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Relational and graph data models for your organization's actual data, a real API, and architecture documented so your team can maintain it.</p></article>
+          <article><span>${icon("forum")}</span><h3>A community that outlasts the engagement</h3><p>The Discord is open all day, every day — for anyone working through the free courses, anyone in a training engagement, and anyone who's been through either.</p></article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("auto_stories")} The Four Pillars</span>
-            <h2>Four free digital courses. What to work through before cohort night.</h2>
-            <p>Each course is a standalone, story-driven guide following Nate and Kai as they build AutoNateAI from a meetup back room to a real, shipped system. Read one, or read all four before your first Monday at Center Street Station.</p>
-            <p>These four pillars are the foundation the program builds on. Once you know them, the program teaches you to point that knowledge at a real problem — something local, or something personal — design a system that gets you through it better than however you're handling it now, and build that system out using the same technical principles, live.</p>
+            <span class="kicker">${icon("auto_stories")} Free Course Library</span>
+            <h2>Sharpen your technical skills, free, whenever you're ready.</h2>
+            <p>Each course is a standalone, story-driven guide following Nate and Kai as they build AutoNateAI from a meetup back room to a real, shipped system. Read one, or read all four — no cost, no catch.</p>
+            <p>These four pillars are the same foundation our training engagements and Build Labs build on — the fundamentals behind every internal tool we ship for a real Southeast Missouri organization.</p>
           </div>
           <a class="primary-button" href="/tutorials">Browse Free Courses ${icon("arrow_forward")}</a>
         </div>
@@ -214,26 +261,26 @@ export function renderHome(data) {
         <div class="compete-layout">
           <div class="compete-visual">
             <div class="compete-media">
-              <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="A laptop screen showing an internal business dashboard built during an AutoNateAI cohort" />
+              <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="A laptop screen showing an internal business dashboard built for a Southeast Missouri organization" />
               <div class="compete-callout">
-                <span>${icon("flag")} Live capstone</span>
-                <strong>A real system, built live in Sikeston</strong>
-                <p>See whether your architecture can hold up when a real local organization is the one depending on it.</p>
+                <span>${icon("flag")} Live, every week</span>
+                <strong>A real internal tool, built in front of you</strong>
+                <p>See whether an architecture like yours can hold up — before you commit to anything.</p>
               </div>
             </div>
             <div class="button-row compete-actions">
-              <a class="primary-button" href="${primaryCheckoutHref}">Get the Course ${icon("arrow_forward")}</a>
-              <a class="outline-button" href="/programs/${primaryProgram.handle}">View Curriculum</a>
+              <a class="primary-button" href="/events">See a Build Lab ${icon("arrow_forward")}</a>
+              <a class="outline-button" href="/for-organizations">Request Team Training</a>
             </div>
           </div>
           <div class="compete-copy">
-            <span class="kicker">${icon("emoji_events")} Design, Build, Ship</span>
-            <h2>Design a real system for a Sikeston organization, then ship it.</h2>
-            <p>This is for builders who want to get sharper at directing AI agents: designing data models and APIs, documenting architecture, and building a real internal tool for an employer, school, nonprofit, or small business you already know — the kind of organization down the street, not a hypothetical one in a textbook. By the end, you're pointing at a real system you designed, built, and tested yourself, in front of the people it was built for.</p>
+            <span class="kicker">${icon("emoji_events")} Research, Architect, Build, Ship</span>
+            <h2>The same process, whether it's your workflow or a Build Lab audience watching.</h2>
+            <p>This is the methodology behind everything AutoNateAI ships: a real workflow from a real Southeast Missouri organization, researched, architected, and built into working software — with the people who'll actually use it in the room.</p>
             <div class="compete-curriculum">
-              <article><b>01</b><span>Set up Claude Code and Codex, and learn to engineer prompts and context for real projects.</span></article>
-              <article><b>02</b><span>Design databases and APIs, and document architecture with Mermaid diagrams.</span></article>
-              <article><b>03</b><span>Spend the second week building toward your organizational project and shipping a real system live at Center Street Station.</span></article>
+              <article><b>01</b><span>Research the real workflow — terminology, constraints, what actually happens today.</span></article>
+              <article><b>02</b><span>Architect the system — data model, API, and a documented plan before a line of code ships.</span></article>
+              <article><b>03</b><span>Build and refine it live, then hand off a system your team can actually run.</span></article>
             </div>
           </div>
         </div>
@@ -243,8 +290,8 @@ export function renderHome(data) {
         <div class="spotlight-image"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="Nathan Baker shaking hands with a local employer partner in the Sikeston classroom" /></div>
         <div>
           <span class="kicker">${icon("forum")} Always-On Support</span>
-          <h2>The Discord doesn't close when class does.</h2>
-          <p>Get help with the four free courses, get help with the live program material, or get help designing and building a system you've already got an idea for — whether you've been through the courses, the program, or both. It's open all day, every day, not just during scheduled sessions.</p>
+          <h2>The Discord doesn't close when a session does.</h2>
+          <p>Get help with the free courses, get help during a training engagement, or get help designing and building a system you've already got an idea for. It's open all day, every day, not just during scheduled sessions.</p>
           <div class="stat-grid">
             <div><strong>All day, every day</strong><span>Availability</span></div>
             <div><strong>Free</strong><span>Open to Everyone</span></div>
@@ -260,26 +307,15 @@ export function renderHome(data) {
         <div class="section-head section-head-center">
           <div>
             <span class="kicker">${icon("route")} How It All Connects</span>
-            <h2>Free courses. An in-person program. Internal tools. It's one system.</h2>
-            <p>The four free courses and the in-person program build the skill. AutoNateAI Consulting and the free weekly Industry Build Labs are the same skill, pointed at real Southeast Missouri organizations across nine industries — proof this works outside the classroom too.</p>
+            <h2>Consulting. Team training. Live builds. Free courses. It's one system.</h2>
+            <p>Every path teaches and ships the same skill, pointed at real Southeast Missouri organizations — the difference is just who's driving.</p>
           </div>
         </div>
         <div class="compete-curriculum">
-          <article><b>01</b><span><a href="/tutorials">Start free</a> — four self-paced digital courses build the fundamentals.</span></article>
-          <article><b>02</b><span><a href="/programs/ai-agent-systems">Go in person</a> — a 2-week Sikeston cohort, building a real system for a real organization.</span></article>
-          <article><b>03</b><span><a href="/events">See it live</a> — free weekly Industry Build Labs across nine regional industries.</span></article>
-          <article><b>04</b><span><a href="/consulting">Hire it out</a> — AutoNateAI Consulting builds the internal tool for you.</span></article>
-        </div>
-      </section>
-
-      <section class="section compact">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("business_center")} For Organizations</span>
-            <h2>Businesses send employees. Schools send students. Organizations sponsor seats.</h2>
-            <p>AI skills aren't only for technology companies — Missouri employers increasingly need technical talent across every industry. Sponsor employees to build internal tools your organization actually needs, or ask about student sponsorships for your school or nonprofit.</p>
-          </div>
-          <a class="primary-button" href="/for-organizations">See Sponsorship Options ${icon("arrow_forward")}</a>
+          <article><b>01</b><span><a href="/consulting">Hire it out</a> — AutoNateAI researches, architects, and builds the internal tool for you.</span></article>
+          <article><b>02</b><span><a href="/for-organizations">Train your team</a> — a custom, on-site engagement, and your people leave able to build it themselves.</span></article>
+          <article><b>03</b><span><a href="/events">See it live</a> — free weekly Industry Build Labs, no cost to attend.</span></article>
+          <article><b>04</b><span><a href="/tutorials">Start free</a> — a self-paced course library for sharpening your own skills.</span></article>
         </div>
       </section>
 
@@ -288,22 +324,22 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("article")} Articles</span>
             <h2>Research, workforce insights, and build notes.</h2>
-            <p>We write up research on AI workforce readiness in Southeast Missouri, impact reports from our employer and school partnerships, and behind-the-scenes notes on how these systems actually get built.</p>
+            <p>We write up research on AI adoption in Southeast Missouri, notes from real engagements, and behind-the-scenes looks at how these systems actually get built.</p>
           </div>
-          <a class="primary-button" href="${primaryCheckoutHref}">Start Enrollment ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/articles">Read More Articles ${icon("arrow_forward")}</a>
         </div>
         <div class="article-grid">${landingArticles.map((article) => articleCard(article)).join("")}</div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Reserve your seat for the next cohort.</h2>
-          <p>${escapeHtml(primaryProgram.cohortNote || "New cohorts run every so often.")} The cohort is two weeks, in person at Center Street Station in Sikeston, MO, Monday through Thursday, 6:00 PM-8:00 PM CST, capped at ${cohortCapacity(primaryProgram)}, and supported inside a dedicated AutoNateAI Discord channel.</p>
+          <h2>Have a workflow that's eating your team's time?</h2>
+          <p>Tell us about it. We'll tell you honestly whether an internal tool makes sense, what it would take to build, and what it would cost — fixed scope, no enterprise-length contract.</p>
           <form>
             <input placeholder="Enter your email" type="email" />
-            <button type="button">Request Info</button>
+            <button type="button">Get in Touch</button>
           </form>
-          <small>Agent setup help, cohort workspace, Git repo guidance, architecture coaching, and build support are included.</small>
+          <small>Prefer to start free? The <a href="/tutorials">course library</a> and the weekly <a href="/events">Industry Build Labs</a> cost nothing.</small>
         </div>
       </section>
     </main>
@@ -381,17 +417,17 @@ export function renderAbout() {
       <section class="about-hero">
         <div>
           <span class="kicker">${icon("psychology")} About AutoNateAI</span>
-          <h1>We develop local people into AI and software systems builders.</h1>
-          <p>AutoNateAI develops local people into AI and software systems builders who can create, manage, and improve the technology used by the organizations and communities around them — starting in person in Sikeston, Missouri.</p>
+          <h1>AutoNateAI builds AI systems for Southeast Missouri businesses.</h1>
+          <p>AutoNateAI is an AI consulting and development studio — Nathan Baker builds real internal tools for real Southeast Missouri organizations, and trains teams to build and run that capability themselves, starting in Sikeston.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/articles">Read the Learning Model</a>
           </div>
         </div>
         <aside class="about-founder-card">
           <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
           <div>
-            <span class="kicker">Founder / Instructor</span>
+            <span class="kicker">Founder &amp; Principal Consultant</span>
             <h2>Nathan Baker</h2>
             <p>Computer Science, University of Michigan. Software and AI engineering experience across Microsoft, Citi, Veterans United, Atomic Object, and Outlier.</p>
           </div>
@@ -400,19 +436,19 @@ export function renderAbout() {
 
       <section class="about-mission">
         <span class="kicker">${icon("architecture")} Mission</span>
-        <h2>AutoNateAI develops local people into AI and software systems builders.</h2>
-        <p>AI skills aren't only for technology companies. Missouri's 2026 Technology2030 report found more than 223,000 Missourians already work in technology occupations, many of them outside traditional tech companies, and calls for preparing Missouri's workforce and economy for AI. AutoNateAI is building that capability locally — training students and professionals to create, manage, and improve the systems used by the organizations and communities around them.</p>
-        <p>That practice is not hypothetical. Every cohort builds toward a real internal tool for a real organization: an employer, a school, a nonprofit, a local business. The Discord keeps that same discipline moving every day in between — not just during scheduled sessions.</p>
+        <h2>AutoNateAI is Southeast Missouri's AI and development service provider.</h2>
+        <p>AI skills aren't only for technology companies. Missouri's 2026 Technology2030 report found more than 223,000 Missourians already work in technology occupations, many of them outside traditional tech companies. Agentic AI is what makes that capability affordable at a local-business scale: AutoNateAI researches a real workflow, architects the system, and builds it — either directly through Consulting, or by training your own team to build it through a requested engagement.</p>
+        <p>That practice is not hypothetical. Every engagement — and every free weekly Industry Build Lab — builds toward a real internal tool for a real organization. The Discord keeps that same discipline moving every day in between, and the free course library is open to anyone sharpening the fundamentals on their own.</p>
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/sikeston/classroom-cohort.jpg" alt="Nathan Baker teaching an in-person AutoNateAI class in Sikeston, Missouri" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/sikeston-nathan-consulting-portrait.jpg" alt="Nathan Baker consulting with a Southeast Missouri business owner in Sikeston, Missouri" /></div>
         <div>
           <span class="kicker">${icon("apartment")} World-Class Experience. Local Investment.</span>
           <h2>Now applying that experience locally — starting in Sikeston.</h2>
-          <p>Nathan built software and AI systems across the University of Michigan, Microsoft, Citi, Veterans United, and Atomic Object, working inside organizations where clarity, reliability, and communication matter. That's not a résumé to be impressed by — it's capability now being reinvested close to home, starting with a 20-seat in-person cohort at Center Street Station in Sikeston, MO.</p>
+          <p>Nathan built software and AI systems across the University of Michigan, Microsoft, Citi, Veterans United, and Atomic Object, working inside organizations where clarity, reliability, and communication matter. That's not a résumé to be impressed by — it's capability now being reinvested close to home, priced for a Southeast Missouri business, not an enterprise vendor contract.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
           </div>
         </div>
       </section>
@@ -448,9 +484,9 @@ export function renderAbout() {
 
       <section class="section compact about-split">
         <div>
-          <span class="kicker">${icon("verified")} Why the training is different</span>
+          <span class="kicker">${icon("verified")} Why the work is different</span>
           <h2>Built from real engineering work, not generic coding practice.</h2>
-          <p>For the last five years, Nathan has designed software systems, AI workflows, and software architectures used inside organizations where clarity, reliability, and communication matter. AutoNateAI turns those same engineering methods into a practical training ground.</p>
+          <p>For the last five years, Nathan has designed software systems, AI workflows, and software architectures used inside organizations where clarity, reliability, and communication matter — most recently as Senior Software Consultant and Developer at Atomic Object. AutoNateAI turns those same engineering methods into what it delivers for clients.</p>
           <p>Before founding AutoNateAI, Nathan also taught Computer Security at the University of Michigan as an instructional aide, leading office hours, lab sections, and mentoring students through software security, networking, and systems problems.</p>
         </div>
         <div class="about-proof-list">
@@ -461,11 +497,11 @@ export function renderAbout() {
       <section class="section compact">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("school")} Teaching Philosophy</span>
+            <span class="kicker">${icon("school")} How We Work</span>
             <h2>Technology changes. Engineering judgment lasts.</h2>
-            <p>Builders practice reading the environment first, designing before changing code, using AI with context, testing the result, and explaining the tradeoffs behind their decisions.</p>
+            <p>Every engagement reads the environment first, designs before changing code, uses AI with context, tests the result, and explains the tradeoffs behind every decision — whether AutoNateAI builds it or your team does.</p>
           </div>
-          <a class="primary-button" href="/programs/ai-agent-systems">Reserve Seat ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
         </div>
         <div class="value-grid about-value-grid">
           <article><span>${icon("account_tree")}</span><h3>Architecture</h3><p>Turn mechanics, components, state, and constraints into a system you can explain.</p></article>
@@ -500,45 +536,45 @@ export function renderAbout() {
 
       <section class="founder-letter">
         <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
-        <h2>Let's build stronger engineering judgment.</h2>
-        <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, consulting, and education reinforced one lesson: the strongest builders are not just the people who can write code. They are the people who can understand a system.</p>
-        <p>AutoNateAI exists because developers and technical builders deserve practice that feels closer to real engineering work: reading an environment, planning changes, using Git, debugging behavior, working with AI responsibly, and building projects that can fail in visible ways.</p>
-        <p>If you are preparing for software, AI, automation, security, data, or technical leadership, I would love to build with you.</p>
+        <h2>Let's build something your team can actually run.</h2>
+        <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, and consulting at Atomic Object reinforced one lesson: the strongest engineers are not just the people who can write code. They are the people who can understand a system, and explain it clearly to the people depending on it.</p>
+        <p>AutoNateAI exists because Southeast Missouri businesses deserve access to that same caliber of engineering — not a generic SaaS platform, not an enterprise vendor contract, but a real system built for how your organization actually works, priced for a business your size. Agentic AI is what finally makes that math work.</p>
+        <p>If you have a workflow eating your team's time, or want your own people capable of building the next one, I would love to build with you.</p>
         <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
       </section>
 
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
-          <article><h3>Is this for complete beginners?</h3><p>The free digital courses start from zero. The paid program is best once you are comfortable reading and modifying code and want to get sharper at designing systems: data models, APIs, and architecture.</p></article>
-          <article><h3>How does AI fit into the class?</h3><p>You use agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it does not replace understanding.</p></article>
-          <article><h3>Why build real systems instead of exercises?</h3><p>A real organizational project makes tradeoffs visible in a way an exercise can't. You can see requirements, constraints, feedback, failure, and whether your design actually holds up for the people who'd use it.</p></article>
-          <article><h3>Who is this built for?</h3><p>Students with some coding experience, working professionals who want to build internal tools, and employer- or school-sponsored participants who want stronger systems thinking and AI-assisted engineering habits.</p></article>
+          <article><h3>Do you build it, or train us to build it?</h3><p>Both are on the table. Consulting means AutoNateAI researches, architects, and builds the tool for you. Requested team training means your own people learn to build it themselves, over a 4-day on-site engagement.</p></article>
+          <article><h3>How does AI fit into the work?</h3><p>Every build uses agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it doesn't replace understanding — every engagement stays reviewed and explainable.</p></article>
+          <article><h3>Why is this more affordable than I'd expect?</h3><p>Agentic AI collapses the distance between architecture and working software. Work that used to require a full in-house engineering team can now be scoped, built, and delivered by a much smaller one — and that savings gets passed on.</p></article>
+          <article><h3>Who is this for?</h3><p>Any Southeast Missouri business, school, or nonprofit with a real workflow that's eating staff time — plus anyone who wants to sharpen their own technical skills through the free course library.</p></article>
         </div>
       </section>
 
       <section class="detail-enroll-band">
         <div>
-          <span class="kicker">${icon("local_activity")} Current Program</span>
-          <h2>How to Create Software Systems with AI Agents</h2>
-          <p>A two-week in-person cohort at Center Street Station in Sikeston, MO, Monday through Thursday, where builders design databases, APIs, and architecture with Claude Code and Codex, use Git, and spend the second week building a real system for a real organization.</p>
+          <span class="kicker">${icon("local_activity")} Ready to Talk?</span>
+          <h2>Bring us a real workflow.</h2>
+          <p>Whether you want AutoNateAI to build it, want your team trained to build it, or just want to see how it's done first — every path starts with a conversation.</p>
         </div>
-        <a class="primary-button" href="/programs/ai-agent-systems">Explore the Program ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "About AutoNateAI | Southeast Missouri AI Workforce Development",
+    title: "About AutoNateAI | Southeast Missouri AI Consulting & Development",
     active: "about",
     body,
     canonicalPath: "/about",
     ogImage: "/assets/og/about.jpg",
     description:
-      "AutoNateAI develops local people into AI and software systems builders. World-class experience across Michigan, Microsoft, Citi, Veterans United, and Atomic Object, now reinvested locally in Sikeston, MO.",
-    ogTitle: "Meet the engineer behind the program.",
+      "AutoNateAI is Southeast Missouri's AI consulting and development studio. World-class experience across Michigan, Microsoft, Citi, Veterans United, and Atomic Object, now reinvested locally in Sikeston, MO.",
+    ogTitle: "Meet the team behind AutoNateAI.",
     ogDescription:
-      "Real engineering habits, a real in-person program, and a five-year regional vision: prove the model in Sikeston, expand across Southeast Missouri, build a regional network of local AI/software talent.",
+      "Real engineering experience, real Southeast Missouri clients, and a five-year regional vision: prove the model in Sikeston, expand consulting and training across the region, become the region's standing AI partner.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -559,12 +595,10 @@ export function renderAbout() {
 }
 
 export function renderProgramDetail(data, program) {
-  const related = data.programs.filter((p) => p.handle !== program.handle).slice(0, 3);
   const gallery = ["/assets/landing/sikeston-presenting-fullbody.jpg", "/assets/landing/sikeston-mentoring.jpg", "/assets/landing/agent-review.jpg"];
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
-  const sessionWeeks = chunkSessions(program.sessions || [], 4);
   const heroTitle = escapeHtml(program.name);
 
   const body = `
@@ -573,28 +607,24 @@ export function renderProgramDetail(data, program) {
         <div class="hero-bg"><img src="${gallery[0]}" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/programs/${program.handle}">Program</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
-            <span class="kicker">${icon("school")} Built for People Ready to Build</span>
+            <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/for-organizations">For Organizations</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
+            <span class="kicker">${icon("apartment")} Requested Team Training</span>
             <h1>${heroTitle}</h1>
-            <p>An in-person, 2-week cohort at Center Street Station in Sikeston, MO: use Claude Code and Codex to design a real system, then build toward a real project for your employer, school, nonprofit, or a local business, and see how your system holds up against it.</p>
-            <div class="cohort-date-row">
-              ${cohortBadge(program)}
-              <span>${escapeHtml(program.cohortNote || "")} ${cohortCapacity(program)}. Dedicated AutoNateAI Discord included for setup help, architecture reviews, agent workflow coaching, and build support between sessions.</span>
-            </div>
+            <p>A 4-day, 4-hours-a-day engagement using ChatGPT, Claude, Codex, and Claude Code — customized around your business, built on-site at your location or at Center Street Station in Sikeston, MO. Requested and scoped for the specific business that asks for it.</p>
             <div class="button-row">
-              <a class="primary-button" href="${checkoutHref}">Reserve Seat for ${price} ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="#curriculum">View 8 Sessions</a>
+              <a class="primary-button" href="/for-organizations#request">Request This Training ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="#curriculum">View the 4-Day Curriculum</a>
             </div>
           </div>
           <aside class="hero-program-panel program-hero-panel">
             <img src="${gallery[1]}" alt="" />
             <div class="hero-panel-body">
               <span class="kicker">${icon("sports_esports")} What You Build</span>
-              <h2>A system that has to hold up while a real organization is watching.</h2>
-              <p>Learn the tools, design the architecture, keep decisions in Git, then build toward a real project for your employer, school, nonprofit, or a local business, and ship it live.</p>
+              <h2>3 real internal tools, ready for work or home.</h2>
+              <p>Learn the tools, design the architecture, and build toward real internal tools chosen from a menu of 9 that could help your business immediately.</p>
               <div class="hero-facts">
-                <span>${cohortCapacity(program)}</span>
-                <span>${program.durationWeeks || 2} weeks</span>
+                <span>4 days, 4 hrs/day</span>
+                <span>3 tools built</span>
                 <span>Your Git repo</span>
                 <span>Agent coaching</span>
               </div>
@@ -604,72 +634,60 @@ export function renderProgramDetail(data, program) {
       </section>
 
       <section class="detail-proof-strip">
-        <a href="${checkoutHref}"><b>${price}</b><span>Full ${program.durationWeeks || 2}-week cohort</span></a>
-        <a href="${checkoutHref}"><b>${formatDate(program.startDate) || "Soon"}</b><span>Next cohort opens</span></a>
-        <a href="#curriculum"><b>8</b><span>Live build sessions</span></a>
-        <a href="#outcomes"><b>In Person</b><span>Sikeston, MO</span></a>
+        <a href="/for-organizations#request"><b>From ${price}</b><span>Per employee trained</span></a>
+        <a href="#curriculum"><b>4</b><span>Days, 4 hrs/day</span></a>
+        <a href="#tools"><b>3 of 9</b><span>Internal tools built</span></a>
+        <a href="#outcomes"><b>On-site</b><span>Or Sikeston, MO</span></a>
       </section>
 
-      <section class="section compact" id="who">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("groups")} Built for People Ready to Build</span>
-            <h2>Students, professionals, and employer-sponsored employees, side by side.</h2>
-          </div>
-        </div>
-        <div class="value-grid audience-grid">
-          <article><span>${icon("school")}</span><h3>Students with coding experience</h3><p>Go beyond syntax and learn how complete systems fit together.</p></article>
-          <article><span>${icon("work")}</span><h3>Working professionals</h3><p>Learn to use AI agents, databases, APIs, and architecture to improve real organizational workflows.</p></article>
-          <article><span>${icon("business_center")}</span><h3>Employer-sponsored employees</h3><p>Bring the capability back inside your organization. <a href="/for-organizations">See sponsorship options</a>.</p></article>
-        </div>
-      </section>
-
-      <section class="section compact" id="what-you-build">
+      <section class="section" id="curriculum">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("build")} What Could You Build for Your Organization?</span>
-            <h2>Everyone brings a real project. Here's what that can look like.</h2>
+            <span class="kicker">${icon("route")} How the 4 Days Break Down</span>
+            <h2>Days 1-2 are the foundation. Days 3-4 are your real tools.</h2>
+            <p>Heavy emphasis on prompt engineering and context engineering — the skill that makes your team context specialists and junior engineering managers, judging the quality of what an AI coding agent produces, not necessarily typing every line of it themselves.</p>
           </div>
         </div>
-        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
+        <div class="pack-grid">${businessTrainingCurriculum.map((day) => curriculumDayCard(day)).join("")}</div>
       </section>
 
-      <section class="section compact detail-enroll-band">
-        <div>
-          <span class="kicker">${icon("apartment")} For Organizations</span>
-          <h2>Sending more than one person?</h2>
-          <p>Sponsor employees to build internal tools your organization actually needs, or ask about student sponsorships for your school or nonprofit.</p>
+      <section class="section compact" id="tools">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("build")} Choose 3 of 9</span>
+            <h2>A menu of internal tools that could help your business immediately.</h2>
+          </div>
         </div>
-        <a class="primary-button" href="/for-organizations">See Sponsorship Options ${icon("arrow_forward")}</a>
+        <div class="industry-grid">${toolsMenu.map((tool) => toolMenuCard(tool)).join("")}</div>
       </section>
 
       <section class="section compact detail-sales-band" id="outcomes">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("architecture")} What Actually Changes</span>
-            <h2>You start seeing code as a living system, not a file of instructions.</h2>
-            <p>You learn to direct AI agents, design data models and APIs, debug failures, and use Git checkpoints. Then you go further than most programs: build a real internal tool for a real organization, and ship against real user scenarios.</p>
+            <h2>Your team starts seeing code as a living system, not a file of instructions.</h2>
+            <p>They learn to direct AI agents, design data models and APIs, debug failures, and use Git checkpoints — then go further than a generic course: build 3 real internal tools for your actual business, and ship against real scenarios.</p>
           </div>
-          <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/for-organizations#request">Request Training ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="/assets/landing/sikeston-org-system-dashboard.jpg" alt="A builder and a local business owner reviewing an internal dashboard built during an AutoNateAI cohort" /><h3>A system built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by a real project for your employer, school, nonprofit, or a local business.</p></article>
-          <article><img src="/assets/landing/sikeston-agent-review.jpg" alt="A builder reviewing AI-generated code changes in an AutoNateAI cohort" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, README notes, and architecture notes keep the work explainable.</p></article>
-          <article><img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" /><h3>Real user scenarios you define yourself</h3><p>Define who the system needs to work for, then run your system against those scenarios before it ships. Standout builders get noticed — sometimes that means real work with <a href="/for-organizations">an AutoNateAI partner organization</a>.</p></article>
+          <article><img src="/assets/landing/sikeston-org-system-dashboard.jpg" alt="A builder and a local business owner reviewing an internal dashboard built during a requested AutoNateAI training engagement" /><h3>Tools built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by your real business, not a hypothetical one.</p></article>
+          <article><img src="/assets/landing/sikeston-agent-review.jpg" alt="A builder reviewing AI-generated code changes during a training engagement" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, and architecture notes keep the work explainable.</p></article>
+          <article><img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" /><h3>Real scenarios your team defines</h3><p>Define who each tool needs to work for, then run it against those scenarios before the engagement ends.</p></article>
         </div>
       </section>
 
       <section class="program-instructor-section">
         <div class="program-instructor-photo">
-          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder and instructor at AutoNateAI" />
+          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
         </div>
         <div>
-          <span class="kicker">${icon("verified")} About the Instructor</span>
-          <h2>Learn from an engineer who has built AI and software systems across Microsoft, Citi, Veterans United, and Atomic Object.</h2>
-          <p>Nathan Baker studied Computer Science at the University of Michigan and has spent the last five years building real software, AI workflows, and software architectures inside organizations where clarity and reliability matter.</p>
-          <p>He also taught Computer Security at the University of Michigan as an instructional aide. That mix of industry engineering and hands-on teaching shapes the program: you bring development experience, then practice how modern engineers read environments, design systems, debug behavior, use Git, collaborate with AI, and explain tradeoffs.</p>
+          <span class="kicker">${icon("verified")} Who's Leading It</span>
+          <h2>Led by an engineer who has built AI and software systems across Microsoft, Citi, Veterans United, and Atomic Object.</h2>
+          <p>Nathan Baker studied Computer Science at the University of Michigan and has spent the last five years building real software, AI workflows, and software architectures inside organizations where clarity and reliability matter — most recently as Senior Software Consultant and Developer at Atomic Object.</p>
+          <p>That consulting background shapes every engagement: showing up, understanding your real workflow, and building something your team can actually run — not a generic curriculum with your logo on it.</p>
           <div class="button-row">
-            <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/for-organizations#request">Request Training ${icon("arrow_forward")}</a>
             <a class="outline-button" href="/about">About AutoNateAI</a>
           </div>
         </div>
@@ -677,48 +695,25 @@ export function renderProgramDetail(data, program) {
 
       <section class="detail-enroll-band">
         <div>
-          <span class="kicker">${icon("local_activity")} Live Cohort Seat</span>
-          <h2>${price} for the full ${program.durationWeeks || 2}-week cohort</h2>
-          <p>${escapeHtml(program.cohortNote || "")} Includes agent setup help, cohort workspace access, Git repo guidance, architecture coaching, dedicated AutoNateAI Discord access, and live build-week support.</p>
+          <span class="kicker">${icon("local_activity")} Requested Training</span>
+          <h2>From ${price} per employee for the full 4-day engagement</h2>
+          <p>Includes agent setup help, Git repo guidance, architecture coaching, dedicated AutoNateAI Discord access, and the 4-day on-site engagement itself. <a href="/for-organizations">See full pricing and request the engagement</a>.</p>
         </div>
-        <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/for-organizations#request">Request Training ${icon("arrow_forward")}</a>
       </section>
-
-      <section class="section compact" id="curriculum">
-        <div class="section-head">
-          <div><h2>8 sessions from meeting your agents to shipping a real system.</h2><p>Because you're building a real project for a real organization, you see the same pressures real software faces: unfamiliar environments, changing requirements, dependencies, automation, failure recovery, resource constraints, and performance under real deadlines.</p></div>
-          <a class="primary-button" href="${checkoutHref}">Get the Course ${icon("arrow_forward")}</a>
-        </div>
-        <div class="week-grid">
-          ${sessionWeeks.map((sessions, index) => weekCard(index, sessions)).join("")}
-        </div>
-        <div class="detail-bottom-cta">
-          <div><strong>Ready to join the cohort?</strong><span>Seats include all 8 live sessions, with the final week dedicated to building your organizational project and shipping a real system against it.</span></div>
-          <a class="primary-button" href="${checkoutHref}">Reserve Seat ${icon("arrow_forward")}</a>
-        </div>
-      </section>
-
-      ${
-        related.length
-          ? `<section class="section compact">
-        <div class="section-head"><h2>Related cohorts</h2><a href="/programs/${program.handle}">Back to program ${icon("arrow_forward")}</a></div>
-        <div class="mini-grid">${related.map((p) => miniProgramCard(p)).join("")}</div>
-      </section>`
-          : ""
-      }
     </main>
   `;
 
   return pageShell({
-    title: `${program.name} | Sikeston, MO | AutoNateAI`,
+    title: `${program.name} | Custom Business Training | Sikeston, MO | AutoNateAI`,
     active: "programs",
     body,
     canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
-    ogTitle: "An in-person AI systems cohort in Sikeston, MO.",
+    ogTitle: "Custom AI & development training for Southeast Missouri businesses.",
     ogDescription:
-      "Use Claude Code and Codex to design a real system, tune it in Git, then build a real internal tool for your employer, school, nonprofit, or a local business and ship it live.",
+      "A requested, 4-day on-site training engagement: prompt and context engineering, real ChatGPT/Claude/Codex/Claude Code workflows, and 3 real internal tools built for your business.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -749,27 +744,27 @@ export function renderForOrganizations(data) {
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/landing/sikeston-business-training-terminal.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("apartment")} For Organizations</span>
-          <h1>Develop technical capability inside your own team.</h1>
-          <p>AI skills aren't only for technology companies. Missouri employers increasingly need technical talent across every industry. Sponsor employees to build internal tools your organization actually needs, or sponsor students from your school or nonprofit.</p>
+          <span class="kicker">${icon("apartment")} Requested Team Training</span>
+          <h1>Custom AI &amp; development training, built around your business.</h1>
+          <p>A 4-day, 4-hours-a-day engagement — on-site at your business or at Center Street Station in Sikeston — customized around your industry's real workflows using ChatGPT, Claude, Codex, and Claude Code. Every program is requested and built specifically for the business that asks for it.</p>
           <div class="button-row">
-            <a class="primary-button" href="#sponsorship">Sponsor Your Team ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20question">Talk With AutoNateAI</a>
+            <a class="primary-button" href="#request">Request Training For Your Team ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20training%20question">Talk With AutoNateAI</a>
           </div>
         </div>
         <aside class="hero-program-panel">
           <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("insights")} The Regional Case</span>
-            <h2>223,000+ Missourians already work in tech occupations.</h2>
-            <p>Missouri's 2026 Technology2030 report found technology talent is needed across every industry, not just tech companies. AutoNateAI is building that capability locally, starting in Sikeston.</p>
+            <span class="kicker">${icon("emoji_events")} What Your Team Leaves With</span>
+            <h2>3 real internal tools, ready for work or home.</h2>
+            <p>Not a certificate. Working software your team built themselves, chosen from a menu of 9 tools that could help your business immediately.</p>
             <div class="hero-facts">
-              <span>In person, Sikeston, MO</span>
-              <span>2-week cohort</span>
-              <span>Real internal tools</span>
+              <span>4 days, 4 hrs/day</span>
+              <span>On-site or in Sikeston</span>
+              <span>3 real tools built</span>
               <span>Discord support included</span>
             </div>
           </div>
@@ -777,43 +772,70 @@ export function renderForOrganizations(data) {
         </div>
       </section>
 
-      <section class="section" id="sponsorship">
+      <section class="section compact" id="who">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("groups")} Built for Teams Ready to Build</span>
+            <h2>Frontline staff, managers, and technical leads — side by side.</h2>
+            <p>Missouri's 2026 Technology2030 report found technology talent is needed across every industry, not just tech companies — the same democratization behind agentic AI is why this is finally affordable for a business your size.</p>
+          </div>
+        </div>
+        <div class="value-grid audience-grid">
+          <article><span>${icon("work")}</span><h3>Frontline &amp; operational staff</h3><p>The people closest to the workflow that's eating the most time — they know exactly where it breaks.</p></article>
+          <article><span>${icon("supervisor_account")}</span><h3>Managers &amp; team leads</h3><p>Learn to direct and evaluate AI-assisted work as it happens, not just approve it after the fact.</p></article>
+          <article><span>${icon("autorenew")}</span><h3>Anyone who touches repetitive work</h3><p>If a workflow repeats every week, there's probably a tool in it — this training teaches you to build that tool yourself.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="curriculum">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("payments")} Team &amp; Group Pricing</span>
-            <h2>Sponsor 1 seat or 20 — one purchase, done.</h2>
-            <p>Pick how many seats you're sponsoring below. Every seat includes the full 2-week in-person cohort, agent setup help, Git repo guidance, architecture coaching, and dedicated AutoNateAI Discord access. Need a different number? Enter it directly in the form.</p>
+            <span class="kicker">${icon("route")} How the 4 Days Break Down</span>
+            <h2>Days 1-2 are the foundation. Days 3-4 are your real tools.</h2>
+            <p>Heavy emphasis on prompt engineering and context engineering — the skill that makes your team context specialists and junior engineering managers, judging the quality of what an AI coding agent produces, not necessarily typing every line of it themselves.</p>
+          </div>
+        </div>
+        <div class="pack-grid">${businessTrainingCurriculum.map((day) => curriculumDayCard(day)).join("")}</div>
+      </section>
+
+      <section class="section compact" id="tools">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("build")} Choose 3 of 9</span>
+            <h2>A menu of internal tools that could help your business immediately.</h2>
+            <p>Every engagement picks 3 from this list, customized to your real workflows. One is the focus of Days 1-2 while your team learns the flow; the other two get built in parallel on Day 3.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${toolsMenu.map((tool) => toolMenuCard(tool)).join("")}</div>
+      </section>
+
+      <section class="section compact" id="request">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("payments")} Team Training Pricing</span>
+            <h2>Train 1 employee or 20 — one request, done.</h2>
+            <p>Pick how many employees you're training below. Every seat includes the full 4-day, 4-hour/day custom engagement, 3 real internal tools built for your business, and dedicated AutoNateAI Discord access. Need a different number? Enter it directly in the form.</p>
           </div>
         </div>
         <div class="industry-grid offer-grid">${sponsorshipTiers.map((tier) => sponsorshipTierCard(tier)).join("")}</div>
       </section>
 
-      <section class="section compact" id="build">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("build")} What Could You Build for Your Organization?</span>
-            <h2>Every participant brings a real project back to work on.</h2>
-          </div>
-        </div>
-        <div class="industry-grid pack-grid org-examples-grid">${organizationExamples.map((example) => orgExampleCard(example)).join("")}</div>
-      </section>
-
       <section class="section compact" id="pay">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("shopping_cart")} Complete Your Sponsorship</span>
-            <h2>Purchase seats for your team, school, or organization.</h2>
-            <p>Card payment is processed securely through Square. Once payment is confirmed, we reach out to get your organization onboarded — your sponsored builders get added to the AutoNateAI Discord and started on the free digital courses to prepare for the class.</p>
+            <span class="kicker">${icon("shopping_cart")} Complete Your Training Request</span>
+            <h2>Reserve training for your team.</h2>
+            <p>Card payment is processed securely through Square. Once payment is confirmed, we reach out to schedule your 4-day engagement and customize the curriculum around your business's real workflows.</p>
           </div>
         </div>
         <div class="checkout-grid sponsorship-checkout" data-sponsorship-form>
           <section class="checkout-form">
             <div class="form-stack payment-fields">
-              <label>Number of Seats
+              <label>Number of Employees
                 <input type="number" min="1" max="200" step="1" value="1" data-sponsorship-field="seats" data-sponsorship-seats />
               </label>
               <div class="two-col">
-                <label>Organization<input data-sponsorship-field="organization" autocomplete="organization" placeholder="Your business, school, or nonprofit" required /></label>
+                <label>Organization<input data-sponsorship-field="organization" autocomplete="organization" placeholder="Your business name" required /></label>
                 <label>Contact Name<input data-sponsorship-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
               </div>
               <label>Contact Email<input data-sponsorship-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
@@ -827,14 +849,14 @@ export function renderForOrganizations(data) {
               <span>Encrypted and processed by Square</span>
             </div>
             <div class="square-card-container" data-square-card><span>Loading secure card fields...</span></div>
-            <p class="fine-print" data-sponsorship-status>Prefer to pay by invoice, or have questions first? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20sponsorship%20invoice">autonate.ai@gmail.com</a>.</p>
+            <p class="fine-print" data-sponsorship-status>Prefer to pay by invoice, or have questions first? Write to <a href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20training%20invoice">autonate.ai@gmail.com</a>.</p>
           </section>
           <aside class="order-summary">
             <h2>Order Summary</h2>
             <div class="checkout-product-strip">
               <div>
-                <strong>AI Systems Cohort</strong>
-                <span>In-person &middot; Center Street Station, Sikeston, MO</span>
+                <strong>Custom Team Training</strong>
+                <span>4 days &middot; On-site or Center Street Station, Sikeston, MO</span>
                 <em data-sponsorship-seats-label>1 seat &middot; $499 per seat</em>
               </div>
             </div>
@@ -842,30 +864,30 @@ export function renderForOrganizations(data) {
             <div class="summary-line"><span>Transaction Fee</span><b>$0</b></div>
             <div class="total-line"><span>Total</span><b data-sponsorship-total-2>$499</b></div>
             <button type="button" class="primary-button full disabled" data-sponsorship-submit aria-disabled="true">Complete Purchase ${icon("arrow_forward")}</button>
-            <p class="fine-print">You'll get a confirmation on screen once payment clears. Our team follows up within 1-2 business days to start Discord onboarding.</p>
+            <p class="fine-print">You'll get a confirmation on screen once payment clears. Our team follows up within 1-2 business days to schedule your engagement.</p>
           </aside>
         </div>
         <div class="sponsorship-success" data-sponsorship-success hidden>
           <div class="success-mark">${icon("check_circle")}</div>
-          <h2>Sponsorship confirmed.</h2>
-          <p data-sponsorship-success-detail>Payment received. We'll reach out to get your organization onboarded.</p>
-          <p>Next: we work with your organization to get your sponsored builders added to the AutoNateAI Discord and started on the four free digital courses, so they walk into the first session already prepared.</p>
+          <h2>Training request confirmed.</h2>
+          <p data-sponsorship-success-detail>Payment received. We'll reach out to schedule your engagement.</p>
+          <p>Next: we work with you to pick the 3 tools, schedule your 4 days, and get your team added to the AutoNateAI Discord to prepare.</p>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Sponsor Employee & Student AI Training | Sikeston, MO | AutoNateAI",
+    title: "Custom AI Training for Local Businesses | Sikeston, MO | AutoNateAI",
     active: "for-organizations",
     body,
     canonicalPath: "/for-organizations",
     ogImage: "/assets/og/for-organizations.jpg",
     description:
-      "Sponsor employees or students into AutoNateAI's in-person AI systems cohort in Sikeston, MO. Develop technical capability inside your own team, school, or nonprofit.",
-    ogTitle: "Develop technical capability inside your own team.",
+      "Custom, on-site AI and development training for Southeast Missouri businesses: 4 days, real ChatGPT/Claude/Codex/Claude Code workflows, and 3 real internal tools your team builds and keeps.",
+    ogTitle: "Custom AI & development training, built around your business.",
     ogDescription:
-      "Sponsorship pricing for employers, schools, and nonprofits sending employees or students into AutoNateAI's in-person Sikeston cohort.",
+      "A requested, customized 4-day training engagement for your team — prompt and context engineering, real internal tools chosen from a menu of 9, built for your industry.",
   });
 }
 
@@ -907,6 +929,8 @@ function bankLadderStrip() {
 
 export function renderEvents() {
   const industryBySlug = new Map(industries.map((industry) => [industry.slug, industry]));
+  const [nextWeek, ...laterWeeks] = industryWeeks;
+  const nextIndustry = industryBySlug.get(nextWeek?.industry);
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
@@ -915,9 +939,9 @@ export function renderEvents() {
         <div class="hero-copy">
           <span class="kicker">${icon("event")} AutoNateAI Industry Build Labs</span>
           <h1>We build a real internal tool live, every week, free.</h1>
-          <p>One local workflow. One hour. We build the system live — no slides, no theory-only session. ${escapeHtml(buildLabInfo.quarterLabel)} runs ${formatDate(buildLabInfo.startDate)} through ${formatDate(buildLabInfo.endDate)}, one session per regional industry, every week, over Google Meet.</p>
+          <p>One industry gets the spotlight each week. Three live sessions — Tuesday, Wednesday, Thursday, 11:30 AM Central — each building a different internal tool for that week's industry. No slides, no theory-only session: real workflow, researched and built live, on Google Meet.</p>
           <div class="button-row">
-            <a class="primary-button" href="#schedule">See This Week's Schedule ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="#schedule">See the Schedule ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/consulting">Bring Us Your Workflow</a>
           </div>
         </div>
@@ -928,7 +952,7 @@ export function renderEvents() {
             <h2>${escapeHtml(buildLabInfo.format)}</h2>
             <div class="hero-facts">
               <span>Free, every week</span>
-              <span>Nine industries</span>
+              <span>3 sessions/week</span>
               <span>Google Meet</span>
               <span>Guest operators welcome</span>
             </div>
@@ -941,7 +965,7 @@ export function renderEvents() {
         <div class="section-head section-head-center">
           <div>
             <span class="kicker">${icon("route")} The Methodology, Live</span>
-            <h2>Research, architecture, build, refine — the same process every week.</h2>
+            <h2>Research, architecture, build, refine — the same process every session.</h2>
           </div>
         </div>
         <div class="compete-curriculum">
@@ -952,15 +976,30 @@ export function renderEvents() {
         </div>
       </section>
 
+      ${
+        nextIndustry
+          ? `<section class="section compact">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("bolt")} Up Next</span>
+            <h2>${escapeHtml(nextIndustry.name)} — ${escapeHtml(weekRangeLabel(nextWeek.days))}</h2>
+            <p>${escapeHtml(nextIndustry.tagline)}</p>
+          </div>
+        </div>
+        <div class="week-calendar-solo">${industryWeekCalendarCard(nextWeek, industryBySlug, true)}</div>
+      </section>`
+          : ""
+      }
+
       <section class="section" id="schedule">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("calendar_month")} Weekly Schedule</span>
-            <h2>Nine industries, one session each, every week.</h2>
-            <p>Consistent day and time per industry so we can actually measure what's working — the schedule shifts only once real demand shows us it should. All times Central.</p>
+            <span class="kicker">${icon("calendar_month")} The Rotation</span>
+            <h2>One industry a week, three builds each.</h2>
+            <p>We cycle through the region's industries, one spotlight week at a time. This list grows as we schedule more.</p>
           </div>
         </div>
-        <div class="industry-grid">${buildLabSchedule.map((slot) => buildLabCard(slot, industryBySlug)).join("")}</div>
+        <div class="industry-grid week-calendar-grid">${laterWeeks.map((week) => industryWeekCalendarCard(week, industryBySlug)).join("")}</div>
       </section>
 
       <section class="detail-enroll-band">
@@ -981,10 +1020,10 @@ export function renderEvents() {
     canonicalPath: "/events",
     ogImage: "/assets/og/events.jpg",
     description:
-      "AutoNateAI's free weekly Industry Build Labs: one Southeast Missouri industry workflow, built live into a real internal AI tool, every week, over Google Meet.",
+      "AutoNateAI's free weekly Industry Build Labs: a real Southeast Missouri industry workflow, built live into a real internal AI tool, three sessions a week, over Google Meet.",
     ogTitle: "We build a real internal tool live, every week, free.",
     ogDescription:
-      "Nine regional industries, one live-build session each per week: agriculture, automotive, construction, finance, government, graphic arts, healthcare, manufacturing, and tourism. Free, over Google Meet.",
+      "One industry gets the spotlight each week — three live build sessions, Tuesday through Thursday, 11:30 AM Central. Free, over Google Meet.",
   });
 }
 
@@ -1188,20 +1227,20 @@ export function renderTutorials() {
         <div class="hero-bg"><img src="/assets/landing/learning-path.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("menu_book")} Your Free On-Ramp</span>
-          <h1>Start building before the cohort begins.</h1>
-          <p>Four free learning paths teach the foundations you'll need to participate in AutoNateAI's in-person AI systems training — from JavaScript and databases to AI agents and real-world system design. No enrollment, no cost, and help is available in the Discord the whole way through.</p>
+          <span class="kicker">${icon("menu_book")} Free Course Library</span>
+          <h1>Sharpen your technical skills. Free.</h1>
+          <p>A free library of technical courses — JavaScript fundamentals, prompt and context engineering, databases, and agentic AI — with real curriculum, real code, and Discord support the whole way through. No enrollment, no cost, no catch.</p>
           <div class="button-row">
-            <a class="primary-button" href="/programs/ai-agent-systems">Take the Program ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="https://discord.gg/4HkkuntdSs">Ask in Discord ${icon("open_in_new")}</a>
+            <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
+            <a class="secondary-button" href="#catalog">Browse the Courses</a>
           </div>
         </div>
         <aside class="hero-program-panel">
           <img src="/assets/landing/learning-path.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("terminal")} Built for Where You're At</span>
-            <h2>We get you ready for free, with our always-free pillar courses.</h2>
-            <p>New to programming? Start with Nate and Kai's story and learn JavaScript from zero. Know some code already? Jump straight into whichever course matches what you're building next. Either way, these courses build toward the same system-architect habits the live cohort practices.</p>
+            <h2>Start wherever you are, free, always.</h2>
+            <p>New to programming? Start with Nate and Kai's story and learn JavaScript from zero. Know some code already? Jump straight into whichever course matches what you're building next. These are the same fundamentals behind every internal tool AutoNateAI ships.</p>
             <div class="hero-facts">
               <span>${tutorialPacks.length} free digital courses</span>
               <span>Copy-ready code</span>
@@ -1218,7 +1257,7 @@ export function renderTutorials() {
           <div>
             <span class="kicker">${icon("route")} Many Ways In</span>
             <h2>There's no single right way to start.</h2>
-            <p>Self-taught builder, working professional, sponsored employee, or sponsored student — these four courses are the on-ramp for all of it. They're the foundation the live program builds on: once you know the pillars, the program teaches you to point them at a real problem, design a system for it, and build that system out.</p>
+            <p>Self-taught builder or working professional — these four courses stand on their own, no matter why you're here.</p>
           </div>
         </div>
         <div class="value-grid">
@@ -1229,7 +1268,7 @@ export function renderTutorials() {
         </div>
       </section>
 
-      <section class="section pack-catalog-section">
+      <section class="section pack-catalog-section" id="catalog">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("view_module")} Pick a Course</span>
@@ -1244,8 +1283,8 @@ export function renderTutorials() {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("forum")} Help Whenever You Need It</span>
-            <h2>The Discord covers all of it — courses, program, and your own ideas.</h2>
-            <p>It's open all day, every day: setup and concept help for anyone working through the four free courses, architecture reviews and build support for anyone in the live program, and project help for builders who already know the pillars or the program and are stuck designing or building a system they came up with themselves.</p>
+            <h2>The Discord is where the community lives.</h2>
+            <p>It's open all day, every day: setup and concept help for anyone working through the courses, and a place to talk through a system you're designing or stuck on, whether it's from a course or an idea of your own.</p>
           </div>
           <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
         </div>
@@ -1260,10 +1299,10 @@ export function renderTutorials() {
     canonicalPath: "/tutorials",
     ogImage: "/assets/og/courses.jpg",
     description:
-      "Start building before the cohort begins. Four free digital courses teach JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI.",
-    ogTitle: "Start building before the cohort begins.",
+      "A free library of technical courses: JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI. Discord support included.",
+    ogTitle: "Sharpen your technical skills. Free.",
     ogDescription:
-      "Start with Nate and Kai's story, then pick whichever course matches what you're building next. Free courses, real curriculum, before you join the in-person cohort.",
+      "A free course library with real curriculum and real code, plus a Discord community for help along the way. No enrollment, no cost, no catch.",
   });
 }
 
@@ -1309,7 +1348,7 @@ export function renderTutorialPack(pack) {
           <strong>${escapeHtml(pack.title)}</strong>
           ${tracks.map((track) => `<a href="#${slugify(track)}">${escapeHtml(track)}</a>`).join("")}
           <a href="/tutorials">All Courses</a>
-          <a href="/programs/ai-agent-systems">Full cohort</a>
+          <a href="/for-organizations">For Organizations</a>
         </aside>
         <div class="docs-content">
           ${comingSoon ? packStatusBanner() : ""}
@@ -1345,7 +1384,7 @@ export function renderTutorialDetail(pack, tutorial) {
           <strong>${escapeHtml(pack.title)}</strong>
           ${packTutorials.map((item) => `<a class="${item.handle === tutorial.handle ? "active" : ""}" href="/tutorials/${pack.handle}/${escapeHtml(item.handle)}">${escapeHtml(item.episode)} ${escapeHtml(item.title)}${item.draft ? " (soon)" : ""}</a>`).join("")}
           <a href="/tutorials">All Courses</a>
-          <a href="/programs/ai-agent-systems">Join the cohort</a>
+          <a href="/consulting">Consulting</a>
           <a href="/community">Ask in Discord</a>
         </aside>
         <article class="tutorial-document">
@@ -1366,11 +1405,11 @@ export function renderTutorialDetail(pack, tutorial) {
           }
           <footer class="tutorial-next-step">
             <div>
-              <span class="kicker">${icon("architecture")} Want the architecture layer?</span>
-              <h2>The free guide gets you moving. The cohort teaches the system to hold up.</h2>
-              <p>Bring this into How to Create Software Systems with AI Agents to practice agent workflows, Git strategy, debugging under pressure, and shipping a real RFP-built system.</p>
+              <span class="kicker">${icon("architecture")} Want to see this at real scale?</span>
+              <h2>The free guide gets you moving. Consulting builds the real thing.</h2>
+              <p>See these same skills — agent workflows, Git strategy, architecture, debugging under pressure — turned into a real internal tool for a real Southeast Missouri business.</p>
             </div>
-            <a class="primary-button" href="/programs/ai-agent-systems">View the Program ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
           </footer>
         </article>
       </div>

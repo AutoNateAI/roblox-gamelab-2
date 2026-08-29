@@ -1,21 +1,23 @@
 export const navItems = [
   { label: "Home", href: "/", keys: ["home"] },
-  { label: "Program", href: "/programs/ai-agent-systems", keys: ["programs"] },
-  { label: "Free Courses", href: "/tutorials", keys: ["tutorials"] },
-  { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations"] },
   { label: "Consulting", href: "/consulting", keys: ["consulting"] },
+  { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations", "programs"] },
+  { label: "Courses", href: "/tutorials", keys: ["tutorials"] },
   { label: "Events", href: "/events", keys: ["events"] },
   { label: "Articles", href: "/articles", keys: ["articles"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];
 
-// Community is still a real, working page — just not in the primary nav (reachable
-// from the footer and in-page CTAs). Consulting is back in primary nav now that it's
-// the connective tissue between the free courses, the in-person program, and the
-// weekly Industry Build Lab events — the site's full loop.
+// AutoNateAI leads with Consulting & development services now, not a public
+// individually-enrolled cohort — Consulting sits right after Home. "Program" and
+// "For Organizations" are now the same offering (custom, business-requested team
+// training) and share one nav entry/page at /for-organizations; /programs/:handle
+// still renders (old links, checkout references) with matching updated copy, it's
+// just not in primary nav. Community is still a real, working page — reachable from
+// the footer and in-page CTAs, not primary nav.
 // Live Builds (the old weekly Saturday event) has been decommissioned entirely in
-// favor of the always-on Discord + the four free courses + the in-person program +
-// the free weekly Industry Build Labs (see /events).
+// favor of the always-on Discord + the free course library + the weekly Industry
+// Build Lab events (see /events) + requested team training (see /for-organizations).
 
 // The nine regional industries AutoNateAI Consulting builds internal AI tooling
 // for, and the weekly free live-build sessions organized around them (see
@@ -126,104 +128,159 @@ export const industries = [
   },
 ];
 
-// AutoNateAI Industry Build Labs: free, live, 60-minute weekly sessions, one per
-// industry above, running through Q1 FY27 (per the AutoNateAI Planning OS Airtable:
-// Q1 FY27 "Prove" runs 2026-09-01 through 2026-11-30). Real, recurring Google
-// Calendar events on autonate.ai@gmail.com (public, with a Google Meet link).
-// Day/slot placement and the very first session's topic are launch defaults — easy
-// to move once real attendance data shows which industry/timeslot pairing works
-// best (see buildLabInfo.format for the session structure).
-export const buildLabSchedule = [
+// AutoNateAI Industry Build Labs: one industry "week" at a time. Three free, live,
+// 60-minute sessions — Tuesday, Wednesday, Thursday, 11:30 AM CST — all building
+// toward internal tools for that week's industry, then the spotlight rotates to the
+// next industry. Real Google Calendar events on autonate.ai@gmail.com (public, each
+// with its own Google Meet link). Week placement is chosen so each industry's spotlight
+// week lands near a major trade event in that field — no need to say so on the site,
+// it's just why these particular weeks were picked. Cycle repeats/extends over time;
+// this is the first pass through all nine.
+export const industryWeeks = [
   {
-    day: "Monday",
-    time: "12:00 PM CST",
-    industry: "government-economic-development",
-    topic: "Build a Grant Opportunity Intelligence System",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=aDNjcjF2dmN1ZjFtZDhyNGVmc2h0ZzU0MWNfMjAyNjA5MDdUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/efa-owvg-kwk",
-  },
-  {
-    day: "Tuesday",
-    time: "12:00 PM CST",
-    industry: "agriculture",
-    topic: "Build a Farm & Equipment Operations Agent",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=aHVpaW1vNWpmbnY2YjlkYnQwaGlsMWJiMzBfMjAyNjA5MDFUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/cfs-gwgu-ahb",
-  },
-  {
-    day: "Tuesday",
-    time: "4:30 PM CST",
-    industry: "automotive",
-    topic: "Build an AI Service Advisor",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=azZoYjZwYjI2MHRydG11MzBtcGN2dWZmYWtfMjAyNjA5MDFUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/qpj-usxy-pbv",
-  },
-  {
-    day: "Wednesday",
-    time: "12:00 PM CST",
-    industry: "finance",
-    topic: "Build a Commercial Loan Intake Copilot",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=bWg0Njg2cGc3YjZpbmpkcXU4dXRiMm8yNzRfMjAyNjA5MDJUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/kzq-ascq-jpg",
-  },
-  {
-    day: "Wednesday",
-    time: "4:30 PM CST",
-    industry: "healthcare",
-    topic: "Build a Healthcare Administrative Intake Agent",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=dDdxbDRsbzJzdG1ua2RjZjR0cWpyc3Q1ODhfMjAyNjA5MDJUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/euh-hjrx-dtr",
-  },
-  {
-    day: "Wednesday",
-    time: "6:00 PM CST",
-    industry: "manufacturing",
-    topic: "Build a Maintenance Intelligence Agent",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=YjQ1aTBmcTVydHEwMjJsbDlmdGxkcW5jbGtfMjAyNjA5MDJUMjMwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/dyw-okfw-cuu",
-  },
-  {
-    day: "Thursday",
-    time: "4:30 PM CST",
-    industry: "construction",
-    topic: "Build an RFP & Bid Intelligence Tool",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=bW05djN2YjJqaGZsc2JhYzVvcGtiaGFsbnNfMjAyNjA5MDNUMjEzMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/oez-fvyb-qsf",
-  },
-  {
-    day: "Thursday",
-    time: "6:00 PM CST",
     industry: "graphic-arts",
-    topic: "Build a Print Quote & Job Intake System",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=Y3N2ZWt1dXN0aDNyZGRqczBvajRxODVwYnNfMjAyNjA5MDNUMjMwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/pnx-diwa-ywu",
+    days: [
+      { date: "2026-09-15", topic: "Print Quote & Job-Intake Agent", meetUrl: "https://meet.google.com/nyw-iifi-zdb", calendarUrl: "https://www.google.com/calendar/event?eid=Njl0aTgyNmI5cGJkOWFybnQ4M291MmhmbTggYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-09-16", topic: "File Preflight & Production-Scheduling Assistant", meetUrl: "https://meet.google.com/oge-mmeg-ftr", calendarUrl: "https://www.google.com/calendar/event?eid=NmFjaTczcmdwbmZ1dTE1YW9lY2Jkc212aW8gYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-09-17", topic: "Customer Communication & Proof-Approval Workflow", meetUrl: "https://meet.google.com/dsu-eteo-gwd", calendarUrl: "https://www.google.com/calendar/event?eid=OHJrYmdoOTBzcTM4cDVoNHE3NTBoYmRyMGsgYXV0b25hdGUuYWlAbQ" },
+    ],
   },
   {
-    day: "Friday",
-    time: "12:00 PM CST",
+    industry: "automotive",
+    days: [
+      { date: "2026-09-29", topic: "AI Service Advisor", meetUrl: "https://meet.google.com/vkj-nyui-kuq", calendarUrl: "https://www.google.com/calendar/event?eid=bTczbGwwNTVwYmo0Z2dzbTh1OXRhaG1uNGsgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-09-30", topic: "Diagnostic & Service-Manual Research Agent", meetUrl: "https://meet.google.com/yen-owjd-dzh", calendarUrl: "https://www.google.com/calendar/event?eid=b2ZyMzVxdXB1OGFiZWsxY3ZuOWUyOXFjamcgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-01", topic: "Shop Operations Dashboard", meetUrl: "https://meet.google.com/cow-tesb-yrb", calendarUrl: "https://www.google.com/calendar/event?eid=YWRlNnJjZnYzNWticTFpNmlrbGI1bzlyNTQgYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "agriculture",
+    days: [
+      { date: "2026-10-06", topic: "Sensor & Equipment Anomaly Detection", meetUrl: "https://meet.google.com/hhz-iadb-msd", calendarUrl: "https://www.google.com/calendar/event?eid=N29iZjI3MjBxYWpiNGdvaGJmbzZkdWpqcTggYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-07", topic: "Agronomic Knowledge Agent", meetUrl: "https://meet.google.com/nwv-kajm-mos", calendarUrl: "https://www.google.com/calendar/event?eid=b2QwdmZqamc5NWE3aGdvbHZvbTJmaW5rNmcgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-08", topic: "Service & Maintenance Record Intelligence", meetUrl: "https://meet.google.com/nuw-nnec-ccf", calendarUrl: "https://www.google.com/calendar/event?eid=djc3cTEzaDhhYjl1ZW1wcGs1YmJla3M1bmcgYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "construction",
+    days: [
+      { date: "2026-10-13", topic: "RFP & Bid-Package Analysis Agent", meetUrl: "https://meet.google.com/tac-vkyc-pkf", calendarUrl: "https://www.google.com/calendar/event?eid=YWgwbjkyZW81ZDJocW1xb21qamU0ajVmMG8gYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-14", topic: "Estimate Copilot", meetUrl: "https://meet.google.com/qnc-hrvc-voc", calendarUrl: "https://www.google.com/calendar/event?eid=YWduMWpxY2gxdmFlaDRvczUwNThkcjE3bjQgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-15", topic: "Project Document Agent", meetUrl: "https://meet.google.com/rqk-tssj-spf", calendarUrl: "https://www.google.com/calendar/event?eid=djFybWlmYmphZGw0ZmN0cnA2OWYzZmFwdWMgYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "finance",
+    days: [
+      { date: "2026-10-20", topic: "Commercial Loan Intake Copilot", meetUrl: "https://meet.google.com/fpx-jmpd-cah", calendarUrl: "https://www.google.com/calendar/event?eid=N2dtcTF2cjc3bXZnajVra29jcWlhMDNwMjggYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-21", topic: "Document & Call Intelligence", meetUrl: "https://meet.google.com/tph-srav-gct", calendarUrl: "https://www.google.com/calendar/event?eid=Ym5wNmJxM2RudXMxbTE5ZXEzOGFwaDcwOTggYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-22", topic: "Fraud & Risk Scenario Simulation", meetUrl: "https://meet.google.com/yqi-abin-wbu", calendarUrl: "https://www.google.com/calendar/event?eid=M3FjaG5wbzAyNjRjMGt0MHQzbDc5YTZhZTAgYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "manufacturing",
+    days: [
+      { date: "2026-10-27", topic: "Maintenance Intelligence Agent", meetUrl: "https://meet.google.com/cwr-yzss-bqk", calendarUrl: "https://www.google.com/calendar/event?eid=ZW04c3RkZjFzdmtlcmY5ZjJycWNsZXE5MmMgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-28", topic: "SOP Troubleshooting Assistant", meetUrl: "https://meet.google.com/vkq-cesq-puk", calendarUrl: "https://www.google.com/calendar/event?eid=N29ocjZ2MWkzNnA1dHRtNDBlOHFucjh1YmsgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-10-29", topic: "Production/Ops Dashboard", meetUrl: "https://meet.google.com/kbe-mxnj-wuh", calendarUrl: "https://www.google.com/calendar/event?eid=aXBqdGYwMThjOHZmYzlhMzl2NTI1aTJwdDggYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "government-economic-development",
+    days: [
+      { date: "2026-11-03", topic: "Grant Opportunity Intelligence", meetUrl: "https://meet.google.com/gyx-wydy-zhw", calendarUrl: "https://www.google.com/calendar/event?eid=ZGZkN2JpdTZjdnBzdDJja282dWI4a2dpcW8gYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-04", topic: "RFP-to-Project-Plan Agent", meetUrl: "https://meet.google.com/vio-fmnw-jiv", calendarUrl: "https://www.google.com/calendar/event?eid=cmdpcWkxdGpmM284bTBiZjQ1N2xwMm4zN2MgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-05", topic: "Economic-Development Research Briefing Agent", meetUrl: "https://meet.google.com/ktb-bgqf-rzm", calendarUrl: "https://www.google.com/calendar/event?eid=bzg3OG01NzgxbWhza2xjbWVtMzN0cXZzb3MgYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
+    industry: "healthcare",
+    days: [
+      { date: "2026-11-10", topic: "Administrative Intake Agent", meetUrl: "https://meet.google.com/coa-rmju-kod", calendarUrl: "https://www.google.com/calendar/event?eid=aGJ1NG10cm03bWVtbzBjYmx1aGxqMnVzNDggYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-11", topic: "Policy & Scheduling Knowledge System", meetUrl: "https://meet.google.com/mxx-qbib-anq", calendarUrl: "https://www.google.com/calendar/event?eid=ZWYyNWFyaThnajdiYzlodTc4aTRkaG5sczAgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-12", topic: "Reporting Automation", meetUrl: "https://meet.google.com/sdo-euvb-not", calendarUrl: "https://www.google.com/calendar/event?eid=MGRmYTM3cDE1aThhaDA2aGo2ZjNzYWE3Ym8gYXV0b25hdGUuYWlAbQ" },
+    ],
+  },
+  {
     industry: "tourism-hospitality",
-    topic: "Build a Sikeston Visitor Concierge Agent",
-    calendarUrl:
-      "https://www.google.com/calendar/event?eid=MGJjaG5wbmRoaGFjcm04aGxyNTk0bGRlZThfMjAyNjA5MDRUMTcwMDAwWiBhdXRvbmF0ZS5haUBt",
-    meetUrl: "https://meet.google.com/dom-pzac-ive",
+    days: [
+      { date: "2026-11-17", topic: "Visitor Concierge Agent", meetUrl: "https://meet.google.com/zti-nbav-icr", calendarUrl: "https://www.google.com/calendar/event?eid=aGk1ZjBkOXRoaWYzODZobDMyMzE1MG5pZmcgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-18", topic: "Guest Messaging & Reservation Support", meetUrl: "https://meet.google.com/gvv-jzav-yoe", calendarUrl: "https://www.google.com/calendar/event?eid=NmpmdG9vM2V2ZWF2dGRybW81aG5ibWtwcWMgYXV0b25hdGUuYWlAbQ" },
+      { date: "2026-11-19", topic: "Event & Attraction Intelligence Dashboard", meetUrl: "https://meet.google.com/mfb-qmdu-ixt", calendarUrl: "https://www.google.com/calendar/event?eid=cjJmdWw3YzE4MjAzNm0ycDNuYm04c2tpOWcgYXV0b25hdGUuYWlAbQ" },
+    ],
   },
 ];
 
 export const buildLabInfo = {
-  quarterLabel: "Fall 2026",
-  startDate: "2026-09-01",
-  endDate: "2026-11-30",
-  format:
-    "60 minutes: the real workflow explained, a live build with ChatGPT for research, Claude for architecture, Codex to scaffold, and Claude Code to refine — then an open floor for Q&A.",
+  format: "Three live sessions a week — Tuesday, Wednesday, Thursday, 11:30 AM Central — all building toward internal tools for that week's featured industry.",
 };
+
+// The nine-tool menu offered inside a requested business-training engagement (see
+// businessTrainingCurriculum below). Generic on purpose — customized to the specific
+// requesting business's real workflows during the engagement. Each business picks 3.
+export const toolsMenu = [
+  { icon: "support_agent", name: "Customer / Client Intake Agent", description: "Turns a new inquiry into structured, routed, ready-to-work information." },
+  { icon: "search", name: "Internal Knowledge & Document Search Assistant", description: "Ask a question, get an answer pulled straight from your own files." },
+  { icon: "bar_chart", name: "Reporting & Analytics Dashboard", description: "Turns scattered data into a live view leadership actually checks." },
+  { icon: "calculate", name: "Quote / Estimate Generator", description: "Structured pricing output from a job's real details, in minutes." },
+  { icon: "calendar_month", name: "Scheduling & Operations Coordinator", description: "Keeps jobs, staff, and resources lined up without the manual juggling." },
+  { icon: "fact_check", name: "Document & Compliance Intelligence Tool", description: "Extracts, flags, and organizes what's buried in paperwork and policy." },
+  { icon: "inventory_2", name: "Inventory & Resource Tracker", description: "Real-time visibility into what you have, what's low, and what's next." },
+  { icon: "forward_to_inbox", name: "Follow-Up & Outreach Automator", description: "Nothing falls through the cracks after the first conversation." },
+  { icon: "rule", name: "Workflow & Approval Automation Agent", description: "Routes a request through the right steps and the right people, automatically." },
+];
+
+// The 4-day (Monday-Thursday, 4 hours/day) requested business-training curriculum.
+// Days 1-2 are shared foundations; Days 3-4 are hands-on build time on the business's
+// own chosen tools (see toolsMenu). Emphasis throughout is prompt/context engineering —
+// participants become the people who can direct and judge an AI coding agent's output,
+// not necessarily write the code by hand.
+export const businessTrainingCurriculum = [
+  {
+    day: "Day 1",
+    title: "Research & Context",
+    hours: "4 hours",
+    items: [
+      "Research principles with ChatGPT — turning an ambiguous business problem into a clear, structured ask",
+      "Prompt engineering and context engineering fundamentals — the core skill of the whole week",
+      "Turning research into a structured PDF asset that Claude (and any AI) can read and build from",
+      "Terminal basics and VS Code with the Claude Code and Codex extensions — both interfaces, participants choose",
+      "Quick file-system navigation dive, terminal and OS folder view alike",
+      "Tool #1 selected and kicked off",
+    ],
+  },
+  {
+    day: "Day 2",
+    title: "Build & Review",
+    hours: "4 hours",
+    items: [
+      "Scaffolding backend architecture with Codex — data model, API, and what's actually happening under the hood, explained",
+      "Crafting a professional, well-designed interface with Claude Code",
+      "Reviewing AI-generated code like a junior engineering manager: judging quality and fit, not necessarily writing it by hand",
+      "Tool #1 working end to end",
+    ],
+  },
+  {
+    day: "Day 3",
+    title: "Parallel Build",
+    hours: "4 hours",
+    items: [
+      "Tools #2 and #3 kicked off at the same time",
+      "Directing multiple agent workflows in parallel — vibe coding with proper management",
+      "Running the same research → context → scaffold → refine flow independently",
+    ],
+  },
+  {
+    day: "Day 4",
+    title: "Refinement & Fun",
+    hours: "4 hours",
+    items: [
+      "Refining and polishing all 3 tools",
+      "A capstone build: a simple web game using the same systems-architecture thinking — scenes, state, entities, events",
+      "Wrap-up — everyone leaves with 3 real internal tools, ready for work or home",
+    ],
+  },
+];
 
 // What a participant could build for their organizational project track, by org
 // type. Used on the Program page ("What could you build for your organization?")
@@ -267,9 +324,9 @@ export const sponsorshipTiers = [
 
 // Five-year regional vision shown on the About page.
 export const regionalVision = [
-  { period: "2026-27", text: "Prove and scale the workforce-development model in Sikeston." },
-  { period: "Next", text: "Expand based on demonstrated demand throughout Southeast Missouri." },
-  { period: "Long term", text: "Build a regional network of trained facilitators, businesses, schools, and community organizations developing AI/software talent locally." },
+  { period: "2026-27", text: "Prove the model in Sikeston: real internal tools, built for real local businesses, at prices only agentic AI makes possible." },
+  { period: "Next", text: "Expand consulting, requested team training, and the Industry Build Labs across Southeast Missouri as demand grows." },
+  { period: "Long term", text: "Become the region's standing AI and development partner — the first call when a local business needs a real system built." },
 ];
 
 // Consulting offerings for AutoNateAI's community/regional banking vertical.

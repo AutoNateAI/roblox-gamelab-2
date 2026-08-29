@@ -50,7 +50,7 @@ export function topNav(active = "home", mode = "full") {
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
           ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/programs/ai-agent-systems">Reserve Seat</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/consulting#book">Talk to Us</a>`}
         </div>
       </nav>
     </header>
@@ -63,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>Building Southeast Missouri's AI workforce: an in-person program in Sikeston, MO where students and professionals design real systems with AI agents like Claude Code and Codex, for real organizations.</p>
+          <p>AI consulting and development for Southeast Missouri businesses: real internal tools, custom team training, and free weekly live builds, based in Sikeston, MO.</p>
         </div>
-        ${footerColumn("Program", [["How to Create Software Systems with AI Agents", "/programs/ai-agent-systems"], ["For Organizations", "/for-organizations"], ["Consulting", "/consulting"], ["Industry Build Labs", "/events"], ["Free Courses", "/tutorials"]])}
+        ${footerColumn("Work With Us", [["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Industry Build Labs", "/events"], ["Free Courses", "/tutorials"]])}
         ${footerColumn("Company", [["Discord", "https://discord.gg/4HkkuntdSs"], ["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Southeast Missouri AI workforce development, in person in Sikeston, MO.</span>
+        <span>&copy; 2026 AutoNateAI. AI consulting and development for Southeast Missouri, based in Sikeston, MO.</span>
       </div>
     </footer>
   `;
@@ -88,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI develops Southeast Missouri's AI and software workforce: an in-person program in Sikeston, MO where students and professionals design real systems with AI agents, then ship them for real organizations.";
+  "AutoNateAI is Southeast Missouri's AI consulting and development studio, based in Sikeston, MO: real internal tools for real businesses, custom team training, and free weekly live builds.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;
