@@ -826,6 +826,8 @@ export const tutorials = [
 export const articles = [
   {
     handle: "why-southeast-missouri-businesses-need-internal-ai-capability",
+    datePublished: "2026-08-21",
+    dateModified: "2026-08-29",
     title: "Why Southeast Missouri Businesses Need Internal AI Capability, Not Just AI Vendors",
     category: "AI Workforce",
     audience: "Business owners, bank leadership, and school and nonprofit administrators in Southeast Missouri",
@@ -842,6 +844,8 @@ export const articles = [
   },
   {
     handle: "what-ai-workforce-readiness-looks-like-for-sikeston-students",
+    datePublished: "2026-08-21",
+    dateModified: "2026-08-21",
     title: "What AI Workforce Readiness Could Look Like for Sikeston Students",
     category: "Local Economy",
     audience: "Parents, students, and educators in Sikeston and Southeast Missouri",
@@ -858,6 +862,8 @@ export const articles = [
   },
   {
     handle: "coding-as-workforce-development",
+    datePublished: "2026-08-21",
+    dateModified: "2026-08-21",
     title: "Why System Design Practice Beats Another Syntax Course",
     category: "Strategy",
     audience: "Developers, CS students, junior SWEs, and technical builders",
@@ -874,6 +880,8 @@ export const articles = [
   },
   {
     handle: "why-live-builds-make-it-real",
+    datePublished: "2026-08-02",
+    dateModified: "2026-08-21",
     title: "Why the Discord Doesn't Close When Class Does",
     category: "Guide",
     audience: "Builders preparing to ship a real system",
@@ -890,6 +898,8 @@ export const articles = [
   },
   {
     handle: "ai-agents-are-showing-up-in-civic-tech",
+    datePublished: "2026-07-14",
+    dateModified: "2026-07-14",
     title: "AI Agents Are Already Showing Up in Civic Tech. Most Engineers Aren't Ready.",
     category: "Trend",
     audience: "Engineers curious about public-sector and civic-tech work",
@@ -906,6 +916,8 @@ export const articles = [
   },
   {
     handle: "the-rfp-is-an-underrated-proving-ground",
+    datePublished: "2026-07-14",
+    dateModified: "2026-07-14",
     title: "The RFP Is an Underrated Proving Ground for Engineers",
     category: "Guide",
     audience: "Programmers who want a more serious project than another app clone",
@@ -922,6 +934,8 @@ export const articles = [
   },
   {
     handle: "systems-thinking-through-code",
+    datePublished: "2026-07-14",
+    dateModified: "2026-07-14",
     title: "How Real Constraints Become Software Architecture",
     category: "Strategy",
     audience: "Builders training for AI, automation, and software roles",
@@ -938,6 +952,8 @@ export const articles = [
   },
   {
     handle: "why-git-matters-for-builders",
+    datePublished: "2026-07-14",
+    dateModified: "2026-07-14",
     title: "Why Git Matters When AI Is Moving Fast",
     category: "Tutorial",
     audience: "Builders using AI agents on real code",

@@ -30,11 +30,11 @@ function shot(index) {
 }
 
 function packMedia(pack, index) {
-  if (pack.heroImage) return `<img src="${pack.heroImage}" alt="" />`;
+  if (pack.heroImage) return `<img src="${pack.heroImage}" alt="${escapeHtml(pack.title)}" />`;
   if (pack.heroShotIndex === undefined || pack.heroShotIndex === null) {
     return `<div class="media-icon-tile"><span class="material-symbols-outlined">${escapeHtml(pack.icon)}</span></div>`;
   }
-  return `<img src="${shot(index ?? pack.heroShotIndex)}" alt="" />`;
+  return `<img src="${shot(index ?? pack.heroShotIndex)}" alt="${escapeHtml(pack.title)}" />`;
 }
 
 function formatDate(value) {
@@ -346,29 +346,34 @@ export function renderHome(data) {
   `;
 
   return pageShell({
-    title: "AutoNateAI | Building Southeast Missouri's AI Workforce",
+    title: "AutoNateAI | AI Consulting & Development, Sikeston, MO",
     active: "home",
     body,
     canonicalPath: "/",
-    ogImage: "/assets/og/programs.jpg",
+    ogImage: "/assets/og/default.jpg",
     description:
-      "AutoNateAI trains students and professionals in Sikeston, MO to design software systems with AI, then apply those skills to real problems inside businesses, schools, and community organizations across Southeast Missouri.",
-    ogTitle: "Building Southeast Missouri's AI Workforce.",
+      "AutoNateAI builds real internal AI tools for Southeast Missouri businesses and trains teams to build their own — fixed-scope pricing, based in Sikeston, MO.",
+    ogTitle: "Enterprise-grade AI systems, at Southeast Missouri prices.",
     ogDescription:
-      "An in-person cohort in Sikeston, MO, four free digital courses, and an always-on Discord where students and professionals design databases, APIs, and architecture with Claude Code and Codex, then ship a real system for a real organization.",
+      "AutoNateAI researches a real workflow, architects the system, and builds it — either directly through Consulting, or by training your team to build it themselves. Fixed-scope pricing, based in Sikeston, MO.",
     structuredData: [
       {
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
+        "@type": ["ProfessionalService", "EducationalOrganization"],
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI develops Southeast Missouri's AI and software workforce, training students and professionals to design real software systems, direct AI agents responsibly, and ship real systems for real organizations.",
+        "description": "AutoNateAI is Southeast Missouri's AI consulting and development studio: real internal tools for real businesses, custom team training, and free weekly Industry Build Labs, based in Sikeston, MO.",
+        "areaServed": {
+          "@type": "State",
+          "name": "Missouri",
+        },
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Sikeston",
           "addressRegion": "MO",
           "addressCountry": "US",
         },
+        "priceRange": "$$",
       },
     ],
   });
@@ -410,6 +415,12 @@ export function renderAbout() {
     ["Veterans United", "AI software engineering for real organizational workflows"],
     ["Atomic Object", "Senior software consulting across products, teams, and architecture decisions"],
     ["Outlier", "Prompt engineering and AI workflow evaluation before it became mainstream"],
+  ];
+  const faqs = [
+    ["Do you build it, or train us to build it?", "Both are on the table. Consulting means AutoNateAI researches, architects, and builds the tool for you. Requested team training means your own people learn to build it themselves, over a 4-day on-site engagement."],
+    ["How does AI fit into the work?", "Every build uses agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it doesn't replace understanding — every engagement stays reviewed and explainable."],
+    ["Why is this more affordable than I'd expect?", "Agentic AI collapses the distance between architecture and working software. Work that used to require a full in-house engineering team can now be scoped, built, and delivered by a much smaller one — and that savings gets passed on."],
+    ["Who is this for?", "Any Southeast Missouri business, school, or nonprofit with a real workflow that's eating staff time — plus anyone who wants to sharpen their own technical skills through the free course library."],
   ];
 
   const body = `
@@ -546,10 +557,7 @@ export function renderAbout() {
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
-          <article><h3>Do you build it, or train us to build it?</h3><p>Both are on the table. Consulting means AutoNateAI researches, architects, and builds the tool for you. Requested team training means your own people learn to build it themselves, over a 4-day on-site engagement.</p></article>
-          <article><h3>How does AI fit into the work?</h3><p>Every build uses agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it doesn't replace understanding — every engagement stays reviewed and explainable.</p></article>
-          <article><h3>Why is this more affordable than I'd expect?</h3><p>Agentic AI collapses the distance between architecture and working software. Work that used to require a full in-house engineering team can now be scoped, built, and delivered by a much smaller one — and that savings gets passed on.</p></article>
-          <article><h3>Who is this for?</h3><p>Any Southeast Missouri business, school, or nonprofit with a real workflow that's eating staff time — plus anyone who wants to sharpen their own technical skills through the free course library.</p></article>
+          ${faqs.map(([q, a]) => `<article><h3>${escapeHtml(q)}</h3><p>${escapeHtml(a)}</p></article>`).join("")}
         </div>
       </section>
 
@@ -565,13 +573,13 @@ export function renderAbout() {
   `;
 
   return pageShell({
-    title: "About AutoNateAI | Southeast Missouri AI Consulting & Development",
+    title: "About AutoNateAI | AI Consulting, Sikeston, MO",
     active: "about",
     body,
     canonicalPath: "/about",
     ogImage: "/assets/og/about.jpg",
     description:
-      "AutoNateAI is Southeast Missouri's AI consulting and development studio. World-class experience across Michigan, Microsoft, Citi, Veterans United, and Atomic Object, now reinvested locally in Sikeston, MO.",
+      "AutoNateAI is Southeast Missouri's AI consulting studio, founded by ex-Microsoft, Citi, and Veterans United engineer Nathan Baker, based in Sikeston, MO.",
     ogTitle: "Meet the team behind AutoNateAI.",
     ogDescription:
       "Real engineering experience, real Southeast Missouri clients, and a five-year regional vision: prove the model in Sikeston, expand consulting and training across the region, become the region's standing AI partner.",
@@ -580,7 +588,7 @@ export function renderAbout() {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Nathan Baker",
-        "jobTitle": "Founder and Instructor",
+        "jobTitle": "Founder and Principal Consultant",
         "worksFor": {
           "@type": "Organization",
           "name": "AutoNateAI",
@@ -589,6 +597,18 @@ export function renderAbout() {
           "@type": "CollegeOrUniversity",
           "name": "University of Michigan",
         },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(([q, a]) => ({
+          "@type": "Question",
+          "name": q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": a,
+          },
+        })),
       },
     ],
   });
@@ -878,13 +898,13 @@ export function renderForOrganizations(data) {
   `;
 
   return pageShell({
-    title: "Custom AI Training for Local Businesses | Sikeston, MO | AutoNateAI",
+    title: "Custom AI Training for Local Businesses | AutoNateAI",
     active: "for-organizations",
     body,
     canonicalPath: "/for-organizations",
     ogImage: "/assets/og/for-organizations.jpg",
     description:
-      "Custom, on-site AI and development training for Southeast Missouri businesses: 4 days, real ChatGPT/Claude/Codex/Claude Code workflows, and 3 real internal tools your team builds and keeps.",
+      "Custom, on-site AI training for Southeast Missouri businesses: 4 days, real ChatGPT/Claude/Codex workflows, and 3 real internal tools your team builds and keeps.",
     ogTitle: "Custom AI & development training, built around your business.",
     ogDescription:
       "A requested, customized 4-day training engagement for your team — prompt and context engineering, real internal tools chosen from a menu of 9, built for your industry.",
@@ -1020,7 +1040,7 @@ export function renderEvents() {
     canonicalPath: "/events",
     ogImage: "/assets/og/events.jpg",
     description:
-      "AutoNateAI's free weekly Industry Build Labs: a real Southeast Missouri industry workflow, built live into a real internal AI tool, three sessions a week, over Google Meet.",
+      "AutoNateAI's free Industry Build Labs: a real Southeast Missouri workflow built live into a working AI tool, three sessions a week, over Google Meet.",
     ogTitle: "We build a real internal tool live, every week, free.",
     ogDescription:
       "One industry gets the spotlight each week — three live build sessions, Tuesday through Thursday, 11:30 AM Central. Free, over Google Meet.",
@@ -1213,7 +1233,7 @@ export function renderConsulting(data) {
     canonicalPath: "/consulting",
     ogImage: "/assets/og/consulting.jpg",
     description:
-      "AutoNateAI Consulting builds internal AI tools for Southeast Missouri businesses across nine regional industries — agriculture, automotive, construction, finance, government, graphic arts, healthcare, manufacturing, and tourism.",
+      "AutoNateAI Consulting builds real internal AI tools for Southeast Missouri businesses, fixed-scope, priced for a business your size, not an enterprise contract.",
     ogTitle: "We build the internal AI tools your business wishes existed.",
     ogDescription:
       "Nine regional industries, one methodology: research the workflow, architect the system, build it live, hand it off to a team that can run it. See it happen free every week at the Industry Build Labs.",
@@ -1299,7 +1319,7 @@ export function renderTutorials() {
     canonicalPath: "/tutorials",
     ogImage: "/assets/og/courses.jpg",
     description:
-      "A free library of technical courses: JavaScript fundamentals, prompt and context engineering, relational databases and graphs, and civics with agentic AI, following Nate and Kai as they build AutoNateAI. Discord support included.",
+      "A free course library: JavaScript fundamentals, prompt and context engineering, databases, and agentic AI, with Discord support included. No cost, no catch.",
     ogTitle: "Sharpen your technical skills. Free.",
     ogDescription:
       "A free course library with real curriculum and real code, plus a Discord community for help along the way. No enrollment, no cost, no catch.",
@@ -1528,7 +1548,7 @@ export function renderArticles() {
   `;
 
   return pageShell({
-    title: "AI & Workforce Development Articles | Southeast Missouri | AutoNateAI",
+    title: "Articles | AI & Systems in Southeast Missouri | AutoNateAI",
     active: "articles",
     body,
     canonicalPath: "/articles",
@@ -1550,6 +1570,7 @@ export function renderArticleDetail(article) {
           <span class="kicker">${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
           <h1>${escapeHtml(article.title)}</h1>
           <p>${escapeHtml(article.summary)}</p>
+          <div class="article-byline">By Nathan Baker, AutoNateAI${article.datePublished ? ` &middot; <time datetime="${escapeHtml(article.datePublished)}">${escapeHtml(formatDate(article.datePublished))}</time>` : ""}${article.dateModified && article.dateModified !== article.datePublished ? ` &middot; Updated ${escapeHtml(formatDate(article.dateModified))}` : ""}</div>
           <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
         </header>
         <img src="${article.image}" alt="${escapeHtml(article.title)}" />
@@ -1576,13 +1597,24 @@ export function renderArticleDetail(article) {
         "headline": article.title,
         "description": article.summary,
         "image": `https://autonateai.com${article.image}`,
+        "datePublished": article.datePublished,
+        "dateModified": article.dateModified || article.datePublished,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `https://autonateai.com/articles/${article.handle}`,
+        },
         "author": {
-          "@type": "Organization",
-          "name": "AutoNateAI",
+          "@type": "Person",
+          "name": "Nathan Baker",
+          "url": "https://autonateai.com/about",
         },
         "publisher": {
           "@type": "Organization",
           "name": "AutoNateAI",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://autonateai.com/assets/brand/logo-512.png",
+          },
         },
       },
     ],

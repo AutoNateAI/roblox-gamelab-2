@@ -42,9 +42,12 @@ const routes = [
   ["success/index.html", renderSuccess(programsData)],
 ];
 
-function sitemapEntry(url, priority = "0.7") {
+const TODAY = new Date().toISOString().slice(0, 10);
+
+function sitemapEntry(url, priority = "0.7", lastmod = TODAY) {
   return `  <url>
     <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${priority}</priority>
   </url>`;
@@ -96,19 +99,21 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
-  sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.9"),
-  sitemapEntry("https://autonateai.com/consulting", "0.8"),
-  sitemapEntry("https://autonateai.com/events", "0.8"),
+  sitemapEntry("https://autonateai.com/consulting", "0.9"),
   sitemapEntry("https://autonateai.com/for-organizations", "0.9"),
+  sitemapEntry("https://autonateai.com/events", "0.8"),
   sitemapEntry("https://autonateai.com/tutorials", "0.8"),
-  sitemapEntry("https://autonateai.com/community", "0.8"),
-  sitemapEntry("https://autonateai.com/about", "0.8"),
   sitemapEntry("https://autonateai.com/articles", "0.7"),
+  sitemapEntry("https://autonateai.com/about", "0.7"),
+  sitemapEntry("https://autonateai.com/community", "0.6"),
+  sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.5"),
   ...tutorialPacks.map((pack) => sitemapEntry(`https://autonateai.com/tutorials/${pack.handle}`, "0.7")),
   ...tutorials.map((tutorial) =>
     sitemapEntry(`https://autonateai.com/tutorials/${tutorial.pack}/${tutorial.handle}`, tutorial.draft ? "0.3" : "0.6"),
   ),
-  ...articles.map((article) => sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6")),
+  ...articles.map((article) =>
+    sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6", article.dateModified || article.datePublished || TODAY),
+  ),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
