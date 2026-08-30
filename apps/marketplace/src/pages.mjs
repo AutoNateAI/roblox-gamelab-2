@@ -8,6 +8,7 @@ import {
   foundingBankPilot,
   industries,
   industryWeeks,
+  kickoffSession,
   organizationExamples,
   regionalVision,
   sceneShots,
@@ -978,6 +979,41 @@ export function renderEvents() {
             </div>
           </div>
         </aside>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("celebration")} First Session</span>
+            <h2>The Kickoff — ${escapeHtml(dayName(kickoffSession.date))}, ${escapeHtml(shortDate(kickoffSession.date))}</h2>
+            <p>Before the industry rotation starts, one standalone session to show what an Industry Build Lab actually is: we introduce the format, then research, architect, and build a real internal tool live — a "${escapeHtml(kickoffSession.topic)}" any local business could use. Same process, same open floor for Q&amp;A.</p>
+          </div>
+        </div>
+        <div class="week-calendar-solo">
+          <article class="industry-card week-calendar-card week-calendar-next">
+            <div class="week-calendar-head">
+              <div class="industry-card-icon">${icon("celebration")}</div>
+              <div>
+                <span class="kicker">${icon("bolt")} First Ever Build Lab</span>
+                <h3>Kickoff Session</h3>
+                <span class="week-range">${escapeHtml(shortDate(kickoffSession.date))}</span>
+              </div>
+            </div>
+            <div class="week-calendar-days">
+              <div class="week-calendar-day">
+                <div class="week-calendar-day-label">
+                  <strong>${escapeHtml(dayName(kickoffSession.date))}</strong>
+                  <span>${escapeHtml(shortDate(kickoffSession.date))} &middot; 11:30 AM CST</span>
+                </div>
+                <p>"${escapeHtml(kickoffSession.topic)}"</p>
+                <div class="button-row">
+                  <a class="primary-button" href="${kickoffSession.meetUrl}">Join ${icon("videocam")}</a>
+                  <a class="outline-button" href="${kickoffSession.calendarUrl}">Add to Calendar</a>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 

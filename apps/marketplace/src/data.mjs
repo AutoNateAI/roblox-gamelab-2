@@ -215,6 +215,17 @@ export const buildLabInfo = {
   format: "Three live sessions a week — Tuesday, Wednesday, Thursday, 11:30 AM Central — all building toward internal tools for that week's featured industry.",
 };
 
+// One-off standalone launch session, ahead of the industry rotation (which starts
+// with Graphic Arts & Printing on 2026-09-15 — see industryWeeks). Not tied to any
+// single industry: introduces the Build Lab format itself, live. Real Google
+// Calendar event on autonate.ai@gmail.com (public, own Google Meet link).
+export const kickoffSession = {
+  date: "2026-09-01",
+  topic: "Customer Follow-Up & Intake Agent",
+  meetUrl: "https://meet.google.com/ufv-uwji-dxn",
+  calendarUrl: "https://www.google.com/calendar/event?eid=OHVkNXFkOTVnM3F1bHU2Zml0OWlwM2dvbW8gYXV0b25hdGUuYWlAbQ",
+};
+
 // The nine-tool menu offered inside a requested business-training engagement (see
 // businessTrainingCurriculum below). Generic on purpose — customized to the specific
 // requesting business's real workflows during the engagement. Each business picks 3.
