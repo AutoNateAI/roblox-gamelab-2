@@ -50,7 +50,7 @@ export function topNav(active = "home", mode = "full") {
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
           ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/consulting#book">Talk to Us</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/about#work-with-me">Work With Me</a>`}
         </div>
       </nav>
     </header>
@@ -63,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>AI consulting and development for Southeast Missouri businesses: real internal tools, custom team training, and free weekly live builds, based in Sikeston, MO.</p>
+          <p>Independent AI, software, and human-systems research lab — the practice of Nathan Baker. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
         </div>
-        ${footerColumn("Work With Us", [["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Industry Build Labs", "/events"], ["Free Courses", "/tutorials"]])}
-        ${footerColumn("Company", [["Discord", "https://discord.gg/4HkkuntdSs"], ["Community", "/community"], ["About AutoNateAI", "/about"], ["Articles", "/articles"]])}
+        ${footerColumn("The Lab", [["Latest", "/"], ["Publications", "/articles"], ["Experiments", "/experiments"], ["Projects", "/projects"], ["Open Source", "/open-source"]])}
+        ${footerColumn("Company", [["Events", "/events"], ["Learn", "/tutorials"], ["Work With Me", "/about#work-with-me"], ["Discord", "https://discord.gg/4HkkuntdSs"], ["About Nathan", "/about"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. AI consulting and development for Southeast Missouri, based in Sikeston, MO.</span>
+        <span>&copy; 2026 AutoNateAI. Independent AI, software, and human-systems research lab.</span>
       </div>
     </footer>
   `;
@@ -88,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI is Southeast Missouri's AI consulting and development studio, based in Sikeston, MO: real internal tools for real businesses, custom team training, and free weekly live builds.";
+  "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker: research, experiments, open-source work, and free technical courses.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

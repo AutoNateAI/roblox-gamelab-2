@@ -5,10 +5,15 @@ import {
   bankingOfferings,
   businessTrainingCurriculum,
   buildLabInfo,
+  currentInvestigation,
+  eventSignals,
   foundingBankPilot,
   industries,
   industryWeeks,
   kickoffSession,
+  labExperiments,
+  labProjects,
+  openSourceRepos,
   organizationExamples,
   regionalVision,
   sceneShots,
@@ -156,6 +161,64 @@ function industryWeekCalendarCard(week, industryBySlug, isNext = false) {
   `;
 }
 
+function projectCard(project) {
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(project.icon)}</div>
+      <div class="card-title-row"><h3>${escapeHtml(project.name)}</h3><span class="status-pill">${escapeHtml(project.status)}</span></div>
+      <p class="industry-hook">${escapeHtml(project.tagline)}</p>
+      <ul class="industry-capabilities">
+        ${project.desks.map((desk) => `<li>${icon("radar")}<span>${escapeHtml(desk)}</span></li>`).join("")}
+      </ul>
+      <a class="outline-button full" href="/projects#${project.slug}">View Project ${icon("arrow_forward")}</a>
+    </article>
+  `;
+}
+
+function experimentCard(experiment) {
+  const project = labProjects.find((item) => item.slug === experiment.project);
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(experiment.icon)}</div>
+      <div class="card-title-row"><h3>${escapeHtml(experiment.name)}</h3><span class="status-pill">${escapeHtml(experiment.status)}</span></div>
+      <p class="industry-hook">${escapeHtml(experiment.question)}</p>
+      <ul class="industry-capabilities">
+        ${experiment.notes.map((note) => `<li>${icon("science")}<span>${escapeHtml(note)}</span></li>`).join("")}
+      </ul>
+      ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
+    </article>
+  `;
+}
+
+function repoCard(repo) {
+  const project = labProjects.find((item) => item.slug === repo.project);
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon(repo.icon)}</div>
+      <div class="card-title-row"><h3>${escapeHtml(repo.name)}</h3><span class="status-pill">${escapeHtml(repo.status)}</span></div>
+      <p class="industry-hook">${escapeHtml(repo.hook)}</p>
+      <ul class="industry-capabilities">
+        ${repo.notes.map((note) => `<li>${icon("bolt")}<span>${escapeHtml(note)}</span></li>`).join("")}
+      </ul>
+      <div class="button-row">
+        ${repo.searchUrl ? `<a class="outline-button full" href="${repo.searchUrl}">Find on GitHub ${icon("open_in_new")}</a>` : ""}
+        ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function eventSignalCard(signal) {
+  return `
+    <article class="industry-card">
+      <div class="industry-card-icon">${icon("radar")}</div>
+      <h3>${escapeHtml(signal.name)}</h3>
+      <p class="industry-hook">${escapeHtml(signal.focus)}</p>
+      <span class="kicker">${icon("radar")} Flagged by ${escapeHtml(signal.source)}</span>
+    </article>
+  `;
+}
+
 function sponsorshipTierCard(tier) {
   return `
     <button type="button" class="offering-card tier-select-card" data-seat-tier="${tier.seats}">
@@ -168,44 +231,44 @@ function sponsorshipTierCard(tier) {
 }
 
 export function renderHome(data) {
-  const { programs } = data;
-  const primaryProgram = programs?.[0];
   const landingArticles = [
     "why-southeast-missouri-businesses-need-internal-ai-capability",
-    "what-ai-workforce-readiness-looks-like-for-sikeston-students",
     "coding-as-workforce-development",
+    "why-git-matters-for-builders",
   ]
     .map((handle) => articles.find((article) => article.handle === handle))
     .filter(Boolean);
 
+  const todayCards = [
+    { label: "Research", icon: "biotech", title: "Three desks converged on agent memory & evaluation", href: "/publications" },
+    { label: "Open Source", icon: "hub", title: `Studying ${openSourceRepos.map((r) => r.name).join(" and ")}`, href: "/open-source" },
+    { label: "Experiment", icon: "science", title: labExperiments[0]?.name || "None proposed yet", href: "/experiments" },
+    { label: "Human Systems", icon: "psychology", title: "Evidence-ladder read of EEG/HRV & contemplative research", href: "/projects#human-systems" },
+  ];
+
   const body = `
-    <main>
-      <section class="home-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-consulting-industries.jpg" alt="Nathan Baker architecting a system for a Southeast Missouri business" /></div>
+    <main class="lab-home">
+      <section class="home-hero lab-masthead">
+        <div class="hero-bg"><img src="/assets/scenes/scene-04.jpg" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("hub")} AI Consulting &amp; Development · Southeast Missouri</span>
-            <h1>Enterprise-grade AI systems, at Southeast Missouri prices.</h1>
-            <p>Agentic AI is democratizing access to engineering workflows that used to require a full in-house team. AutoNateAI brings that capability directly to Sikeston and the rest of Southeast Missouri — real internal tools, built fast, priced for a business your size, not an enterprise vendor contract.</p>
+            <span class="kicker">${icon("radar")} Independent AI, Software &amp; Human Systems Lab</span>
+            <h1>AutoNateAI is Nathan Baker's research practice.</h1>
+            <p>I research, build, and write about how software, intelligence, and human systems interact — then publish what holds up. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
             <div class="button-row">
-              <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/for-organizations">Request Team Training</a>
-            </div>
-            <div class="button-row">
-              <a class="outline-button" href="/tutorials">Free Course Library</a>
+              <a class="primary-button" href="/projects#${currentInvestigation.slug}">View Current Investigation ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="/tutorials">Free Course Library</a>
             </div>
           </div>
           <aside class="hero-program-panel">
-            <img src="/assets/sikeston/downtown-street.jpg" alt="Historic downtown Sikeston, Missouri" />
             <div class="hero-panel-body">
-              <span class="kicker">${icon("event")} See It Built, Live, Free</span>
-              <h2>Every week, we build a real internal tool for a different regional industry — live.</h2>
-              <p>No slides. A real workflow, researched and architected on the spot, built into working software, with an open floor for Q&amp;A.</p>
+              <span class="kicker">${icon("bolt")} Current Investigation &middot; ${escapeHtml(currentInvestigation.status)}</span>
+              <h2>${escapeHtml(currentInvestigation.title)}</h2>
+              <p>${escapeHtml(currentInvestigation.question)}</p>
               <div class="hero-facts">
-                <span>Fixed-scope pricing</span>
-                <span>Built in Southeast Missouri</span>
-                <span>Free weekly live builds</span>
-                <span>Discord support included</span>
+                <span>${labProjects.length} active project${labProjects.length === 1 ? "" : "s"}</span>
+                <span>${labExperiments.length} proposed experiment${labExperiments.length === 1 ? "" : "s"}</span>
+                <span>${openSourceRepos.length} repos queued</span>
               </div>
             </div>
           </aside>
@@ -215,84 +278,61 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head section-head-center">
           <div>
-            <span class="kicker">${icon("route")} What We Offer</span>
-            <h2>Four ways to work with AutoNateAI.</h2>
-            <p>Whether you want us to build it, want your team trained to build it, want to watch it happen first, or want to learn the fundamentals yourself — there's a starting point here.</p>
+            <span class="kicker">${icon("today")} Today at the Lab</span>
+            <h2>What surfaced from this morning's research desks.</h2>
+            <p>${escapeHtml(currentInvestigation.thesis)}</p>
           </div>
         </div>
         <div class="value-grid">
-          <article><span>${icon("hub")}</span><h3>Consulting</h3><p>Bring us a real workflow. We research it, architect it, and build the internal tool — your team owns it when we're done.</p><a class="outline-button full" href="/consulting">Learn More ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("groups")}</span><h3>For Organizations</h3><p>A custom, on-site training engagement for your team — they leave with 3 real internal tools built for your business.</p><a class="outline-button full" href="/for-organizations">Learn More ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("event")}</span><h3>Industry Build Labs</h3><p>Free, live, every week — watch a real internal tool get built for a different regional industry, no cost to attend.</p><a class="outline-button full" href="/events">Learn More ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("auto_stories")}</span><h3>Free Courses</h3><p>A free library of technical courses for sharpening your own skills, with Discord support built in.</p><a class="outline-button full" href="/tutorials">Learn More ${icon("arrow_forward")}</a></article>
+          ${todayCards.map((card) => `<article><span>${icon(card.icon)}</span><h3>${escapeHtml(card.label)}</h3><p>${escapeHtml(card.title)}</p><a class="outline-button full" href="${card.href}">Look Closer ${icon("arrow_forward")}</a></article>`).join("")}
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("public")} Why This Works Here</span>
-            <h2>Real Southeast Missouri organizations make architecture visible.</h2>
-            <p>Not a made-up case study — the business, school, or nonprofit you already know around town. Requirements become data models, decisions become components, Git protects every experiment, and every AI-generated change gets reviewed, not blindly trusted. The system has to actually work for someone here, not just demo well — and agentic AI means we can build it for a fraction of what it used to cost.</p>
+            <span class="kicker">${icon("hub")} Active Projects</span>
+            <h2>What's forming right now.</h2>
+            <p>Multi-week research programs that group publications, experiments, sources, and code as they accumulate.</p>
           </div>
-          <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/projects">All Projects ${icon("arrow_forward")}</a>
         </div>
-        <div class="value-grid">
-          <article><span>${icon("functions")}</span><h3>Built for someone local</h3><p>Every engagement is a real system for a real Southeast Missouri organization: databases, APIs, architecture, and the tradeoffs that come with an actual business depending on it.</p></article>
-          <article><span>${icon("account_tree")}</span><h3>Engineered like engineers</h3><p>Working versions committed, diffs reviewed, changes recoverable — a repo history that explains exactly what was built and why, not a black box.</p></article>
-          <article><span>${icon("hub")}</span><h3>Databases and APIs</h3><p>Relational and graph data models for your organization's actual data, a real API, and architecture documented so your team can maintain it.</p></article>
-          <article><span>${icon("forum")}</span><h3>A community that outlasts the engagement</h3><p>The Discord is open all day, every day — for anyone working through the free courses, anyone in a training engagement, and anyone who's been through either.</p></article>
+        <div class="industry-grid">${labProjects.map((project) => projectCard(project)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("science")} Experiments &amp; Open Source</span>
+            <h2>What's queued to test and study.</h2>
+            <p>Hypothesis, method, and the repos behind them — nothing here is marked further along than it actually is.</p>
+          </div>
+          <a class="primary-button" href="/experiments">All Experiments ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid">
+          ${labExperiments.map((experiment) => experimentCard(experiment)).join("")}
+          ${openSourceRepos.map((repo) => repoCard(repo)).join("")}
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("auto_stories")} Free Course Library</span>
-            <h2>Sharpen your technical skills, free, whenever you're ready.</h2>
-            <p>Each course is a standalone, story-driven guide following Nate and Kai as they build AutoNateAI from a meetup back room to a real, shipped system. Read one, or read all four — no cost, no catch.</p>
-            <p>These four pillars are the same foundation our training engagements and Build Labs build on — the fundamentals behind every internal tool we ship for a real Southeast Missouri organization.</p>
+            <span class="kicker">${icon("auto_stories")} Learn From the Lab</span>
+            <h2>Free technical courses, no cost, no catch.</h2>
+            <p>Four story-driven courses following Nate and Kai from a meetup back room to a real, shipped system — the same fundamentals behind everything researched and built here.</p>
           </div>
           <a class="primary-button" href="/tutorials">Browse Free Courses ${icon("arrow_forward")}</a>
         </div>
         <div class="pack-grid">${tutorialPacks.map((pack) => packCard(pack)).join("")}</div>
       </section>
 
-      <section class="section compete-section">
-        <div class="compete-layout">
-          <div class="compete-visual">
-            <div class="compete-media">
-              <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="A laptop screen showing an internal business dashboard built for a Southeast Missouri organization" />
-              <div class="compete-callout">
-                <span>${icon("flag")} Live, every week</span>
-                <strong>A real internal tool, built in front of you</strong>
-                <p>See whether an architecture like yours can hold up — before you commit to anything.</p>
-              </div>
-            </div>
-            <div class="button-row compete-actions">
-              <a class="primary-button" href="/events">See a Build Lab ${icon("arrow_forward")}</a>
-              <a class="outline-button" href="/for-organizations">Request Team Training</a>
-            </div>
-          </div>
-          <div class="compete-copy">
-            <span class="kicker">${icon("emoji_events")} Research, Architect, Build, Ship</span>
-            <h2>The same process, whether it's your workflow or a Build Lab audience watching.</h2>
-            <p>This is the methodology behind everything AutoNateAI ships: a real workflow from a real Southeast Missouri organization, researched, architected, and built into working software — with the people who'll actually use it in the room.</p>
-            <div class="compete-curriculum">
-              <article><b>01</b><span>Research the real workflow — terminology, constraints, what actually happens today.</span></article>
-              <article><b>02</b><span>Architect the system — data model, API, and a documented plan before a line of code ships.</span></article>
-              <article><b>03</b><span>Build and refine it live, then hand off a system your team can actually run.</span></article>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="Nathan Baker shaking hands with a local employer partner in the Sikeston classroom" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="Nathan Baker" /></div>
         <div>
           <span class="kicker">${icon("forum")} Always-On Support</span>
           <h2>The Discord doesn't close when a session does.</h2>
-          <p>Get help with the free courses, get help during a training engagement, or get help designing and building a system you've already got an idea for. It's open all day, every day, not just during scheduled sessions.</p>
+          <p>Get help with the free courses, ask about a project or experiment, or bring a system you're trying to design yourself. It's open all day, every day, not just during scheduled sessions.</p>
           <div class="stat-grid">
             <div><strong>All day, every day</strong><span>Availability</span></div>
             <div><strong>Free</strong><span>Open to Everyone</span></div>
@@ -305,78 +345,169 @@ export function renderHome(data) {
       </section>
 
       <section class="section">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("route")} How It All Connects</span>
-            <h2>Consulting. Team training. Live builds. Free courses. It's one system.</h2>
-            <p>Every path teaches and ships the same skill, pointed at real Southeast Missouri organizations — the difference is just who's driving.</p>
-          </div>
-        </div>
-        <div class="compete-curriculum">
-          <article><b>01</b><span><a href="/consulting">Hire it out</a> — AutoNateAI researches, architects, and builds the internal tool for you.</span></article>
-          <article><b>02</b><span><a href="/for-organizations">Train your team</a> — a custom, on-site engagement, and your people leave able to build it themselves.</span></article>
-          <article><b>03</b><span><a href="/events">See it live</a> — free weekly Industry Build Labs, no cost to attend.</span></article>
-          <article><b>04</b><span><a href="/tutorials">Start free</a> — a self-paced course library for sharpening your own skills.</span></article>
-        </div>
-      </section>
-
-      <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("article")} Articles</span>
-            <h2>Research, workforce insights, and build notes.</h2>
-            <p>We write up research on AI adoption in Southeast Missouri, notes from real engagements, and behind-the-scenes looks at how these systems actually get built.</p>
+            <span class="kicker">${icon("article")} Publications</span>
+            <h2>Research, field notes, and build notes.</h2>
+            <p>Finished writing from the lab — what's been researched, built, and learned so far.</p>
           </div>
-          <a class="primary-button" href="/articles">Read More Articles ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/articles">Read More Publications ${icon("arrow_forward")}</a>
         </div>
         <div class="article-grid">${landingArticles.map((article) => articleCard(article)).join("")}</div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Have a workflow that's eating your team's time?</h2>
-          <p>Tell us about it. We'll tell you honestly whether an internal tool makes sense, what it would take to build, and what it would cost — fixed scope, no enterprise-length contract.</p>
-          <form>
-            <input placeholder="Enter your email" type="email" />
-            <button type="button">Get in Touch</button>
-          </form>
-          <small>Prefer to start free? The <a href="/tutorials">course library</a> and the weekly <a href="/events">Industry Build Labs</a> cost nothing.</small>
+          <h2>Have a real system you need built?</h2>
+          <p>Architecture, AI engineering, and technical consulting are still very much on the table — see how to work with me directly.</p>
+          <div class="button-row">
+            <a class="primary-button" href="/about#work-with-me">Work With Me ${icon("arrow_forward")}</a>
+          </div>
+          <small>Prefer to start free? The <a href="/tutorials">course library</a> and <a href="/events">Lab Sessions</a> cost nothing.</small>
         </div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "AutoNateAI | AI Consulting & Development, Sikeston, MO",
+    title: "AutoNateAI | Nathan Baker's AI, Software & Human Systems Lab",
     active: "home",
     body,
     canonicalPath: "/",
     ogImage: "/assets/og/default.jpg",
     description:
-      "AutoNateAI builds real internal AI tools for Southeast Missouri businesses and trains teams to build their own — fixed-scope pricing, based in Sikeston, MO.",
-    ogTitle: "Enterprise-grade AI systems, at Southeast Missouri prices.",
+      "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker — research, experiments, open-source work, and free technical courses.",
+    ogTitle: "AutoNateAI is Nathan Baker's research practice.",
     ogDescription:
-      "AutoNateAI researches a real workflow, architects the system, and builds it — either directly through Consulting, or by training your team to build it themselves. Fixed-scope pricing, based in Sikeston, MO.",
+      "Research, build, publish: a living research lab tracking agentic AI systems, open source, and human systems, with free technical courses and consulting available.",
     structuredData: [
       {
         "@context": "https://schema.org",
-        "@type": ["ProfessionalService", "EducationalOrganization"],
+        "@type": ["Organization", "EducationalOrganization"],
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI is Southeast Missouri's AI consulting and development studio: real internal tools for real businesses, custom team training, and free weekly Industry Build Labs, based in Sikeston, MO.",
-        "areaServed": {
-          "@type": "State",
-          "name": "Missouri",
+        "description": "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker.",
+        "founder": {
+          "@type": "Person",
+          "name": "Nathan Baker",
         },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Sikeston",
-          "addressRegion": "MO",
-          "addressCountry": "US",
-        },
-        "priceRange": "$$",
       },
     ],
+  });
+}
+
+export function renderProjects() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/scenes/scene-02.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("hub")} Projects</span>
+            <h1>Multi-week research programs.</h1>
+            <p>Each project aggregates the publications, experiments, sources, and code that accumulate around one research question over time. Status reflects reality — "Forming" and "Watching" mean exactly what they say, not a euphemism for "active."</p>
+          </div>
+        </div>
+      </section>
+      <div class="article-grid">
+        ${labProjects
+          .map((project) => {
+            const experiments = labExperiments.filter((e) => e.project === project.slug);
+            const repos = openSourceRepos.filter((r) => r.project === project.slug);
+            return `
+              <article class="industry-card" id="${project.slug}">
+                <div class="industry-card-icon">${icon(project.icon)}</div>
+                <div class="card-title-row"><h3>${escapeHtml(project.name)}</h3><span class="status-pill">${escapeHtml(project.status)}</span></div>
+                <p class="industry-hook">${escapeHtml(project.tagline)}</p>
+                ${project.slug === currentInvestigation.slug ? `<p>${escapeHtml(currentInvestigation.note)}</p>` : ""}
+                <div class="stat-grid">
+                  <div><strong>${experiments.length}</strong><span>Experiments</span></div>
+                  <div><strong>${repos.length}</strong><span>Sources</span></div>
+                  <div><strong>${project.desks.length}</strong><span>Research Desks</span></div>
+                </div>
+                <ul class="industry-capabilities">
+                  ${project.desks.map((desk) => `<li>${icon("radar")}<span>${escapeHtml(desk)}</span></li>`).join("")}
+                </ul>
+              </article>
+            `;
+          })
+          .join("")}
+      </div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Projects | AutoNateAI Lab",
+    active: "projects",
+    body,
+    canonicalPath: "/projects",
+    description: "Active multi-week research programs from AutoNateAI, Nathan Baker's independent AI, software, and human-systems research lab.",
+    ogTitle: "Projects | AutoNateAI Lab",
+    ogDescription: "What's currently forming at the AutoNateAI lab, and which experiments and sources are attached to each research program.",
+  });
+}
+
+export function renderExperiments() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/scenes/scene-05.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("science")} Experiments</span>
+            <h1>The lab notebook.</h1>
+            <p>Question, hypothesis, method, result. Status is honest: "Proposed" means queued, not started — nothing here claims further progress than actually happened.</p>
+          </div>
+        </div>
+      </section>
+      ${
+        labExperiments.length
+          ? `<div class="article-grid">${labExperiments.map((experiment) => experimentCard(experiment)).join("")}</div>`
+          : `<div class="section-head section-head-center"><div><p>No experiments running yet — check back after the next research cycle.</p></div></div>`
+      }
+    </main>
+  `;
+
+  return pageShell({
+    title: "Experiments | AutoNateAI Lab",
+    active: "experiments",
+    body,
+    canonicalPath: "/experiments",
+    description: "The AutoNateAI lab notebook: question, hypothesis, method, and result for every experiment Nathan Baker runs.",
+    ogTitle: "Experiments | AutoNateAI Lab",
+    ogDescription: "Proposed and running experiments from AutoNateAI's independent AI, software, and human-systems research lab.",
+  });
+}
+
+export function renderOpenSource() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/scenes/scene-07.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("code")} Open Source</span>
+            <h1>What I'm studying, building with, and contributing to.</h1>
+            <p>Not a GitHub mirror — the repositories currently informing the lab's active projects, and why each one matters.</p>
+          </div>
+        </div>
+      </section>
+      ${
+        openSourceRepos.length
+          ? `<div class="article-grid">${openSourceRepos.map((repo) => repoCard(repo)).join("")}</div>`
+          : `<div class="section-head section-head-center"><div><p>Nothing queued yet — check back after the next research cycle.</p></div></div>`
+      }
+    </main>
+  `;
+
+  return pageShell({
+    title: "Open Source | AutoNateAI Lab",
+    active: "open-source",
+    body,
+    canonicalPath: "/open-source",
+    description: "Open-source repositories AutoNateAI is studying, building with, or contributing to — and why each one matters to the lab's current research.",
+    ogTitle: "Open Source | AutoNateAI Lab",
+    ogDescription: "The repositories currently informing AutoNateAI's active research projects.",
   });
 }
 
@@ -428,12 +559,12 @@ export function renderAbout() {
     <main class="about-page">
       <section class="about-hero">
         <div>
-          <span class="kicker">${icon("psychology")} About AutoNateAI</span>
-          <h1>AutoNateAI builds AI systems for Southeast Missouri businesses.</h1>
-          <p>AutoNateAI is an AI consulting and development studio — Nathan Baker builds real internal tools for real Southeast Missouri organizations, and trains teams to build and run that capability themselves, starting in Sikeston.</p>
+          <span class="kicker">${icon("psychology")} About</span>
+          <h1>I build and study software systems.</h1>
+          <p>AutoNateAI is Nathan Baker's independent AI, software, and human-systems research lab: I research, architect, and build real systems, then write up what I learn. Consulting, team training, and architecture work are all still on the table — see <a href="#work-with-me">Work With Me</a> below.</p>
           <div class="button-row">
-            <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/articles">Read the Learning Model</a>
+            <a class="primary-button" href="#work-with-me">Work With Me ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="/articles">Read the Publications</a>
           </div>
         </div>
         <aside class="about-founder-card">
@@ -448,9 +579,9 @@ export function renderAbout() {
 
       <section class="about-mission">
         <span class="kicker">${icon("architecture")} Mission</span>
-        <h2>AutoNateAI is Southeast Missouri's AI and development service provider.</h2>
-        <p>AI skills aren't only for technology companies. Missouri's 2026 Technology2030 report found more than 223,000 Missourians already work in technology occupations, many of them outside traditional tech companies. Agentic AI is what makes that capability affordable at a local-business scale: AutoNateAI researches a real workflow, architects the system, and builds it — either directly through Consulting, or by training your own team to build it through a requested engagement.</p>
-        <p>That practice is not hypothetical. Every engagement — and every free weekly Industry Build Lab — builds toward a real internal tool for a real organization. The Discord keeps that same discipline moving every day in between, and the free course library is open to anyone sharpening the fundamentals on their own.</p>
+        <h2>Research direction changes as the evidence changes.</h2>
+        <p>AutoNateAI isn't built around a fixed roadmap. Every research desk — agentic AI systems, open source, published research, technical events, and human systems — feeds a daily research cycle: observe, question, build, measure, publish, connect. What gets studied, built, and written up next comes from that evidence, not from a plan set in January.</p>
+        <p>That practice is not hypothetical. Every free weekly Lab Session builds toward a real system, live. The Discord keeps that same discipline moving every day in between, and the free course library is open to anyone sharpening the fundamentals on their own.</p>
       </section>
 
       <section class="spotlight-section">
@@ -555,6 +686,21 @@ export function renderAbout() {
         <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
       </section>
 
+      <section class="section compact" id="work-with-me">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("handshake")} Work With Me</span>
+            <h2>Architecture, AI engineering, and technical consulting are still very real.</h2>
+            <p>The lab is the front door now, but the underlying capability hasn't changed: real systems, researched and built for organizations that need them.</p>
+          </div>
+        </div>
+        <div class="value-grid">
+          <article><span>${icon("hub")}</span><h3>Consulting</h3><p>Bring a real workflow. I research it, architect it, and build the tool — your team owns it when it's done.</p><a class="outline-button full" href="/consulting">See Consulting ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("groups")}</span><h3>For Organizations</h3><p>A custom, on-site training engagement for your team — they leave with real internal tools built for your business.</p><a class="outline-button full" href="/for-organizations">See For Organizations ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_tree")}</span><h3>Architecture &amp; AI Engineering</h3><p>System design, data models, and agentic AI systems built and reviewed the way this lab's own experiments are.</p><a class="outline-button full" href="/consulting#book">Talk to Me ${icon("arrow_forward")}</a></article>
+        </div>
+      </section>
+
       <section class="section compact about-faq">
         <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
         <div class="faq-grid">
@@ -565,25 +711,25 @@ export function renderAbout() {
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Ready to Talk?</span>
-          <h2>Bring us a real workflow.</h2>
-          <p>Whether you want AutoNateAI to build it, want your team trained to build it, or just want to see how it's done first — every path starts with a conversation.</p>
+          <h2>Bring me a real workflow.</h2>
+          <p>Whether you want it built, want your team trained to build it, or just want to see how the lab works first — every path starts with a conversation.</p>
         </div>
-        <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/consulting#book">Talk to Me ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "About AutoNateAI | AI Consulting, Sikeston, MO",
+    title: "About Nathan Baker | AutoNateAI Lab",
     active: "about",
     body,
     canonicalPath: "/about",
     ogImage: "/assets/og/about.jpg",
     description:
-      "AutoNateAI is Southeast Missouri's AI consulting studio, founded by ex-Microsoft, Citi, and Veterans United engineer Nathan Baker, based in Sikeston, MO.",
-    ogTitle: "Meet the team behind AutoNateAI.",
+      "Nathan Baker is the researcher and engineer behind AutoNateAI, an independent AI, software, and human-systems research lab — ex-Microsoft, Citi, and Veterans United.",
+    ogTitle: "Nathan Baker — AutoNateAI Lab",
     ogDescription:
-      "Real engineering experience, real Southeast Missouri clients, and a five-year regional vision: prove the model in Sikeston, expand consulting and training across the region, become the region's standing AI partner.",
+      "Real engineering experience across Microsoft, Citi, Veterans United, and Atomic Object, now applied to an independent research lab and still-open consulting and training work.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -958,12 +1104,12 @@ export function renderEvents() {
         <div class="hero-bg"><img src="/assets/landing/sikeston-build-lab-live.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("event")} AutoNateAI Industry Build Labs</span>
-          <h1>We build a real internal tool live, every week, free.</h1>
-          <p>One industry gets the spotlight each week. Three live sessions — Tuesday, Wednesday, Thursday, 11:30 AM Central — each building a different internal tool for that week's industry. No slides, no theory-only session: real workflow, researched and built live, on Google Meet.</p>
+          <span class="kicker">${icon("event")} AutoNateAI Lab Sessions</span>
+          <h1>We build a real system live, every week, free.</h1>
+          <p>One industry gets the spotlight each week. Three live sessions — Tuesday, Wednesday, Thursday, 11:30 AM Central — each building a different internal tool live, on Google Meet, open floor for questions. No slides, no theory-only session.</p>
           <div class="button-row">
             <a class="primary-button" href="#schedule">See the Schedule ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/consulting">Bring Us Your Workflow</a>
+            <a class="secondary-button" href="/about#work-with-me">Bring Us Your Workflow</a>
           </div>
         </div>
         <aside class="hero-program-panel">
@@ -1058,26 +1204,37 @@ export function renderEvents() {
         <div class="industry-grid week-calendar-grid">${laterWeeks.map((week) => industryWeekCalendarCard(week, industryBySlug)).join("")}</div>
       </section>
 
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("radar")} Signals AutoNateAI Is Watching</span>
+            <h2>Conferences, hackathons, and research gatherings the radar flagged.</h2>
+            <p>Surfaced by the Events &amp; Build and Mindfulness Tech research desks — under review, not yet committed to.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${eventSignals.map((signal) => eventSignalCard(signal)).join("")}</div>
+      </section>
+
       <section class="detail-enroll-band">
         <div>
-          <span class="kicker">${icon("business_center")} Want this built for your organization?</span>
+          <span class="kicker">${icon("business_center")} Want a system built for your organization?</span>
           <h2>See a workflow like yours built live, then bring us the real one.</h2>
-          <p>Every Build Lab session doubles as a live demonstration of AutoNateAI Consulting's process. If you like what you see, bring us your actual workflow.</p>
+          <p>Every Lab Session doubles as a live demonstration of how AutoNateAI actually builds. If you like what you see, bring the real thing.</p>
         </div>
-        <a class="primary-button" href="/consulting#book">Talk to AutoNateAI ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/about#work-with-me">Work With Me ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Industry Build Labs | Free Weekly AI Live Builds | AutoNateAI",
+    title: "Events | AutoNateAI Lab",
     active: "events",
     body,
     canonicalPath: "/events",
     ogImage: "/assets/og/events.jpg",
     description:
-      "AutoNateAI's free Industry Build Labs: a real Southeast Missouri workflow built live into a working AI tool, three sessions a week, over Google Meet.",
-    ogTitle: "We build a real internal tool live, every week, free.",
+      "AutoNateAI's free weekly Lab Sessions, plus the conferences, hackathons, and research events the lab's daily radars are watching.",
+    ogTitle: "We build a real system live, every week, free.",
     ogDescription:
       "One industry gets the spotlight each week — three live build sessions, Tuesday through Thursday, 11:30 AM Central. Free, over Google Meet.",
   });
@@ -1553,9 +1710,9 @@ export function renderArticles() {
         <div class="hero-bg">${featuredArticle ? `<img src="${featuredArticle.image}" alt="" />` : ""}</div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("article")} Articles</span>
-            <h1>AI, Workforce &amp; Systems in Southeast Missouri.</h1>
-            <p>Research, practical guides, workforce insights, and field notes documenting how AI and software systems are changing the organizations and careers around us — written for students, working professionals, and the employers, schools, and nonprofits sponsoring them.</p>
+            <span class="kicker">${icon("article")} Publications</span>
+            <h1>Research, architecture, and field notes.</h1>
+            <p>Finished writing from the AutoNateAI lab — research analysis, engineering practice, and workforce insight, written up once it actually holds up.</p>
             ${featuredArticle ? `<div class="button-row"><a class="primary-button" href="/articles/${featuredArticle.handle}">Read Featured Article ${icon("arrow_forward")}</a></div>` : ""}
           </div>
           ${
@@ -1584,16 +1741,16 @@ export function renderArticles() {
   `;
 
   return pageShell({
-    title: "Articles | AI & Systems in Southeast Missouri | AutoNateAI",
+    title: "Publications | AutoNateAI Lab",
     active: "articles",
     body,
     canonicalPath: "/articles",
     ogImage: "/assets/og/articles.jpg",
     description:
-      "Research, workforce insights, and field notes on how AI and software systems are changing the organizations and careers around Southeast Missouri.",
-    ogTitle: "AI, Workforce & Systems in Southeast Missouri.",
+      "Research, architecture, and field notes from AutoNateAI, Nathan Baker's independent AI, software, and human-systems research lab.",
+    ogTitle: "Research, architecture, and field notes.",
     ogDescription:
-      "Workforce readiness research, employer and school impact reports, and behind-the-scenes build notes for students, professionals, and the organizations sponsoring them.",
+      "Finished writing from the AutoNateAI lab — research analysis, engineering practice, and workforce insight.",
   });
 }
 

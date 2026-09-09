@@ -226,19 +226,53 @@ or started, `/learn` and `/about` are close to static.
 - [x] Inaugural radar runs (manual) — Sept 9, 2026, seeded in
       `Radar_Reports/09092026/`.
 - [x] Radar_Reports tracked in git.
+- [x] Nav rebuilt (Sept 9, 2026): `navItems` in `src/data.mjs` is now
+      `Latest · Publications · Experiments · Projects · Open Source ·
+      Events · Learn · About`. Consulting/For Organizations demoted to
+      `/about#work-with-me` (still fully live at `/consulting`,
+      `/for-organizations`, `/programs/:handle` — just out of primary nav).
+- [x] `renderHome` rebuilt around Current Investigation / Today at the Lab /
+      Active Projects / Experiments & Open Source / Learn / Publications,
+      driven by new `src/data.mjs` exports: `currentInvestigation`,
+      `labProjects`, `labExperiments`, `openSourceRepos`, `eventSignals`.
+      These are **hand-seeded placeholders** (see the file's own comment
+      block) — real content once `Daily Lab State`/`Experiments`/`Projects`
+      exist in Airtable, same field shapes.
+- [x] New pages: `/experiments`, `/projects`, `/open-source` — `renderX`
+      functions in `src/pages.mjs`, wired into `server.mjs` and
+      `scripts/export-static.mjs` (routes + sitemap + nav).
+- [x] `/articles` (Publications), `/events` (Lab Sessions + "Signals
+      AutoNateAI Is Watching"), and `/about` (opens "I build and study
+      software systems," new `#work-with-me` section) copy updated to Lab
+      framing. Footer/meta identity (`src/components.mjs`) no longer leads
+      with Sikeston/Southeast Missouri.
+- [x] `scripts/export-static.mjs` static build verified end-to-end (51 pages,
+      dev-server smoke test on all changed/new routes — no runtime errors).
 - [ ] `Radar Runs / Daily Briefs` table (coverage/exhaustiveness tracking).
-- [ ] `Daily Lab State` table (public/private handoff surface).
+- [ ] `Daily Lab State` table (public/private handoff surface) — once this
+      exists, `currentInvestigation`/`labProjects`/`labExperiments`/
+      `openSourceRepos`/`eventSignals` in `data.mjs` should become a fetch
+      from Airtable instead of a hand-edited array. Same shapes, so this is
+      a data-source swap, not a template rewrite.
 - [ ] `AIRTABLE_BASE_ID_LAB` wired into `.env` + `src/airtable-client.mjs`
       consumer.
-- [ ] New `renderX` pages in `src/pages.mjs` for Experiments/Projects/
-      Open Source; rebuild of `renderHome`/`renderEvents`/`renderArticles`.
-- [ ] Nav update in `src/data.mjs` (`navItems`), footer copy in
-      `src/components.mjs` (currently hardcodes Sikeston/Southeast Missouri
-      identity — see line ~66, ~72).
-- [ ] Visual system (serif/sans/mono type scale, evidence badges, editorial
-      card hierarchy) implemented in `public/styles.css`.
-- [ ] Sitemap/meta/OG updates once routes exist (see
-      `docs/marketplace/google-search-console-setup.md`).
+- [ ] Visual system (serif/sans/mono type scale, evidence badges beyond the
+      reused `.status-pill`, editorial card hierarchy) — today's build
+      intentionally reused existing tokens/classes (Space Grotesk/Inter/
+      JetBrains Mono, `.industry-card`, `.value-grid`, `.status-pill`) rather
+      than introducing a new type system, to ship the IA/content pivot
+      without a parallel CSS rewrite. Revisit once real Lab content exists.
+- [ ] Regenerate OG images for `/experiments`, `/projects`, `/open-source`
+      (currently fall back to `DEFAULT_OG_IMAGE`) — see
+      `scripts/generate-og-images.mjs`.
+- [ ] Sikeston still appears in `regionalVision`, the About page "five-year
+      vision" section, and some image alt text/filenames — left as-is
+      (Nathan is genuinely Sikeston-based; this is no longer the primary
+      framing, just no longer scrubbed everywhere). Revisit if it reads as
+      inconsistent once real Lab content fills the page out.
+- [ ] Resubmit sitemap in Google Search Console once this deploys (see
+      `docs/marketplace/google-search-console-setup.md`) — new routes and
+      the homepage title/description both changed.
 
 This doc should be updated as each box gets checked, and whenever a scope
 decision changes (e.g. exactly where Consulting lives in the new nav).

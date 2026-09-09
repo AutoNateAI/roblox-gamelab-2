@@ -1,23 +1,135 @@
+// AutoNateAI is Nathan Baker's independent AI, software, and human-systems
+// research lab now — the site is a public projection of the lab's current
+// research state, not a Southeast Missouri consulting brochure. See
+// docs/marketplace/lab-operating-model.md for the full contract. Consulting
+// and For Organizations are real, still-running services, but they're no
+// longer the front door — they live under "Work With Me" on /about instead
+// of primary nav. /consulting, /for-organizations, and /programs/:handle all
+// still render unchanged for existing links/checkout references.
 export const navItems = [
-  { label: "Home", href: "/", keys: ["home"] },
-  { label: "Consulting", href: "/consulting", keys: ["consulting"] },
-  { label: "For Organizations", href: "/for-organizations", keys: ["for-organizations", "programs"] },
-  { label: "Courses", href: "/tutorials", keys: ["tutorials"] },
+  { label: "Latest", href: "/", keys: ["home"] },
+  { label: "Publications", href: "/articles", keys: ["articles"] },
+  { label: "Experiments", href: "/experiments", keys: ["experiments"] },
+  { label: "Projects", href: "/projects", keys: ["projects"] },
+  { label: "Open Source", href: "/open-source", keys: ["open-source"] },
   { label: "Events", href: "/events", keys: ["events"] },
-  { label: "Articles", href: "/articles", keys: ["articles"] },
+  { label: "Learn", href: "/tutorials", keys: ["tutorials"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];
 
-// AutoNateAI leads with Consulting & development services now, not a public
-// individually-enrolled cohort — Consulting sits right after Home. "Program" and
-// "For Organizations" are now the same offering (custom, business-requested team
-// training) and share one nav entry/page at /for-organizations; /programs/:handle
-// still renders (old links, checkout references) with matching updated copy, it's
-// just not in primary nav. Community is still a real, working page — reachable from
-// the footer and in-page CTAs, not primary nav.
-// Live Builds (the old weekly Saturday event) has been decommissioned entirely in
-// favor of the always-on Discord + the free course library + the weekly Industry
-// Build Lab events (see /events) + requested team training (see /for-organizations).
+// Community is still a real, working page — reachable from the footer and
+// in-page CTAs, not primary nav.
+
+// ---------------------------------------------------------------------------
+// THE LAB — current investigation, experiments, projects, and open-source
+// signals. This is hand-seeded from the Sept 9, 2026 inaugural run of the
+// five daily research desks (California Network, GitHub Open Source,
+// Research Paper, Events & Build, Mindfulness Tech) — see
+// apps/marketplace/Radar_Reports/09092026/ for the private source PDFs and
+// docs/marketplace/lab-operating-model.md for the pipeline. Nothing below
+// claims more activity than actually happened: experiments/projects not yet
+// started are marked "Proposed"/"Forming", not "Running". Once the Airtable
+// `Daily Lab State`/`Experiments`/`Projects` tables exist, this block is the
+// shape a live data layer should replace — same fields, real records.
+// ---------------------------------------------------------------------------
+
+export const currentInvestigation = {
+  slug: "inspectable-agent-systems",
+  status: "Forming",
+  title: "Inspectable Agent Systems",
+  question:
+    "How should intelligent systems represent memory, state, authority, and evaluation so they stay inspectable as they scale?",
+  thesis:
+    "Intelligence is getting cheap. The structure around intelligence — memory, provenance, authority, evaluation — is what's becoming valuable.",
+  note:
+    "Logged from the Sept 9, 2026 inaugural run of AutoNateAI's five research desks. Three of the five — California Network, GitHub Open Source, and Research Paper — independently converged on the same underlying problem: agent systems need explicit, inspectable structure around memory, context, authority, and evaluation.",
+};
+
+export const labProjects = [
+  {
+    slug: "inspectable-agent-systems",
+    icon: "hub",
+    name: "Inspectable Agent Systems",
+    status: "Forming",
+    tagline: "How agentic software should represent memory, authority, state, provenance, and evaluation.",
+    desks: ["California Network Radar", "GitHub Open Source Radar", "Research Paper Radar"],
+  },
+  {
+    slug: "human-systems",
+    icon: "psychology",
+    name: "Human Systems",
+    status: "Watching",
+    tagline: "Contemplative practice, EEG/HRV, and neurotechnology, read through a strict evidence ladder.",
+    desks: ["Mindfulness Tech Radar"],
+  },
+];
+
+export const openSourceRepos = [
+  {
+    slug: "semantica",
+    icon: "hub",
+    name: "Semantica",
+    status: "Queued to study",
+    project: "inspectable-agent-systems",
+    hook: "Graph-native context/memory layer for agent systems — one of the two strongest signals out of the Sept 9 GitHub Open Source Radar run.",
+    notes: [
+      "Candidate for the Context Graph vs. Context Database benchmark",
+      "Watching for architecture writeups and maintainer activity",
+    ],
+    searchUrl: "https://github.com/search?q=Semantica+agent+memory&type=repositories",
+  },
+  {
+    slug: "openviking",
+    icon: "account_tree",
+    name: "OpenViking",
+    status: "Queued to study",
+    project: "inspectable-agent-systems",
+    hook: "Graph memory infrastructure for agents — the second top GitHub Open Source Radar recommendation on Sept 9, alongside Semantica.",
+    notes: [
+      "Candidate for the Context Graph vs. Context Database benchmark",
+      "Cross-referencing against Research Paper Radar's graph-memory findings",
+    ],
+    searchUrl: "https://github.com/search?q=OpenViking+agent+memory&type=repositories",
+  },
+];
+
+export const labExperiments = [
+  {
+    slug: "context-graph-vs-context-database",
+    icon: "science",
+    name: "Context Graph vs. Context Database",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Does graph-native agent memory (Semantica/OpenViking-style) outperform a traditional context/vector-database on recall accuracy and latency for a real multi-step agent task?",
+    notes: [
+      "Method not yet locked — surfaced by the GitHub Open Source Radar as the natural next test",
+      "Depends on studying Semantica and OpenViking first",
+    ],
+  },
+];
+
+export const eventSignals = [
+  {
+    name: "Microsoft \"Agent-a-Thon\" architect track",
+    focus: "Production agent orchestration",
+    source: "Events & Build Radar",
+  },
+  {
+    name: "GSA MCP / agent hackathon",
+    focus: "Model Context Protocol tooling",
+    source: "Events & Build Radar",
+  },
+  {
+    name: "Stanford CCARE contemplative-science sessions",
+    focus: "Compassion & contemplative research",
+    source: "Mindfulness Tech Radar",
+  },
+  {
+    name: "Berkeley Neuroscience Conference",
+    focus: "Neurotech / cognition research",
+    source: "Mindfulness Tech Radar",
+  },
+];
 
 // The nine regional industries AutoNateAI Consulting builds internal AI tooling
 // for, and the weekly free live-build sessions organized around them (see
