@@ -1,28 +1,31 @@
-/* Sikeston brand: red, black, and white. Red (--primary / --primary-container)
-   is the single accent, used sparingly for kickers, links, borders, and button
-   fills. --secondary swaps poles by mode (near-black on light, near-white on
-   dark) instead of carrying its own hue, so status/checkmark accents stay
-   inside the red-black-white palette. Site now defaults to light mode (see
-   pageShell's inline theme script and app.js) — dark mode is still available
-   via the toggle. */
+/* AutoNateAI Lab brand: white/navy/gold in light mode, black/navy/gold in
+   dark mode. Navy (--on-surface, --primary-container in dark) carries the
+   institutional-lab identity; gold (--primary / --primary-bright) is the
+   single accent — kickers, links, borders, evidence badges, active nav.
+   Button fills deliberately invert by mode: navy-filled buttons with white
+   text in light mode, gold-filled buttons with navy text in dark mode — one
+   brand, two legible poles. --secondary swaps poles by mode (near-navy-ink
+   on light, near-white on dark) for non-accent contrast elements. Site
+   defaults to light mode (see pageShell's inline theme script and app.js) —
+   dark mode is still available via the toggle. */
 :root,
 :root[data-theme="light"] {
-  --background: #fafaf8;
+  --background: #f6f7fb;
   --surface: #ffffff;
-  --surface-low: #f3f1ee;
-  --surface-high: #e8e4de;
-  --surface-highest: #d8d2c9;
-  --on-surface: #17130f;
-  --on-variant: #5c554c;
-  --outline: #e3ddd4;
-  --outline-strong: #b8afa2;
-  --primary: #af0e28;
-  --primary-bright: #d4142f;
-  --primary-container: #c8102e;
+  --surface-low: #eef0f7;
+  --surface-high: #e1e5f0;
+  --surface-highest: #ccd2e3;
+  --on-surface: #0e1a33;
+  --on-variant: #4c5770;
+  --outline: #dde1ec;
+  --outline-strong: #b7bfd4;
+  --primary: #93700f;
+  --primary-bright: #c9a227;
+  --primary-container: #10213f;
   --on-primary: #ffffff;
-  --secondary: #17130f;
-  --secondary-soft: rgba(23, 19, 15, 0.06);
-  --error: #af0e28;
+  --secondary: #10213f;
+  --secondary-soft: rgba(16, 33, 63, 0.06);
+  --error: #b3261e;
   --container-max: 1440px;
   --margin: 64px;
   --gutter: 24px;
@@ -31,22 +34,22 @@
 }
 
 :root[data-theme="dark"] {
-  --background: #0a0908;
-  --surface: #151311;
-  --surface-low: #100f0d;
-  --surface-high: #1f1c19;
-  --surface-highest: #2b2723;
-  --on-surface: #f6f4f1;
-  --on-variant: #a49a8e;
-  --outline: #29241f;
-  --outline-strong: #423b33;
-  --primary: #ff5a63;
-  --primary-bright: #ff828a;
-  --primary-container: #c8102e;
-  --on-primary: #ffffff;
-  --secondary: #f6f4f1;
-  --secondary-soft: rgba(246, 244, 241, 0.1);
-  --error: #ff5a63;
+  --background: #05070d;
+  --surface: #0d1526;
+  --surface-low: #090e1c;
+  --surface-high: #16213b;
+  --surface-highest: #202c4a;
+  --on-surface: #f2f4f9;
+  --on-variant: #9aa4bf;
+  --outline: #1f2a45;
+  --outline-strong: #33416a;
+  --primary: #e0b93a;
+  --primary-bright: #f0cc5c;
+  --primary-container: #e0b93a;
+  --on-primary: #0e1a33;
+  --secondary: #f2f4f9;
+  --secondary-soft: rgba(242, 244, 249, 0.08);
+  --error: #ff6b6b;
   color-scheme: dark;
 }
 
@@ -284,14 +287,29 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Space Grotesk", sans-serif;
   letter-spacing: -0.01em;
+}
+
+h3,
+h4 {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* Editorial serif for major headlines — the "journal" half of the Bloomberg
+   density × scientific-journal credibility × modern-lab visual system.
+   Space Grotesk (structural/UI) and JetBrains Mono (technical/experiment
+   IDs) still carry everything below headline weight. */
+h1,
+h2 {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
 }
 
 h1 {
   margin: 16px 0 18px;
   font-size: clamp(42px, 4.55vw, 68px);
-  font-weight: 800;
+  font-weight: 620;
   line-height: 1.02;
 }
 
@@ -932,6 +950,57 @@ h1 {
 .status-pill.live {
   border-color: var(--secondary);
   color: var(--secondary);
+}
+
+/* Evidence-ladder badges — never let a claim's source strength go unlabeled.
+   Six classes, ranked strongest to weakest; color is a signal, not a grade. */
+.evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--outline-strong);
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.evidence-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.evidence-badge[data-evidence="peer-reviewed"] {
+  border-color: color-mix(in srgb, #1f9d63 55%, var(--outline));
+  color: #1f9d63;
+}
+.evidence-badge[data-evidence="preprint"] {
+  border-color: color-mix(in srgb, #2e8fd6 55%, var(--outline));
+  color: #2e8fd6;
+}
+.evidence-badge[data-evidence="technical"] {
+  border-color: color-mix(in srgb, #7a5fd1 55%, var(--outline));
+  color: #7a5fd1;
+}
+.evidence-badge[data-evidence="institute-claim"] {
+  border-color: color-mix(in srgb, var(--primary-bright) 60%, var(--outline));
+  color: var(--primary);
+}
+.evidence-badge[data-evidence="practitioner"] {
+  border-color: color-mix(in srgb, #d97a3f 55%, var(--outline));
+  color: #d97a3f;
+}
+.evidence-badge[data-evidence="cultural"] {
+  border-color: color-mix(in srgb, #d1487a 55%, var(--outline));
+  color: #d1487a;
 }
 
 .card-body h3 {
@@ -4683,5 +4752,189 @@ pre.mermaid svg {
 @media (max-width: 760px) {
   .week-calendar-grid {
     display: flex !important;
+  }
+}
+
+/* --- Lab content cards: thumbnails, clickable cards, detail pages, ---
+   --- pagination, and mobile content-library treatment. --- */
+
+/* Every Lab card (project/experiment/repo/event/source) is a clickable
+   .lab-card wrapping .industry-card's existing look, topped with a
+   thumbnail image. Anchor gets block display so the whole card is a
+   tap/click target, not just the title text. */
+a.lab-card {
+  display: block;
+  color: inherit;
+}
+
+a.lab-card:hover .industry-card,
+a.lab-card:focus-visible .industry-card {
+  border-color: var(--primary);
+}
+
+a.lab-card .industry-card {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.card-thumbnail {
+  position: relative;
+  margin: 0 -24px 14px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface-high);
+}
+
+.card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms ease;
+}
+
+a.lab-card:hover .card-thumbnail img,
+a.lab-card:focus-visible .card-thumbnail img {
+  transform: scale(1.06);
+}
+
+.card-thumbnail .status-pill {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+/* .industry-card::before (the top accent bar) collides visually with a
+   full-bleed thumbnail — suppress it only on thumbnail cards. */
+a.lab-card .industry-card::before {
+  display: none;
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--outline-strong);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.pagination a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pagination .pagination-current {
+  background: var(--primary-container);
+  border-color: var(--primary-container);
+  color: var(--on-primary);
+}
+
+.pagination .pagination-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* --- Detail pages (experiments/projects/repos/events/sources) --- */
+.detail-field-grid {
+  display: grid;
+  gap: 28px;
+  margin: 32px 0;
+}
+
+.detail-field {
+  border-top: 1px solid var(--outline);
+  padding-top: 18px;
+}
+
+.detail-field h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.detail-field p,
+.detail-field ul {
+  margin: 0;
+  color: var(--on-surface);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.detail-field ul {
+  padding-left: 20px;
+}
+
+.detail-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--gutter);
+  margin-top: 20px;
+}
+
+.detail-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+/* --- Mobile: content-heavy Lab grids become swipeable card shelves ---
+   instead of a long vertical stack. Applied via an additional .lab-grid
+   class alongside .industry-grid on Lab listing sections specifically —
+   plain .industry-grid usage elsewhere (Consulting/For Organizations)
+   keeps its existing stack-to-1-column behavior. */
+@media (max-width: 760px) {
+  .lab-grid {
+    display: flex !important;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px 10px;
+  }
+
+  .lab-grid > a.lab-card,
+  .lab-grid > article {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  .detail-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination a,
+  .pagination span {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    font-size: 12px;
   }
 }

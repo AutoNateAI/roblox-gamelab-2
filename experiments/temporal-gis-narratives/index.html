@@ -1,0 +1,117 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Temporal GIS Narratives | AutoNateAI Lab</title>
+        <meta name="description" content="Can sheaf/narrative structure preserve provenance and consistency in evolving geographic knowledge graphs better than event logs?" />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/experiments/temporal-gis-narratives" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="Temporal GIS Narratives" />
+        <meta property="og:description" content="Can sheaf/narrative structure preserve provenance and consistency in evolving geographic knowledge graphs better than event logs?" />
+        <meta property="og:url" content="https://autonateai.com/experiments/temporal-gis-narratives" />
+        <meta property="og:image" content="https://autonateai.com/assets/thumbnails/experiments/temporal-gis-narratives.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Temporal GIS Narratives" />
+        <meta name="twitter:description" content="Can sheaf/narrative structure preserve provenance and consistency in evolving geographic knowledge graphs better than event logs?" />
+        <meta name="twitter:image" content="https://autonateai.com/assets/thumbnails/experiments/temporal-gis-narratives.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker: research, experiments, open-source work, and free technical courses."}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "light";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,420..680&family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="" href="/">Latest</a><a class="" href="/articles">Publications</a><a class="active" href="/experiments">Experiments</a><a class="" href="/projects">Projects</a><a class="" href="/open-source">Open Source</a><a class="" href="/events">Events</a><a class="" href="/tutorials">Learn</a><a class="" href="/about">About</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs"><span class="material-symbols-outlined">forum</span></a>
+          <a class="nav-cta" href="/about#work-with-me">Work With Me</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="article-page">
+      <nav class="breadcrumbs"><a href="/">Home</a><span>/</span><a href="/experiments">Experiments</a><span>/</span><b>Temporal GIS Narratives</b></nav>
+      <article class="article-detail">
+        <header>
+          <span class="kicker"><span class="material-symbols-outlined">public</span> Experiment &middot; Proposed</span>
+          <h1>Temporal GIS Narratives</h1>
+          <p>Can sheaf/narrative structure preserve provenance and consistency in evolving geographic knowledge graphs better than event logs?</p>
+          <div class="tag-row"><span>Spatial &amp; Simulation Systems</span></div>
+        </header>
+        <img src="/assets/thumbnails/experiments/temporal-gis-narratives.jpg" alt="" />
+        <div class="detail-field-grid">
+          <div class="detail-field"><h3>Hypothesis</h3><p>A narrative/sheaf representation of changing spatial relationships stays more consistent under repeated edits than a plain event-sourced log, at a reasonable query-complexity cost.</p></div>
+          <div class="detail-field"><h3>Background</h3><p>Time-Varying Data as Sheaves (arXiv 2609.09056) proposes a unifying formal language for time-varying, switching-relationship data — highly mathematical, no public code or benchmark yet.</p></div>
+          <div class="detail-field"><h3>Method</h3><p>Simulate a parcel, infrastructure, or logistics-network domain with repeated changes; compare event-sourcing, temporal property graphs, and a narrative/sheaf representation.</p></div>
+          <div class="detail-field"><h3>Measurement Plan</h3><p>Change consistency, provenance fidelity, and query complexity across representations.</p></div>
+          <div class="detail-field"><h3>Expected Artifact</h3><p>An interactive temporal map plus a query benchmark, built on NetworkX/Neo4j and a mapping layer.</p></div>
+          <div class="detail-field"><h3>Limitations</h3><p>The source paper is exploratory and mathematical — no empirical benchmark or public implementation exists to build on directly.</p></div>
+          <div class="detail-field"><h3>Status</h3><p>This experiment is <strong>Proposed</strong> — queued, not started. Results, data, and measurements will appear here once it actually runs.</p></div>
+        </div>
+        <h2>Sources</h2><ul class="industry-capabilities"><li><span class="material-symbols-outlined">link</span><span><a href="https://arxiv.org/abs/2609.09056">Time-Varying Data as Sheaves (arXiv)</a></span></li><li><span class="material-symbols-outlined">link</span><span><a href="https://arxiv.org/abs/2609.08599">Graph-Based Personalized Memory survey (arXiv)</a></span></li></ul>
+        <h2>Part of</h2><div class="detail-related-grid">
+    <a class="lab-card" href="/projects/spatial-simulation-systems">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="/assets/thumbnails/projects/spatial-simulation-systems.jpg" alt="" loading="lazy" /><span class="status-pill">Forming</span></div>
+        <h3>Spatial &amp; Simulation Systems</h3>
+        <p class="industry-hook">Agentic scenario generation, GIS, and physical-world grounding — from autonomous driving benchmarks to logistics.</p>
+        <ul class="industry-capabilities">
+          <li><span class="material-symbols-outlined">radar</span><span>Research Paper Radar</span></li><li><span class="material-symbols-outlined">radar</span><span>Events &amp; Build Radar</span></li><li><span class="material-symbols-outlined">radar</span><span>California Network Radar</span></li>
+        </ul>
+        <span class="outline-button full">Enter Project <span class="material-symbols-outlined">arrow_forward</span></span>
+      </article>
+    </a>
+  </div>
+      </article>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>Independent AI, software, and human-systems research lab — the practice of Nathan Baker. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
+        </div>
+        
+    <div>
+      <h5>The Lab</h5>
+      <ul><li><a href="/">Latest</a></li><li><a href="/articles">Publications</a></li><li><a href="/experiments">Experiments</a></li><li><a href="/projects">Projects</a></li><li><a href="/open-source">Open Source</a></li></ul>
+    </div>
+  
+        
+    <div>
+      <h5>Company</h5>
+      <ul><li><a href="/events">Events</a></li><li><a href="/tutorials">Learn</a></li><li><a href="/about#work-with-me">Work With Me</a></li><li><a href="https://discord.gg/4HkkuntdSs">Discord</a></li><li><a href="/about">About Nathan</a></li></ul>
+    </div>
+  
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Independent AI, software, and human-systems research lab.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>
