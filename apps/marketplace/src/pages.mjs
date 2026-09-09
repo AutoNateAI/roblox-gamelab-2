@@ -4,13 +4,10 @@ import {
   bankEngagementLadder,
   bankingOfferings,
   businessTrainingCurriculum,
-  buildLabInfo,
   currentInvestigation,
   evidenceLabels,
   foundingBankPilot,
   industries,
-  industryWeeks,
-  kickoffSession,
   labEvents,
   labExperiments,
   labProjects,
@@ -112,120 +109,8 @@ function industryCard(industry) {
   `;
 }
 
-function shortDate(value) {
-  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
-}
-
-function dayName(value) {
-  return new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(new Date(`${value}T00:00:00`));
-}
-
-function weekRangeLabel(days) {
-  if (!days?.length) return "";
-  return `${shortDate(days[0].date)}–${shortDate(days[days.length - 1].date)}`;
-}
-
-// One "calendar" tile for an industry's spotlight week — the week range up top,
-// then its three build sessions (Tue/Wed/Thu, 11:30 AM Central) underneath.
-function industryWeekCalendarCard(week, industryBySlug, isNext = false) {
-  const industry = industryBySlug.get(week.industry);
-  if (!industry) return "";
-  return `
-    <article class="industry-card week-calendar-card${isNext ? " week-calendar-next" : ""}">
-      <div class="week-calendar-head">
-        <div class="industry-card-icon">${icon(industry.icon)}</div>
-        <div>
-          ${isNext ? `<span class="kicker">${icon("bolt")} Up Next</span>` : ""}
-          <h3>${escapeHtml(industry.name)}</h3>
-          <span class="week-range">${weekRangeLabel(week.days)}</span>
-        </div>
-      </div>
-      <div class="week-calendar-days">
-        ${week.days
-          .map(
-            (d) => `
-          <div class="week-calendar-day">
-            <div class="week-calendar-day-label">
-              <strong>${escapeHtml(dayName(d.date))}</strong>
-              <span>${escapeHtml(shortDate(d.date))} · 11:30 AM CST</span>
-            </div>
-            <p>"${escapeHtml(d.topic)}"</p>
-            <div class="button-row">
-              <a class="primary-button" href="${d.meetUrl}">Join ${icon("videocam")}</a>
-              <a class="outline-button" href="${d.calendarUrl}">Add to Calendar</a>
-            </div>
-          </div>
-        `,
-          )
-          .join("")}
-      </div>
-    </article>
-  `;
-}
-
-function projectCard(project) {
-  return `
-    <article class="industry-card">
-      <div class="industry-card-icon">${icon(project.icon)}</div>
-      <div class="card-title-row"><h3>${escapeHtml(project.name)}</h3><span class="status-pill">${escapeHtml(project.status)}</span></div>
-      <p class="industry-hook">${escapeHtml(project.tagline)}</p>
-      <ul class="industry-capabilities">
-        ${project.desks.map((desk) => `<li>${icon("radar")}<span>${escapeHtml(desk)}</span></li>`).join("")}
-      </ul>
-      <a class="outline-button full" href="/projects#${project.slug}">View Project ${icon("arrow_forward")}</a>
-    </article>
-  `;
-}
-
-function experimentCard(experiment) {
-  const project = labProjects.find((item) => item.slug === experiment.project);
-  return `
-    <article class="industry-card">
-      <div class="industry-card-icon">${icon(experiment.icon)}</div>
-      <div class="card-title-row"><h3>${escapeHtml(experiment.name)}</h3><span class="status-pill">${escapeHtml(experiment.status)}</span></div>
-      <p class="industry-hook">${escapeHtml(experiment.question)}</p>
-      <ul class="industry-capabilities">
-        ${experiment.notes.map((note) => `<li>${icon("science")}<span>${escapeHtml(note)}</span></li>`).join("")}
-      </ul>
-      ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
-    </article>
-  `;
-}
-
-function repoCard(repo) {
-  const project = labProjects.find((item) => item.slug === repo.project);
-  return `
-    <article class="industry-card">
-      <div class="industry-card-icon">${icon(repo.icon)}</div>
-      <div class="card-title-row"><h3>${escapeHtml(repo.name)}</h3><span class="status-pill">${escapeHtml(repo.status)}</span></div>
-      <span class="kicker">${escapeHtml(repo.meta)}</span>
-      <p class="industry-hook">${escapeHtml(repo.hook)}</p>
-      <ul class="industry-capabilities">
-        ${repo.notes.map((note) => `<li>${icon("bolt")}<span>${escapeHtml(note)}</span></li>`).join("")}
-      </ul>
-      <div class="button-row">
-        <a class="outline-button full" href="${repo.url}">View on GitHub ${icon("open_in_new")}</a>
-        ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
-      </div>
-    </article>
-  `;
-}
-
 function evidenceBadge(evidenceClass) {
   return `<span class="evidence-badge" data-evidence="${evidenceClass}">${escapeHtml(evidenceLabels[evidenceClass] || evidenceClass)}</span>`;
-}
-
-function sourceCard(source) {
-  return `
-    <article class="industry-card">
-      <div class="card-title-row">${evidenceBadge(source.evidenceClass)}<span class="kicker">${escapeHtml(source.topic)}</span></div>
-      <h3>${escapeHtml(source.title)}</h3>
-      <p class="industry-hook">${escapeHtml(source.insight)}</p>
-      <div class="button-row">
-        <a class="outline-button full" href="${source.url}">${escapeHtml(source.authors)} ${icon("open_in_new")}</a>
-      </div>
-    </article>
-  `;
 }
 
 function eventDateRange(event) {
@@ -234,20 +119,121 @@ function eventDateRange(event) {
   return `${start} – ${formatDate(event.end)}`;
 }
 
+// ---------------------------------------------------------------------------
+// Lab content library cards. Every card is one clickable <a> wrapping an
+// .industry-card, thumbnail on top, linking to a full detail page — external
+// links (GitHub, source URL, event registration) live on the detail page,
+// not nested inside the card (nested anchors aren't valid HTML).
+// ---------------------------------------------------------------------------
+
+function projectCard(project) {
+  return `
+    <a class="lab-card" href="/projects/${project.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="${project.thumbnail}" alt="" loading="lazy" /><span class="status-pill">${escapeHtml(project.status)}</span></div>
+        <h3>${escapeHtml(project.name)}</h3>
+        <p class="industry-hook">${escapeHtml(project.tagline)}</p>
+        <ul class="industry-capabilities">
+          ${project.desks.slice(0, 3).map((desk) => `<li>${icon("radar")}<span>${escapeHtml(desk)}</span></li>`).join("")}
+        </ul>
+        <span class="outline-button full">Enter Project ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function experimentCard(experiment) {
+  const project = labProjects.find((item) => item.slug === experiment.project);
+  return `
+    <a class="lab-card" href="/experiments/${experiment.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="${experiment.thumbnail}" alt="" loading="lazy" /><span class="status-pill">${escapeHtml(experiment.status)}</span></div>
+        <h3>${escapeHtml(experiment.name)}</h3>
+        <p class="industry-hook">${escapeHtml(experiment.question)}</p>
+        ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
+        <span class="outline-button full">Read the Experiment ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function repoCard(repo) {
+  const project = labProjects.find((item) => item.slug === repo.project);
+  return `
+    <a class="lab-card" href="/open-source/${repo.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="${repo.thumbnail}" alt="" loading="lazy" /><span class="status-pill">${escapeHtml(repo.status)}</span></div>
+        <span class="kicker">${escapeHtml(repo.meta)}</span>
+        <h3>${escapeHtml(repo.name)}</h3>
+        <p class="industry-hook">${escapeHtml(repo.hook)}</p>
+        ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
+        <span class="outline-button full">View Repo Notes ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function sourceCard(source) {
+  return `
+    <a class="lab-card" href="/sources/${source.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="${source.thumbnail}" alt="" loading="lazy" /></div>
+        <div class="card-title-row">${evidenceBadge(source.evidenceClass)}<span class="kicker">${escapeHtml(source.topic)}</span></div>
+        <h3>${escapeHtml(source.title)}</h3>
+        <p class="industry-hook">${escapeHtml(source.insight)}</p>
+        <span class="outline-button full">Read the Breakdown ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
 function labEventCard(event) {
   return `
-    <article class="industry-card">
-      <div class="card-title-row"><span class="status-pill">${escapeHtml(event.status)}</span><span class="kicker">${icon(event.virtual ? "videocam" : "location_on")} ${escapeHtml(event.type)}</span></div>
-      <h3>${escapeHtml(event.name)}</h3>
-      <p class="industry-hook">${escapeHtml(event.why)}</p>
-      <ul class="industry-capabilities">
-        <li>${icon("event")}<span>${escapeHtml(eventDateRange(event))}</span></li>
-        <li>${icon(event.virtual ? "public" : "place")}<span>${escapeHtml(event.location)}</span></li>
-      </ul>
-      <div class="button-row">
-        <a class="outline-button full" href="${event.url}">Event Page ${icon("open_in_new")}</a>
-      </div>
-    </article>
+    <a class="lab-card" href="/events/${event.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail"><img src="${event.thumbnail}" alt="" loading="lazy" /><span class="status-pill">${escapeHtml(event.status)}</span></div>
+        <span class="kicker">${icon(event.virtual ? "videocam" : "location_on")} ${escapeHtml(event.type)}</span>
+        <h3>${escapeHtml(event.name)}</h3>
+        <p class="industry-hook">${escapeHtml(event.why)}</p>
+        <ul class="industry-capabilities">
+          <li>${icon("event")}<span>${escapeHtml(eventDateRange(event))}</span></li>
+          <li>${icon(event.virtual ? "public" : "place")}<span>${escapeHtml(event.location)}</span></li>
+        </ul>
+        <span class="outline-button full">Event Details ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+// ---------------------------------------------------------------------------
+// Pagination — perPage kept low deliberately so the mechanism is visibly
+// real today, not just future-proofing. paginate() slices; paginationNav()
+// renders prev/numbered/next. basePath is the listing route ("/experiments");
+// page 1 always lives at basePath itself, page N>1 at `${basePath}/page/${N}`.
+// ---------------------------------------------------------------------------
+
+function paginate(items, page, perPage) {
+  const totalPages = Math.max(1, Math.ceil(items.length / perPage));
+  const current = Math.min(Math.max(1, page), totalPages);
+  const start = (current - 1) * perPage;
+  return { pageItems: items.slice(start, start + perPage), totalPages, page: current };
+}
+
+function pageHref(basePath, page) {
+  return page <= 1 ? basePath : `${basePath}/page/${page}`;
+}
+
+function paginationNav(basePath, page, totalPages) {
+  if (totalPages <= 1) return "";
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  return `
+    <nav class="pagination" aria-label="Pagination">
+      <a class="${page <= 1 ? "pagination-disabled" : ""}" href="${pageHref(basePath, page - 1)}" aria-label="Previous page">${icon("chevron_left")}</a>
+      ${pages
+        .map((p) => (p === page ? `<span class="pagination-current">${p}</span>` : `<a href="${pageHref(basePath, p)}">${p}</a>`))
+        .join("")}
+      <a class="${page >= totalPages ? "pagination-disabled" : ""}" href="${pageHref(basePath, page + 1)}" aria-label="Next page">${icon("chevron_right")}</a>
+    </nav>
   `;
 }
 
@@ -274,10 +260,10 @@ export function renderHome(data) {
   const featuredSources = labSources.slice(0, 4);
 
   const todayCards = [
-    { label: "Study Today", icon: "biotech", title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents", href: "/experiments#procedural-graph-runtime" },
+    { label: "Study Today", icon: "biotech", title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents", href: "/experiments/procedural-graph-runtime" },
     { label: "Open Source", icon: "hub", title: "Studying semantica-agi/semantica and volcengine/OpenViking", href: "/open-source" },
-    { label: "Build Toward", icon: "event", title: "Microsoft Agent-a-Thon — Sep 17, Architect track", href: "/events#showing-up" },
-    { label: "Human Systems", icon: "psychology", title: "Evidence-ladder read of EEG/HRV & contemplative research", href: "/projects#human-systems" },
+    { label: "Build Toward", icon: "event", title: "Microsoft Agent-a-Thon — Sep 17, Architect track", href: "/events/microsoft-agent-a-thon" },
+    { label: "Human Systems", icon: "psychology", title: "Evidence-ladder read of EEG/HRV & contemplative research", href: "/projects/human-systems" },
   ];
 
   const body = `
@@ -331,7 +317,7 @@ export function renderHome(data) {
           </div>
           <a class="primary-button" href="/projects">All Projects ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid">${labProjects.map((project) => projectCard(project)).join("")}</div>
+        <div class="industry-grid lab-grid">${labProjects.map((project) => projectCard(project)).join("")}</div>
       </section>
 
       <section class="section">
@@ -343,9 +329,9 @@ export function renderHome(data) {
           </div>
           <a class="primary-button" href="/experiments">All Experiments ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid">
-          ${labExperiments.map((experiment) => experimentCard(experiment)).join("")}
-          ${openSourceRepos.map((repo) => repoCard(repo)).join("")}
+        <div class="industry-grid lab-grid">
+          ${labExperiments.slice(0, 3).map((experiment) => experimentCard(experiment)).join("")}
+          ${openSourceRepos.slice(0, 3).map((repo) => repoCard(repo)).join("")}
         </div>
       </section>
 
@@ -358,7 +344,7 @@ export function renderHome(data) {
           </div>
           <a class="primary-button" href="/articles#reading">Full Reading List ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid">${featuredSources.map((source) => sourceCard(source)).join("")}</div>
+        <div class="industry-grid lab-grid">${featuredSources.map((source) => sourceCard(source)).join("")}</div>
       </section>
 
       <section class="section">
@@ -455,30 +441,7 @@ export function renderProjects() {
           </div>
         </div>
       </section>
-      <div class="article-grid">
-        ${labProjects
-          .map((project) => {
-            const experiments = labExperiments.filter((e) => e.project === project.slug);
-            const repos = openSourceRepos.filter((r) => r.project === project.slug);
-            return `
-              <article class="industry-card" id="${project.slug}">
-                <div class="industry-card-icon">${icon(project.icon)}</div>
-                <div class="card-title-row"><h3>${escapeHtml(project.name)}</h3><span class="status-pill">${escapeHtml(project.status)}</span></div>
-                <p class="industry-hook">${escapeHtml(project.tagline)}</p>
-                ${project.slug === currentInvestigation.slug ? `<p>${escapeHtml(currentInvestigation.note)}</p>` : ""}
-                <div class="stat-grid">
-                  <div><strong>${experiments.length}</strong><span>Experiments</span></div>
-                  <div><strong>${repos.length}</strong><span>Sources</span></div>
-                  <div><strong>${project.desks.length}</strong><span>Research Desks</span></div>
-                </div>
-                <ul class="industry-capabilities">
-                  ${project.desks.map((desk) => `<li>${icon("radar")}<span>${escapeHtml(desk)}</span></li>`).join("")}
-                </ul>
-              </article>
-            `;
-          })
-          .join("")}
-      </div>
+      <div class="industry-grid lab-grid">${labProjects.map((project) => projectCard(project)).join("")}</div>
     </main>
   `;
 
@@ -493,7 +456,8 @@ export function renderProjects() {
   });
 }
 
-export function renderExperiments() {
+export function renderExperiments(page = 1) {
+  const { pageItems, totalPages, page: current } = paginate(labExperiments, page, 6);
   const body = `
     <main class="articles-page">
       <section class="home-hero articles-hero">
@@ -508,24 +472,27 @@ export function renderExperiments() {
       </section>
       ${
         labExperiments.length
-          ? `<div class="article-grid">${labExperiments.map((experiment) => experimentCard(experiment)).join("")}</div>`
+          ? `<div class="industry-grid lab-grid">${pageItems.map((experiment) => experimentCard(experiment)).join("")}</div>
+             ${paginationNav("/experiments", current, totalPages)}`
           : `<div class="section-head section-head-center"><div><p>No experiments running yet — check back after the next research cycle.</p></div></div>`
       }
     </main>
   `;
 
   return pageShell({
-    title: "Experiments | AutoNateAI Lab",
+    title: current > 1 ? `Experiments — Page ${current} | AutoNateAI Lab` : "Experiments | AutoNateAI Lab",
     active: "experiments",
     body,
-    canonicalPath: "/experiments",
+    canonicalPath: current > 1 ? `/experiments/page/${current}` : "/experiments",
     description: "The AutoNateAI lab notebook: question, hypothesis, method, and result for every experiment Nathan Baker runs.",
     ogTitle: "Experiments | AutoNateAI Lab",
     ogDescription: "Proposed and running experiments from AutoNateAI's independent AI, software, and human-systems research lab.",
+    robots: current > 1 ? "noindex,follow" : "index,follow",
   });
 }
 
-export function renderOpenSource() {
+export function renderOpenSource(page = 1) {
+  const { pageItems, totalPages, page: current } = paginate(openSourceRepos, page, 6);
   const body = `
     <main class="articles-page">
       <section class="home-hero articles-hero">
@@ -540,20 +507,283 @@ export function renderOpenSource() {
       </section>
       ${
         openSourceRepos.length
-          ? `<div class="article-grid">${openSourceRepos.map((repo) => repoCard(repo)).join("")}</div>`
+          ? `<div class="industry-grid lab-grid">${pageItems.map((repo) => repoCard(repo)).join("")}</div>
+             ${paginationNav("/open-source", current, totalPages)}`
           : `<div class="section-head section-head-center"><div><p>Nothing queued yet — check back after the next research cycle.</p></div></div>`
       }
     </main>
   `;
 
   return pageShell({
-    title: "Open Source | AutoNateAI Lab",
+    title: current > 1 ? `Open Source — Page ${current} | AutoNateAI Lab` : "Open Source | AutoNateAI Lab",
     active: "open-source",
     body,
-    canonicalPath: "/open-source",
+    canonicalPath: current > 1 ? `/open-source/page/${current}` : "/open-source",
     description: "Open-source repositories AutoNateAI is studying, building with, or contributing to — and why each one matters to the lab's current research.",
     ogTitle: "Open Source | AutoNateAI Lab",
     ogDescription: "The repositories currently informing AutoNateAI's active research projects.",
+    robots: current > 1 ? "noindex,follow" : "index,follow",
+  });
+}
+
+function breadcrumbs(trail) {
+  return `<nav class="breadcrumbs">${trail.map(([label, href], index) => (href ? `<a href="${href}">${escapeHtml(label)}</a><span>/</span>` : `<b>${escapeHtml(label)}</b>`)).join("")}</nav>`;
+}
+
+function detailField(title, content) {
+  if (!content) return "";
+  return `<div class="detail-field"><h3>${escapeHtml(title)}</h3>${content}</div>`;
+}
+
+function detailFieldText(title, text) {
+  return detailField(title, text ? `<p>${escapeHtml(text)}</p>` : "");
+}
+
+function detailFieldList(title, items) {
+  if (!items?.length) return "";
+  return detailField(title, `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`);
+}
+
+export function renderProjectDetail(project) {
+  const experiments = labExperiments.filter((e) => e.project === project.slug);
+  const repos = openSourceRepos.filter((r) => r.project === project.slug);
+  const sources = labSources.filter((s) => s.project === project.slug);
+  const isCurrent = project.slug === currentInvestigation.slug;
+
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Projects", "/projects"], [project.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(project.icon)} Project &middot; ${escapeHtml(project.status)}</span>
+          <h1>${escapeHtml(project.name)}</h1>
+          <p>${escapeHtml(project.tagline)}</p>
+          <div class="tag-row">${project.desks.map((desk) => `<span>${escapeHtml(desk)}</span>`).join("")}</div>
+        </header>
+        <img src="${project.thumbnail}" alt="" />
+        <div class="stat-grid">
+          <div><strong>${experiments.length}</strong><span>Experiments</span></div>
+          <div><strong>${repos.length}</strong><span>Repositories</span></div>
+          <div><strong>${sources.length}</strong><span>Sources</span></div>
+        </div>
+        <div class="detail-field-grid">
+          ${detailFieldText("Research Question", project.researchQuestion)}
+          ${detailFieldText("Description", project.description)}
+          ${isCurrent ? detailFieldText("Latest Lab Note", currentInvestigation.note) : ""}
+        </div>
+
+        ${
+          experiments.length
+            ? `<h2>Related Experiments</h2><div class="detail-related-grid">${experiments.map((e) => experimentCard(e)).join("")}</div>`
+            : ""
+        }
+        ${
+          repos.length
+            ? `<h2>Related Open Source</h2><div class="detail-related-grid">${repos.map((r) => repoCard(r)).join("")}</div>`
+            : ""
+        }
+        ${
+          sources.length
+            ? `<h2>Related Sources</h2><div class="detail-related-grid">${sources.map((s) => sourceCard(s)).join("")}</div>`
+            : ""
+        }
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${project.name} | AutoNateAI Lab`,
+    active: "projects",
+    body,
+    canonicalPath: `/projects/${project.slug}`,
+    ogImage: project.thumbnail,
+    description: project.description,
+    ogTitle: project.name,
+    ogDescription: project.tagline,
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ResearchProject",
+        "name": project.name,
+        "description": project.description,
+        "url": `https://autonateai.com/projects/${project.slug}`,
+      },
+    ],
+  });
+}
+
+export function renderExperimentDetail(experiment) {
+  const project = labProjects.find((p) => p.slug === experiment.project);
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Experiments", "/experiments"], [experiment.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(experiment.icon)} Experiment &middot; ${escapeHtml(experiment.status)}</span>
+          <h1>${escapeHtml(experiment.name)}</h1>
+          <p>${escapeHtml(experiment.question)}</p>
+          ${project ? `<div class="tag-row"><span>${escapeHtml(project.name)}</span></div>` : ""}
+        </header>
+        <img src="${experiment.thumbnail}" alt="" />
+        <div class="detail-field-grid">
+          ${detailFieldText("Hypothesis", experiment.hypothesis)}
+          ${detailFieldText("Background", experiment.background)}
+          ${detailFieldText("Method", experiment.method)}
+          ${detailFieldText("Measurement Plan", experiment.measurement)}
+          ${detailFieldText("Expected Artifact", experiment.artifact)}
+          ${detailFieldText("Limitations", experiment.limitations)}
+          ${detailField("Status", `<p>This experiment is <strong>${escapeHtml(experiment.status)}</strong>${experiment.status === "Proposed" ? " — queued, not started. Results, data, and measurements will appear here once it actually runs." : ""}</p>`)}
+        </div>
+        ${
+          experiment.sources?.length
+            ? `<h2>Sources</h2><ul class="industry-capabilities">${experiment.sources.map((s) => `<li>${icon("link")}<span><a href="${s.url}">${escapeHtml(s.label)}</a></span></li>`).join("")}</ul>`
+            : ""
+        }
+        ${project ? `<h2>Part of</h2><div class="detail-related-grid">${projectCard(project)}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${experiment.name} | AutoNateAI Lab`,
+    active: "experiments",
+    body,
+    canonicalPath: `/experiments/${experiment.slug}`,
+    ogImage: experiment.thumbnail,
+    description: experiment.question,
+    ogTitle: experiment.name,
+    ogDescription: experiment.question,
+  });
+}
+
+export function renderOpenSourceDetail(repo) {
+  const project = labProjects.find((p) => p.slug === repo.project);
+  const relatedExperiments = labExperiments.filter((e) => e.project === repo.project || e.sources?.some((s) => s.url === repo.url));
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Open Source", "/open-source"], [repo.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(repo.icon)} Open Source &middot; ${escapeHtml(repo.status)}${repo.score ? ` &middot; ${escapeHtml(repo.score)}` : ""}</span>
+          <h1>${escapeHtml(repo.name)}</h1>
+          <p>${escapeHtml(repo.hook)}</p>
+          <div class="tag-row"><span>${escapeHtml(repo.meta)}</span>${project ? `<span>${escapeHtml(project.name)}</span>` : ""}</div>
+        </header>
+        <img src="${repo.thumbnail}" alt="" />
+        <div class="button-row">
+          <a class="primary-button" href="${repo.url}">View on GitHub ${icon("open_in_new")}</a>
+        </div>
+        <div class="detail-field-grid">
+          ${detailFieldText("Activity", repo.activity)}
+          ${detailFieldText("What to Study", repo.whatToStudy)}
+          ${detailFieldText("Why It Matters", repo.whyItMatters)}
+          ${detailFieldText("Action", repo.action)}
+          ${detailFieldList("Notes", repo.notes)}
+        </div>
+        ${relatedExperiments.length ? `<h2>AutoNateAI Experiments Using This</h2><div class="detail-related-grid">${relatedExperiments.map((e) => experimentCard(e)).join("")}</div>` : ""}
+        ${project ? `<h2>Part of</h2><div class="detail-related-grid">${projectCard(project)}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${repo.name} | AutoNateAI Lab`,
+    active: "open-source",
+    body,
+    canonicalPath: `/open-source/${repo.slug}`,
+    ogImage: repo.thumbnail,
+    description: repo.hook,
+    ogTitle: repo.name,
+    ogDescription: repo.hook,
+  });
+}
+
+export function renderSourceDetail(source) {
+  const project = labProjects.find((p) => p.slug === source.project);
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Publications", "/articles"], [source.title, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${evidenceBadge(source.evidenceClass)} <span style="margin-left: 8px">${escapeHtml(source.topic)}</span></span>
+          <h1>${escapeHtml(source.title)}</h1>
+          <p>${escapeHtml(source.authors)}</p>
+        </header>
+        <img src="${source.thumbnail}" alt="" />
+        <div class="button-row">
+          <a class="primary-button" href="${source.url}">Read the Source ${icon("open_in_new")}</a>
+        </div>
+        <div class="detail-field-grid">
+          ${detailFieldText("Key Insight", source.insight)}
+          ${detailFieldText("What's Actually Supported", source.supported)}
+          ${detailFieldText("Caveat / Limitations", source.caveat)}
+        </div>
+        ${project ? `<h2>Part of</h2><div class="detail-related-grid">${projectCard(project)}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${source.title} | AutoNateAI Lab`,
+    active: "articles",
+    body,
+    canonicalPath: `/sources/${source.slug}`,
+    ogImage: source.thumbnail,
+    description: source.insight,
+    ogTitle: source.title,
+    ogDescription: source.insight,
+  });
+}
+
+export function renderEventDetail(event) {
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Events", "/events"], [event.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(event.virtual ? "videocam" : "location_on")} ${escapeHtml(event.type)} &middot; ${escapeHtml(event.status)}</span>
+          <h1>${escapeHtml(event.name)}</h1>
+          <p>${escapeHtml(event.why)}</p>
+          <div class="tag-row">${event.topics.map((t) => `<span>${escapeHtml(t)}</span>`).join("")}</div>
+        </header>
+        <img src="${event.thumbnail}" alt="" />
+        <div class="detail-meta-row">
+          <span class="status-pill">${icon("event")} ${escapeHtml(eventDateRange(event))}</span>
+          <span class="status-pill">${icon(event.virtual ? "public" : "place")} ${escapeHtml(event.location)}</span>
+          ${event.organizer ? `<span class="status-pill">${icon("apartment")} ${escapeHtml(event.organizer)}</span>` : ""}
+        </div>
+        <div class="button-row">
+          <a class="primary-button" href="${event.url}">Event Page ${icon("open_in_new")}</a>
+        </div>
+        <div class="detail-field-grid">
+          ${detailFieldText("Action / Networking Plan", event.actionPlan)}
+          ${detailFieldText("Cost / Prize Notes", event.costNotes)}
+        </div>
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${event.name} | AutoNateAI Lab`,
+    active: "events",
+    body,
+    canonicalPath: `/events/${event.slug}`,
+    ogImage: event.thumbnail,
+    description: event.why,
+    ogTitle: event.name,
+    ogDescription: event.why,
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": event.name,
+        "startDate": event.start,
+        "endDate": event.end || event.start,
+        "eventAttendanceMode": event.virtual ? "https://schema.org/OnlineEventAttendanceMode" : "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@type": "Place", "name": event.location },
+        "url": event.url,
+      },
+    ],
   });
 }
 
@@ -1136,9 +1366,6 @@ function bankLadderStrip() {
 }
 
 export function renderEvents() {
-  const industryBySlug = new Map(industries.map((industry) => [industry.slug, industry]));
-  const [nextWeek, ...laterWeeks] = industryWeeks;
-  const nextIndustry = industryBySlug.get(nextWeek?.industry);
   const isHumanSystems = (event) => event.topics.includes("Mindfulness") || event.topics.includes("Neurotech");
   const technicalEvents = labEvents.filter((event) => !isHumanSystems(event));
   const humanSystemsEvents = labEvents.filter(isHumanSystems);
@@ -1150,12 +1377,8 @@ export function renderEvents() {
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("event")} Events</span>
-          <h1>Two ways AutoNateAI shows up.</h1>
-          <p>Live sessions I host every week, building a real system in front of anyone watching — and the conferences, hackathons, and research gatherings the lab's daily radars surface, tracked here as they're evaluated, not after the fact.</p>
-          <div class="button-row">
-            <a class="primary-button" href="#showing-up">Where I'm Showing Up ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="#lab-sessions">AutoNateAI Lab Sessions</a>
-          </div>
+          <h1>Where AutoNateAI shows up.</h1>
+          <p>The conferences, hackathons, and research gatherings the lab's daily radars surface, tracked here as they're evaluated — not after the fact. Every card is real: a verified date, location, and link, and status that says exactly where things stand.</p>
         </div>
         <aside class="hero-program-panel">
           <div class="hero-panel-body">
@@ -1176,12 +1399,12 @@ export function renderEvents() {
       <section class="section" id="showing-up">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("radar")} Where I'm Showing Up</span>
-            <h2>Agent systems, software, and open source.</h2>
-            <p>Conferences, hackathons, and talks the lab is tracking — from a Microsoft build session next week to NASA Space Apps in November.</p>
+            <span class="kicker">${icon("radar")} Agent Systems &amp; Software</span>
+            <h2>Where I'm showing up for the technical work.</h2>
+            <p>Conferences, hackathons, and talks the lab is tracking — from a Microsoft build session to NASA Space Apps in November.</p>
           </div>
         </div>
-        <div class="industry-grid">${technicalEvents.map((event) => labEventCard(event)).join("")}</div>
+        <div class="industry-grid lab-grid">${technicalEvents.map((event) => labEventCard(event)).join("")}</div>
       </section>
 
       <section class="section">
@@ -1192,53 +1415,14 @@ export function renderEvents() {
             <p>Where the Human Systems desk finds its network — contemplative science, EEG/neurotech labs, and California's consciousness-research community.</p>
           </div>
         </div>
-        <div class="industry-grid">${humanSystemsEvents.map((event) => labEventCard(event)).join("")}</div>
-      </section>
-
-      <section class="section" id="lab-sessions">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("videocam")} AutoNateAI Lab Sessions</span>
-            <h2>${escapeHtml(buildLabInfo.format)}</h2>
-            <p>Free, live, on Google Meet — a real system researched, architected, and built in the open, with the floor open for questions.</p>
-          </div>
-        </div>
-        <div class="week-calendar-solo">
-          <article class="industry-card week-calendar-card week-calendar-next">
-            <div class="week-calendar-head">
-              <div class="industry-card-icon">${icon("celebration")}</div>
-              <div>
-                <span class="kicker">${icon("bolt")} First Ever Session</span>
-                <h3>Kickoff — ${escapeHtml(dayName(kickoffSession.date))}, ${escapeHtml(shortDate(kickoffSession.date))}</h3>
-              </div>
-            </div>
-            <div class="week-calendar-days">
-              <div class="week-calendar-day">
-                <p>"${escapeHtml(kickoffSession.topic)}" — introducing the format, then research → architect → build → refine, live, same as every session since.</p>
-                <div class="button-row">
-                  <a class="primary-button" href="${kickoffSession.meetUrl}">Join ${icon("videocam")}</a>
-                  <a class="outline-button" href="${kickoffSession.calendarUrl}">Add to Calendar</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        ${
-          nextIndustry
-            ? `<div class="week-calendar-solo" style="margin-top: var(--gutter)">${industryWeekCalendarCard(nextWeek, industryBySlug, true)}</div>`
-            : ""
-        }
-        <details class="section compact" style="padding: 24px 0 0">
-          <summary class="kicker" style="cursor: pointer">${icon("calendar_month")} See the full rotation (${laterWeeks.length} more weeks)</summary>
-          <div class="industry-grid week-calendar-grid" style="margin-top: 24px">${laterWeeks.map((week) => industryWeekCalendarCard(week, industryBySlug)).join("")}</div>
-        </details>
+        <div class="industry-grid lab-grid">${humanSystemsEvents.map((event) => labEventCard(event)).join("")}</div>
       </section>
 
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("business_center")} Want a system built for your organization?</span>
-          <h2>See a workflow like yours built live, then bring us the real one.</h2>
-          <p>Every Lab Session doubles as a live demonstration of how AutoNateAI actually builds. If you like what you see, bring the real thing.</p>
+          <h2>See how the lab actually builds, then bring us the real thing.</h2>
+          <p>Architecture, AI engineering, and requested team training are still very real — see how to work with me directly.</p>
         </div>
         <a class="primary-button" href="/about#work-with-me">Work With Me ${icon("arrow_forward")}</a>
       </section>
@@ -1252,10 +1436,10 @@ export function renderEvents() {
     canonicalPath: "/events",
     ogImage: "/assets/og/events.jpg",
     description:
-      "Where AutoNateAI is showing up: agent-systems and human-systems events the lab's daily radars track, plus the free weekly AutoNateAI Lab Sessions.",
-    ogTitle: "Two ways AutoNateAI shows up.",
+      "Where AutoNateAI is showing up: agent-systems and human-systems events the lab's daily radars track, with real dates, locations, and links.",
+    ogTitle: "Where AutoNateAI shows up.",
     ogDescription:
-      "Live build sessions every week, and the conferences, hackathons, and research events the lab's daily radars are watching — tracked with real dates and links.",
+      "The conferences, hackathons, and research events the lab's daily radars are watching — tracked with real dates and links, not after the fact.",
   });
 }
 
@@ -1720,9 +1904,10 @@ export function renderCommunity() {
   });
 }
 
-export function renderArticles() {
+export function renderArticles(page = 1) {
   const featuredArticle = articles.find((article) => article.handle === "systems-thinking-through-code");
-  const listedArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
+  const remainingArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
+  const { pageItems: listedArticles, totalPages, page: current } = paginate(remainingArticles, page, 6);
   const body = `
     <main class="articles-page">
       <section class="home-hero articles-hero">
@@ -1756,6 +1941,7 @@ export function renderArticles() {
         </div>
       </div>
       <div class="article-grid" data-article-grid>${listedArticles.map((article) => articleCard(article)).join("")}</div>
+      ${paginationNav("/articles", current, totalPages)}
 
       <section class="section" id="reading">
         <div class="section-head">
@@ -1765,22 +1951,23 @@ export function renderArticles() {
             <p>Every source is labeled by what it actually supports — peer-reviewed research, preprints, official technical sources, institute claims, practitioner takes, and cultural/spiritual signal are never presented as equivalent.</p>
           </div>
         </div>
-        <div class="industry-grid">${labSources.map((source) => sourceCard(source)).join("")}</div>
+        <div class="industry-grid lab-grid">${labSources.map((source) => sourceCard(source)).join("")}</div>
       </section>
     </main>
   `;
 
   return pageShell({
-    title: "Publications | AutoNateAI Lab",
+    title: current > 1 ? `Publications — Page ${current} | AutoNateAI Lab` : "Publications | AutoNateAI Lab",
     active: "articles",
     body,
-    canonicalPath: "/articles",
+    canonicalPath: current > 1 ? `/articles/page/${current}` : "/articles",
     ogImage: "/assets/og/articles.jpg",
     description:
       "Research, architecture, and field notes from AutoNateAI, Nathan Baker's independent AI, software, and human-systems research lab.",
     ogTitle: "Research, architecture, and field notes.",
     ogDescription:
       "Finished writing from the AutoNateAI lab — research analysis, engineering practice, and workforce insight.",
+    robots: current > 1 ? "noindex,follow" : "index,follow",
   });
 }
 

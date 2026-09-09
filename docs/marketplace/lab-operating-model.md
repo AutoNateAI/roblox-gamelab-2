@@ -322,5 +322,90 @@ or started, `/learn` and `/about` are close to static.
       `scripts/export-static.mjs` build succeeded. Worth an actual visual
       pass (browser or `/design`-style review) before a wide announcement.
 
+## 9. Sept 9 third pass — content library: detail pages, thumbnails, pagination
+
+Shipped per explicit feedback that the site read as "landing-page-ish" —
+every Lab entity now has its own real detail page and thumbnail, structured
+like a research/tech blog (NYT/Bloomberg content-library model), not just
+card grids.
+
+- [x] **Detail pages for every Lab entity**: `/projects/:slug`,
+      `/experiments/:slug`, `/open-source/:slug`, `/events/:slug`,
+      `/sources/:slug` (new — the Publications "What I'm Reading"/Research
+      Desk items). Each is a real, shareable, SEO'd page: breadcrumbs,
+      thumbnail, full `detail-field-grid` (experiments get Question/
+      Hypothesis/Background/Method/Measurement/Artifact/Limitations;
+      open-source gets Activity/What to Study/Why It Matters/Action; sources
+      get Key Insight/What's Supported/Caveat; events get Action/Networking
+      Plan + Cost/Prize Notes), external link to the real source, and a
+      "Related" grid linking back to the same project's other
+      experiments/repos/sources. `og:image` is the entity's own thumbnail —
+      built specifically so individual pages are shareable to specific
+      people/orgs.
+- [x] **45 AutoNateAI-branded thumbnails**, generated via `gpt-image-2` in
+      parallel (`scripts/generate-lab-thumbnails.mjs`, concurrency 8,
+      ~16MB total under `public/assets/thumbnails/<type>/<slug>.jpg`):
+      3 projects, 9 open-source repos, 7 experiments, 12 sources, 14 events.
+      Navy/gold meme-energy style, no readable text/logos (gpt-image-2
+      renders garbled text), each prompt genuinely tailored to its content.
+      Re-run the script (same concurrency pattern) to regenerate or extend —
+      it's additive-safe, just add entries to both `items` in the script and
+      the matching `thumbnail` field in `data.mjs`, they're cross-verified
+      to match 1:1 before every build.
+  - **Not delivered: animation.** Nathan asked for "animated" thumbnails —
+    gpt-image-2 only produces static images and no video/GIF-generation
+    tool was available this session. Compensated with a CSS hover-zoom on
+    every `.card-thumbnail` (see `public/styles.css`) as a motion touch, but
+    genuinely animated thumbnails are still open — would need a different
+    tool/API.
+- [x] **Real navy/gold/white brand carried through** the new thumbnails —
+    generated using the same hex values as the `:root` CSS tokens (§Sept 9
+    second pass), so they read as one system with the rest of the site.
+- [x] **A 3rd Active Project**: "Spatial & Simulation Systems" (real, not
+      padding — grounded in PlannerForge, Mireye, NASA Space Apps, HackStorm)
+      so the homepage's "What's Forming Right Now" now shows 3 cards, not 2.
+- [x] **Events page**: removed the "AutoNateAI Lab Sessions" section
+      entirely (the old 3-day-a-week Industry Build Lab kickoff/rotation
+      block) per explicit feedback — `industryWeeks`/`kickoffSession`/
+      `buildLabInfo` and the now-dead `industryWeekCalendarCard` helper were
+      removed from `src/pages.mjs` (data itself untouched in `data.mjs` in
+      case another page needs it later). `/events` is now purely the two
+      real research-desk sections (Agent Systems & Software / Human Systems
+      Signals), each card linking to a real detail page.
+- [x] **Pagination**, real not theoretical: `paginate()`/`paginationNav()`
+      in `src/pages.mjs`, wired into `/experiments` (7 items, 6/page),
+      `/open-source` (9 items, 6/page), and `/articles` main grid (8 items,
+      6/page) — each genuinely produces a page 2 today. Page-2+ URLs are
+      `noindex,follow` (avoid duplicate-content indexing) and both
+      `server.mjs` and `scripts/export-static.mjs` serve
+      `<section>/page/<n>`. **Not paginated on purpose**: `/projects` (3
+      items — no real need yet) and `/events` (14 items across 2 sections —
+      reasonable on one page; forcing shared pagination across two
+      differently-sized sections would've been architecturally awkward for
+      no real payoff yet). Publications' Research Desk reading-list
+      sub-section is also unpaginated (12 items, fits fine) — revisit all of
+      these thresholds as content actually grows.
+- [x] **Mobile**: content-heavy Lab grids (`.lab-grid`, applied alongside
+      `.industry-grid` on every Lab listing/section) become horizontal
+      swipeable card shelves at ≤760px instead of a long vertical stack —
+      mirrors the existing `.pack-grid` carousel pattern. Plain
+      `.industry-grid` usage elsewhere (Consulting's industries/org-examples
+      grids) is untouched and keeps its original stack-to-1-column
+      behavior.
+- [x] Verified: `node --check` on every changed file; a 62-route smoke test
+      covering every new listing/pagination/detail route (all 200, no
+      `undefined` leaks); a full `scripts/export-static.mjs` build (99
+      static pages, up from 51) with automated checks that every `og:image`
+      and every `/assets/thumbnails/...` `<img>` reference resolves to a
+      real file on disk (0 missing across 100 and 191 references
+      respectively).
+- [ ] Existing `articles`/Publications entries already had thumbnails and
+      detail pages from before this pass (`articleCard`/
+      `renderArticleDetail`) — untouched, already met the bar.
+- [ ] `paginatedSections` in `scripts/export-static.mjs` hardcodes the same
+      `"systems-thinking-through-code"` featured-article exclusion that
+      `renderArticles` uses internally, to keep the page-count math in sync.
+      If the featured article ever changes, update both places.
+
 This doc should be updated as each box gets checked, and whenever a scope
 decision changes (e.g. exactly where Consulting lives in the new nav).

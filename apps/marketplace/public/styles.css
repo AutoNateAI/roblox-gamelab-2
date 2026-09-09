@@ -4754,3 +4754,187 @@ pre.mermaid svg {
     display: flex !important;
   }
 }
+
+/* --- Lab content cards: thumbnails, clickable cards, detail pages, ---
+   --- pagination, and mobile content-library treatment. --- */
+
+/* Every Lab card (project/experiment/repo/event/source) is a clickable
+   .lab-card wrapping .industry-card's existing look, topped with a
+   thumbnail image. Anchor gets block display so the whole card is a
+   tap/click target, not just the title text. */
+a.lab-card {
+  display: block;
+  color: inherit;
+}
+
+a.lab-card:hover .industry-card,
+a.lab-card:focus-visible .industry-card {
+  border-color: var(--primary);
+}
+
+a.lab-card .industry-card {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.card-thumbnail {
+  position: relative;
+  margin: 0 -24px 14px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface-high);
+}
+
+.card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms ease;
+}
+
+a.lab-card:hover .card-thumbnail img,
+a.lab-card:focus-visible .card-thumbnail img {
+  transform: scale(1.06);
+}
+
+.card-thumbnail .status-pill {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+/* .industry-card::before (the top accent bar) collides visually with a
+   full-bleed thumbnail — suppress it only on thumbnail cards. */
+a.lab-card .industry-card::before {
+  display: none;
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--outline-strong);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.pagination a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pagination .pagination-current {
+  background: var(--primary-container);
+  border-color: var(--primary-container);
+  color: var(--on-primary);
+}
+
+.pagination .pagination-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* --- Detail pages (experiments/projects/repos/events/sources) --- */
+.detail-field-grid {
+  display: grid;
+  gap: 28px;
+  margin: 32px 0;
+}
+
+.detail-field {
+  border-top: 1px solid var(--outline);
+  padding-top: 18px;
+}
+
+.detail-field h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.detail-field p,
+.detail-field ul {
+  margin: 0;
+  color: var(--on-surface);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.detail-field ul {
+  padding-left: 20px;
+}
+
+.detail-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--gutter);
+  margin-top: 20px;
+}
+
+.detail-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+/* --- Mobile: content-heavy Lab grids become swipeable card shelves ---
+   instead of a long vertical stack. Applied via an additional .lab-grid
+   class alongside .industry-grid on Lab listing sections specifically —
+   plain .industry-grid usage elsewhere (Consulting/For Organizations)
+   keeps its existing stack-to-1-column behavior. */
+@media (max-width: 760px) {
+  .lab-grid {
+    display: flex !important;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px 10px;
+  }
+
+  .lab-grid > a.lab-card,
+  .lab-grid > article {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  .detail-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    gap: 6px;
+  }
+
+  .pagination a,
+  .pagination span {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+}

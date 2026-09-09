@@ -10,20 +10,25 @@ import {
   renderAbout,
   renderCommunity,
   renderConsulting,
+  renderEventDetail,
   renderEvents,
   renderCheckout,
+  renderExperimentDetail,
   renderExperiments,
   renderForOrganizations,
   renderHome,
   renderOpenSource,
+  renderOpenSourceDetail,
   renderProgramDetail,
+  renderProjectDetail,
   renderProjects,
+  renderSourceDetail,
   renderSuccess,
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
 } from "./src/pages.mjs";
-import { articles, tutorialPacks, tutorials } from "./src/data.mjs";
+import { articles, labEvents, labExperiments, labProjects, labSources, openSourceRepos, tutorialPacks, tutorials } from "./src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -257,6 +262,17 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    // Pagination routes: page 1 lives at the bare listing route above;
+    // page N>1 lives at "<listing>/page/<n>" (see pages.mjs paginationNav).
+    const paginationMatch = url.pathname.match(/^\/(articles|experiments|open-source)\/page\/(\d+)$/);
+    if (paginationMatch) {
+      const [, section, pageStr] = paginationMatch;
+      const page = Number(pageStr) || 1;
+      const renderer = { articles: renderArticles, experiments: renderExperiments, "open-source": renderOpenSource }[section];
+      html(response, 200, renderer(page));
+      return;
+    }
+
     if (url.pathname.startsWith("/articles/")) {
       const handle = url.pathname.split("/").filter(Boolean).at(-1);
       const article = articles.find((item) => item.handle === handle);
@@ -265,6 +281,61 @@ const server = createServer(async (request, response) => {
         return;
       }
       html(response, 200, renderArticleDetail(article));
+      return;
+    }
+
+    if (url.pathname.startsWith("/sources/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const source = labSources.find((item) => item.slug === slug);
+      if (!source) {
+        json(response, 404, { error: "Source not found" });
+        return;
+      }
+      html(response, 200, renderSourceDetail(source));
+      return;
+    }
+
+    if (url.pathname.startsWith("/projects/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const project = labProjects.find((item) => item.slug === slug);
+      if (!project) {
+        json(response, 404, { error: "Project not found" });
+        return;
+      }
+      html(response, 200, renderProjectDetail(project));
+      return;
+    }
+
+    if (url.pathname.startsWith("/experiments/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const experiment = labExperiments.find((item) => item.slug === slug);
+      if (!experiment) {
+        json(response, 404, { error: "Experiment not found" });
+        return;
+      }
+      html(response, 200, renderExperimentDetail(experiment));
+      return;
+    }
+
+    if (url.pathname.startsWith("/open-source/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const repo = openSourceRepos.find((item) => item.slug === slug);
+      if (!repo) {
+        json(response, 404, { error: "Repository not found" });
+        return;
+      }
+      html(response, 200, renderOpenSourceDetail(repo));
+      return;
+    }
+
+    if (url.pathname.startsWith("/events/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const event = labEvents.find((item) => item.slug === slug);
+      if (!event) {
+        json(response, 404, { error: "Event not found" });
+        return;
+      }
+      html(response, 200, renderEventDetail(event));
       return;
     }
 

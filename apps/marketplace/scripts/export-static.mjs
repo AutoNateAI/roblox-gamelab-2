@@ -7,20 +7,25 @@ import {
   renderAbout,
   renderCommunity,
   renderConsulting,
+  renderEventDetail,
   renderEvents,
   renderCheckout,
+  renderExperimentDetail,
   renderExperiments,
   renderForOrganizations,
   renderHome,
   renderOpenSource,
+  renderOpenSourceDetail,
   renderProgramDetail,
+  renderProjectDetail,
   renderProjects,
+  renderSourceDetail,
   renderSuccess,
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
 } from "../src/pages.mjs";
-import { articles, tutorialPacks, tutorials } from "../src/data.mjs";
+import { articles, labEvents, labExperiments, labProjects, labSources, openSourceRepos, tutorialPacks, tutorials } from "../src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
@@ -30,6 +35,9 @@ const outDir = path.join(rootDir, "dist/site");
 const programsData = JSON.parse(
   await readFile(path.join(rootDir, "data/marketplace/programs.json"), "utf8"),
 );
+
+const PAGE_SIZE = 6;
+const pageCount = (items) => Math.max(1, Math.ceil(items.length / PAGE_SIZE));
 
 const routes = [
   ["index.html", renderHome(programsData)],
@@ -47,6 +55,20 @@ const routes = [
   ["checkout/index.html", renderCheckout(programsData)],
   ["success/index.html", renderSuccess(programsData)],
 ];
+
+// Paginated listings: page 1 is the bare route above; page 2+ gets its own
+// "<section>/page/<n>/index.html" (mirrors server.mjs's routing).
+const paginatedSections = [
+  { dir: "articles", items: articles.filter((a) => a.handle !== "systems-thinking-through-code"), render: renderArticles },
+  { dir: "experiments", items: labExperiments, render: renderExperiments },
+  { dir: "open-source", items: openSourceRepos, render: renderOpenSource },
+];
+for (const { dir, items, render } of paginatedSections) {
+  const pages = pageCount(items);
+  for (let page = 2; page <= pages; page++) {
+    routes.push([`${dir}/page/${page}/index.html`, render(page)]);
+  }
+}
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -72,6 +94,36 @@ for (const article of articles) {
   const filePath = path.join(outDir, "articles", article.handle, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderArticleDetail(article));
+}
+
+for (const project of labProjects) {
+  const filePath = path.join(outDir, "projects", project.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderProjectDetail(project));
+}
+
+for (const experiment of labExperiments) {
+  const filePath = path.join(outDir, "experiments", experiment.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderExperimentDetail(experiment));
+}
+
+for (const repo of openSourceRepos) {
+  const filePath = path.join(outDir, "open-source", repo.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderOpenSourceDetail(repo));
+}
+
+for (const event of labEvents) {
+  const filePath = path.join(outDir, "events", event.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderEventDetail(event));
+}
+
+for (const source of labSources) {
+  const filePath = path.join(outDir, "sources", source.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderSourceDetail(source));
 }
 
 for (const pack of tutorialPacks) {
@@ -123,6 +175,11 @@ const sitemapUrls = [
   ...articles.map((article) =>
     sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6", article.dateModified || article.datePublished || TODAY),
   ),
+  ...labProjects.map((project) => sitemapEntry(`https://autonateai.com/projects/${project.slug}`, "0.7")),
+  ...labExperiments.map((experiment) => sitemapEntry(`https://autonateai.com/experiments/${experiment.slug}`, "0.7")),
+  ...openSourceRepos.map((repo) => sitemapEntry(`https://autonateai.com/open-source/${repo.slug}`, "0.7")),
+  ...labEvents.map((event) => sitemapEntry(`https://autonateai.com/events/${event.slug}`, "0.6", event.start)),
+  ...labSources.map((source) => sitemapEntry(`https://autonateai.com/sources/${source.slug}`, "0.6")),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
@@ -150,6 +207,9 @@ await writeFile(
   ),
 );
 
+const detailPageCount =
+  labProjects.length + labExperiments.length + openSourceRepos.length + labEvents.length + labSources.length;
+
 console.log(
-  `Exported ${routes.length + programsData.programs.length + articles.length + tutorialPacks.length + tutorials.length} marketplace pages to ${path.relative(rootDir, outDir)}`,
+  `Exported ${routes.length + programsData.programs.length + articles.length + tutorialPacks.length + tutorials.length + detailPageCount} marketplace pages to ${path.relative(rootDir, outDir)}`,
 );
