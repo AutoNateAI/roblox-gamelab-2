@@ -273,10 +273,14 @@ export function renderHome(data) {
         <div class="hero-content">
           <div class="hero-copy">
             <span class="kicker">${icon("radar")} Independent AI, Software &amp; Human Systems Lab</span>
-            <h1>AutoNateAI is Nathan Baker's research practice.</h1>
+            <h1>Welcome to my lab.</h1>
             <p>I research, build, and write about how software, intelligence, and human systems interact — then publish what holds up. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
+            <div class="lab-byline">
+              <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker" />
+              <div><strong>Nathan Baker</strong><span>Founder &amp; Lead Researcher, AutoNateAI</span></div>
+            </div>
             <div class="button-row">
-              <a class="primary-button" href="/projects#${currentInvestigation.slug}">View Current Investigation ${icon("arrow_forward")}</a>
+              <a class="primary-button" href="/projects/${currentInvestigation.slug}">View Current Investigation ${icon("arrow_forward")}</a>
               <a class="secondary-button" href="/tutorials">Free Course Library</a>
             </div>
           </div>
@@ -402,14 +406,14 @@ export function renderHome(data) {
   `;
 
   return pageShell({
-    title: "AutoNateAI | Nathan Baker's AI, Software & Human Systems Lab",
+    title: "AutoNateAI | Welcome to My Lab",
     active: "home",
     body,
     canonicalPath: "/",
     ogImage: "/assets/og/default.jpg",
     description:
       "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker — research, experiments, open-source work, and free technical courses.",
-    ogTitle: "AutoNateAI is Nathan Baker's research practice.",
+    ogTitle: "Welcome to My Lab",
     ogDescription:
       "Research, build, publish: a living research lab tracking agentic AI systems, open source, and human systems, with free technical courses and consulting available.",
     structuredData: [
@@ -1709,7 +1713,7 @@ export function renderTutorials() {
   `;
 
   return pageShell({
-    title: "Free AI & Coding Courses | Southeast Missouri | AutoNateAI",
+    title: "Free AI & Coding Courses | AutoNateAI Lab",
     active: "tutorials",
     body,
     canonicalPath: "/tutorials",
@@ -1779,7 +1783,7 @@ export function renderTutorialPack(pack) {
     active: "tutorials",
     body,
     canonicalPath: `/tutorials/${pack.handle}`,
-    ogImage: `/assets/og/tutorial-pack-${pack.handle}.jpg`,
+    ogImage: pack.heroImage || `/assets/og/tutorial-pack-${pack.handle}.jpg`,
     description: pack.summary,
     ogTitle: `${pack.title}: ${comingSoon ? "coming soon." : "start here."}`,
     ogDescription: pack.summary,
@@ -1837,7 +1841,7 @@ export function renderTutorialDetail(pack, tutorial) {
     active: "tutorials",
     body,
     canonicalPath: `/tutorials/${pack.handle}/${tutorial.handle}`,
-    ogImage: `/assets/og/tutorial-${tutorial.pack}-${tutorial.handle}.jpg`,
+    ogImage: pack.heroImage || `/assets/og/tutorial-${tutorial.pack}-${tutorial.handle}.jpg`,
     description: tutorial.summary,
     ogTitle: `${tutorial.title}: keep the build moving.`,
     ogDescription: tutorial.summary,

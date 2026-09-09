@@ -407,5 +407,46 @@ card grids.
       `renderArticles` uses internally, to keep the page-count math in sync.
       If the featured article ever changes, update both places.
 
+## 10. Sept 9 fourth pass — fixed OG images, course thumbnails, Nathan's photo
+
+`scripts/generate-og-images.mjs` was still on the *old* red/black/white SVG
+template and Sikeston photo pool (its text had been updated in an earlier
+pass, but the actual color hex codes and background images never were) —
+that's why the homepage/course/About share cards still looked old after
+everything else changed. Fixed for real this time:
+
+- [x] SVG compositor recolored to navy/gold (`#0e1a33` panel, `#c9a227`/
+      `#e0b93a` gold accents, `#f6f7fb` title text) — matches `public/
+      styles.css` tokens exactly. `BACKGROUND_POOL` now cycles the existing
+      `sceneShots` (already gold-accented, non-Sikeston, no people/text) via
+      `src/data.mjs`, replacing the old Sikeston photo array.
+- [x] Homepage (`default.jpg`) and About (`about.jpg`) OG cards now
+      composite Nathan's real photo (`public/assets/nathan-baker.jpeg`) —
+      `focusTop: true` keeps his face in frame — instead of the generic
+      scene pool. Ran `scripts/generate-og-images.mjs` (free — local Resvg/
+      sharp compositing, no API calls) to regenerate all 38 composited OGs.
+- [x] Homepage hero: added a small `.lab-byline` (Nathan's real photo,
+      circular, 52px + name/title) right under the H1 — "so you can see who
+      Nathan Baker is" without a full founder-card takeover. H1 changed
+      from "AutoNateAI is Nathan Baker's research practice." to
+      "Welcome to my lab." (title/`og:title` updated to match:
+      "AutoNateAI | Welcome to My Lab").
+- [x] 4 new course thumbnails (`scripts/generate-course-thumbnails.mjs`,
+      gpt-image-2, parallel) overwrite the existing
+      `public/assets/landing/tutorial-pack-*.jpg` files in place — no
+      `data.mjs` path changes needed. Navy/gold meme style matching the Lab
+      thumbnails; Nate and Kai (the courses' fictional framing characters)
+      rendered as simple glowing silhouettes, never a real-person likeness.
+      `renderTutorialPack`/`renderTutorialDetail` now point `ogImage`
+      directly at `pack.heroImage` instead of the old SVG-composited
+      `/assets/og/tutorial-pack-*.jpg` (better quality, one less thing to
+      keep in sync — those composited files still get generated as a
+      harmless fallback, just unused).
+- [ ] The per-program OG cards (`ai-agent-systems.jpg` etc.), Consulting,
+      For Organizations, Community, and per-tutorial-lesson OGs still cycle
+      the generic `sceneShots` pool rather than anything content-specific —
+      fine for now, revisit if those pages ever want their own dedicated
+      art the way Lab entities and courses do.
+
 This doc should be updated as each box gets checked, and whenever a scope
 decision changes (e.g. exactly where Consulting lives in the new nav).

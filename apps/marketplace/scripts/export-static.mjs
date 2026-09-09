@@ -202,7 +202,7 @@ Sitemap: https://autonateai.com/sitemap.xml
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | Nathan Baker's AI, Software & Human Systems Lab</title>",
+    "<title>AutoNateAI | Welcome to My Lab</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
