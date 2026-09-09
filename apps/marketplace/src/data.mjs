@@ -21,28 +21,36 @@ export const navItems = [
 // in-page CTAs, not primary nav.
 
 // ---------------------------------------------------------------------------
-// THE LAB — current investigation, experiments, projects, and open-source
-// signals. This is hand-seeded from the Sept 9, 2026 inaugural run of the
-// five daily research desks (California Network, GitHub Open Source,
-// Research Paper, Events & Build, Mindfulness Tech) — see
-// apps/marketplace/Radar_Reports/09092026/ for the private source PDFs and
-// docs/marketplace/lab-operating-model.md for the pipeline. Nothing below
-// claims more activity than actually happened: experiments/projects not yet
-// started are marked "Proposed"/"Forming", not "Running". Once the Airtable
-// `Daily Lab State`/`Experiments`/`Projects` tables exist, this block is the
-// shape a live data layer should replace — same fields, real records.
+// THE LAB — current investigation, experiments, projects, open-source
+// signals, research sources, and events. Grounded in the Sept 9, 2026
+// inaugural run of the five daily research desks (California Network,
+// GitHub Open Source, Research Paper, Events & Build, Mindfulness Tech):
+// private source PDFs in apps/marketplace/Radar_Reports/09092026/, verified
+// structured records in the "AutoNateAI California Technical Network Radar"
+// Airtable base (appUHkTbaYBwqpQnA — Sources/Events/Daily Lab State tables).
+// See docs/marketplace/lab-operating-model.md for the pipeline. Nothing here
+// claims more activity than actually happened: the Airtable Projects and
+// Experiments tables are still empty (0 records) as of this run, so those
+// stay "Forming"/"Proposed" candidates, not "Running" — and every URL below
+// is a real, verified link pulled from Airtable or a radar PDF, never
+// invented. Once Nathan promotes a candidate into a real Airtable Project or
+// Experiment, this block is the shape a live fetch should replace.
 // ---------------------------------------------------------------------------
 
+// Airtable "Daily Lab State" record 2026-09-09 — Inspectable Agent Systems
+// (recWyzR95Gs8R3nui). Thesis/question/note text below is the record's
+// actual Daily Thesis / Research Question / Lab Note fields, verbatim.
 export const currentInvestigation = {
   slug: "inspectable-agent-systems",
   status: "Forming",
   title: "Inspectable Agent Systems",
   question:
-    "How should intelligent systems represent memory, state, authority, and evaluation so they stay inspectable as they scale?",
+    "What architectures make agent memory, context, execution, evaluation, provenance, and authority boundaries observable and controllable without sacrificing adaptability?",
   thesis:
-    "Intelligence is getting cheap. The structure around intelligence — memory, provenance, authority, evaluation — is what's becoming valuable.",
+    "Intelligence is becoming cheaper. Reliable structure around intelligence is becoming more valuable. Across current research, open source, technical companies, events, simulation, and human-systems work, the recurring problem is how to make intelligent systems inspectable, contextual, governable, measurable, and useful in the real world.",
   note:
-    "Logged from the Sept 9, 2026 inaugural run of AutoNateAI's five research desks. Three of the five — California Network, GitHub Open Source, and Research Paper — independently converged on the same underlying problem: agent systems need explicit, inspectable structure around memory, context, authority, and evaluation.",
+    "Today's lab state converged around inspectable agent systems: graph-native context, governed memory, independent evaluation, explicit authority boundaries, and simulation-based testing. The immediate study path is to compare procedural graphs and context architectures, then connect those findings to build opportunities in MCP, spatial intelligence, and agent evaluation.",
+  date: "2026-09-09",
 };
 
 export const labProjects = [
@@ -52,7 +60,7 @@ export const labProjects = [
     name: "Inspectable Agent Systems",
     status: "Forming",
     tagline: "How agentic software should represent memory, authority, state, provenance, and evaluation.",
-    desks: ["California Network Radar", "GitHub Open Source Radar", "Research Paper Radar"],
+    desks: ["California Network Radar", "GitHub Open Source Radar", "Research Paper Radar", "Events & Build Radar"],
   },
   {
     slug: "human-systems",
@@ -64,71 +72,298 @@ export const labProjects = [
   },
 ];
 
+// Curated from the GitHub Open Source Radar (Sept 9) + Airtable Sources.
+// Growth figures are the radar's own Trending-horizon counters, not lifetime
+// totals. Stars/forks as captured on the run date.
 export const openSourceRepos = [
   {
     slug: "semantica",
     icon: "hub",
-    name: "Semantica",
+    name: "semantica-agi/semantica",
     status: "Queued to study",
     project: "inspectable-agent-systems",
-    hook: "Graph-native context/memory layer for agent systems — one of the two strongest signals out of the Sept 9 GitHub Open Source Radar run.",
+    meta: "Python · MIT · 12,497 stars · +9,951/month",
+    hook: "Graph-native context, provenance, ontology, and accountable-AI layer for agents — the #1 repo out of the Sept 9 run (98/100).",
     notes: [
+      "Study temporal graphs, provenance, ontology boundaries, accountable reasoning",
       "Candidate for the Context Graph vs. Context Database benchmark",
-      "Watching for architecture writeups and maintainer activity",
     ],
-    searchUrl: "https://github.com/search?q=Semantica+agent+memory&type=repositories",
+    url: "https://github.com/semantica-agi/semantica",
   },
   {
     slug: "openviking",
     icon: "account_tree",
-    name: "OpenViking",
+    name: "volcengine/OpenViking",
     status: "Queued to study",
     project: "inspectable-agent-systems",
-    hook: "Graph memory infrastructure for agents — the second top GitHub Open Source Radar recommendation on Sept 9, alongside Semantica.",
+    meta: "Python · AGPL-3.0 · 36,256 stars · +8,115/month",
+    hook: "A live context database unifying memory, RAG, and skills — a concrete agent-memory architecture to test against Semantica (97/100).",
     notes: [
-      "Candidate for the Context Graph vs. Context Database benchmark",
-      "Cross-referencing against Research Paper Radar's graph-memory findings",
+      "Study context-database lifecycle, recall/capture filters, embeddings",
+      "Run sandboxed; trace recall/capture; compare retrieval quality and cost",
     ],
-    searchUrl: "https://github.com/search?q=OpenViking+agent+memory&type=repositories",
+    url: "https://github.com/volcengine/OpenViking",
+  },
+  {
+    slug: "browser-use-pi",
+    icon: "travel_explore",
+    name: "browser-use/browser-use-pi",
+    status: "Queued to study",
+    meta: "JavaScript · MIT · 142 stars · created Sep 5, 2026",
+    hook: "Four days old and already worth dissecting: a minimal, evaluation-driven browser agent — small enough to fully understand (95/100).",
+    notes: ["Study the minimal browser control loop and eval-driven hill climbing", "Fork; mutate one policy/tool boundary; measure task success"],
+    url: "https://github.com/browser-use/browser-use-pi",
+  },
+  {
+    slug: "hermes-agent",
+    icon: "smart_toy",
+    name: "NousResearch/hermes-agent",
+    status: "Queued to study",
+    meta: "Python · MIT · 243,749 stars · +4,221/week · v0.21.1",
+    hook: "A mature reference for orchestration, delegation, MCP auth, and desktop/browser control — useful as a benchmark baseline, not something to adopt wholesale (93/100).",
+    notes: ["v0.21.1 (Sep 7) touched modularization, providers, scheduling, and delegation across the whole platform"],
+    url: "https://github.com/NousResearch/hermes-agent",
+  },
+  {
+    slug: "tradingagents",
+    icon: "candlestick_chart",
+    name: "TauricResearch/TradingAgents",
+    status: "Queued to study",
+    meta: "Python · Apache-2.0 · 103,727 stars · +506/day",
+    hook: "Role-specialized multi-agent debate over financial data — direct overlap with agent-systems research, and linked to an arXiv paper (90/100).",
+    notes: ["Reproduce on historical-only data; instrument agent disagreement vs. a single-agent baseline"],
+    url: "https://github.com/TauricResearch/TradingAgents",
+  },
+  {
+    slug: "pydantic-ai-harness",
+    icon: "verified",
+    name: "pydantic/pydantic-ai-harness",
+    status: "Queued to study",
+    meta: "Python · MIT · 873 stars · v0.30.0 current",
+    hook: "A compact, typed harness — a clean baseline for comparing ergonomics, correctness, and observability against heavier frameworks (89/100).",
+    notes: ["Build the same task in this harness vs. Hermes vs. a minimal custom loop"],
+    url: "https://github.com/pydantic/pydantic-ai-harness",
+  },
+  {
+    slug: "context-mode",
+    icon: "compress",
+    name: "mksglu/context-mode",
+    status: "Queued to study",
+    meta: "TypeScript · 21,606 stars · +935/week",
+    hook: "Context-window optimization — isolation, compression, tool-output shaping. Becoming a first-class agent-systems problem in its own right (88/100).",
+    notes: ["Benchmark token cost, latency, and task success on the same engineering workload"],
+    url: "https://github.com/mksglu/context-mode",
+  },
+  {
+    slug: "needle",
+    icon: "memory",
+    name: "cactus-compute/needle",
+    status: "Queued to study",
+    meta: "Python · 10,648 stars · +7,220/month",
+    hook: "Tiny local-model inference — a useful counterweight to cloud-agent hype for on-device experiments (85/100).",
+    notes: ["Benchmark on available local hardware; report latency, RAM, and task quality"],
+    url: "https://github.com/cactus-compute/needle",
   },
 ];
 
+// Research Paper Radar's "Experiment Queue // candidates only" (page 13) —
+// explicitly not Airtable Experiments records until Nathan starts one.
 export const labExperiments = [
+  {
+    slug: "procedural-graph-runtime",
+    icon: "account_tree",
+    name: "Procedural Graph Runtime",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Can a validation-gated, self-evolving execution graph (per Procedural Graphs) improve long-horizon agent workflows without increasing unsafe tool use?",
+    notes: ["Sources: Procedural Graphs + AgentGrad", "Measure: completion, wrong-order tools, latency, token cost", "Artifact: graph runtime + benchmark report"],
+  },
+  {
+    slug: "independent-test-agent",
+    icon: "fact_check",
+    name: "Independent Test Agent",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Does separating an independent Test agent from a Repair agent (per ExecCritic) reduce false-confidence patches without hurting resolution rate?",
+    notes: ["Source: ExecCritic (open repo)", "Measure: resolved tasks, false confidence, test validity, compute", "Artifact: fail-closed repo-repair harness"],
+  },
+  {
+    slug: "revocable-memory-graph",
+    icon: "shield",
+    name: "Revocable Memory Graph",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Can a graph-based retriever enforce memory revocation structurally while still preserving useful personalized context?",
+    notes: ["Sources: MeClear + Revoked but Still Authoritative", "Measure: revoked-retrieval/action recovery, collateral forgetting", "Artifact: memory-governance test suite"],
+  },
+  {
+    slug: "agentic-simulation-foundry",
+    icon: "map",
+    name: "Agentic Simulation Foundry",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Does a generate → retrieve → mutate → execute → score pipeline (per PlannerForge) transfer from autonomous driving to logistics, GIS, or facility-operations scenarios?",
+    notes: ["Source: PlannerForge (open repo)", "Measure: scenario validity, diversity, retrieval, edit success", "Artifact: domain-neutral simulation pipeline"],
+  },
+  {
+    slug: "safety-judge-stress-lab",
+    icon: "gavel",
+    name: "Safety Judge Stress Lab",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Which content-invariant wrapper transformations produce the highest disagreement across automated safety judges, and can simple ensembles resist them?",
+    notes: ["Source: Style Over Substance (open repo)", "Measure: flip rate, noise floor, ensemble agreement", "Artifact: judge-robustness dashboard"],
+  },
   {
     slug: "context-graph-vs-context-database",
     icon: "science",
     name: "Context Graph vs. Context Database",
     status: "Proposed",
     project: "inspectable-agent-systems",
-    question: "Does graph-native agent memory (Semantica/OpenViking-style) outperform a traditional context/vector-database on recall accuracy and latency for a real multi-step agent task?",
-    notes: [
-      "Method not yet locked — surfaced by the GitHub Open Source Radar as the natural next test",
-      "Depends on studying Semantica and OpenViking first",
-    ],
+    question: "Does explicit graph structure (Semantica/OpenViking) improve retrieval traceability and multi-hop reasoning over a context-database approach, at the same token cost?",
+    notes: ["Repos: Semantica + OpenViking", "Same source corpus, same task set, same model", "Artifact: benchmark notebook + architecture diagrams"],
+  },
+  {
+    slug: "temporal-gis-narratives",
+    icon: "public",
+    name: "Temporal GIS Narratives",
+    status: "Proposed",
+    project: "inspectable-agent-systems",
+    question: "Can sheaf/narrative structure preserve provenance and consistency in evolving geographic knowledge graphs better than event logs?",
+    notes: ["Sources: Time-Varying Data as Sheaves + graph-memory survey", "Stack: NetworkX/Neo4j + a mapping layer", "Artifact: interactive temporal map + query benchmark"],
   },
 ];
 
-export const eventSignals = [
+// Evidence-ladder reading list — real papers and mindfulness sources pulled
+// from the Sept 9 Sources table (Airtable). evidenceClass keys map to
+// data-evidence values in public/styles.css (.evidence-badge).
+export const evidenceLabels = {
+  "peer-reviewed": "Peer Reviewed",
+  "preprint": "Preprint",
+  "technical": "Technical Source",
+  "institute-claim": "Institute Claim",
+  "practitioner": "Practitioner",
+  "cultural": "Cultural / Spiritual",
+};
+
+export const labSources = [
   {
-    name: "Microsoft \"Agent-a-Thon\" architect track",
-    focus: "Production agent orchestration",
-    source: "Events & Build Radar",
+    title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents",
+    authors: "Yuxing Lu, Yicheng Chen, Shanchan Wu, Sercan Ö. Arık — Google / Georgia Tech / Peking University",
+    evidenceClass: "preprint",
+    topic: "Agentic AI · Software Architecture",
+    insight: "A localized, editable execution graph that biases the next action and can self-evolve — the strongest architecture fit of the Sept 9 research run (98/100 fit).",
+    url: "https://arxiv.org/abs/2609.09153",
   },
   {
-    name: "GSA MCP / agent hackathon",
-    focus: "Model Context Protocol tooling",
-    source: "Events & Build Radar",
+    title: "ExecCritic: Learn to Test, Test to Improve for Coding Agents",
+    authors: "Leitian Tao et al. — UW-Madison / Microsoft Research / Georgia Tech",
+    evidenceClass: "preprint",
+    topic: "Agentic AI · Evaluation",
+    insight: "Independent Test/Repair agents in a fail-closed harness reach 72.6% on SWE-bench Verified, +11.4 points over a no-test baseline.",
+    url: "https://arxiv.org/abs/2609.09133",
   },
   {
-    name: "Stanford CCARE contemplative-science sessions",
-    focus: "Compassion & contemplative research",
-    source: "Mindfulness Tech Radar",
+    title: "PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners",
+    authors: "Yuan Gao et al. — TUM AVS/MIRMI · University College London",
+    evidenceClass: "peer-reviewed",
+    topic: "Simulation · Robotics",
+    insight: "193/200 executable scenarios vs. 144 for a baseline; planner success rises from 50.4% to 70.2% with grounded scenario generation. Accepted at EMNLP 2026.",
+    url: "https://arxiv.org/abs/2609.08965",
   },
   {
-    name: "Berkeley Neuroscience Conference",
-    focus: "Neurotech / cognition research",
-    source: "Mindfulness Tech Radar",
+    title: "MeClear: Cooperative Game-Theoretic Attribution and Risk-Aware Memory Clearance",
+    authors: "Boyu Yang, Jiazheng Sun, Zilong Lu, Zhi Qiu, Xin Peng, Jun Zheng — Fudan University · Beijing Institute of Technology",
+    evidenceClass: "preprint",
+    topic: "Agent Memory · Safety",
+    insight: "Reports 85.9% target recall and 82.3% task recovery across long-dialogue pools when clearing harmful/redundant agent memory.",
+    url: "https://arxiv.org/abs/2609.09115",
   },
+  {
+    title: "Consumer-Grade Neurofeedback With Mindfulness Meditation: A Meta-Analysis",
+    authors: "Multiple authors — peer-reviewed meta-analysis",
+    evidenceClass: "peer-reviewed",
+    topic: "Human Systems · EEG",
+    insight: "Modest distress benefits, but no convincing evidence that consumer neurofeedback teaches control of a specific brain state — the methodological baseline for any Muse experiment.",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12046271/",
+  },
+  {
+    title: "EEG Oscillatory Correlates of Meditation Practice: Systematic Review & Meta-Analysis",
+    authors: "Multiple authors — Neuroscience / Elsevier",
+    evidenceClass: "peer-reviewed",
+    topic: "Human Systems · EEG",
+    insight: "Pooled alpha/beta/gamma effects during meditation are real, but measurement state materially changes effect sizes — 'one frequency = one mental state' is not supported.",
+    url: "https://www.sciencedirect.com/science/article/pii/S0306452226004422",
+  },
+  {
+    title: "HRV Biofeedback in a Global Study of Common Coherence Frequencies and Emotional States",
+    authors: "Sai Balaji et al. — Scientific Reports / HeartMath-linked dataset",
+    evidenceClass: "peer-reviewed",
+    topic: "Human Systems · HRV",
+    insight: "1.8M app-derived sessions characterize common HRV-coherence frequencies and emotion-associated patterns — observational, not a validated individual-wellbeing metric.",
+    url: "https://www.heartmath.org/research/research-library/basic/hrv-biofeedback-coherence-frequencies-emotional-states/",
+  },
+  {
+    title: "WRITER: Building Agent Memory (engineering blog)",
+    authors: "WRITER Engineering",
+    evidenceClass: "technical",
+    topic: "Agentic AI · Memory",
+    insight: "Task-, requirement-, and deliverable-oriented enterprise agent memory — the #1 California signal on Sept 9 (99/100), and the seed of the Context Graph vs. Context Database experiment.",
+    url: "https://writer.com/engineering/building-agent-memory/",
+  },
+  {
+    title: "LangChain: Organizing Context in a Multi-Agent Harness",
+    authors: "Thushanth Bengre, Chester Curme — LangChain",
+    evidenceClass: "technical",
+    topic: "Agentic AI · Context Engineering",
+    insight: "Forked subagents inheriting supervisor context, compared against retrieval and graph-context strategies for reducing repeated lookups.",
+    url: "https://www.langchain.com/blog/organizing-context-in-a-multi-agent-harness",
+  },
+  {
+    title: "Arcade: Skills Over MCP",
+    authors: "Mateo Torres — Arcade.dev",
+    evidenceClass: "technical",
+    topic: "Agentic AI · MCP",
+    insight: "Runtime divergence around MCP is appearing before the spec fully lands — a live standards/governance conversation, not a settled protocol.",
+    url: "https://www.arcade.dev/blog/skills-over-mcp-explained/",
+  },
+  {
+    title: "The Muse Headband Review: Meditation 2.0",
+    authors: "The Medical Futurist — YouTube, 2026-06-11",
+    evidenceClass: "practitioner",
+    topic: "Human Systems · Neurotech",
+    insight: "An independent reviewer's framing: Muse is a feedback aid, not a machine that produces mindfulness — useful for calibrating expectations, not evidence.",
+    url: "https://www.youtube.com/watch?v=YifvLHvLckA",
+  },
+  {
+    title: "This Is Your Brain on Meditation",
+    authors: "Joe Dispenza — Gaia",
+    evidenceClass: "cultural",
+    topic: "Human Systems · Contemplative",
+    insight: "Presents meditation, neuroplasticity, and self-transformation claims in a spiritual frame — useful for generating falsifiable questions, not as scientific evidence.",
+    url: "https://www.gaia.com/video/your-brain-meditation-joe-dispenza",
+  },
+];
+
+// Real events from the Airtable Events table (Sept 9 Events & Build +
+// Mindfulness Tech radar runs) — every url/date/location below is a verified
+// field value, not a guess. `status` mirrors Airtable's own Status field
+// (Discovered / Considering) rather than claiming registration/attendance.
+export const labEvents = [
+  { name: "Stanford CCARE — Conversations on Compassion: Hidden Happiness with Venerable Ani Choyang", type: "Seminar / Talk", start: "2026-09-10", location: "Stanford University, Palo Alto, CA", virtual: false, status: "Considering", topics: ["Mindfulness", "Human Systems"], why: "Immediate California networking opportunity at the intersection of contemplative practice, neuroscience training, and compassion research.", url: "https://ccare.stanford.edu/events/conversations-on-compassion-hidden-happiness-with-venerable-ani-choyang/" },
+  { name: "UC Berkeley Law AI Institute 2026", type: "Conference", start: "2026-09-15", end: "2026-09-17", location: "Berkeley, CA — livestream available", virtual: false, status: "Discovered", topics: ["AI / ML", "Cybersecurity", "Human Systems"], why: "AI-governance and rollout network — how enterprise agent permissions, logging, and human signoff translate governance into software controls.", url: "https://executive.law.berkeley.edu/programs/berkeley-law-ai-institute/" },
+  { name: "The Buddha, the Brain, and Bach: Exploring Practice in Mind, Music, and Life", type: "Workshop", start: "2026-09-14", end: "2026-09-18", location: "Esalen Institute, Big Sur, CA", virtual: false, status: "Discovered", topics: ["Mindfulness", "Neurotech", "Human Systems"], why: "Meditation instruction paired with neuroscience and music, with Clifford Saron — a direct contemplative-neuroscience network node.", url: "https://www.esalen.org/workshops/the-buddha-the-brain-and-bach-exploring-practice-in-mind-music-and-life-09142026" },
+  { name: "Microsoft Agent-a-Thon — Architect Track", type: "Virtual Event", start: "2026-09-17", location: "Virtual — Americas, 11 AM–2 PM ET", virtual: true, status: "Considering", topics: ["Agentic AI", "Software Architecture", "Developer Tools"], why: "Production-grade agent orchestration, multi-agent systems, and secure enterprise workflows in Microsoft Foundry.", url: "https://www.microsoft.com/en-us/events/local-events/microsoft-agent-a-thon" },
+  { name: "2026 Model Context Protocol Server and AI Agent Hackathon", type: "Hackathon", start: "2026-09-01", location: "Virtual · Sep–Nov window", virtual: true, status: "Considering", topics: ["Agentic AI", "Developer Tools", "Cybersecurity"], why: "Federal MCP/agent build pathway — a provenance-first public-procurement intelligence agent is the candidate concept.", url: "https://www.gsa.gov/artificial-intelligence/ai-community-of-practice/events-and-training/2026-ai-hackathon" },
+  { name: "Stanford HAI — Alexandr Lenk & Arvind Karunakaran: Industry Conversation with Instacart", type: "Seminar / Talk", start: "2026-09-23", location: "Stanford, CA — Room 119; virtual available", virtual: true, status: "Considering", topics: ["AI / ML", "Human Systems"], why: "Real-world AI diffusion and organizational-design conversation — which work handoffs become more important after agent adoption.", url: "https://hai.stanford.edu/events/alexandr-lenk-arvind-karunakaran-industry-conversation-with-instacart" },
+  { name: "The AI Conference 2026 (incl. Day ZERO)", type: "Conference", start: "2026-09-29", end: "2026-10-01", location: "San Francisco Bay Area, CA", virtual: false, status: "Considering", topics: ["AI / ML", "Agentic AI", "Research"], why: "5,500+ builders/researchers, 120+ speakers; Day ZERO is capped at 350 and focused on RAG, evaluation, and deployment.", url: "https://aiconference.com/" },
+  { name: "Stanford HAI — The World Model and Spatial Intelligence Era", type: "Seminar / Talk", start: "2026-09-30", location: "Stanford, CA — Room 119; virtual available", virtual: true, status: "Considering", topics: ["AI / ML", "GIS / Spatial", "Simulation"], why: "World models, spatial intelligence, infrastructure planning, and embodied AI — the highest thematic fit on the calendar with GIS/simulation work. Speakers include Jiajun Wu and Daniel Zhang.", url: "https://hai.stanford.edu/events/world-model-and-spatial-intelligence-era" },
+  { name: "Empirical Methods in the Age of AI Conference", type: "Conference", start: "2026-10-02", location: "Stanford, CA", virtual: false, status: "Discovered", topics: ["AI / ML", "Research", "Data / Graphs"], why: "How AI changes data collection, analysis, inference, and scientific decision-making — a bridge to defensible radar methodology.", url: "https://datascience.stanford.edu/events/conference/empirical-methods-age-ai" },
+  { name: "The Science of Consciousness 2026", type: "Conference", start: "2026-10-11", end: "2026-10-16", location: "San Diego, CA", virtual: false, status: "Discovered", topics: ["Neurotech", "Research", "Human Systems"], why: "Major consciousness meeting spanning neuroscience, philosophy, physics, and technology.", url: "https://tsc2026.org/" },
+  { name: "ODSC West 2026", type: "Conference", start: "2026-10-27", location: "Burlingame, CA", virtual: false, status: "Considering", topics: ["AI / ML", "Data / Graphs", "Developer Tools"], why: "Recurring Bay Area open-data-science/AI community with production-AI and data-infrastructure sessions.", url: "https://odsc.ai/west/" },
+  { name: "2026 Berkeley Neuroscience Conference", type: "Conference", start: "2026-10-23", location: "Berkeley, CA", virtual: false, status: "Considering", topics: ["Neurotech", "Research", "Human Systems"], why: "Brain rhythms, cognition, memory, sleep, and experimental methods — a bridge from consumer-sensor experiments to rigorous lab-method conversations.", url: "https://neuroscience.berkeley.edu/conference" },
+  { name: "NASA International Space Apps Challenge 2026 — California / Universal", type: "Hackathon", start: "2026-11-14", end: "2026-11-15", location: "Los Angeles or Irvine, CA — Universal virtual also open", virtual: true, status: "Considering", topics: ["GIS / Spatial", "Data / Graphs", "Simulation"], why: "Best broad build opportunity for GIS, maps, simulation, and agentic analysis — teams up to 6, submissions close Nov 15.", url: "https://www.spaceappschallenge.org/2026/" },
+  { name: "HackStorm Physical AI Hackathon", type: "Hackathon", start: "2026-11-06", end: "2026-11-08", location: "Bay Area, CA", virtual: false, status: "Considering", topics: ["AI / ML", "Robotics", "Simulation"], why: "Physical-AI build with AIoT/robotics tracks, supplied hardware, and cash/hardware awards. Registration opens Oct 1.", url: "https://www.hackstorm.ai/" },
 ];
 
 // The nine regional industries AutoNateAI Consulting builds internal AI tooling
@@ -445,11 +680,11 @@ export const sponsorshipTiers = [
   { seats: 20, price: 9980, label: "Sponsor 20 seats" },
 ];
 
-// Five-year regional vision shown on the About page.
+// Multi-year lab roadmap shown on the About page.
 export const regionalVision = [
-  { period: "2026-27", text: "Prove the model in Sikeston: real internal tools, built for real local businesses, at prices only agentic AI makes possible." },
-  { period: "Next", text: "Expand consulting, requested team training, and the Industry Build Labs across Southeast Missouri as demand grows." },
-  { period: "Long term", text: "Become the region's standing AI and development partner — the first call when a local business needs a real system built." },
+  { period: "2026-27", text: "Run the daily research cycle: observe, question, build, measure, publish, connect — turning five research desks into real experiments and publications." },
+  { period: "Next", text: "Grow Active Projects out of the strongest recurring signals, and keep architecture, AI engineering, and requested team training open alongside the research." },
+  { period: "Long term", text: "Become the standing independent research lab people check before building the next agentic system — public evidence, not a pitch deck." },
 ];
 
 // Consulting offerings for AutoNateAI's community/regional banking vertical.
@@ -948,40 +1183,40 @@ export const tutorials = [
 
 export const articles = [
   {
-    handle: "why-southeast-missouri-businesses-need-internal-ai-capability",
+    handle: "why-organizations-need-internal-ai-capability",
     datePublished: "2026-08-21",
     dateModified: "2026-08-29",
-    title: "Why Southeast Missouri Businesses Need Internal AI Capability, Not Just AI Vendors",
+    title: "Why Organizations Need Internal AI Capability, Not Just AI Vendors",
     category: "AI Workforce",
-    audience: "Business owners, bank leadership, and school and nonprofit administrators in Southeast Missouri",
+    audience: "Business owners, technical leadership, and administrators evaluating AI adoption",
     summary:
-      "Missouri's 2026 Technology2030 report says technology talent is needed across every industry, not just tech companies. The fastest way to act on that locally is to build the capability inside your own team.",
+      "AI skills aren't a specialty department anymore — they're becoming a baseline capability. The fastest way to act on that is to build the capability inside your own team, not rent it from a vendor platform.",
     body: [
-      "Missouri's Technology2030 report puts a number on something a lot of Southeast Missouri employers already sense: over 223,000 Missourians work in technology occupations, and a growing share of them work outside traditional tech companies. AI skills aren't a specialty department anymore. They're becoming a baseline capability, the same way spreadsheets did twenty years ago.",
+      "AI skills aren't a specialty department anymore. They're becoming a baseline capability, the same way spreadsheets did twenty years ago — and that shift is happening across every industry, not just technology companies.",
       "Buying a vendor platform solves a narrow problem for a while. It doesn't leave your organization with anyone who understands your own workflows well enough to extend, fix, or replace that tool when your needs change. The alternative is training people already inside your organization to build and maintain the internal tools themselves: a customer follow-up system, a reporting dashboard, a document workflow, an internal knowledge assistant.",
-      "That's the premise behind AutoNateAI's in-person cohort in Sikeston: bring an employee (or sponsor a few), and they leave with a real internal tool built for your organization, not a generic certificate. The capability stays local, and it stays with the people who already know how your business actually runs."
+      "That's the premise behind AutoNateAI's requested team-training engagements: bring an employee (or a few), and they leave with a real internal tool built for your organization, not a generic certificate. The capability stays inside the team that already knows how the business actually runs."
     ],
-    tags: ["Workforce Development", "Southeast Missouri", "Employers"],
+    tags: ["Workforce Development", "AI Adoption", "Employers"],
     readingTime: "3 min read",
-    image: "/assets/landing/sikeston-article-internal-ai-capability.jpg",
+    image: "/assets/landing/learning-path.jpg",
   },
   {
-    handle: "what-ai-workforce-readiness-looks-like-for-sikeston-students",
+    handle: "what-ai-workforce-readiness-looks-like-for-students",
     datePublished: "2026-08-21",
     dateModified: "2026-08-21",
-    title: "What AI Workforce Readiness Could Look Like for Sikeston Students",
-    category: "Local Economy",
-    audience: "Parents, students, and educators in Sikeston and Southeast Missouri",
+    title: "What AI Workforce Readiness Could Look Like for Students",
+    category: "Education",
+    audience: "Students, parents, and educators evaluating a hands-on path into AI and software",
     summary:
-      "Sikeston already has a workforce-development ecosystem connecting the Chamber, schools, SEMO, Three Rivers, and programs like SOAR. AI-agent systems training is a natural next rung on that same ladder.",
+      "A hands-on, project-based path into AI-agent systems doesn't require waiting for a college curriculum to catch up. Four free self-paced courses are the on-ramp.",
     body: [
-      "Sikeston's Chamber of Commerce already treats workforce development as an economic-development priority, with existing relationships across local schools, SEMO, Three Rivers, and programs like SOAR. What's been missing locally is a hands-on, in-person path into AI and software systems work that doesn't require leaving the region or waiting for a college curriculum to catch up.",
-      "AutoNateAI's youth pathway is built for students who already have some coding experience and want to go further: designing data models and APIs, directing AI coding agents responsibly, and building a real system for a real local organization instead of another isolated class project. It's a two-week, in-person cohort, not a semester-long commitment, so it fits alongside school.",
-      "The bar for entry is a free on-ramp: four self-paced digital courses that teach JavaScript fundamentals, prompt and context engineering, and databases before a student ever sets foot in the cohort. A student, or a parent asking on their behalf, can try the material for free first and see if it's a fit before paying anything."
+      "Most students learning to code hit a ceiling: syntax practice without a real system to build for. What's missing is a hands-on path into AI and software-systems work that starts with something a real organization actually needs, not another isolated class project.",
+      "AutoNateAI's approach is built for students who already have some coding experience and want to go further: designing data models and APIs, directing AI coding agents responsibly, and building a real system in response to a real ask — the same civic-RFP model the free courses teach.",
+      "The bar for entry is a free on-ramp: four self-paced digital courses that teach JavaScript fundamentals, prompt and context engineering, and databases. A student, or a parent asking on their behalf, can try the material for free first and see if it's a fit before committing to anything further."
     ],
-    tags: ["Youth Programming", "Sikeston", "Workforce Development"],
+    tags: ["Youth Programming", "Education", "Workforce Development"],
     readingTime: "3 min read",
-    image: "/assets/landing/sikeston-article-workforce-readiness.jpg",
+    image: "/assets/landing/tutorial-pack-civics-and-agentic-ai.jpg",
   },
   {
     handle: "coding-as-workforce-development",
@@ -999,7 +1234,7 @@ export const articles = [
     ],
     tags: ["System Design", "AI Agents", "Workforce Development"],
     readingTime: "4 min read",
-    image: "/assets/landing/sikeston-article-system-design.jpg",
+    image: "/assets/landing/design-build-ship.jpg",
   },
   {
     handle: "why-live-builds-make-it-real",

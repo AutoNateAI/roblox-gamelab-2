@@ -265,14 +265,62 @@ or started, `/learn` and `/about` are close to static.
 - [ ] Regenerate OG images for `/experiments`, `/projects`, `/open-source`
       (currently fall back to `DEFAULT_OG_IMAGE`) — see
       `scripts/generate-og-images.mjs`.
-- [ ] Sikeston still appears in `regionalVision`, the About page "five-year
-      vision" section, and some image alt text/filenames — left as-is
-      (Nathan is genuinely Sikeston-based; this is no longer the primary
-      framing, just no longer scrubbed everywhere). Revisit if it reads as
-      inconsistent once real Lab content fills the page out.
 - [ ] Resubmit sitemap in Google Search Console once this deploys (see
       `docs/marketplace/google-search-console-setup.md`) — new routes and
       the homepage title/description both changed.
+
+## 8. Sept 9 second pass — real content, visual system, Sikeston removal
+
+- [x] **Sikeston fully removed** from every rendered page (`src/`, `content/`)
+      — verified via a post-build grep of `dist/site`. The only surviving
+      mentions are the real, dated, located cohort logistics
+      (`liveSchedule`/`cohortNote`/`meetingFrequency` in
+      `data/marketplace/programs.json`, surfaced only in the hidden
+      checkout/success JSON data island) — a real in-person program really
+      does meet at Center Street Station, Sikeston, MO, so that fact stayed;
+      marketing copy referencing it did not. `scripts/generate-og-images.mjs`
+      text updated too, but the actual OG `.jpg` files still need a real
+      regeneration run (not done — costs a gpt-image-2 call per image).
+- [x] **Color system**: white/navy/gold (light) and black/navy/gold (dark) —
+      `:root` tokens in `public/styles.css`. Button fills deliberately invert
+      by mode (navy-on-white in light, gold-on-navy in dark) rather than
+      using one fixed brand color, so both poles stay legible. No leftover
+      hardcoded red hex anywhere in the stylesheet (verified by grep).
+- [x] **Typography**: added Fraunces (serif) for `h1`/`h2` editorial
+      headlines; Space Grotesk stays on `h3`/`h4` (structural/card titles);
+      Inter/JetBrains Mono unchanged. Loaded via the existing Google Fonts
+      `<link>` in `pageShell` (`src/components.mjs`).
+- [x] **Evidence-ladder badges** (`.evidence-badge[data-evidence=...]`) —
+      6 classes, color-as-signal not color-as-grade. Wired into
+      `labSources`/`sourceCard` and used on `/` ("What I'm Reading") and
+      `/articles#reading` ("Research Desk").
+- [x] **Real content replaced the hand-seeded placeholders** from the first
+      pass — every project/experiment/repo/source/event now traces to an
+      actual Airtable record or radar-PDF page (Sept 9 run): read all 5
+      Radar_Reports PDFs directly (90 pages) and queried the Airtable base
+      (`Sources` — 76 records, `Events` — 18 records, `Daily Lab State` — the
+      real Sept 9 record) via the Airtable MCP tools. `labSources`,
+      `labEvents`, `labExperiments` (from the Research Paper Radar's
+      candidate-experiment queue), and `openSourceRepos` in `src/data.mjs`
+      are the curated, real subset now rendered — every URL is a verified
+      field value or PDF-visible link, never invented.
+- [x] **`/events` rebuilt** per explicit feedback that it wasn't doing what
+      was asked: now two clearly separated real sections — "Where I'm
+      Showing Up" (agent/software events) and "Human Systems Signals"
+      (mindfulness/neurotech events), both from `labEvents` — plus
+      "AutoNateAI Lab Sessions" (the real recurring build sessions,
+      condensed behind a `<details>` for the full rotation instead of
+      dominating the page).
+- [ ] Airtable's `Daily Lab State` record has `Website Status: Draft` (not
+      `Published`) — this pass rendered it anyway on Nathan's explicit
+      instruction in-session. Once the daily workflow is running
+      unattended, the site's data layer should actually respect that field
+      before rendering a day's state publicly.
+- [ ] Visual QA was done at the code/token level only (no screenshot tool
+      available in this session) — grep-verified no orphaned red hex, dev
+      server smoke-tested on every route (200s, no `undefined` leaks), full
+      `scripts/export-static.mjs` build succeeded. Worth an actual visual
+      pass (browser or `/design`-style review) before a wide announcement.
 
 This doc should be updated as each box gets checked, and whenever a scope
 decision changes (e.g. exactly where Consulting lives in the new nav).

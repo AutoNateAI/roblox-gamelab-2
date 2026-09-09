@@ -3,7 +3,7 @@
   "path": {
     "id": "path-ai-agent-systems",
     "name": "Software Systems with AI Agents",
-    "description": "An in-person program in Sikeston, MO where students and working professionals use Claude Code, Codex, and other AI agents to design and ship a real software system for a real organization — their employer, school, nonprofit, or a local business.",
+    "description": "A requested, in-person program where students and working professionals use Claude Code, Codex, and other AI agents to design and ship a real software system for a real organization — their employer, school, nonprofit, or a local business.",
     "targetAudience": "Students with some coding experience, working professionals who want to build internal tools, and employer- or school-sponsored participants. No formal enrollment required beyond comfort reading and writing basic code.",
     "difficulty": "Beginner-to-intermediate, agent-assisted",
     "estimatedDuration": "2 weeks, 8 live in-person sessions",
@@ -14,7 +14,7 @@
       "id": "program-ai-agent-systems-september-2026",
       "handle": "ai-agent-systems",
       "name": "How to Create Software Systems with AI Agents",
-      "description": "A two-week, in-person cohort in Sikeston, MO, Monday through Thursday, where builders use Claude Code, Codex, and other AI agents to design real software systems: databases, APIs, and architecture. In the second week, each participant builds toward a real organizational project — an internal tool for their employer, school, nonprofit, or a local business — testing it against a small set of real user scenarios before shipping it live.",
+      "description": "A two-week, in-person cohort, Monday through Thursday, where builders use Claude Code, Codex, and other AI agents to design real software systems: databases, APIs, and architecture. In the second week, each participant builds toward a real organizational project — an internal tool for their employer, school, nonprofit, or a local business — testing it against a small set of real user scenarios before shipping it live.",
       "durationWeeks": 2,
       "sequence": 1,
       "learningOutcomes": "Set up and direct AI coding agents responsibly, engineer prompts and context for real projects, design relational and graph data models, build and query APIs, document architecture with Mermaid diagrams, review and debug AI-generated code, define real user scenarios to test a system against, and ship a working system for a real organization.",

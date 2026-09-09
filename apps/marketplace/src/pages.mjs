@@ -6,13 +6,15 @@ import {
   businessTrainingCurriculum,
   buildLabInfo,
   currentInvestigation,
-  eventSignals,
+  evidenceLabels,
   foundingBankPilot,
   industries,
   industryWeeks,
   kickoffSession,
+  labEvents,
   labExperiments,
   labProjects,
+  labSources,
   openSourceRepos,
   organizationExamples,
   regionalVision,
@@ -196,25 +198,55 @@ function repoCard(repo) {
     <article class="industry-card">
       <div class="industry-card-icon">${icon(repo.icon)}</div>
       <div class="card-title-row"><h3>${escapeHtml(repo.name)}</h3><span class="status-pill">${escapeHtml(repo.status)}</span></div>
+      <span class="kicker">${escapeHtml(repo.meta)}</span>
       <p class="industry-hook">${escapeHtml(repo.hook)}</p>
       <ul class="industry-capabilities">
         ${repo.notes.map((note) => `<li>${icon("bolt")}<span>${escapeHtml(note)}</span></li>`).join("")}
       </ul>
       <div class="button-row">
-        ${repo.searchUrl ? `<a class="outline-button full" href="${repo.searchUrl}">Find on GitHub ${icon("open_in_new")}</a>` : ""}
+        <a class="outline-button full" href="${repo.url}">View on GitHub ${icon("open_in_new")}</a>
         ${project ? `<span class="kicker">${icon("hub")} ${escapeHtml(project.name)}</span>` : ""}
       </div>
     </article>
   `;
 }
 
-function eventSignalCard(signal) {
+function evidenceBadge(evidenceClass) {
+  return `<span class="evidence-badge" data-evidence="${evidenceClass}">${escapeHtml(evidenceLabels[evidenceClass] || evidenceClass)}</span>`;
+}
+
+function sourceCard(source) {
   return `
     <article class="industry-card">
-      <div class="industry-card-icon">${icon("radar")}</div>
-      <h3>${escapeHtml(signal.name)}</h3>
-      <p class="industry-hook">${escapeHtml(signal.focus)}</p>
-      <span class="kicker">${icon("radar")} Flagged by ${escapeHtml(signal.source)}</span>
+      <div class="card-title-row">${evidenceBadge(source.evidenceClass)}<span class="kicker">${escapeHtml(source.topic)}</span></div>
+      <h3>${escapeHtml(source.title)}</h3>
+      <p class="industry-hook">${escapeHtml(source.insight)}</p>
+      <div class="button-row">
+        <a class="outline-button full" href="${source.url}">${escapeHtml(source.authors)} ${icon("open_in_new")}</a>
+      </div>
+    </article>
+  `;
+}
+
+function eventDateRange(event) {
+  const start = formatDate(event.start);
+  if (!event.end || event.end === event.start) return start;
+  return `${start} – ${formatDate(event.end)}`;
+}
+
+function labEventCard(event) {
+  return `
+    <article class="industry-card">
+      <div class="card-title-row"><span class="status-pill">${escapeHtml(event.status)}</span><span class="kicker">${icon(event.virtual ? "videocam" : "location_on")} ${escapeHtml(event.type)}</span></div>
+      <h3>${escapeHtml(event.name)}</h3>
+      <p class="industry-hook">${escapeHtml(event.why)}</p>
+      <ul class="industry-capabilities">
+        <li>${icon("event")}<span>${escapeHtml(eventDateRange(event))}</span></li>
+        <li>${icon(event.virtual ? "public" : "place")}<span>${escapeHtml(event.location)}</span></li>
+      </ul>
+      <div class="button-row">
+        <a class="outline-button full" href="${event.url}">Event Page ${icon("open_in_new")}</a>
+      </div>
     </article>
   `;
 }
@@ -232,17 +264,19 @@ function sponsorshipTierCard(tier) {
 
 export function renderHome(data) {
   const landingArticles = [
-    "why-southeast-missouri-businesses-need-internal-ai-capability",
     "coding-as-workforce-development",
     "why-git-matters-for-builders",
+    "systems-thinking-through-code",
   ]
     .map((handle) => articles.find((article) => article.handle === handle))
     .filter(Boolean);
 
+  const featuredSources = labSources.slice(0, 4);
+
   const todayCards = [
-    { label: "Research", icon: "biotech", title: "Three desks converged on agent memory & evaluation", href: "/publications" },
-    { label: "Open Source", icon: "hub", title: `Studying ${openSourceRepos.map((r) => r.name).join(" and ")}`, href: "/open-source" },
-    { label: "Experiment", icon: "science", title: labExperiments[0]?.name || "None proposed yet", href: "/experiments" },
+    { label: "Study Today", icon: "biotech", title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents", href: "/experiments#procedural-graph-runtime" },
+    { label: "Open Source", icon: "hub", title: "Studying semantica-agi/semantica and volcengine/OpenViking", href: "/open-source" },
+    { label: "Build Toward", icon: "event", title: "Microsoft Agent-a-Thon — Sep 17, Architect track", href: "/events#showing-up" },
     { label: "Human Systems", icon: "psychology", title: "Evidence-ladder read of EEG/HRV & contemplative research", href: "/projects#human-systems" },
   ];
 
@@ -318,6 +352,18 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head">
           <div>
+            <span class="kicker">${icon("menu_book")} What I'm Reading</span>
+            <h2>The evidence ladder, applied.</h2>
+            <p>Every source gets ranked by what it actually supports — peer-reviewed evidence never gets presented next to a spiritual claim as if they carry equal weight.</p>
+          </div>
+          <a class="primary-button" href="/articles#reading">Full Reading List ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid">${featuredSources.map((source) => sourceCard(source)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
             <span class="kicker">${icon("auto_stories")} Learn From the Lab</span>
             <h2>Free technical courses, no cost, no catch.</h2>
             <p>Four story-driven courses following Nate and Kai from a meetup back room to a real, shipped system — the same fundamentals behind everything researched and built here.</p>
@@ -328,7 +374,7 @@ export function renderHome(data) {
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/sikeston-organizations-handshake.jpg" alt="Nathan Baker" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/community-discord.jpg" alt="AutoNateAI Discord community" /></div>
         <div>
           <span class="kicker">${icon("forum")} Always-On Support</span>
           <h2>The Discord doesn't close when a session does.</h2>
@@ -521,7 +567,7 @@ export function renderPrograms(data) {
   `;
 
   return pageShell({
-    title: "AI & Coding Training Program | Sikeston, MO | AutoNateAI",
+    title: "AI & Coding Training Program | AutoNateAI Lab",
     active: "programs",
     body,
     canonicalPath: "/programs",
@@ -552,7 +598,7 @@ export function renderAbout() {
     ["Do you build it, or train us to build it?", "Both are on the table. Consulting means AutoNateAI researches, architects, and builds the tool for you. Requested team training means your own people learn to build it themselves, over a 4-day on-site engagement."],
     ["How does AI fit into the work?", "Every build uses agents like Claude Code and Codex to plan features, inspect code, explain errors, and review tradeoffs. AI speeds up the work, but it doesn't replace understanding — every engagement stays reviewed and explainable."],
     ["Why is this more affordable than I'd expect?", "Agentic AI collapses the distance between architecture and working software. Work that used to require a full in-house engineering team can now be scoped, built, and delivered by a much smaller one — and that savings gets passed on."],
-    ["Who is this for?", "Any Southeast Missouri business, school, or nonprofit with a real workflow that's eating staff time — plus anyone who wants to sharpen their own technical skills through the free course library."],
+    ["Who is this for?", "Any business, school, or nonprofit with a real workflow that's eating staff time — plus anyone who wants to sharpen their own technical skills through the free course library."],
   ];
 
   const body = `
@@ -585,11 +631,11 @@ export function renderAbout() {
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/sikeston-nathan-consulting-portrait.jpg" alt="Nathan Baker consulting with a Southeast Missouri business owner in Sikeston, Missouri" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/agent-review.jpg" alt="Reviewing an AI-generated system change" /></div>
         <div>
-          <span class="kicker">${icon("apartment")} World-Class Experience. Local Investment.</span>
-          <h2>Now applying that experience locally — starting in Sikeston.</h2>
-          <p>Nathan built software and AI systems across the University of Michigan, Microsoft, Citi, Veterans United, and Atomic Object, working inside organizations where clarity, reliability, and communication matter. That's not a résumé to be impressed by — it's capability now being reinvested close to home, priced for a Southeast Missouri business, not an enterprise vendor contract.</p>
+          <span class="kicker">${icon("apartment")} World-Class Experience, Applied Independently</span>
+          <h2>Now running as an independent research lab.</h2>
+          <p>Nathan built software and AI systems across the University of Michigan, Microsoft, Citi, Veterans United, and Atomic Object, working inside organizations where clarity, reliability, and communication matter. That's not a résumé to be impressed by — it's capability now reinvested into public research, real experiments, and consulting work priced for a business your size, not an enterprise vendor contract.</p>
           <div class="button-row">
             <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
           </div>
@@ -611,17 +657,12 @@ export function renderAbout() {
       <section class="section compact">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("timeline")} Starting in Sikeston. Built to Grow Regionally.</span>
-            <h2>The five-year vision.</h2>
+            <span class="kicker">${icon("timeline")} Where the Lab Is Headed</span>
+            <h2>The multi-year roadmap.</h2>
           </div>
         </div>
         <div class="about-values">
           ${regionalVision.map((step) => `<article><h3>${escapeHtml(step.period)}</h3><p>${escapeHtml(step.text)}</p></article>`).join("")}
-        </div>
-        <div class="league-gallery">
-          <img src="/assets/sikeston/city-welcome-sign.jpg" alt="City of Sikeston welcome sign" />
-          <img src="/assets/sikeston/historic-downtown.jpg" alt="Historic Downtown Sikeston" />
-          <img src="/assets/sikeston/downtown-street.jpg" alt="Downtown Sikeston, Missouri" />
         </div>
       </section>
 
@@ -681,7 +722,7 @@ export function renderAbout() {
         <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
         <h2>Let's build something your team can actually run.</h2>
         <p>I grew up fascinated with technology because it gave me a way to turn ideas into something real. Over time, working across Microsoft, financial technology, AI, and consulting at Atomic Object reinforced one lesson: the strongest engineers are not just the people who can write code. They are the people who can understand a system, and explain it clearly to the people depending on it.</p>
-        <p>AutoNateAI exists because Southeast Missouri businesses deserve access to that same caliber of engineering — not a generic SaaS platform, not an enterprise vendor contract, but a real system built for how your organization actually works, priced for a business your size. Agentic AI is what finally makes that math work.</p>
+        <p>AutoNateAI exists because that same caliber of engineering shouldn't be locked behind an enterprise vendor contract — a real system built for how your organization actually works, priced for a business your size, and researched in the open the rest of the time. Agentic AI is what finally makes that math work.</p>
         <p>If you have a workflow eating your team's time, or want your own people capable of building the next one, I would love to build with you.</p>
         <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
       </section>
@@ -762,7 +803,7 @@ export function renderAbout() {
 }
 
 export function renderProgramDetail(data, program) {
-  const gallery = ["/assets/landing/sikeston-presenting-fullbody.jpg", "/assets/landing/sikeston-mentoring.jpg", "/assets/landing/agent-review.jpg"];
+  const gallery = ["/assets/landing/hero-panel-two-builders.jpg", "/assets/landing/live-builds-spotlight.jpg", "/assets/landing/agent-review.jpg"];
   const offering = program.offerings?.[0];
   const price = offering ? money(offering.price) : "$499";
   const checkoutHref = offering ? `/checkout?program=${program.handle}&offering=${offering.id}` : "/checkout";
@@ -777,7 +818,7 @@ export function renderProgramDetail(data, program) {
             <nav class="breadcrumbs program-hero-breadcrumbs"><a href="/">Home</a><span>/</span><a href="/for-organizations">For Organizations</a><span>/</span><b>${escapeHtml(program.name)}</b></nav>
             <span class="kicker">${icon("apartment")} Requested Team Training</span>
             <h1>${heroTitle}</h1>
-            <p>A 4-day, 4-hours-a-day engagement using ChatGPT, Claude, Codex, and Claude Code — customized around your business, built on-site at your location or at Center Street Station in Sikeston, MO. Requested and scoped for the specific business that asks for it.</p>
+            <p>A 4-day, 4-hours-a-day engagement using ChatGPT, Claude, Codex, and Claude Code — customized around your business, built on-site at your location or remote. Requested and scoped for the specific business that asks for it.</p>
             <div class="button-row">
               <a class="primary-button" href="/for-organizations#request">Request This Training ${icon("arrow_forward")}</a>
               <a class="secondary-button" href="#curriculum">View the 4-Day Curriculum</a>
@@ -804,7 +845,7 @@ export function renderProgramDetail(data, program) {
         <a href="/for-organizations#request"><b>From ${price}</b><span>Per employee trained</span></a>
         <a href="#curriculum"><b>4</b><span>Days, 4 hrs/day</span></a>
         <a href="#tools"><b>3 of 9</b><span>Internal tools built</span></a>
-        <a href="#outcomes"><b>On-site</b><span>Or Sikeston, MO</span></a>
+        <a href="#outcomes"><b>On-site</b><span>Or remote</span></a>
       </section>
 
       <section class="section" id="curriculum">
@@ -838,9 +879,9 @@ export function renderProgramDetail(data, program) {
           <a class="primary-button" href="/for-organizations#request">Request Training ${icon("arrow_forward")}</a>
         </div>
         <div class="outcome-grid">
-          <article><img src="/assets/landing/sikeston-org-system-dashboard.jpg" alt="A builder and a local business owner reviewing an internal dashboard built during a requested AutoNateAI training engagement" /><h3>Tools built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by your real business, not a hypothetical one.</p></article>
-          <article><img src="/assets/landing/sikeston-agent-review.jpg" alt="A builder reviewing AI-generated code changes during a training engagement" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, and architecture notes keep the work explainable.</p></article>
-          <article><img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" /><h3>Real scenarios your team defines</h3><p>Define who each tool needs to work for, then run it against those scenarios before the engagement ends.</p></article>
+          <article><img src="/assets/landing/api-data-model.jpg" alt="An internal dashboard built during a requested AutoNateAI training engagement" /><h3>Tools built for your organization</h3><p>Data models, API endpoints, agent workflows, and decisions shaped by your real business, not a hypothetical one.</p></article>
+          <article><img src="/assets/landing/agent-review.jpg" alt="A builder reviewing AI-generated code changes during a training engagement" /><h3>AI-assisted engineering habits</h3><p>Use Claude Code and Codex to plan and build faster while Git commits, diffs, and architecture notes keep the work explainable.</p></article>
+          <article><img src="/assets/landing/hero-panel-two-builders.jpg" alt="" /><h3>Real scenarios your team defines</h3><p>Define who each tool needs to work for, then run it against those scenarios before the engagement ends.</p></article>
         </div>
       </section>
 
@@ -872,13 +913,13 @@ export function renderProgramDetail(data, program) {
   `;
 
   return pageShell({
-    title: `${program.name} | Custom Business Training | Sikeston, MO | AutoNateAI`,
+    title: `${program.name} | Custom Business Training | AutoNateAI Lab`,
     active: "programs",
     body,
     canonicalPath: `/programs/${program.handle}`,
     ogImage: `/assets/og/${program.handle}.jpg`,
     description: program.description,
-    ogTitle: "Custom AI & development training for Southeast Missouri businesses.",
+    ogTitle: "Custom AI & development training for your business.",
     ogDescription:
       "A requested, 4-day on-site training engagement: prompt and context engineering, real ChatGPT/Claude/Codex/Claude Code workflows, and 3 real internal tools built for your business.",
     structuredData: [
@@ -911,26 +952,26 @@ export function renderForOrganizations(data) {
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-business-training-terminal.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/scenes/scene-08.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("apartment")} Requested Team Training</span>
           <h1>Custom AI &amp; development training, built around your business.</h1>
-          <p>A 4-day, 4-hours-a-day engagement — on-site at your business or at Center Street Station in Sikeston — customized around your industry's real workflows using ChatGPT, Claude, Codex, and Claude Code. Every program is requested and built specifically for the business that asks for it.</p>
+          <p>A 4-day, 4-hours-a-day engagement — on-site at your business or remote — customized around your industry's real workflows using ChatGPT, Claude, Codex, and Claude Code. Every program is requested and built specifically for the business that asks for it.</p>
           <div class="button-row">
             <a class="primary-button" href="#request">Request Training For Your Team ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="mailto:autonate.ai@gmail.com?subject=AutoNateAI%20training%20question">Talk With AutoNateAI</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="" />
+          <img src="/assets/landing/hero-panel-two-builders.jpg" alt="" />
           <div class="hero-panel-body">
             <span class="kicker">${icon("emoji_events")} What Your Team Leaves With</span>
             <h2>3 real internal tools, ready for work or home.</h2>
             <p>Not a certificate. Working software your team built themselves, chosen from a menu of 9 tools that could help your business immediately.</p>
             <div class="hero-facts">
               <span>4 days, 4 hrs/day</span>
-              <span>On-site or in Sikeston</span>
+              <span>On-site or remote</span>
               <span>3 real tools built</span>
               <span>Discord support included</span>
             </div>
@@ -1023,7 +1064,7 @@ export function renderForOrganizations(data) {
             <div class="checkout-product-strip">
               <div>
                 <strong>Custom Team Training</strong>
-                <span>4 days &middot; On-site or Center Street Station, Sikeston, MO</span>
+                <span>4 days &middot; On-site or remote</span>
                 <em data-sponsorship-seats-label>1 seat &middot; $499 per seat</em>
               </div>
             </div>
@@ -1098,42 +1139,68 @@ export function renderEvents() {
   const industryBySlug = new Map(industries.map((industry) => [industry.slug, industry]));
   const [nextWeek, ...laterWeeks] = industryWeeks;
   const nextIndustry = industryBySlug.get(nextWeek?.industry);
+  const isHumanSystems = (event) => event.topics.includes("Mindfulness") || event.topics.includes("Neurotech");
+  const technicalEvents = labEvents.filter((event) => !isHumanSystems(event));
+  const humanSystemsEvents = labEvents.filter(isHumanSystems);
+
   const body = `
-    <main class="league-page consulting-page">
+    <main class="league-page consulting-page events-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-build-lab-live.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/scenes/scene-03.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
-          <span class="kicker">${icon("event")} AutoNateAI Lab Sessions</span>
-          <h1>We build a real system live, every week, free.</h1>
-          <p>One industry gets the spotlight each week. Three live sessions — Tuesday, Wednesday, Thursday, 11:30 AM Central — each building a different internal tool live, on Google Meet, open floor for questions. No slides, no theory-only session.</p>
+          <span class="kicker">${icon("event")} Events</span>
+          <h1>Two ways AutoNateAI shows up.</h1>
+          <p>Live sessions I host every week, building a real system in front of anyone watching — and the conferences, hackathons, and research gatherings the lab's daily radars surface, tracked here as they're evaluated, not after the fact.</p>
           <div class="button-row">
-            <a class="primary-button" href="#schedule">See the Schedule ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/about#work-with-me">Bring Us Your Workflow</a>
+            <a class="primary-button" href="#showing-up">Where I'm Showing Up ${icon("arrow_forward")}</a>
+            <a class="secondary-button" href="#lab-sessions">AutoNateAI Lab Sessions</a>
           </div>
         </div>
         <aside class="hero-program-panel">
-          <img src="/assets/landing/sikeston-internal-tool-laptop.jpg" alt="" />
           <div class="hero-panel-body">
-            <span class="kicker">${icon("route")} How a Build Lab Works</span>
-            <h2>${escapeHtml(buildLabInfo.format)}</h2>
+            <span class="kicker">${icon("radar")} Radar Coverage</span>
+            <h2>${labEvents.length} events currently tracked</h2>
+            <p>Surfaced by the Events &amp; Build and Mindfulness Tech research desks on Sept 9, 2026 — status reflects what's actually true: Discovered or Considering, never claimed attendance.</p>
             <div class="hero-facts">
-              <span>Free, every week</span>
-              <span>3 sessions/week</span>
-              <span>Google Meet</span>
-              <span>Guest operators welcome</span>
+              <span>${technicalEvents.length} agent / software</span>
+              <span>${humanSystemsEvents.length} human systems</span>
+              <span>Updated daily</span>
+              <span>Real, verified links</span>
             </div>
           </div>
         </aside>
         </div>
       </section>
 
-      <section class="section compact">
-        <div class="section-head section-head-center">
+      <section class="section" id="showing-up">
+        <div class="section-head">
           <div>
-            <span class="kicker">${icon("celebration")} First Session</span>
-            <h2>The Kickoff — ${escapeHtml(dayName(kickoffSession.date))}, ${escapeHtml(shortDate(kickoffSession.date))}</h2>
-            <p>Before the industry rotation starts, one standalone session to show what an Industry Build Lab actually is: we introduce the format, then research, architect, and build a real internal tool live — a "${escapeHtml(kickoffSession.topic)}" any local business could use. Same process, same open floor for Q&amp;A.</p>
+            <span class="kicker">${icon("radar")} Where I'm Showing Up</span>
+            <h2>Agent systems, software, and open source.</h2>
+            <p>Conferences, hackathons, and talks the lab is tracking — from a Microsoft build session next week to NASA Space Apps in November.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${technicalEvents.map((event) => labEventCard(event)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("psychology")} Human Systems Signals</span>
+            <h2>Mindfulness, neurotech, and consciousness research.</h2>
+            <p>Where the Human Systems desk finds its network — contemplative science, EEG/neurotech labs, and California's consciousness-research community.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${humanSystemsEvents.map((event) => labEventCard(event)).join("")}</div>
+      </section>
+
+      <section class="section" id="lab-sessions">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("videocam")} AutoNateAI Lab Sessions</span>
+            <h2>${escapeHtml(buildLabInfo.format)}</h2>
+            <p>Free, live, on Google Meet — a real system researched, architected, and built in the open, with the floor open for questions.</p>
           </div>
         </div>
         <div class="week-calendar-solo">
@@ -1141,18 +1208,13 @@ export function renderEvents() {
             <div class="week-calendar-head">
               <div class="industry-card-icon">${icon("celebration")}</div>
               <div>
-                <span class="kicker">${icon("bolt")} First Ever Build Lab</span>
-                <h3>Kickoff Session</h3>
-                <span class="week-range">${escapeHtml(shortDate(kickoffSession.date))}</span>
+                <span class="kicker">${icon("bolt")} First Ever Session</span>
+                <h3>Kickoff — ${escapeHtml(dayName(kickoffSession.date))}, ${escapeHtml(shortDate(kickoffSession.date))}</h3>
               </div>
             </div>
             <div class="week-calendar-days">
               <div class="week-calendar-day">
-                <div class="week-calendar-day-label">
-                  <strong>${escapeHtml(dayName(kickoffSession.date))}</strong>
-                  <span>${escapeHtml(shortDate(kickoffSession.date))} &middot; 11:30 AM CST</span>
-                </div>
-                <p>"${escapeHtml(kickoffSession.topic)}"</p>
+                <p>"${escapeHtml(kickoffSession.topic)}" — introducing the format, then research → architect → build → refine, live, same as every session since.</p>
                 <div class="button-row">
                   <a class="primary-button" href="${kickoffSession.meetUrl}">Join ${icon("videocam")}</a>
                   <a class="outline-button" href="${kickoffSession.calendarUrl}">Add to Calendar</a>
@@ -1161,58 +1223,15 @@ export function renderEvents() {
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="section compact">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("route")} The Methodology, Live</span>
-            <h2>Research, architecture, build, refine — the same process every session.</h2>
-          </div>
-        </div>
-        <div class="compete-curriculum">
-          <article><b>01</b><span>Research the real workflow with ChatGPT — terminology, constraints, what actually happens today.</span></article>
-          <article><b>02</b><span>Architect the system with Claude — requirements, data model, system diagram.</span></article>
-          <article><b>03</b><span>Scaffold it with Codex — database, API, and a working UI, live.</span></article>
-          <article><b>04</b><span>Refine it with Claude Code, then open the floor — would this actually work inside your operation?</span></article>
-        </div>
-      </section>
-
-      ${
-        nextIndustry
-          ? `<section class="section compact">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("bolt")} Up Next</span>
-            <h2>${escapeHtml(nextIndustry.name)} — ${escapeHtml(weekRangeLabel(nextWeek.days))}</h2>
-            <p>${escapeHtml(nextIndustry.tagline)}</p>
-          </div>
-        </div>
-        <div class="week-calendar-solo">${industryWeekCalendarCard(nextWeek, industryBySlug, true)}</div>
-      </section>`
-          : ""
-      }
-
-      <section class="section" id="schedule">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("calendar_month")} The Rotation</span>
-            <h2>One industry a week, three builds each.</h2>
-            <p>We cycle through the region's industries, one spotlight week at a time. This list grows as we schedule more.</p>
-          </div>
-        </div>
-        <div class="industry-grid week-calendar-grid">${laterWeeks.map((week) => industryWeekCalendarCard(week, industryBySlug)).join("")}</div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("radar")} Signals AutoNateAI Is Watching</span>
-            <h2>Conferences, hackathons, and research gatherings the radar flagged.</h2>
-            <p>Surfaced by the Events &amp; Build and Mindfulness Tech research desks — under review, not yet committed to.</p>
-          </div>
-        </div>
-        <div class="industry-grid">${eventSignals.map((signal) => eventSignalCard(signal)).join("")}</div>
+        ${
+          nextIndustry
+            ? `<div class="week-calendar-solo" style="margin-top: var(--gutter)">${industryWeekCalendarCard(nextWeek, industryBySlug, true)}</div>`
+            : ""
+        }
+        <details class="section compact" style="padding: 24px 0 0">
+          <summary class="kicker" style="cursor: pointer">${icon("calendar_month")} See the full rotation (${laterWeeks.length} more weeks)</summary>
+          <div class="industry-grid week-calendar-grid" style="margin-top: 24px">${laterWeeks.map((week) => industryWeekCalendarCard(week, industryBySlug)).join("")}</div>
+        </details>
       </section>
 
       <section class="detail-enroll-band">
@@ -1233,10 +1252,10 @@ export function renderEvents() {
     canonicalPath: "/events",
     ogImage: "/assets/og/events.jpg",
     description:
-      "AutoNateAI's free weekly Lab Sessions, plus the conferences, hackathons, and research events the lab's daily radars are watching.",
-    ogTitle: "We build a real system live, every week, free.",
+      "Where AutoNateAI is showing up: agent-systems and human-systems events the lab's daily radars track, plus the free weekly AutoNateAI Lab Sessions.",
+    ogTitle: "Two ways AutoNateAI shows up.",
     ogDescription:
-      "One industry gets the spotlight each week — three live build sessions, Tuesday through Thursday, 11:30 AM Central. Free, over Google Meet.",
+      "Live build sessions every week, and the conferences, hackathons, and research events the lab's daily radars are watching — tracked with real dates and links.",
   });
 }
 
@@ -1246,7 +1265,7 @@ export function renderConsulting(data) {
   const body = `
     <main class="league-page consulting-page">
       <section class="home-hero league-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-consulting-industries.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/scenes/scene-01.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("hub")} AutoNateAI Consulting</span>
@@ -1645,7 +1664,7 @@ export function renderCommunity() {
   const body = `
     <main class="community-page">
       <section class="home-hero community-detail-hero">
-        <div class="hero-bg"><img src="/assets/landing/sikeston-group-collaboration.jpg" alt="" /></div>
+        <div class="hero-bg"><img src="/assets/scenes/scene-06.jpg" alt="" /></div>
         <div class="hero-content">
         <div class="hero-copy">
           <span class="kicker">${icon("groups")} AutoNateAI Community</span>
@@ -1688,13 +1707,13 @@ export function renderCommunity() {
   `;
 
   return pageShell({
-    title: "Community & Discord Support | Sikeston, MO | AutoNateAI",
+    title: "Community & Discord Support | AutoNateAI Lab",
     active: "community",
     body,
     canonicalPath: "/community",
     ogImage: "/assets/og/community.jpg",
     description:
-      "Join the AutoNateAI Discord community in Sikeston, MO for help with the four free AI and coding courses, the in-person program, and any system you're building on your own — Southeast Missouri workforce development, all day, every day.",
+      "Join the AutoNateAI Discord community for help with the four free AI and coding courses, requested team training, and any system you're building on your own — all day, every day.",
     ogTitle: "The systems lab has a Discord.",
     ogDescription:
       "Get setup help, code review, agent workflow practice, and project help with the AutoNateAI community — open all day, every day.",
@@ -1702,7 +1721,7 @@ export function renderCommunity() {
 }
 
 export function renderArticles() {
-  const featuredArticle = articles.find((article) => article.handle === "why-southeast-missouri-businesses-need-internal-ai-capability");
+  const featuredArticle = articles.find((article) => article.handle === "systems-thinking-through-code");
   const listedArticles = articles.filter((article) => article.handle !== featuredArticle?.handle);
   const body = `
     <main class="articles-page">
@@ -1737,6 +1756,17 @@ export function renderArticles() {
         </div>
       </div>
       <div class="article-grid" data-article-grid>${listedArticles.map((article) => articleCard(article)).join("")}</div>
+
+      <section class="section" id="reading">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("menu_book")} Research Desk</span>
+            <h2>What I'm reading, evidence-ranked.</h2>
+            <p>Every source is labeled by what it actually supports — peer-reviewed research, preprints, official technical sources, institute claims, practitioner takes, and cultural/spiritual signal are never presented as equivalent.</p>
+          </div>
+        </div>
+        <div class="industry-grid">${labSources.map((source) => sourceCard(source)).join("")}</div>
+      </section>
     </main>
   `;
 
@@ -2166,7 +2196,7 @@ function packCard(pack) {
 }
 
 function programThumbnail(program) {
-  return program.handle === "ai-agent-systems" ? "/assets/landing/sikeston-hero-teaching.jpg" : shot(program.sequence);
+  return program.handle === "ai-agent-systems" ? "/assets/landing/hero-panel-two-builders.jpg" : shot(program.sequence);
 }
 
 function dataScript(data) {

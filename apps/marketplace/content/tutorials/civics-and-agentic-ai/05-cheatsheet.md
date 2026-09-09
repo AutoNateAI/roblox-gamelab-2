@@ -81,7 +81,7 @@ That's the whole arc. Not "game skills transferred to real life." Just skills �
 
 There's no chapter six. There's the Discord, and it doesn't close.
 
-**Bring the checklist, the habits, and whatever you're actually building** — a real internal tool for your own employer, your own school, an idea nobody's built yet — and the same people who wrote this pack are on the other side of the Discord, all day, helping. That's where these four free courses hand off to AutoNateAI's in-person program in Sikeston, and it's where the program hands off to whatever you build next.
+**Bring the checklist, the habits, and whatever you're actually building** — a real internal tool for your own employer, your own school, an idea nobody's built yet — and the same people who wrote this pack are on the other side of the Discord, all day, helping. That's where these four free courses hand off to AutoNateAI's requested team-training engagements, and it's where the program hands off to whatever you build next.
 
 There's nothing to prepare beyond what's already in your head from these four packs. It's two people who have done this exactly enough times to know how much they don't know, plus whoever's in the Discord that day.
 

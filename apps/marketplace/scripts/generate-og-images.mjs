@@ -107,25 +107,30 @@ const programsData = JSON.parse(
   await readFile(path.join(rootDir, "data/marketplace/programs.json"), "utf8"),
 );
 
-console.log(`Generating OG images from ${BACKGROUND_POOL.length} Sikeston source photos...`);
+console.log(`Generating OG images from ${BACKGROUND_POOL.length} source photos...`);
 
 let index = 0;
 
+// NOTE (Sept 9, 2026 Lab pivot): these strings were updated to drop
+// Sikeston/Southeast Missouri framing, but the actual .jpg files under
+// public/assets/og/ are still the old renders — this script needs an actual
+// run (calls gpt-image-2) to regenerate them. See docs/marketplace/
+// lab-operating-model.md sequencing checklist.
 for (const program of programsData.programs) {
   await composite({
     screenshotFile: screenshotFor(index++),
-    eyebrow: "Custom Business Training · Sikeston, MO",
+    eyebrow: "Custom Business Training",
     title: "Custom AI & Development Training for Your Team",
-    footer: "AutoNateAI · Requested Team Training · Southeast Missouri",
+    footer: "AutoNateAI · Requested Team Training",
     outFile: path.join(outDir, `${program.handle}.jpg`),
   });
 }
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI Consulting & Development · Southeast Missouri",
-  title: "Enterprise-Grade AI Systems, at Southeast Missouri Prices",
-  footer: "AutoNateAI · AI, Coding & Technical Training in Sikeston, MO",
+  eyebrow: "AI & Coding Training",
+  title: "Real Systems, Not Worksheets",
+  footer: "AutoNateAI Lab · AI, Coding & Technical Training",
   outFile: path.join(outDir, "programs.jpg"),
 });
 
@@ -133,31 +138,31 @@ await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "Requested Team Training",
   title: "Custom AI & Development Training, Built Around Your Business",
-  footer: "AutoNateAI · Southeast Missouri",
+  footer: "AutoNateAI Lab",
   outFile: path.join(outDir, "for-organizations.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI Consulting for Southeast Missouri Businesses",
+  eyebrow: "AI Consulting",
   title: "We Build the Internal AI Tools Your Business Needs",
-  footer: "AutoNateAI · Nine Regional Industries · Southeast Missouri",
+  footer: "AutoNateAI Lab · Architecture, AI Engineering, Consulting",
   outFile: path.join(outDir, "consulting.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "Free Weekly Live Builds",
-  title: "We Build a Real Internal Tool Live, Every Week",
-  footer: "AutoNateAI Industry Build Labs · Southeast Missouri",
+  eyebrow: "Events",
+  title: "Two Ways AutoNateAI Shows Up",
+  footer: "AutoNateAI Lab Sessions + Research Events",
   outFile: path.join(outDir, "events.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI, Workforce & Systems",
-  title: "AI, Workforce & Systems in Southeast Missouri",
-  footer: "AutoNateAI · Research, Guides & Field Notes from Sikeston, MO",
+  eyebrow: "Publications",
+  title: "Research, Architecture, and Field Notes",
+  footer: "AutoNateAI · Independent AI, Software & Human Systems Lab",
   outFile: path.join(outDir, "articles.jpg"),
 });
 
@@ -165,7 +170,7 @@ await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "Free Course Library",
   title: "Sharpen Your Technical Skills. Free.",
-  footer: "AutoNateAI · 4 Free Digital Courses · Sikeston, MO",
+  footer: "AutoNateAI Lab · 4 Free Digital Courses",
   outFile: path.join(outDir, "courses.jpg"),
 });
 
@@ -173,23 +178,23 @@ await composite({
   screenshotFile: screenshotFor(index++),
   eyebrow: "AutoNateAI Community",
   title: "Free Courses & Discord Support",
-  footer: "AutoNateAI Discord · Southeast Missouri",
+  footer: "AutoNateAI Discord",
   outFile: path.join(outDir, "community.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "About AutoNateAI",
-  title: "AI Consulting & Development, Built Locally in Sikeston",
-  footer: "AutoNateAI · Founder Nathan Baker · Southeast Missouri",
+  eyebrow: "About",
+  title: "Nathan Baker — AutoNateAI Lab",
+  footer: "AutoNateAI · Independent AI, Software & Human Systems Lab",
   outFile: path.join(outDir, "about.jpg"),
 });
 
 await composite({
   screenshotFile: screenshotFor(index++),
-  eyebrow: "AI Consulting & Development · Southeast Missouri",
-  title: "Enterprise-Grade AI Systems, at Southeast Missouri Prices",
-  footer: "AutoNateAI · Sikeston, MO",
+  eyebrow: "Independent AI, Software & Human Systems Lab",
+  title: "AutoNateAI Is Nathan Baker's Research Practice",
+  footer: "AutoNateAI Lab",
   outFile: path.join(outDir, "default.jpg"),
 });
 
@@ -199,7 +204,7 @@ for (const tutorial of tutorials) {
     screenshotFile: screenshotFor(index++),
     eyebrow: `Free Course ${tutorial.episode} · ${tutorial.track}`,
     title: tutorial.title,
-    footer: `AutoNateAI · ${pack?.title || "Free Digital Course"} · Sikeston, MO`,
+    footer: `AutoNateAI Lab · ${pack?.title || "Free Digital Course"}`,
     outFile: path.join(outDir, `tutorial-${tutorial.pack}-${tutorial.handle}.jpg`),
   });
 }
@@ -209,7 +214,7 @@ for (const pack of tutorialPacks) {
     screenshotFile: screenshotFor(pack.heroShotIndex ?? index++),
     eyebrow: pack.tagline,
     title: pack.title,
-    footer: "AutoNateAI · Free Digital Course · Sikeston, MO",
+    footer: "AutoNateAI Lab · Free Digital Course",
     outFile: path.join(outDir, `tutorial-pack-${pack.handle}.jpg`),
   });
 }
