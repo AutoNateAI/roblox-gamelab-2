@@ -109,6 +109,35 @@ function sitemapEntry(url, priority = "0.7", lastmod = TODAY) {
   </url>`;
 }
 
+// This site deploys as a plain static export (GitHub Pages serves
+// autonateai.com directly — see .github/workflows/deploy-gh-pages.yml),
+// which has no server-side redirect config, so firebase.json's
+// "redirects" never actually apply in production. Old URLs need a real
+// static file in place: a fast client-side redirect plus a canonical
+// link, so a visitor or search engine hitting the old path still lands
+// on (and re-indexes under) the new one instead of getting a 404.
+function redirectPage(destinationPath) {
+  const url = `https://autonateai.com${destinationPath}`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Redirecting…</title>
+<link rel="canonical" href="${url}" />
+<meta http-equiv="refresh" content="0; url=${destinationPath}" />
+<script>location.replace(${JSON.stringify(destinationPath)});</script>
+</head>
+<body>This page has moved to <a href="${destinationPath}">${url}</a>.</body>
+</html>
+`;
+}
+
+async function writeRedirect(routePath, destinationPath) {
+  const filePath = path.join(outDir, routePath, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, redirectPage(destinationPath));
+}
+
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 
@@ -179,6 +208,22 @@ for (const investigation of investigations) {
   const filePath = path.join(outDir, "research-and-case-studies", investigation.slug, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderInvestigationDetail(investigation));
+}
+
+// Static redirect stubs for every path this rename moved, so an already-
+// shared or indexed old URL still lands on the new one instead of a 404.
+await writeRedirect("articles", "/research-and-case-studies");
+for (const region of regions) {
+  await writeRedirect(`regions/${region.slug}`, `/research-and-case-studies/${region.slug}`);
+}
+for (const organization of organizations) {
+  await writeRedirect(`organizations/${organization.slug}`, `/research-and-case-studies/${organization.slug}`);
+}
+for (const system of systems) {
+  await writeRedirect(`systems/${system.slug}`, `/research-and-case-studies/${system.slug}`);
+}
+for (const investigation of investigations) {
+  await writeRedirect(`investigations/${investigation.slug}`, `/research-and-case-studies/${investigation.slug}`);
 }
 
 for (const pack of tutorialPacks) {
