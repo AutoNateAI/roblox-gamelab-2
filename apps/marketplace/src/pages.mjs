@@ -812,16 +812,16 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head section-head-center">
           <div>
-            <span class="kicker">${icon("hub")} What's Here</span>
-            <h2>Four ways to explore the research.</h2>
-            <p>Everything lives in one place — <a href="/articles">Research &amp; Case Studies</a> — organized so you can go straight to what matters to you.</p>
+            <span class="kicker">${icon("hub")} Research Library</span>
+            <h2>Four kinds of research, all in one place.</h2>
+            <p>Every piece we publish falls into one of these four types. Pick the one you need.</p>
           </div>
         </div>
         <div class="value-grid">
-          <article><span>${icon("landscape")}</span><h3>Your Region</h3><p>What's grown, who finances it, how it gets to market — for one area at a time.</p><a class="outline-button full" href="/articles?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_balance")}</span><h3>Lenders & Businesses</h3><p>The real organizations farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/articles?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_tree")}</span><h3>How Things Work</h3><p>Getting a loan, moving a crop, getting it processed — step by step.</p><a class="outline-button full" href="/articles?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're still figuring out, honestly labeled as such.</p><a class="outline-button full" href="/articles?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>What's grown, who finances it, and how it gets to market — one farming region at a time.</p><a class="outline-button full" href="/articles?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Profiles of the real lenders, elevators, and cooperatives farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/articles?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_tree")}</span><h3>How It Works</h3><p>Step-by-step breakdowns of real processes, like getting a loan or moving a crop to market.</p><a class="outline-button full" href="/articles?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're actively researching but haven't answered yet, labeled honestly as open.</p><a class="outline-button full" href="/articles?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
         </div>
       </section>
 
@@ -829,22 +829,22 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("landscape")} Featured Research</span>
-            <h2>The deepest profile so far.</h2>
-            <p>12 counties, a real lender's public numbers, and one open question about what a crop shift would mean for growers, the bank, and the local elevators.</p>
+            <h2>See the research in action.</h2>
+            <p>One region, one organization, and one open question — real examples of what's actually here.</p>
           </div>
           <a class="primary-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid lab-grid">
-          ${regions.filter((r) => r.status === "laboratory").map((region) => regionCard(region)).join("")}
-          ${organizations.filter((o) => o.status !== "watchlist").map((org) => organizationCard(org)).join("")}
-          ${investigations.map((investigation) => investigationCard(investigation)).join("")}
+        <div class="industry-grid home-featured-grid">
+          ${regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)).join("")}
+          ${organizations.filter((o) => o.status !== "watchlist").slice(0, 1).map((org) => organizationCard(org)).join("")}
+          ${investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)).join("")}
         </div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>A farm, lender, or agribusiness with a real system question?</h2>
-          <p>Business analysis, data work, and software builds around agricultural operations are on the table — see how to work with AutoNateAI directly.</p>
+          <h2>Are you a farm, lender, or agribusiness with a real system question?</h2>
+          <p>Reach out directly — business analysis, data work, and software builds around agricultural operations are all on the table.</p>
           <div class="button-row">
             <a class="primary-button" href="/about#work-with-me">Work With Us ${icon("arrow_forward")}</a>
           </div>

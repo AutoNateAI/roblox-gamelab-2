@@ -1098,6 +1098,10 @@ h1 {
   text-align: center;
 }
 
+.newsletter .button-row {
+  justify-content: center;
+}
+
 .newsletter form {
   display: flex;
   justify-content: center;
