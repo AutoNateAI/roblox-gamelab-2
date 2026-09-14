@@ -3229,6 +3229,15 @@ pre.mermaid svg {
   gap: var(--gutter);
 }
 
+.industry-grid.is-empty::after {
+  content: "Nothing matches that search.";
+  grid-column: 1 / -1;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  color: var(--on-variant);
+  padding: 28px;
+}
+
 .industry-card {
   position: relative;
   border: 1px solid var(--outline);
@@ -4770,6 +4779,13 @@ a.lab-card {
   color: inherit;
 }
 
+/* `display: block` above has higher specificity than the plain [hidden] UA
+   rule, so it was winning and keeping filtered-out cards visible — same
+   fix pattern as .article-card[hidden] below. */
+a.lab-card[hidden] {
+  display: none;
+}
+
 a.lab-card:hover .industry-card,
 a.lab-card:focus-visible .industry-card {
   border-color: var(--primary);
@@ -4839,7 +4855,8 @@ a.lab-card .industry-card::before {
 }
 
 .pagination a,
-.pagination span {
+.pagination span,
+.pagination button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4847,13 +4864,16 @@ a.lab-card .industry-card::before {
   height: 40px;
   padding: 0 12px;
   border: 1px solid var(--outline-strong);
+  background: none;
   font-family: "JetBrains Mono", monospace;
   font-size: 13px;
   font-weight: 700;
   color: var(--on-surface);
+  cursor: pointer;
 }
 
-.pagination a:hover {
+.pagination a:hover,
+.pagination button:hover:not(:disabled) {
   border-color: var(--primary);
   color: var(--primary);
 }
@@ -4864,9 +4884,11 @@ a.lab-card .industry-card::before {
   color: var(--on-primary);
 }
 
-.pagination .pagination-disabled {
+.pagination .pagination-disabled,
+.pagination button:disabled {
   opacity: 0.35;
   pointer-events: none;
+  cursor: default;
 }
 
 /* --- Detail pages (experiments/projects/repos/events/sources) --- */
@@ -5064,6 +5086,23 @@ a.lab-card .industry-card::before {
   .lab-grid > article {
     flex: 0 0 86%;
     scroll-snap-align: start;
+  }
+
+  /* Research & Case Studies mixes 4 card types with search/filter/pagination
+     on top — a horizontal shelf makes results hard to scan there, so it
+     keeps the grid look (1 column on this width) instead of the swipe
+     treatment other Lab listing pages use. */
+  .lab-grid[data-article-grid] {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    overflow-x: visible;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lab-grid[data-article-grid] > a.lab-card {
+    flex: unset;
+    scroll-snap-align: unset;
   }
 
   .detail-related-grid {
