@@ -291,7 +291,7 @@ function searchAttr(...parts) {
 function regionCard(region) {
   const isPlaceholder = region.status === "watchlist";
   return `
-    <a class="lab-card" href="/regions/${region.slug}" data-category="Regions" data-search="${searchAttr(region.name, region.tagline, ...(region.commodities || []))}">
+    <a class="lab-card" href="/research-and-case-studies/${region.slug}" data-category="Regions" data-search="${searchAttr(region.name, region.tagline, ...(region.commodities || []))}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(region, region.icon)}<span class="status-pill">${escapeHtml(regionStatusLabels[region.status] || region.status)}</span></div>
         <h3>${escapeHtml(region.name)}</h3>
@@ -306,7 +306,7 @@ function regionCard(region) {
 function organizationCard(org) {
   const isPlaceholder = org.status === "watchlist";
   return `
-    <a class="lab-card" href="/organizations/${org.slug}" data-category="Organizations" data-search="${searchAttr(org.name, org.tagline)}">
+    <a class="lab-card" href="/research-and-case-studies/${org.slug}" data-category="Organizations" data-search="${searchAttr(org.name, org.tagline)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(org, org.icon)}<span class="status-pill">${escapeHtml(organizationStatusLabels[org.status] || org.status)}</span></div>
         <span class="kicker">${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)}</span>
@@ -321,7 +321,7 @@ function organizationCard(org) {
 function systemCard(system) {
   const isPlaceholder = system.status === "planned";
   return `
-    <a class="lab-card" href="/systems/${system.slug}" data-category="Systems" data-search="${searchAttr(system.name, system.tagline)}">
+    <a class="lab-card" href="/research-and-case-studies/${system.slug}" data-category="Systems" data-search="${searchAttr(system.name, system.tagline)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(system, system.icon)}<span class="status-pill">${escapeHtml(systemStatusLabels[system.status] || system.status)}</span></div>
         <span class="kicker">${escapeHtml(systemCategoryLabels[system.category] || system.category)}</span>
@@ -337,7 +337,7 @@ function investigationCard(investigation) {
   const region = regions.find((r) => r.slug === investigation.region);
   const isPlaceholder = !investigation.evidence?.length;
   return `
-    <a class="lab-card" href="/investigations/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
+    <a class="lab-card" href="/research-and-case-studies/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(investigation, investigation.icon)}<span class="status-pill">${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span></div>
         ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.name)}</span>` : ""}
@@ -359,7 +359,7 @@ export function renderRegions() {
             <span class="kicker">${icon("landscape")} Regions</span>
             <h1>How your area's farm economy actually works.</h1>
             <p>A county, a river corridor, a multi-state belt — whatever the natural boundary is, we walk through what's grown there, who finances it, and how it gets to market. Southeast Missouri is the deepest profile so far, because it's home.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -385,7 +385,7 @@ export function renderRegionDetail(region) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [region.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [region.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(region.icon)} Region &middot; ${escapeHtml(regionStatusLabels[region.status] || region.status)}</span>
@@ -415,7 +415,7 @@ export function renderRegionDetail(region) {
     title: `${region.name} | AutoNateAI Agricultural Systems Lab`,
     active: "regions",
     body,
-    canonicalPath: `/regions/${region.slug}`,
+    canonicalPath: `/research-and-case-studies/${region.slug}`,
     ogImage: region.thumbnail || "/assets/ag-lab/regions-hero.jpg",
     description: region.tagline,
     ogTitle: region.name,
@@ -426,7 +426,7 @@ export function renderRegionDetail(region) {
         "@type": "Place",
         "name": region.name,
         "description": region.tagline,
-        "url": `https://autonateai.com/regions/${region.slug}`,
+        "url": `https://autonateai.com/research-and-case-studies/${region.slug}`,
       },
     ],
   });
@@ -442,7 +442,7 @@ export function renderOrganizations() {
             <span class="kicker">${icon("account_balance")} Organizations</span>
             <h1>The lenders, elevators, and co-ops farmers actually deal with.</h1>
             <p>Not a scraped company page — real public numbers, sourced, and the open questions worth asking next. If you work at one of these, we'd genuinely like to hear where we got it wrong.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -468,7 +468,7 @@ export function renderOrganizationDetail(org) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [org.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [org.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(org.icon)} ${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)} &middot; ${escapeHtml(organizationStatusLabels[org.status] || org.status)}</span>
@@ -510,7 +510,7 @@ export function renderOrganizationDetail(org) {
     title: `${org.name} | AutoNateAI Agricultural Systems Lab`,
     active: "organizations",
     body,
-    canonicalPath: `/organizations/${org.slug}`,
+    canonicalPath: `/research-and-case-studies/${org.slug}`,
     ogImage: org.thumbnail || "/assets/ag-lab/organizations-hero.jpg",
     description: org.tagline,
     ogTitle: org.name,
@@ -521,7 +521,7 @@ export function renderOrganizationDetail(org) {
         "@type": "Organization",
         "name": org.name,
         "description": org.tagline,
-        "url": `https://autonateai.com/organizations/${org.slug}`,
+        "url": `https://autonateai.com/research-and-case-studies/${org.slug}`,
       },
     ],
   });
@@ -537,7 +537,7 @@ export function renderSystems() {
             <span class="kicker">${icon("account_tree")} Systems</span>
             <h1>How the industry actually operates, step by step.</h1>
             <p>Getting a loan, moving a crop to storage, getting it processed and sold — every deep dive walks through the real steps, the people involved, and where things tend to get stuck.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -562,7 +562,7 @@ export function renderSystemDetail(system) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [system.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [system.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(system.icon)} ${escapeHtml(systemCategoryLabels[system.category] || system.category)} &middot; ${escapeHtml(systemStatusLabels[system.status] || system.status)}</span>
@@ -612,7 +612,7 @@ export function renderSystemDetail(system) {
     title: `${system.name} | AutoNateAI Agricultural Systems Lab`,
     active: "systems",
     body,
-    canonicalPath: `/systems/${system.slug}`,
+    canonicalPath: `/research-and-case-studies/${system.slug}`,
     ogImage: system.thumbnail || "/assets/ag-lab/systems-hero.jpg",
     description: system.tagline,
     ogTitle: system.name,
@@ -631,7 +631,7 @@ export function renderInvestigations() {
             <span class="kicker">${icon("help_center")} Open Questions</span>
             <h1>What we're still digging into.</h1>
             <p>${openCount} open question${openCount === 1 ? "" : "s"} right now. "Open" means genuinely open — what we know, what we still need, and who we still need to talk to are all public. We don't dress up a guess as an answer.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -657,7 +657,7 @@ export function renderInvestigationDetail(investigation) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], ["Open Questions", "/investigations"], [investigation.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], ["Open Questions", "/investigations"], [investigation.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(investigation.icon)} Open Question &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
@@ -701,7 +701,7 @@ export function renderInvestigationDetail(investigation) {
     title: `${investigation.name} | AutoNateAI Agricultural Systems Lab`,
     active: "investigations",
     body,
-    canonicalPath: `/investigations/${investigation.slug}`,
+    canonicalPath: `/research-and-case-studies/${investigation.slug}`,
     ogImage: investigation.thumbnail || "/assets/ag-lab/investigations-hero.jpg",
     description: investigation.question,
     ogTitle: investigation.name,
@@ -784,25 +784,26 @@ export function renderHome(data) {
           <div class="hero-copy">
             <span class="kicker">${icon("agriculture")} Agricultural Economic Intelligence</span>
             <h1>We study how farm country actually works — and publish it, free.</h1>
-            <p>How financing works, how a crop gets from a field to a buyer, which businesses connect to which — we research it, source it, and write it up in plain language. Starting in Southeast Missouri, because it's home, with more regions coming.</p>
+            <p>How financing works, how a crop gets from a field to a buyer, which businesses connect to which — we research it, source it, and write it up in plain language, one region at a time.</p>
             <div class="lab-byline">
               <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker" />
               <div><strong>Nathan Baker</strong><span>Founder, AutoNateAI</span></div>
             </div>
             <div class="button-row">
-              <a class="primary-button" href="/articles">Browse the Research ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/articles?type=Open%20Questions">See What's Still Open</a>
+              <a class="primary-button" href="/research-and-case-studies">Browse the Research ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="/about#work-with-me">Work With Us</a>
             </div>
           </div>
           <aside class="hero-program-panel">
             <div class="hero-panel-body">
-              <span class="kicker">${icon("help_center")} Right Now</span>
-              <h2>${openInvestigations.length} open question${openInvestigations.length === 1 ? "" : "s"}</h2>
-              <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Nothing open yet — check back soon."}</p>
+              <span class="kicker">${icon("help_center")} Featured Research Question</span>
+              <h2>${openInvestigations[0] ? escapeHtml(openInvestigations[0].name) : "Nothing open yet"}</h2>
+              <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Check back soon for the next open question."}</p>
               <div class="hero-facts">
-                <span>${profiledRegions} region${profiledRegions === 1 ? "" : "s"} covered</span>
-                <span>${profiledOrgs} organization${profiledOrgs === 1 ? "" : "s"} profiled</span>
-                <span>${systems.length} how-it-works guide${systems.length === 1 ? "" : "s"}</span>
+                <span>${profiledRegions} Region${profiledRegions === 1 ? "" : "s"} Profiled</span>
+                <span>${profiledOrgs} Organization${profiledOrgs === 1 ? "" : "s"} Profiled</span>
+                <span>${systems.length} How-It-Works Guide${systems.length === 1 ? "" : "s"}</span>
+                <span>${openInvestigations.length} Open Question${openInvestigations.length === 1 ? "" : "s"}</span>
               </div>
             </div>
           </aside>
@@ -812,43 +813,42 @@ export function renderHome(data) {
       <section class="section">
         <div class="section-head section-head-center">
           <div>
-            <span class="kicker">${icon("hub")} What's Here</span>
-            <h2>Four ways to find what applies to you.</h2>
-            <p>All of it lives in one place — <a href="/articles">Research &amp; Case Studies</a> — filterable by whichever of these you actually came here for.</p>
+            <span class="kicker">${icon("hub")} Research Library</span>
+            <h2>Four kinds of research, all in one place.</h2>
+            <p>Every piece we publish falls into one of these four types. Pick the one you need.</p>
           </div>
         </div>
         <div class="value-grid">
-          <article><span>${icon("landscape")}</span><h3>Your Region</h3><p>What's grown, who finances it, how it gets to market — for one area at a time.</p><a class="outline-button full" href="/articles?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_balance")}</span><h3>Lenders & Businesses</h3><p>The real organizations farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/articles?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_tree")}</span><h3>How Things Work</h3><p>Getting a loan, moving a crop, getting it processed — step by step.</p><a class="outline-button full" href="/articles?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're still figuring out, honestly labeled as such.</p><a class="outline-button full" href="/articles?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>What's grown, who finances it, and how it gets to market — one farming region at a time.</p><a class="outline-button full" href="/research-and-case-studies?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Profiles of the real lenders, elevators, and cooperatives farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/research-and-case-studies?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_tree")}</span><h3>How It Works</h3><p>Step-by-step breakdowns of real processes, like getting a loan or moving a crop to market.</p><a class="outline-button full" href="/research-and-case-studies?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're actively researching but haven't answered yet, labeled honestly as open.</p><a class="outline-button full" href="/research-and-case-studies?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("landscape")} Start With Southeast Missouri</span>
-            <h2>The deepest profile so far.</h2>
-            <p>12 counties, a real lender's public numbers, and one open question about what a crop shift would mean for growers, the bank, and the local elevators.</p>
+            <span class="kicker">${icon("landscape")} Featured Research</span>
+            <h2>See the research in action.</h2>
+            <p>One region, one organization, and one open question — real examples of what's actually here.</p>
           </div>
-          <a class="primary-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid lab-grid">
-          ${regions.filter((r) => r.status === "laboratory").map((region) => regionCard(region)).join("")}
-          ${organizations.filter((o) => o.status !== "watchlist").map((org) => organizationCard(org)).join("")}
-          ${investigations.map((investigation) => investigationCard(investigation)).join("")}
+        <div class="industry-grid home-featured-grid">
+          ${regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)).join("")}
+          ${organizations.filter((o) => o.status !== "watchlist").slice(0, 1).map((org) => organizationCard(org)).join("")}
+          ${investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)).join("")}
         </div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>A farm, lender, or agribusiness with a real system question?</h2>
-          <p>Business analysis, data work, and software builds around agricultural operations are on the table — see how to work with AutoNateAI directly.</p>
+          <h2>Are you a farm, lender, or agribusiness with a real system question?</h2>
+          <p>Reach out directly — business analysis, data work, and software builds around agricultural operations are all on the table.</p>
           <div class="button-row">
             <a class="primary-button" href="/about#work-with-me">Work With Us ${icon("arrow_forward")}</a>
           </div>
-          <small>Prefer to start free? The <a href="/tutorials">course library</a> and <a href="/events">Lab Sessions</a> cost nothing.</small>
         </div>
       </section>
     </main>
@@ -1155,7 +1155,7 @@ export function renderSourceDetail(source) {
   const project = labProjects.find((p) => p.slug === source.project);
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Publications", "/articles"], [source.title, null]])}
+      ${breadcrumbs([["Home", "/"], ["The Lab", "/lab"], [source.title, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${evidenceBadge(source.evidenceClass)} <span style="margin-left: 8px">${escapeHtml(source.topic)}</span></span>
@@ -1269,14 +1269,6 @@ export function renderAbout() {
     ["Integrity", "Every number gets a source. Every open question stays labeled open until it's actually answered."],
     ["Creation", "Publish real analysis, dashboards, and tools — not just observations."],
   ];
-  const experience = [
-    ["University of Michigan", "B.S. Computer Science and Computer Security instructional aide"],
-    ["Microsoft Security", "Software developer experience on systems people depend on"],
-    ["Citi", "Engineering work inside financial technology environments"],
-    ["Veterans United", "AI software engineering for real organizational workflows"],
-    ["Atomic Object", "Senior software consulting across products, teams, and architecture decisions"],
-    ["Outlier", "Prompt engineering and AI workflow evaluation before it became mainstream"],
-  ];
   const faqs = [
     ["Why agriculture?", "It's home. I grew up around Southeast Missouri, and once I started looking closely, I realized the same systems thinking I'd used in software — mapping how data, money, and decisions actually move — applies directly to how a farm economy works. Nobody was writing it up in plain language, so I started."],
     ["Are you a farmer, a banker, or an economist?", "No — I'm a software engineer and business analyst by background. I'm not pretending otherwise. What I bring is the ability to research a system carefully, source it honestly, and explain it clearly — the same way I'd document any other complex system."],
@@ -1289,11 +1281,11 @@ export function renderAbout() {
       <section class="about-hero">
         <div>
           <span class="kicker">${icon("agriculture")} About</span>
-          <h1>I study how farm country actually works.</h1>
-          <p>AutoNateAI is my independent research practice. I dig into how financing, land, equipment, and grain actually move through a farm economy, source it honestly, and write it up in plain language — starting with Southeast Missouri, where I'm from. Consulting and software work are also on the table — see <a href="#work-with-me">Work With Us</a> below.</p>
+          <h1>I grew up in the Bootheel, and I never stopped loving it.</h1>
+          <p>AutoNateAI is my independent research practice — a way to point my software and business-analytics background back at the place I'm from. I dig into how financing, land, equipment, and grain actually move through a farm economy, source every claim honestly, and write it up in plain language. Consulting and software work are also on the table — see <a href="#work-with-me">Work With Us</a> below.</p>
           <div class="button-row">
             <a class="primary-button" href="#work-with-me">Work With Us ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/articles">Browse the Research</a>
+            <a class="secondary-button" href="/research-and-case-studies">Browse the Research</a>
           </div>
         </div>
         <aside class="about-founder-card">
@@ -1301,7 +1293,7 @@ export function renderAbout() {
           <div>
             <span class="kicker">Founder, AutoNateAI</span>
             <h2>Nathan Baker</h2>
-            <p>Computer Science, University of Michigan. Software and AI engineering experience across Microsoft, Citi, Veterans United, Atomic Object, and Outlier — now applied to studying agricultural economies.</p>
+            <p>Computer Science, University of Michigan. Software engineering and business analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now pointed at the Bootheel farm economy he grew up in.</p>
           </div>
         </aside>
       </section>
@@ -1316,23 +1308,11 @@ export function renderAbout() {
       <section class="spotlight-section">
         <div class="spotlight-image"><img src="/assets/landing/agent-review.jpg" alt="Reviewing research and data" /></div>
         <div>
-          <span class="kicker">${icon("apartment")} A Software Background, Applied to Farm Country</span>
+          <span class="kicker">${icon("apartment")} Tech and Business Analytics, Pointed at Agriculture</span>
           <h2>Systems thinking doesn't care what industry it's pointed at.</h2>
-          <p>I spent years building software and AI systems at the University of Michigan, Microsoft, Citi, Veterans United, and Atomic Object — places where you have to understand a system fully before you touch it. That same discipline is what this research is built on: map the real process, find where it actually breaks, source every claim. Business analysis, data work, and software builds are still on the table too.</p>
+          <p>Before this, I spent years as a software engineer and business analyst — at Microsoft, Citi, Veterans United, and Atomic Object — learning to map how data, money, and decisions actually move through a complex system before touching it. Growing up in the Bootheel, I always figured that same discipline belonged pointed at the farm economy around me. It fit perfectly: map the real process, find where it actually breaks, source every claim. Business analysis, data work, and software builds are still on the table too.</p>
           <div class="button-row">
             <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/nate-and-kai.jpg" alt="Nate and Kai, the two builders behind the AutoNateAI free digital courses" /></div>
-        <div>
-          <span class="kicker">${icon("auto_stories")} Free Technical Courses</span>
-          <h2>I also teach the fundamentals, free.</h2>
-          <p>Separate from the agricultural research: four free digital courses follow Nate and Kai, two builders learning JavaScript, AI agents, databases, and civic tech from scratch. No cost, no catch — open to anyone who wants to build that kind of technical foundation for themselves.</p>
-          <div class="button-row">
-            <a class="primary-button" href="/tutorials">Take the Free Courses ${icon("arrow_forward")}</a>
           </div>
         </div>
       </section>
@@ -1346,29 +1326,6 @@ export function renderAbout() {
         </div>
         <div class="about-values">
           ${regionalVision.map((step) => `<article><h3>${escapeHtml(step.period)}</h3><p>${escapeHtml(step.text)}</p></article>`).join("")}
-        </div>
-      </section>
-
-      <section class="section compact about-split">
-        <div>
-          <span class="kicker">${icon("verified")} Why the research holds up</span>
-          <h2>Built on real engineering discipline, not a hot take.</h2>
-          <p>For the last several years, Nathan has designed software systems and AI workflows used inside organizations where being wrong is expensive — most recently as Senior Software Consultant and Developer at Atomic Object. That same rigor — read the real system first, verify before you publish, explain your reasoning — is what goes into every region, organization, and open question on this site.</p>
-          <p>Before founding AutoNateAI, Nathan also taught Computer Security at the University of Michigan as an instructional aide, leading office hours, lab sections, and mentoring students through security, networking, and systems problems.</p>
-        </div>
-        <div class="about-proof-list">
-          ${experience.map(([title, text]) => `<article><span>${icon("work_history")}</span><div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div></article>`).join("")}
-        </div>
-      </section>
-
-      <section class="about-logos">
-        <div>
-          <span class="kicker">${icon("groups")} Engineering and education work</span>
-          <h2>Experience across classrooms, companies, and technical training spaces.</h2>
-          <p>Nathan's background is shaped by engineering practice, teaching, workshops, outreach, and technology initiatives involving universities, companies, and community programs. That same practice — think clearly, verify before you claim it, prove your reasoning — now drives the agricultural research on this site.</p>
-        </div>
-        <div class="org-cloud">
-          ${["Grand Valley State University", "Black Boys Code", "Salesforce", "Microsoft", "Endless Opportunities", "Churches", "Community Organizations", "Youth Education Initiatives"].map((org) => `<span>${escapeHtml(org)}</span>`).join("")}
         </div>
       </section>
 
@@ -1387,7 +1344,7 @@ export function renderAbout() {
       <section class="founder-letter">
         <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
         <h2>I wanted to understand the place I'm from.</h2>
-        <p>I grew up in Southeast Missouri, fascinated by technology because it gave me a way to turn ideas into something real. Years of building software at Microsoft, in financial technology, and in consulting taught me the same lesson over and over: the people who actually add value aren't just the ones who can write code — they're the ones who can understand a whole system and explain it clearly to the people depending on it.</p>
+        <p>I grew up in the Missouri Bootheel, and no matter where technology took me — Microsoft, financial technology, consulting — this place never stopped feeling like home. What technology gave me was a way to turn ideas into something real; what all those years of building software actually taught me is that the people who add value aren't just the ones who can write code, they're the ones who can understand a whole system and explain it clearly to the people depending on it.</p>
         <p>Coming back home, I started asking questions about how the farm economy around me actually works — how a farmer gets financing, how a crop actually gets to market, who the real decision-makers are — and realized nobody had written most of it down in a way a regular person could just go read. So I started researching it myself, the same disciplined way I'd approach any other system, and publishing what I find.</p>
         <p>If you're a farmer, a lender, or a local business with a question about how your part of this works — or a real workflow you need built — I'd genuinely like to hear from you.</p>
         <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
@@ -2366,7 +2323,7 @@ export function renderArticles() {
         </div>
         ${
           featured
-            ? `<a class="about-founder-card" href="/regions/${featured.slug}">
+            ? `<a class="about-founder-card" href="/research-and-case-studies/${featured.slug}">
                 <img src="${featured.thumbnail}" alt="${escapeHtml(featured.name)}" />
                 <div>
                   <span class="kicker">${icon("star")} Featured &middot; ${escapeHtml(regionStatusLabels[featured.status] || featured.status)}</span>
@@ -2390,6 +2347,7 @@ export function renderArticles() {
         ${systems.map((system) => systemCard(system)).join("")}
         ${investigations.map((investigation) => investigationCard(investigation)).join("")}
       </div>
+      <nav class="pagination" data-article-pagination aria-label="Pagination"></nav>
     </main>
   `;
 
@@ -2397,7 +2355,7 @@ export function renderArticles() {
     title: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
     active: "articles",
     body,
-    canonicalPath: "/articles",
+    canonicalPath: "/research-and-case-studies",
     ogImage: "/assets/og/articles.jpg",
     description:
       "Regional profiles, organization profiles, how-things-work explainers, and open questions from AutoNateAI's agricultural economic-intelligence research — all in one searchable, filterable place.",

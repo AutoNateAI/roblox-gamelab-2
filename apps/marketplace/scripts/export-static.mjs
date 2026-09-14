@@ -64,7 +64,7 @@ const pageCount = (items) => Math.max(1, Math.ceil(items.length / PAGE_SIZE));
 const routes = [
   ["index.html", renderHome(programsData)],
   ["programs/index.html", renderProgramDetail(programsData, programsData.programs[0])],
-  ["articles/index.html", renderArticles()],
+  ["research-and-case-studies/index.html", renderArticles()],
   ["experiments/index.html", renderExperiments()],
   ["projects/index.html", renderProjects()],
   ["open-source/index.html", renderOpenSource()],
@@ -154,26 +154,29 @@ for (const source of labSources) {
   await writeFile(filePath, renderSourceDetail(source));
 }
 
+// Region/organization/system/investigation detail pages all publish under
+// one unified path for SEO (fourth pass) — see the matching server.mjs
+// routing and firebase.json redirects for the old per-type detail URLs.
 for (const region of regions) {
-  const filePath = path.join(outDir, "regions", region.slug, "index.html");
+  const filePath = path.join(outDir, "research-and-case-studies", region.slug, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderRegionDetail(region));
 }
 
 for (const organization of organizations) {
-  const filePath = path.join(outDir, "organizations", organization.slug, "index.html");
+  const filePath = path.join(outDir, "research-and-case-studies", organization.slug, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderOrganizationDetail(organization));
 }
 
 for (const system of systems) {
-  const filePath = path.join(outDir, "systems", system.slug, "index.html");
+  const filePath = path.join(outDir, "research-and-case-studies", system.slug, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderSystemDetail(system));
 }
 
 for (const investigation of investigations) {
-  const filePath = path.join(outDir, "investigations", investigation.slug, "index.html");
+  const filePath = path.join(outDir, "research-and-case-studies", investigation.slug, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, renderInvestigationDetail(investigation));
 }
@@ -213,7 +216,7 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/organizations", "0.9"),
   sitemapEntry("https://autonateai.com/systems", "0.9"),
   sitemapEntry("https://autonateai.com/investigations", "0.9"),
-  sitemapEntry("https://autonateai.com/articles", "0.9"),
+  sitemapEntry("https://autonateai.com/research-and-case-studies", "0.9"),
   sitemapEntry("https://autonateai.com/lab", "0.7"),
   sitemapEntry("https://autonateai.com/experiments", "0.7"),
   sitemapEntry("https://autonateai.com/projects", "0.7"),
@@ -225,10 +228,10 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/for-organizations", "0.6"),
   sitemapEntry("https://autonateai.com/community", "0.6"),
   sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.5"),
-  ...regions.map((region) => sitemapEntry(`https://autonateai.com/regions/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
-  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/organizations/${org.slug}`, org.status === "Watchlist" ? "0.4" : "0.8")),
-  ...systems.map((system) => sitemapEntry(`https://autonateai.com/systems/${system.slug}`, "0.8")),
-  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/investigations/${investigation.slug}`, "0.8")),
+  ...regions.map((region) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
+  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${org.slug}`, org.status === "Watchlist" ? "0.4" : "0.8")),
+  ...systems.map((system) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${system.slug}`, "0.8")),
+  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${investigation.slug}`, "0.8")),
   ...tutorialPacks.map((pack) => sitemapEntry(`https://autonateai.com/tutorials/${pack.handle}`, "0.7")),
   ...tutorials.map((tutorial) =>
     sitemapEntry(`https://autonateai.com/tutorials/${tutorial.pack}/${tutorial.handle}`, tutorial.draft ? "0.3" : "0.6"),
