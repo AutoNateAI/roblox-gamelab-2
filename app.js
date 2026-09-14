@@ -495,30 +495,68 @@ bookingForm?.addEventListener("submit", async (event) => {
   }
 });
 
-// --- Article search / category filters ---
+// --- Article search / category filters / pagination ---
 const articleSearch = document.querySelector("[data-article-search]");
 const articleGrid = document.querySelector("[data-article-grid]");
+const articlePagination = document.querySelector("[data-article-pagination]");
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+const ARTICLES_PER_PAGE = 9;
 let activeArticleFilter = "All";
+let articlePage = 1;
+
+function renderArticlePagination(totalPages) {
+  if (!articlePagination) return;
+  if (totalPages <= 1) {
+    articlePagination.innerHTML = "";
+    return;
+  }
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  articlePagination.innerHTML = `
+    <button type="button" data-article-page="prev" ${articlePage <= 1 ? "disabled" : ""} aria-label="Previous page"><span class="material-symbols-outlined">chevron_left</span></button>
+    ${pages
+      .map((p) => (p === articlePage ? `<span class="pagination-current">${p}</span>` : `<button type="button" data-article-page="${p}">${p}</button>`))
+      .join("")}
+    <button type="button" data-article-page="next" ${articlePage >= totalPages ? "disabled" : ""} aria-label="Next page"><span class="material-symbols-outlined">chevron_right</span></button>
+  `;
+  articlePagination.querySelectorAll("[data-article-page]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.articlePage === "prev" ? articlePage - 1 : button.dataset.articlePage === "next" ? articlePage + 1 : Number(button.dataset.articlePage);
+      if (!target || target < 1 || target > totalPages || target === articlePage) return;
+      articlePage = target;
+      filterArticles();
+      articleGrid?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
 
 function filterArticles() {
   if (!articleGrid) return;
   const query = (articleSearch?.value || "").trim().toLowerCase();
   const cards = Array.from(articleGrid.querySelectorAll("[data-category]"));
-
-  cards.forEach((card) => {
+  const matches = cards.filter((card) => {
     const categoryMatch = activeArticleFilter === "All" || card.dataset.category === activeArticleFilter;
     const textMatch = !query || (card.dataset.search || "").includes(query);
-    card.hidden = !(categoryMatch && textMatch);
+    return categoryMatch && textMatch;
   });
 
-  articleGrid.classList.toggle("is-empty", cards.every((card) => card.hidden));
+  const totalPages = Math.max(1, Math.ceil(matches.length / ARTICLES_PER_PAGE));
+  articlePage = Math.min(Math.max(1, articlePage), totalPages);
+  const start = (articlePage - 1) * ARTICLES_PER_PAGE;
+  const visible = new Set(matches.slice(start, start + ARTICLES_PER_PAGE));
+
+  cards.forEach((card) => {
+    card.hidden = !visible.has(card);
+  });
+
+  articleGrid.classList.toggle("is-empty", matches.length === 0);
+  renderArticlePagination(totalPages);
 }
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeArticleFilter = button.dataset.filter || "All";
     filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+    articlePage = 1;
     filterArticles();
   });
 });
@@ -529,7 +567,10 @@ const presetType = new URLSearchParams(window.location.search).get("type");
 const presetButton = presetType && filterButtons.find((button) => button.dataset.filter === presetType);
 (presetButton || filterButtons[0])?.classList.add("active");
 if (presetButton) activeArticleFilter = presetType;
-articleSearch?.addEventListener("input", filterArticles);
+articleSearch?.addEventListener("input", () => {
+  articlePage = 1;
+  filterArticles();
+});
 filterArticles();
 
 // --- For Organizations: seat-based sponsorship checkout ---
