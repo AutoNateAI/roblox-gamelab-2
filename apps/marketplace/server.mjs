@@ -17,18 +17,40 @@ import {
   renderExperiments,
   renderForOrganizations,
   renderHome,
+  renderInvestigationDetail,
+  renderInvestigations,
+  renderLab,
   renderOpenSource,
   renderOpenSourceDetail,
+  renderOrganizationDetail,
+  renderOrganizations,
   renderProgramDetail,
   renderProjectDetail,
   renderProjects,
+  renderRegionDetail,
+  renderRegions,
   renderSourceDetail,
   renderSuccess,
+  renderSystemDetail,
+  renderSystems,
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
 } from "./src/pages.mjs";
-import { articles, labEvents, labExperiments, labProjects, labSources, openSourceRepos, tutorialPacks, tutorials } from "./src/data.mjs";
+import {
+  articles,
+  investigations,
+  labEvents,
+  labExperiments,
+  labProjects,
+  labSources,
+  openSourceRepos,
+  organizations,
+  regions,
+  systems,
+  tutorialPacks,
+  tutorials,
+} from "./src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../..");
@@ -236,7 +258,27 @@ const server = createServer(async (request, response) => {
   const apiPath = marketplaceApiPath(url.pathname);
 
   try {
-    const pageRoutes = new Set(["/", "/about", "/programs", "/articles", "/experiments", "/projects", "/open-source", "/tutorials", "/community", "/consulting", "/events", "/for-organizations", "/checkout", "/success"]);
+    const pageRoutes = new Set([
+      "/",
+      "/about",
+      "/programs",
+      "/articles",
+      "/experiments",
+      "/projects",
+      "/open-source",
+      "/regions",
+      "/organizations",
+      "/systems",
+      "/investigations",
+      "/lab",
+      "/tutorials",
+      "/community",
+      "/consulting",
+      "/events",
+      "/for-organizations",
+      "/checkout",
+      "/success",
+    ]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
       if (url.pathname === "/programs") {
@@ -250,6 +292,11 @@ const server = createServer(async (request, response) => {
         "/experiments": renderExperiments,
         "/projects": renderProjects,
         "/open-source": renderOpenSource,
+        "/regions": renderRegions,
+        "/organizations": renderOrganizations,
+        "/systems": renderSystems,
+        "/investigations": renderInvestigations,
+        "/lab": renderLab,
         "/tutorials": renderTutorials,
         "/community": renderCommunity,
         "/consulting": renderConsulting,
@@ -325,6 +372,50 @@ const server = createServer(async (request, response) => {
         return;
       }
       html(response, 200, renderOpenSourceDetail(repo));
+      return;
+    }
+
+    if (url.pathname.startsWith("/regions/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const region = regions.find((item) => item.slug === slug);
+      if (!region) {
+        json(response, 404, { error: "Region not found" });
+        return;
+      }
+      html(response, 200, renderRegionDetail(region));
+      return;
+    }
+
+    if (url.pathname.startsWith("/organizations/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const organization = organizations.find((item) => item.slug === slug);
+      if (!organization) {
+        json(response, 404, { error: "Organization not found" });
+        return;
+      }
+      html(response, 200, renderOrganizationDetail(organization));
+      return;
+    }
+
+    if (url.pathname.startsWith("/systems/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const system = systems.find((item) => item.slug === slug);
+      if (!system) {
+        json(response, 404, { error: "System not found" });
+        return;
+      }
+      html(response, 200, renderSystemDetail(system));
+      return;
+    }
+
+    if (url.pathname.startsWith("/investigations/")) {
+      const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const investigation = investigations.find((item) => item.slug === slug);
+      if (!investigation) {
+        json(response, 404, { error: "Investigation not found" });
+        return;
+      }
+      html(response, 200, renderInvestigationDetail(investigation));
       return;
     }
 

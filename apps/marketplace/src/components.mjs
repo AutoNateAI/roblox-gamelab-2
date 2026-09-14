@@ -50,7 +50,7 @@ export function topNav(active = "home", mode = "full") {
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
           ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/about#work-with-me">Work With Me</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/about#work-with-me">Work With Us</a>`}
         </div>
       </nav>
     </header>
@@ -63,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>Independent AI, software, and human-systems research lab — the practice of Nathan Baker. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
+          <p>Agricultural economic-intelligence and technology lab — the practice of Nathan Baker. Research, business analysis, data intelligence, and software applied to how food, capital, and infrastructure move through regional economies.</p>
         </div>
-        ${footerColumn("The Lab", [["Latest", "/"], ["Publications", "/articles"], ["Experiments", "/experiments"], ["Projects", "/projects"], ["Open Source", "/open-source"]])}
-        ${footerColumn("Company", [["Events", "/events"], ["Learn", "/tutorials"], ["Work With Me", "/about#work-with-me"], ["Discord", "https://discord.gg/4HkkuntdSs"], ["About Nathan", "/about"]])}
+        ${footerColumn("Intelligence", [["Regions", "/regions"], ["Systems", "/systems"], ["Organizations", "/organizations"], ["Research & Case Studies", "/articles"], ["Business Question Queue", "/investigations"], ["The Lab", "/lab"]])}
+        ${footerColumn("More", [["Free Courses", "/tutorials"], ["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Events", "/events"], ["Community", "/community"], ["Work With Us", "/about#work-with-me"], ["About Nathan", "/about"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Independent AI, software, and human-systems research lab.</span>
+        <span>&copy; 2026 AutoNateAI. Agricultural economic-intelligence and technology lab.</span>
       </div>
     </footer>
   `;
@@ -88,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker: research, experiments, open-source work, and free technical courses.";
+  "AutoNateAI is an agricultural economic-intelligence and technology lab: regional profiles, organization nodes, system deep dives, and an open business-question queue, run by Nathan Baker.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

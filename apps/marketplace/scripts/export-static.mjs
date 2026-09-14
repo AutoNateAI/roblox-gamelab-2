@@ -14,18 +14,40 @@ import {
   renderExperiments,
   renderForOrganizations,
   renderHome,
+  renderInvestigationDetail,
+  renderInvestigations,
+  renderLab,
   renderOpenSource,
   renderOpenSourceDetail,
+  renderOrganizationDetail,
+  renderOrganizations,
   renderProgramDetail,
   renderProjectDetail,
   renderProjects,
+  renderRegionDetail,
+  renderRegions,
   renderSourceDetail,
   renderSuccess,
+  renderSystemDetail,
+  renderSystems,
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
 } from "../src/pages.mjs";
-import { articles, labEvents, labExperiments, labProjects, labSources, openSourceRepos, tutorialPacks, tutorials } from "../src/data.mjs";
+import {
+  articles,
+  investigations,
+  labEvents,
+  labExperiments,
+  labProjects,
+  labSources,
+  openSourceRepos,
+  organizations,
+  regions,
+  systems,
+  tutorialPacks,
+  tutorials,
+} from "../src/data.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "../../..");
@@ -46,6 +68,11 @@ const routes = [
   ["experiments/index.html", renderExperiments()],
   ["projects/index.html", renderProjects()],
   ["open-source/index.html", renderOpenSource()],
+  ["regions/index.html", renderRegions()],
+  ["organizations/index.html", renderOrganizations()],
+  ["systems/index.html", renderSystems()],
+  ["investigations/index.html", renderInvestigations()],
+  ["lab/index.html", renderLab()],
   ["tutorials/index.html", renderTutorials()],
   ["community/index.html", renderCommunity()],
   ["about/index.html", renderAbout()],
@@ -126,6 +153,30 @@ for (const source of labSources) {
   await writeFile(filePath, renderSourceDetail(source));
 }
 
+for (const region of regions) {
+  const filePath = path.join(outDir, "regions", region.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderRegionDetail(region));
+}
+
+for (const organization of organizations) {
+  const filePath = path.join(outDir, "organizations", organization.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderOrganizationDetail(organization));
+}
+
+for (const system of systems) {
+  const filePath = path.join(outDir, "systems", system.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderSystemDetail(system));
+}
+
+for (const investigation of investigations) {
+  const filePath = path.join(outDir, "investigations", investigation.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderInvestigationDetail(investigation));
+}
+
 for (const pack of tutorialPacks) {
   const packFilePath = path.join(outDir, "tutorials", pack.handle, "index.html");
   await mkdir(path.dirname(packFilePath), { recursive: true });
@@ -157,17 +208,26 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
+  sitemapEntry("https://autonateai.com/regions", "0.9"),
+  sitemapEntry("https://autonateai.com/organizations", "0.9"),
+  sitemapEntry("https://autonateai.com/systems", "0.9"),
+  sitemapEntry("https://autonateai.com/investigations", "0.9"),
   sitemapEntry("https://autonateai.com/articles", "0.9"),
-  sitemapEntry("https://autonateai.com/experiments", "0.8"),
-  sitemapEntry("https://autonateai.com/projects", "0.8"),
-  sitemapEntry("https://autonateai.com/open-source", "0.8"),
-  sitemapEntry("https://autonateai.com/events", "0.8"),
-  sitemapEntry("https://autonateai.com/tutorials", "0.8"),
+  sitemapEntry("https://autonateai.com/lab", "0.7"),
+  sitemapEntry("https://autonateai.com/experiments", "0.7"),
+  sitemapEntry("https://autonateai.com/projects", "0.7"),
+  sitemapEntry("https://autonateai.com/open-source", "0.7"),
+  sitemapEntry("https://autonateai.com/events", "0.7"),
+  sitemapEntry("https://autonateai.com/tutorials", "0.7"),
   sitemapEntry("https://autonateai.com/about", "0.7"),
   sitemapEntry("https://autonateai.com/consulting", "0.6"),
   sitemapEntry("https://autonateai.com/for-organizations", "0.6"),
   sitemapEntry("https://autonateai.com/community", "0.6"),
   sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.5"),
+  ...regions.map((region) => sitemapEntry(`https://autonateai.com/regions/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
+  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/organizations/${org.slug}`, org.status === "Watchlist" ? "0.4" : "0.8")),
+  ...systems.map((system) => sitemapEntry(`https://autonateai.com/systems/${system.slug}`, "0.8")),
+  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/investigations/${investigation.slug}`, "0.8")),
   ...tutorialPacks.map((pack) => sitemapEntry(`https://autonateai.com/tutorials/${pack.handle}`, "0.7")),
   ...tutorials.map((tutorial) =>
     sitemapEntry(`https://autonateai.com/tutorials/${tutorial.pack}/${tutorial.handle}`, tutorial.draft ? "0.3" : "0.6"),
@@ -175,9 +235,9 @@ const sitemapUrls = [
   ...articles.map((article) =>
     sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6", article.dateModified || article.datePublished || TODAY),
   ),
-  ...labProjects.map((project) => sitemapEntry(`https://autonateai.com/projects/${project.slug}`, "0.7")),
-  ...labExperiments.map((experiment) => sitemapEntry(`https://autonateai.com/experiments/${experiment.slug}`, "0.7")),
-  ...openSourceRepos.map((repo) => sitemapEntry(`https://autonateai.com/open-source/${repo.slug}`, "0.7")),
+  ...labProjects.map((project) => sitemapEntry(`https://autonateai.com/projects/${project.slug}`, "0.6")),
+  ...labExperiments.map((experiment) => sitemapEntry(`https://autonateai.com/experiments/${experiment.slug}`, "0.6")),
+  ...openSourceRepos.map((repo) => sitemapEntry(`https://autonateai.com/open-source/${repo.slug}`, "0.6")),
   ...labEvents.map((event) => sitemapEntry(`https://autonateai.com/events/${event.slug}`, "0.6", event.start)),
   ...labSources.map((source) => sitemapEntry(`https://autonateai.com/sources/${source.slug}`, "0.6")),
 ];
@@ -202,13 +262,21 @@ Sitemap: https://autonateai.com/sitemap.xml
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | Welcome to My Lab</title>",
+    "<title>AutoNateAI | Agricultural Economic Systems Intelligence Lab</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
 
 const detailPageCount =
-  labProjects.length + labExperiments.length + openSourceRepos.length + labEvents.length + labSources.length;
+  labProjects.length +
+  labExperiments.length +
+  openSourceRepos.length +
+  labEvents.length +
+  labSources.length +
+  regions.length +
+  organizations.length +
+  systems.length +
+  investigations.length;
 
 console.log(
   `Exported ${routes.length + programsData.programs.length + articles.length + tutorialPacks.length + tutorials.length + detailPageCount} marketplace pages to ${path.relative(rootDir, outDir)}`,

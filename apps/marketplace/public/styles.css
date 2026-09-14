@@ -1,31 +1,34 @@
-/* AutoNateAI Lab brand: white/navy/gold in light mode, black/navy/gold in
-   dark mode. Navy (--on-surface, --primary-container in dark) carries the
-   institutional-lab identity; gold (--primary / --primary-bright) is the
-   single accent — kickers, links, borders, evidence badges, active nav.
-   Button fills deliberately invert by mode: navy-filled buttons with white
-   text in light mode, gold-filled buttons with navy text in dark mode — one
-   brand, two legible poles. --secondary swaps poles by mode (near-navy-ink
-   on light, near-white on dark) for non-accent contrast elements. Site
-   defaults to light mode (see pageShell's inline theme script and app.js) —
-   dark mode is still available via the toggle. */
+/* AutoNateAI Agricultural Systems Lab brand — "Technical Editorial":
+   ivory/emerald/river-blue in light mode, forest-black/emerald in dark
+   mode. Palette pulled straight from the Google Stitch redesign mockups'
+   own embedded Tailwind config (stitch_autonateai_research_lab_redesign/),
+   not the looser DESIGN.md prose. Emerald (--primary / --primary-bright) is
+   the ecological/verified-data accent — kickers, links, borders, evidence
+   badges, active nav. River blue (--secondary) marks freight/logistics and
+   non-accent contrast elements. Button fills deliberately invert by mode:
+   deep-forest-ink-filled buttons with white text in light mode,
+   emerald-filled buttons with dark ink text in dark mode — one brand, two
+   legible poles (same structural pattern the old navy/gold theme used).
+   Site defaults to light mode (see pageShell's inline theme script and
+   app.js) — dark mode is still available via the toggle. */
 :root,
 :root[data-theme="light"] {
-  --background: #f6f7fb;
+  --background: #f9f9ff;
   --surface: #ffffff;
-  --surface-low: #eef0f7;
-  --surface-high: #e1e5f0;
-  --surface-highest: #ccd2e3;
-  --on-surface: #0e1a33;
-  --on-variant: #4c5770;
-  --outline: #dde1ec;
-  --outline-strong: #b7bfd4;
-  --primary: #93700f;
-  --primary-bright: #c9a227;
-  --primary-container: #10213f;
+  --surface-low: #f1f3ff;
+  --surface-high: #e9edff;
+  --surface-highest: #dce2f7;
+  --on-surface: #141b2b;
+  --on-variant: #3d4a42;
+  --outline: #dbe6de;
+  --outline-strong: #aebfb2;
+  --primary: #006948;
+  --primary-bright: #00855d;
+  --primary-container: #0f2b1e;
   --on-primary: #ffffff;
-  --secondary: #10213f;
-  --secondary-soft: rgba(16, 33, 63, 0.06);
-  --error: #b3261e;
+  --secondary: #006398;
+  --secondary-soft: rgba(0, 99, 152, 0.08);
+  --error: #ba1a1a;
   --container-max: 1440px;
   --margin: 64px;
   --gutter: 24px;
@@ -34,21 +37,21 @@
 }
 
 :root[data-theme="dark"] {
-  --background: #05070d;
-  --surface: #0d1526;
-  --surface-low: #090e1c;
-  --surface-high: #16213b;
-  --surface-highest: #202c4a;
-  --on-surface: #f2f4f9;
-  --on-variant: #9aa4bf;
-  --outline: #1f2a45;
-  --outline-strong: #33416a;
-  --primary: #e0b93a;
-  --primary-bright: #f0cc5c;
-  --primary-container: #e0b93a;
-  --on-primary: #0e1a33;
-  --secondary: #f2f4f9;
-  --secondary-soft: rgba(242, 244, 249, 0.08);
+  --background: #050b08;
+  --surface: #0d1a14;
+  --surface-low: #081109;
+  --surface-high: #14261c;
+  --surface-highest: #1e3629;
+  --on-surface: #eef4f0;
+  --on-variant: #9fb3a7;
+  --outline: #1c3126;
+  --outline-strong: #305041;
+  --primary: #34d399;
+  --primary-bright: #5eeab3;
+  --primary-container: #34d399;
+  --on-primary: #06251a;
+  --secondary: #eef4f0;
+  --secondary-soft: rgba(238, 244, 240, 0.08);
   --error: #ff6b6b;
   color-scheme: dark;
 }
@@ -4891,6 +4894,134 @@ a.lab-card .industry-card::before {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--gutter);
   margin-top: 20px;
+}
+
+/* Agricultural Systems Lab — additions for Region/Organization/System/
+   Investigation detail pages. Deliberately small: everything else reuses
+   the card/badge/table/list vocabulary already above. */
+
+.stage-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.stage-stepper li {
+  position: relative;
+  padding: 18px 0 18px 28px;
+  border-left: 2px solid var(--outline-strong);
+}
+
+.stage-stepper li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 24px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid var(--surface);
+}
+
+.stage-stepper li:last-child {
+  border-left-color: transparent;
+}
+
+.stage-stepper h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--on-surface);
+}
+
+.stage-stepper p {
+  margin: 0;
+  color: var(--on-variant);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.fact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px 28px;
+  margin: 24px 0;
+}
+
+.fact-list > div {
+  border-top: 1px solid var(--outline);
+  padding-top: 10px;
+}
+
+.fact-list dt {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-variant);
+}
+
+.fact-list dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.field-note {
+  font-size: 13px;
+  color: var(--on-variant);
+  font-style: italic;
+  margin: 8px 0 20px;
+}
+
+.portfolio-mix {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.portfolio-mix-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 56px;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.portfolio-mix-row span {
+  color: var(--on-variant);
+}
+
+.portfolio-mix-row b {
+  font-family: "JetBrains Mono", monospace;
+  text-align: right;
+  color: var(--on-surface);
+}
+
+.portfolio-mix-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--surface-high);
+  overflow: hidden;
+}
+
+.portfolio-mix-bar div {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .portfolio-mix-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
 }
 
 .detail-meta-row {

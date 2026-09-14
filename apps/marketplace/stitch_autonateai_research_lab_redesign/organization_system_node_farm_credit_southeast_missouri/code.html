@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>AutoNateAI — Agricultural Economic Systems Intelligence Lab</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary-fixed":"#2f1500","tertiary-fixed-dim":"#ffb77d","inverse-primary":"#68dba9","primary-fixed":"#85f8c4","on-tertiary":"#ffffff","on-primary":"#ffffff","on-secondary-fixed":"#001d31","surface-container-lowest":"#ffffff","outline":"#6d7a72","background":"#f9f9ff","inverse-on-surface":"#edf0ff","on-error-container":"#93000a","surface-container-high":"#e1e8fd","error-container":"#ffdad6","secondary-fixed-dim":"#93ccff","primary-container":"#00855d","on-surface-variant":"#3d4a42","primary":"#006948","surface-variant":"#dce2f7","tertiary":"#8d4b00","inverse-surface":"#293040","on-primary-container":"#f5fff7","surface-container-highest":"#dce2f7","outline-variant":"#bccac0","surface-bright":"#f9f9ff","on-secondary-fixed-variant":"#004b73","primary-fixed-dim":"#68dba9","surface-dim":"#d3daef","error":"#ba1a1a","on-surface":"#141b2b","surface-container-low":"#f1f3ff","secondary-container":"#5bb8fe","on-error":"#ffffff","on-tertiary-fixed-variant":"#6e3900","tertiary-container":"#b15f00","surface-container":"#e9edff","on-background":"#141b2b","on-secondary-container":"#00476e","on-primary-fixed":"#002114","secondary":"#006398","on-tertiary-container":"#fffbff","surface":"#f9f9ff","tertiary-fixed":"#ffdcc3","secondary-fixed":"#cce5ff","on-primary-fixed-variant":"#005137","on-secondary":"#ffffff","surface-tint":"#006c4a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-lg":"1.5rem","space-md":"1rem","margin-mobile":"1rem","space-xl":"2.5rem","gutter-mobile":"0.75rem","space-sm":"0.5rem","margin":"2rem","gutter":"1.25rem"},"fontFamily":{"label-caps":["JetBrains Mono"],"data-mono-lg":["JetBrains Mono"],"body-lg":["Inter"],"data-mono-md":["JetBrains Mono"],"headline-lg-mobile":["Inter"],"display-lg-mobile":["Inter"],"body-md":["Inter"],"headline-md":["Inter"],"display-lg":["Inter"],"headline-sm":["Inter"],"body-sm":["Inter"],"headline-lg":["Inter"]},"fontSize":{"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"data-mono-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.02em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"400"}],"data-mono-md":["13px",{"lineHeight":"18px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full bg-surface-container-low px-margin py-space-xs"><div class="flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant overflow-x-auto whitespace-nowrap gap-gutter"><div class="flex items-center gap-space-md"><span class="flex items-center gap-space-xs text-primary"><span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>LIVE LAB TELEMETRY</span><span class="font-data-mono-md text-data-mono-md text-secondary">CAIRO MISSISSIPPI STAGE: 14.20 FT</span><span class="font-data-mono-md text-data-mono-md text-primary">SEMO BASIS: +$0.18/BU</span></div><div class="flex items-center gap-space-md"><span class="font-data-mono-md text-data-mono-md">MONITORED NODES: 16 REGIONS</span><span class="font-data-mono-md text-data-mono-md text-tertiary">ACTIVE INVESTIGATIONS: 12</span><span class="font-label-caps text-label-caps text-on-surface-variant">CENTRAL NODE: SIKESTON LAB [36.8767° N, 89.5879° W]</span></div></div></div><div class="h-16 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #10b981
+- Font: inter
+- Mode: dark
+- Roundness: rounded-sm
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W0Wj2zFn_DYzs_PMQtycXXUJVhIGqUctlx5ZjZlptIKrwQydx1eBBJC9hQByFHx6pbANSZXt2uVOUaZlvCbGW1CgWcFgCp1FQBjKaaulRji21tNw0MZCFqnjwe4HTMuUNE2-8cZVaHIfs7r5Fq8vR2KlUeDuVu4ztu1BZ7fdyl47MbhyjqHUpZpIQJ6GyFndyiaB3KnBuLmR-xwlAAQcGTHQLqOnTCZLdtUOyUfusA1aW4MJO_DRWwKw72"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-none tracking-tight">AutoNateAI</span><span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase">Ag Economic Systems Lab</span></div></div><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="intelligence" href="#">Intelligence</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="regions" href="#">Regions</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="systems" href="#">Systems</a><a aria-current="page" class="transition-colors py-space-xs px-space-sm text-primary font-bold" data-path="organizations" href="#">Organizations</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="research-and-case-studies" href="#">Research &amp; Case Studies</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="the-lab" href="#">The Lab</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm" data-path="work-with-us" href="#">Work With Us</a></nav><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-high rounded text-on-surface"><span class="material-symbols-outlined text-base text-primary">psychology_alt</span><span class="font-label-caps text-label-caps uppercase">Queue:</span><span class="font-data-mono-md text-data-mono-md text-primary font-bold">4 Open</span></div><a class="px-space-md py-space-xs bg-primary text-on-primary hover:bg-primary-container font-headline-sm text-headline-sm text-body-md rounded shadow-[0_1px_4px_rgba(0,0,0,0.08)] transition-colors" data-path="work-with-us" href="#">Work With Lab</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-24 bg-surface min-h-[calc(100vh-240px)]"><div class="flex flex-col w-full">
+<!-- Systems Telemetry Ribbon / Context -->
+<div class="w-full bg-surface-container-lowest px-margin py-space-xs shadow-sm">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-space-sm font-label-caps text-label-caps text-on-surface-variant">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>ECONOMIC GRAPH TAXONOMY: CAPITAL INFRASTRUCTURE TIER-1</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-data-mono-md text-data-mono-md text-secondary">FCA SYSTEM ENTITY: ID-004921</span>
+<span class="font-data-mono-md text-data-mono-md text-tertiary">NODE ID: CAPITAL_LENDER_01</span>
+<span class="font-data-mono-md text-data-mono-md">DATA INTEGRITY: VERIFIED AUDIT (99.4%)</span>
+</div>
+</div>
+</div>
+<!-- Main Grid Workspace -->
+<div class="w-full px-margin py-space-lg max-w-7xl mx-auto flex flex-col gap-space-xl">
+<!-- Section 1: Header & Institutional Metadata Block -->
+<section class="flex flex-col gap-space-md">
+<nav class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Organizations</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Farm Credit Southeast Missouri</span>
+</nav>
+<div class="bg-surface-container-lowest p-space-lg shadow-sm rounded-xl relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-tertiary"></div>
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex flex-wrap items-center gap-space-xs mb-space-xs">
+<span class="px-space-xs py-0.5 bg-primary/10 text-primary font-label-caps text-label-caps rounded">FEDERALLY CHARTERED ACA</span>
+<span class="px-space-xs py-0.5 bg-secondary/10 text-secondary font-label-caps text-label-caps rounded">SYSTEM NODE: CAPITAL_LENDER_01</span>
+<span class="px-space-xs py-0.5 bg-tertiary/10 text-tertiary font-label-caps text-label-caps rounded">COOPERATIVE REGULATION § 615</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight leading-tight">Farm Credit Southeast Missouri</h1>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant font-normal">
+              Primary production credit association and agricultural mortgage lending infrastructure for the Mississippi Embayment alluvial floodplains.
+            </p>
+</div>
+<div class="flex flex-col sm:flex-row lg:flex-col gap-space-sm min-w-[260px] bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base mt-0.5">domain</span>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block uppercase">Central Headquarters</span>
+<span class="font-body-md text-body-md text-on-surface font-medium block">1116 N. Main Street</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">Sikeston, MO 63801</span>
+</div>
+</div>
+<div class="flex items-start gap-space-xs pt-space-xs">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">verified_user</span>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block uppercase">Executive Governance</span>
+<span class="font-body-md text-body-md text-on-surface font-medium block">Gregory Cunningham <span class="text-on-surface-variant text-body-sm font-normal">(President &amp; CEO)</span></span>
+<span class="font-body-md text-body-md text-on-surface font-medium block">Ed Marshall <span class="text-on-surface-variant text-body-sm font-normal">(Board Chair)</span></span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/30 -mx-space-lg -mb-space-lg px-space-lg pb-space-md flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant">
+<span class="text-on-surface font-semibold">TERRITORY (12 COUNTIES):</span>
+<span>Bollinger • Butler • Cape Girardeau • Carter • Dunklin • Mississippi • New Madrid • Pemiscot • Ripley • Scott • Stoddard • Wayne</span>
+</div>
+<div class="font-data-mono-md text-data-mono-md text-primary font-semibold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span>ACTIVE MONITORED PORTFOLIO: $853.5M</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2 & 3: Systems Overview, Dynamic Graph Edge & Institutional Diagnostics -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Graph Role & Edge (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- System Role Module -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+              Position in Regional Graph
+            </h2>
+<span class="font-label-caps text-label-caps text-primary px-space-xs py-0.5 bg-primary/10 rounded">ORIGINATION GENESIS</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Unlike commercial depository institutions with transient liquidity mandates, Farm Credit Southeast Missouri is a federally chartered, member-owned credit cooperative positioned strictly at the <strong class="text-on-surface font-medium">genesis of the agricultural production cycle</strong>.
+          </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Capital deployed through its 7 branch facilities directly provides the liquidity floor required for pre-season nitrogen pre-buys, seed prepayments, precision equipment leases, and long-term alluvial land capitalization across 1,840,000 cultivated delta acres.
+          </p>
+<!-- System Flow Edge Diagram -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Directed Structural Edge: Ag Flow</span>
+<div class="flex flex-col gap-space-xs font-data-mono-md text-data-mono-md text-on-surface mt-space-xs">
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-space-xs rounded shadow-sm">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps">1</span>
+<span class="font-semibold text-primary">Farm Credit SEMO</span>
+<span class="text-on-surface-variant text-body-sm font-normal">(Primary Capital Node)</span>
+</div>
+<div class="flex justify-center text-primary">
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-space-xs rounded shadow-sm">
+<span class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-caps text-label-caps">2</span>
+<span class="font-semibold text-secondary">Delta Producers</span>
+<span class="text-on-surface-variant text-body-sm font-normal">(Operating &amp; Land Lines)</span>
+</div>
+<div class="flex justify-center text-secondary">
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-space-xs rounded shadow-sm">
+<span class="w-6 h-6 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-label-caps text-label-caps">3</span>
+<span class="font-semibold text-tertiary">Input Suppliers &amp; Levees</span>
+<span class="text-on-surface-variant text-body-sm font-normal">(Fertilizer/Machinery/Fuel)</span>
+</div>
+<div class="flex justify-center text-tertiary">
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-space-xs rounded shadow-sm">
+<span class="w-6 h-6 rounded-full bg-inverse-surface text-inverse-on-surface flex items-center justify-center font-label-caps text-label-caps">4</span>
+<span class="font-semibold text-on-surface">Grain Terminals &amp; Ports</span>
+<span class="text-on-surface-variant text-body-sm font-normal">(Cairo/SEMO Barge Portals)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Institutional Diagnostic Card: Patronage Structure -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Economic Feedback Mechanism</span>
+<span class="font-label-caps text-label-caps text-tertiary">COOP RETURN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Member Patronage Yield Dividend</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Because borrowers are stock-holding owners, the cooperative routinely returns a fraction of its net interest margin back to members via cash patronage refunds. This effectively reduces real borrower borrowing rates by an estimated 75 to 125 basis points below headline commercial terms.
+          </p>
+<div class="bg-surface-container-low p-space-sm rounded flex items-center justify-between mt-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface">Historical Avg. Patronage Reduction</span>
+<span class="font-data-mono-lg text-data-mono-lg text-tertiary font-bold">-0.85% to -1.15%</span>
+</div>
+</div>
+<!-- Visual Image: Bootheel Agriculture Context -->
+<div class="rounded-xl overflow-hidden shadow-sm relative h-56">
+<img class="w-full h-full object-cover" data-alt="Expansive precision-irrigated farmland in Southeast Missouri Bootheel with center pivot irrigation and high-tech combine harvesters operating in late summer under an open sky, captured with crisp analytical scientific editorial lighting in natural tones of emerald green, river blue, and soft golden soil." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEwlGg1Y-Q6IoMNZXNuPaB5t9PZxoIbe_MTp13BfczpCeOWSKL-1WahQ7ezMTW39d7b-qE5Z6D9BAti7RuvTKNUi8ZEtIqDFYAbsfQV0FdBeoch6gAc49gQWG_E86sVamTo42rs1ZPiGoGlPejuXZVVGOnEkJCVapegT1fhWbEPnVnhoDYI2E2KbxSU90-1h8AJNtgHBCg2ndjT036BK21szA-6dGyRZSGk2KAr5NW-8Pyawrn8tyiyA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent flex items-end p-space-md">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-inverse-on-surface uppercase tracking-wider">Territory Ingress Telemetry</span>
+<span class="font-body-md text-body-md text-inverse-on-surface font-medium">Bootheel Alluvial Plain: 1.84M Cultivated Acres</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Institutional Scale & Public Financial Diagnostics (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Financial Diagnostic Panel -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase block">FCA Call Report Extraction</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Public Financial Scale &amp; Diagnostics</h2>
+</div>
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant bg-surface-container-low px-space-sm py-space-xs rounded">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>CALENDAR YEAR AUDITED AUDIT</span>
+</div>
+</div>
+<!-- Top Metric Metric Ribbon -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm mt-space-xs">
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Loan Portfolio</span>
+<span class="font-display-lg text-headline-lg text-primary font-bold mt-space-xs">$853.5M</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Overwhelmingly ag-tied</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Institutional Assets</span>
+<span class="font-display-lg text-headline-lg text-on-surface font-bold mt-space-xs">$955.6M</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Capital reserves &amp; liquidity</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Member Equity</span>
+<span class="font-display-lg text-headline-lg text-secondary font-bold mt-space-xs">$207.7M</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Risk capital baseline</span>
+</div>
+</div>
+<!-- Origination Volume and Avg Loan -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-high/40 p-space-md rounded-lg flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Annual Origination Volume</span>
+<span class="font-data-mono-lg text-data-mono-lg text-on-surface font-bold">~$173.8M / Year</span>
+</div>
+<span class="material-symbols-outlined text-primary text-2xl">trending_up</span>
+</div>
+<div class="bg-surface-container-high/40 p-space-md rounded-lg flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Mean Origination Scale</span>
+<span class="font-data-mono-lg text-data-mono-lg text-on-surface font-bold">~$740,000 / Loan</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-2xl">receipt_long</span>
+</div>
+</div>
+<!-- Portfolio Composition Breakdown Section -->
+<div class="flex flex-col gap-space-sm mt-space-sm pt-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Portfolio Exposure Classification</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SECTOR RISK ALLOCATION</span>
+</div>
+<!-- Visualization Bar -->
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="bg-primary h-full" style="width: 60.7%" title="Farm Real Estate: 60.7%"></div>
+<div class="bg-secondary h-full" style="width: 33.0%" title="Production Operating: 33.0%"></div>
+<div class="bg-tertiary h-full" style="width: 3.8%" title="Rural Housing / Other: 3.8%"></div>
+<div class="bg-inverse-surface h-full" style="width: 2.5%" title="Agribusiness: 2.5%"></div>
+</div>
+<!-- Detailed Breakdown Rows -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm mt-space-xs font-body-sm text-body-sm">
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded bg-primary"></span>
+<span class="text-on-surface font-medium">Farm Real Estate Mortgages</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">60.7% <span class="text-on-surface-variant text-body-sm font-normal">($518.1M)</span></span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded bg-secondary"></span>
+<span class="text-on-surface font-medium">Production &amp; Equipment Operating</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">33.0% <span class="text-on-surface-variant text-body-sm font-normal">($281.7M)</span></span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded bg-tertiary"></span>
+<span class="text-on-surface font-medium">Rural Housing &amp; Utilities</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">3.8% <span class="text-on-surface-variant text-body-sm font-normal">($32.4M)</span></span>
+</div>
+<div class="flex items-center justify-between p-space-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded bg-inverse-surface"></span>
+<span class="text-on-surface font-medium">Commercial Agribusiness Facilities</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">2.5% <span class="text-on-surface-variant text-body-sm font-normal">($21.3M)</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Technology & Information Infrastructure Stack -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+              Verified Enterprise Technology Stack
+            </h2>
+<span class="px-space-xs py-0.5 bg-secondary/10 text-secondary font-label-caps text-label-caps rounded">SYSTEM ARCHITECTURE</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Cooperative field operations rely on a hybrid environment spanning modern cloud engagement tiers and legacy transactional core processors common across the 12-institution AgriBank district:
+          </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary uppercase">Borrower CRM Layer</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Salesforce CRM</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Field relationship pipeline, farm visits &amp; crop insurance policy tracking.</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Underwriting Engine</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">nCino BankOS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Commercial loan origination, covenant checks &amp; agricultural spreading.</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Core Enterprise Ledger</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">IBM DB2 / z/OS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">AgriBank centralized data warehouse &amp; historical loan account ledgers.</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Transaction Core</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">FIS Profile</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">High-volume daily interest accrual, ACH lines &amp; loan paydown calculations.</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary uppercase">Analytical BI</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Microsoft Power BI</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Board room geographic stress modeling and county-level concentration analysis.</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps text-error uppercase">Integration Gap</span>
+<span class="font-headline-sm text-headline-sm text-error">Re-keying Hotspot</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Manual intermediate translation between nCino pipeline and AS400 core tables.</span>
+</div>
+</div>
+<!-- Systems Engineer Opportunity Box -->
+<div class="bg-primary/5 p-space-md rounded-lg flex items-start gap-space-md mt-space-xs">
+<span class="material-symbols-outlined text-primary text-2xl mt-0.5">insights</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Systems Analyst Diagnostic Note</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 leading-relaxed">
+                Eliminating multi-system manual re-keying between field origination (Salesforce/nCino) and legacy AgriBank mainframe data sources represents a high-impact automation target. Synchronizing FSA tract geospatial data into pre-flight credit packets could compress cycle times from 14 days to under 48 hours.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 5: Branch Network & Physical Footprint -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase block">Physical Distribution Nodes</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Branch Network &amp; Regional Footprint (7 Branch Nodes + Central Office)</h2>
+</div>
+<div class="font-data-mono-md text-data-mono-md text-on-surface-variant">
+          COVERAGE: 12 COUNTIES / 7 PHYSICAL DISPATCH POINTS
+        </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md mt-space-xs">
+<!-- Sikeston (Central HQ) -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-primary/20 text-primary font-label-caps text-label-caps rounded">CENTRAL HQ NODE</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_01_HQ</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Sikeston Central Office</span>
+<span class="font-body-md text-body-md text-on-surface-variant">1116 N. Main Street, Sikeston, MO</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Scott / New Madrid Hub</span>
+<span class="text-primary font-semibold">Active</span>
+</div>
+</div>
+<!-- Dexter Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-secondary/20 text-secondary font-label-caps text-label-caps rounded">RIDGE DISPATCH</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_02_DEX</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Dexter Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Crowley's Ridge Delta Axis</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Stoddard County Corridor</span>
+<span class="text-secondary font-semibold">Active</span>
+</div>
+</div>
+<!-- Jackson Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-secondary/20 text-secondary font-label-caps text-label-caps rounded">NORTH GATEWAY</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_03_JCK</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Jackson Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Cape Girardeau Northern Zone</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Livestock &amp; Timber Ridge</span>
+<span class="text-secondary font-semibold">Active</span>
+</div>
+</div>
+<!-- Kennett Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-tertiary/20 text-tertiary font-label-caps text-label-caps rounded">COTTON BASIN</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_04_KEN</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Kennett Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Dunklin County Alluvial South</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Cotton &amp; Rice Specialty</span>
+<span class="text-tertiary font-semibold">Active</span>
+</div>
+</div>
+<!-- Charleston Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-secondary/20 text-secondary font-label-caps text-label-caps rounded">RIVER FRONT</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_05_CHS</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Charleston Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Mississippi County Floodplain</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>High-Yield Corn / Soy</span>
+<span class="text-secondary font-semibold">Active</span>
+</div>
+</div>
+<!-- Poplar Bluff Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-secondary/20 text-secondary font-label-caps text-label-caps rounded">OZARK MARGIN</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_06_PBF</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Poplar Bluff Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Butler &amp; Ripley Foothills</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Black River Basin Line</span>
+<span class="text-secondary font-semibold">Active</span>
+</div>
+</div>
+<!-- Portageville Branch -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 bg-tertiary/20 text-tertiary font-label-caps text-label-caps rounded">LOWER DELTA</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">NODE_07_PTG</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Portageville Branch</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Pemiscot Deep Delta Basin</span>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>Intensive Flood Irrigation</span>
+<span class="text-tertiary font-semibold">Active</span>
+</div>
+</div>
+<!-- Geographic Map Anchor -->
+<div class="bg-surface-container-high p-space-md rounded-lg flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Regional Topology</span>
+<span class="font-headline-sm text-headline-sm text-on-surface block mt-1">Spatial Density</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              7 operational hubs ensure no delta producer operates more than 28 driving miles from a certified agricultural loan officer.
+            </p>
+</div>
+<div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps pt-space-xs">
+<span class="material-symbols-outlined text-base">pin_drop</span>
+<span>COORDINATE GRID MAPPED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6 & 7: Connected Research, Case Studies, and Commodity Nodes -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Connected AutoNateAI Research (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary uppercase">Lab Publications &amp; Architecture</span>
+<span class="px-space-xs py-0.5 bg-primary/10 text-primary font-label-caps text-label-caps rounded">PEER REVIEWED</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Connected AutoNateAI Research &amp; Case Studies</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Investigations detailing architectural integration pipelines and quantitative debt repayment vulnerabilities under variable commodity basis environments:
+          </p>
+<!-- Study 1 -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary font-bold">CASE STUDY // SYS-ARCH-2024-04</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">32 MIN READ</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Agricultural Credit Lifecycle &amp; Systems Architecture: Integrating Salesforce, nCino, and DB2 for Agricultural Member Cooperatives
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Comprehensive reference blueprint demonstrating event-driven Kafka architectures to bridge cloud commercial loan engines with mainframe accounting systems.
+            </p>
+<div class="pt-space-xs flex items-center justify-between">
+<a class="font-headline-sm text-headline-sm text-body-md text-primary hover:text-primary-container font-semibold inline-flex items-center gap-space-xs" href="#">
+<span>Read Full Technical Architecture</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SYSTEMS WHITE PAPER</span>
+</div>
+</div>
+<!-- Study 2 -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs hover:bg-surface-container transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-tertiary font-bold">INVESTIGATION // Q-02</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">DIAGNOSTIC REPORT</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Business Question Q-02: Where do nCino-to-DB2 duplicate data entries cause 4-day loan origination delays?
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Root-cause telemetry analysis isolating 9 manual reconciliation checkpoints in collateral assessment schedules that induce springtime operating credit logjams.
+            </p>
+<div class="pt-space-xs flex items-center justify-between">
+<a class="font-headline-sm text-headline-sm text-body-md text-tertiary hover:text-tertiary-container font-semibold inline-flex items-center gap-space-xs" href="#">
+<span>Examine Reconciliation Bottlenecks</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OPERATIONS AUDIT</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant pt-space-xs">
+<span class="material-symbols-outlined text-base text-primary">science</span>
+<span>AUTONATEAI SYSTEMS RESEARCH REPOSITORY — AUTHORIZED ACCESS</span>
+</div>
+</div>
+<!-- Connected Regional Nodes & Commodities (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Graph Associations</span>
+<span class="px-space-xs py-0.5 bg-secondary/10 text-secondary font-label-caps text-label-caps rounded">COMMODITY EXPOSURE</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Connected Regional Nodes &amp; Commodities</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Capital disbursed by this node is backed by direct lien rights on specific crop inventories and irrigated land acreage:
+          </p>
+<div class="flex flex-col gap-space-xs">
+<!-- Region Link -->
+<a class="p-space-sm bg-surface-container-low rounded flex items-center justify-between hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-lg">public</span>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold block">Southeast Missouri Delta</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Macro agricultural production zone</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps text-primary">PRIMARY REGION</span>
+</a>
+<!-- Soybeans -->
+<a class="p-space-sm bg-surface-container-low rounded flex items-center justify-between hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-lg">grain</span>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold block">Soybean Supply Chain</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Over 1.1M acres financed seasonally</span>
+</div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-secondary">HIGH EXPOSURE</span>
+</a>
+<!-- Corn -->
+<a class="p-space-sm bg-surface-container-low rounded flex items-center justify-between hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-lg">grass</span>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold block">Feed &amp; Ethanol Corn</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Intensive nitrogen prepay financing</span>
+</div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-tertiary">HIGH EXPOSURE</span>
+</a>
+<!-- Rice -->
+<a class="p-space-sm bg-surface-container-low rounded flex items-center justify-between hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-lg">water_drop</span>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold block">Delta Long-Grain Rice</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Bootheel alluvial aquifer pumping lines</span>
+</div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-secondary">MODERATE</span>
+</a>
+<!-- Cotton -->
+<a class="p-space-sm bg-surface-container-low rounded flex items-center justify-between hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">filter_vintage</span>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold block">Upland Cotton</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dunklin &amp; Pemiscot specialized module loans</span>
+</div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">REGIONAL NICHE</span>
+</a>
+</div>
+</div>
+<div class="bg-surface-container-high/40 p-space-sm rounded text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">INTERCONNECTED NODES: 4 COMMODITIES • 1 REGION • 14 ELEVATOR RECEPTORS</span>
+</div>
+</div>
+</div>
+<!-- Section 8: Field Research & Open Inquiries -->
+<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-tertiary uppercase block">Academic Field Inquiry Protocol</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Field Research Inquiries for Cooperative Credit Officers</h2>
+</div>
+<div class="flex items-center gap-space-xs text-tertiary font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-base">psychology</span>
+<span>NON-COMMERCIAL INQUIRIES</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl leading-relaxed">
+        The AutoNateAI laboratory formulates objective investigative protocols to comprehend capital mechanics during extreme agronomic stress. These structured questions are deployed during field research interviews with agricultural relationship managers:
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-xs">
+<!-- Question 1 -->
+<div class="p-space-md bg-surface-container-low rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">INQUIRY REF: AG-FIN-01</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Digital Crop Insurance Integration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              How are digital RMA/crop insurance production report APIs ingested into nCino when structuring annual operating renewals, and does delayed acreage reporting from FSA County Committees directly impede springtime pre-pay drawdowns?
+            </p>
+</div>
+<div class="pt-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Target: Credit Risk Underwriting</span>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="p-space-md bg-surface-container-low rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold">INQUIRY REF: AG-FIN-02</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Geospatial FSA Tract Binding</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              What percentage of active mortgage collateral schedules utilize real-time polygon boundary validation versus manual deed description transcriptions when updating flood zone exposures along Mississippi river levee districts?
+            </p>
+</div>
+<div class="pt-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Target: Collateral Systems Operations</span>
+</div>
+</div>
+<!-- Question 3 -->
+<div class="p-space-md bg-surface-container-low rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-space-xs">
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-bold">INQUIRY REF: AG-FIN-03</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Elevator Basis Spread Vulnerability</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              When low-water restrictions on the Mississippi River trigger negative local basis anomalies (-$0.65/bu below Chicago), what covenant monitoring protocols detect producer liquidity compression before end-of-year maturity dates?
+            </p>
+</div>
+<div class="pt-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Target: Portfolio Sensitivity Modeling</span>
+</div>
+</div>
+</div>
+<!-- Lab Action Banner -->
+<div class="mt-space-md p-space-md bg-surface-container-high/30 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-2xl">science</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold block">Contributing Field Observations?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">AutoNateAI welcomes verified institutional feedback from accredited credit analysts.</span>
+</div>
+</div>
+<a class="px-space-md py-space-xs bg-primary text-on-primary hover:bg-primary-container font-headline-sm text-headline-sm text-body-md rounded shadow-sm transition-colors whitespace-nowrap" href="#">
+          Submit Systems Telemetry
+        </a>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(0,0,0,0.02)] mt-space-xl pt-space-xl pb-space-lg"><div class="w-full px-margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl"><div class="flex flex-col gap-space-sm"><div class="font-headline-sm text-headline-sm text-on-surface">AutoNateAI Lab</div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Computational agricultural economics, hydrological transport modeling, and continental logistics network analysis founded by Nathan Baker.</p><div class="flex items-center gap-space-xs font-label-caps text-label-caps text-primary"><span class="material-symbols-outlined text-base">verified</span>PEER-REVIEWED METHODOLOGY</div></div><div class="flex flex-col gap-space-xs"><div class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider mb-space-xs">Telemetry &amp; Research Nodes</div><div class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-bold text-on-surface">Sikeston Central HQ:</span> Macro Ag-Grid Telemetry</div><div class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-bold text-on-surface">Cape Girardeau Port Node:</span> River Barge &amp; Freight Logistics</div><div class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-bold text-on-surface">Rolla Biosystems Node:</span> Computational Soil &amp; Yield Telemetry</div><div class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-bold text-on-surface">St. Louis Gateway Node:</span> Multimodal Rail &amp; Basin Exchange</div></div><div class="flex flex-col gap-space-xs"><div class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider mb-space-xs">4-Graph System Architecture</div><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="systems" href="#">Graph I: Hydrological &amp; Soil Moisture Vector Model</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="systems" href="#">Graph II: Continental Rail &amp; Mississippi Barge Network</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="systems" href="#">Graph III: Grain Basis &amp; Terminal Velocity Spreads</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="systems" href="#">Graph IV: Regional Crop Physiology &amp; Weather Stress</a></div><div class="flex flex-col gap-space-xs"><div class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider mb-space-xs">Public Research &amp; Inquiries</div><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="intelligence" href="#">Economic Intelligence Dispatches</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="regions" href="#">Regional Portals &amp; Basins</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="research-and-case-studies" href="#">Investigations Archive</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="work-with-us" href="#">Commission an Investigation</a></div></div><div class="w-full px-margin pt-space-md bg-surface-container-high/40 flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-caps text-label-caps text-on-surface-variant"><div class="flex items-center gap-space-sm"><span>© 2025 Nathan Baker &amp; AutoNateAI Research Lab. All rights reserved.</span><span>•</span><span>Internal Autonomous Engine: Online</span></div><div class="flex items-center gap-space-md font-data-mono-md text-data-mono-md"><span>LATENCY: 42MS</span><span>SYSTEM HEARTBEAT: 99.98%</span></div></div></footer></body></html>

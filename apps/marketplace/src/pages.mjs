@@ -8,15 +8,24 @@ import {
   evidenceLabels,
   foundingBankPilot,
   industries,
+  investigations,
+  investigationStatusLabels,
   labEvents,
   labExperiments,
   labProjects,
   labSources,
   openSourceRepos,
   organizationExamples,
+  organizations,
+  organizationTypeLabels,
+  pillarLabels,
   regionalVision,
+  regions,
+  regionStatusLabels,
   sceneShots,
   sponsorshipTiers,
+  systemCategoryLabels,
+  systems,
   toolsMenu,
   tutorialPacks,
   tutorials,
@@ -248,76 +257,466 @@ function sponsorshipTierCard(tier) {
   `;
 }
 
-export function renderHome(data) {
-  const landingArticles = [
-    "coding-as-workforce-development",
-    "why-git-matters-for-builders",
-    "systems-thinking-through-code",
-  ]
-    .map((handle) => articles.find((article) => article.handle === handle))
-    .filter(Boolean);
+// ---------------------------------------------------------------------------
+// AGRICULTURAL ECONOMIC SYSTEMS INTELLIGENCE — Regions, Organizations,
+// Systems, and Investigations. Cards follow the exact lab-card pattern above
+// (projectCard/experimentCard/repoCard/sourceCard): one clickable <a> around
+// an .industry-card, thumbnail (or a media-icon-tile fallback for entries
+// with no generated image yet) on top. Detail pages follow the same
+// breadcrumbs()/detail-field-grid()/detail-related-grid pattern as
+// renderProjectDetail etc. below.
+// ---------------------------------------------------------------------------
 
-  const featuredSources = labSources.slice(0, 4);
+function thumbnailOrIcon(entity, iconName) {
+  return entity.thumbnail
+    ? `<img src="${entity.thumbnail}" alt="" loading="lazy" />`
+    : `<div class="media-icon-tile"><span class="material-symbols-outlined">${escapeHtml(iconName)}</span></div>`;
+}
 
-  const todayCards = [
-    { label: "Study Today", icon: "biotech", title: "Procedural Graphs: Self-Evolving Execution Structures for LLM Agents", href: "/experiments/procedural-graph-runtime" },
-    { label: "Open Source", icon: "hub", title: "Studying semantica-agi/semantica and volcengine/OpenViking", href: "/open-source" },
-    { label: "Build Toward", icon: "event", title: "Microsoft Agent-a-Thon — Sep 17, Architect track", href: "/events/microsoft-agent-a-thon" },
-    { label: "Human Systems", icon: "psychology", title: "Evidence-ladder read of EEG/HRV & contemplative research", href: "/projects/human-systems" },
-  ];
+function detailFieldLinks(title, items) {
+  if (!items?.length) return "";
+  return detailField(
+    title,
+    `<ul class="industry-capabilities">${items
+      .map((item) => `<li>${icon("link")}<span>${item.url ? `<a href="${item.url}">${escapeHtml(item.label)}</a>` : escapeHtml(item.label)}${item.note ? ` — ${escapeHtml(item.note)}` : ""}</span></li>`)
+      .join("")}</ul>`,
+  );
+}
 
+function regionCard(region) {
+  const isPlaceholder = region.status === "watchlist";
+  return `
+    <a class="lab-card" href="/regions/${region.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail">${thumbnailOrIcon(region, region.icon)}<span class="status-pill">${escapeHtml(regionStatusLabels[region.status] || region.status)}</span></div>
+        <h3>${escapeHtml(region.name)}</h3>
+        <p class="industry-hook">${escapeHtml(region.tagline)}</p>
+        ${region.commodities?.length ? `<div class="tag-row">${region.commodities.slice(0, 4).map((c) => `<span>${escapeHtml(c)}</span>`).join("")}</div>` : ""}
+        <span class="outline-button full">${isPlaceholder ? "View Watchlist Entry" : "Enter Region"} ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function organizationCard(org) {
+  const isPlaceholder = org.status === "Watchlist";
+  return `
+    <a class="lab-card" href="/organizations/${org.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail">${thumbnailOrIcon(org, org.icon)}<span class="status-pill">${escapeHtml(org.status)}</span></div>
+        <span class="kicker">${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)}</span>
+        <h3>${escapeHtml(org.name)}</h3>
+        <p class="industry-hook">${escapeHtml(org.tagline)}</p>
+        <span class="outline-button full">${isPlaceholder ? "View Watchlist Entry" : "View Organization Node"} ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function systemCard(system) {
+  return `
+    <a class="lab-card" href="/systems/${system.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail">${thumbnailOrIcon(system, system.icon)}<span class="status-pill">${escapeHtml(system.status)}</span></div>
+        <span class="kicker">${escapeHtml(systemCategoryLabels[system.category] || system.category)}</span>
+        <h3>${escapeHtml(system.name)}</h3>
+        <p class="industry-hook">${escapeHtml(system.tagline)}</p>
+        <span class="outline-button full">Open System Deep Dive ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+function investigationCard(investigation) {
+  const region = regions.find((r) => r.slug === investigation.region);
+  return `
+    <a class="lab-card" href="/investigations/${investigation.slug}">
+      <article class="industry-card">
+        <div class="card-thumbnail">${thumbnailOrIcon(investigation, investigation.icon)}<span class="status-pill">${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span></div>
+        ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.name)}</span>` : ""}
+        <h3>${escapeHtml(investigation.name)}</h3>
+        <p class="industry-hook">${escapeHtml(investigation.question)}</p>
+        <span class="outline-button full">Read the Investigation ${icon("arrow_forward")}</span>
+      </article>
+    </a>
+  `;
+}
+
+export function renderRegions() {
   const body = `
-    <main class="lab-home">
-      <section class="home-hero lab-masthead">
-        <div class="hero-bg"><img src="/assets/scenes/scene-04.jpg" alt="" /></div>
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/ag-lab/regions-hero.jpg" alt="" /></div>
         <div class="hero-content">
           <div class="hero-copy">
-            <span class="kicker">${icon("radar")} Independent AI, Software &amp; Human Systems Lab</span>
-            <h1>Welcome to my lab.</h1>
-            <p>I research, build, and write about how software, intelligence, and human systems interact — then publish what holds up. Research direction is continuously informed by emerging software, scientific work, technical communities, and experimental results.</p>
-            <div class="lab-byline">
-              <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker" />
-              <div><strong>Nathan Baker</strong><span>Founder &amp; Lead Researcher, AutoNateAI</span></div>
-            </div>
-            <div class="button-row">
-              <a class="primary-button" href="/projects/${currentInvestigation.slug}">View Current Investigation ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/tutorials">Free Course Library</a>
-            </div>
+            <span class="kicker">${icon("landscape")} Regions</span>
+            <h1>Agriculture, region by region.</h1>
+            <p>Agriculture doesn't respect a single boundary type — a "region" here can be a county, a multi-county corridor, a river delta, or a multi-state belt. Southeast Missouri is the one Nathan can physically validate; the rest of the U.S. watchlist gets profiled the same way, one real research pass at a time.</p>
           </div>
-          <aside class="hero-program-panel">
-            <div class="hero-panel-body">
-              <span class="kicker">${icon("bolt")} Current Investigation &middot; ${escapeHtml(currentInvestigation.status)}</span>
-              <h2>${escapeHtml(currentInvestigation.title)}</h2>
-              <p>${escapeHtml(currentInvestigation.question)}</p>
-              <div class="hero-facts">
-                <span>${labProjects.length} active project${labProjects.length === 1 ? "" : "s"}</span>
-                <span>${labExperiments.length} proposed experiment${labExperiments.length === 1 ? "" : "s"}</span>
-                <span>${openSourceRepos.length} repos queued</span>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
+      <div class="industry-grid lab-grid">${regions.map((region) => regionCard(region)).join("")}</div>
+    </main>
+  `;
 
-      <section class="section">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("today")} Today at the Lab</span>
-            <h2>What surfaced from this morning's research desks.</h2>
-            <p>${escapeHtml(currentInvestigation.thesis)}</p>
+  return pageShell({
+    title: "Regions | AutoNateAI Agricultural Systems Lab",
+    active: "regions",
+    body,
+    canonicalPath: "/regions",
+    description: "U.S. agricultural regions AutoNateAI is profiling — production, capital, freight, and the organizations that connect them, starting with Southeast Missouri.",
+    ogTitle: "Regions | AutoNateAI Agricultural Systems Lab",
+    ogDescription: "Agricultural regions profiled by AutoNateAI's economic-intelligence research, starting with Southeast Missouri.",
+  });
+}
+
+export function renderRegionDetail(region) {
+  const relatedOrgs = organizations.filter((o) => region.organizations?.includes(o.slug));
+  const relatedSystems = systems.filter((s) => region.systems?.includes(s.slug));
+  const relatedInvestigations = investigations.filter((i) => region.investigations?.includes(i.slug));
+
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Regions", "/regions"], [region.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(region.icon)} Region &middot; ${escapeHtml(regionStatusLabels[region.status] || region.status)}</span>
+          <h1>${escapeHtml(region.name)}</h1>
+          <p>${escapeHtml(region.tagline)}</p>
+          ${region.commodities?.length ? `<div class="tag-row">${region.commodities.map((c) => `<span>${escapeHtml(c)}</span>`).join("")}</div>` : ""}
+        </header>
+        ${region.thumbnail ? `<img src="${region.thumbnail}" alt="" />` : ""}
+        ${region.stats?.length ? `<div class="stat-grid">${region.stats.map((s) => `<div><strong>${escapeHtml(s.value)}</strong><span>${escapeHtml(s.label)}</span></div>`).join("")}</div>` : ""}
+        <div class="detail-field-grid">
+          ${detailFieldText("Geography", region.geography)}
+          ${region.coordinates ? detailFieldText("Central Node", region.coordinates) : ""}
+          ${detailFieldText("Production Profile", region.production)}
+          ${detailFieldText("Capital & Finance", region.capital)}
+          ${detailFieldText("Freight & Infrastructure", region.freight)}
+        </div>
+        ${detailFieldLinks("Sources", region.sources)}
+
+        ${relatedOrgs.length ? `<h2>Organizations in This Region</h2><div class="detail-related-grid">${relatedOrgs.map((o) => organizationCard(o)).join("")}</div>` : ""}
+        ${relatedSystems.length ? `<h2>Systems at Work Here</h2><div class="detail-related-grid">${relatedSystems.map((s) => systemCard(s)).join("")}</div>` : ""}
+        ${relatedInvestigations.length ? `<h2>Open Investigations</h2><div class="detail-related-grid">${relatedInvestigations.map((i) => investigationCard(i)).join("")}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${region.name} | AutoNateAI Agricultural Systems Lab`,
+    active: "regions",
+    body,
+    canonicalPath: `/regions/${region.slug}`,
+    ogImage: region.thumbnail || "/assets/ag-lab/regions-hero.jpg",
+    description: region.tagline,
+    ogTitle: region.name,
+    ogDescription: region.tagline,
+    structuredData: region.status === "watchlist" ? [] : [
+      {
+        "@context": "https://schema.org",
+        "@type": "Place",
+        "name": region.name,
+        "description": region.tagline,
+        "url": `https://autonateai.com/regions/${region.slug}`,
+      },
+    ],
+  });
+}
+
+export function renderOrganizations() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/ag-lab/organizations-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("account_balance")} Organizations</span>
+            <h1>The nodes of the agricultural economy.</h1>
+            <p>Lenders, elevators, processors, and cooperatives — each profile is an economic-system node, not a scraped company page: role in the graph, verified public figures with sources, and the open questions worth investigating next.</p>
           </div>
         </div>
-        <div class="value-grid">
-          ${todayCards.map((card) => `<article><span>${icon(card.icon)}</span><h3>${escapeHtml(card.label)}</h3><p>${escapeHtml(card.title)}</p><a class="outline-button full" href="${card.href}">Look Closer ${icon("arrow_forward")}</a></article>`).join("")}
+      </section>
+      <div class="industry-grid lab-grid">${organizations.map((org) => organizationCard(org)).join("")}</div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Organizations | AutoNateAI Agricultural Systems Lab",
+    active: "organizations",
+    body,
+    canonicalPath: "/organizations",
+    description: "Agricultural lenders, elevators, and cooperatives profiled by AutoNateAI as nodes in the regional agricultural economy — role in system, verified public figures, and open questions.",
+    ogTitle: "Organizations | AutoNateAI Agricultural Systems Lab",
+    ogDescription: "Agricultural economy organizations profiled as system nodes, starting with Farm Credit Southeast Missouri.",
+  });
+}
+
+export function renderOrganizationDetail(org) {
+  const region = regions.find((r) => r.slug === org.region);
+  const relatedSystems = systems.filter((s) => org.systems?.includes(s.slug));
+  const relatedInvestigations = investigations.filter((i) => org.investigations?.includes(i.slug));
+
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Organizations", "/organizations"], [org.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(org.icon)} ${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)} &middot; ${escapeHtml(org.status)}</span>
+          <h1>${escapeHtml(org.name)}</h1>
+          <p>${escapeHtml(org.tagline)}</p>
+          ${region ? `<div class="tag-row"><span>${escapeHtml(region.name)}</span></div>` : ""}
+        </header>
+        ${org.thumbnail ? `<img src="${org.thumbnail}" alt="" />` : ""}
+        <div class="detail-field-grid">
+          ${detailFieldText("Role in the System", org.roleInSystem)}
+        </div>
+        ${
+          org.facts?.length
+            ? `<h2>Verified Public Figures</h2><dl class="fact-list">${org.facts.map((f) => `<div><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`).join("")}</dl>`
+            : ""
+        }
+        ${
+          org.portfolioMix?.length
+            ? `<h2>Loan Portfolio Composition</h2>
+               ${org.portfolioMixNote ? `<p class="field-note">${escapeHtml(org.portfolioMixNote)}</p>` : ""}
+               <div class="portfolio-mix">${org.portfolioMix
+                 .map((m) => `<div class="portfolio-mix-row"><span>${escapeHtml(m.label)}</span><div class="portfolio-mix-bar"><div style="width:${m.percent}%"></div></div><b>${m.percent}%</b></div>`)
+                 .join("")}</div>`
+            : ""
+        }
+        ${org.locations?.length ? `<h2>Branch Network</h2><div class="tag-row">${org.locations.map((l) => `<span>${escapeHtml(l.name)} — ${escapeHtml(l.city)}</span>`).join("")}</div>` : ""}
+        ${detailFieldList("Technology Stack", org.technologyStack)}
+        ${detailFieldList("Open Questions", org.openQuestions)}
+        ${detailFieldLinks("Sources", org.sources)}
+
+        ${relatedSystems.length ? `<h2>Related Systems</h2><div class="detail-related-grid">${relatedSystems.map((s) => systemCard(s)).join("")}</div>` : ""}
+        ${relatedInvestigations.length ? `<h2>Related Investigations</h2><div class="detail-related-grid">${relatedInvestigations.map((i) => investigationCard(i)).join("")}</div>` : ""}
+        ${region ? `<h2>Part of</h2><div class="detail-related-grid">${regionCard(region)}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${org.name} | AutoNateAI Agricultural Systems Lab`,
+    active: "organizations",
+    body,
+    canonicalPath: `/organizations/${org.slug}`,
+    ogImage: org.thumbnail || "/assets/ag-lab/organizations-hero.jpg",
+    description: org.tagline,
+    ogTitle: org.name,
+    ogDescription: org.tagline,
+    structuredData: org.status === "Watchlist" ? [] : [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": org.name,
+        "description": org.tagline,
+        "url": `https://autonateai.com/organizations/${org.slug}`,
+      },
+    ],
+  });
+}
+
+export function renderSystems() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/ag-lab/systems-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("account_tree")} Systems</span>
+            <h1>The pipelines underneath the industry.</h1>
+            <p>Production &amp; food, finance &amp; capital, freight &amp; storage, processing &amp; market access — each system deep dive runs the same four-pillar lens: Business Analysis, Data Intelligence, Systems Mapping, AI &amp; Automation.</p>
+          </div>
+        </div>
+      </section>
+      <div class="industry-grid lab-grid">${systems.map((system) => systemCard(system)).join("")}</div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Systems | AutoNateAI Agricultural Systems Lab",
+    active: "systems",
+    body,
+    canonicalPath: "/systems",
+    description: "Agricultural economic system deep dives from AutoNateAI: production & food, finance & capital, freight & storage, and processing & market access, each run through a four-pillar analytical lens.",
+    ogTitle: "Systems | AutoNateAI Agricultural Systems Lab",
+    ogDescription: "Pipeline-by-pipeline deep dives into the systems underneath U.S. agriculture.",
+  });
+}
+
+export function renderSystemDetail(system) {
+  const relatedRegions = regions.filter((r) => system.regions?.includes(r.slug));
+  const relatedInvestigations = investigations.filter((i) => system.investigations?.includes(i.slug));
+
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Systems", "/systems"], [system.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(system.icon)} ${escapeHtml(systemCategoryLabels[system.category] || system.category)} &middot; ${escapeHtml(system.status)}</span>
+          <h1>${escapeHtml(system.name)}</h1>
+          <p>${escapeHtml(system.tagline)}</p>
+        </header>
+        ${system.thumbnail ? `<img src="${system.thumbnail}" alt="" />` : ""}
+        <div class="detail-field-grid">${detailFieldText("Overview", system.overview)}</div>
+
+        ${
+          system.pipeline?.length
+            ? `<h2>Pipeline</h2><ol class="stage-stepper">${system.pipeline
+                .map((stage) => `<li><div><h4>${escapeHtml(stage.stage)}</h4><p>${escapeHtml(stage.description)}</p></div></li>`)
+                .join("")}</ol>`
+            : ""
+        }
+
+        ${
+          system.pillars?.length
+            ? `<h2>The Four Pillars, Applied</h2><div class="detail-field-grid">${system.pillars.map((p) => detailFieldText(p.pillar, p.description)).join("")}</div>`
+            : ""
+        }
+
+        ${
+          system.dataModel
+            ? `<h2>Illustrative Data Model</h2><p>${escapeHtml(system.dataModel.description)}</p><pre class="code-block language-sql"><code>${escapeHtml(system.dataModel.sql)}</code></pre>`
+            : ""
+        }
+
+        ${
+          system.datasets?.length
+            ? `<h2>Datasets</h2><div class="markdown-table"><table><thead><tr><th>Dataset</th><th>Publisher</th><th>Cadence</th></tr></thead><tbody>${system.datasets
+                .map((d) => `<tr><td><a href="${d.url}">${escapeHtml(d.name)}</a></td><td>${escapeHtml(d.publisher)}</td><td>${escapeHtml(d.cadence)}</td></tr>`)
+                .join("")}</tbody></table></div>`
+            : ""
+        }
+
+        ${detailFieldList("Stakeholders", system.stakeholders)}
+
+        ${relatedRegions.length ? `<h2>Where This Shows Up</h2><div class="detail-related-grid">${relatedRegions.map((r) => regionCard(r)).join("")}</div>` : ""}
+        ${relatedInvestigations.length ? `<h2>Related Investigations</h2><div class="detail-related-grid">${relatedInvestigations.map((i) => investigationCard(i)).join("")}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${system.name} | AutoNateAI Agricultural Systems Lab`,
+    active: "systems",
+    body,
+    canonicalPath: `/systems/${system.slug}`,
+    ogImage: system.thumbnail || "/assets/ag-lab/systems-hero.jpg",
+    description: system.tagline,
+    ogTitle: system.name,
+    ogDescription: system.tagline,
+  });
+}
+
+export function renderInvestigations() {
+  const openCount = investigations.filter((i) => i.status === "open").length;
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/ag-lab/investigations-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("help_center")} Business Question Queue</span>
+            <h1>Open investigations, honestly labeled.</h1>
+            <p>${openCount} open question${openCount === 1 ? "" : "s"} right now. "Open" means genuinely open — the evidence, hypothesis, and data gaps are public, but nothing here claims a finding that hasn't actually been researched yet.</p>
+          </div>
+        </div>
+      </section>
+      <div class="industry-grid lab-grid">${investigations.map((investigation) => investigationCard(investigation)).join("")}</div>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Business Question Queue | AutoNateAI Agricultural Systems Lab",
+    active: "investigations",
+    body,
+    canonicalPath: "/investigations",
+    description: "AutoNateAI's open agricultural business-question queue — evidence-derived investigations spanning internal business systems, operator/farm analysis, and regional economic systems.",
+    ogTitle: "Business Question Queue | AutoNateAI Agricultural Systems Lab",
+    ogDescription: "Open, honestly-labeled agricultural business questions AutoNateAI is investigating.",
+  });
+}
+
+export function renderInvestigationDetail(investigation) {
+  const region = regions.find((r) => r.slug === investigation.region);
+  const relatedSystems = systems.filter((s) => s.investigations?.includes(investigation.slug));
+  const relatedOrgs = organizations.filter((o) => o.investigations?.includes(investigation.slug));
+
+  const body = `
+    <main class="article-page">
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], ["Business Question Queue", "/investigations"], [investigation.name, null]])}
+      <article class="article-detail">
+        <header>
+          <span class="kicker">${icon(investigation.icon)} Investigation &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
+          <h1>${escapeHtml(investigation.name)}</h1>
+          <p>${escapeHtml(investigation.question)}</p>
+          <div class="tag-row">${region ? `<span>${escapeHtml(region.name)}</span>` : ""}${investigation.commodity ? `<span>${escapeHtml(investigation.commodity)}</span>` : ""}</div>
+        </header>
+        ${investigation.thumbnail ? `<img src="${investigation.thumbnail}" alt="" />` : ""}
+        <div class="detail-field-grid">
+          ${detailField("Status", `<p>This investigation is <strong>${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</strong>${investigation.status === "open" ? " — a real question with a research plan, not yet a finding." : ""}</p>`)}
+          ${detailFieldText("Working Hypothesis", investigation.hypothesis)}
+        </div>
+
+        ${detailFieldLinks("Triggering Evidence", investigation.evidence)}
+
+        ${
+          investigation.graphLayers && (investigation.graphLayers.physical || investigation.graphLayers.capital || investigation.graphLayers.business || investigation.graphLayers.information)
+            ? `<h2>Four-Graph Mapping</h2><div class="detail-field-grid">
+                ${detailFieldText("Physical Graph", investigation.graphLayers.physical)}
+                ${detailFieldText("Capital Graph", investigation.graphLayers.capital)}
+                ${detailFieldText("Business Graph", investigation.graphLayers.business)}
+                ${detailFieldText("Information Graph", investigation.graphLayers.information)}
+              </div>`
+            : ""
+        }
+
+        ${detailFieldList("Stakeholders to Interview", investigation.stakeholders)}
+        ${detailFieldList("Data Still Needed", investigation.dataNeeds)}
+        ${detailFieldList("Candidate Portfolio Artifacts", investigation.artifacts)}
+        ${detailFieldText("Findings", investigation.findings)}
+        ${detailFieldLinks("Sources", investigation.sources)}
+
+        ${relatedSystems.length ? `<h2>Related Systems</h2><div class="detail-related-grid">${relatedSystems.map((s) => systemCard(s)).join("")}</div>` : ""}
+        ${relatedOrgs.length ? `<h2>Related Organizations</h2><div class="detail-related-grid">${relatedOrgs.map((o) => organizationCard(o)).join("")}</div>` : ""}
+        ${region ? `<h2>Part of</h2><div class="detail-related-grid">${regionCard(region)}</div>` : ""}
+      </article>
+    </main>
+  `;
+
+  return pageShell({
+    title: `${investigation.name} | AutoNateAI Agricultural Systems Lab`,
+    active: "investigations",
+    body,
+    canonicalPath: `/investigations/${investigation.slug}`,
+    ogImage: investigation.thumbnail || "/assets/ag-lab/investigations-hero.jpg",
+    description: investigation.question,
+    ogTitle: investigation.name,
+    ogDescription: investigation.question,
+  });
+}
+
+export function renderLab() {
+  const body = `
+    <main class="articles-page">
+      <section class="home-hero articles-hero">
+        <div class="hero-bg"><img src="/assets/ag-lab/lab-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("science")} The Lab</span>
+            <h1>Methodology and instruments.</h1>
+            <p>Underneath the regions, organizations, systems, and investigations is the same general research instrumentation Nathan has been running since the lab's Sept 9 general-purpose launch: multi-week projects, a real lab notebook of experiments, the open-source repos informing them, and an evidence-ranked reading list. Not agriculture-specific — the methodology this narrows down from.</p>
+          </div>
         </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("hub")} Active Projects</span>
-            <h2>What's forming right now.</h2>
-            <p>Multi-week research programs that group publications, experiments, sources, and code as they accumulate.</p>
+            <span class="kicker">${icon("hub")} Projects</span>
+            <h2>Multi-week research programs.</h2>
           </div>
           <a class="primary-button" href="/projects">All Projects ${icon("arrow_forward")}</a>
         </div>
@@ -328,8 +727,7 @@ export function renderHome(data) {
         <div class="section-head">
           <div>
             <span class="kicker">${icon("science")} Experiments &amp; Open Source</span>
-            <h2>What's queued to test and study.</h2>
-            <p>Hypothesis, method, and the repos behind them — nothing here is marked further along than it actually is.</p>
+            <h2>The lab notebook.</h2>
           </div>
           <a class="primary-button" href="/experiments">All Experiments ${icon("arrow_forward")}</a>
         </div>
@@ -344,23 +742,123 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("menu_book")} What I'm Reading</span>
             <h2>The evidence ladder, applied.</h2>
-            <p>Every source gets ranked by what it actually supports — peer-reviewed evidence never gets presented next to a spiritual claim as if they carry equal weight.</p>
           </div>
           <a class="primary-button" href="/articles#reading">Full Reading List ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid lab-grid">${featuredSources.map((source) => sourceCard(source)).join("")}</div>
+        <div class="industry-grid lab-grid">${labSources.slice(0, 4).map((source) => sourceCard(source)).join("")}</div>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "The Lab | AutoNateAI Agricultural Systems Lab",
+    active: "lab",
+    body,
+    canonicalPath: "/lab",
+    description: "The general research instrumentation behind AutoNateAI's agricultural intelligence work — projects, experiments, open source, and an evidence-ranked reading list.",
+    ogTitle: "The Lab | AutoNateAI Agricultural Systems Lab",
+    ogDescription: "Methodology and instruments: the projects, experiments, open source, and reading list behind AutoNateAI's research.",
+  });
+}
+
+export function renderHome(data) {
+  const openInvestigations = investigations.filter((i) => i.status === "open");
+  const profiledRegions = regions.filter((r) => r.status === "laboratory").length;
+  const profiledOrgs = organizations.filter((o) => o.status !== "Watchlist").length;
+
+  const body = `
+    <main class="lab-home">
+      <section class="home-hero lab-masthead">
+        <div class="hero-bg"><img src="/assets/ag-lab/home-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("agriculture")} Agricultural Economic Systems Intelligence Lab</span>
+            <h1>Applied economic intelligence for regional agricultural systems.</h1>
+            <p>AutoNateAI studies how food, capital, freight infrastructure, businesses, and information move through regional economies — using agriculture as the anchor. Southeast Missouri is the laboratory Nathan can physically validate; the same methodology extends region by region across the U.S.</p>
+            <div class="lab-byline">
+              <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker" />
+              <div><strong>Nathan Baker</strong><span>Founder &amp; Principal Systems Analyst, AutoNateAI</span></div>
+            </div>
+            <div class="button-row">
+              <a class="primary-button" href="/regions">Browse Regional Portals ${icon("arrow_forward")}</a>
+              <a class="secondary-button" href="/investigations">Open Investigations</a>
+            </div>
+          </div>
+          <aside class="hero-program-panel">
+            <div class="hero-panel-body">
+              <span class="kicker">${icon("help_center")} Business Question Queue</span>
+              <h2>${openInvestigations.length} open investigation${openInvestigations.length === 1 ? "" : "s"}</h2>
+              <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Nothing queued yet — check back after the next research cycle."}</p>
+              <div class="hero-facts">
+                <span>${profiledRegions} region${profiledRegions === 1 ? "" : "s"} profiled</span>
+                <span>${profiledOrgs} organization${profiledOrgs === 1 ? "" : "s"} profiled</span>
+                <span>${systems.length} system deep dive${systems.length === 1 ? "" : "s"}</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head section-head-center">
+          <div>
+            <span class="kicker">${icon("hub")} How the Lab Works</span>
+            <h2>Regions, Organizations, Systems, Investigations.</h2>
+            <p>Every research pass produces the same four kinds of object: a regional profile, an organization node, a system deep dive, or an open business question — cross-linked, sourced, and honest about what's actually been researched yet.</p>
+          </div>
+        </div>
+        <div class="value-grid">
+          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>Production, capital, and freight for one geography at a time.</p><a class="outline-button full" href="/regions">Browse Regions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Lenders, elevators, and cooperatives as economic-system nodes.</p><a class="outline-button full" href="/organizations">Browse Organizations ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_tree")}</span><h3>Systems</h3><p>The pipelines — finance, freight, processing — run through four pillars.</p><a class="outline-button full" href="/systems">Browse Systems ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("help_center")}</span><h3>Investigations</h3><p>Open business questions, evidence-derived and honestly labeled.</p><a class="outline-button full" href="/investigations">Browse Investigations ${icon("arrow_forward")}</a></article>
+        </div>
       </section>
 
       <section class="section">
         <div class="section-head">
           <div>
-            <span class="kicker">${icon("auto_stories")} Learn From the Lab</span>
-            <h2>Free technical courses, no cost, no catch.</h2>
-            <p>Four story-driven courses following Nate and Kai from a meetup back room to a real, shipped system — the same fundamentals behind everything researched and built here.</p>
+            <span class="kicker">${icon("landscape")} Regional Portals</span>
+            <h2>Southeast Missouri, and where this goes next.</h2>
+            <p>Southeast Missouri is the active laboratory. Other U.S. agricultural regions sit on the watchlist until a real research pass profiles them.</p>
           </div>
-          <a class="primary-button" href="/tutorials">Browse Free Courses ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/regions">All Regions ${icon("arrow_forward")}</a>
         </div>
-        <div class="pack-grid">${tutorialPacks.map((pack) => packCard(pack)).join("")}</div>
+        <div class="industry-grid lab-grid">${regions.map((region) => regionCard(region)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("account_balance")} Organizations</span>
+            <h2>The nodes of the agricultural economy.</h2>
+          </div>
+          <a class="primary-button" href="/organizations">All Organizations ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid lab-grid">${organizations.map((org) => organizationCard(org)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("account_tree")} Systems</span>
+            <h2>The pipelines underneath the industry.</h2>
+          </div>
+          <a class="primary-button" href="/systems">All Systems ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid lab-grid">${systems.map((system) => systemCard(system)).join("")}</div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("help_center")} Business Question Queue</span>
+            <h2>What's genuinely open right now.</h2>
+            <p>Evidence, hypothesis, and data gaps are public for every question — "Open" never gets quietly upgraded to a finding that hasn't happened yet.</p>
+          </div>
+          <a class="primary-button" href="/investigations">Full Queue ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid lab-grid">${investigations.map((investigation) => investigationCard(investigation)).join("")}</div>
       </section>
 
       <section class="spotlight-section">
@@ -368,36 +866,24 @@ export function renderHome(data) {
         <div>
           <span class="kicker">${icon("forum")} Always-On Support</span>
           <h2>The Discord doesn't close when a session does.</h2>
-          <p>Get help with the free courses, ask about a project or experiment, or bring a system you're trying to design yourself. It's open all day, every day, not just during scheduled sessions.</p>
+          <p>Get help with the free courses, ask about a region or investigation, or bring a system you're trying to design yourself. It's open all day, every day, not just during scheduled sessions.</p>
           <div class="stat-grid">
             <div><strong>All day, every day</strong><span>Availability</span></div>
             <div><strong>Free</strong><span>Open to Everyone</span></div>
           </div>
           <div class="button-row">
             <a class="primary-button" href="https://discord.gg/4HkkuntdSs">Join the Discord ${icon("open_in_new")}</a>
-            <a class="outline-button" href="/tutorials">Start the Free Courses</a>
+            <a class="outline-button" href="/lab">Explore the Lab</a>
           </div>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("article")} Publications</span>
-            <h2>Research, field notes, and build notes.</h2>
-            <p>Finished writing from the lab — what's been researched, built, and learned so far.</p>
-          </div>
-          <a class="primary-button" href="/articles">Read More Publications ${icon("arrow_forward")}</a>
-        </div>
-        <div class="article-grid">${landingArticles.map((article) => articleCard(article)).join("")}</div>
       </section>
 
       <section class="newsletter">
         <div>
-          <h2>Have a real system you need built?</h2>
-          <p>Architecture, AI engineering, and technical consulting are still very much on the table — see how to work with me directly.</p>
+          <h2>A farm, lender, or agribusiness with a real system question?</h2>
+          <p>Business analysis, data intelligence, and software builds around agricultural operations are on the table — see how to work with AutoNateAI directly.</p>
           <div class="button-row">
-            <a class="primary-button" href="/about#work-with-me">Work With Me ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/about#work-with-me">Work With Us ${icon("arrow_forward")}</a>
           </div>
           <small>Prefer to start free? The <a href="/tutorials">course library</a> and <a href="/events">Lab Sessions</a> cost nothing.</small>
         </div>
@@ -406,23 +892,23 @@ export function renderHome(data) {
   `;
 
   return pageShell({
-    title: "AutoNateAI | Welcome to My Lab",
+    title: "AutoNateAI | Agricultural Economic Systems Intelligence Lab",
     active: "home",
     body,
     canonicalPath: "/",
     ogImage: "/assets/og/default.jpg",
     description:
-      "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker — research, experiments, open-source work, and free technical courses.",
-    ogTitle: "Welcome to My Lab",
+      "AutoNateAI is an agricultural economic-intelligence and technology lab studying how food, capital, freight, businesses, and information move through regional economies — starting with Southeast Missouri.",
+    ogTitle: "Agricultural Economic Systems Intelligence Lab",
     ogDescription:
-      "Research, build, publish: a living research lab tracking agentic AI systems, open source, and human systems, with free technical courses and consulting available.",
+      "Regions, organizations, systems, and an honest business-question queue — applied economic intelligence for U.S. agricultural regions, run by Nathan Baker.",
     structuredData: [
       {
         "@context": "https://schema.org",
-        "@type": ["Organization", "EducationalOrganization"],
+        "@type": "Organization",
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI is the independent AI, software, and human-systems research lab of Nathan Baker.",
+        "description": "AutoNateAI is an agricultural economic-intelligence and technology lab studying how food, capital, freight, businesses, and information move through regional economies.",
         "founder": {
           "@type": "Person",
           "name": "Nathan Baker",
@@ -1938,6 +2424,18 @@ export function renderArticles(page = 1) {
           }
         </div>
       </section>
+      <section class="section" id="queue">
+        <div class="section-head">
+          <div>
+            <span class="kicker">${icon("help_center")} Business Question Queue</span>
+            <h2>Open investigations, alongside the finished writing.</h2>
+            <p>Case studies in progress, not yet published — evidence, hypothesis, and data gaps are public for each one.</p>
+          </div>
+          <a class="primary-button" href="/investigations">Full Queue ${icon("arrow_forward")}</a>
+        </div>
+        <div class="industry-grid lab-grid">${investigations.map((investigation) => investigationCard(investigation)).join("")}</div>
+      </section>
+
       <div class="content-tools">
         <label>${icon("search")} <input type="search" placeholder="Search articles, AI agents, systems, Git..." data-article-search /></label>
         <div class="filter-row" data-article-filters>

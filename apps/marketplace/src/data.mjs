@@ -1,24 +1,27 @@
-// AutoNateAI is Nathan Baker's independent AI, software, and human-systems
-// research lab now — the site is a public projection of the lab's current
-// research state, not a Southeast Missouri consulting brochure. See
-// docs/marketplace/lab-operating-model.md for the full contract. Consulting
-// and For Organizations are real, still-running services, but they're no
-// longer the front door — they live under "Work With Me" on /about instead
-// of primary nav. /consulting, /for-organizations, and /programs/:handle all
-// still render unchanged for existing links/checkout references.
+// AutoNateAI is now narrowed from a general AI/software/human-systems lab to
+// an Agricultural Economic Systems Intelligence Lab — agriculture as the
+// anchor for regional economic-development research across the U.S., with
+// Southeast Missouri as the recurring laboratory Nathan can physically
+// validate. See docs/marketplace/agricultural-intelligence-lab.md for the
+// full contract (supersedes the general-lab framing in
+// lab-operating-model.md as the current locked direction — that doc's
+// private/public boundary rule and "never fabricate activity" rule still
+// apply). Primary nav takes over the homepage; Tutorials, Programs,
+// Consulting, Events, Community, and For Organizations keep their routes
+// unchanged and move to the footer.
 export const navItems = [
-  { label: "Latest", href: "/", keys: ["home"] },
-  { label: "Publications", href: "/articles", keys: ["articles"] },
-  { label: "Experiments", href: "/experiments", keys: ["experiments"] },
-  { label: "Projects", href: "/projects", keys: ["projects"] },
-  { label: "Open Source", href: "/open-source", keys: ["open-source"] },
-  { label: "Events", href: "/events", keys: ["events"] },
-  { label: "Learn", href: "/tutorials", keys: ["tutorials"] },
-  { label: "About", href: "/about", keys: ["about"] },
+  { label: "Intelligence", href: "/", keys: ["home"] },
+  { label: "Regions", href: "/regions", keys: ["regions"] },
+  { label: "Systems", href: "/systems", keys: ["systems"] },
+  { label: "Organizations", href: "/organizations", keys: ["organizations"] },
+  { label: "Research & Case Studies", href: "/articles", keys: ["articles", "investigations"] },
+  { label: "The Lab", href: "/lab", keys: ["lab", "projects", "experiments", "open-source"] },
+  { label: "Work With Us", href: "/about#work-with-me", keys: ["about"] },
 ];
 
-// Community is still a real, working page — reachable from the footer and
-// in-page CTAs, not primary nav.
+// Tutorials, Consulting, Events, Community, and For Organizations are still
+// real, working pages — reachable from the footer and in-page CTAs, not
+// primary nav.
 
 // ---------------------------------------------------------------------------
 // THE LAB — current investigation, experiments, projects, open-source
@@ -553,6 +556,305 @@ export const labEvents = [
   { slug: "berkeley-neuroscience-conference", thumbnail: "/assets/thumbnails/events/berkeley-neuroscience-conference.jpg", name: "2026 Berkeley Neuroscience Conference", type: "Conference", organizer: "Berkeley Neuroscience", start: "2026-10-23", location: "Berkeley, CA", virtual: false, status: "Considering", topics: ["Neurotech", "Research", "Human Systems"], why: "Brain rhythms, cognition, memory, sleep, and experimental methods — a bridge from consumer-sensor experiments to rigorous lab-method conversations.", actionPlan: "Track poster/session details when published. Use the conference as a bridge from Project Athena-style consumer-sensor experiments toward rigorous lab-method conversations.", url: "https://neuroscience.berkeley.edu/conference" },
   { slug: "nasa-space-apps-challenge", thumbnail: "/assets/thumbnails/events/nasa-space-apps-challenge.jpg", name: "NASA International Space Apps Challenge 2026 — California / Universal", type: "Hackathon", organizer: "NASA Science Mission Directorate", start: "2026-11-14", end: "2026-11-15", location: "Los Angeles or Irvine, CA — Universal virtual also open", virtual: true, status: "Considering", topics: ["GIS / Spatial", "Data / Graphs", "Simulation"], why: "Best broad build opportunity for GIS, maps, simulation, and agentic analysis — teams up to 6, submissions close Nov 15.", actionPlan: "Register now; team formation opens Sep 17. Wait for official challenge statements before locking a problem, then favor a map-first decision simulator with transparent uncertainty and evidence-grounded explanations.", costNotes: "Registration open; teams capped at 6. Submission closes Nov 15, 11:59 PM local time. Global winners selected; the official page doesn't state cash prizes.", url: "https://www.spaceappschallenge.org/2026/" },
   { slug: "hackstorm-physical-ai-hackathon", thumbnail: "/assets/thumbnails/events/hackstorm-physical-ai-hackathon.jpg", name: "HackStorm Physical AI Hackathon", type: "Hackathon", organizer: "HackStorm", start: "2026-11-06", end: "2026-11-08", location: "Bay Area, CA", virtual: false, status: "Considering", topics: ["AI / ML", "Robotics", "Simulation"], why: "Physical-AI build with AIoT/robotics tracks, supplied hardware, and cash/hardware awards. Registration opens Oct 1.", actionPlan: "Prepare a Project-Athena-adjacent or embodied-agent concept before registration opens Oct 1; use the build as an experiment, publication, and demo.", costNotes: "Registration opens Oct 1. Event lists cash prizes for top AIoT/robotics placements plus hardware/sponsor awards.", url: "https://www.hackstorm.ai/" },
+];
+
+// ---------------------------------------------------------------------------
+// AGRICULTURAL ECONOMIC SYSTEMS INTELLIGENCE — Regions, Organizations,
+// Systems, and Investigations (the Business Question Queue). This is the
+// lab's new primary content model: agriculture as the anchor for regional
+// economic-development research. See
+// docs/marketplace/agricultural-intelligence-lab.md for the operating
+// contract this narrows down from.
+//
+// Each array holds one fully-researched flagship entry (grounded in real,
+// cited public sources — Farm Credit Southeast Missouri's own annual
+// reports, the Farm Credit Administration public directory, and USDA NASS
+// acreage reports) plus one honest "Watchlist" placeholder proving the
+// list/detail pattern before real research fills it in. No daily
+// agricultural radar has landed in this repo yet — Radar_Reports/ still
+// only has the Sept 9 general-lab desks — so nothing here claims a "live"
+// automated pipeline. Every fact carries its source; every open question
+// stays genuinely open (status: "open", not a fabricated finding).
+// ---------------------------------------------------------------------------
+
+export const regionStatusLabels = {
+  laboratory: "Active Laboratory",
+  watchlist: "Watchlist — Not Yet Profiled",
+};
+
+export const regions = [
+  {
+    slug: "southeast-missouri",
+    icon: "landscape",
+    status: "laboratory",
+    name: "Southeast Missouri (The Bootheel)",
+    thumbnail: "/assets/regions/southeast-missouri.jpg",
+    tagline: "Nathan's home laboratory — the one region validated by walking in, not only reading public data.",
+    geography:
+      "The 12-county Farm Credit Southeast Missouri territory plus the wider Bootheel lowlands: Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Mississippi, New Madrid, Pemiscot, Ripley, Scott, Stoddard, and Wayne counties, anchored on the Mississippi River at Cairo/Sikeston.",
+    coordinates: "36.8767° N, 89.5879° W (Sikeston, MO — central office node)",
+    commodities: ["Soybeans", "Corn", "Cotton", "Rice", "Winter Wheat"],
+    stats: [
+      { label: "Counties in territory", value: "12" },
+      { label: "Farm Credit SEMO locations", value: "8" },
+      { label: "Organizations profiled", value: "1" },
+      { label: "Open investigations", value: "1" },
+    ],
+    production:
+      "Flat, fertile Mississippi River-alluvial lowland ground supporting row-crop agriculture at a scale unusual for Missouri — one of the state's few rice- and cotton-growing regions alongside the dominant soybean/corn rotation.",
+    capital:
+      "Financed primarily through Farm Credit Southeast Missouri — a member-owned Farm Credit System cooperative headquartered in Sikeston — alongside community banks and credit unions. See the organization profile for verified public financials.",
+    freight:
+      "I-55 and I-57 highway corridors, BNSF/UP rail lines, and Mississippi River barge access via Cairo/New Madrid terminals move Bootheel grain toward Gulf export markets.",
+    organizations: ["farm-credit-southeast-missouri"],
+    systems: ["agricultural-finance-and-capital"],
+    investigations: ["bootheel-rice-to-soybean-pivot"],
+    sources: [
+      { label: "Farm Credit Southeast Missouri — 2023 Annual Report", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2023AnnualReport.pdf" },
+      { label: "Farm Credit Southeast Missouri — Locations", url: "https://farmcreditsemo.com/locations" },
+      { label: "Farm Credit Administration — Public Directory (Farm Credit SEMO)", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
+    ],
+  },
+  {
+    slug: "central-iowa-corn-belt",
+    icon: "grass",
+    status: "watchlist",
+    name: "Central Iowa Corn Belt",
+    thumbnail: null,
+    tagline: "On the national region watchlist. No research pass has run yet — this entry only proves the template.",
+    geography: "Placeholder — county/corridor boundary not yet defined.",
+    coordinates: "",
+    commodities: ["Corn", "Soybeans"],
+    stats: [],
+    production: "",
+    capital: "",
+    freight: "",
+    organizations: [],
+    systems: [],
+    investigations: [],
+    sources: [],
+  },
+];
+
+export const organizationTypeLabels = {
+  lender: "Agricultural Lender",
+  elevator: "Grain Elevator / Cooperative",
+};
+
+export const organizations = [
+  {
+    slug: "farm-credit-southeast-missouri",
+    icon: "account_balance",
+    status: "Profiled",
+    orgType: "lender",
+    name: "Farm Credit Southeast Missouri",
+    thumbnail: "/assets/organizations/farm-credit-southeast-missouri.jpg",
+    tagline: "A federally chartered, member-owned agricultural lending cooperative headquartered in Sikeston — the capital edge of the Bootheel's agricultural graph.",
+    region: "southeast-missouri",
+    roleInSystem:
+      "Farm Credit Southeast Missouri sits on the Capital Graph's lender node: it finances farm real estate, operating expenses, equipment, livestock, and agribusiness, and sells crop and life insurance, across its 12-county Southeast Missouri territory. As a Farm Credit System cooperative, its borrowers are member-owners — profits can flow back through patronage distributions, which makes its economics different from a conventional commercial bank.",
+    facts: [
+      { label: "Structure", value: "Member-owned cooperative, part of the nationwide Farm Credit System" },
+      { label: "CEO", value: "Gregory Cunningham" },
+      { label: "Board Chair", value: "Ed Marshall" },
+      { label: "Territory", value: "12 counties: Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Mississippi, New Madrid, Pemiscot, Ripley, Scott, Stoddard, Wayne" },
+      { label: "Total loans (FY2023)", value: "≈ $853.5M" },
+      { label: "Total assets (FY2023)", value: "≈ $955.6M" },
+      { label: "Member equity (FY2023)", value: "≈ $207.7M" },
+      { label: "Net income (FY2023)", value: "≈ $20.36M" },
+      { label: "Missouri Farm Credit customers (statewide, 12/31/2025)", value: "15,502" },
+      { label: "Missouri Farm Credit loan volume (statewide, 12/31/2025)", value: "≈ $13.3B" },
+    ],
+    portfolioMix: [
+      { label: "Real estate mortgage", percent: 60.7 },
+      { label: "Production / intermediate-term", percent: 33.0 },
+      { label: "Agribusiness", percent: 2.5 },
+      { label: "Other", percent: 3.8 },
+    ],
+    portfolioMixNote: "2022 Annual Report figures — the most recent breakdown Nathan's research surfaced. Verify against the current annual report before treating this as this year's mix.",
+    locations: [
+      { name: "Central Office", city: "Sikeston, MO" },
+      { name: "Branch", city: "Dexter, MO" },
+      { name: "Branch", city: "Jackson, MO" },
+      { name: "Branch", city: "Kennett, MO" },
+      { name: "Branch", city: "Charleston, MO" },
+      { name: "Branch", city: "Poplar Bluff, MO" },
+      { name: "Branch", city: "Portageville, MO" },
+    ],
+    technologyStack: ["SQL / DB2", "Power BI", "Salesforce", "nCino", "FIS Profile (loan accounting)", "Approved generative AI tools (research, analysis, documentation)"],
+    commodities: ["Soybeans", "Corn", "Rice", "Cotton"],
+    systems: ["agricultural-finance-and-capital"],
+    investigations: ["bootheel-rice-to-soybean-pivot"],
+    openQuestions: [
+      "Where does the Business Analyst role's process-improvement work actually start — loan intake, underwriting handoff, or servicing/reporting?",
+      "How much duplicate data entry exists across Salesforce, nCino, and FIS Profile for a single loan file?",
+      "What would a commodity-mix concentration dashboard (Power BI, sourced from public FCA call-report data) show for the 12-county territory?",
+    ],
+    sources: [
+      { label: "Farm Credit Southeast Missouri — official site", url: "https://farmcreditsemo.com/" },
+      { label: "Farm Credit Southeast Missouri — Locations", url: "https://farmcreditsemo.com/locations" },
+      { label: "Farm Credit Southeast Missouri — 2023 Annual Report", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2023AnnualReport.pdf" },
+      { label: "Farm Credit Southeast Missouri — 2022 Annual Report (portfolio mix)", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2022AnnualReport.pdf" },
+      { label: "Farm Credit Administration — Public Directory", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
+      { label: "Farm Credit Council — Missouri state page", url: "https://farmcredit.com/states/missouri/" },
+      { label: "Farm Credit Southeast Missouri — Careers", url: "https://farmcreditsemo.com/about-us/careers" },
+    ],
+  },
+  {
+    slug: "bootheel-grain-cooperative",
+    icon: "storefront",
+    status: "Watchlist",
+    orgType: "elevator",
+    name: "Bootheel Grain Cooperative (placeholder)",
+    thumbnail: null,
+    tagline: "Template entry only — no specific elevator/cooperative has been researched or verified yet.",
+    region: "southeast-missouri",
+    roleInSystem: "",
+    facts: [],
+    portfolioMix: [],
+    locations: [],
+    technologyStack: [],
+    commodities: [],
+    systems: [],
+    investigations: [],
+    openQuestions: [],
+    sources: [],
+  },
+];
+
+export const systemCategoryLabels = {
+  "production-food": "Production & Food Systems",
+  "finance-capital": "Agricultural Finance & Capital",
+  "freight-infrastructure": "Freight / Infrastructure / Storage",
+  "processing-market": "Processing & Market Access",
+};
+
+// The Four Pillars applied consistently across every system deep dive —
+// Business Analysis, Data Intelligence, Systems Mapping, AI & Automation.
+export const pillarLabels = ["Business Analysis", "Data Intelligence", "Systems Mapping", "AI & Automation"];
+
+export const systems = [
+  {
+    slug: "agricultural-finance-and-capital",
+    icon: "payments",
+    status: "Deep dive published",
+    category: "finance-capital",
+    name: "Agricultural Finance & Capital",
+    thumbnail: "/assets/systems/agricultural-finance-and-capital.jpg",
+    tagline: "How capital enters the agricultural graph — from a producer's need to a lender's balance sheet, and back.",
+    overview:
+      "Capital is the edge that has to exist before most physical activity in the agricultural graph can happen: a farmer needs financing for equipment, land, or an operating season before production, storage, or transportation ever occur. This system deep dive traces that lifecycle through a Farm Credit System lender, using Farm Credit Southeast Missouri's real public disclosures as the concrete example — see /organizations/farm-credit-southeast-missouri.",
+    pipeline: [
+      { stage: "1. Capital Need Identified", description: "A producer needs financing for operating expenses, equipment, land, or insurance ahead of a production season." },
+      { stage: "2. Application & Financial Intake", description: "Farm financials, production history, and collateral information are submitted — typically through a CRM/origination system such as Salesforce or nCino." },
+      { stage: "3. Underwriting & Credit Analysis", description: "The lender evaluates capacity, capital, collateral, character, and conditions (the classic '5 Cs') against enterprise data sources." },
+      { stage: "4. Approval & Loan Structuring", description: "Terms, rate, amortization, and (for a cooperative lender) patronage eligibility are set and the loan closes." },
+      { stage: "5. Servicing, Monitoring & Reporting", description: "Payments post through a loan-accounting system (e.g. FIS Profile); portfolio-level dashboards (e.g. Power BI) track concentration, delinquency, and renewal risk." },
+    ],
+    pillars: [
+      { pillar: "Business Analysis", description: "Map the handoffs between loan officer, underwriting, closing, and servicing — the classic place to find duplicate data entry across Salesforce, nCino, and a core loan-accounting system." },
+      { pillar: "Data Intelligence", description: "A relational data model (producer, loan, collateral, payment) feeding KPIs like days-to-decision, portfolio concentration by commodity, and delinquency rate, surfaced in Power BI." },
+      { pillar: "Systems Mapping", description: "The Capital Graph: lender/insurer/public funding → operator → asset/operation → production → revenue → repayment, cross-linked to the region's Physical Graph (what that capital actually buys)." },
+      { pillar: "AI & Automation", description: "Approved generative AI for research, document summarization, and drafting — used on the lender's own approved tools, with confidential borrower information never leaving the system it belongs in." },
+    ],
+    dataModel: {
+      description: "An illustrative schema for the Capital Graph — not Farm Credit Southeast Missouri's actual production schema, which is private.",
+      sql: `CREATE TABLE producer (\n  producer_id      INT PRIMARY KEY,\n  county            VARCHAR(64),\n  primary_commodity VARCHAR(64)\n);\n\nCREATE TABLE loan (\n  loan_id       INT PRIMARY KEY,\n  producer_id   INT REFERENCES producer(producer_id),\n  loan_type     VARCHAR(32), -- real_estate | operating | equipment\n  amount        DECIMAL(14,2),\n  origination_date DATE,\n  status        VARCHAR(24)\n);\n\nCREATE TABLE collateral (\n  collateral_id INT PRIMARY KEY,\n  loan_id       INT REFERENCES loan(loan_id),\n  asset_type    VARCHAR(32), -- land | equipment | crop\n  appraised_value DECIMAL(14,2)\n);\n\nCREATE TABLE payment (\n  payment_id    INT PRIMARY KEY,\n  loan_id       INT REFERENCES loan(loan_id),\n  due_date      DATE,\n  paid_date     DATE,\n  amount        DECIMAL(14,2)\n);`,
+    },
+    datasets: [
+      { name: "Farm Credit Administration — Call Report / public directory data", publisher: "Farm Credit Administration", cadence: "Quarterly / as published", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
+      { name: "USDA ARMS — Agricultural Resource Management Survey (farm income & finance)", publisher: "USDA ERS", cadence: "Annual", url: "https://www.ers.usda.gov/data-products/arms-farm-financial-and-crop-production-practices" },
+      { name: "Kansas City Fed — Ag Finance Databook", publisher: "Federal Reserve Bank of Kansas City", cadence: "Quarterly", url: "https://www.kansascityfed.org/research/agriculture-finance-databook/" },
+      { name: "Farm Credit Southeast Missouri — Annual Reports", publisher: "Farm Credit Southeast Missouri", cadence: "Annual", url: "https://farmcreditsemo.com/about-us/reports" },
+    ],
+    stakeholders: ["Loan officers / relationship managers", "Credit analysts / underwriters", "Producer-borrowers", "SVP & Chief Information Officer (the Business Analyst role's reporting line)"],
+    regions: ["southeast-missouri"],
+    investigations: ["bootheel-rice-to-soybean-pivot"],
+  },
+  {
+    slug: "freight-infrastructure-storage",
+    icon: "local_shipping",
+    status: "Framework drafted",
+    category: "freight-infrastructure",
+    name: "Freight / Infrastructure / Storage",
+    thumbnail: null,
+    tagline: "Template entry — the pipeline/pillar framework is defined, region-specific evidence is not yet filled in.",
+    overview: "",
+    pipeline: [],
+    pillars: [],
+    dataModel: null,
+    datasets: [],
+    stakeholders: [],
+    regions: [],
+    investigations: [],
+  },
+];
+
+export const investigationStatusLabels = {
+  open: "Open",
+  investigating: "Investigating",
+  published: "Published",
+};
+
+export const investigations = [
+  {
+    slug: "bootheel-rice-to-soybean-pivot",
+    icon: "help_center",
+    status: "open",
+    name: "Bootheel Rice-to-Soybean Pivot",
+    question:
+      "As Missouri rice acreage comes under water- and weather-driven pressure while national soybean acreage expands, how would a continued Bootheel-level shift from rice toward soybeans change grower cash flow, Farm Credit lending exposure, and regional elevator/freight demand?",
+    tagline: "An open business question, not a finding — the county-level data this needs hasn't been pulled yet.",
+    thumbnail: "/assets/investigations/bootheel-rice-to-soybean-pivot.jpg",
+    region: "southeast-missouri",
+    commodity: "Rice / Soybeans",
+    evidence: [
+      { label: "USDA NASS — national Acreage report, Jun 30 2026", note: "Soybean planted acreage up 5% from 2025 (85.4M acres); corn planted acreage down 3% from 2025 — national row-crop acreage is actively reallocating.", url: "https://www.nass.usda.gov/Newsroom/2026/06-30-2026.php" },
+      { label: "USDA NASS — Rice Outlook, Jul 2025", note: "Missouri's 2025 rice planting estimate was lowered ~20,000 acres from March intentions after May weather prevented planting; national rice harvested area was lowered 121,000 acres to 2.647M acres.", url: "https://esmis.nal.usda.gov/sites/default/release-files/dn39x152w/5h73rv009/707976158/RCS-25F.pdf" },
+    ],
+    stakeholders: ["Farm Credit Southeast Missouri loan officers", "Bootheel rice producers considering a crop-mix change", "Regional grain elevators with rice-drying capacity", "University of Missouri Extension — Fisher Delta Research Center agronomists"],
+    hypothesis:
+      "Rice requires flood-irrigation infrastructure (levees, wells, dryers) that soybeans don't — a sustained pivot would idle rice-specific capital assets, change loan collateral/valuation profiles for affected acreage, and shift elevator/dryer throughput toward soybean handling. This is a hypothesis to test against county-level data, not a conclusion.",
+    graphLayers: {
+      physical: "Rice-specific infrastructure (levees, wells, dryers) sits idle or gets repurposed as acreage shifts; elevator/dryer throughput mix changes.",
+      capital: "Rice ground and soybean ground carry different collateral valuation and different operating-loan sizing — a crop-mix shift changes a lender's commodity concentration.",
+      business: "A loan officer's operating-loan renewal workflow changes inputs: a different crop budget, different insurance product, different collateral review.",
+      information: "A lender's CRM/origination intake and portfolio dashboards would need a commodity-mix-change flag to surface this as a portfolio trend, not just one loan file.",
+    },
+    dataNeeds: [
+      "County-level USDA NASS QuickStats pull for the 12 Farm Credit SEMO counties: rice vs. soybean planted acres, 2019–2026",
+      "Farm Credit Southeast Missouri's own commodity concentration by year, if published publicly",
+      "Regional elevator/dryer capacity utilization — public data doesn't cover this; needs interviews",
+    ],
+    artifacts: [
+      "County-level rice vs. soybean acreage dashboard (Power BI) for the 12 SEMO counties",
+      "SQL model comparing hypothetical operating-loan sizing for a rice budget vs. a soybean budget on the same acreage",
+    ],
+    findings: null,
+    sources: [
+      { label: "USDA NASS — Acreage, June 30 2026", url: "https://www.nass.usda.gov/Newsroom/2026/06-30-2026.php" },
+      { label: "USDA NASS — Rice Outlook, July 2025", url: "https://esmis.nal.usda.gov/sites/default/release-files/dn39x152w/5h73rv009/707976158/RCS-25F.pdf" },
+    ],
+  },
+  {
+    slug: "elevator-harvest-bottleneck",
+    icon: "help_center",
+    status: "open",
+    name: "Elevator Harvest-Season Bottleneck (placeholder)",
+    question: "Template entry only — no specific elevator or bottleneck has been researched or verified yet.",
+    tagline: "Proves the queue can hold more than one open question at a time.",
+    thumbnail: null,
+    region: "southeast-missouri",
+    commodity: "",
+    evidence: [],
+    stakeholders: [],
+    hypothesis: "",
+    graphLayers: { physical: "", capital: "", business: "", information: "" },
+    dataNeeds: [],
+    artifacts: [],
+    findings: null,
+    sources: [],
+  },
 ];
 
 // The nine regional industries AutoNateAI Consulting builds internal AI tooling
