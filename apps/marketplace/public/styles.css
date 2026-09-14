@@ -4775,9 +4775,22 @@ a.lab-card:focus-visible .industry-card {
   border-color: var(--primary);
 }
 
+/* Cards in a lab-grid row must all read as the same height — CSS Grid
+   already stretches each a.lab-card to the row's tallest item, but block
+   layout doesn't propagate that height into the .industry-card inside it
+   by default, so a card with a short tagline ends up visibly shorter than
+   its neighbors. Force it to fill, then flex the CTA to the bottom so
+   uneven tagline/tag-row lengths don't shift button position either. */
 a.lab-card .industry-card {
   padding-top: 0;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a.lab-card .industry-card > *:last-child {
+  margin-top: auto;
 }
 
 .card-thumbnail {

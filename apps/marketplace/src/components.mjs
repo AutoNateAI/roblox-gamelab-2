@@ -63,13 +63,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>Agricultural economic-intelligence and technology lab — the practice of Nathan Baker. Research, business analysis, data intelligence, and software applied to how food, capital, and infrastructure move through regional economies.</p>
+          <p>Nathan Baker's independent research practice, studying how farm country actually works — the land, the money, the roads, and the businesses that connect them — and publishing it free.</p>
         </div>
-        ${footerColumn("Intelligence", [["Regions", "/regions"], ["Systems", "/systems"], ["Organizations", "/organizations"], ["Research & Case Studies", "/articles"], ["Business Question Queue", "/investigations"], ["The Lab", "/lab"]])}
+        ${footerColumn("Research & Case Studies", [["Browse Everything", "/articles"], ["Regions", "/regions"], ["Organizations", "/organizations"], ["How Things Work", "/systems"], ["Open Questions", "/investigations"], ["The Lab (methodology)", "/lab"]])}
         ${footerColumn("More", [["Free Courses", "/tutorials"], ["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Events", "/events"], ["Community", "/community"], ["Work With Us", "/about#work-with-me"], ["About Nathan", "/about"]])}
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Agricultural economic-intelligence and technology lab.</span>
+        <span>&copy; 2026 AutoNateAI. Independent agricultural economic research, published free.</span>
       </div>
     </footer>
   `;
@@ -88,7 +88,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI is an agricultural economic-intelligence and technology lab: regional profiles, organization nodes, system deep dives, and an open business-question queue, run by Nathan Baker.";
+  "AutoNateAI researches how farm country actually works — regional profiles, the lenders and businesses in them, how-things-work guides, and open questions — researched, sourced, and published free by Nathan Baker.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;

@@ -1,27 +1,28 @@
-// AutoNateAI is now narrowed from a general AI/software/human-systems lab to
-// an Agricultural Economic Systems Intelligence Lab — agriculture as the
-// anchor for regional economic-development research across the U.S., with
-// Southeast Missouri as the recurring laboratory Nathan can physically
-// validate. See docs/marketplace/agricultural-intelligence-lab.md for the
-// full contract (supersedes the general-lab framing in
-// lab-operating-model.md as the current locked direction — that doc's
-// private/public boundary rule and "never fabricate activity" rule still
-// apply). Primary nav takes over the homepage; Tutorials, Programs,
-// Consulting, Events, Community, and For Organizations keep their routes
-// unchanged and move to the footer.
+// AutoNateAI is an Agricultural Economic Systems Intelligence Lab —
+// agriculture as the anchor for regional economic-development research
+// across the U.S., with Southeast Missouri as the recurring home region
+// Nathan can walk the ground on. See
+// docs/marketplace/agricultural-intelligence-lab.md for the full contract
+// (supersedes the general-lab framing in lab-operating-model.md as the
+// current locked direction — that doc's private/public boundary rule and
+// "never fabricate activity" rule still apply).
+//
+// SECOND PASS (nav simplification): Regions, Organizations, Systems, and
+// The Lab are no longer primary-nav destinations — they're filters inside
+// Research & Case Studies (/articles), which is where visitors are meant
+// to browse and discover. Their own URLs (/regions/:slug, etc.) stay real
+// and unchanged for direct links, search results, and SEO — see
+// renderArticles in src/pages.mjs for the unified filter UI.
 export const navItems = [
   { label: "Intelligence", href: "/", keys: ["home"] },
-  { label: "Regions", href: "/regions", keys: ["regions"] },
-  { label: "Systems", href: "/systems", keys: ["systems"] },
-  { label: "Organizations", href: "/organizations", keys: ["organizations"] },
-  { label: "Research & Case Studies", href: "/articles", keys: ["articles", "investigations"] },
-  { label: "The Lab", href: "/lab", keys: ["lab", "projects", "experiments", "open-source"] },
-  { label: "Work With Us", href: "/about#work-with-me", keys: ["about"] },
+  { label: "Research & Case Studies", href: "/articles", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
+  { label: "About", href: "/about", keys: ["about"] },
+  { label: "Work With Us", href: "/about#work-with-me", keys: ["work-with-us"] },
 ];
 
-// Tutorials, Consulting, Events, Community, and For Organizations are still
-// real, working pages — reachable from the footer and in-page CTAs, not
-// primary nav.
+// Tutorials, Consulting, Events, Community, For Organizations, and The Lab
+// (the general research-methodology layer) are still real, working pages —
+// reachable from the footer and in-page CTAs, not primary nav.
 
 // ---------------------------------------------------------------------------
 // THE LAB — current investigation, experiments, projects, open-source
@@ -560,16 +561,18 @@ export const labEvents = [
 
 // ---------------------------------------------------------------------------
 // AGRICULTURAL ECONOMIC SYSTEMS INTELLIGENCE — Regions, Organizations,
-// Systems, and Investigations (the Business Question Queue). This is the
-// lab's new primary content model: agriculture as the anchor for regional
-// economic-development research. See
+// Systems, and Investigations (Open Questions). This is the lab's primary
+// content model: agriculture as the anchor for regional
+// economic-development research. All four types are surfaced as filters on
+// the Research & Case Studies hub (/articles, see renderArticles in
+// src/pages.mjs) rather than as separate primary-nav destinations — see
 // docs/marketplace/agricultural-intelligence-lab.md for the operating
 // contract this narrows down from.
 //
 // Each array holds one fully-researched flagship entry (grounded in real,
 // cited public sources — Farm Credit Southeast Missouri's own annual
 // reports, the Farm Credit Administration public directory, and USDA NASS
-// acreage reports) plus one honest "Watchlist" placeholder proving the
+// acreage reports) plus one honest "Coming Soon" placeholder proving the
 // list/detail pattern before real research fills it in. No daily
 // agricultural radar has landed in this repo yet — Radar_Reports/ still
 // only has the Sept 9 general-lab desks — so nothing here claims a "live"
@@ -578,8 +581,8 @@ export const labEvents = [
 // ---------------------------------------------------------------------------
 
 export const regionStatusLabels = {
-  laboratory: "Active Laboratory",
-  watchlist: "Watchlist — Not Yet Profiled",
+  laboratory: "In-Depth Profile",
+  watchlist: "Coming Soon",
 };
 
 export const regions = [
@@ -589,23 +592,23 @@ export const regions = [
     status: "laboratory",
     name: "Southeast Missouri (The Bootheel)",
     thumbnail: "/assets/regions/southeast-missouri.jpg",
-    tagline: "Nathan's home laboratory — the one region validated by walking in, not only reading public data.",
+    tagline: "Soybeans, corn, cotton, rice, and wheat move through a 12-county river-bottom economy anchored on the Mississippi at Sikeston — here's how the land, the money, and the roads connect.",
     geography:
       "The 12-county Farm Credit Southeast Missouri territory plus the wider Bootheel lowlands: Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Mississippi, New Madrid, Pemiscot, Ripley, Scott, Stoddard, and Wayne counties, anchored on the Mississippi River at Cairo/Sikeston.",
-    coordinates: "36.8767° N, 89.5879° W (Sikeston, MO — central office node)",
+    coordinates: "36.8767° N, 89.5879° W (Sikeston, MO)",
     commodities: ["Soybeans", "Corn", "Cotton", "Rice", "Winter Wheat"],
     stats: [
       { label: "Counties in territory", value: "12" },
       { label: "Farm Credit SEMO locations", value: "8" },
       { label: "Organizations profiled", value: "1" },
-      { label: "Open investigations", value: "1" },
+      { label: "Open questions", value: "1" },
     ],
     production:
-      "Flat, fertile Mississippi River-alluvial lowland ground supporting row-crop agriculture at a scale unusual for Missouri — one of the state's few rice- and cotton-growing regions alongside the dominant soybean/corn rotation.",
+      "Flat, fertile Mississippi River-bottom ground grows row crops at a scale unusual for Missouri — one of the state's few rice- and cotton-growing areas, alongside the soybean/corn rotation most of the region runs.",
     capital:
-      "Financed primarily through Farm Credit Southeast Missouri — a member-owned Farm Credit System cooperative headquartered in Sikeston — alongside community banks and credit unions. See the organization profile for verified public financials.",
+      "Most Bootheel producers finance their operations through Farm Credit Southeast Missouri — a member-owned lending cooperative headquartered in Sikeston — alongside community banks and credit unions. See the organization profile below for verified public numbers.",
     freight:
-      "I-55 and I-57 highway corridors, BNSF/UP rail lines, and Mississippi River barge access via Cairo/New Madrid terminals move Bootheel grain toward Gulf export markets.",
+      "I-55 and I-57 move Bootheel grain by truck; BNSF/UP rail and Mississippi River barges out of Cairo and New Madrid carry it on toward Gulf export markets.",
     organizations: ["farm-credit-southeast-missouri"],
     systems: ["agricultural-finance-and-capital"],
     investigations: ["bootheel-rice-to-soybean-pivot"],
@@ -620,9 +623,9 @@ export const regions = [
     icon: "grass",
     status: "watchlist",
     name: "Central Iowa Corn Belt",
-    thumbnail: null,
-    tagline: "On the national region watchlist. No research pass has run yet — this entry only proves the template.",
-    geography: "Placeholder — county/corridor boundary not yet defined.",
+    thumbnail: "/assets/regions/central-iowa-corn-belt.jpg",
+    tagline: "We haven't profiled this region yet — it's next up on the list.",
+    geography: "Coming soon.",
     coordinates: "",
     commodities: ["Corn", "Soybeans"],
     stats: [],
@@ -641,18 +644,23 @@ export const organizationTypeLabels = {
   elevator: "Grain Elevator / Cooperative",
 };
 
+export const organizationStatusLabels = {
+  profiled: "In-Depth Profile",
+  watchlist: "Coming Soon",
+};
+
 export const organizations = [
   {
     slug: "farm-credit-southeast-missouri",
     icon: "account_balance",
-    status: "Profiled",
+    status: "profiled",
     orgType: "lender",
     name: "Farm Credit Southeast Missouri",
     thumbnail: "/assets/organizations/farm-credit-southeast-missouri.jpg",
-    tagline: "A federally chartered, member-owned agricultural lending cooperative headquartered in Sikeston — the capital edge of the Bootheel's agricultural graph.",
+    tagline: "A member-owned lending cooperative headquartered in Sikeston that finances much of the Bootheel's farmland, equipment, and operating seasons.",
     region: "southeast-missouri",
     roleInSystem:
-      "Farm Credit Southeast Missouri sits on the Capital Graph's lender node: it finances farm real estate, operating expenses, equipment, livestock, and agribusiness, and sells crop and life insurance, across its 12-county Southeast Missouri territory. As a Farm Credit System cooperative, its borrowers are member-owners — profits can flow back through patronage distributions, which makes its economics different from a conventional commercial bank.",
+      "Farm Credit Southeast Missouri is where capital actually enters the Bootheel's agricultural economy: it finances farm real estate, operating expenses, equipment, livestock, and agribusiness, and sells crop and life insurance, across its 12-county Southeast Missouri territory. Because it's a Farm Credit System cooperative, its borrowers are member-owners — profits can flow back to them through patronage distributions, which makes its economics different from a conventional commercial bank.",
     facts: [
       { label: "Structure", value: "Member-owned cooperative, part of the nationwide Farm Credit System" },
       { label: "CEO", value: "Gregory Cunningham" },
@@ -703,11 +711,11 @@ export const organizations = [
   {
     slug: "bootheel-grain-cooperative",
     icon: "storefront",
-    status: "Watchlist",
+    status: "watchlist",
     orgType: "elevator",
     name: "Bootheel Grain Cooperative (placeholder)",
-    thumbnail: null,
-    tagline: "Template entry only — no specific elevator/cooperative has been researched or verified yet.",
+    thumbnail: "/assets/organizations/bootheel-grain-cooperative.jpg",
+    tagline: "We haven't profiled a specific elevator or cooperative yet — it's next up on the list.",
     region: "southeast-missouri",
     roleInSystem: "",
     facts: [],
@@ -729,6 +737,11 @@ export const systemCategoryLabels = {
   "processing-market": "Processing & Market Access",
 };
 
+export const systemStatusLabels = {
+  published: "In-Depth Profile",
+  planned: "Coming Soon",
+};
+
 // The Four Pillars applied consistently across every system deep dive —
 // Business Analysis, Data Intelligence, Systems Mapping, AI & Automation.
 export const pillarLabels = ["Business Analysis", "Data Intelligence", "Systems Mapping", "AI & Automation"];
@@ -737,13 +750,13 @@ export const systems = [
   {
     slug: "agricultural-finance-and-capital",
     icon: "payments",
-    status: "Deep dive published",
+    status: "published",
     category: "finance-capital",
     name: "Agricultural Finance & Capital",
     thumbnail: "/assets/systems/agricultural-finance-and-capital.jpg",
-    tagline: "How capital enters the agricultural graph — from a producer's need to a lender's balance sheet, and back.",
+    tagline: "How financing actually works for a farm operation — from a producer's need for capital to a lender's approval, and back.",
     overview:
-      "Capital is the edge that has to exist before most physical activity in the agricultural graph can happen: a farmer needs financing for equipment, land, or an operating season before production, storage, or transportation ever occur. This system deep dive traces that lifecycle through a Farm Credit System lender, using Farm Credit Southeast Missouri's real public disclosures as the concrete example — see /organizations/farm-credit-southeast-missouri.",
+      "A farmer usually needs financing before anything else can happen — for equipment, land, or an operating season — before production, storage, or hauling ever starts. This deep dive walks that process step by step through a real Farm Credit System lender, using Farm Credit Southeast Missouri's own public disclosures as the concrete example — see the organization profile.",
     pipeline: [
       { stage: "1. Capital Need Identified", description: "A producer needs financing for operating expenses, equipment, land, or insurance ahead of a production season." },
       { stage: "2. Application & Financial Intake", description: "Farm financials, production history, and collateral information are submitted — typically through a CRM/origination system such as Salesforce or nCino." },
@@ -774,11 +787,11 @@ export const systems = [
   {
     slug: "freight-infrastructure-storage",
     icon: "local_shipping",
-    status: "Framework drafted",
+    status: "planned",
     category: "freight-infrastructure",
     name: "Freight / Infrastructure / Storage",
-    thumbnail: null,
-    tagline: "Template entry — the pipeline/pillar framework is defined, region-specific evidence is not yet filled in.",
+    thumbnail: "/assets/systems/freight-infrastructure-storage.jpg",
+    tagline: "We haven't published this deep dive yet — it's next up on the list.",
     overview: "",
     pipeline: [],
     pillars: [],
@@ -791,9 +804,9 @@ export const systems = [
 ];
 
 export const investigationStatusLabels = {
-  open: "Open",
+  open: "Open Question",
   investigating: "Investigating",
-  published: "Published",
+  published: "Answered",
 };
 
 export const investigations = [
@@ -804,7 +817,7 @@ export const investigations = [
     name: "Bootheel Rice-to-Soybean Pivot",
     question:
       "As Missouri rice acreage comes under water- and weather-driven pressure while national soybean acreage expands, how would a continued Bootheel-level shift from rice toward soybeans change grower cash flow, Farm Credit lending exposure, and regional elevator/freight demand?",
-    tagline: "An open business question, not a finding — the county-level data this needs hasn't been pulled yet.",
+    tagline: "We're still gathering the county-level numbers to answer this — here's what we know so far and what's still missing.",
     thumbnail: "/assets/investigations/bootheel-rice-to-soybean-pivot.jpg",
     region: "southeast-missouri",
     commodity: "Rice / Soybeans",
@@ -841,9 +854,9 @@ export const investigations = [
     icon: "help_center",
     status: "open",
     name: "Elevator Harvest-Season Bottleneck (placeholder)",
-    question: "Template entry only — no specific elevator or bottleneck has been researched or verified yet.",
-    tagline: "Proves the queue can hold more than one open question at a time.",
-    thumbnail: null,
+    question: "We haven't researched a specific elevator or bottleneck yet — it's next up on the list.",
+    tagline: "Coming soon.",
+    thumbnail: "/assets/investigations/elevator-harvest-bottleneck.jpg",
     region: "southeast-missouri",
     commodity: "",
     evidence: [],
@@ -1171,11 +1184,11 @@ export const sponsorshipTiers = [
   { seats: 20, price: 9980, label: "Sponsor 20 seats" },
 ];
 
-// Multi-year lab roadmap shown on the About page.
+// Multi-year roadmap shown on the About page.
 export const regionalVision = [
-  { period: "2026-27", text: "Run the daily research cycle: observe, question, build, measure, publish, connect — turning five research desks into real experiments and publications." },
-  { period: "Next", text: "Grow Active Projects out of the strongest recurring signals, and keep architecture, AI engineering, and requested team training open alongside the research." },
-  { period: "Long term", text: "Become the standing independent research lab people check before building the next agentic system — public evidence, not a pitch deck." },
+  { period: "2026-27", text: "Go deep on Southeast Missouri: profile the lenders, elevators, and businesses that make up its farm economy, one real research pass at a time — and answer the open questions it raises." },
+  { period: "Next", text: "Extend the same method to more U.S. agricultural regions, while keeping consulting, architecture, and requested team training open alongside the research." },
+  { period: "Long term", text: "Become the place farmers, lenders, and agribusinesses check first to understand how their local farm economy actually works — public evidence, not a pitch deck." },
 ];
 
 // Consulting offerings for AutoNateAI's community/regional banking vertical.

@@ -311,11 +311,13 @@ const server = createServer(async (request, response) => {
 
     // Pagination routes: page 1 lives at the bare listing route above;
     // page N>1 lives at "<listing>/page/<n>" (see pages.mjs paginationNav).
-    const paginationMatch = url.pathname.match(/^\/(articles|experiments|open-source)\/page\/(\d+)$/);
+    // renderArticles is no longer paginated (second pass: it's the unified
+    // Research & Case Studies hub — small enough to show unfiltered).
+    const paginationMatch = url.pathname.match(/^\/(experiments|open-source)\/page\/(\d+)$/);
     if (paginationMatch) {
       const [, section, pageStr] = paginationMatch;
       const page = Number(pageStr) || 1;
-      const renderer = { articles: renderArticles, experiments: renderExperiments, "open-source": renderOpenSource }[section];
+      const renderer = { experiments: renderExperiments, "open-source": renderOpenSource }[section];
       html(response, 200, renderer(page));
       return;
     }

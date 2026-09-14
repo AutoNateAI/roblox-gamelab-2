@@ -48,7 +48,7 @@ const images = [
   {
     file: "ag-lab/systems-hero.jpg",
     size: "1536x1024",
-    prompt: `An abstract photo-realistic illustration of a glowing emerald-green network diagram of connected nodes overlaid faintly on a blurred grain elevator and silo skyline at dusk, technical and editorial. ${STYLE}`,
+    prompt: `A photo-realistic wide shot of a combine harvester cutting a soybean field at golden hour, a grain truck driving alongside to catch the unload, a grain elevator visible in the distance, dust in the warm evening light. Concrete and grounded, no abstract overlays or diagrams. ${STYLE}`,
   },
   {
     file: "ag-lab/investigations-hero.jpg",
@@ -58,7 +58,7 @@ const images = [
   {
     file: "ag-lab/lab-hero.jpg",
     size: "1536x1024",
-    prompt: `A photo-realistic close-up of a clean researcher's desk with a laptop showing a faint abstract network-graph diagram, a notebook, and a coffee cup, soft window light, calm and analytical mood, no readable text. ${STYLE}`,
+    prompt: `A photo-realistic close-up of a wooden farmhouse table covered with a spread-out paper county map, a research notebook, a pen, a few printed reports, and a mug of coffee, soft window light, warm and tangible, no screens, no glowing overlays, no readable text. ${STYLE}`,
   },
   {
     file: "regions/southeast-missouri.jpg",
@@ -73,12 +73,32 @@ const images = [
   {
     file: "systems/agricultural-finance-and-capital.jpg",
     size: "1536x1024",
-    prompt: `An abstract photo-realistic illustration of a glowing emerald-and-river-blue flow diagram — circles connected by directional lines — overlaid subtly on a blurred stack of paper loan documents and a calculator on a wooden desk. ${STYLE}`,
+    prompt: `A photo-realistic shot of two people at a wooden desk shaking hands over a loan document and a farm ledger book, a window behind them showing green farmland, warm natural light, hands and torsos only, no visible faces, grounded and concrete, no abstract overlays or glowing diagrams. ${STYLE}`,
   },
   {
     file: "investigations/bootheel-rice-to-soybean-pivot.jpg",
     size: "1536x1024",
     prompt: `A photo-realistic aerial documentary shot showing a sharp visual boundary between a flooded rice paddy on one side and a dry green soybean field on the other, straight levee line dividing them, soft daylight. ${STYLE}`,
+  },
+  {
+    file: "regions/central-iowa-corn-belt.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic aerial shot of classic Iowa Corn Belt farmland: vast geometric cornfields in late-summer green, a farmstead with grain bins and a red barn, gravel section roads, soft midday light. ${STYLE}`,
+  },
+  {
+    file: "organizations/bootheel-grain-cooperative.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic wide shot of a working grain elevator and co-op complex: concrete grain silos, a truck scale, and a couple of grain trucks parked nearby, flat farmland in the background, generic and unbranded, midday light, documentary style — no signage, no logos, no readable text anywhere. ${STYLE}`,
+  },
+  {
+    file: "systems/freight-infrastructure-storage.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic shot of a loaded grain barge being pushed by a towboat on a wide river, grain elevator and conveyor visible on the riverbank, overcast working-day light, documentary and concrete. ${STYLE}`,
+  },
+  {
+    file: "investigations/elevator-harvest-bottleneck.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic shot of a line of grain trucks queued up on a gravel road waiting to unload at a busy grain elevator during harvest, dust in the air, late afternoon light, documentary and concrete, no readable text or logos. ${STYLE}`,
   },
 ];
 

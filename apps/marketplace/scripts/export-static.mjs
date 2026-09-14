@@ -85,8 +85,9 @@ const routes = [
 
 // Paginated listings: page 1 is the bare route above; page 2+ gets its own
 // "<section>/page/<n>/index.html" (mirrors server.mjs's routing).
+// renderArticles is no longer paginated (second pass: it's the unified
+// Research & Case Studies hub — small enough to show unfiltered).
 const paginatedSections = [
-  { dir: "articles", items: articles.filter((a) => a.handle !== "systems-thinking-through-code"), render: renderArticles },
   { dir: "experiments", items: labExperiments, render: renderExperiments },
   { dir: "open-source", items: openSourceRepos, render: renderOpenSource },
 ];

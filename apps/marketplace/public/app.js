@@ -523,8 +523,14 @@ filterButtons.forEach((button) => {
   });
 });
 
-filterButtons[0]?.classList.add("active");
+// Allow a link into Research & Case Studies to land pre-filtered, e.g.
+// /articles?type=Regions from the homepage's "All Regions" button.
+const presetType = new URLSearchParams(window.location.search).get("type");
+const presetButton = presetType && filterButtons.find((button) => button.dataset.filter === presetType);
+(presetButton || filterButtons[0])?.classList.add("active");
+if (presetButton) activeArticleFilter = presetType;
 articleSearch?.addEventListener("input", filterArticles);
+filterArticles();
 
 // --- For Organizations: seat-based sponsorship checkout ---
 // Reuses the same Square SDK load/attach flow as the single-seat checkout
