@@ -9,13 +9,18 @@
 //
 // SECOND PASS (nav simplification): Regions, Organizations, Systems, and
 // The Lab are no longer primary-nav destinations — they're filters inside
-// Research & Case Studies (/articles), which is where visitors are meant
-// to browse and discover. Their own URLs (/regions/:slug, etc.) stay real
-// and unchanged for direct links, search results, and SEO — see
-// renderArticles in src/pages.mjs for the unified filter UI.
+// Research & Case Studies (/research-and-case-studies), which is where
+// visitors are meant to browse and discover.
+//
+// FOURTH PASS (SEO path unification): every region/organization/system/
+// investigation detail page now lives at /research-and-case-studies/:slug
+// instead of scattered under /regions/:slug, /organizations/:slug, etc. —
+// see renderArticles and the shared card helpers in src/pages.mjs. The
+// bare listing pages (/regions, /organizations, /systems, /investigations)
+// are unchanged. Old detail URLs 301-redirect via firebase.json.
 export const navItems = [
   { label: "Intelligence", href: "/", keys: ["home"] },
-  { label: "Research & Case Studies", href: "/articles", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
+  { label: "Research & Case Studies", href: "/research-and-case-studies", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
   { label: "About", href: "/about", keys: ["about"] },
   { label: "Work With Us", href: "/about#work-with-me", keys: ["work-with-us"] },
 ];
@@ -564,7 +569,7 @@ export const labEvents = [
 // Systems, and Investigations (Open Questions). This is the lab's primary
 // content model: agriculture as the anchor for regional
 // economic-development research. All four types are surfaced as filters on
-// the Research & Case Studies hub (/articles, see renderArticles in
+// the Research & Case Studies hub (/research-and-case-studies, see renderArticles in
 // src/pages.mjs) rather than as separate primary-nav destinations — see
 // docs/marketplace/agricultural-intelligence-lab.md for the operating
 // contract this narrows down from.

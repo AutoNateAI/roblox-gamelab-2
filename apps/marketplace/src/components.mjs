@@ -65,7 +65,7 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>Nathan Baker's independent research practice, studying how farm country actually works — the land, the money, the roads, and the businesses that connect them — and publishing it free.</p>
         </div>
-        ${footerColumn("Research & Case Studies", [["Browse Everything", "/articles"], ["Regions", "/regions"], ["Organizations", "/organizations"], ["How Things Work", "/systems"], ["Open Questions", "/investigations"], ["The Lab (methodology)", "/lab"]])}
+        ${footerColumn("Research & Case Studies", [["Browse Everything", "/research-and-case-studies"], ["Regions", "/regions"], ["Organizations", "/organizations"], ["How Things Work", "/systems"], ["Open Questions", "/investigations"], ["The Lab (methodology)", "/lab"]])}
         ${footerColumn("More", [["Free Courses", "/tutorials"], ["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Events", "/events"], ["Community", "/community"], ["Work With Us", "/about#work-with-me"], ["About Nathan", "/about"]])}
       </div>
       <div class="footer-bottom">

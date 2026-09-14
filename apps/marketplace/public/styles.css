@@ -4685,10 +4685,19 @@ pre.mermaid svg {
   }
 }
 
-/* Home "What We Offer" 4-up cards: push the trailing link to consistent
-   spacing regardless of card copy length. */
+/* Cards with a trailing button (Research Library, Work With Us, etc.)
+   pin that button to the card's bottom edge regardless of copy length,
+   so buttons line up across a row even when descriptions wrap to
+   different heights — cards without a button (audience/course grids)
+   are untouched. Same technique as a.lab-card .industry-card above. */
+.value-grid article:has(.outline-button.full) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .value-grid article .outline-button.full {
-  margin-top: 14px;
+  margin-top: auto;
 }
 
 /* Events page: one calendar-style tile per industry spotlight week. */

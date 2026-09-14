@@ -232,6 +232,11 @@ function html(response, status, payload) {
   response.end(payload);
 }
 
+function redirect(response, location) {
+  response.writeHead(301, { location, "cache-control": "no-store" });
+  response.end();
+}
+
 async function staticFile(response, pathname) {
   const cleanPath = pathname === "/" ? "/index.html" : pathname;
   const filePath = path.join(publicDir, cleanPath);
@@ -262,7 +267,7 @@ const server = createServer(async (request, response) => {
       "/",
       "/about",
       "/programs",
-      "/articles",
+      "/research-and-case-studies",
       "/experiments",
       "/projects",
       "/open-source",
@@ -288,7 +293,7 @@ const server = createServer(async (request, response) => {
       const renderers = {
         "/": renderHome,
         "/about": renderAbout,
-        "/articles": renderArticles,
+        "/research-and-case-studies": renderArticles,
         "/experiments": renderExperiments,
         "/projects": renderProjects,
         "/open-source": renderOpenSource,
@@ -306,6 +311,13 @@ const server = createServer(async (request, response) => {
         "/success": renderSuccess,
       };
       html(response, 200, renderers[url.pathname](programsData));
+      return;
+    }
+
+    // Old Research & Case Studies hub path — 301 to the new one, preserving
+    // any ?type= filter query string.
+    if (url.pathname === "/articles") {
+      redirect(response, `/research-and-case-studies${url.search}`);
       return;
     }
 
@@ -377,47 +389,55 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (url.pathname.startsWith("/regions/")) {
+    // Region/organization/system/investigation detail pages all live under
+    // one unified path for SEO (fourth pass) — a single slug lookup across
+    // all four collections, since slugs are unique across them. The old
+    // per-type detail URLs below now just 301 to the new path; the bare
+    // listing pages (/regions, /organizations, /systems, /investigations)
+    // are untouched.
+    if (url.pathname.startsWith("/research-and-case-studies/")) {
       const slug = url.pathname.split("/").filter(Boolean).at(-1);
       const region = regions.find((item) => item.slug === slug);
-      if (!region) {
-        json(response, 404, { error: "Region not found" });
+      if (region) {
+        html(response, 200, renderRegionDetail(region));
         return;
       }
-      html(response, 200, renderRegionDetail(region));
+      const organization = organizations.find((item) => item.slug === slug);
+      if (organization) {
+        html(response, 200, renderOrganizationDetail(organization));
+        return;
+      }
+      const system = systems.find((item) => item.slug === slug);
+      if (system) {
+        html(response, 200, renderSystemDetail(system));
+        return;
+      }
+      const investigation = investigations.find((item) => item.slug === slug);
+      if (investigation) {
+        html(response, 200, renderInvestigationDetail(investigation));
+        return;
+      }
+      json(response, 404, { error: "Not found" });
+      return;
+    }
+
+    if (url.pathname.startsWith("/regions/")) {
+      redirect(response, `/research-and-case-studies/${url.pathname.split("/").filter(Boolean).at(-1)}`);
       return;
     }
 
     if (url.pathname.startsWith("/organizations/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const organization = organizations.find((item) => item.slug === slug);
-      if (!organization) {
-        json(response, 404, { error: "Organization not found" });
-        return;
-      }
-      html(response, 200, renderOrganizationDetail(organization));
+      redirect(response, `/research-and-case-studies/${url.pathname.split("/").filter(Boolean).at(-1)}`);
       return;
     }
 
     if (url.pathname.startsWith("/systems/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const system = systems.find((item) => item.slug === slug);
-      if (!system) {
-        json(response, 404, { error: "System not found" });
-        return;
-      }
-      html(response, 200, renderSystemDetail(system));
+      redirect(response, `/research-and-case-studies/${url.pathname.split("/").filter(Boolean).at(-1)}`);
       return;
     }
 
     if (url.pathname.startsWith("/investigations/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const investigation = investigations.find((item) => item.slug === slug);
-      if (!investigation) {
-        json(response, 404, { error: "Investigation not found" });
-        return;
-      }
-      html(response, 200, renderInvestigationDetail(investigation));
+      redirect(response, `/research-and-case-studies/${url.pathname.split("/").filter(Boolean).at(-1)}`);
       return;
     }
 

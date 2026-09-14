@@ -7,6 +7,13 @@
   "hosting": {
     "public": "dist/site",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      { "source": "/articles", "destination": "/research-and-case-studies", "type": 301 },
+      { "source": "/regions/:slug", "destination": "/research-and-case-studies/:slug", "type": 301 },
+      { "source": "/organizations/:slug", "destination": "/research-and-case-studies/:slug", "type": 301 },
+      { "source": "/systems/:slug", "destination": "/research-and-case-studies/:slug", "type": 301 },
+      { "source": "/investigations/:slug", "destination": "/research-and-case-studies/:slug", "type": 301 }
+    ],
     "rewrites": [
       { "source": "/api/marketplace/**", "function": "marketplaceApi" },
       { "source": "/api/square/**", "function": "marketplaceApi" }

@@ -291,7 +291,7 @@ function searchAttr(...parts) {
 function regionCard(region) {
   const isPlaceholder = region.status === "watchlist";
   return `
-    <a class="lab-card" href="/regions/${region.slug}" data-category="Regions" data-search="${searchAttr(region.name, region.tagline, ...(region.commodities || []))}">
+    <a class="lab-card" href="/research-and-case-studies/${region.slug}" data-category="Regions" data-search="${searchAttr(region.name, region.tagline, ...(region.commodities || []))}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(region, region.icon)}<span class="status-pill">${escapeHtml(regionStatusLabels[region.status] || region.status)}</span></div>
         <h3>${escapeHtml(region.name)}</h3>
@@ -306,7 +306,7 @@ function regionCard(region) {
 function organizationCard(org) {
   const isPlaceholder = org.status === "watchlist";
   return `
-    <a class="lab-card" href="/organizations/${org.slug}" data-category="Organizations" data-search="${searchAttr(org.name, org.tagline)}">
+    <a class="lab-card" href="/research-and-case-studies/${org.slug}" data-category="Organizations" data-search="${searchAttr(org.name, org.tagline)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(org, org.icon)}<span class="status-pill">${escapeHtml(organizationStatusLabels[org.status] || org.status)}</span></div>
         <span class="kicker">${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)}</span>
@@ -321,7 +321,7 @@ function organizationCard(org) {
 function systemCard(system) {
   const isPlaceholder = system.status === "planned";
   return `
-    <a class="lab-card" href="/systems/${system.slug}" data-category="Systems" data-search="${searchAttr(system.name, system.tagline)}">
+    <a class="lab-card" href="/research-and-case-studies/${system.slug}" data-category="Systems" data-search="${searchAttr(system.name, system.tagline)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(system, system.icon)}<span class="status-pill">${escapeHtml(systemStatusLabels[system.status] || system.status)}</span></div>
         <span class="kicker">${escapeHtml(systemCategoryLabels[system.category] || system.category)}</span>
@@ -337,7 +337,7 @@ function investigationCard(investigation) {
   const region = regions.find((r) => r.slug === investigation.region);
   const isPlaceholder = !investigation.evidence?.length;
   return `
-    <a class="lab-card" href="/investigations/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
+    <a class="lab-card" href="/research-and-case-studies/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(investigation, investigation.icon)}<span class="status-pill">${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span></div>
         ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.name)}</span>` : ""}
@@ -359,7 +359,7 @@ export function renderRegions() {
             <span class="kicker">${icon("landscape")} Regions</span>
             <h1>How your area's farm economy actually works.</h1>
             <p>A county, a river corridor, a multi-state belt — whatever the natural boundary is, we walk through what's grown there, who finances it, and how it gets to market. Southeast Missouri is the deepest profile so far, because it's home.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -385,7 +385,7 @@ export function renderRegionDetail(region) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [region.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [region.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(region.icon)} Region &middot; ${escapeHtml(regionStatusLabels[region.status] || region.status)}</span>
@@ -415,7 +415,7 @@ export function renderRegionDetail(region) {
     title: `${region.name} | AutoNateAI Agricultural Systems Lab`,
     active: "regions",
     body,
-    canonicalPath: `/regions/${region.slug}`,
+    canonicalPath: `/research-and-case-studies/${region.slug}`,
     ogImage: region.thumbnail || "/assets/ag-lab/regions-hero.jpg",
     description: region.tagline,
     ogTitle: region.name,
@@ -426,7 +426,7 @@ export function renderRegionDetail(region) {
         "@type": "Place",
         "name": region.name,
         "description": region.tagline,
-        "url": `https://autonateai.com/regions/${region.slug}`,
+        "url": `https://autonateai.com/research-and-case-studies/${region.slug}`,
       },
     ],
   });
@@ -442,7 +442,7 @@ export function renderOrganizations() {
             <span class="kicker">${icon("account_balance")} Organizations</span>
             <h1>The lenders, elevators, and co-ops farmers actually deal with.</h1>
             <p>Not a scraped company page — real public numbers, sourced, and the open questions worth asking next. If you work at one of these, we'd genuinely like to hear where we got it wrong.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -468,7 +468,7 @@ export function renderOrganizationDetail(org) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [org.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [org.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(org.icon)} ${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)} &middot; ${escapeHtml(organizationStatusLabels[org.status] || org.status)}</span>
@@ -510,7 +510,7 @@ export function renderOrganizationDetail(org) {
     title: `${org.name} | AutoNateAI Agricultural Systems Lab`,
     active: "organizations",
     body,
-    canonicalPath: `/organizations/${org.slug}`,
+    canonicalPath: `/research-and-case-studies/${org.slug}`,
     ogImage: org.thumbnail || "/assets/ag-lab/organizations-hero.jpg",
     description: org.tagline,
     ogTitle: org.name,
@@ -521,7 +521,7 @@ export function renderOrganizationDetail(org) {
         "@type": "Organization",
         "name": org.name,
         "description": org.tagline,
-        "url": `https://autonateai.com/organizations/${org.slug}`,
+        "url": `https://autonateai.com/research-and-case-studies/${org.slug}`,
       },
     ],
   });
@@ -537,7 +537,7 @@ export function renderSystems() {
             <span class="kicker">${icon("account_tree")} Systems</span>
             <h1>How the industry actually operates, step by step.</h1>
             <p>Getting a loan, moving a crop to storage, getting it processed and sold — every deep dive walks through the real steps, the people involved, and where things tend to get stuck.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -562,7 +562,7 @@ export function renderSystemDetail(system) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], [system.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [system.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(system.icon)} ${escapeHtml(systemCategoryLabels[system.category] || system.category)} &middot; ${escapeHtml(systemStatusLabels[system.status] || system.status)}</span>
@@ -612,7 +612,7 @@ export function renderSystemDetail(system) {
     title: `${system.name} | AutoNateAI Agricultural Systems Lab`,
     active: "systems",
     body,
-    canonicalPath: `/systems/${system.slug}`,
+    canonicalPath: `/research-and-case-studies/${system.slug}`,
     ogImage: system.thumbnail || "/assets/ag-lab/systems-hero.jpg",
     description: system.tagline,
     ogTitle: system.name,
@@ -631,7 +631,7 @@ export function renderInvestigations() {
             <span class="kicker">${icon("help_center")} Open Questions</span>
             <h1>What we're still digging into.</h1>
             <p>${openCount} open question${openCount === 1 ? "" : "s"} right now. "Open" means genuinely open — what we know, what we still need, and who we still need to talk to are all public. We don't dress up a guess as an answer.</p>
-            <div class="button-row"><a class="outline-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a></div>
+            <div class="button-row"><a class="outline-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a></div>
           </div>
         </div>
       </section>
@@ -657,7 +657,7 @@ export function renderInvestigationDetail(investigation) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/articles"], ["Open Questions", "/investigations"], [investigation.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], ["Open Questions", "/investigations"], [investigation.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(investigation.icon)} Open Question &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
@@ -701,7 +701,7 @@ export function renderInvestigationDetail(investigation) {
     title: `${investigation.name} | AutoNateAI Agricultural Systems Lab`,
     active: "investigations",
     body,
-    canonicalPath: `/investigations/${investigation.slug}`,
+    canonicalPath: `/research-and-case-studies/${investigation.slug}`,
     ogImage: investigation.thumbnail || "/assets/ag-lab/investigations-hero.jpg",
     description: investigation.question,
     ogTitle: investigation.name,
@@ -790,7 +790,7 @@ export function renderHome(data) {
               <div><strong>Nathan Baker</strong><span>Founder, AutoNateAI</span></div>
             </div>
             <div class="button-row">
-              <a class="primary-button" href="/articles">Browse the Research ${icon("arrow_forward")}</a>
+              <a class="primary-button" href="/research-and-case-studies">Browse the Research ${icon("arrow_forward")}</a>
               <a class="secondary-button" href="/about#work-with-me">Work With Us</a>
             </div>
           </div>
@@ -800,9 +800,10 @@ export function renderHome(data) {
               <h2>${openInvestigations[0] ? escapeHtml(openInvestigations[0].name) : "Nothing open yet"}</h2>
               <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Check back soon for the next open question."}</p>
               <div class="hero-facts">
-                <span>${profiledRegions} region${profiledRegions === 1 ? "" : "s"} covered</span>
-                <span>${profiledOrgs} organization${profiledOrgs === 1 ? "" : "s"} profiled</span>
-                <span>${systems.length} how-it-works guide${systems.length === 1 ? "" : "s"}</span>
+                <span>${profiledRegions} Region${profiledRegions === 1 ? "" : "s"} Profiled</span>
+                <span>${profiledOrgs} Organization${profiledOrgs === 1 ? "" : "s"} Profiled</span>
+                <span>${systems.length} How-It-Works Guide${systems.length === 1 ? "" : "s"}</span>
+                <span>${openInvestigations.length} Open Question${openInvestigations.length === 1 ? "" : "s"}</span>
               </div>
             </div>
           </aside>
@@ -818,10 +819,10 @@ export function renderHome(data) {
           </div>
         </div>
         <div class="value-grid">
-          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>What's grown, who finances it, and how it gets to market — one farming region at a time.</p><a class="outline-button full" href="/articles?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Profiles of the real lenders, elevators, and cooperatives farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/articles?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_tree")}</span><h3>How It Works</h3><p>Step-by-step breakdowns of real processes, like getting a loan or moving a crop to market.</p><a class="outline-button full" href="/articles?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're actively researching but haven't answered yet, labeled honestly as open.</p><a class="outline-button full" href="/articles?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>What's grown, who finances it, and how it gets to market — one farming region at a time.</p><a class="outline-button full" href="/research-and-case-studies?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Profiles of the real lenders, elevators, and cooperatives farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/research-and-case-studies?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("account_tree")}</span><h3>How It Works</h3><p>Step-by-step breakdowns of real processes, like getting a loan or moving a crop to market.</p><a class="outline-button full" href="/research-and-case-studies?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
+          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're actively researching but haven't answered yet, labeled honestly as open.</p><a class="outline-button full" href="/research-and-case-studies?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
         </div>
       </section>
 
@@ -832,7 +833,7 @@ export function renderHome(data) {
             <h2>See the research in action.</h2>
             <p>One region, one organization, and one open question — real examples of what's actually here.</p>
           </div>
-          <a class="primary-button" href="/articles">Browse Everything ${icon("arrow_forward")}</a>
+          <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
         </div>
         <div class="industry-grid home-featured-grid">
           ${regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)).join("")}
@@ -1154,7 +1155,7 @@ export function renderSourceDetail(source) {
   const project = labProjects.find((p) => p.slug === source.project);
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Publications", "/articles"], [source.title, null]])}
+      ${breadcrumbs([["Home", "/"], ["The Lab", "/lab"], [source.title, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${evidenceBadge(source.evidenceClass)} <span style="margin-left: 8px">${escapeHtml(source.topic)}</span></span>
@@ -1284,7 +1285,7 @@ export function renderAbout() {
           <p>AutoNateAI is my independent research practice — a way to point my software and business-analytics background back at the place I'm from. I dig into how financing, land, equipment, and grain actually move through a farm economy, source every claim honestly, and write it up in plain language. Consulting and software work are also on the table — see <a href="#work-with-me">Work With Us</a> below.</p>
           <div class="button-row">
             <a class="primary-button" href="#work-with-me">Work With Us ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/articles">Browse the Research</a>
+            <a class="secondary-button" href="/research-and-case-studies">Browse the Research</a>
           </div>
         </div>
         <aside class="about-founder-card">
@@ -2322,7 +2323,7 @@ export function renderArticles() {
         </div>
         ${
           featured
-            ? `<a class="about-founder-card" href="/regions/${featured.slug}">
+            ? `<a class="about-founder-card" href="/research-and-case-studies/${featured.slug}">
                 <img src="${featured.thumbnail}" alt="${escapeHtml(featured.name)}" />
                 <div>
                   <span class="kicker">${icon("star")} Featured &middot; ${escapeHtml(regionStatusLabels[featured.status] || featured.status)}</span>
@@ -2354,7 +2355,7 @@ export function renderArticles() {
     title: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
     active: "articles",
     body,
-    canonicalPath: "/articles",
+    canonicalPath: "/research-and-case-studies",
     ogImage: "/assets/og/articles.jpg",
     description:
       "Regional profiles, organization profiles, how-things-work explainers, and open questions from AutoNateAI's agricultural economic-intelligence research — all in one searchable, filterable place.",
