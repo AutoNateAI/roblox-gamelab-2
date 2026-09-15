@@ -3154,6 +3154,7 @@ pre.mermaid svg {
 
 .form-stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   margin-top: 42px;
 }
@@ -3165,6 +3166,7 @@ pre.mermaid svg {
 .form-stack label {
   display: grid;
   gap: 8px;
+  min-width: 0;
   color: var(--on-variant);
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
@@ -3182,6 +3184,12 @@ pre.mermaid svg {
 .form-stack input,
 .form-stack select,
 .form-stack textarea {
+  /* Grid items default to a content-based min-width, so a <select> with
+     long option text (e.g. "Lender / Bank / Credit Union") can force
+     itself — and the whole grid — wider than the viewport on mobile.
+     width:100% + min-width:0 lets it shrink with its track instead. */
+  width: 100%;
+  min-width: 0;
   border: 0;
   border-bottom: 1px solid var(--outline);
   background: var(--surface-low);
@@ -3189,6 +3197,7 @@ pre.mermaid svg {
   font-family: inherit;
   font-size: 15px;
   padding: 16px;
+  box-sizing: border-box;
 }
 
 .form-stack select {
@@ -3220,7 +3229,7 @@ pre.mermaid svg {
 
 .two-col {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
