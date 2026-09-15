@@ -328,10 +328,18 @@ h1 {
 }
 
 .hero-program-panel {
+  display: block;
   overflow: hidden;
   border: 1px solid var(--outline);
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+  color: inherit;
+  transition: border-color 160ms ease;
+}
+
+a.hero-program-panel:hover,
+a.hero-program-panel:focus-visible {
+  border-color: var(--primary);
 }
 
 .hero-program-panel img,
