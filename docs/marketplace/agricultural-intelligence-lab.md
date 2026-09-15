@@ -186,3 +186,202 @@ rather than a scrollbar. Fixed with `minmax(0, 1fr)` tracks and explicit
 research template offline, then plans to return asking for Claude Code
 skills to help produce both the research and its webpage — no template
 shape confirmed yet as of this writing.
+
+## 8. Research Brief skill (2026-09-15) — search-based research → published page
+
+Status: **implemented, not yet committed/deployed.** Delivers the template
+work from §7's "Next" note. Reviewed a ChatGPT-drafted research-page
+template against the site's actual voice/architecture and adapted it rather
+than adopting it wholesale — see the skill's own reference docs for the
+full rationale.
+
+- **New skill**: `apps/marketplace/.claude/skills/research-brief/` —
+  4-phase workflow (Research → Draft → Assets → Assemble & Verify), each
+  phase a checkpoint. Phase 1 is genuinely search-based (WebSearch/WebFetch
+  against primary sources only); nothing is drafted from the model's own
+  knowledge. `reference/voice-and-evidence.md` codifies the evidence bar and
+  the never-fabricate/never-name-the-Radars rules from §2 of
+  `lab-operating-model.md`; `reference/schema.md` is the field-by-field
+  `investigations[]` + Markdown shape; `reference/interactive-blocks.md`
+  documents the new chart/map fence spec.
+- **Long-form content moved out of `data.mjs`**: `investigations[]` entries
+  can now carry a `sourcePath` pointing at `content/research/<slug>.md` —
+  same pattern the tutorial content already used
+  (`readTutorialMarkdown`/`sourcePath` in `src/pages.mjs`), now generalized
+  as `readResearchMarkdown()`. Keeps `data.mjs` as scannable structured
+  metadata; the narrative (short answer, methodology, implications) lives
+  in its own file and reuses the existing hand-rolled `markdownToHtml()` —
+  no new Markdown dependency.
+- **Two new fenced-code-block types**, ` ```chart ` and ` ```map `, added to
+  `codeBlockHtml()` in `src/pages.mjs`. They parse a JSON spec into a
+  `data-chart`/`data-map` attribute at build time; `public/app.js`
+  lazy-loads Chart.js and Leaflet from jsdelivr **only on pages that
+  actually use one** — exactly the existing Mermaid pattern
+  (` ```mermaid ` → `<pre class="mermaid">`, lazy ESM import), extended
+  rather than replaced. Maps use CARTO's free light/dark basemap tiles, no
+  API key, theme-aware (swaps with the existing dark-mode toggle, same as
+  Mermaid's theme vars). A malformed chart/map block degrades to a visible
+  `.data-block-error` message instead of failing the static build.
+- **One end-to-end test entry**: `content/research/bootheel-rice-to-soybean-pivot.md`
+  wired to the existing `bootheel-rice-to-soybean-pivot` investigation via
+  `sourcePath`. Content is bounded strictly to the two USDA NASS figures
+  already cited in that investigation's `evidence[]` (national soybean
+  acreage +5% to 85.4M, national rice harvested area -121K to 2.647M) —
+  no new claims, explicit "national, not county-level" caveats throughout,
+  implications section hedged as "if this holds locally." Verified via
+  `node scripts/export-static.mjs` (succeeds) and grepping the built
+  `dist/site/research-and-case-studies/bootheel-rice-to-soybean-pivot/index.html`
+  for `research-chart`/`research-map`/`pre class="mermaid"` — all three
+  rendered as real data islands, not raw code blocks.
+- **Out of scope, on purpose**: no live Airtable/Radar wiring (still the
+  manual one-question-in loop from §6 of `lab-operating-model.md`); no
+  distribution automation (LinkedIn/Facebook/email/YouTube) — that should
+  be a separate downstream skill consuming a finished `investigations[]`
+  entry, not folded into this one; no county-level choropleth map (the
+  `map` fence is point-markers only — a real boundary layer is a bigger
+  follow-up if it turns out to be needed); SEO/redirect cleanup explicitly
+  excluded per user instruction (handled separately, same session, via
+  Codex — see commit `8951067`).
+- **Not done yet**: nothing in this round has been committed or deployed —
+  `git status` still shows the changed files. User should review the
+  rendered page (or ask for a dev-server look) before deciding to ship it.
+
+## 9. Real end-to-end run + `Research Questions` Airtable table (2026-09-15)
+
+Two things happened after the user reviewed §8's build and asked for a real
+run plus new voice/format requirements:
+
+- **Voice and format requirements folded into the skill** (durable, applies
+  to every future run, not just this one): `reference/voice-and-evidence.md`
+  now specifies the narrative voice — first person, Nathan's real bio (young
+  Black professional, Michigan-raised, moved to the Bootheel where his
+  family is from), witty but professional. `reference/schema.md` now
+  requires a history/context section, a policy/incentive section (call out
+  explicitly wherever two policy levers point in different directions), and
+  a named `## Moral of the Story` section with concrete per-stakeholder
+  takeaways, on every article.
+- **A genuine end-to-end research pass** on `bootheel-rice-to-soybean-pivot`
+  — 8 WebSearches + 5 WebFetches against primary/trade sources (USDA NASS,
+  FSA/CRS, EPA/Federal Register via Holland & Knight, farmdoc daily, USA
+  Rice Federation, Brownfield Ag News, USGS/academic groundwater research,
+  the Little River Drainage District's own history). Real finds: the Little
+  River Drainage District (1907-1928) engineered the Bootheel's farmland out
+  of swamp; the shared Mississippi River Valley Alluvial Aquifer has been
+  declining since large-scale pumping began near Stuttgart, AR in the early
+  1900s; H.R. 1 (the One Big Beautiful Bill Act, Jul 2025) raised the rice
+  PLC reference price 20.7% ($14.00 → $16.90/cwt); EPA's final 2026-2027 RFS
+  rule pulls ~17% more soybean oil into biofuel; the China soybean deal
+  still runs ~14% below the five-year average with a 13% tariff standing;
+  and Missouri's 2026 rice acreage already came in below average, with USA
+  Rice's own regional contact attributing it to "market issues" on the
+  record. `content/research/bootheel-rice-to-soybean-pivot.md` rewritten in
+  full with this material; `investigations[]` entry in `src/data.mjs`
+  updated to match (`status` moved from `"open"` to `"investigating"`,
+  `findings` no longer `null`, `evidence`/`sources` expanded to 6/10 real
+  citations). Rebuilt via `scripts/export-static.mjs` and verified in the
+  already-running local dev server (port 4173) — 3 charts, 1 map, 1 mermaid
+  diagram, 0 parse errors.
+- **New Airtable table**: `Research Questions` in the
+  `AutoNateAI California Technical Network Radar` base
+  (`appUHkTbaYBwqpQnA`, table `tblqCcZMkhdRM63RI`) — the `ResearchQuestion`
+  object from the Sept 15 ChatGPT planning conversation, flattened into
+  Airtable fields (Question, Short Answer, Status, Confidence, Region,
+  Commodities, Stakeholders, Hypothesis, Historical Context, Policy &
+  Incentive Signals, Findings, What's Still Needed, Moral of the Story,
+  Evidence & Sources, Mermaid Diagram, Chart/Map Specs as JSON, Page URL,
+  Source File Path, Deployed checkbox, Created/Updated At, and four blank
+  distribution-draft fields for LinkedIn/Facebook/Email/YouTube). Chose
+  this base over creating a new one because it already hosts the Lab-layer
+  tables (`Sources`, `Lab Publications`, `Experiments`, `Projects`,
+  `Daily Lab State`) this table is a peer of, per `lab-operating-model.md`
+  §4. One record created (`recNZVcbi79n1zDCR`) for the Bootheel
+  investigation, `Deployed` left unchecked since nothing is committed yet.
+  Distribution-draft fields deliberately left blank — no distribution copy
+  has been written; that's out of scope for this skill (see its own "What
+  this skill does not do" section).
+- **Not done**: no linked-record relationships to the base's existing
+  `Sources` table (would mean creating 10 new Source records to match;
+  citations live as a single formatted text field on the Research Questions
+  record for now) — revisit if/when this table gets more than a couple of
+  records and cross-referencing sources across articles starts to matter.
+  No Airtable → site sync in either direction yet; the site still reads only
+  from `src/data.mjs`/`content/research/*.md`, and this table is a
+  documentation/research-ops record of that content, not (yet) its source
+  of truth.
+
+## 10. Real bugs from user QA + dedicated Airtable base (2026-09-15, later same day)
+
+User read the live page and found three real problems plus asked for two
+structural changes. All fixed/shipped in this pass:
+
+- **Root cause of "Mermaid didn't render and no assets loaded" (real bug,
+  not a viewing-method issue as first suspected)**: `public/app.js` had
+  **two** top-level `function loadScript(...)` declarations — the new one
+  this session added for lazy-loading Chart.js/Leaflet, and a pre-existing
+  one used by the Square checkout flow. `app.js` loads as
+  `<script type="module">`, where a duplicate top-level function
+  declaration is a `SyntaxError` that silently kills the *entire* script —
+  explaining why Mermaid, the charts, and the map all failed together with
+  no console-visible symptom from the server side (curl/HTML checks all
+  showed 200s and correct markup, because the bug only manifests at
+  browser-side JS parse time). Fixed by renaming the new one to
+  `loadExternalScript` and updating its two call sites. Verified with
+  `node --input-type=module --check < public/app.js` in addition to the
+  normal `node --check` (which treats the file as a script and would not
+  have caught this) — that combined check is now the standard verification
+  step for this file going forward.
+- **Charts had unbounded/infinite height, page unscrollable**: a classic
+  Chart.js gotcha — with `responsive:true`/`maintainAspectRatio:false`,
+  Chart.js measures the canvas's *immediate parent* to size itself; the
+  fixed height was on the canvas itself (`.research-chart canvas`), not a
+  dedicated parent, so the resize observer fed back into its own
+  measurement and grew without bound. Fixed by wrapping the canvas in a new
+  `.chart-canvas-wrap` div that carries the fixed height
+  (`dataBlockHtml()` in `src/pages.mjs`, CSS in `public/styles.css`) — the
+  canvas itself now has no explicit CSS height, matching Chart.js' own
+  documented fix for this exact issue.
+- **Dev server doesn't hot-reload**: discovered mid-session that
+  `server.mjs` caches its `pages.mjs`/`data.mjs` ESM imports per process —
+  edits to those files require killing and restarting the `node server.mjs`
+  process (static files like `app.js`/`styles.css` **do** reflect
+  immediately, no restart needed for those). Worth remembering for any
+  future session working against the local dev server rather than a fresh
+  `export-static.mjs` build.
+- **Breadcrumb fix**: investigation detail pages had an extra
+  `Open Questions → /investigations` breadcrumb segment pointing at a route
+  the Sept 15 SEO cleanup (commit `8951067`) already removed from
+  `server.mjs`'s page routes — dead link, and redundant with
+  "Research & Case Studies" besides. Removed; investigation breadcrumbs now
+  match the same 3-level pattern (`Home / Research & Case Studies /
+  <title>`) already used by regions/organizations/systems.
+- **Titles are now provocative real questions, not topic labels**: per
+  explicit feedback that "Bootheel Rice-to-Soybean Pivot" wouldn't make
+  anyone want to click. `investigation.name` — which is the H1, `<title>`,
+  and OG title everywhere via the existing `pageShell()` call, so no
+  render-code changes were needed — is now the headline
+  ("Congress Just Made Rice More Profitable. So Why Are Bootheel Farmers
+  Planting Less of It?"); the precise analytical `question` field is
+  unchanged and still renders as the subhead. OG description already used
+  `investigation.question` (also a question) — satisfied automatically.
+  `reference/schema.md` in the skill now requires every future `name` to be
+  an honestly-earned provocative question — applied to `investigations[]`
+  only (regions/organizations/systems are profile pages, not
+  question-driven pieces, and weren't touched).
+- **New dedicated Airtable base**: `AutoNateAI Agricultural Intelligence`
+  (`appcgGb8QHxrgrQB1`, workspace `Research`) with four tables — `Research
+  Questions` (`tblCN6mQPRuEj2c8B`), `Regions` (`tblFmdBIxpHh4Wc5E`),
+  `Organizations` (`tbl0NtYc3GzyL27Qn`), `Systems` (`tblP2xPeUAdBRuzRB`) —
+  replacing the `Research Questions` table originally (and mistakenly)
+  added to the general-purpose `AutoNateAI California Technical Network
+  Radar` base two sections ago; that table was deleted after migrating.
+  `Research Questions` has real `multipleRecordLinks` fields to all three
+  other tables (Airtable auto-created the inverse link fields on
+  Regions/Organizations/Systems). Seeded with the real content already live
+  on the site: one Region (Southeast Missouri), one Organization (Farm
+  Credit Southeast Missouri), one System (Agricultural Finance & Capital),
+  and the Bootheel Research Question record, linked to all three.
+  Renaming/duplicating the *old* California base itself (Nathan separately
+  asked about this) isn't possible through the available Airtable MCP tools
+  (no base-level rename or duplicate operation) — flagged back to Nathan to
+  do directly in the Airtable UI if still wanted; this new base sidesteps
+  the need for agricultural work specifically.

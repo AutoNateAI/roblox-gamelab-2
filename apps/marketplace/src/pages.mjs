@@ -660,7 +660,7 @@ export function renderInvestigationDetail(investigation) {
 
   const body = `
     <main class="article-page">
-      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], ["Open Questions", "/investigations"], [investigation.name, null]])}
+      ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [investigation.name, null]])}
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(investigation.icon)} Open Question &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
@@ -669,6 +669,9 @@ export function renderInvestigationDetail(investigation) {
           <div class="tag-row">${region ? `<span>${escapeHtml(region.name)}</span>` : ""}${investigation.commodity ? `<span>${escapeHtml(investigation.commodity)}</span>` : ""}</div>
         </header>
         ${investigation.thumbnail ? `<img src="${investigation.thumbnail}" alt="" />` : ""}
+
+        ${investigation.sourcePath ? `<div class="markdown-body">${markdownToHtml(stripFirstHeading(readResearchMarkdown(investigation.sourcePath, investigation.name)))}</div>` : ""}
+
         <div class="detail-field-grid">
           ${detailField("Where This Stands", `<p><strong>${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</strong>${investigation.status === "open" ? " — we have a real plan for answering this, but we're not there yet." : ""}</p>`)}
           ${detailFieldText("Our Best Guess So Far", investigation.hypothesis)}
@@ -2633,6 +2636,18 @@ function readTutorialMarkdown(tutorial) {
   }
 }
 
+// Same pattern as readTutorialMarkdown, for research entries (investigations,
+// and eventually regions/organizations/systems) that carry their long-form
+// narrative in content/research/<slug>.md instead of an inline string field
+// in data.mjs. See apps/marketplace/.claude/skills/research-brief/.
+function readResearchMarkdown(sourcePath, fallbackTitle) {
+  try {
+    return readFileSync(new URL(sourcePath, import.meta.url), "utf8");
+  } catch {
+    return `# ${fallbackTitle}\n\nThis research write-up could not be loaded yet.`;
+  }
+}
+
 function stripFirstHeading(markdown = "") {
   return markdown.replace(/^# .+\n+/, "");
 }
@@ -2749,8 +2764,34 @@ function codeBlockHtml(code) {
   if (lang === "mermaid") {
     return `<pre class="mermaid">${escapeHtml(raw)}</pre>`;
   }
+  if (lang === "chart" || lang === "map") {
+    return dataBlockHtml(lang, raw);
+  }
   const highlighted = ["js", "javascript"].includes(lang) ? highlightJavaScript(raw) : escapeHtml(raw);
   return `<pre class="code-block language-${escapeHtml(lang)}"><code>${highlighted}</code></pre>`;
+}
+
+// ```chart / ```map fences hold a JSON spec and render client-side (see
+// public/app.js) — same lazy-load-only-if-present pattern as Mermaid above.
+// Chart.js / Leaflet only ever load on a page that actually uses one, so
+// pages without research visuals pay zero cost. A malformed block degrades
+// to a visible error instead of failing the whole static build.
+function dataBlockHtml(kind, raw) {
+  let spec;
+  try {
+    spec = JSON.parse(raw);
+  } catch {
+    return `<p class="data-block-error">Could not parse this \`\`\`${escapeHtml(kind)} block — check its JSON.</p>`;
+  }
+  const caption = spec.sourceLabel || spec.source || "";
+  const className = kind === "chart" ? "research-chart" : "research-map";
+  // Chart.js with responsive:true/maintainAspectRatio:false needs its
+  // immediate parent to carry the fixed height — a height set on the canvas
+  // itself (or on an ancestor further up, like the <figure>) lets Chart.js's
+  // resize observer feed back into its own measurement and grow the canvas
+  // without bound. The wrapper div is what's fixed-height; the canvas fills it.
+  const inner = kind === "chart" ? `<div class="chart-canvas-wrap"><canvas></canvas></div>` : `<div class="map-canvas"></div>`;
+  return `<figure class="${className}" data-${kind}="${escapeHtml(JSON.stringify(spec))}">${inner}${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}</figure>`;
 }
 
 function highlightJavaScript(source = "") {

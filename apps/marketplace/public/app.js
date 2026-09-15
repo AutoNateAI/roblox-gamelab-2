@@ -89,6 +89,128 @@ if (mermaidBlocks.length) {
   });
 }
 
+// Shared loader for CDN libraries that only ship a classic UMD build (no ESM
+// build to `import()` the way Mermaid does above) — appends a <script> tag
+// and resolves once it has attached its global (window.Chart, window.L).
+// Named distinctly from the Square-SDK `loadScript()` further down this file
+// — this file loads as `type="module"`, where two top-level functions with
+// the same name is a SyntaxError that silently kills the entire script.
+function loadExternalScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load ${src}`));
+    document.head.appendChild(script);
+  });
+}
+
+// --- Research charts (lazy-loaded only when a research page has one) ---
+const chartBlocks = Array.from(document.querySelectorAll(".research-chart[data-chart]"));
+if (chartBlocks.length) {
+  const chartSpecs = chartBlocks.map((block) => {
+    try {
+      return JSON.parse(block.dataset.chart);
+    } catch {
+      return null;
+    }
+  });
+  loadExternalScript("https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js").then(() => {
+    const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
+    const palette = ["#f2b134", "#5aa9e6", "#7fbf7f", "#e07a5f", "#9a6cff"];
+    let charts = [];
+    function renderCharts() {
+      charts.forEach((chart) => chart.destroy());
+      charts = [];
+      const gridColor = isLight() ? "rgba(20,24,26,0.12)" : "rgba(238,242,238,0.14)";
+      const textColor = isLight() ? "#14181a" : "#eef2ee";
+      chartBlocks.forEach((block, index) => {
+        const spec = chartSpecs[index];
+        const canvas = block.querySelector("canvas");
+        if (!spec || !canvas) return;
+        charts.push(
+          new window.Chart(canvas, {
+            type: spec.type || "bar",
+            data: {
+              labels: spec.labels || [],
+              datasets: (spec.series || []).map((series, seriesIndex) => ({
+                label: series.name || "",
+                data: series.data || [],
+                backgroundColor: series.color || palette[seriesIndex % palette.length],
+                borderColor: series.color || palette[seriesIndex % palette.length],
+                borderWidth: (spec.type || "bar") === "line" ? 2 : 0,
+                tension: 0.25,
+              })),
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                title: spec.title ? { display: true, text: spec.title, color: textColor, font: { family: "JetBrains Mono, monospace", size: 13 } } : { display: false },
+                legend: { display: (spec.series || []).length > 1, labels: { color: textColor, font: { family: "JetBrains Mono, monospace" } } },
+              },
+              scales: {
+                x: { ticks: { color: textColor }, grid: { color: gridColor } },
+                y: { ticks: { color: textColor }, grid: { color: gridColor }, beginAtZero: true },
+              },
+            },
+          }),
+        );
+      });
+    }
+    renderCharts();
+    document.querySelector("[data-theme-toggle]")?.addEventListener("click", renderCharts);
+  });
+}
+
+// --- Research maps (lazy-loaded only when a research page has one) ---
+const mapBlocks = Array.from(document.querySelectorAll(".research-map[data-map]"));
+if (mapBlocks.length) {
+  const mapSpecs = mapBlocks.map((block) => {
+    try {
+      return JSON.parse(block.dataset.map);
+    } catch {
+      return null;
+    }
+  });
+  const leafletCss = document.createElement("link");
+  leafletCss.rel = "stylesheet";
+  leafletCss.href = "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css";
+  document.head.appendChild(leafletCss);
+  loadExternalScript("https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js").then(() => {
+    const L = window.L;
+    const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
+    const tileUrl = () =>
+      isLight() ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+    let maps = [];
+    function renderMaps() {
+      maps.forEach((map) => map.remove());
+      maps = [];
+      mapBlocks.forEach((block, index) => {
+        const spec = mapSpecs[index];
+        const container = block.querySelector(".map-canvas");
+        if (!spec || !container) return;
+        container.innerHTML = "";
+        const markers = spec.markers || [];
+        const center = spec.center || (markers[0] ? [markers[0].lat, markers[0].lng] : [37.5, -92]);
+        const map = L.map(container, { scrollWheelZoom: false }).setView(center, spec.zoom || 7);
+        L.tileLayer(tileUrl(), { attribution: "&copy; OpenStreetMap &copy; CARTO", maxZoom: 18 }).addTo(map);
+        markers.forEach((marker) => {
+          if (typeof marker.lat === "number" && typeof marker.lng === "number") {
+            L.marker([marker.lat, marker.lng]).addTo(map).bindPopup(marker.label || "");
+          }
+        });
+        if (markers.length > 1) {
+          map.fitBounds(markers.map((marker) => [marker.lat, marker.lng]), { padding: [24, 24] });
+        }
+        maps.push(map);
+      });
+    }
+    renderMaps();
+    document.querySelector("[data-theme-toggle]")?.addEventListener("click", renderMaps);
+  });
+}
+
 // --- Mobile navigation ---
 const mobileMenuToggle = document.querySelector("[data-mobile-menu-toggle]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");
