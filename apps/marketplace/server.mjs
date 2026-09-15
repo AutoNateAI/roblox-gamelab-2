@@ -36,6 +36,7 @@ import {
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
+  renderWorkWithUs,
 } from "./src/pages.mjs";
 import {
   articles,
@@ -266,6 +267,7 @@ const server = createServer(async (request, response) => {
     const pageRoutes = new Set([
       "/",
       "/about",
+      "/work-with-us",
       "/programs",
       "/research-and-case-studies",
       "/experiments",
@@ -293,6 +295,7 @@ const server = createServer(async (request, response) => {
       const renderers = {
         "/": renderHome,
         "/about": renderAbout,
+        "/work-with-us": renderWorkWithUs,
         "/research-and-case-studies": renderArticles,
         "/experiments": renderExperiments,
         "/projects": renderProjects,

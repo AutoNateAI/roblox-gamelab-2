@@ -50,7 +50,7 @@ export function topNav(active = "home", mode = "full") {
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
           ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/about#work-with-me">Work With Us</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/work-with-us">Work With Us</a>`}
         </div>
       </nav>
     </header>
@@ -65,22 +65,13 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>Nathan Baker's independent research practice, studying how farm country actually works — the land, the money, the roads, and the businesses that connect them — and publishing it free.</p>
         </div>
-        ${footerColumn("Research & Case Studies", [["Browse Everything", "/research-and-case-studies"], ["Regions", "/regions"], ["Organizations", "/organizations"], ["How Things Work", "/systems"], ["Open Questions", "/investigations"], ["The Lab (methodology)", "/lab"]])}
-        ${footerColumn("More", [["Free Courses", "/tutorials"], ["Consulting", "/consulting"], ["For Organizations", "/for-organizations"], ["Events", "/events"], ["Community", "/community"], ["Work With Us", "/about#work-with-me"], ["About Nathan", "/about"]])}
+        <div><h5><a href="/research-and-case-studies">Research &amp; Case Studies</a></h5></div>
+        <div><ul><li><a href="/work-with-us">Work With Us</a></li><li><a href="/about">About Nathan</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 AutoNateAI. Independent agricultural economic research, published free.</span>
       </div>
     </footer>
-  `;
-}
-
-function footerColumn(title, items) {
-  return `
-    <div>
-      <h5>${title}</h5>
-      <ul>${items.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join("")}</ul>
-    </div>
   `;
 }
 
