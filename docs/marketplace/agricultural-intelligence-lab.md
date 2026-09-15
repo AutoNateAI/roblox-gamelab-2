@@ -1,10 +1,11 @@
 # AutoNateAI — Agricultural Economic Systems Intelligence Lab
 
-Status: **implemented 2026-09-14.** This document records the current locked
-direction for autonateai.com and supersedes the general-lab framing in
-`lab-operating-model.md` as the site's primary identity — that document's
-private/public boundary rule (§2) and "never claim more activity than
-actually happened" rule still apply in full; nothing here relaxes them.
+Status: **implemented 2026-09-14, refined 2026-09-15 (see §7).** This
+document records the current locked direction for autonateai.com and
+supersedes the general-lab framing in `lab-operating-model.md` as the
+site's primary identity — that document's private/public boundary rule
+(§2) and "never claim more activity than actually happened" rule still
+apply in full; nothing here relaxes them.
 
 ## 1. What changed
 
@@ -50,10 +51,13 @@ pattern as the existing lab content):
   An investigation stays `"open"` — hypothesis and evidence public, no
   fabricated finding — until real research actually produces one.
 
-Primary nav (`navItems` in `src/data.mjs`): `Intelligence(/) · Regions ·
-Systems · Organizations · Research & Case Studies (/articles) · The Lab
-(/lab) · Work With Us`. Tutorials, Consulting, Events, Community, and For
-Organizations keep their routes unchanged, moved to the footer.
+Primary nav (`navItems` in `src/data.mjs`) at launch: `Intelligence(/) ·
+Regions · Systems · Organizations · Research & Case Studies (/articles) ·
+The Lab (/lab) · Work With Us`. **Superseded 2026-09-14/15 — see §7 below**:
+nav is now just four items, and Regions/Systems/Organizations/The Lab are
+footer links / in-page filters, not primary nav. Tutorials, Consulting,
+Events, Community, and For Organizations keep their routes unchanged,
+still reachable from the footer.
 
 ## 3. Seed content (2026-09-14 launch)
 
@@ -100,8 +104,85 @@ Tailwind CDN — to match the rest of the codebase and avoid FOUC.
 - No live Airtable integration for regions/organizations/systems/
   investigations — hardcoded in `data.mjs`, same as the existing lab
   arrays. No agricultural radar Airtable base exists yet.
-- `/about`, `/consulting`, `/for-organizations`, `/tutorials`, `/programs`
-  content itself wasn't rewritten — only nav/footer placement changed.
+- `/consulting`, `/for-organizations`, `/tutorials`, `/programs` content
+  itself wasn't rewritten — only nav/footer placement changed. (`/about`
+  **was** rewritten in the §7 round below.)
 - Only Southeast Missouri and one organization/system/investigation are
   real research; everything else is a watchlist placeholder until a real
   research pass fills it in.
+
+## 7. Second round (2026-09-14/15) — copy cleanup, Work With Us, URL/SEO rework
+
+Status: **implemented, merged to `main`, deployed live** (PRs #11-#15).
+Follow-up round after real-site feedback — most changes below are copy/UX
+polish plus one real bug fix, not a positioning change; the agricultural
+identity from §1-6 stands.
+
+**Real bio correction** (was wrong on the live About page): Nathan grew up
+in **Michigan** — that's where he first got into agriculture. His family
+is from the Missouri Bootheel; he spent every summer there growing up and
+has recently moved back. He did **not** grow up in Sikeston/the Bootheel.
+Fixed everywhere the About page's hero, founder card, spotlight section,
+and FAQ previously said otherwise.
+
+**Nav/footer, corrected from §2 above**: primary nav is now exactly
+`Intelligence(/) · Research & Case Studies · Work With Us · About` —
+Regions/Systems/Organizations/Investigations/Lab are footer links and
+in-page filters only. Footer's "Research & Case Studies" column is a
+single link (no sub-list); the old "More" column is gone, replaced with
+just "Work With Us" and "About Nathan." The Discord button was removed
+from the navbar entirely.
+
+**New `/work-with-us` page**: a standalone contact form for agribusiness
+targets (org type, need, project details) that builds a `mailto:` link on
+submit and opens the visitor's email client with everything pre-filled —
+no backend, no Airtable. Has its own generated hero image and a generated
+side-panel image; deliberately does not duplicate Nathan's photo/bio from
+`/about`. Every "Work With Us" link site-wide now points here instead of
+the old `/about#work-with-me` anchor.
+
+**About page rework**: mission section retitled, "Where This Is Headed"
+roadmap and "Letter from Nathan" sections removed entirely, a redundant
+"Free Technical Courses"/org-logo-cloud/engineering-discipline block
+removed, Work With Us section reduced to one card+button linking to the
+new page, FAQ broadened to national scope (added "Do you only cover
+Southeast Missouri? No.") with the bio fix applied, new generated image
+for the "Tech and Business Analytics, Pointed at Agriculture" section.
+
+**URL/SEO restructuring**: `/articles` → `/research-and-case-studies`, and
+every region/organization/system/investigation detail page moved from
+`/regions/<slug>`, `/organizations/<slug>`, etc. to a unified
+`/research-and-case-studies/<slug>` — one canonical URL per piece of
+research. The bare listing pages (`/regions`, `/organizations`, `/systems`,
+`/investigations`) are unchanged.
+
+**Infrastructure correction — important if touching routing again**: this
+site's actual production host is **GitHub Pages**
+(`.github/workflows/deploy-gh-pages.yml`, auto-deploys on every push to
+`main`), serving the static export from `scripts/export-static.mjs`.
+`firebase.json`'s `redirects` config is **not live** for the main site —
+relying on it for the URL rename above shipped as real 404s in production
+until caught same-session. The actual fix is static redirect stub files
+(`writeRedirect()` in `export-static.mjs`: canonical link + meta-refresh +
+JS `location.replace`) generated at every old path. Verify against the
+GitHub Pages deploy, not `firebase.json`, if this comes up again.
+
+**Full OG (social-preview) image audit**: `scripts/generate-og-images.mjs`
+still had pre-agriculture-pivot copy ("Independent AI, Software & Human
+Systems Lab," "Welcome to My Lab") on the Home/About/Research-hub cards —
+fixed. 8 pages (Regions, Organizations, Systems, Investigations, Lab,
+Projects, Experiments, Open Source) had no `ogImage` set at all and were
+silently falling back to a mismatched default — each now reuses its own
+already-displayed hero photo.
+
+**Mobile CSS fix**: `.two-col`/`.form-stack` (shared with the Consulting
+booking form) had bare `1fr` grid tracks and unconstrained form controls —
+a `<select>` with long option text could force the grid wider than the
+viewport, which `body`'s `overflow-x: hidden` turned into clipped content
+rather than a scrollbar. Fixed with `minmax(0, 1fr)` tracks and explicit
+`width: 100%; min-width: 0` on form inputs/selects/textareas.
+
+**Next**: user is pausing further site changes to build a repeatable
+research template offline, then plans to return asking for Claude Code
+skills to help produce both the research and its webpage — no template
+shape confirmed yet as of this writing.
