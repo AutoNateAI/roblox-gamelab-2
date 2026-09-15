@@ -21,8 +21,8 @@
 export const navItems = [
   { label: "Intelligence", href: "/", keys: ["home"] },
   { label: "Research & Case Studies", href: "/research-and-case-studies", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
+  { label: "Work With Us", href: "/work-with-us", keys: ["work-with-us"] },
   { label: "About", href: "/about", keys: ["about"] },
-  { label: "Work With Us", href: "/about#work-with-me", keys: ["work-with-us"] },
 ];
 
 // Tutorials, Consulting, Events, Community, For Organizations, and The Lab
@@ -1187,13 +1187,6 @@ export const sponsorshipTiers = [
   { seats: 10, price: 4990, label: "Sponsor 10 seats" },
   { seats: 15, price: 7485, label: "Sponsor 15 seats" },
   { seats: 20, price: 9980, label: "Sponsor 20 seats" },
-];
-
-// Multi-year roadmap shown on the About page.
-export const regionalVision = [
-  { period: "2026-27", text: "Go deep on Southeast Missouri: profile the lenders, elevators, and businesses that make up its farm economy, one real research pass at a time — and answer the open questions it raises." },
-  { period: "Next", text: "Extend the same method to more U.S. agricultural regions, while keeping consulting, architecture, and requested team training open alongside the research." },
-  { period: "Long term", text: "Become the place farmers, lenders, and agribusinesses check first to understand how their local farm economy actually works — public evidence, not a pitch deck." },
 ];
 
 // Consulting offerings for AutoNateAI's community/regional banking vertical.

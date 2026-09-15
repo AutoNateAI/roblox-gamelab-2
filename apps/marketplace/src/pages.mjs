@@ -19,7 +19,6 @@ import {
   organizationStatusLabels,
   organizationTypeLabels,
   pillarLabels,
-  regionalVision,
   regions,
   regionStatusLabels,
   sceneShots,
@@ -791,7 +790,7 @@ export function renderHome(data) {
             </div>
             <div class="button-row">
               <a class="primary-button" href="/research-and-case-studies">Browse the Research ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/about#work-with-me">Work With Us</a>
+              <a class="secondary-button" href="/work-with-us">Work With Us</a>
             </div>
           </div>
           <aside class="hero-program-panel">
@@ -847,7 +846,7 @@ export function renderHome(data) {
           <h2>Are you a farm, lender, or agribusiness with a real system question?</h2>
           <p>Reach out directly — business analysis, data work, and software builds around agricultural operations are all on the table.</p>
           <div class="button-row">
-            <a class="primary-button" href="/about#work-with-me">Work With Us ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
           </div>
         </div>
       </section>
@@ -1270,10 +1269,11 @@ export function renderAbout() {
     ["Creation", "Publish real analysis, dashboards, and tools — not just observations."],
   ];
   const faqs = [
-    ["Why agriculture?", "It's home. I grew up around Southeast Missouri, and once I started looking closely, I realized the same systems thinking I'd used in software — mapping how data, money, and decisions actually move — applies directly to how a farm economy works. Nobody was writing it up in plain language, so I started."],
+    ["Why agriculture?", "It's family. I grew up in Michigan, but my family is from the Missouri Bootheel, and I spent every summer here growing up. Once I started looking closely at agriculture with the same systems thinking I'd used in software — mapping how data, money, and decisions actually move — I realized nobody was writing most of it up in plain language. So I started, and I'm not stopping at one region."],
+    ["Do you only cover Southeast Missouri?", "No. Southeast Missouri — the Bootheel — is the deepest profile so far because it's where my family's from and where I'm building this. But the research and the consulting work are both national. If you're a farm operation, lender, elevator, or agribusiness anywhere in the country, I want to hear from you."],
     ["Are you a farmer, a banker, or an economist?", "No — I'm a software engineer and business analyst by background. I'm not pretending otherwise. What I bring is the ability to research a system carefully, source it honestly, and explain it clearly — the same way I'd document any other complex system."],
     ["How do you make sure this is accurate?", "Every fact on this site links to its public source — an annual report, a USDA dataset, a government filing. Where I don't have real data yet, the page says so instead of guessing. See any of the region or organization pages for examples."],
-    ["Do you also do consulting and software work?", "Yes. Business analysis, data work, and software builds — for a farm operation, a lender, an agribusiness, or any organization with a real workflow eating staff time. See Work With Us below."],
+    ["Do you also do consulting and software work?", "Yes — business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country. See Work With Us."],
   ];
 
   const body = `
@@ -1281,10 +1281,10 @@ export function renderAbout() {
       <section class="about-hero">
         <div>
           <span class="kicker">${icon("agriculture")} About</span>
-          <h1>I grew up in the Bootheel, and I never stopped loving it.</h1>
-          <p>AutoNateAI is my independent research practice — a way to point my software and business-analytics background back at the place I'm from. I dig into how financing, land, equipment, and grain actually move through a farm economy, source every claim honestly, and write it up in plain language. Consulting and software work are also on the table — see <a href="#work-with-me">Work With Us</a> below.</p>
+          <h1>Raised in Michigan. Rooted in the Bootheel. All in on agriculture.</h1>
+          <p>AutoNateAI is my independent research and consulting practice — where my software engineering and business-analytics background meets agriculture. I grew up in Michigan, where I first got curious about how farm economies actually work, but my family is from the Missouri Bootheel, and I spent every summer here growing up. I moved back down recently, and I'm building this from home now — researching agricultural economies nationally, not just the region I can see out the window. Consulting and software work are also on the table — see <a href="/work-with-us">Work With Us</a>.</p>
           <div class="button-row">
-            <a class="primary-button" href="#work-with-me">Work With Us ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
             <a class="secondary-button" href="/research-and-case-studies">Browse the Research</a>
           </div>
         </div>
@@ -1293,39 +1293,27 @@ export function renderAbout() {
           <div>
             <span class="kicker">Founder, AutoNateAI</span>
             <h2>Nathan Baker</h2>
-            <p>Computer Science, University of Michigan. Software engineering and business analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now pointed at the Bootheel farm economy he grew up in.</p>
+            <p>Computer Science, University of Michigan. Software engineering and business analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now pointed at agriculture nationally, with deep family roots in the Bootheel.</p>
           </div>
         </aside>
       </section>
 
       <section class="about-mission">
         <span class="kicker">${icon("architecture")} Mission</span>
-        <h2>Understand how it actually works, then explain it plainly.</h2>
-        <p>A lot of what shapes a farm economy — how a lender actually underwrites a loan, how a crop mix shift ripples through an elevator's harvest season, which roads and rail lines a county's grain really depends on — never gets written down anywhere a farmer, a banker, or a local business owner can just go read it. I research it, cite where every fact comes from, and publish it free.</p>
+        <h2>The parts of your industry nobody explains clearly.</h2>
+        <p>A lot of what actually shapes an agricultural economy — how a lender underwrites a loan, how a crop-mix shift ripples through an elevator's harvest season, which roads and rail lines a region's grain really depends on — never gets written down anywhere a farm operation, a lender, or an agribusiness can just go read it. I research it, cite where every fact comes from, and publish it free.</p>
         <p>I don't pretend to know more than I do. When I haven't found the answer yet, the page says "open question," not a guess dressed up as fact.</p>
       </section>
 
       <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/agent-review.jpg" alt="Reviewing research and data" /></div>
+        <div class="spotlight-image"><img src="/assets/landing/tech-meets-agriculture.jpg" alt="A laptop showing a data chart, with farmland visible through the window behind it" /></div>
         <div>
           <span class="kicker">${icon("apartment")} Tech and Business Analytics, Pointed at Agriculture</span>
-          <h2>Systems thinking doesn't care what industry it's pointed at.</h2>
-          <p>Before this, I spent years as a software engineer and business analyst — at Microsoft, Citi, Veterans United, and Atomic Object — learning to map how data, money, and decisions actually move through a complex system before touching it. Growing up in the Bootheel, I always figured that same discipline belonged pointed at the farm economy around me. It fit perfectly: map the real process, find where it actually breaks, source every claim. Business analysis, data work, and software builds are still on the table too.</p>
+          <h2>Whatever runs your operation, someone built the system underneath it — I map that first.</h2>
+          <p>Years before agriculture, I was a software engineer and business analyst at Microsoft, Citi, Veterans United, and Atomic Object — mapping how data, money, and decisions actually move through a complex system before anyone touched it. I grew up in Michigan, but my family's from the Missouri Bootheel, and I spent every summer here growing up. Once I pointed that same discipline at agriculture, it fit immediately: whether you're a farm operation, a lender, an elevator, or an agribusiness anywhere in the country, the approach is the same — map the real process, find where it actually breaks, source every claim before we build anything.</p>
           <div class="button-row">
-            <a class="primary-button" href="/consulting">See Consulting ${icon("arrow_forward")}</a>
+            <a class="primary-button" href="/work-with-us">Speak With Nathan ${icon("arrow_forward")}</a>
           </div>
-        </div>
-      </section>
-
-      <section class="section compact">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("timeline")} Where This Is Headed</span>
-            <h2>The multi-year roadmap.</h2>
-          </div>
-        </div>
-        <div class="about-values">
-          ${regionalVision.map((step) => `<article><h3>${escapeHtml(step.period)}</h3><p>${escapeHtml(step.text)}</p></article>`).join("")}
         </div>
       </section>
 
@@ -1341,28 +1329,13 @@ export function renderAbout() {
         </div>
       </section>
 
-      <section class="founder-letter">
-        <span class="kicker">${icon("edit_note")} Letter from Nathan</span>
-        <h2>I wanted to understand the place I'm from.</h2>
-        <p>I grew up in the Missouri Bootheel, and no matter where technology took me — Microsoft, financial technology, consulting — this place never stopped feeling like home. What technology gave me was a way to turn ideas into something real; what all those years of building software actually taught me is that the people who add value aren't just the ones who can write code, they're the ones who can understand a whole system and explain it clearly to the people depending on it.</p>
-        <p>Coming back home, I started asking questions about how the farm economy around me actually works — how a farmer gets financing, how a crop actually gets to market, who the real decision-makers are — and realized nobody had written most of it down in a way a regular person could just go read. So I started researching it myself, the same disciplined way I'd approach any other system, and publishing what I find.</p>
-        <p>If you're a farmer, a lender, or a local business with a question about how your part of this works — or a real workflow you need built — I'd genuinely like to hear from you.</p>
-        <strong>Nathan Baker<br /><span>Founder, AutoNateAI</span></strong>
-      </section>
-
-      <section class="section compact" id="work-with-me">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("handshake")} Work With Us</span>
-            <h2>Business analysis, data work, and software are still very real.</h2>
-            <p>The research is free and public. Alongside it, I still take on real engagements — for a farm operation, a lender, an agribusiness, or any organization with a workflow worth fixing.</p>
-          </div>
+      <section class="detail-enroll-band">
+        <div>
+          <span class="kicker">${icon("handshake")} Work With Us</span>
+          <h2>Bring me a real workflow — I'll tell you straight whether it's a fit.</h2>
+          <p>Business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country.</p>
         </div>
-        <div class="value-grid">
-          <article><span>${icon("hub")}</span><h3>Consulting</h3><p>Bring a real workflow. I research it, architect it, and build the tool — your team owns it when it's done.</p><a class="outline-button full" href="/consulting">See Consulting ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("groups")}</span><h3>For Organizations</h3><p>A custom, on-site training engagement for your team — they leave with real internal tools built for your business.</p><a class="outline-button full" href="/for-organizations">See For Organizations ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_tree")}</span><h3>Business & Data Analysis</h3><p>Process mapping, data models, and dashboards, researched and built with the same rigor as the site's own case studies.</p><a class="outline-button full" href="/consulting#book">Talk to Me ${icon("arrow_forward")}</a></article>
-        </div>
+        <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
       </section>
 
       <section class="section compact about-faq">
@@ -1375,10 +1348,10 @@ export function renderAbout() {
       <section class="detail-enroll-band">
         <div>
           <span class="kicker">${icon("local_activity")} Ready to Talk?</span>
-          <h2>Bring me a real question or a real workflow.</h2>
-          <p>Whether you want something researched, something built, or just want to see how this works first — every path starts with a conversation.</p>
+          <h2>Bring me a real question about your operation, or a real workflow to fix.</h2>
+          <p>Farm operations, lenders, elevators, agribusinesses — wherever you are in the country, every path starts with a conversation.</p>
         </div>
-        <a class="primary-button" href="/consulting#book">Talk to Me ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;
@@ -1422,6 +1395,90 @@ export function renderAbout() {
         })),
       },
     ],
+  });
+}
+
+export function renderWorkWithUs() {
+  const body = `
+    <main class="about-page">
+      <section class="about-hero">
+        <div>
+          <span class="kicker">${icon("handshake")} Work With Us</span>
+          <h1>Bring me a real workflow. I'll tell you straight whether it's a fit.</h1>
+          <p>Farm operations, lenders, elevators, and agribusinesses anywhere in the country — if there's a real workflow eating your team's time, or a question about how your part of this actually works, tell me about it below. I read every message myself.</p>
+        </div>
+        <aside class="about-founder-card">
+          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
+          <div>
+            <span class="kicker">Founder, AutoNateAI</span>
+            <h2>Nathan Baker</h2>
+            <p>Software engineering and business-analytics background, now doing research and consulting work in agriculture nationally.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section compact">
+        <div class="book-layout">
+          <form class="form-stack booking-card booking-form" data-workwithus-form>
+            <div class="two-col">
+              <label>Name<input data-workwithus-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
+              <label>Email<input data-workwithus-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
+            </div>
+            <div class="two-col">
+              <label>Organization<input data-workwithus-field="organization" autocomplete="organization" placeholder="Rivera Family Farms" /></label>
+              <label>What best describes you?
+                <select data-workwithus-field="orgType">
+                  <option value="">Select one</option>
+                  <option value="Farm / Ranch Operation">Farm / Ranch Operation</option>
+                  <option value="Lender / Bank / Credit Union">Lender / Bank / Credit Union</option>
+                  <option value="Elevator / Cooperative">Elevator / Cooperative</option>
+                  <option value="Agribusiness">Agribusiness</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+            </div>
+            <label>What do you need?
+              <select data-workwithus-field="need">
+                <option value="">Select one</option>
+                <option value="Business & Data Analysis">Business & Data Analysis</option>
+                <option value="Custom Software Build">Custom Software Build</option>
+                <option value="Team AI Training">Team AI Training</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </label>
+            <label>Tell me about what you're working on<textarea data-workwithus-field="details" rows="4" placeholder="What's the workflow, the question, or the problem you want solved?" required></textarea></label>
+            <button class="primary-button full" type="submit">Send This to Nathan ${icon("arrow_forward")}</button>
+            <p class="fine-print" data-workwithus-status>This opens your email app with everything you entered above, addressed to autonate.ai@gmail.com — review it and hit send.</p>
+          </form>
+          <aside class="book-sidebar">
+            <div class="book-sidebar-block">
+              <span class="kicker">${icon("checklist")} What happens next</span>
+              <ol>
+                <li>Your email app opens with a message pre-filled from what you entered — review it and hit send.</li>
+                <li>I read every message myself — no auto-reply, an actual read.</li>
+                <li>You'll hear back within 1-2 business days with a straight answer on fit and next steps.</li>
+              </ol>
+            </div>
+            <div class="book-sidebar-block">
+              <span class="kicker">${icon("verified")} Background</span>
+              <p>Computer Science, University of Michigan. Software engineering and business-analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now applied to agriculture nationally.</p>
+              <a class="outline-button full" href="/about">About Nathan ${icon("arrow_forward")}</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  `;
+
+  return pageShell({
+    title: "Work With Us | AutoNateAI",
+    active: "work-with-us",
+    body,
+    canonicalPath: "/work-with-us",
+    ogImage: "/assets/og/about.jpg",
+    description: "Business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country — tell Nathan Baker what you need.",
+    ogTitle: "Work With Us | AutoNateAI",
+    ogDescription: "Bring a real workflow or a real question — business analysis, data work, and software builds for agricultural operations nationally.",
   });
 }
 
@@ -1817,7 +1874,7 @@ export function renderEvents() {
           <h2>See how the lab actually builds, then bring us the real thing.</h2>
           <p>Architecture, AI engineering, and requested team training are still very real — see how to work with me directly.</p>
         </div>
-        <a class="primary-button" href="/about#work-with-me">Work With Me ${icon("arrow_forward")}</a>
+        <a class="primary-button" href="/work-with-us">Work With Me ${icon("arrow_forward")}</a>
       </section>
     </main>
   `;

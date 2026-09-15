@@ -100,6 +100,11 @@ const images = [
     size: "1536x1024",
     prompt: `A photo-realistic shot of a line of grain trucks queued up on a gravel road waiting to unload at a busy grain elevator during harvest, dust in the air, late afternoon light, documentary and concrete, no readable text or logos. ${STYLE}`,
   },
+  {
+    file: "landing/tech-meets-agriculture.jpg",
+    size: "1024x1024",
+    prompt: `A photo-realistic close-up of an open laptop on a rustic wooden desk showing a clean, abstract data chart glowing softly on its screen (no readable text or numbers), positioned so a soft-focus view of green farmland and a distant grain elevator is visible through a window just behind it, warm morning light bridging the two, grounded and concrete, hands resting near the keyboard but no visible face. ${STYLE}`,
+  },
 ];
 
 async function generateImage({ file, size, prompt }) {

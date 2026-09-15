@@ -33,6 +33,7 @@ import {
   renderTutorialDetail,
   renderTutorialPack,
   renderTutorials,
+  renderWorkWithUs,
 } from "../src/pages.mjs";
 import {
   articles,
@@ -76,6 +77,7 @@ const routes = [
   ["tutorials/index.html", renderTutorials()],
   ["community/index.html", renderCommunity()],
   ["about/index.html", renderAbout()],
+  ["work-with-us/index.html", renderWorkWithUs()],
   ["consulting/index.html", renderConsulting(programsData)],
   ["events/index.html", renderEvents()],
   ["for-organizations/index.html", renderForOrganizations(programsData)],
@@ -269,6 +271,7 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/events", "0.7"),
   sitemapEntry("https://autonateai.com/tutorials", "0.7"),
   sitemapEntry("https://autonateai.com/about", "0.7"),
+  sitemapEntry("https://autonateai.com/work-with-us", "0.8"),
   sitemapEntry("https://autonateai.com/consulting", "0.6"),
   sitemapEntry("https://autonateai.com/for-organizations", "0.6"),
   sitemapEntry("https://autonateai.com/community", "0.6"),

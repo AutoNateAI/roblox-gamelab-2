@@ -411,6 +411,37 @@ studentInfoForm?.addEventListener("submit", async (event) => {
   }
 });
 
+// --- Work With Us: opens the visitor's email client with a pre-filled
+// message instead of posting anywhere — no backend needed for this form.
+const workWithUsForm = document.querySelector("[data-workwithus-form]");
+workWithUsForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const fields = Object.fromEntries(
+    Array.from(workWithUsForm.querySelectorAll("[data-workwithus-field]")).map((field) => [
+      field.dataset.workwithusField,
+      field.value.trim(),
+    ]),
+  );
+  const statusEl = workWithUsForm.querySelector("[data-workwithus-status]");
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email || "");
+  if (!fields.name || !emailValid || !fields.details) {
+    if (statusEl) statusEl.textContent = "Add your name, a valid email, and a bit about what you need before continuing.";
+    return;
+  }
+  const subject = `Work With AutoNateAI — ${fields.orgType || "Inquiry"} from ${fields.name}`;
+  const bodyLines = [
+    `Name: ${fields.name}`,
+    `Email: ${fields.email}`,
+    fields.organization ? `Organization: ${fields.organization}` : null,
+    fields.orgType ? `Type: ${fields.orgType}` : null,
+    fields.need ? `What they need: ${fields.need}` : null,
+    "",
+    "Details:",
+    fields.details,
+  ].filter((line) => line !== null);
+  window.location.href = `mailto:autonate.ai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+});
+
 // --- Consulting booking form ---
 const bookingForm = document.querySelector("[data-booking-form]");
 const bookingDurations = {
