@@ -148,12 +148,15 @@ await composite({
   outFile: path.join(outDir, "events.jpg"),
 });
 
+index++; // ag imagery replaces the cinematic pool here — keep the shared
+// counter advancing anyway so every later composite() call still lands on
+// the same background photo it did before this entry existed.
 await composite({
-  screenshotFile: screenshotFor(index++),
-  eyebrow: "Publications",
-  title: "Research, Architecture, and Field Notes",
-  footer: "AutoNateAI · Independent AI, Software & Human Systems Lab",
-  outFile: path.join(outDir, "articles.jpg"),
+  screenshotFile: path.join(publicDir, "assets/ag-lab/home-hero.jpg"),
+  eyebrow: "Research & Case Studies",
+  title: "Real Regions, Real Organizations, Real Numbers",
+  footer: "AutoNateAI · Agricultural Economic Systems Intelligence Lab",
+  outFile: path.join(outDir, "research-and-case-studies.jpg"),
 });
 
 await composite({
@@ -177,17 +180,17 @@ await composite({
 await composite({
   screenshotFile: NATHAN_PHOTO,
   eyebrow: "About",
-  title: "Nathan Baker — AutoNateAI Lab",
-  footer: "AutoNateAI · Independent AI, Software & Human Systems Lab",
+  title: "Nathan Baker — AutoNateAI",
+  footer: "AutoNateAI · Agricultural Economic Systems Intelligence Lab",
   outFile: path.join(outDir, "about.jpg"),
   focusTop: true,
 });
 
 await composite({
   screenshotFile: NATHAN_PHOTO,
-  eyebrow: "Independent AI, Software & Human Systems Lab",
-  title: "Welcome to My Lab",
-  footer: "AutoNateAI · Nathan Baker",
+  eyebrow: "Agricultural Economic Intelligence",
+  title: "We Study How Farm Country Actually Works",
+  footer: "AutoNateAI · Agricultural Economic Systems Intelligence Lab",
   outFile: path.join(outDir, "default.jpg"),
   focusTop: true,
 });

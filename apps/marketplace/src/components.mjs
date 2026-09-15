@@ -49,7 +49,6 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="theme-toggle" aria-label="Join the AutoNateAI Discord" href="https://discord.gg/4HkkuntdSs">${icon("forum")}</a>`}
           ${mode === "checkout" ? "" : `<a class="nav-cta" href="/work-with-us">Work With Us</a>`}
         </div>
       </nav>

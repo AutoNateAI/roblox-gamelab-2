@@ -371,9 +371,10 @@ export function renderRegions() {
     active: "regions",
     body,
     canonicalPath: "/regions",
-    description: "U.S. agricultural regions AutoNateAI is profiling — production, capital, freight, and the organizations that connect them, starting with Southeast Missouri.",
+    ogImage: "/assets/ag-lab/regions-hero.jpg",
+    description: "U.S. agricultural regions AutoNateAI is profiling — production, capital, freight, and the organizations that connect them, with Southeast Missouri as the deepest profile so far.",
     ogTitle: "Regions | AutoNateAI Agricultural Systems Lab",
-    ogDescription: "Agricultural regions profiled by AutoNateAI's economic-intelligence research, starting with Southeast Missouri.",
+    ogDescription: "Agricultural regions profiled by AutoNateAI's economic-intelligence research, with Southeast Missouri as the deepest profile so far.",
   });
 }
 
@@ -454,6 +455,7 @@ export function renderOrganizations() {
     active: "organizations",
     body,
     canonicalPath: "/organizations",
+    ogImage: "/assets/ag-lab/organizations-hero.jpg",
     description: "Agricultural lenders, elevators, and cooperatives profiled by AutoNateAI with verified public figures and sources, starting with Farm Credit Southeast Missouri.",
     ogTitle: "Organizations | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Agricultural lenders, elevators, and cooperatives profiled with real, sourced public numbers, starting with Farm Credit Southeast Missouri.",
@@ -549,6 +551,7 @@ export function renderSystems() {
     active: "systems",
     body,
     canonicalPath: "/systems",
+    ogImage: "/assets/ag-lab/systems-hero.jpg",
     description: "Agricultural system deep dives from AutoNateAI: how financing, freight & storage, and processing & market access actually work, step by step.",
     ogTitle: "Systems | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Step-by-step deep dives into how financing, freight, storage, and processing actually work in agriculture.",
@@ -643,6 +646,7 @@ export function renderInvestigations() {
     active: "investigations",
     body,
     canonicalPath: "/investigations",
+    ogImage: "/assets/ag-lab/investigations-hero.jpg",
     description: "Open agricultural business questions AutoNateAI is investigating — what's known, what's missing, and who we still need to talk to.",
     ogTitle: "Open Questions | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Open, honestly-labeled agricultural business questions AutoNateAI is investigating.",
@@ -764,6 +768,7 @@ export function renderLab() {
     active: "lab",
     body,
     canonicalPath: "/lab",
+    ogImage: "/assets/ag-lab/lab-hero.jpg",
     description: "The general research instrumentation behind AutoNateAI's agricultural intelligence work — projects, experiments, open source, and an evidence-ranked reading list.",
     ogTitle: "The Lab | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Methodology and instruments: the projects, experiments, open source, and reading list behind AutoNateAI's research.",
@@ -772,8 +777,6 @@ export function renderLab() {
 
 export function renderHome(data) {
   const openInvestigations = investigations.filter((i) => i.status === "open");
-  const profiledRegions = regions.filter((r) => r.status === "laboratory").length;
-  const profiledOrgs = organizations.filter((o) => o.status !== "watchlist").length;
 
   const body = `
     <main class="lab-home">
@@ -793,19 +796,19 @@ export function renderHome(data) {
               <a class="secondary-button" href="/work-with-us">Work With Us</a>
             </div>
           </div>
-          <aside class="hero-program-panel">
+          <a class="hero-program-panel" href="${openInvestigations[0] ? `/research-and-case-studies/${openInvestigations[0].slug}` : "/research-and-case-studies?type=Open%20Questions"}">
             <div class="hero-panel-body">
               <span class="kicker">${icon("help_center")} Featured Research Question</span>
               <h2>${openInvestigations[0] ? escapeHtml(openInvestigations[0].name) : "Nothing open yet"}</h2>
               <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Check back soon for the next open question."}</p>
               <div class="hero-facts">
-                <span>${profiledRegions} Region${profiledRegions === 1 ? "" : "s"} Profiled</span>
-                <span>${profiledOrgs} Organization${profiledOrgs === 1 ? "" : "s"} Profiled</span>
-                <span>${systems.length} How-It-Works Guide${systems.length === 1 ? "" : "s"}</span>
-                <span>${openInvestigations.length} Open Question${openInvestigations.length === 1 ? "" : "s"}</span>
+                <span>Every Number, Sourced</span>
+                <span>Never a Guess Dressed as Fact</span>
+                <span>Farm Country, Actually Explained</span>
+                <span>Free. Public. No Pitch Deck.</span>
               </div>
             </div>
-          </aside>
+          </a>
         </div>
       </section>
 
@@ -830,7 +833,7 @@ export function renderHome(data) {
           <div>
             <span class="kicker">${icon("landscape")} Featured Research</span>
             <h2>See the research in action.</h2>
-            <p>One region, one organization, and one open question — real examples of what's actually here.</p>
+            <p>Top articles from our library.</p>
           </div>
           <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
         </div>
@@ -860,7 +863,7 @@ export function renderHome(data) {
     canonicalPath: "/",
     ogImage: "/assets/og/default.jpg",
     description:
-      "AutoNateAI researches how farm country's money, land, and grain actually move — regional profiles, organization profiles, how-things-work guides, and open questions, starting with Southeast Missouri.",
+      "AutoNateAI researches how farm country's money, land, and grain actually move — regional profiles, organization profiles, how-things-work guides, and open questions, with Southeast Missouri as the deepest profile so far.",
     ogTitle: "Agricultural Economic Systems Intelligence Lab",
     ogDescription:
       "Real regions, real organizations, real numbers — how farm country actually works, researched and published free by Nathan Baker.",
@@ -870,7 +873,7 @@ export function renderHome(data) {
         "@type": "Organization",
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI researches how farm country's money, land, and grain actually move, starting with Southeast Missouri.",
+        "description": "AutoNateAI researches how farm country's money, land, and grain actually move, nationally, with Southeast Missouri as the deepest profile so far.",
         "founder": {
           "@type": "Person",
           "name": "Nathan Baker",
@@ -902,6 +905,7 @@ export function renderProjects() {
     active: "projects",
     body,
     canonicalPath: "/projects",
+    ogImage: "/assets/scenes/scene-02.jpg",
     description: "Active multi-week research programs from AutoNateAI, Nathan Baker's independent AI, software, and human-systems research lab.",
     ogTitle: "Projects | AutoNateAI Lab",
     ogDescription: "What's currently forming at the AutoNateAI lab, and which experiments and sources are attached to each research program.",
@@ -936,6 +940,7 @@ export function renderExperiments(page = 1) {
     active: "experiments",
     body,
     canonicalPath: current > 1 ? `/experiments/page/${current}` : "/experiments",
+    ogImage: "/assets/scenes/scene-05.jpg",
     description: "The AutoNateAI lab notebook: question, hypothesis, method, and result for every experiment Nathan Baker runs.",
     ogTitle: "Experiments | AutoNateAI Lab",
     ogDescription: "Proposed and running experiments from AutoNateAI's independent AI, software, and human-systems research lab.",
@@ -971,6 +976,7 @@ export function renderOpenSource(page = 1) {
     active: "open-source",
     body,
     canonicalPath: current > 1 ? `/open-source/page/${current}` : "/open-source",
+    ogImage: "/assets/scenes/scene-07.jpg",
     description: "Open-source repositories AutoNateAI is studying, building with, or contributing to — and why each one matters to the lab's current research.",
     ogTitle: "Open Source | AutoNateAI Lab",
     ogDescription: "The repositories currently informing AutoNateAI's active research projects.",
@@ -1401,20 +1407,23 @@ export function renderAbout() {
 export function renderWorkWithUs() {
   const body = `
     <main class="about-page">
-      <section class="about-hero">
-        <div>
-          <span class="kicker">${icon("handshake")} Work With Us</span>
-          <h1>Bring me a real workflow. I'll tell you straight whether it's a fit.</h1>
-          <p>Farm operations, lenders, elevators, and agribusinesses anywhere in the country — if there's a real workflow eating your team's time, or a question about how your part of this actually works, tell me about it below. I read every message myself.</p>
-        </div>
-        <aside class="about-founder-card">
-          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
-          <div>
-            <span class="kicker">Founder, AutoNateAI</span>
-            <h2>Nathan Baker</h2>
-            <p>Software engineering and business-analytics background, now doing research and consulting work in agriculture nationally.</p>
+      <section class="home-hero">
+        <div class="hero-bg"><img src="/assets/landing/work-with-us-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker">${icon("handshake")} Work With Us</span>
+            <h1>Bring me a real workflow. I'll tell you straight whether it's a fit.</h1>
+            <p>Farm operations, lenders, elevators, and agribusinesses anywhere in the country — if there's a real workflow eating your team's time, or a question about how your part of this actually works, tell me about it below. I read every message myself.</p>
           </div>
-        </aside>
+          <aside class="about-founder-card">
+            <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
+            <div>
+              <span class="kicker">Founder, AutoNateAI</span>
+              <h2>Nathan Baker</h2>
+              <p>Software engineering and business-analytics background, now doing research and consulting work in agriculture nationally.</p>
+            </div>
+          </aside>
+        </div>
       </section>
 
       <section class="section compact">
@@ -1475,7 +1484,7 @@ export function renderWorkWithUs() {
     active: "work-with-us",
     body,
     canonicalPath: "/work-with-us",
-    ogImage: "/assets/og/about.jpg",
+    ogImage: "/assets/landing/work-with-us-hero.jpg",
     description: "Business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country — tell Nathan Baker what you need.",
     ogTitle: "Work With Us | AutoNateAI",
     ogDescription: "Bring a real workflow or a real question — business analysis, data work, and software builds for agricultural operations nationally.",
@@ -2413,7 +2422,7 @@ export function renderArticles() {
     active: "articles",
     body,
     canonicalPath: "/research-and-case-studies",
-    ogImage: "/assets/og/articles.jpg",
+    ogImage: "/assets/og/research-and-case-studies.jpg",
     description:
       "Regional profiles, organization profiles, how-things-work explainers, and open questions from AutoNateAI's agricultural economic-intelligence research — all in one searchable, filterable place.",
     ogTitle: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
