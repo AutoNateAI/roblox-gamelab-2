@@ -64,41 +64,10 @@ const pageCount = (items) => Math.max(1, Math.ceil(items.length / PAGE_SIZE));
 
 const routes = [
   ["index.html", renderHome(programsData)],
-  ["programs/index.html", renderProgramDetail(programsData, programsData.programs[0])],
   ["research-and-case-studies/index.html", renderArticles()],
-  ["experiments/index.html", renderExperiments()],
-  ["projects/index.html", renderProjects()],
-  ["open-source/index.html", renderOpenSource()],
-  ["regions/index.html", renderRegions()],
-  ["organizations/index.html", renderOrganizations()],
-  ["systems/index.html", renderSystems()],
-  ["investigations/index.html", renderInvestigations()],
-  ["lab/index.html", renderLab()],
-  ["tutorials/index.html", renderTutorials()],
-  ["community/index.html", renderCommunity()],
   ["about/index.html", renderAbout()],
   ["work-with-us/index.html", renderWorkWithUs()],
-  ["consulting/index.html", renderConsulting(programsData)],
-  ["events/index.html", renderEvents()],
-  ["for-organizations/index.html", renderForOrganizations(programsData)],
-  ["checkout/index.html", renderCheckout(programsData)],
-  ["success/index.html", renderSuccess(programsData)],
 ];
-
-// Paginated listings: page 1 is the bare route above; page 2+ gets its own
-// "<section>/page/<n>/index.html" (mirrors server.mjs's routing).
-// renderArticles is no longer paginated (second pass: it's the unified
-// Research & Case Studies hub — small enough to show unfiltered).
-const paginatedSections = [
-  { dir: "experiments", items: labExperiments, render: renderExperiments },
-  { dir: "open-source", items: openSourceRepos, render: renderOpenSource },
-];
-for (const { dir, items, render } of paginatedSections) {
-  const pages = pageCount(items);
-  for (let page = 2; page <= pages; page++) {
-    routes.push([`${dir}/page/${page}/index.html`, render(page)]);
-  }
-}
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -125,6 +94,7 @@ function redirectPage(destinationPath) {
 <head>
 <meta charset="utf-8" />
 <title>Redirecting…</title>
+<meta name="robots" content="noindex,follow" />
 <link rel="canonical" href="${url}" />
 <meta http-equiv="refresh" content="0; url=${destinationPath}" />
 <script>location.replace(${JSON.stringify(destinationPath)});</script>
@@ -147,42 +117,6 @@ for (const [routePath, html] of routes) {
   const filePath = path.join(outDir, routePath);
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, html);
-}
-
-for (const article of articles) {
-  const filePath = path.join(outDir, "articles", article.handle, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderArticleDetail(article));
-}
-
-for (const project of labProjects) {
-  const filePath = path.join(outDir, "projects", project.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderProjectDetail(project));
-}
-
-for (const experiment of labExperiments) {
-  const filePath = path.join(outDir, "experiments", experiment.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderExperimentDetail(experiment));
-}
-
-for (const repo of openSourceRepos) {
-  const filePath = path.join(outDir, "open-source", repo.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderOpenSourceDetail(repo));
-}
-
-for (const event of labEvents) {
-  const filePath = path.join(outDir, "events", event.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderEventDetail(event));
-}
-
-for (const source of labSources) {
-  const filePath = path.join(outDir, "sources", source.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderSourceDetail(source));
 }
 
 // Region/organization/system/investigation detail pages all publish under
@@ -215,35 +149,24 @@ for (const investigation of investigations) {
 // Static redirect stubs for every path this rename moved, so an already-
 // shared or indexed old URL still lands on the new one instead of a 404.
 await writeRedirect("articles", "/research-and-case-studies");
+for (const article of articles) {
+  await writeRedirect(`articles/${article.handle}`, "/research-and-case-studies");
+}
+await writeRedirect("regions", "/research-and-case-studies?type=Regions");
 for (const region of regions) {
   await writeRedirect(`regions/${region.slug}`, `/research-and-case-studies/${region.slug}`);
 }
+await writeRedirect("organizations", "/research-and-case-studies?type=Organizations");
 for (const organization of organizations) {
   await writeRedirect(`organizations/${organization.slug}`, `/research-and-case-studies/${organization.slug}`);
 }
+await writeRedirect("systems", "/research-and-case-studies?type=Systems");
 for (const system of systems) {
   await writeRedirect(`systems/${system.slug}`, `/research-and-case-studies/${system.slug}`);
 }
+await writeRedirect("investigations", "/research-and-case-studies?type=Open%20Questions");
 for (const investigation of investigations) {
   await writeRedirect(`investigations/${investigation.slug}`, `/research-and-case-studies/${investigation.slug}`);
-}
-
-for (const pack of tutorialPacks) {
-  const packFilePath = path.join(outDir, "tutorials", pack.handle, "index.html");
-  await mkdir(path.dirname(packFilePath), { recursive: true });
-  await writeFile(packFilePath, renderTutorialPack(pack));
-
-  for (const tutorial of tutorials.filter((item) => item.pack === pack.handle)) {
-    const filePath = path.join(outDir, "tutorials", pack.handle, tutorial.handle, "index.html");
-    await mkdir(path.dirname(filePath), { recursive: true });
-    await writeFile(filePath, renderTutorialDetail(pack, tutorial));
-  }
-}
-
-for (const program of programsData.programs) {
-  const filePath = path.join(outDir, "programs", program.handle, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderProgramDetail(programsData, program));
 }
 
 await cp(path.join(publicDir, "styles.css"), path.join(outDir, "styles.css"));
@@ -259,39 +182,13 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
-  sitemapEntry("https://autonateai.com/regions", "0.9"),
-  sitemapEntry("https://autonateai.com/organizations", "0.9"),
-  sitemapEntry("https://autonateai.com/systems", "0.9"),
-  sitemapEntry("https://autonateai.com/investigations", "0.9"),
   sitemapEntry("https://autonateai.com/research-and-case-studies", "0.9"),
-  sitemapEntry("https://autonateai.com/lab", "0.7"),
-  sitemapEntry("https://autonateai.com/experiments", "0.7"),
-  sitemapEntry("https://autonateai.com/projects", "0.7"),
-  sitemapEntry("https://autonateai.com/open-source", "0.7"),
-  sitemapEntry("https://autonateai.com/events", "0.7"),
-  sitemapEntry("https://autonateai.com/tutorials", "0.7"),
-  sitemapEntry("https://autonateai.com/about", "0.7"),
+  sitemapEntry("https://autonateai.com/about", "0.8"),
   sitemapEntry("https://autonateai.com/work-with-us", "0.8"),
-  sitemapEntry("https://autonateai.com/consulting", "0.6"),
-  sitemapEntry("https://autonateai.com/for-organizations", "0.6"),
-  sitemapEntry("https://autonateai.com/community", "0.6"),
-  sitemapEntry("https://autonateai.com/programs/ai-agent-systems", "0.5"),
   ...regions.map((region) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
-  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${org.slug}`, org.status === "Watchlist" ? "0.4" : "0.8")),
+  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${org.slug}`, org.status === "watchlist" ? "0.4" : "0.8")),
   ...systems.map((system) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${system.slug}`, "0.8")),
   ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${investigation.slug}`, "0.8")),
-  ...tutorialPacks.map((pack) => sitemapEntry(`https://autonateai.com/tutorials/${pack.handle}`, "0.7")),
-  ...tutorials.map((tutorial) =>
-    sitemapEntry(`https://autonateai.com/tutorials/${tutorial.pack}/${tutorial.handle}`, tutorial.draft ? "0.3" : "0.6"),
-  ),
-  ...articles.map((article) =>
-    sitemapEntry(`https://autonateai.com/articles/${article.handle}`, "0.6", article.dateModified || article.datePublished || TODAY),
-  ),
-  ...labProjects.map((project) => sitemapEntry(`https://autonateai.com/projects/${project.slug}`, "0.6")),
-  ...labExperiments.map((experiment) => sitemapEntry(`https://autonateai.com/experiments/${experiment.slug}`, "0.6")),
-  ...openSourceRepos.map((repo) => sitemapEntry(`https://autonateai.com/open-source/${repo.slug}`, "0.6")),
-  ...labEvents.map((event) => sitemapEntry(`https://autonateai.com/events/${event.slug}`, "0.6", event.start)),
-  ...labSources.map((source) => sitemapEntry(`https://autonateai.com/sources/${source.slug}`, "0.6")),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
@@ -305,8 +202,6 @@ await writeFile(
   path.join(outDir, "robots.txt"),
   `User-agent: *
 Allow: /
-Disallow: /checkout
-Disallow: /success
 
 Sitemap: https://autonateai.com/sitemap.xml
 `,
@@ -320,16 +215,11 @@ await writeFile(
 );
 
 const detailPageCount =
-  labProjects.length +
-  labExperiments.length +
-  openSourceRepos.length +
-  labEvents.length +
-  labSources.length +
   regions.length +
   organizations.length +
   systems.length +
   investigations.length;
 
 console.log(
-  `Exported ${routes.length + programsData.programs.length + articles.length + tutorialPacks.length + tutorials.length + detailPageCount} marketplace pages to ${path.relative(rootDir, outDir)}`,
+  `Exported ${routes.length + detailPageCount} agricultural intelligence pages to ${path.relative(rootDir, outDir)}`,
 );

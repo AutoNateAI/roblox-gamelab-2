@@ -238,6 +238,14 @@ function redirect(response, location) {
   response.end();
 }
 
+function gone(response) {
+  response.writeHead(410, {
+    "content-type": "text/plain; charset=utf-8",
+    "cache-control": "no-store",
+  });
+  response.end("Gone");
+}
+
 async function staticFile(response, pathname) {
   const cleanPath = pathname === "/" ? "/index.html" : pathname;
   const filePath = path.join(publicDir, cleanPath);
@@ -268,50 +276,15 @@ const server = createServer(async (request, response) => {
       "/",
       "/about",
       "/work-with-us",
-      "/programs",
       "/research-and-case-studies",
-      "/experiments",
-      "/projects",
-      "/open-source",
-      "/regions",
-      "/organizations",
-      "/systems",
-      "/investigations",
-      "/lab",
-      "/tutorials",
-      "/community",
-      "/consulting",
-      "/events",
-      "/for-organizations",
-      "/checkout",
-      "/success",
     ]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
-      if (url.pathname === "/programs") {
-        html(response, 200, renderProgramDetail(programsData, programsData.programs[0]));
-        return;
-      }
       const renderers = {
         "/": renderHome,
         "/about": renderAbout,
         "/work-with-us": renderWorkWithUs,
         "/research-and-case-studies": renderArticles,
-        "/experiments": renderExperiments,
-        "/projects": renderProjects,
-        "/open-source": renderOpenSource,
-        "/regions": renderRegions,
-        "/organizations": renderOrganizations,
-        "/systems": renderSystems,
-        "/investigations": renderInvestigations,
-        "/lab": renderLab,
-        "/tutorials": renderTutorials,
-        "/community": renderCommunity,
-        "/consulting": renderConsulting,
-        "/events": renderEvents,
-        "/for-organizations": renderForOrganizations,
-        "/checkout": renderCheckout,
-        "/success": renderSuccess,
       };
       html(response, 200, renderers[url.pathname](programsData));
       return;
@@ -324,71 +297,48 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    // Pagination routes: page 1 lives at the bare listing route above;
-    // page N>1 lives at "<listing>/page/<n>" (see pages.mjs paginationNav).
-    // renderArticles is no longer paginated (second pass: it's the unified
-    // Research & Case Studies hub — small enough to show unfiltered).
-    const paginationMatch = url.pathname.match(/^\/(experiments|open-source)\/page\/(\d+)$/);
-    if (paginationMatch) {
-      const [, section, pageStr] = paginationMatch;
-      const page = Number(pageStr) || 1;
-      const renderer = { experiments: renderExperiments, "open-source": renderOpenSource }[section];
-      html(response, 200, renderer(page));
+    if (url.pathname === "/regions") {
+      redirect(response, "/research-and-case-studies?type=Regions");
+      return;
+    }
+
+    if (url.pathname === "/organizations") {
+      redirect(response, "/research-and-case-studies?type=Organizations");
+      return;
+    }
+
+    if (url.pathname === "/systems") {
+      redirect(response, "/research-and-case-studies?type=Systems");
+      return;
+    }
+
+    if (url.pathname === "/investigations") {
+      redirect(response, "/research-and-case-studies?type=Open%20Questions");
       return;
     }
 
     if (url.pathname.startsWith("/articles/")) {
-      const handle = url.pathname.split("/").filter(Boolean).at(-1);
-      const article = articles.find((item) => item.handle === handle);
-      if (!article) {
-        json(response, 404, { error: "Article not found" });
-        return;
-      }
-      html(response, 200, renderArticleDetail(article));
+      redirect(response, "/research-and-case-studies");
       return;
     }
 
     if (url.pathname.startsWith("/sources/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const source = labSources.find((item) => item.slug === slug);
-      if (!source) {
-        json(response, 404, { error: "Source not found" });
-        return;
-      }
-      html(response, 200, renderSourceDetail(source));
+      gone(response);
       return;
     }
 
     if (url.pathname.startsWith("/projects/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const project = labProjects.find((item) => item.slug === slug);
-      if (!project) {
-        json(response, 404, { error: "Project not found" });
-        return;
-      }
-      html(response, 200, renderProjectDetail(project));
+      gone(response);
       return;
     }
 
     if (url.pathname.startsWith("/experiments/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const experiment = labExperiments.find((item) => item.slug === slug);
-      if (!experiment) {
-        json(response, 404, { error: "Experiment not found" });
-        return;
-      }
-      html(response, 200, renderExperimentDetail(experiment));
+      gone(response);
       return;
     }
 
     if (url.pathname.startsWith("/open-source/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const repo = openSourceRepos.find((item) => item.slug === slug);
-      if (!repo) {
-        json(response, 404, { error: "Repository not found" });
-        return;
-      }
-      html(response, 200, renderOpenSourceDetail(repo));
+      gone(response);
       return;
     }
 
@@ -445,47 +395,17 @@ const server = createServer(async (request, response) => {
     }
 
     if (url.pathname.startsWith("/events/")) {
-      const slug = url.pathname.split("/").filter(Boolean).at(-1);
-      const event = labEvents.find((item) => item.slug === slug);
-      if (!event) {
-        json(response, 404, { error: "Event not found" });
-        return;
-      }
-      html(response, 200, renderEventDetail(event));
+      gone(response);
       return;
     }
 
     if (url.pathname.startsWith("/tutorials/")) {
-      const segments = url.pathname.split("/").filter(Boolean);
-      const packHandle = segments[1];
-      const pack = tutorialPacks.find((item) => item.handle === packHandle);
-      if (!pack) {
-        json(response, 404, { error: "Tutorial pack not found" });
-        return;
-      }
-      if (segments.length === 2) {
-        html(response, 200, renderTutorialPack(pack));
-        return;
-      }
-      const tutorialHandle = segments[2];
-      const tutorial = tutorials.find((item) => item.pack === pack.handle && item.handle === tutorialHandle);
-      if (!tutorial) {
-        json(response, 404, { error: "Tutorial not found" });
-        return;
-      }
-      html(response, 200, renderTutorialDetail(pack, tutorial));
+      gone(response);
       return;
     }
 
     if (url.pathname.startsWith("/programs/")) {
-      const handle = url.pathname.split("/").filter(Boolean).at(-1);
-      const programsData = await readJson("data/marketplace/programs.json");
-      const program = programsData.programs.find((item) => item.handle === handle);
-      if (!program) {
-        json(response, 404, { error: "Program not found" });
-        return;
-      }
-      html(response, 200, renderProgramDetail(programsData, program));
+      gone(response);
       return;
     }
 
