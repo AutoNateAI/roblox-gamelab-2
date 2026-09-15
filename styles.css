@@ -2140,6 +2140,48 @@ pre.mermaid svg {
   height: auto;
 }
 
+.research-chart,
+.research-map {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  padding: 20px;
+}
+
+/* Chart.js measures this wrapper (not the canvas) to size itself — the fixed
+   height has to live here or the resize loop described in dataBlockHtml()
+   makes the canvas grow indefinitely. */
+.research-chart .chart-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.research-map .map-canvas {
+  width: 100%;
+  height: 360px;
+}
+
+.research-chart figcaption,
+.research-map figcaption {
+  border-top: 1px solid var(--outline);
+  margin-top: 16px;
+  padding-top: 12px;
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  text-align: center;
+}
+
+.data-block-error {
+  border: 1px dashed var(--outline);
+  padding: 16px;
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+
 .tutorial-pager {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
