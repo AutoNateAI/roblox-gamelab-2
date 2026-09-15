@@ -110,6 +110,11 @@ const images = [
     size: "1536x1024",
     prompt: `A wide photo-realistic shot of two people shaking hands across a rustic wooden desk covered with an open folder and a farm ledger book, a closed laptop resting beside them, warm golden-hour light through a window revealing distant farmland and a grain elevator, hands and forearms only, no visible faces, documentary and concrete, no readable text or logos. ${STYLE}`,
   },
+  {
+    file: "landing/work-with-us-panel.jpg",
+    size: "1536x1024",
+    prompt: `A photo-realistic close-up of a smartphone resting on a wooden desk showing a soft-focus, abstract email-compose screen glowing gently (no readable text), next to a farm ledger book and a cup of coffee, a soft-focus view of green farmland visible through a window behind it, warm daylight, grounded and concrete, no visible face. ${STYLE}`,
+  },
 ];
 
 async function generateImage({ file, size, prompt }) {

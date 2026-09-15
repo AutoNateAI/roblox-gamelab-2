@@ -1415,12 +1415,18 @@ export function renderWorkWithUs() {
             <h1>Bring me a real workflow. I'll tell you straight whether it's a fit.</h1>
             <p>Farm operations, lenders, elevators, and agribusinesses anywhere in the country — if there's a real workflow eating your team's time, or a question about how your part of this actually works, tell me about it below. I read every message myself.</p>
           </div>
-          <aside class="about-founder-card">
-            <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
-            <div>
-              <span class="kicker">Founder, AutoNateAI</span>
-              <h2>Nathan Baker</h2>
-              <p>Software engineering and business-analytics background, now doing research and consulting work in agriculture nationally.</p>
+          <aside class="hero-program-panel">
+            <img src="/assets/landing/work-with-us-panel.jpg" alt="" />
+            <div class="hero-panel-body">
+              <span class="kicker">${icon("checklist")} Who This Is For</span>
+              <h2>Farm operations, lenders, elevators, agribusinesses.</h2>
+              <p>Anywhere in the country — if a real workflow is eating your team's time, this is the place to start.</p>
+              <div class="hero-facts">
+                <span>Business &amp; Data Analysis</span>
+                <span>Custom Software Builds</span>
+                <span>Team AI Training</span>
+                <span>National, Not Just Local</span>
+              </div>
             </div>
           </aside>
         </div>
