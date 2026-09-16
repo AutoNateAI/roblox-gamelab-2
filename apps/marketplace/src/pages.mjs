@@ -267,9 +267,18 @@ function sponsorshipTierCard(tier) {
 // renderProjectDetail etc. below.
 // ---------------------------------------------------------------------------
 
+// Images under /assets/og/ have their headline/caption text baked in by
+// gpt-image-2 (see scripts/generate-og-hero-images.mjs) and always live in
+// the right ~40% of the frame — a plain center-crop (the sitewide default
+// for a card thumbnail, which is narrower than these images) can clip that
+// text. Flag those specifically so CSS can crop from the left instead.
+function captionedImgClass(src) {
+  return src?.startsWith("/assets/og/") ? ' class="captioned-thumb"' : "";
+}
+
 function thumbnailOrIcon(entity, iconName) {
   return entity.thumbnail
-    ? `<img src="${entity.thumbnail}" alt="" loading="lazy" />`
+    ? `<img src="${entity.thumbnail}" alt="" loading="lazy"${captionedImgClass(entity.thumbnail)} />`
     : `<div class="media-icon-tile"><span class="material-symbols-outlined">${escapeHtml(iconName)}</span></div>`;
 }
 
@@ -393,7 +402,7 @@ export function renderRegionDetail(region) {
           <p>${escapeHtml(region.tagline)}</p>
           ${region.commodities?.length ? `<div class="tag-row">${region.commodities.map((c) => `<span>${escapeHtml(c)}</span>`).join("")}</div>` : ""}
         </header>
-        ${region.thumbnail ? `<img src="${region.thumbnail}" alt="" />` : ""}
+        ${region.thumbnail ? `<img src="${region.thumbnail}" alt=""${captionedImgClass(region.thumbnail)} />` : ""}
         ${region.stats?.length ? `<div class="stat-grid">${region.stats.map((s) => `<div><strong>${escapeHtml(s.value)}</strong><span>${escapeHtml(s.label)}</span></div>`).join("")}</div>` : ""}
         <div class="detail-field-grid">
           ${detailFieldText("Where This Is", region.geography)}
@@ -419,7 +428,7 @@ export function renderRegionDetail(region) {
     // Every region gets its own dedicated, text-baked-in OG card (see
     // scripts/generate-og-hero-images.mjs) instead of sharing one generic
     // category image or a bare content photo with no caption.
-    ogImage: `/assets/og/${region.slug}.jpg`,
+    ogImage: region.thumbnail || `/assets/og/${region.slug}.jpg`,
     description: region.tagline,
     ogTitle: region.name,
     ogDescription: region.tagline,
@@ -480,7 +489,7 @@ export function renderOrganizationDetail(org) {
           <p>${escapeHtml(org.tagline)}</p>
           ${region ? `<div class="tag-row"><span>${escapeHtml(region.shortName || region.name)}</span></div>` : ""}
         </header>
-        ${org.thumbnail ? `<img src="${org.thumbnail}" alt="" />` : ""}
+        ${org.thumbnail ? `<img src="${org.thumbnail}" alt=""${captionedImgClass(org.thumbnail)} />` : ""}
         <div class="detail-field-grid">
           ${detailFieldText("What They Actually Do", org.roleInSystem)}
         </div>
@@ -518,7 +527,7 @@ export function renderOrganizationDetail(org) {
     // Every organization gets its own dedicated, text-baked-in OG card (see
     // scripts/generate-og-hero-images.mjs) instead of sharing one generic
     // category image or a bare content photo with no caption.
-    ogImage: `/assets/og/${org.slug}.jpg`,
+    ogImage: org.thumbnail || `/assets/og/${org.slug}.jpg`,
     description: org.tagline,
     ogTitle: org.name,
     ogDescription: org.tagline,
@@ -577,7 +586,7 @@ export function renderSystemDetail(system) {
           <h1>${escapeHtml(system.name)}</h1>
           <p>${escapeHtml(system.tagline)}</p>
         </header>
-        ${system.thumbnail ? `<img src="${system.thumbnail}" alt="" />` : ""}
+        ${system.thumbnail ? `<img src="${system.thumbnail}" alt=""${captionedImgClass(system.thumbnail)} />` : ""}
         <div class="detail-field-grid">${detailFieldText("The Short Version", system.overview)}</div>
 
         ${
@@ -624,7 +633,7 @@ export function renderSystemDetail(system) {
     // Every system gets its own dedicated, text-baked-in OG card (see
     // scripts/generate-og-hero-images.mjs) instead of sharing one generic
     // category image or a bare content photo with no caption.
-    ogImage: `/assets/og/${system.slug}.jpg`,
+    ogImage: system.thumbnail || `/assets/og/${system.slug}.jpg`,
     description: system.tagline,
     ogTitle: system.name,
     ogDescription: system.tagline,
@@ -677,7 +686,7 @@ export function renderInvestigationDetail(investigation) {
           <p>${escapeHtml(investigation.question)}</p>
           <div class="tag-row">${region ? `<span>${escapeHtml(region.shortName || region.name)}</span>` : ""}${investigation.commodity ? `<span>${escapeHtml(investigation.commodity)}</span>` : ""}</div>
         </header>
-        ${investigation.thumbnail ? `<img src="${investigation.thumbnail}" alt="" />` : ""}
+        ${investigation.thumbnail ? `<img src="${investigation.thumbnail}" alt=""${captionedImgClass(investigation.thumbnail)} />` : ""}
 
         ${investigation.sourcePath ? `<div class="markdown-body">${markdownToHtml(stripFirstHeading(readResearchMarkdown(investigation.sourcePath, investigation.name)))}</div>` : ""}
 
@@ -720,7 +729,7 @@ export function renderInvestigationDetail(investigation) {
     // Every investigation gets its own dedicated, text-baked-in OG card
     // (see scripts/generate-og-hero-images.mjs) instead of sharing one
     // generic category image or a bare content photo with no caption.
-    ogImage: `/assets/og/${investigation.slug}.jpg`,
+    ogImage: investigation.thumbnail || `/assets/og/${investigation.slug}.jpg`,
     description: investigation.question,
     ogTitle: investigation.name,
     ogDescription: investigation.question,

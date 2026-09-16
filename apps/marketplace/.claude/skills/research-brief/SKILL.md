@@ -24,7 +24,18 @@ Load `reference/schema.md` for the exact field shapes. Produces two things:
 Status stays `"open"` unless the research phase actually produced a real, sourced answer — see `investigationStatusLabels` in `src/data.mjs`.
 
 ### 3. Assets
-Hero/thumbnail image: follow the existing pattern in `scripts/generate-ag-lab-images.mjs` (same "Technical Editorial" style — luminous ivory/emerald/river-blue, photo-realistic, no readable text/logos) — add one new prompt entry, don't build a new script. Charts and maps are **not** separate image assets; they're data embedded directly in the Markdown (Phase 2) and render client-side.
+One image per article, generated with `gpt-image-2` via `scripts/generate-og-hero-images.mjs` — add one new job entry there, don't build a new script and don't use the older `scripts/generate-ag-lab-images.mjs` plain-photo pattern. This single generated image does triple duty: the investigation's `thumbnail` (card thumbnail *and* the image at the top of the article body) *and* the page's `ogImage` — set `ogImage: investigation.thumbnail || ...` in `renderInvestigationDetail` rather than generating a second, separate OG asset.
+
+Requirements for the prompt (see the existing job entries for real examples):
+- **Photo-realistic**, relevant to the specific question this article answers — not a generic category stock photo.
+- The headline/caption text is **baked directly into the image by the model**, not added afterward — ask for "large bold headline text reading [X]" plus a smaller caption line "AutoNateAI · [short label], Coming Soon" (drop ", Coming Soon" once the piece has real content). Witty, click-worthy, professional — the same voice as `name` (see `reference/voice-and-evidence.md`), never clickbait that oversells a stub.
+- Composition: photo on the left, text baked into the **right ~40-45% of the frame**, dark navy background bleeding in behind the text (matches the site's brand — see `STYLE` constant in the script). Keep text out of the bottom ~10% of the frame — a first pass that crammed a headline against the bottom edge had to be regenerated with an explicit "generous quiet margin below the text" instruction.
+- Generate at `1536x1024`, the script center-crops to the `1200x630` OG size automatically.
+- Save as `og/<slug>.jpg` (not `investigations/<slug>.jpg`) — the `/assets/og/` path prefix is what makes `captionedImgClass()` in `src/pages.mjs` apply the right-cropping CSS (`.captioned-thumb`, `object-position: right center`) that keeps a card-thumbnail's tighter crop from clipping the caption text. A different path prefix silently loses that protection.
+
+Run it with `ONLY="<slug>" node scripts/generate-og-hero-images.mjs` from `apps/marketplace/` to generate just the new entry (or a comma-separated list to regenerate a few) — don't rerun the whole file, it'll re-spend on every image that's already good.
+
+Charts and maps are **not** separate image assets; they're data embedded directly in the Markdown (Phase 2) and render client-side.
 
 ### 4. Assemble & verify
 1. `node --check` every file you touched (`src/data.mjs`, `src/pages.mjs` if you changed it).

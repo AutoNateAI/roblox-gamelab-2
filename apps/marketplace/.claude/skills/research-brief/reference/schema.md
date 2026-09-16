@@ -12,7 +12,7 @@ Structured, scannable metadata. Keep this flat — don't nest new sub-objects fo
   name: "A provocative, real, clickable QUESTION — this is the H1, the <title>, the OG title, and the card headline everywhere this entry appears. Never a flat topic label ('Bootheel Rice-to-Soybean Pivot') — a reason to click ('Congress Just Made Rice More Profitable. So Why Are Bootheel Farmers Planting Less of It?'). It has to be honestly earned by the actual research (see voice-and-evidence.md) — provocative, not clickbait; the tension in the title should be a real tension the article actually resolves or investigates, not a hook that oversells what's inside.",
   question: "The actual analytical research question, one sentence, precise — this is what renders under the H1, not the headline itself. Can be denser/more technical than `name`.",
   tagline: "One honest sentence for card previews — 'here's what we know, here's what's missing.'",
-  thumbnail: "/assets/investigations/<slug>.jpg",    // generated per reference below
+  thumbnail: "/assets/og/<slug>.jpg",                 // generated per Phase 3 below — same file also serves as the page's ogImage, no separate asset
   region: "existing-region-slug" | "",               // must match a slug in regions[]
   commodity: "Rice / Soybeans",                       // free text, used as a tag
   evidence: [ { label, note, url } ],                 // what got you asking the question

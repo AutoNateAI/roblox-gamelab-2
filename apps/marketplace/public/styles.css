@@ -4947,6 +4947,14 @@ a.lab-card:focus-visible .card-thumbnail img {
   transform: scale(1.06);
 }
 
+/* gpt-image-2 OG-style images (public/assets/og/*) carry their headline
+   text in the right ~40% of a ~1.9:1 frame. A card thumbnail crops to
+   16:10 (narrower), so a centered crop clips that text — crop from the
+   left (the photo side) instead and keep the full caption on screen. */
+.captioned-thumb {
+  object-position: right center;
+}
+
 .card-thumbnail .status-pill {
   position: absolute;
   top: 12px;
