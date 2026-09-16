@@ -1344,6 +1344,27 @@ a.hero-program-panel:focus-visible {
   line-height: 1.65;
 }
 
+/* The question each legacy article actually answers — same rhetorical
+   device as the investigations[] "Open Question" pages, surfaced here as a
+   distinct callout rather than folded into the plain summary paragraph. */
+.article-question {
+  margin: 4px 0 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--primary);
+  background: var(--surface-low);
+  color: var(--on-surface);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.article-card .article-question {
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .article-byline {
   color: var(--on-variant);
   font-family: "JetBrains Mono", monospace;
@@ -2156,6 +2177,20 @@ pre.mermaid svg {
   position: relative;
   width: 100%;
   height: 320px;
+}
+
+@media (max-width: 640px) {
+  /* app.js flips bar charts to horizontal under this breakpoint so long,
+     sentence-length labels read on the y-axis instead of cramming the
+     x-axis — reclaim padding here so the label column has real room. */
+  .research-chart,
+  .research-map {
+    padding: 14px 10px;
+  }
+
+  .research-chart .chart-canvas-wrap {
+    height: 280px;
+  }
 }
 
 .research-map .map-canvas {
@@ -3290,6 +3325,16 @@ pre.mermaid svg {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gutter);
+}
+
+/* Homepage "Featured Research" falls back to fewer than 3 cards when a
+   region/organization has no real profile to feature — a fixed 3-column
+   grid leaves obvious empty cells at 1-2 items, so cap the width and center
+   instead of stretching a lone card across the full row. */
+.home-featured-grid-sparse {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 420px;
+  margin: 0 auto;
 }
 
 .industry-grid.is-empty::after {

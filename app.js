@@ -118,19 +118,30 @@ if (chartBlocks.length) {
   loadExternalScript("https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js").then(() => {
     const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
     const palette = ["#f2b134", "#5aa9e6", "#7fbf7f", "#e07a5f", "#9a6cff"];
+    // Research-brief chart labels tend to be full sentences ("PLC reference
+    // price — before H.R. 1"), not short categories. Vertical bars cram those
+    // onto the x-axis and the wrapped/rotated labels eat almost the entire
+    // fixed-height canvas on a phone, leaving the bars themselves a sliver —
+    // fine on a wide screen, broken under ~640px. Flipping bar charts
+    // horizontal on narrow viewports puts that text on the y-axis instead,
+    // where it has the full chart width to read normally.
+    const mobileQuery = window.matchMedia("(max-width: 640px)");
     let charts = [];
     function renderCharts() {
       charts.forEach((chart) => chart.destroy());
       charts = [];
+      const isMobile = mobileQuery.matches;
       const gridColor = isLight() ? "rgba(20,24,26,0.12)" : "rgba(238,242,238,0.14)";
       const textColor = isLight() ? "#14181a" : "#eef2ee";
       chartBlocks.forEach((block, index) => {
         const spec = chartSpecs[index];
         const canvas = block.querySelector("canvas");
         if (!spec || !canvas) return;
+        const type = spec.type || "bar";
+        const horizontal = type === "bar" && isMobile;
         charts.push(
           new window.Chart(canvas, {
-            type: spec.type || "bar",
+            type,
             data: {
               labels: spec.labels || [],
               datasets: (spec.series || []).map((series, seriesIndex) => ({
@@ -138,20 +149,21 @@ if (chartBlocks.length) {
                 data: series.data || [],
                 backgroundColor: series.color || palette[seriesIndex % palette.length],
                 borderColor: series.color || palette[seriesIndex % palette.length],
-                borderWidth: (spec.type || "bar") === "line" ? 2 : 0,
+                borderWidth: type === "line" ? 2 : 0,
                 tension: 0.25,
               })),
             },
             options: {
+              indexAxis: horizontal ? "y" : "x",
               responsive: true,
               maintainAspectRatio: false,
               plugins: {
-                title: spec.title ? { display: true, text: spec.title, color: textColor, font: { family: "JetBrains Mono, monospace", size: 13 } } : { display: false },
+                title: spec.title ? { display: true, text: spec.title, color: textColor, font: { family: "JetBrains Mono, monospace", size: isMobile ? 12 : 13 } } : { display: false },
                 legend: { display: (spec.series || []).length > 1, labels: { color: textColor, font: { family: "JetBrains Mono, monospace" } } },
               },
               scales: {
-                x: { ticks: { color: textColor }, grid: { color: gridColor } },
-                y: { ticks: { color: textColor }, grid: { color: gridColor }, beginAtZero: true },
+                x: { ticks: { color: textColor, font: { size: isMobile ? 11 : 12 } }, grid: { color: gridColor }, beginAtZero: horizontal },
+                y: { ticks: { color: textColor, font: { size: isMobile ? 11 : 12 }, autoSkip: false }, grid: { color: gridColor }, beginAtZero: !horizontal },
               },
             },
           }),
@@ -160,6 +172,7 @@ if (chartBlocks.length) {
     }
     renderCharts();
     document.querySelector("[data-theme-toggle]")?.addEventListener("click", renderCharts);
+    mobileQuery.addEventListener("change", renderCharts);
   });
 }
 
