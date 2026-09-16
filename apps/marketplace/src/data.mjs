@@ -592,36 +592,28 @@ export const regionStatusLabels = {
 
 export const regions = [
   {
+    // Pulled back to "coming soon" on 2026-09-15 — the full profile didn't
+    // match the site's question-based structure. Cross-reference arrays
+    // (organizations/systems/investigations) are deliberately left populated
+    // so this stub still links forward to the one live piece (the Bootheel
+    // investigation) instead of dead-ending.
     slug: "southeast-missouri",
     icon: "landscape",
-    status: "laboratory",
+    status: "watchlist",
     name: "Southeast Missouri (The Bootheel)",
     thumbnail: "/assets/regions/southeast-missouri.jpg",
-    tagline: "Soybeans, corn, cotton, rice, and wheat move through a 12-county river-bottom economy anchored on the Mississippi at Sikeston — here's how the land, the money, and the roads connect.",
-    geography:
-      "The 12-county Farm Credit Southeast Missouri territory plus the wider Bootheel lowlands: Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Mississippi, New Madrid, Pemiscot, Ripley, Scott, Stoddard, and Wayne counties, anchored on the Mississippi River at Cairo/Sikeston.",
-    coordinates: "36.8767° N, 89.5879° W (Sikeston, MO)",
+    tagline: "We haven't published an in-depth profile of this region yet — it's next up on the list.",
+    geography: "Coming soon.",
+    coordinates: "",
     commodities: ["Soybeans", "Corn", "Cotton", "Rice", "Winter Wheat"],
-    stats: [
-      { label: "Counties in territory", value: "12" },
-      { label: "Farm Credit SEMO locations", value: "8" },
-      { label: "Organizations profiled", value: "1" },
-      { label: "Open questions", value: "1" },
-    ],
-    production:
-      "Flat, fertile Mississippi River-bottom ground grows row crops at a scale unusual for Missouri — one of the state's few rice- and cotton-growing areas, alongside the soybean/corn rotation most of the region runs.",
-    capital:
-      "Most Bootheel producers finance their operations through Farm Credit Southeast Missouri — a member-owned lending cooperative headquartered in Sikeston — alongside community banks and credit unions. See the organization profile below for verified public numbers.",
-    freight:
-      "I-55 and I-57 move Bootheel grain by truck; BNSF/UP rail and Mississippi River barges out of Cairo and New Madrid carry it on toward Gulf export markets.",
+    stats: [],
+    production: "",
+    capital: "",
+    freight: "",
     organizations: ["farm-credit-southeast-missouri"],
     systems: ["agricultural-finance-and-capital"],
     investigations: ["bootheel-rice-to-soybean-pivot"],
-    sources: [
-      { label: "Farm Credit Southeast Missouri — 2023 Annual Report", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2023AnnualReport.pdf" },
-      { label: "Farm Credit Southeast Missouri — Locations", url: "https://farmcreditsemo.com/locations" },
-      { label: "Farm Credit Administration — Public Directory (Farm Credit SEMO)", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
-    ],
+    sources: [],
   },
   {
     slug: "central-iowa-corn-belt",
@@ -656,62 +648,27 @@ export const organizationStatusLabels = {
 
 export const organizations = [
   {
+    // Pulled back to "coming soon" on 2026-09-15 — same reason as the region
+    // profile: didn't match the site's question-based structure. systems/
+    // investigations left populated so this stub still links forward.
     slug: "farm-credit-southeast-missouri",
     icon: "account_balance",
-    status: "profiled",
+    status: "watchlist",
     orgType: "lender",
     name: "Farm Credit Southeast Missouri",
     thumbnail: "/assets/organizations/farm-credit-southeast-missouri.jpg",
-    tagline: "A member-owned lending cooperative headquartered in Sikeston that finances much of the Bootheel's farmland, equipment, and operating seasons.",
+    tagline: "We haven't published an in-depth profile of this organization yet — it's next up on the list.",
     region: "southeast-missouri",
-    roleInSystem:
-      "Farm Credit Southeast Missouri is where capital actually enters the Bootheel's agricultural economy: it finances farm real estate, operating expenses, equipment, livestock, and agribusiness, and sells crop and life insurance, across its 12-county Southeast Missouri territory. Because it's a Farm Credit System cooperative, its borrowers are member-owners — profits can flow back to them through patronage distributions, which makes its economics different from a conventional commercial bank.",
-    facts: [
-      { label: "Structure", value: "Member-owned cooperative, part of the nationwide Farm Credit System" },
-      { label: "CEO", value: "Gregory Cunningham" },
-      { label: "Board Chair", value: "Ed Marshall" },
-      { label: "Territory", value: "12 counties: Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Mississippi, New Madrid, Pemiscot, Ripley, Scott, Stoddard, Wayne" },
-      { label: "Total loans (FY2023)", value: "≈ $853.5M" },
-      { label: "Total assets (FY2023)", value: "≈ $955.6M" },
-      { label: "Member equity (FY2023)", value: "≈ $207.7M" },
-      { label: "Net income (FY2023)", value: "≈ $20.36M" },
-      { label: "Missouri Farm Credit customers (statewide, 12/31/2025)", value: "15,502" },
-      { label: "Missouri Farm Credit loan volume (statewide, 12/31/2025)", value: "≈ $13.3B" },
-    ],
-    portfolioMix: [
-      { label: "Real estate mortgage", percent: 60.7 },
-      { label: "Production / intermediate-term", percent: 33.0 },
-      { label: "Agribusiness", percent: 2.5 },
-      { label: "Other", percent: 3.8 },
-    ],
-    portfolioMixNote: "2022 Annual Report figures — the most recent breakdown Nathan's research surfaced. Verify against the current annual report before treating this as this year's mix.",
-    locations: [
-      { name: "Central Office", city: "Sikeston, MO" },
-      { name: "Branch", city: "Dexter, MO" },
-      { name: "Branch", city: "Jackson, MO" },
-      { name: "Branch", city: "Kennett, MO" },
-      { name: "Branch", city: "Charleston, MO" },
-      { name: "Branch", city: "Poplar Bluff, MO" },
-      { name: "Branch", city: "Portageville, MO" },
-    ],
-    technologyStack: ["SQL / DB2", "Power BI", "Salesforce", "nCino", "FIS Profile (loan accounting)", "Approved generative AI tools (research, analysis, documentation)"],
-    commodities: ["Soybeans", "Corn", "Rice", "Cotton"],
+    roleInSystem: "",
+    facts: [],
+    portfolioMix: [],
+    locations: [],
+    technologyStack: [],
+    commodities: [],
     systems: ["agricultural-finance-and-capital"],
     investigations: ["bootheel-rice-to-soybean-pivot"],
-    openQuestions: [
-      "Where does the Business Analyst role's process-improvement work actually start — loan intake, underwriting handoff, or servicing/reporting?",
-      "How much duplicate data entry exists across Salesforce, nCino, and FIS Profile for a single loan file?",
-      "What would a commodity-mix concentration dashboard (Power BI, sourced from public FCA call-report data) show for the 12-county territory?",
-    ],
-    sources: [
-      { label: "Farm Credit Southeast Missouri — official site", url: "https://farmcreditsemo.com/" },
-      { label: "Farm Credit Southeast Missouri — Locations", url: "https://farmcreditsemo.com/locations" },
-      { label: "Farm Credit Southeast Missouri — 2023 Annual Report", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2023AnnualReport.pdf" },
-      { label: "Farm Credit Southeast Missouri — 2022 Annual Report (portfolio mix)", url: "https://farmcreditsemo.com/sites/default/files/files/reports/2022AnnualReport.pdf" },
-      { label: "Farm Credit Administration — Public Directory", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
-      { label: "Farm Credit Council — Missouri state page", url: "https://farmcredit.com/states/missouri/" },
-      { label: "Farm Credit Southeast Missouri — Careers", url: "https://farmcreditsemo.com/about-us/careers" },
-    ],
+    openQuestions: [],
+    sources: [],
   },
   {
     slug: "bootheel-grain-cooperative",
@@ -753,39 +710,23 @@ export const pillarLabels = ["Business Analysis", "Data Intelligence", "Systems 
 
 export const systems = [
   {
+    // Pulled back to "coming soon" on 2026-09-15 — same reason as the region
+    // and organization profiles: didn't match the site's question-based
+    // structure. regions/investigations left populated so this stub still
+    // links forward.
     slug: "agricultural-finance-and-capital",
     icon: "payments",
-    status: "published",
+    status: "planned",
     category: "finance-capital",
     name: "Agricultural Finance & Capital",
     thumbnail: "/assets/systems/agricultural-finance-and-capital.jpg",
-    tagline: "How financing actually works for a farm operation — from a producer's need for capital to a lender's approval, and back.",
-    overview:
-      "A farmer usually needs financing before anything else can happen — for equipment, land, or an operating season — before production, storage, or hauling ever starts. This deep dive walks that process step by step through a real Farm Credit System lender, using Farm Credit Southeast Missouri's own public disclosures as the concrete example — see the organization profile.",
-    pipeline: [
-      { stage: "1. Capital Need Identified", description: "A producer needs financing for operating expenses, equipment, land, or insurance ahead of a production season." },
-      { stage: "2. Application & Financial Intake", description: "Farm financials, production history, and collateral information are submitted — typically through a CRM/origination system such as Salesforce or nCino." },
-      { stage: "3. Underwriting & Credit Analysis", description: "The lender evaluates capacity, capital, collateral, character, and conditions (the classic '5 Cs') against enterprise data sources." },
-      { stage: "4. Approval & Loan Structuring", description: "Terms, rate, amortization, and (for a cooperative lender) patronage eligibility are set and the loan closes." },
-      { stage: "5. Servicing, Monitoring & Reporting", description: "Payments post through a loan-accounting system (e.g. FIS Profile); portfolio-level dashboards (e.g. Power BI) track concentration, delinquency, and renewal risk." },
-    ],
-    pillars: [
-      { pillar: "Business Analysis", description: "Map the handoffs between loan officer, underwriting, closing, and servicing — the classic place to find duplicate data entry across Salesforce, nCino, and a core loan-accounting system." },
-      { pillar: "Data Intelligence", description: "A relational data model (producer, loan, collateral, payment) feeding KPIs like days-to-decision, portfolio concentration by commodity, and delinquency rate, surfaced in Power BI." },
-      { pillar: "Systems Mapping", description: "The Capital Graph: lender/insurer/public funding → operator → asset/operation → production → revenue → repayment, cross-linked to the region's Physical Graph (what that capital actually buys)." },
-      { pillar: "AI & Automation", description: "Approved generative AI for research, document summarization, and drafting — used on the lender's own approved tools, with confidential borrower information never leaving the system it belongs in." },
-    ],
-    dataModel: {
-      description: "An illustrative schema for the Capital Graph — not Farm Credit Southeast Missouri's actual production schema, which is private.",
-      sql: `CREATE TABLE producer (\n  producer_id      INT PRIMARY KEY,\n  county            VARCHAR(64),\n  primary_commodity VARCHAR(64)\n);\n\nCREATE TABLE loan (\n  loan_id       INT PRIMARY KEY,\n  producer_id   INT REFERENCES producer(producer_id),\n  loan_type     VARCHAR(32), -- real_estate | operating | equipment\n  amount        DECIMAL(14,2),\n  origination_date DATE,\n  status        VARCHAR(24)\n);\n\nCREATE TABLE collateral (\n  collateral_id INT PRIMARY KEY,\n  loan_id       INT REFERENCES loan(loan_id),\n  asset_type    VARCHAR(32), -- land | equipment | crop\n  appraised_value DECIMAL(14,2)\n);\n\nCREATE TABLE payment (\n  payment_id    INT PRIMARY KEY,\n  loan_id       INT REFERENCES loan(loan_id),\n  due_date      DATE,\n  paid_date     DATE,\n  amount        DECIMAL(14,2)\n);`,
-    },
-    datasets: [
-      { name: "Farm Credit Administration — Call Report / public directory data", publisher: "Farm Credit Administration", cadence: "Quarterly / as published", url: "https://apps.fca.gov/FCSPublicDirectory/PubViewInst.aspx?u=722406" },
-      { name: "USDA ARMS — Agricultural Resource Management Survey (farm income & finance)", publisher: "USDA ERS", cadence: "Annual", url: "https://www.ers.usda.gov/data-products/arms-farm-financial-and-crop-production-practices" },
-      { name: "Kansas City Fed — Ag Finance Databook", publisher: "Federal Reserve Bank of Kansas City", cadence: "Quarterly", url: "https://www.kansascityfed.org/research/agriculture-finance-databook/" },
-      { name: "Farm Credit Southeast Missouri — Annual Reports", publisher: "Farm Credit Southeast Missouri", cadence: "Annual", url: "https://farmcreditsemo.com/about-us/reports" },
-    ],
-    stakeholders: ["Loan officers / relationship managers", "Credit analysts / underwriters", "Producer-borrowers", "SVP & Chief Information Officer (the Business Analyst role's reporting line)"],
+    tagline: "We haven't published this deep dive yet — it's next up on the list.",
+    overview: "",
+    pipeline: [],
+    pillars: [],
+    dataModel: null,
+    datasets: [],
+    stakeholders: [],
     regions: ["southeast-missouri"],
     investigations: ["bootheel-rice-to-soybean-pivot"],
   },
@@ -1709,6 +1650,7 @@ export const articles = [
     datePublished: "2026-08-21",
     dateModified: "2026-08-29",
     title: "Why Organizations Need Internal AI Capability, Not Just AI Vendors",
+    question: "Should your organization buy an AI vendor platform, or train your own people to build the tool instead?",
     category: "AI Workforce",
     audience: "Business owners, technical leadership, and administrators evaluating AI adoption",
     summary:
@@ -1727,6 +1669,7 @@ export const articles = [
     datePublished: "2026-08-21",
     dateModified: "2026-08-21",
     title: "What AI Workforce Readiness Could Look Like for Students",
+    question: "Can a student build real AI-agent skills without waiting for a college curriculum to catch up?",
     category: "Education",
     audience: "Students, parents, and educators evaluating a hands-on path into AI and software",
     summary:
@@ -1745,6 +1688,7 @@ export const articles = [
     datePublished: "2026-08-21",
     dateModified: "2026-08-21",
     title: "Why System Design Practice Beats Another Syntax Course",
+    question: "Why do some builders who can write working code still make bad system-design decisions?",
     category: "Strategy",
     audience: "Developers, CS students, junior SWEs, and technical builders",
     summary:
@@ -1763,6 +1707,7 @@ export const articles = [
     datePublished: "2026-08-02",
     dateModified: "2026-08-21",
     title: "Why the Discord Doesn't Close When Class Does",
+    question: "What happens to a builder's momentum the day a course or cohort session ends?",
     category: "Guide",
     audience: "Builders preparing to ship a real system",
     summary:
@@ -1781,6 +1726,7 @@ export const articles = [
     datePublished: "2026-07-14",
     dateModified: "2026-07-14",
     title: "AI Agents Are Already Showing Up in Civic Tech. Most Engineers Aren't Ready.",
+    question: "Are engineers actually ready for the AI-automation questions now showing up inside real city RFPs?",
     category: "Trend",
     audience: "Engineers curious about public-sector and civic-tech work",
     summary:
@@ -1799,6 +1745,7 @@ export const articles = [
     datePublished: "2026-07-14",
     dateModified: "2026-07-14",
     title: "The RFP Is an Underrated Proving Ground for Engineers",
+    question: "What can a real RFP teach a programmer that another app clone never will?",
     category: "Guide",
     audience: "Programmers who want a more serious project than another app clone",
     summary:
@@ -1817,6 +1764,7 @@ export const articles = [
     datePublished: "2026-07-14",
     dateModified: "2026-07-14",
     title: "How Real Constraints Become Software Architecture",
+    question: "How do real-world constraints actually turn someone who writes code into someone who designs systems?",
     category: "Strategy",
     audience: "Builders training for AI, automation, and software roles",
     summary:
@@ -1835,6 +1783,7 @@ export const articles = [
     datePublished: "2026-07-14",
     dateModified: "2026-07-14",
     title: "Why Git Matters When AI Is Moving Fast",
+    question: "If an AI agent can rewrite your code in seconds, what keeps that work trustworthy?",
     category: "Tutorial",
     audience: "Builders using AI agents on real code",
     summary:

@@ -148,16 +148,13 @@ await composite({
   outFile: path.join(outDir, "events.jpg"),
 });
 
-index++; // ag imagery replaces the cinematic pool here — keep the shared
-// counter advancing anyway so every later composite() call still lands on
-// the same background photo it did before this entry existed.
-await composite({
-  screenshotFile: path.join(publicDir, "assets/ag-lab/home-hero.jpg"),
-  eyebrow: "Research & Case Studies",
-  title: "Real Regions, Real Organizations, Real Numbers",
-  footer: "AutoNateAI · Agricultural Economic Systems Intelligence Lab",
-  outFile: path.join(outDir, "research-and-case-studies.jpg"),
-});
+index++; // research-and-case-studies.jpg (and the other research-hub OG
+// cards, and default.jpg) are no longer built by this SVG-text-over-photo
+// pipeline — see scripts/generate-og-hero-images.mjs, which asks gpt-image-2
+// to bake the headline directly into the image (YouTube-thumbnail style)
+// instead of overlaying it after the fact. Keep the shared counter
+// advancing anyway so every later composite() call still lands on the same
+// background photo it did before this entry existed.
 
 await composite({
   screenshotFile: screenshotFor(index++),
@@ -186,14 +183,9 @@ await composite({
   focusTop: true,
 });
 
-await composite({
-  screenshotFile: NATHAN_PHOTO,
-  eyebrow: "Agricultural Economic Intelligence",
-  title: "We Study How Farm Country Actually Works",
-  footer: "AutoNateAI · Agricultural Economic Systems Intelligence Lab",
-  outFile: path.join(outDir, "default.jpg"),
-  focusTop: true,
-});
+// default.jpg (the sitewide fallback + homepage OG card) used to be Nathan's
+// own photo here too — replaced by a generated, text-baked-in hero. See
+// scripts/generate-og-hero-images.mjs.
 
 for (const tutorial of tutorials) {
   const pack = tutorialPacks.find((item) => item.handle === tutorial.pack);
@@ -216,4 +208,4 @@ for (const pack of tutorialPacks) {
   });
 }
 
-console.log(`Done. ${programsData.programs.length + 9 + tutorials.length + tutorialPacks.length} OG images written to ${path.relative(rootDir, outDir)}`);
+console.log(`Done. ${programsData.programs.length + 7 + tutorials.length + tutorialPacks.length} OG images written to ${path.relative(rootDir, outDir)}`);

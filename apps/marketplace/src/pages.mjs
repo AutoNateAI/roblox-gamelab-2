@@ -371,7 +371,7 @@ export function renderRegions() {
     active: "regions",
     body,
     canonicalPath: "/regions",
-    ogImage: "/assets/ag-lab/regions-hero.jpg",
+    ogImage: "/assets/og/regions.jpg",
     description: "U.S. agricultural regions AutoNateAI is profiling — production, capital, freight, and the organizations that connect them, with Southeast Missouri as the deepest profile so far.",
     ogTitle: "Regions | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Agricultural regions profiled by AutoNateAI's economic-intelligence research, with Southeast Missouri as the deepest profile so far.",
@@ -416,7 +416,9 @@ export function renderRegionDetail(region) {
     active: "regions",
     body,
     canonicalPath: `/research-and-case-studies/${region.slug}`,
-    ogImage: region.thumbnail || "/assets/ag-lab/regions-hero.jpg",
+    // A "coming soon" stub gets the branded, text-baked-in category card
+    // instead of a bare content photo with nothing behind it.
+    ogImage: region.status === "watchlist" ? "/assets/og/regions.jpg" : region.thumbnail || "/assets/og/regions.jpg",
     description: region.tagline,
     ogTitle: region.name,
     ogDescription: region.tagline,
@@ -455,7 +457,7 @@ export function renderOrganizations() {
     active: "organizations",
     body,
     canonicalPath: "/organizations",
-    ogImage: "/assets/ag-lab/organizations-hero.jpg",
+    ogImage: "/assets/og/organizations.jpg",
     description: "Agricultural lenders, elevators, and cooperatives profiled by AutoNateAI with verified public figures and sources, starting with Farm Credit Southeast Missouri.",
     ogTitle: "Organizations | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Agricultural lenders, elevators, and cooperatives profiled with real, sourced public numbers, starting with Farm Credit Southeast Missouri.",
@@ -512,7 +514,9 @@ export function renderOrganizationDetail(org) {
     active: "organizations",
     body,
     canonicalPath: `/research-and-case-studies/${org.slug}`,
-    ogImage: org.thumbnail || "/assets/ag-lab/organizations-hero.jpg",
+    // A "coming soon" stub gets the branded, text-baked-in category card
+    // instead of a bare content photo with nothing behind it.
+    ogImage: org.status === "watchlist" ? "/assets/og/organizations.jpg" : org.thumbnail || "/assets/og/organizations.jpg",
     description: org.tagline,
     ogTitle: org.name,
     ogDescription: org.tagline,
@@ -551,7 +555,7 @@ export function renderSystems() {
     active: "systems",
     body,
     canonicalPath: "/systems",
-    ogImage: "/assets/ag-lab/systems-hero.jpg",
+    ogImage: "/assets/og/systems.jpg",
     description: "Agricultural system deep dives from AutoNateAI: how financing, freight & storage, and processing & market access actually work, step by step.",
     ogTitle: "Systems | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Step-by-step deep dives into how financing, freight, storage, and processing actually work in agriculture.",
@@ -615,7 +619,9 @@ export function renderSystemDetail(system) {
     active: "systems",
     body,
     canonicalPath: `/research-and-case-studies/${system.slug}`,
-    ogImage: system.thumbnail || "/assets/ag-lab/systems-hero.jpg",
+    // A "coming soon" stub gets the branded, text-baked-in category card
+    // instead of a bare content photo with nothing behind it.
+    ogImage: system.status === "planned" ? "/assets/og/systems.jpg" : system.thumbnail || "/assets/og/systems.jpg",
     description: system.tagline,
     ogTitle: system.name,
     ogDescription: system.tagline,
@@ -646,7 +652,7 @@ export function renderInvestigations() {
     active: "investigations",
     body,
     canonicalPath: "/investigations",
-    ogImage: "/assets/ag-lab/investigations-hero.jpg",
+    ogImage: "/assets/og/investigations.jpg",
     description: "Open agricultural business questions AutoNateAI is investigating — what's known, what's missing, and who we still need to talk to.",
     ogTitle: "Open Questions | AutoNateAI Agricultural Systems Lab",
     ogDescription: "Open, honestly-labeled agricultural business questions AutoNateAI is investigating.",
@@ -708,7 +714,9 @@ export function renderInvestigationDetail(investigation) {
     active: "investigations",
     body,
     canonicalPath: `/research-and-case-studies/${investigation.slug}`,
-    ogImage: investigation.thumbnail || "/assets/ag-lab/investigations-hero.jpg",
+    // A "coming soon" stub (no evidence yet) gets the branded, text-baked-in
+    // category card instead of a bare content photo with nothing behind it.
+    ogImage: investigation.evidence?.length ? investigation.thumbnail || "/assets/og/investigations.jpg" : "/assets/og/investigations.jpg",
     description: investigation.question,
     ogTitle: investigation.name,
     ogDescription: investigation.question,
@@ -779,7 +787,12 @@ export function renderLab() {
 }
 
 export function renderHome(data) {
-  const openInvestigations = investigations.filter((i) => i.status === "open");
+  // Feature whichever investigation actually has content (evidence/sourcePath)
+  // first — an empty "coming soon" stub with status "open" shouldn't win the
+  // homepage hero slot over a real, sourced piece just because its status
+  // label happens to say "open" too.
+  const featuredInvestigation =
+    investigations.find((i) => i.evidence?.length) || investigations.find((i) => i.status === "open");
 
   const body = `
     <main class="lab-home">
@@ -799,11 +812,11 @@ export function renderHome(data) {
               <a class="secondary-button" href="/work-with-us">Work With Us</a>
             </div>
           </div>
-          <a class="hero-program-panel" href="${openInvestigations[0] ? `/research-and-case-studies/${openInvestigations[0].slug}` : "/research-and-case-studies?type=Open%20Questions"}">
+          <a class="hero-program-panel" href="${featuredInvestigation ? `/research-and-case-studies/${featuredInvestigation.slug}` : "/research-and-case-studies?type=Open%20Questions"}">
             <div class="hero-panel-body">
               <span class="kicker">${icon("help_center")} Featured Research Question</span>
-              <h2>${openInvestigations[0] ? escapeHtml(openInvestigations[0].name) : "Nothing open yet"}</h2>
-              <p>${openInvestigations[0] ? escapeHtml(openInvestigations[0].question) : "Check back soon for the next open question."}</p>
+              <h2>${featuredInvestigation ? escapeHtml(featuredInvestigation.name) : "Nothing open yet"}</h2>
+              <p>${featuredInvestigation ? escapeHtml(featuredInvestigation.question) : "Check back soon for the next open question."}</p>
               <div class="hero-facts">
                 <span>Every Number, Sourced</span>
                 <span>Never a Guess Dressed as Fact</span>
@@ -831,6 +844,18 @@ export function renderHome(data) {
         </div>
       </section>
 
+      ${(() => {
+        // Only feature a region/org card once one actually has a real
+        // profile again — right now that's neither, so this gracefully
+        // drops to just the one investigation with real content instead of
+        // leaving two empty slots in a fixed 3-column grid.
+        const featuredCards = [
+          ...regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)),
+          ...organizations.filter((o) => o.status !== "watchlist").slice(0, 1).map((org) => organizationCard(org)),
+          ...investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)),
+        ];
+        if (!featuredCards.length) return "";
+        return `
       <section class="section">
         <div class="section-head">
           <div>
@@ -840,12 +865,12 @@ export function renderHome(data) {
           </div>
           <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
         </div>
-        <div class="industry-grid home-featured-grid">
-          ${regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)).join("")}
-          ${organizations.filter((o) => o.status !== "watchlist").slice(0, 1).map((org) => organizationCard(org)).join("")}
-          ${investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)).join("")}
+        <div class="industry-grid home-featured-grid${featuredCards.length < 3 ? " home-featured-grid-sparse" : ""}">
+          ${featuredCards.join("")}
         </div>
       </section>
+        `;
+      })()}
 
       <section class="newsletter">
         <div>
@@ -2448,6 +2473,7 @@ export function renderArticleDetail(article) {
         <header>
           <span class="kicker">${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
           <h1>${escapeHtml(article.title)}</h1>
+          ${article.question ? `<p class="article-question">${icon("help_center")} ${escapeHtml(article.question)}</p>` : ""}
           <p>${escapeHtml(article.summary)}</p>
           <div class="article-byline">By Nathan Baker, AutoNateAI${article.datePublished ? ` &middot; <time datetime="${escapeHtml(article.datePublished)}">${escapeHtml(formatDate(article.datePublished))}</time>` : ""}${article.dateModified && article.dateModified !== article.datePublished ? ` &middot; Updated ${escapeHtml(formatDate(article.dateModified))}` : ""}</div>
           <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
@@ -3002,6 +3028,7 @@ function articleCard(article) {
         <div>
           <span class="kicker">${escapeHtml(article.category)} &middot; ${escapeHtml(article.readingTime)}</span>
           <h3>${escapeHtml(article.title)}</h3>
+          ${article.question ? `<p class="article-question">${escapeHtml(article.question)}</p>` : ""}
           <p>${escapeHtml(article.summary)}</p>
           <div class="tag-row">${article.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
         </div>
