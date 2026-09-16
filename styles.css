@@ -2409,6 +2409,85 @@ pre.mermaid svg {
   color: var(--primary);
 }
 
+.graph-tap-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  margin: -4px 0 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--on-variant);
+}
+
+.graph-tap-hint .material-symbols-outlined {
+  font-size: 14px;
+  color: var(--primary);
+}
+
+.graph-node-has-detail {
+  cursor: pointer;
+}
+
+.graph-node-has-detail rect {
+  transition: stroke 150ms ease, stroke-width 150ms ease, fill 150ms ease;
+}
+
+.graph-node-has-detail:hover rect,
+.graph-node-has-detail:focus-visible rect {
+  stroke: var(--primary);
+  stroke-width: 2.5px;
+}
+
+.graph-node-has-detail:focus-visible {
+  outline: none;
+}
+
+.graph-node-detail-dot {
+  fill: var(--primary);
+}
+
+.graph-detail-panel {
+  position: relative;
+  margin-top: 14px;
+  padding: 14px 40px 14px 16px;
+  border: 1px solid var(--primary);
+  background: var(--surface);
+}
+
+.graph-detail-panel h4 {
+  margin: 0 0 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--primary);
+}
+
+.graph-detail-panel p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--on-surface);
+}
+
+.graph-detail-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--on-variant);
+  cursor: pointer;
+}
+
+.graph-detail-close .material-symbols-outlined {
+  font-size: 18px;
+}
+
 @media (max-width: 640px) {
   .research-graph {
     padding: 14px 10px;

@@ -301,6 +301,37 @@ graphBlocks.forEach((block) => {
   });
 
   recompute();
+
+  // Tap/click/keyboard-activate a node to see what it means and what backs
+  // it — the actual fix for "hard to interact with," not a 3D engine. Only
+  // nodes the author gave `detail` text get this (see graphBlockHtml in
+  // src/pages.mjs) — the shared panel below the diagram swaps content per
+  // node rather than one popover per node, so only one is ever open.
+  const detailPanel = block.querySelector("[data-graph-detail]");
+  const detailTitle = block.querySelector("[data-graph-detail-title]");
+  const detailText = block.querySelector("[data-graph-detail-text]");
+  if (detailPanel && detailTitle && detailText) {
+    function showDetail(nodeSpec) {
+      detailTitle.textContent = String(nodeSpec.label || nodeSpec.id).replace(/\n/g, " ");
+      detailText.textContent = nodeSpec.detail;
+      detailPanel.hidden = false;
+      detailPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    block.querySelectorAll(".graph-node-has-detail[data-node-id]").forEach((nodeEl) => {
+      const nodeSpec = nodes.find((n) => n.id === nodeEl.dataset.nodeId);
+      if (!nodeSpec) return;
+      nodeEl.addEventListener("click", () => showDetail(nodeSpec));
+      nodeEl.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showDetail(nodeSpec);
+        }
+      });
+    });
+    block.querySelector("[data-graph-detail-close]")?.addEventListener("click", () => {
+      detailPanel.hidden = true;
+    });
+  }
 });
 
 // --- Mobile navigation ---
