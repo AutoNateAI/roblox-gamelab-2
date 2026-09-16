@@ -302,36 +302,245 @@ graphBlocks.forEach((block) => {
 
   recompute();
 
-  // Tap/click/keyboard-activate a node to see what it means and what backs
-  // it — the actual fix for "hard to interact with," not a 3D engine. Only
-  // nodes the author gave `detail` text get this (see graphBlockHtml in
-  // src/pages.mjs) — the shared panel below the diagram swaps content per
-  // node rather than one popover per node, so only one is ever open.
+  // Tap/keyboard-activate a node (no drag) to see what backs it. Only nodes
+  // the author gave `detail` text get this. The click branch of the old
+  // handler is gone — tap-vs-drag is now disambiguated by the pointer
+  // engine below (a "tap" is a pointerdown+up on a node with under ~6px of
+  // total movement between them).
   const detailPanel = block.querySelector("[data-graph-detail]");
   const detailTitle = block.querySelector("[data-graph-detail-title]");
   const detailText = block.querySelector("[data-graph-detail-text]");
-  if (detailPanel && detailTitle && detailText) {
-    function showDetail(nodeSpec) {
-      detailTitle.textContent = String(nodeSpec.label || nodeSpec.id).replace(/\n/g, " ");
-      detailText.textContent = nodeSpec.detail;
-      detailPanel.hidden = false;
-      detailPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-    block.querySelectorAll(".graph-node-has-detail[data-node-id]").forEach((nodeEl) => {
-      const nodeSpec = nodes.find((n) => n.id === nodeEl.dataset.nodeId);
-      if (!nodeSpec) return;
-      nodeEl.addEventListener("click", () => showDetail(nodeSpec));
-      nodeEl.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          showDetail(nodeSpec);
-        }
-      });
-    });
-    block.querySelector("[data-graph-detail-close]")?.addEventListener("click", () => {
-      detailPanel.hidden = true;
-    });
+  function showDetail(nodeSpec) {
+    if (!detailPanel || !detailTitle || !detailText || !nodeSpec?.detail) return;
+    detailTitle.textContent = String(nodeSpec.label || nodeSpec.id).replace(/\n/g, " ");
+    detailText.textContent = nodeSpec.detail;
+    detailPanel.hidden = false;
+    detailPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+  block.querySelector("[data-graph-detail-close]")?.addEventListener("click", () => {
+    if (detailPanel) detailPanel.hidden = true;
+  });
+  block.querySelectorAll(".graph-node-has-detail[data-node-id]").forEach((nodeEl) => {
+    const nodeSpec = nodes.find((n) => n.id === nodeEl.dataset.nodeId);
+    nodeEl.addEventListener("keydown", (event) => {
+      if ((event.key === "Enter" || event.key === " ") && nodeSpec) {
+        event.preventDefault();
+        showDetail(nodeSpec);
+      }
+    });
+  });
+
+  // --- Pan / zoom / drag canvas ---
+  // No library: the viewport <g> (see graphBlockHtml in src/pages.mjs) gets
+  // a translate+scale transform for pan/zoom, and each node <g> gets its
+  // own translate for drag — edges are geometry recomputed from each node's
+  // (original position + drag offset) on every move, and each edge's
+  // animated flow-dot follows automatically because it's an <mpath> pointed
+  // at the edge's own <path> id, not a static path string.
+  const svg = block.querySelector("[data-graph-svg]");
+  const viewport = block.querySelector("[data-graph-viewport]");
+  if (!svg || !viewport) return;
+
+  const baseWidth = Number(svg.dataset.graphBaseWidth) || 800;
+  const baseHeight = Number(svg.dataset.graphBaseHeight) || 400;
+  const MIN_SCALE = 0.5;
+  const MAX_SCALE = 3;
+  const view = { scale: 1, tx: 0, ty: 0 };
+
+  function applyView() {
+    viewport.setAttribute("transform", `translate(${view.tx} ${view.ty}) scale(${view.scale})`);
+  }
+  applyView();
+
+  function unitsPerScreenPixel() {
+    const rect = svg.getBoundingClientRect();
+    return rect.width ? baseWidth / rect.width : 1;
+  }
+
+  // Zoom while keeping whatever SVG point sits under `center` visually
+  // fixed — the standard "zoom toward cursor/pinch-midpoint" recipe.
+  function zoomBy(factor, center) {
+    const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, view.scale * factor));
+    if (newScale === view.scale) return;
+    const pivot = center || { x: view.tx + (view.scale * baseWidth) / 2, y: view.ty + (view.scale * baseHeight) / 2 };
+    const originX = (pivot.x - view.tx) / view.scale;
+    const originY = (pivot.y - view.ty) / view.scale;
+    view.tx = pivot.x - originX * newScale;
+    view.ty = pivot.y - originY * newScale;
+    view.scale = newScale;
+    applyView();
+  }
+
+  // --- Node positions: read once from the server-rendered rects, before
+  // any drag offset is ever applied, so drag math always has a stable base
+  // to add an offset to instead of compounding rounding error.
+  const originalPos = new Map();
+  const nodeOffsets = new Map();
+  nodes.forEach((n) => {
+    const nodeEl = block.querySelector(`.graph-node[data-node-id="${CSS.escape(n.id)}"]`);
+    const rect = nodeEl?.querySelector("rect");
+    if (!rect) return;
+    originalPos.set(n.id, {
+      x: parseFloat(rect.getAttribute("x")),
+      y: parseFloat(rect.getAttribute("y")),
+      w: parseFloat(rect.getAttribute("width")),
+      h: parseFloat(rect.getAttribute("height")),
+    });
+    nodeOffsets.set(n.id, { dx: 0, dy: 0 });
+  });
+
+  function currentPos(id) {
+    const base = originalPos.get(id);
+    const offset = nodeOffsets.get(id);
+    if (!base) return null;
+    return { x: base.x + (offset?.dx || 0), y: base.y + (offset?.dy || 0), w: base.w, h: base.h };
+  }
+
+  function edgeElFor(edge) {
+    return block.querySelector(`.graph-edge[data-edge-from="${CSS.escape(edge.from)}"][data-edge-to="${CSS.escape(edge.to)}"]`);
+  }
+
+  function updateEdgePath(edge) {
+    const from = currentPos(edge.from);
+    const to = currentPos(edge.to);
+    const path = edgeElFor(edge)?.querySelector("path");
+    if (!from || !to || !path) return;
+    const x1 = from.x + from.w;
+    const y1 = from.y + from.h / 2;
+    const x2 = to.x;
+    const y2 = to.y + to.h / 2;
+    const midX = (x1 + x2) / 2;
+    path.setAttribute("d", `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`);
+    const label = edgeElFor(edge)?.querySelector(".graph-edge-label");
+    if (label) {
+      label.setAttribute("x", String(midX));
+      label.setAttribute("y", String((y1 + y2) / 2 - 8));
+    }
+  }
+
+  function edgesTouching(nodeId) {
+    return edges.filter((e) => e.from === nodeId || e.to === nodeId);
+  }
+
+  block.querySelector("[data-graph-zoom-in]")?.addEventListener("click", () => zoomBy(1.25));
+  block.querySelector("[data-graph-zoom-out]")?.addEventListener("click", () => zoomBy(0.8));
+  block.querySelector("[data-graph-zoom-reset]")?.addEventListener("click", () => {
+    view.scale = 1;
+    view.tx = 0;
+    view.ty = 0;
+    applyView();
+    nodeOffsets.forEach((offset, id) => {
+      offset.dx = 0;
+      offset.dy = 0;
+      block.querySelector(`.graph-node[data-node-id="${CSS.escape(id)}"]`)?.removeAttribute("transform");
+    });
+    edges.forEach(updateEdgePath);
+  });
+
+  svg.addEventListener(
+    "wheel",
+    (event) => {
+      event.preventDefault();
+      const rect = svg.getBoundingClientRect();
+      const k = rect.width ? baseWidth / rect.width : 1;
+      const point = { x: (event.clientX - rect.left) * k, y: (event.clientY - rect.top) * k };
+      zoomBy(event.deltaY < 0 ? 1.12 : 0.89, point);
+    },
+    { passive: false },
+  );
+
+  // Pointer Events unify mouse/touch/pen: pointerdown on a node starts a
+  // node-drag, pointerdown on empty canvas starts a pan, and a second
+  // simultaneous pointer switches to pinch-zoom (tracked by pointerId in
+  // `activePointers`). A pointerdown+up on a node with under ~6px of total
+  // movement is treated as a tap instead of a drag.
+  const activePointers = new Map();
+  let pinchStartDistance = null;
+  let pinchStartScale = 1;
+  let dragTarget = null;
+  let dragStart = null;
+  let dragMoved = 0;
+
+  function pointerDistance() {
+    const pts = Array.from(activePointers.values());
+    return pts.length < 2 ? null : Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+  }
+
+  function pointerMidpoint() {
+    const pts = Array.from(activePointers.values());
+    return pts.length < 2 ? null : { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+  }
+
+  svg.addEventListener("pointerdown", (event) => {
+    const nodeEl = event.target.closest(".graph-node[data-node-id]");
+    svg.setPointerCapture(event.pointerId);
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+    if (activePointers.size >= 2) {
+      dragTarget = null;
+      pinchStartDistance = pointerDistance();
+      pinchStartScale = view.scale;
+      return;
+    }
+
+    dragStart = { x: event.clientX, y: event.clientY };
+    dragMoved = 0;
+    dragTarget = nodeEl ? { type: "node", id: nodeEl.dataset.nodeId, el: nodeEl } : { type: "pan" };
+  });
+
+  svg.addEventListener("pointermove", (event) => {
+    if (!activePointers.has(event.pointerId)) return;
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+    if (activePointers.size >= 2) {
+      event.preventDefault();
+      const distance = pointerDistance();
+      const midpoint = pointerMidpoint();
+      if (distance && pinchStartDistance && midpoint) {
+        const rect = svg.getBoundingClientRect();
+        const k = rect.width ? baseWidth / rect.width : 1;
+        const pivot = { x: (midpoint.x - rect.left) * k, y: (midpoint.y - rect.top) * k };
+        zoomBy(pinchStartScale * (distance / pinchStartDistance) / view.scale, pivot);
+      }
+      return;
+    }
+
+    if (!dragTarget || !dragStart) return;
+    event.preventDefault();
+    const dxPx = event.clientX - dragStart.x;
+    const dyPx = event.clientY - dragStart.y;
+    dragMoved = Math.max(dragMoved, Math.hypot(dxPx, dyPx));
+    const k = unitsPerScreenPixel();
+
+    if (dragTarget.type === "pan") {
+      view.tx += dxPx * k;
+      view.ty += dyPx * k;
+      applyView();
+    } else {
+      const offset = nodeOffsets.get(dragTarget.id);
+      if (offset) {
+        offset.dx += (dxPx * k) / view.scale;
+        offset.dy += (dyPx * k) / view.scale;
+        dragTarget.el.setAttribute("transform", `translate(${offset.dx} ${offset.dy})`);
+        edgesTouching(dragTarget.id).forEach(updateEdgePath);
+      }
+    }
+    dragStart = { x: event.clientX, y: event.clientY };
+  });
+
+  function endPointer(event) {
+    activePointers.delete(event.pointerId);
+    if (activePointers.size < 2) pinchStartDistance = null;
+    if (activePointers.size === 0) {
+      if (dragTarget?.type === "node" && dragMoved < 6) {
+        showDetail(nodes.find((n) => n.id === dragTarget.id));
+      }
+      dragTarget = null;
+      dragStart = null;
+    }
+  }
+  svg.addEventListener("pointerup", endPointer);
+  svg.addEventListener("pointercancel", endPointer);
 });
 
 // --- Mobile navigation ---

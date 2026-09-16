@@ -2862,6 +2862,12 @@ const GRAPH_NODE_W = 176;
 const GRAPH_NODE_H = 64;
 const GRAPH_MARGIN = 32;
 const GRAPH_EVIDENCE_KINDS = ["verified", "estimated", "hypothesis"];
+// Module-level so every ```graph block on a build gets a unique DOM-id
+// prefix — needed because each edge <path> gets an id and each flow-dot
+// references it via <mpath href="#...">, and a page can have more than one
+// graph block (or, at minimum, ids must never collide across pages sharing
+// this module in a long-lived process like server.mjs).
+let graphBlockCounter = 0;
 
 function graphFormatValue(value, format) {
   if (typeof value !== "number" || Number.isNaN(value)) return "";
@@ -2870,6 +2876,7 @@ function graphFormatValue(value, format) {
 }
 
 function graphBlockHtml(spec) {
+  const graphId = `graph-${++graphBlockCounter}`;
   const nodes = Array.isArray(spec.nodes) ? spec.nodes : [];
   const edges = Array.isArray(spec.edges) ? spec.edges : [];
   const inputs = Array.isArray(spec.inputs) ? spec.inputs : [];
@@ -2900,7 +2907,7 @@ function graphBlockHtml(spec) {
   });
 
   const edgeSvg = edges
-    .map((e) => {
+    .map((e, edgeIndex) => {
       const from = positions.get(e.from);
       const to = positions.get(e.to);
       if (!from || !to) return "";
@@ -2911,17 +2918,21 @@ function graphBlockHtml(spec) {
       const midX = (x1 + x2) / 2;
       const evidence = GRAPH_EVIDENCE_KINDS.includes(e.evidence) ? e.evidence : "hypothesis";
       const pathD = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+      const pathId = `${graphId}-edge-${edgeIndex}`;
       // Verified/estimated edges get a small dot animated along the path
-      // with native SMIL <animateMotion> — a lightweight "data is actually
-      // flowing here" cue with zero JS and zero new dependency. Hypothesis
-      // edges deliberately stay static/dashed instead: nothing flows along
-      // a relationship that isn't provable yet.
+      // with native SMIL <animateMotion>/<mpath> — a lightweight "data is
+      // actually flowing here" cue with zero JS and zero new dependency.
+      // <mpath href> (not a literal path="..." string) so the dot keeps
+      // following the edge automatically after public/app.js rewrites the
+      // path's `d` on node drag — SMIL re-reads the referenced element live.
+      // Hypothesis edges deliberately stay static/dashed: nothing flows
+      // along a relationship that isn't provable yet.
       const flowDot =
         evidence !== "hypothesis"
-          ? `<circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite" path="${pathD}" /></circle>`
+          ? `<circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#${pathId}" xlink:href="#${pathId}" /></animateMotion></circle>`
           : "";
       return `<g class="graph-edge graph-edge-${evidence}" data-edge-from="${escapeHtml(e.from)}" data-edge-to="${escapeHtml(e.to)}">
-        <path d="${pathD}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
+        <path id="${pathId}" d="${pathD}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
         ${flowDot}
         ${e.label ? `<text x="${midX}" y="${(y1 + y2) / 2 - 8}" text-anchor="middle" class="graph-edge-label">${escapeHtml(e.label)}</text>` : ""}
       </g>`;
@@ -2984,13 +2995,30 @@ function graphBlockHtml(spec) {
         <p data-graph-detail-text></p>
       </div>`
     : "";
-  const hint = hasAnyDetail ? `<p class="graph-tap-hint">${icon("touch_app")} Tap a node for the evidence behind it.</p>` : "";
+  const hint = `<p class="graph-tap-hint">${icon("open_with")} Drag nodes to rearrange${hasAnyDetail ? ", tap one for the evidence behind it" : ""} — pinch or scroll to zoom.</p>`;
+
+  // Zoom/pan/drag is baked into every ```graph block automatically (see the
+  // graph section of public/app.js) — the canvas itself, not a per-node
+  // author choice, so no JSON spec changes are needed to get it. Buttons
+  // exist alongside pinch/wheel/drag for discoverability and keyboard/
+  // non-touch access, not as the only way in.
+  const zoomControls = `<div class="graph-zoom-controls">
+    <button type="button" data-graph-zoom-in aria-label="Zoom in">${icon("add")}</button>
+    <button type="button" data-graph-zoom-out aria-label="Zoom out">${icon("remove")}</button>
+    <button type="button" data-graph-zoom-reset aria-label="Reset view">${icon("restart_alt")}</button>
+  </div>`;
 
   const caption = spec.sourceLabel || spec.source || "";
-  return `<figure class="research-graph" data-graph="${escapeHtml(JSON.stringify(spec))}">
+  return `<figure class="research-graph" data-graph="${escapeHtml(JSON.stringify(spec))}" data-graph-id="${graphId}">
     ${spec.title ? `<figcaption class="graph-title">${escapeHtml(spec.title)}</figcaption>` : ""}
     ${hint}
-    <div class="graph-canvas-wrap"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(spec.title || "System diagram")}">${defs}${edgeSvg}${nodeSvg}</svg></div>
+    <div class="graph-canvas-wrap">
+      ${zoomControls}
+      <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(spec.title || "System diagram")}" data-graph-svg data-graph-base-width="${width}" data-graph-base-height="${height}">
+        ${defs}
+        <g class="graph-viewport" data-graph-viewport>${edgeSvg}${nodeSvg}</g>
+      </svg>
+    </div>
     ${detailPanel}
     ${legend}
     ${sliders ? `<div class="graph-controls">${sliders}</div>` : ""}

@@ -10,19 +10,33 @@ Before there was a "Bootheel rice industry" to have an opinion about, there was 
 
 ## How This Connects
 
-```mermaid
-flowchart LR
-  F[Bootheel Farm] -->|rice acreage| RI[Levees / Wells / Dryer]
-  F -->|soybean acreage| SO[Standard Row-Crop Equipment]
-  RI --> EL[Regional Elevator]
-  SO --> EL
-  EL --> MK[Buyer / Export Market]
-  FC[Farm Credit SEMO — Operating Loan] -.finances.-> F
-  FC -.collateral valuation depends on crop mix.-> RI
-  FC -.collateral valuation depends on crop mix.-> SO
-  RFS[EPA Renewable Fuel Standard] -.pulls demand toward.-> SO
-  PLC[Farm Bill PLC Reference Price] -.pushes safety net toward.-> RI
-  TRADE[China Trade Deal / Tariff] -.caps export upside for.-> SO
+```graph
+{
+  "title": "How This Connects",
+  "nodes": [
+    { "id": "plc", "label": "Farm Bill PLC\nReference Price\n$14.00 → $16.90/cwt", "rank": 0, "detail": "The One Big Beautiful Bill Act (H.R. 1, enacted July 2025) raised the rice Price Loss Coverage reference price 20.7%, from $14.00 to $16.90 per hundredweight — the largest increase given to any covered commodity in that bill." },
+    { "id": "rfs", "label": "EPA Renewable Fuel\nStandard\nSoybean oil biofuel use +17%", "rank": 0, "detail": "EPA's final 2026-2027 Renewable Fuel Standard rule (announced March 27, 2026) requires a 60% jump in biodiesel/renewable diesel production vs. 2025, with soybean oil use for biofuel projected up roughly 17% — worth an estimated $31 billion to corn and soybean oil producers in 2026." },
+    { "id": "trade", "label": "China Trade Deal\n/ Tariff\n~14% below 5-yr average", "rank": 0, "detail": "China's negotiated soybean purchase commitment (25M metric tons/yr through 2028) still runs roughly 14% below the 2020-2024 five-year average, with a 13% tariff still standing." },
+    { "id": "fc", "label": "Farm Credit SEMO\nOperating Loan", "rank": 0, "detail": "Finances the farm's crop-mix decision every season — collateral valuation and loan sizing depend on which crop is actually in the ground. See the companion investigation on Farm Credit SEMO's own 2026 credit-quality trend." },
+    { "id": "farm", "label": "Bootheel Farm\n(the decision)", "rank": 1, "detail": "The actual decision point: how much rice-versus-soybean acreage to plant this season, weighing three federal policy signals moving in different directions at once." },
+    { "id": "rice_infra", "label": "Rice Infrastructure\n(Levees / Wells / Dryer)", "rank": 2, "detail": "Rice requires flood-irrigation infrastructure — wells, levees, a dryer built for a different moisture curve — that soybeans never touch. A real pivot leaves this idle or repurposed." },
+    { "id": "soy_equip", "label": "Standard Row-Crop\nEquipment", "rank": 2, "detail": "Soybean acreage uses the region's standard row-crop equipment — no rice-specific capital investment required." },
+    { "id": "elevator", "label": "Regional Elevator", "rank": 3, "detail": "Where both rice and soybeans converge again after the field — a crop-mix shift changes what an elevator needs to be ready to handle and dry at harvest. Elevator/dryer throughput data doesn't exist publicly yet — see What We Still Need below." },
+    { "id": "market", "label": "Buyer / Export\nMarket", "rank": 4, "detail": "The final destination — domestic biofuel crush for soybeans, or milling/export for rice, each shaped by the policy signals feeding in from the left." }
+  ],
+  "edges": [
+    { "from": "plc", "to": "farm", "evidence": "verified", "label": "Reference price +20.7%" },
+    { "from": "rfs", "to": "farm", "evidence": "verified", "label": "Pulls demand toward soybeans" },
+    { "from": "trade", "to": "farm", "evidence": "verified", "label": "Caps soybean export upside" },
+    { "from": "fc", "to": "farm", "evidence": "verified", "label": "Finances the decision" },
+    { "from": "farm", "to": "rice_infra", "evidence": "estimated", "label": "If rice acreage holds/grows" },
+    { "from": "farm", "to": "soy_equip", "evidence": "estimated", "label": "If soybean acreage grows" },
+    { "from": "rice_infra", "to": "elevator", "evidence": "hypothesis", "label": "Drying/throughput shift not yet measured" },
+    { "from": "soy_equip", "to": "elevator", "evidence": "hypothesis", "label": "Drying/throughput shift not yet measured" },
+    { "from": "elevator", "to": "market", "evidence": "estimated", "label": "Domestic crush vs. export/milling" }
+  ],
+  "sourceLabel": "USA Rice Federation (H.R. 1 coverage, Jul 2025); EPA final RFS rule (Mar 27 2026); farmdoc daily U.S.-China soybean deal analysis (Nov 2025). Drag nodes to rearrange, pinch/scroll to zoom, tap a node for its source."
+}
 ```
 
 Rice and soybeans share a farm, and often a lender, and not much else once they leave the field. Rice needs the flood-irrigation infrastructure soybeans never touch — wells, levees, a dryer built for a different moisture curve. A real pivot doesn't just change what's planted; it changes what's sitting idle, what a loan officer is underwriting, and what an elevator needs to be ready to handle at harvest.
