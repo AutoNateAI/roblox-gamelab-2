@@ -66,18 +66,105 @@
 <h3>Ground I'm Standing On, Literally</h3>
 <p>Before there was a &quot;Bootheel rice industry&quot; to have an opinion about, there was a swamp. Nearly 2 million acres of it — the overflow basin for the Mississippi and Ohio rivers and every Ozark stream that ever ran out of hillside room. In 1907, a group of timber men who'd already logged the place out incorporated the Little River Drainage District and set out to turn what was left into farmland. Construction ran from 1914 to 1928. What they left behind — over 900 miles of ditches, 300 miles of levees, draining 1.2 million acres across Bollinger, Cape Girardeau, Dunklin, New Madrid, Pemiscot, Scott, and Stoddard counties — is still, functionally, the plumbing this entire regional economy sits on top of. Every acre of rice or soybeans anyone's arguing about today is farmable at all because a hundred-plus-year-old engineering project said so. That's not trivia. That's the reason this is delta-flat, ditch-veined, gravity-drained land instead of a bayou — and it's worth remembering before anyone treats &quot;the way the Bootheel farms&quot; as a law of nature instead of a very deliberate, very old decision. (<a href="https://www.thelrdd.org/history/">Little River Drainage District — official history</a>)</p>
 <h3>How This Connects</h3>
-<pre class="mermaid">flowchart LR
-  F[Bootheel Farm] --&gt;|rice acreage| RI[Levees / Wells / Dryer]
-  F --&gt;|soybean acreage| SO[Standard Row-Crop Equipment]
-  RI --&gt; EL[Regional Elevator]
-  SO --&gt; EL
-  EL --&gt; MK[Buyer / Export Market]
-  FC[Farm Credit SEMO — Operating Loan] -.finances.-&gt; F
-  FC -.collateral valuation depends on crop mix.-&gt; RI
-  FC -.collateral valuation depends on crop mix.-&gt; SO
-  RFS[EPA Renewable Fuel Standard] -.pulls demand toward.-&gt; SO
-  PLC[Farm Bill PLC Reference Price] -.pushes safety net toward.-&gt; RI
-  TRADE[China Trade Deal / Tariff] -.caps export upside for.-&gt; SO</pre>
+<figure class="research-graph" data-graph="{&quot;title&quot;:&quot;How This Connects&quot;,&quot;nodes&quot;:[{&quot;id&quot;:&quot;plc&quot;,&quot;label&quot;:&quot;Farm Bill PLC\nReference Price\n$14.00 → $16.90/cwt&quot;,&quot;rank&quot;:0,&quot;detail&quot;:&quot;The One Big Beautiful Bill Act (H.R. 1, enacted July 2025) raised the rice Price Loss Coverage reference price 20.7%, from $14.00 to $16.90 per hundredweight — the largest increase given to any covered commodity in that bill.&quot;},{&quot;id&quot;:&quot;rfs&quot;,&quot;label&quot;:&quot;EPA Renewable Fuel\nStandard\nSoybean oil biofuel use +17%&quot;,&quot;rank&quot;:0,&quot;detail&quot;:&quot;EPA's final 2026-2027 Renewable Fuel Standard rule (announced March 27, 2026) requires a 60% jump in biodiesel/renewable diesel production vs. 2025, with soybean oil use for biofuel projected up roughly 17% — worth an estimated $31 billion to corn and soybean oil producers in 2026.&quot;},{&quot;id&quot;:&quot;trade&quot;,&quot;label&quot;:&quot;China Trade Deal\n/ Tariff\n~14% below 5-yr average&quot;,&quot;rank&quot;:0,&quot;detail&quot;:&quot;China's negotiated soybean purchase commitment (25M metric tons/yr through 2028) still runs roughly 14% below the 2020-2024 five-year average, with a 13% tariff still standing.&quot;},{&quot;id&quot;:&quot;fc&quot;,&quot;label&quot;:&quot;Farm Credit SEMO\nOperating Loan&quot;,&quot;rank&quot;:0,&quot;detail&quot;:&quot;Finances the farm's crop-mix decision every season — collateral valuation and loan sizing depend on which crop is actually in the ground. See the companion investigation on Farm Credit SEMO's own 2026 credit-quality trend.&quot;},{&quot;id&quot;:&quot;farm&quot;,&quot;label&quot;:&quot;Bootheel Farm\n(the decision)&quot;,&quot;rank&quot;:1,&quot;detail&quot;:&quot;The actual decision point: how much rice-versus-soybean acreage to plant this season, weighing three federal policy signals moving in different directions at once.&quot;},{&quot;id&quot;:&quot;rice_infra&quot;,&quot;label&quot;:&quot;Rice Infrastructure\n(Levees / Wells / Dryer)&quot;,&quot;rank&quot;:2,&quot;detail&quot;:&quot;Rice requires flood-irrigation infrastructure — wells, levees, a dryer built for a different moisture curve — that soybeans never touch. A real pivot leaves this idle or repurposed.&quot;},{&quot;id&quot;:&quot;soy_equip&quot;,&quot;label&quot;:&quot;Standard Row-Crop\nEquipment&quot;,&quot;rank&quot;:2,&quot;detail&quot;:&quot;Soybean acreage uses the region's standard row-crop equipment — no rice-specific capital investment required.&quot;},{&quot;id&quot;:&quot;elevator&quot;,&quot;label&quot;:&quot;Regional Elevator&quot;,&quot;rank&quot;:3,&quot;detail&quot;:&quot;Where both rice and soybeans converge again after the field — a crop-mix shift changes what an elevator needs to be ready to handle and dry at harvest. Elevator/dryer throughput data doesn't exist publicly yet — see What We Still Need below.&quot;},{&quot;id&quot;:&quot;market&quot;,&quot;label&quot;:&quot;Buyer / Export\nMarket&quot;,&quot;rank&quot;:4,&quot;detail&quot;:&quot;The final destination — domestic biofuel crush for soybeans, or milling/export for rice, each shaped by the policy signals feeding in from the left.&quot;}],&quot;edges&quot;:[{&quot;from&quot;:&quot;plc&quot;,&quot;to&quot;:&quot;farm&quot;,&quot;evidence&quot;:&quot;verified&quot;,&quot;label&quot;:&quot;Reference price +20.7%&quot;},{&quot;from&quot;:&quot;rfs&quot;,&quot;to&quot;:&quot;farm&quot;,&quot;evidence&quot;:&quot;verified&quot;,&quot;label&quot;:&quot;Pulls demand toward soybeans&quot;},{&quot;from&quot;:&quot;trade&quot;,&quot;to&quot;:&quot;farm&quot;,&quot;evidence&quot;:&quot;verified&quot;,&quot;label&quot;:&quot;Caps soybean export upside&quot;},{&quot;from&quot;:&quot;fc&quot;,&quot;to&quot;:&quot;farm&quot;,&quot;evidence&quot;:&quot;verified&quot;,&quot;label&quot;:&quot;Finances the decision&quot;},{&quot;from&quot;:&quot;farm&quot;,&quot;to&quot;:&quot;rice_infra&quot;,&quot;evidence&quot;:&quot;estimated&quot;,&quot;label&quot;:&quot;If rice acreage holds/grows&quot;},{&quot;from&quot;:&quot;farm&quot;,&quot;to&quot;:&quot;soy_equip&quot;,&quot;evidence&quot;:&quot;estimated&quot;,&quot;label&quot;:&quot;If soybean acreage grows&quot;},{&quot;from&quot;:&quot;rice_infra&quot;,&quot;to&quot;:&quot;elevator&quot;,&quot;evidence&quot;:&quot;hypothesis&quot;,&quot;label&quot;:&quot;Drying/throughput shift not yet measured&quot;},{&quot;from&quot;:&quot;soy_equip&quot;,&quot;to&quot;:&quot;elevator&quot;,&quot;evidence&quot;:&quot;hypothesis&quot;,&quot;label&quot;:&quot;Drying/throughput shift not yet measured&quot;},{&quot;from&quot;:&quot;elevator&quot;,&quot;to&quot;:&quot;market&quot;,&quot;evidence&quot;:&quot;estimated&quot;,&quot;label&quot;:&quot;Domestic crush vs. export/milling&quot;}],&quot;sourceLabel&quot;:&quot;USA Rice Federation (H.R. 1 coverage, Jul 2025); EPA final RFS rule (Mar 27 2026); farmdoc daily U.S.-China soybean deal analysis (Nov 2025). Drag nodes to rearrange, pinch/scroll to zoom, tap a node for its source.&quot;}" data-graph-id="graph-1">
+    <figcaption class="graph-title">How This Connects</figcaption>
+    <p class="graph-tap-hint"><span class="material-symbols-outlined">open_with</span> Drag nodes to rearrange, tap one for the evidence behind it — pinch or scroll to zoom.</p>
+    <div class="graph-canvas-wrap">
+      <div class="graph-zoom-controls">
+    <button type="button" data-graph-zoom-in aria-label="Zoom in"><span class="material-symbols-outlined">add</span></button>
+    <button type="button" data-graph-zoom-out aria-label="Zoom out"><span class="material-symbols-outlined">remove</span></button>
+    <button type="button" data-graph-zoom-reset aria-label="Reset view"><span class="material-symbols-outlined">restart_alt</span></button>
+  </div>
+      <svg viewBox="0 0 1168 416" role="img" aria-label="How This Connects" data-graph-svg data-graph-base-width="1168" data-graph-base-height="416">
+        <defs><marker id="graph-arrow-verified" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" /></marker><marker id="graph-arrow-estimated" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" /></marker><marker id="graph-arrow-hypothesis" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" /></marker></defs>
+        <g class="graph-viewport" data-graph-viewport><g class="graph-edge graph-edge-verified" data-edge-from="plc" data-edge-to="farm">
+        <path id="graph-1-edge-0" d="M 208 64 C 236 64, 236 208, 264 208" fill="none" marker-end="url(#graph-arrow-verified)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-0" xlink:href="#graph-1-edge-0" /></animateMotion></circle>
+        <text x="236" y="128" text-anchor="middle" class="graph-edge-label">Reference price +20.7%</text>
+      </g><g class="graph-edge graph-edge-verified" data-edge-from="rfs" data-edge-to="farm">
+        <path id="graph-1-edge-1" d="M 208 160 C 236 160, 236 208, 264 208" fill="none" marker-end="url(#graph-arrow-verified)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-1" xlink:href="#graph-1-edge-1" /></animateMotion></circle>
+        <text x="236" y="176" text-anchor="middle" class="graph-edge-label">Pulls demand toward soybeans</text>
+      </g><g class="graph-edge graph-edge-verified" data-edge-from="trade" data-edge-to="farm">
+        <path id="graph-1-edge-2" d="M 208 256 C 236 256, 236 208, 264 208" fill="none" marker-end="url(#graph-arrow-verified)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-2" xlink:href="#graph-1-edge-2" /></animateMotion></circle>
+        <text x="236" y="224" text-anchor="middle" class="graph-edge-label">Caps soybean export upside</text>
+      </g><g class="graph-edge graph-edge-verified" data-edge-from="fc" data-edge-to="farm">
+        <path id="graph-1-edge-3" d="M 208 352 C 236 352, 236 208, 264 208" fill="none" marker-end="url(#graph-arrow-verified)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-3" xlink:href="#graph-1-edge-3" /></animateMotion></circle>
+        <text x="236" y="272" text-anchor="middle" class="graph-edge-label">Finances the decision</text>
+      </g><g class="graph-edge graph-edge-estimated" data-edge-from="farm" data-edge-to="rice_infra">
+        <path id="graph-1-edge-4" d="M 440 208 C 468 208, 468 160, 496 160" fill="none" marker-end="url(#graph-arrow-estimated)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-4" xlink:href="#graph-1-edge-4" /></animateMotion></circle>
+        <text x="468" y="176" text-anchor="middle" class="graph-edge-label">If rice acreage holds/grows</text>
+      </g><g class="graph-edge graph-edge-estimated" data-edge-from="farm" data-edge-to="soy_equip">
+        <path id="graph-1-edge-5" d="M 440 208 C 468 208, 468 256, 496 256" fill="none" marker-end="url(#graph-arrow-estimated)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-5" xlink:href="#graph-1-edge-5" /></animateMotion></circle>
+        <text x="468" y="224" text-anchor="middle" class="graph-edge-label">If soybean acreage grows</text>
+      </g><g class="graph-edge graph-edge-hypothesis" data-edge-from="rice_infra" data-edge-to="elevator">
+        <path id="graph-1-edge-6" d="M 672 160 C 700 160, 700 208, 728 208" fill="none" marker-end="url(#graph-arrow-hypothesis)" />
+        
+        <text x="700" y="176" text-anchor="middle" class="graph-edge-label">Drying/throughput shift not yet measured</text>
+      </g><g class="graph-edge graph-edge-hypothesis" data-edge-from="soy_equip" data-edge-to="elevator">
+        <path id="graph-1-edge-7" d="M 672 256 C 700 256, 700 208, 728 208" fill="none" marker-end="url(#graph-arrow-hypothesis)" />
+        
+        <text x="700" y="224" text-anchor="middle" class="graph-edge-label">Drying/throughput shift not yet measured</text>
+      </g><g class="graph-edge graph-edge-estimated" data-edge-from="elevator" data-edge-to="market">
+        <path id="graph-1-edge-8" d="M 904 208 C 932 208, 932 208, 960 208" fill="none" marker-end="url(#graph-arrow-estimated)" />
+        <circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#graph-1-edge-8" xlink:href="#graph-1-edge-8" /></animateMotion></circle>
+        <text x="932" y="200" text-anchor="middle" class="graph-edge-label">Domestic crush vs. export/milling</text>
+      </g><g class="graph-node graph-node-has-detail" data-node-id="plc" tabindex="0" role="button" aria-label="Farm Bill PLC Reference Price $14.00 → $16.90/cwt — show details">
+        <rect x="32" y="32" width="176" height="64" rx="16" />
+        <text x="120" y="49" text-anchor="middle"><tspan x="120" dy="0">Farm Bill PLC</tspan><tspan x="120" dy="15">Reference Price</tspan><tspan x="120" dy="15">$14.00 → $16.90/cwt</tspan></text>
+        <circle class="graph-node-detail-dot" cx="198" cy="42" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="rfs" tabindex="0" role="button" aria-label="EPA Renewable Fuel Standard Soybean oil biofuel use +17% — show details">
+        <rect x="32" y="128" width="176" height="64" rx="16" />
+        <text x="120" y="145" text-anchor="middle"><tspan x="120" dy="0">EPA Renewable Fuel</tspan><tspan x="120" dy="15">Standard</tspan><tspan x="120" dy="15">Soybean oil biofuel use +17%</tspan></text>
+        <circle class="graph-node-detail-dot" cx="198" cy="138" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="trade" tabindex="0" role="button" aria-label="China Trade Deal / Tariff ~14% below 5-yr average — show details">
+        <rect x="32" y="224" width="176" height="64" rx="16" />
+        <text x="120" y="241" text-anchor="middle"><tspan x="120" dy="0">China Trade Deal</tspan><tspan x="120" dy="15">/ Tariff</tspan><tspan x="120" dy="15">~14% below 5-yr average</tspan></text>
+        <circle class="graph-node-detail-dot" cx="198" cy="234" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="fc" tabindex="0" role="button" aria-label="Farm Credit SEMO Operating Loan — show details">
+        <rect x="32" y="320" width="176" height="64" rx="16" />
+        <text x="120" y="344.5" text-anchor="middle"><tspan x="120" dy="0">Farm Credit SEMO</tspan><tspan x="120" dy="15">Operating Loan</tspan></text>
+        <circle class="graph-node-detail-dot" cx="198" cy="330" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="farm" tabindex="0" role="button" aria-label="Bootheel Farm (the decision) — show details">
+        <rect x="264" y="176" width="176" height="64" rx="16" />
+        <text x="352" y="200.5" text-anchor="middle"><tspan x="352" dy="0">Bootheel Farm</tspan><tspan x="352" dy="15">(the decision)</tspan></text>
+        <circle class="graph-node-detail-dot" cx="430" cy="186" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="rice_infra" tabindex="0" role="button" aria-label="Rice Infrastructure (Levees / Wells / Dryer) — show details">
+        <rect x="496" y="128" width="176" height="64" rx="16" />
+        <text x="584" y="152.5" text-anchor="middle"><tspan x="584" dy="0">Rice Infrastructure</tspan><tspan x="584" dy="15">(Levees / Wells / Dryer)</tspan></text>
+        <circle class="graph-node-detail-dot" cx="662" cy="138" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="soy_equip" tabindex="0" role="button" aria-label="Standard Row-Crop Equipment — show details">
+        <rect x="496" y="224" width="176" height="64" rx="16" />
+        <text x="584" y="248.5" text-anchor="middle"><tspan x="584" dy="0">Standard Row-Crop</tspan><tspan x="584" dy="15">Equipment</tspan></text>
+        <circle class="graph-node-detail-dot" cx="662" cy="234" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="elevator" tabindex="0" role="button" aria-label="Regional Elevator — show details">
+        <rect x="728" y="176" width="176" height="64" rx="16" />
+        <text x="816" y="208" text-anchor="middle"><tspan x="816" dy="0">Regional Elevator</tspan></text>
+        <circle class="graph-node-detail-dot" cx="894" cy="186" r="4" />
+      </g><g class="graph-node graph-node-has-detail" data-node-id="market" tabindex="0" role="button" aria-label="Buyer / Export Market — show details">
+        <rect x="960" y="176" width="176" height="64" rx="16" />
+        <text x="1048" y="200.5" text-anchor="middle"><tspan x="1048" dy="0">Buyer / Export</tspan><tspan x="1048" dy="15">Market</tspan></text>
+        <circle class="graph-node-detail-dot" cx="1126" cy="186" r="4" />
+      </g></g>
+      </svg>
+    </div>
+    <div class="graph-detail-panel" data-graph-detail hidden>
+        <button type="button" class="graph-detail-close" data-graph-detail-close aria-label="Close"><span class="material-symbols-outlined">close</span></button>
+        <h4 data-graph-detail-title></h4>
+        <p data-graph-detail-text></p>
+      </div>
+    <div class="graph-legend">
+    <span class="graph-legend-item graph-legend-verified">Verified — disclosed figure</span>
+    <span class="graph-legend-item graph-legend-estimated">Estimated — reasoned from public data</span>
+    <span class="graph-legend-item graph-legend-hypothesis">Hypothesis — not provable from public data yet</span>
+  </div>
+    
+    <figcaption>USA Rice Federation (H.R. 1 coverage, Jul 2025); EPA final RFS rule (Mar 27 2026); farmdoc daily U.S.-China soybean deal analysis (Nov 2025). Drag nodes to rearrange, pinch/scroll to zoom, tap a node for its source.</figcaption>
+  </figure>
 <p>Rice and soybeans share a farm, and often a lender, and not much else once they leave the field. Rice needs the flood-irrigation infrastructure soybeans never touch — wells, levees, a dryer built for a different moisture curve. A real pivot doesn't just change what's planted; it changes what's sitting idle, what a loan officer is underwriting, and what an elevator needs to be ready to handle at harvest.</p>
 <h3>Three Signals, One Farmer</h3>
 <p>Here's the part that made me stop writing the easy version of this piece. I went looking for &quot;why would someone leave rice for soybeans&quot; and found something more interesting: three separate federal policy levers, moving in the same season, pointing three different directions.</p>
