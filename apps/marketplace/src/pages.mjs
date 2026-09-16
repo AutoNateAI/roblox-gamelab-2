@@ -416,9 +416,10 @@ export function renderRegionDetail(region) {
     active: "regions",
     body,
     canonicalPath: `/research-and-case-studies/${region.slug}`,
-    // A "coming soon" stub gets the branded, text-baked-in category card
-    // instead of a bare content photo with nothing behind it.
-    ogImage: region.status === "watchlist" ? "/assets/og/regions.jpg" : region.thumbnail || "/assets/og/regions.jpg",
+    // Every region gets its own dedicated, text-baked-in OG card (see
+    // scripts/generate-og-hero-images.mjs) instead of sharing one generic
+    // category image or a bare content photo with no caption.
+    ogImage: `/assets/og/${region.slug}.jpg`,
     description: region.tagline,
     ogTitle: region.name,
     ogDescription: region.tagline,
@@ -514,9 +515,10 @@ export function renderOrganizationDetail(org) {
     active: "organizations",
     body,
     canonicalPath: `/research-and-case-studies/${org.slug}`,
-    // A "coming soon" stub gets the branded, text-baked-in category card
-    // instead of a bare content photo with nothing behind it.
-    ogImage: org.status === "watchlist" ? "/assets/og/organizations.jpg" : org.thumbnail || "/assets/og/organizations.jpg",
+    // Every organization gets its own dedicated, text-baked-in OG card (see
+    // scripts/generate-og-hero-images.mjs) instead of sharing one generic
+    // category image or a bare content photo with no caption.
+    ogImage: `/assets/og/${org.slug}.jpg`,
     description: org.tagline,
     ogTitle: org.name,
     ogDescription: org.tagline,
@@ -619,9 +621,10 @@ export function renderSystemDetail(system) {
     active: "systems",
     body,
     canonicalPath: `/research-and-case-studies/${system.slug}`,
-    // A "coming soon" stub gets the branded, text-baked-in category card
-    // instead of a bare content photo with nothing behind it.
-    ogImage: system.status === "planned" ? "/assets/og/systems.jpg" : system.thumbnail || "/assets/og/systems.jpg",
+    // Every system gets its own dedicated, text-baked-in OG card (see
+    // scripts/generate-og-hero-images.mjs) instead of sharing one generic
+    // category image or a bare content photo with no caption.
+    ogImage: `/assets/og/${system.slug}.jpg`,
     description: system.tagline,
     ogTitle: system.name,
     ogDescription: system.tagline,
@@ -714,9 +717,10 @@ export function renderInvestigationDetail(investigation) {
     active: "investigations",
     body,
     canonicalPath: `/research-and-case-studies/${investigation.slug}`,
-    // A "coming soon" stub (no evidence yet) gets the branded, text-baked-in
-    // category card instead of a bare content photo with nothing behind it.
-    ogImage: investigation.evidence?.length ? investigation.thumbnail || "/assets/og/investigations.jpg" : "/assets/og/investigations.jpg",
+    // Every investigation gets its own dedicated, text-baked-in OG card
+    // (see scripts/generate-og-hero-images.mjs) instead of sharing one
+    // generic category image or a bare content photo with no caption.
+    ogImage: `/assets/og/${investigation.slug}.jpg`,
     description: investigation.question,
     ogTitle: investigation.name,
     ogDescription: investigation.question,

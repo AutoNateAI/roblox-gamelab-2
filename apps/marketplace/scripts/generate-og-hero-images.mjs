@@ -1,6 +1,9 @@
 // Generates the "YouTube-thumbnail style" OG cards for the highest-traffic
-// pages — home and the Research & Case Studies hub (main hub + its four
-// sub-hubs: Regions, Organizations, Systems, Open Questions/Investigations).
+// pages — home, the Research & Case Studies hub (main hub + its four
+// sub-hubs: Regions, Organizations, Systems, Open Questions/Investigations),
+// and every individual region/organization/system/investigation detail page
+// (each gets its own image, relevant to that specific page's question —
+// not a shared category card).
 //
 // Different approach from scripts/generate-og-images.mjs: instead of
 // compositing a title as an SVG text overlay on top of a stock photo, this
@@ -61,6 +64,42 @@ const jobs = [
     file: "og/investigations.jpg",
     prompt: `A wide editorial image for a page of open research questions. Background: a rice field mid-conversion to a soybean field, a sharp levee line dividing flooded and dry ground, fading into a dark navy panel with gold light. Large bold headline text reading "THE QUESTIONS WE HAVEN'T ANSWERED YET" with a smaller line beneath reading "AutoNateAI · Open Questions". ${STYLE}`,
   },
+
+  // --- Per-article images: one per region/organization/system/investigation
+  // detail page, each relevant to that specific page's question — not a
+  // shared category card like the six above.
+  {
+    file: "og/bootheel-rice-to-soybean-pivot.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: an aerial documentary shot showing a sharp visual boundary between a flooded rice paddy on one side and a dry green soybean field on the other, a straight levee line dividing them, soft daylight, fading into a dark navy panel with gold light. Large bold headline text reading "RICE JUST GOT A BIGGER SAFETY NET. FARMERS ARE PLANTING LESS OF IT." with a smaller line beneath reading "AutoNateAI · Bootheel Rice-to-Soybean Pivot". ${STYLE}`,
+  },
+  {
+    file: "og/elevator-harvest-bottleneck.jpg",
+    prompt: `A wide editorial image about an open research question. Background: a line of grain trucks queued on a gravel road waiting to unload at a busy grain elevator during harvest, dust in the air, late-afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "WHY DO THE SAME ELEVATORS CHOKE EVERY HARVEST?" with a smaller line beneath reading "AutoNateAI · Open Question, Coming Soon". ${STYLE}`,
+  },
+  {
+    file: "og/southeast-missouri.jpg",
+    prompt: `A wide editorial image about a U.S. farming region. Background: an aerial shot of Southeast Missouri Bootheel farmland near the Mississippi River — flat geometric fields of soybeans, cotton, and rice paddies, a levee line, a grain elevator in the distance, warm late-afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "WHAT'S ACTUALLY HAPPENING TO FARM COUNTRY IN THE BOOTHEEL?" with a smaller line beneath reading "AutoNateAI · Southeast Missouri, Coming Soon". ${STYLE}`,
+  },
+  {
+    file: "og/central-iowa-corn-belt.jpg",
+    prompt: `A wide editorial image about a U.S. farming region. Background: an aerial shot of classic Iowa Corn Belt farmland — vast geometric cornfields in late-summer green, a farmstead with grain bins and a red barn, gravel section roads, soft midday light, fading into a dark navy panel with gold light. Large bold headline text reading "WHAT KEEPS THE IOWA CORN BELT RUNNING?" with a smaller line beneath reading "AutoNateAI · Central Iowa Corn Belt, Coming Soon". ${STYLE}`,
+  },
+  {
+    file: "og/farm-credit-southeast-missouri.jpg",
+    prompt: `A wide editorial image about an agricultural lender. Background: a modest brick rural financial-office building exterior with a small parking lot, set against flat farmland, generic and unbranded, midday light, fading into a dark navy panel with gold light. Large bold headline text reading "WHO'S ACTUALLY FINANCING BOOTHEEL FARMLAND?" with a smaller line beneath reading "AutoNateAI · Farm Credit Southeast Missouri, Coming Soon". No signage, no logos, no readable text anywhere in the photo itself. ${STYLE}`,
+  },
+  {
+    file: "og/bootheel-grain-cooperative.jpg",
+    prompt: `A wide editorial image about a grain elevator cooperative. Background: a working grain elevator and co-op complex — concrete grain silos, a truck scale, a couple of grain trucks parked nearby, flat farmland behind, generic and unbranded, midday light, fading into a dark navy panel with gold light. Large bold headline text reading "WHO RUNS THE ELEVATORS FARMERS DEPEND ON?" with a smaller line beneath reading "AutoNateAI · Grain Cooperative Profile, Coming Soon". No signage, no logos, no readable text anywhere in the photo itself. ${STYLE}`,
+  },
+  {
+    file: "og/agricultural-finance-and-capital.jpg",
+    prompt: `A wide editorial image about how farm financing works. Background: two people at a wooden desk shaking hands over a loan document and a farm ledger book, a window behind them showing green farmland, warm natural light, hands and torsos only, no visible faces, fading into a dark navy panel with gold light. Large bold headline text positioned in the upper-middle two-thirds of the frame — never the bottom edge — reading "HOW DOES A FARM LOAN ACTUALLY GET APPROVED?" with a smaller line beneath it reading "AutoNateAI · Agricultural Finance & Capital, Coming Soon", and a generous quiet margin of empty background below both lines before the bottom edge of the image. ${STYLE}`,
+  },
+  {
+    file: "og/freight-infrastructure-storage.jpg",
+    prompt: `A wide editorial image about agricultural freight and storage. Background: a loaded grain barge being pushed by a towboat on a wide river, a grain elevator and conveyor visible on the riverbank, overcast working-day light, fading into a dark navy panel with gold light. Large bold headline text reading "HOW DOES A CROP GET FROM THE FIELD TO THE BOAT?" with a smaller line beneath reading "AutoNateAI · Freight, Infrastructure & Storage, Coming Soon". ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {
@@ -105,8 +144,10 @@ async function generateOne({ file, prompt }) {
   console.log(`  -> ${path.relative(process.cwd(), outFile)}`);
 }
 
-const filter = process.env.ONLY;
-const selected = filter ? jobs.filter((job) => job.file.includes(filter)) : jobs;
+// ONLY supports a comma-separated list of substrings, e.g.
+// ONLY="southeast-missouri,central-iowa" node scripts/generate-og-hero-images.mjs
+const filters = process.env.ONLY?.split(",").map((s) => s.trim()).filter(Boolean);
+const selected = filters?.length ? jobs.filter((job) => filters.some((f) => job.file.includes(f))) : jobs;
 
 console.log(`Generating ${selected.length} OG hero image${selected.length === 1 ? "" : "s"} with gpt-image-2 (text baked in, in parallel)...`);
 
