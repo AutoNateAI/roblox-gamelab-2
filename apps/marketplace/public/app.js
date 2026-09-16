@@ -224,6 +224,85 @@ if (mapBlocks.length) {
   });
 }
 
+// --- Research graphs (lazy — pure inline SVG + vanilla JS, no library) ---
+// Server (graphBlockHtml in src/pages.mjs) renders the full node/edge layout
+// and slider controls already, so this works with JS disabled too — this
+// block only adds live recompute-on-slider-input on top of that.
+const graphBlocks = Array.from(document.querySelectorAll(".research-graph[data-graph]"));
+graphBlocks.forEach((block) => {
+  let spec;
+  try {
+    spec = JSON.parse(block.dataset.graph);
+  } catch {
+    return;
+  }
+  const nodes = spec.nodes || [];
+  const edges = spec.edges || [];
+  const inputs = spec.inputs || [];
+  const sliders = Array.from(block.querySelectorAll("[data-graph-input]"));
+
+  function formatValue(value, format) {
+    if (typeof value !== "number" || Number.isNaN(value)) return "";
+    if (format === "percent") return `${value.toFixed(1)}%`;
+    return String(Math.round(value * 100) / 100);
+  }
+
+  function recompute() {
+    const values = {};
+    sliders.forEach((slider) => {
+      values[slider.dataset.graphInput] = Number(slider.value);
+    });
+
+    // Edge visual weight scales with how far its driving input sits from
+    // that input's own range floor — purely illustrative emphasis, not a
+    // magnitude claim (the evidence-class color/legend carries the actual
+    // epistemic status of each edge, this only shows "more pressure here
+    // right now").
+    edges.forEach((edge) => {
+      const edgeEl = block.querySelector(`.graph-edge[data-edge-from="${CSS.escape(edge.from)}"][data-edge-to="${CSS.escape(edge.to)}"]`);
+      const inputSpec = inputs.find((inp) => inp.id === edge.from);
+      if (!edgeEl || !inputSpec || values[edge.from] == null) return;
+      const range = (inputSpec.max ?? 100) - (inputSpec.min ?? 0) || 1;
+      const intensity = Math.min(1, Math.max(0.3, (values[edge.from] - (inputSpec.min ?? 0)) / range));
+      edgeEl.style.opacity = String(intensity);
+      const path = edgeEl.querySelector("path");
+      if (path) path.style.strokeWidth = String(1.5 + intensity * 2.5);
+    });
+
+    // Output nodes: a linear extrapolation anchored to two real, disclosed
+    // numbers (the node's own `baseline` and the driving input's own
+    // `verifiedAt` value) — never a fitted/regressed model. Past the
+    // disclosed anchor it's explicitly flagged as extrapolation. See
+    // reference/interactive-blocks.md in the research-brief skill for why
+    // this stays linear-and-anchored instead of pretending to more
+    // precision than two data points support.
+    nodes.forEach((node) => {
+      if (!node.output || node.baseline == null || !node.driverInput || node.driverGain == null) return;
+      const driverValue = values[node.driverInput];
+      const inputSpec = inputs.find((inp) => inp.id === node.driverInput);
+      if (driverValue == null || !inputSpec) return;
+      const estimate = node.baseline + driverValue * node.driverGain;
+      const valueEl = block.querySelector(`[data-node-value="${CSS.escape(node.id)}"]`);
+      if (!valueEl) return;
+      valueEl.textContent = formatValue(estimate, node.format);
+      const extrapolated = inputSpec.verifiedAt != null && driverValue > inputSpec.verifiedAt;
+      valueEl.classList.toggle("graph-node-value-extrapolated", extrapolated);
+      valueEl.parentElement?.parentElement?.classList.toggle("graph-node-extrapolated", extrapolated);
+    });
+  }
+
+  sliders.forEach((slider) => {
+    const valueLabel = block.querySelector(`[data-slider-value="${CSS.escape(slider.dataset.graphInput)}"]`);
+    const inputSpec = inputs.find((inp) => inp.id === slider.dataset.graphInput);
+    slider.addEventListener("input", () => {
+      if (valueLabel) valueLabel.textContent = `${slider.value}${inputSpec?.unit || ""}`;
+      recompute();
+    });
+  });
+
+  recompute();
+});
+
 // --- Mobile navigation ---
 const mobileMenuToggle = document.querySelector("[data-mobile-menu-toggle]");
 const mobileMenu = document.querySelector("[data-mobile-menu]");

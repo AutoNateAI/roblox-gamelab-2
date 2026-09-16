@@ -2806,7 +2806,7 @@ function codeBlockHtml(code) {
   if (lang === "mermaid") {
     return `<pre class="mermaid">${escapeHtml(raw)}</pre>`;
   }
-  if (lang === "chart" || lang === "map") {
+  if (lang === "chart" || lang === "map" || lang === "graph") {
     return dataBlockHtml(lang, raw);
   }
   const highlighted = ["js", "javascript"].includes(lang) ? highlightJavaScript(raw) : escapeHtml(raw);
@@ -2825,6 +2825,9 @@ function dataBlockHtml(kind, raw) {
   } catch {
     return `<p class="data-block-error">Could not parse this \`\`\`${escapeHtml(kind)} block — check its JSON.</p>`;
   }
+  if (kind === "graph") {
+    return graphBlockHtml(spec);
+  }
   const caption = spec.sourceLabel || spec.source || "";
   const className = kind === "chart" ? "research-chart" : "research-map";
   // Chart.js with responsive:true/maintainAspectRatio:false needs its
@@ -2834,6 +2837,127 @@ function dataBlockHtml(kind, raw) {
   // without bound. The wrapper div is what's fixed-height; the canvas fills it.
   const inner = kind === "chart" ? `<div class="chart-canvas-wrap"><canvas></canvas></div>` : `<div class="map-canvas"></div>`;
   return `<figure class="${className}" data-${kind}="${escapeHtml(JSON.stringify(spec))}">${inner}${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}</figure>`;
+}
+
+// ```graph — a hand-laid-out, evidence-labeled system diagram with optional
+// live scenario sliders. Server renders the full SVG (nodes/edges positioned
+// by explicit `rank`, so it degrades to a readable static diagram with zero
+// JS); public/app.js only wires slider input + recomputes/updates node
+// values and edge weights on top of that — no charting/graph library, same
+// "don't add a dependency without checking app.js first" rule as chart/map.
+// Deliberately not Mermaid: Mermaid's auto-layout reads as a print/technical
+// diagram; this is meant to feel like a native, animated web control, and it
+// doubles as a real scenario tool instead of a static picture.
+const GRAPH_COL_WIDTH = 232;
+const GRAPH_ROW_HEIGHT = 96;
+const GRAPH_NODE_W = 176;
+const GRAPH_NODE_H = 64;
+const GRAPH_MARGIN = 32;
+const GRAPH_EVIDENCE_KINDS = ["verified", "estimated", "hypothesis"];
+
+function graphFormatValue(value, format) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "";
+  if (format === "percent") return `${value.toFixed(1)}%`;
+  return String(Math.round(value * 100) / 100);
+}
+
+function graphBlockHtml(spec) {
+  const nodes = Array.isArray(spec.nodes) ? spec.nodes : [];
+  const edges = Array.isArray(spec.edges) ? spec.edges : [];
+  const inputs = Array.isArray(spec.inputs) ? spec.inputs : [];
+  if (!nodes.length) {
+    return `<p class="data-block-error">Could not parse this \`\`\`graph block — needs at least one node.</p>`;
+  }
+
+  const byRank = new Map();
+  nodes.forEach((n) => {
+    const rank = Number.isInteger(n.rank) ? n.rank : 0;
+    if (!byRank.has(rank)) byRank.set(rank, []);
+    byRank.get(rank).push(n);
+  });
+  const ranks = Array.from(byRank.keys()).sort((a, b) => a - b);
+  const maxRows = Math.max(...ranks.map((r) => byRank.get(r).length));
+  const width = (ranks.length - 1) * GRAPH_COL_WIDTH + GRAPH_NODE_W + GRAPH_MARGIN * 2;
+  const height = maxRows * GRAPH_ROW_HEIGHT + GRAPH_MARGIN * 2 - (GRAPH_ROW_HEIGHT - GRAPH_NODE_H);
+
+  const positions = new Map();
+  ranks.forEach((rank) => {
+    const col = byRank.get(rank);
+    const colX = GRAPH_MARGIN + rank * GRAPH_COL_WIDTH;
+    const totalH = col.length * GRAPH_ROW_HEIGHT;
+    const startY = GRAPH_MARGIN + (maxRows * GRAPH_ROW_HEIGHT - totalH) / 2;
+    col.forEach((n, i) => {
+      positions.set(n.id, { x: colX, y: startY + i * GRAPH_ROW_HEIGHT, w: GRAPH_NODE_W, h: GRAPH_NODE_H });
+    });
+  });
+
+  const edgeSvg = edges
+    .map((e) => {
+      const from = positions.get(e.from);
+      const to = positions.get(e.to);
+      if (!from || !to) return "";
+      const x1 = from.x + from.w;
+      const y1 = from.y + from.h / 2;
+      const x2 = to.x;
+      const y2 = to.y + to.h / 2;
+      const midX = (x1 + x2) / 2;
+      const evidence = GRAPH_EVIDENCE_KINDS.includes(e.evidence) ? e.evidence : "hypothesis";
+      return `<g class="graph-edge graph-edge-${evidence}" data-edge-from="${escapeHtml(e.from)}" data-edge-to="${escapeHtml(e.to)}">
+        <path d="M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
+        ${e.label ? `<text x="${midX}" y="${(y1 + y2) / 2 - 8}" text-anchor="middle" class="graph-edge-label">${escapeHtml(e.label)}</text>` : ""}
+      </g>`;
+    })
+    .join("");
+
+  const nodeSvg = nodes
+    .map((n) => {
+      const pos = positions.get(n.id);
+      if (!pos) return "";
+      const lines = String(n.label || n.id).split("\n");
+      const isInput = inputs.some((inp) => inp.id === n.id);
+      const cls = ["graph-node", n.output ? "graph-node-output" : "", isInput ? "graph-node-input" : ""].filter(Boolean).join(" ");
+      const cx = pos.x + pos.w / 2;
+      const textStartY = pos.y + pos.h / 2 - ((lines.length - 1) * 15) / 2 - (n.output ? 9 : 0);
+      const textLines = lines.map((line, i) => `<tspan x="${cx}" dy="${i === 0 ? 0 : 15}">${escapeHtml(line)}</tspan>`).join("");
+      const valueLine = n.output
+        ? `<tspan x="${cx}" dy="${lines.length > 1 ? 17 : 15}" class="graph-node-value" data-node-value="${escapeHtml(n.id)}">${graphFormatValue(n.baseline, n.format)}</tspan>`
+        : "";
+      return `<g class="${cls}" data-node-id="${escapeHtml(n.id)}">
+        <rect x="${pos.x}" y="${pos.y}" width="${pos.w}" height="${pos.h}" rx="10" />
+        <text x="${cx}" y="${textStartY}" text-anchor="middle">${textLines}${valueLine}</text>
+      </g>`;
+    })
+    .join("");
+
+  const defs = `<defs>${GRAPH_EVIDENCE_KINDS.map(
+    (k) => `<marker id="graph-arrow-${k}" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" /></marker>`,
+  ).join("")}</defs>`;
+
+  const sliders = inputs
+    .map(
+      (inp) => `
+    <label class="graph-slider">
+      <span class="graph-slider-label">${escapeHtml(inp.label)} — <span class="graph-slider-value" data-slider-value="${escapeHtml(inp.id)}">${escapeHtml(String(inp.default ?? 0))}${escapeHtml(inp.unit || "")}</span></span>
+      <input type="range" data-graph-input="${escapeHtml(inp.id)}" min="${inp.min ?? 0}" max="${inp.max ?? 100}" step="${inp.step ?? 1}" value="${inp.default ?? 0}" />
+      ${inp.verifiedAt != null ? `<span class="graph-slider-anchor">${icon("verified")} Disclosed value: ${inp.verifiedAt}${escapeHtml(inp.unit || "")}${inp.verifiedNote ? ` — ${escapeHtml(inp.verifiedNote)}` : ""}</span>` : ""}
+    </label>`,
+    )
+    .join("");
+
+  const legend = `<div class="graph-legend">
+    <span class="graph-legend-item graph-legend-verified">Verified — disclosed figure</span>
+    <span class="graph-legend-item graph-legend-estimated">Estimated — reasoned from public data</span>
+    <span class="graph-legend-item graph-legend-hypothesis">Hypothesis — not provable from public data yet</span>
+  </div>`;
+
+  const caption = spec.sourceLabel || spec.source || "";
+  return `<figure class="research-graph" data-graph="${escapeHtml(JSON.stringify(spec))}">
+    ${spec.title ? `<figcaption class="graph-title">${escapeHtml(spec.title)}</figcaption>` : ""}
+    <div class="graph-canvas-wrap"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(spec.title || "System diagram")}">${defs}${edgeSvg}${nodeSvg}</svg></div>
+    ${legend}
+    ${sliders ? `<div class="graph-controls">${sliders}</div>` : ""}
+    ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
+  </figure>`;
 }
 
 function highlightJavaScript(source = "") {

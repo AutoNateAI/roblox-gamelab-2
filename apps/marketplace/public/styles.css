@@ -2217,6 +2217,204 @@ pre.mermaid svg {
   font-size: 13px;
 }
 
+/* Research graph — a hand-laid-out, evidence-labeled system diagram with
+   optional live scenario sliders (see graphBlockHtml() in src/pages.mjs and
+   the graph section of public/app.js). Deliberately not Mermaid-styled —
+   this should read as a native interactive web control, not a print
+   diagram, and it re-themes for free via the CSS custom properties below
+   instead of a JS re-render on theme toggle like Mermaid/Chart.js need. */
+.research-graph {
+  margin: 0;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  padding: 20px;
+}
+
+.graph-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.graph-canvas-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.graph-canvas-wrap svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  min-width: 480px;
+}
+
+.graph-node rect {
+  fill: var(--surface);
+  stroke: var(--outline-strong);
+  stroke-width: 1.5px;
+  transition: stroke 200ms ease, fill 200ms ease;
+}
+
+.graph-node text {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  fill: var(--on-surface);
+}
+
+.graph-node-input rect {
+  stroke: var(--secondary);
+  stroke-width: 2px;
+  stroke-dasharray: 4 3;
+}
+
+.graph-node-output rect {
+  fill: var(--primary-container);
+  stroke: var(--primary);
+  stroke-width: 2px;
+}
+
+:root[data-theme="light"] .graph-node-output text {
+  fill: #ffffff;
+}
+
+.graph-node-value {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.graph-node-value-extrapolated {
+  fill: var(--secondary);
+}
+
+.graph-node-extrapolated rect {
+  stroke-dasharray: 5 3;
+}
+
+.graph-edge path {
+  stroke-width: 1.5px;
+  fill: none;
+  transition: stroke-width 150ms ease, opacity 150ms ease;
+}
+
+.graph-edge-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  fill: var(--on-variant);
+}
+
+.graph-edge-verified path,
+.graph-edge-verified marker path {
+  stroke: var(--primary);
+  fill: var(--primary);
+}
+
+.graph-edge-estimated path,
+.graph-edge-estimated marker path {
+  stroke: var(--secondary);
+  fill: var(--secondary);
+}
+
+.graph-edge-hypothesis path {
+  stroke: var(--on-variant);
+  stroke-dasharray: 5 4;
+  opacity: 0.7;
+}
+
+.graph-edge-hypothesis marker path {
+  fill: var(--on-variant);
+}
+
+.graph-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: center;
+  margin-top: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--on-variant);
+}
+
+.graph-legend-item {
+  position: relative;
+  padding-left: 18px;
+}
+
+.graph-legend-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.graph-legend-verified::before {
+  background: var(--primary);
+}
+
+.graph-legend-estimated::before {
+  background: var(--secondary);
+}
+
+.graph-legend-hypothesis::before {
+  background: repeating-linear-gradient(90deg, var(--on-variant) 0 3px, transparent 3px 5px);
+}
+
+.graph-controls {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--outline);
+}
+
+.graph-slider {
+  display: grid;
+  gap: 6px;
+}
+
+.graph-slider-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--on-surface);
+}
+
+.graph-slider-value {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.graph-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.graph-slider-anchor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  color: var(--on-variant);
+}
+
+.graph-slider-anchor .material-symbols-outlined {
+  font-size: 13px;
+  color: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .research-graph {
+    padding: 14px 10px;
+  }
+}
+
 .tutorial-pager {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

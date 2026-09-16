@@ -18,13 +18,13 @@ Output: a scratch findings list, each item `{ claim, url, dateOrVintage }`. Show
 
 ### 2. Draft
 Load `reference/schema.md` for the exact field shapes. Produces two things:
-- `content/research/<slug>.md` — the long-form narrative (short answer, system diagram, numbers, geography, methodology, implications, doubling as the `investigations[]` entry's body). Load `reference/interactive-blocks.md` before writing any ` ```chart `/` ```map ` fence — the JSON shape has to match exactly what `public/app.js` expects.
+- `content/research/<slug>.md` — the long-form narrative (short answer, system diagram, numbers, geography, methodology, implications, doubling as the `investigations[]` entry's body). Load `reference/interactive-blocks.md` before writing any ` ```chart `/` ```map `/` ```graph ` fence — the JSON shape has to match exactly what `public/app.js` expects. Use ` ```graph ` (not ` ```mermaid `) for `## How This Connects` — it's a hand-laid-out, evidence-labeled, live-scenario-capable diagram instead of a static auto-layout flowchart.
 - A `src/data.mjs` `investigations[]` entry stub (question, status, region, commodity, stakeholders, evidence, hypothesis, dataNeeds, sources, `sourcePath` pointing at the new `.md` file).
 
 Status stays `"open"` unless the research phase actually produced a real, sourced answer — see `investigationStatusLabels` in `src/data.mjs`.
 
 ### 3. Assets
-One image per article, generated with `gpt-image-2` via `scripts/generate-og-hero-images.mjs` — add one new job entry there, don't build a new script and don't use the older `scripts/generate-ag-lab-images.mjs` plain-photo pattern. This single generated image does triple duty: the investigation's `thumbnail` (card thumbnail *and* the image at the top of the article body) *and* the page's `ogImage` — set `ogImage: investigation.thumbnail || ...` in `renderInvestigationDetail` rather than generating a second, separate OG asset.
+One image per article, generated with `gpt-image-2.5-flare` via `scripts/generate-og-hero-images.mjs` — add one new job entry there, don't build a new script and don't use the older `scripts/generate-ag-lab-images.mjs` plain-photo pattern. This single generated image does triple duty: the investigation's `thumbnail` (card thumbnail *and* the image at the top of the article body) *and* the page's `ogImage` — set `ogImage: investigation.thumbnail || ...` in `renderInvestigationDetail` rather than generating a second, separate OG asset.
 
 Requirements for the prompt (see the existing job entries for real examples):
 - **Photo-realistic**, relevant to the specific question this article answers — not a generic category stock photo.
@@ -40,7 +40,7 @@ Charts and maps are **not** separate image assets; they're data embedded directl
 ### 4. Assemble & verify
 1. `node --check` every file you touched (`src/data.mjs`, `src/pages.mjs` if you changed it).
 2. `node scripts/export-static.mjs` from `apps/marketplace/` — must complete with no errors and no missing-asset warnings.
-3. Open the built page under `dist/site/research-and-case-studies/<slug>/index.html` and grep for `class="research-chart"`, `class="research-map"`, `<pre class="mermaid">` to confirm every block you wrote actually rendered as a data island, not as a raw code block (a JSON typo silently degrades to a visible `.data-block-error` — check for that string too).
+3. Open the built page under `dist/site/research-and-case-studies/<slug>/index.html` and grep for `class="research-chart"`, `class="research-map"`, `class="research-graph"` (or `<pre class="mermaid">` for older content that still uses it) to confirm every block you wrote actually rendered as a data island, not as a raw code block (a JSON typo silently degrades to a visible `.data-block-error` — check for that string too). For an `app.js` change specifically, run `node --input-type=module --check < public/app.js` in addition to the normal `node --check` — the file loads as `type="module"`, where a duplicate top-level declaration is a silent-at-build-time `SyntaxError` that only shows up in the browser (see `docs/marketplace/agricultural-intelligence-lab.md` §10 for the incident this rule comes from).
 4. Report the new URL and a one-line summary of what's still open/missing. Do not commit or push unless asked.
 
 ## Reference files

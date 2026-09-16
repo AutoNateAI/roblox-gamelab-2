@@ -7,11 +7,12 @@
 //
 // Different approach from scripts/generate-og-images.mjs: instead of
 // compositing a title as an SVG text overlay on top of a stock photo, this
-// asks gpt-image-2 to bake the headline directly into the generated image —
-// bold display type, click-worthy but not clickbait, matching the site's
-// navy/gold "Technical Editorial" identity. No separate text-overlay pass.
+// asks gpt-image-2.5-flare to bake the headline directly into the generated
+// image — bold display type, click-worthy but not clickbait, matching the
+// site's navy/gold "Technical Editorial" identity. No separate text-overlay
+// pass.
 //
-// gpt-image-2 doesn't offer a native 1200x630 (OG) aspect ratio, so each
+// gpt-image-2.5-flare doesn't offer a native 1200x630 (OG) aspect ratio, so each
 // image is generated at 1536x1024 (its widest landscape option) with the
 // headline kept inside the central ~70% vertically, then center-cropped +
 // resized to 1200x630 with sharp.
@@ -35,6 +36,14 @@ if (!apiKey) {
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 const GEN_SIZE = "1536x1024";
+// gpt-image-2.5-flare (released 2026-09-08): same /v1/images/generations
+// endpoint and 1536x1024 landscape size as gpt-image-2, but sharper detail
+// and ~4x fewer output tokens at "high" quality (was priced per-token same
+// as gpt-image-2, so this is a real cost drop, not just a quality bump).
+// Flare (not Sunburst) because this is one-shot batch generation, not
+// iterative image editing — Sunburst is for editing-precision workflows.
+const MODEL = "gpt-image-2.5-flare";
+const QUALITY = "high";
 
 const STYLE =
   "Photo-realistic editorial photography, dark navy (#0e1a33) background environment with warm gold (#c9a227) accent light, cinematic and serious in tone — a research-lab-meets-agricultural-finance aesthetic, not corporate stock photography. Bold, clean, high-contrast sans-serif display type baked directly into the image as part of the scene (not a sticker or watermark), sized like a professional YouTube thumbnail headline — large, confidently readable at a glance, one strong focal point. Keep every word of the text, and the main subject, inside the central 70% of the frame vertically (leave a quiet margin top and bottom) so it survives a crop. No logos, no fabricated brand marks, no illegible or garbled text, no watermark, no border.";
@@ -73,6 +82,10 @@ const jobs = [
     prompt: `A wide editorial image about a real agricultural-economics finding. Background: an aerial documentary shot showing a sharp visual boundary between a flooded rice paddy on one side and a dry green soybean field on the other, a straight levee line dividing them, soft daylight, fading into a dark navy panel with gold light. Large bold headline text reading "RICE JUST GOT A BIGGER SAFETY NET. FARMERS ARE PLANTING LESS OF IT." with a smaller line beneath reading "AutoNateAI · Bootheel Rice-to-Soybean Pivot". ${STYLE}`,
   },
   {
+    file: "og/farm-credit-semo-crop-credit-stress-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-lending finding. Background: a close-up documentary shot of a farm loan ledger book and a quarterly financial statement on a wooden desk, a red pen resting on a highlighted line of numbers, a blurred green Southeast Missouri farm field visible through a window behind, warm natural light, no visible faces, fading into a dark navy panel with gold light. Large bold headline text reading "ADVERSELY CLASSIFIED LOANS JUST JUMPED 55%. HERE'S WHY." with a smaller line beneath reading "AutoNateAI · Farm Credit SEMO Crop-Credit Stress". ${STYLE}`,
+  },
+  {
     file: "og/elevator-harvest-bottleneck.jpg",
     prompt: `A wide editorial image about an open research question. Background: a line of grain trucks queued on a gravel road waiting to unload at a busy grain elevator during harvest, dust in the air, late-afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "WHY DO THE SAME ELEVATORS CHOKE EVERY HARVEST?" with a smaller line beneath reading "AutoNateAI · Open Question, Coming Soon". ${STYLE}`,
   },
@@ -109,7 +122,7 @@ async function generateOne({ file, prompt }) {
       "content-type": "application/json",
       authorization: `Bearer ${apiKey}`,
     },
-    body: JSON.stringify({ model: "gpt-image-2", prompt, size: GEN_SIZE, n: 1 }),
+    body: JSON.stringify({ model: MODEL, prompt, size: GEN_SIZE, quality: QUALITY, n: 1 }),
   });
 
   const payload = await response.json();
@@ -149,7 +162,7 @@ async function generateOne({ file, prompt }) {
 const filters = process.env.ONLY?.split(",").map((s) => s.trim()).filter(Boolean);
 const selected = filters?.length ? jobs.filter((job) => filters.some((f) => job.file.includes(f))) : jobs;
 
-console.log(`Generating ${selected.length} OG hero image${selected.length === 1 ? "" : "s"} with gpt-image-2 (text baked in, in parallel)...`);
+console.log(`Generating ${selected.length} OG hero image${selected.length === 1 ? "" : "s"} with ${MODEL} (text baked in, in parallel)...`);
 
 await Promise.all(selected.map((job) => generateOne(job)));
 

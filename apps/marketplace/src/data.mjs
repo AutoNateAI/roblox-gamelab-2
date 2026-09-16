@@ -843,6 +843,58 @@ export const investigations = [
     findings: null,
     sources: [],
   },
+  {
+    slug: "farm-credit-semo-crop-credit-stress-2026",
+    icon: "help_center",
+    status: "investigating",
+    name: "Farm Credit SEMO's Crop Loan Stress Is Rising. What Is Driving It?",
+    question:
+      "Can public crop, input-cost, freight, and lender disclosures explain the rise in Farm Credit Southeast Missouri's adversely classified and nonperforming loans without using confidential borrower data?",
+    tagline: "Adversely classified loans went 4.7% → 6.3% → 7.3% across three straight quarters — here's what public data can and can't confirm about why, including a driver nobody's dossier had yet.",
+    thumbnail: "/assets/og/farm-credit-semo-crop-credit-stress-2026.jpg",
+    sourcePath: "../content/research/farm-credit-semo-crop-credit-stress-2026.md",
+    region: "southeast-missouri",
+    commodity: "Rice / Soybeans / Corn / Cotton",
+    evidence: [
+      { label: "Farm Credit Southeast Missouri — Q2 2026 Stockholder Report", note: "Adversely classified loans rose from 4.7% (12/31/25) to 7.3% (6/30/26) of the portfolio; nonperforming loans rose from 1.3% to 2.3%. Management explicitly attributes the rise to \"continued adverse economic conditions within the crop sector.\"", url: "https://farmcreditsemo.com/sites/default/files/2026-08/Q2_2026_SH_Report.pdf" },
+      { label: "Farm Credit Southeast Missouri — Q1 2026 Stockholder Report", note: "Names a specific new driver: \"The war with Iran has created upward volatility in energy and fertilizer markets... producers... may be looking to shift some of their intended higher input cost crops, such as corn and cotton, over to soybean acres instead.\"", url: "https://farmcreditsemo.com/sites/default/files/2026-05/Q1_2026_SH_Report.pdf" },
+      { label: "USDA ERS — Farm Sector Income Forecast, Sep 3 2026", note: "2026 real net farm income forecast down 5.5%; fuel/oil expenses +28.8%, fertilizer/lime/soil-conditioner expenses +15.3%; direct government payments forecast $47.4B, +69.8% YoY.", url: "https://www.ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+    ],
+    stakeholders: ["Farm Credit Southeast Missouri credit/portfolio leadership", "Row-crop producers in its 12-county SEMO territory", "USDA FSA/NRCS/FCA staff", "Grain elevator and freight operators", "Crop-insurance agents and agricultural-finance advisers", "University of Missouri Extension — Fisher Delta Research Center"],
+    hypothesis:
+      "A public-data propagation model combining crop mix, input costs, freight/basis, government support, and a newly-identified geopolitical cost shock (the Iran conflict's energy/fertilizer volatility) will explain a meaningful share of the direction of local agricultural credit stress, while borrower-level and commodity-level causation remain unobservable from public data alone. This is a hypothesis to test against county-level and interview data, not a conclusion.",
+    graphLayers: {
+      physical: "Harvest moves fast across SEMO's 12 counties on I-55/57/155, BNSF/UP rail, and Mississippi River terminals at SEMO Port, New Madrid, Mississippi, and Pemiscot counties — freight/basis friction shows up as cash-flow timing before it shows up in a credit file.",
+      capital: "Farm Credit SEMO's own portfolio: $946.9M in loans, adversely classified loans up from 4.7% to 7.3% across three straight quarters, even as capital ratios stayed roughly 2-3x regulatory minimums and a five-year earnings decline (ROE 11.2%→5.1%, 2021→2025) predates all of it.",
+      business: "A loan officer's renewal workflow now weighs input-cost inflation, a newly-disclosed Iran-conflict cost shock pushing corn/cotton acres toward soybeans, a $47.4B national liquidity injection, and decelerating farmland-value appreciation against the same crop-mix questions the Bootheel rice-to-soybean pivot investigation is tracking.",
+      information: "No public dataset currently joins county-level crop mix, input costs, freight/basis, and lender credit-quality metrics into one place — that join is exactly what the graph this site is building is for.",
+    },
+    dataNeeds: [
+      "Farm Credit SEMO's loan exposure broken out by commodity — not publicly disclosed",
+      "County-level 2025-26 crop acreage/yield estimates for the 12-county territory",
+      "Elevator/dryer throughput or utilization data",
+      "Crop-insurance indemnity data by geography",
+      "A direct conversation with a SEMO grower, loan officer, or elevator manager — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Public-data SEMO Crop-Credit Stress Dashboard (quarterly lender metrics × county crop mix × input-cost indices)",
+      "12-county crop-pivot GIS layer feeding the same model the Bootheel rice/soybean investigation needs",
+    ],
+    findings:
+      "Farm Credit Southeast Missouri's own filings show a real, multi-quarter credit-quality deterioration (adversely classified loans 4.7% → 6.3% → 7.3% across three consecutive disclosed quarters in 2026) sitting on top of a five-year earnings decline (return on equity 11.2% in 2021 down to 5.1% in 2025) that predates this year's classification spike entirely. Public national data (rising fuel/fertilizer costs, a large direct-payment increase, decelerating farmland-value growth) plausibly explains the direction of the stress, and Farm Credit SEMO's own March 2026 filing names a specific, previously-unreported driver: Iran-conflict-driven energy/fertilizer volatility pushing some producers to shift corn and cotton acres toward soybeans. None of this yet establishes which commodity, county, or cost is doing the most damage — that requires data and interviews this investigation doesn't have yet, which is why status stays \"investigating.\"",
+    sources: [
+      { label: "Farm Credit Southeast Missouri — Q2 2026 Stockholder Report", url: "https://farmcreditsemo.com/sites/default/files/2026-08/Q2_2026_SH_Report.pdf" },
+      { label: "Farm Credit Southeast Missouri — Q1 2026 Stockholder Report", url: "https://farmcreditsemo.com/sites/default/files/2026-05/Q1_2026_SH_Report.pdf" },
+      { label: "Farm Credit Southeast Missouri — 2025 Annual Report", url: "https://farmcreditsemo.com/sites/default/files/2026-03/2025AnnualReport_0.pdf" },
+      { label: "Farm Credit Southeast Missouri — 2025 patronage refund announcement", url: "https://farmcreditsemo.com/news/farm-credit-semo-board-directors-authorizes-9-1-million-patronage-refund-2025" },
+      { label: "USDA ERS — Farm Sector Income Forecast, updated Sep 3 2026", url: "https://www.ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+      { label: "Farm Credit Administration — quarterly conditions report, Sep 10 2026", url: "https://www.fca.gov/newsroom/pr_detail/fca-board-receives-quarterly-report-on-conditions-in-agriculture-and-the-farm-credit-system-acknowledges-25th-anniversary-of-9-11-attacks" },
+      { label: "Farm Credit Administration — History of FCA", url: "https://www.fca.gov/about/history-of-fca" },
+      { label: "Federal Reserve Beige Book, released Sep 2 2026 (St. Louis / Eighth District)", url: "https://www.federalreserve.gov/monetarypolicy/files/BeigeBook_20260902.pdf" },
+      { label: "MoDOT — Southeast District Freight Plan", url: "https://www.modot.org/southeast-district-freight-plan" },
+      { label: "USDA NASS — Missouri 2026 State Agriculture Overview", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=Missouri&year=2026" },
+    ],
+  },
 ];
 
 // The nine regional industries AutoNateAI Consulting builds internal AI tooling
