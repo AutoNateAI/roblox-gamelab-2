@@ -2884,6 +2884,11 @@ function graphBlockHtml(spec) {
     return `<p class="data-block-error">Could not parse this \`\`\`graph block — needs at least one node.</p>`;
   }
 
+  // `rank` is a row now, not a column — the diagram flows top-to-bottom
+  // (reads better than left-to-right, especially on mobile where a wide
+  // horizontal diagram has to shrink hard to fit). Nodes sharing a rank sit
+  // side by side in that row, centered, same as they used to be stacked
+  // vertically within a column.
   const byRank = new Map();
   nodes.forEach((n) => {
     const rank = Number.isInteger(n.rank) ? n.rank : 0;
@@ -2891,18 +2896,18 @@ function graphBlockHtml(spec) {
     byRank.get(rank).push(n);
   });
   const ranks = Array.from(byRank.keys()).sort((a, b) => a - b);
-  const maxRows = Math.max(...ranks.map((r) => byRank.get(r).length));
-  const width = (ranks.length - 1) * GRAPH_COL_WIDTH + GRAPH_NODE_W + GRAPH_MARGIN * 2;
-  const height = maxRows * GRAPH_ROW_HEIGHT + GRAPH_MARGIN * 2 - (GRAPH_ROW_HEIGHT - GRAPH_NODE_H);
+  const maxCols = Math.max(...ranks.map((r) => byRank.get(r).length));
+  const width = maxCols * GRAPH_COL_WIDTH + GRAPH_MARGIN * 2 - (GRAPH_COL_WIDTH - GRAPH_NODE_W);
+  const height = (ranks.length - 1) * GRAPH_ROW_HEIGHT + GRAPH_NODE_H + GRAPH_MARGIN * 2;
 
   const positions = new Map();
   ranks.forEach((rank) => {
-    const col = byRank.get(rank);
-    const colX = GRAPH_MARGIN + rank * GRAPH_COL_WIDTH;
-    const totalH = col.length * GRAPH_ROW_HEIGHT;
-    const startY = GRAPH_MARGIN + (maxRows * GRAPH_ROW_HEIGHT - totalH) / 2;
-    col.forEach((n, i) => {
-      positions.set(n.id, { x: colX, y: startY + i * GRAPH_ROW_HEIGHT, w: GRAPH_NODE_W, h: GRAPH_NODE_H });
+    const row = byRank.get(rank);
+    const rowY = GRAPH_MARGIN + rank * GRAPH_ROW_HEIGHT;
+    const totalW = row.length * GRAPH_COL_WIDTH;
+    const startX = GRAPH_MARGIN + (maxCols * GRAPH_COL_WIDTH - totalW) / 2;
+    row.forEach((n, i) => {
+      positions.set(n.id, { x: startX + i * GRAPH_COL_WIDTH, y: rowY, w: GRAPH_NODE_W, h: GRAPH_NODE_H });
     });
   });
 
@@ -2911,13 +2916,13 @@ function graphBlockHtml(spec) {
       const from = positions.get(e.from);
       const to = positions.get(e.to);
       if (!from || !to) return "";
-      const x1 = from.x + from.w;
-      const y1 = from.y + from.h / 2;
-      const x2 = to.x;
-      const y2 = to.y + to.h / 2;
-      const midX = (x1 + x2) / 2;
+      const x1 = from.x + from.w / 2;
+      const y1 = from.y + from.h;
+      const x2 = to.x + to.w / 2;
+      const y2 = to.y;
+      const midY = (y1 + y2) / 2;
       const evidence = GRAPH_EVIDENCE_KINDS.includes(e.evidence) ? e.evidence : "hypothesis";
-      const pathD = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+      const pathD = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
       const pathId = `${graphId}-edge-${edgeIndex}`;
       // Verified/estimated edges get a small dot animated along the path
       // with native SMIL <animateMotion>/<mpath> — a lightweight "data is
@@ -2934,7 +2939,7 @@ function graphBlockHtml(spec) {
       return `<g class="graph-edge graph-edge-${evidence}" data-edge-from="${escapeHtml(e.from)}" data-edge-to="${escapeHtml(e.to)}">
         <path id="${pathId}" d="${pathD}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
         ${flowDot}
-        ${e.label ? `<text x="${midX}" y="${(y1 + y2) / 2 - 8}" text-anchor="middle" class="graph-edge-label">${escapeHtml(e.label)}</text>` : ""}
+        ${e.label ? `<text x="${(x1 + x2) / 2 + 10}" y="${midY}" text-anchor="start" class="graph-edge-label">${escapeHtml(e.label)}</text>` : ""}
       </g>`;
     })
     .join("");
