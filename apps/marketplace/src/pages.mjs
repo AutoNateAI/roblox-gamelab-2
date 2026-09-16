@@ -339,7 +339,7 @@ function investigationCard(investigation) {
     <a class="lab-card" href="/research-and-case-studies/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(investigation, investigation.icon)}<span class="status-pill">${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span></div>
-        ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.name)}</span>` : ""}
+        ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.shortName || region.name)}</span>` : ""}
         <h3>${escapeHtml(investigation.name)}</h3>
         <p class="industry-hook">${escapeHtml(investigation.question)}</p>
         <span class="outline-button full">${isPlaceholder ? "Coming Soon" : "Read What We Know So Far"} ${icon("arrow_forward")}</span>
@@ -477,7 +477,7 @@ export function renderOrganizationDetail(org) {
           <span class="kicker">${icon(org.icon)} ${escapeHtml(organizationTypeLabels[org.orgType] || org.orgType)} &middot; ${escapeHtml(organizationStatusLabels[org.status] || org.status)}</span>
           <h1>${escapeHtml(org.name)}</h1>
           <p>${escapeHtml(org.tagline)}</p>
-          ${region ? `<div class="tag-row"><span>${escapeHtml(region.name)}</span></div>` : ""}
+          ${region ? `<div class="tag-row"><span>${escapeHtml(region.shortName || region.name)}</span></div>` : ""}
         </header>
         ${org.thumbnail ? `<img src="${org.thumbnail}" alt="" />` : ""}
         <div class="detail-field-grid">
@@ -672,7 +672,7 @@ export function renderInvestigationDetail(investigation) {
           <span class="kicker">${icon(investigation.icon)} Open Question &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
           <h1>${escapeHtml(investigation.name)}</h1>
           <p>${escapeHtml(investigation.question)}</p>
-          <div class="tag-row">${region ? `<span>${escapeHtml(region.name)}</span>` : ""}${investigation.commodity ? `<span>${escapeHtml(investigation.commodity)}</span>` : ""}</div>
+          <div class="tag-row">${region ? `<span>${escapeHtml(region.shortName || region.name)}</span>` : ""}${investigation.commodity ? `<span>${escapeHtml(investigation.commodity)}</span>` : ""}</div>
         </header>
         ${investigation.thumbnail ? `<img src="${investigation.thumbnail}" alt="" />` : ""}
 
