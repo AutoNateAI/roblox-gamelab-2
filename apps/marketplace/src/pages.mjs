@@ -2910,8 +2910,19 @@ function graphBlockHtml(spec) {
       const y2 = to.y + to.h / 2;
       const midX = (x1 + x2) / 2;
       const evidence = GRAPH_EVIDENCE_KINDS.includes(e.evidence) ? e.evidence : "hypothesis";
+      const pathD = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+      // Verified/estimated edges get a small dot animated along the path
+      // with native SMIL <animateMotion> — a lightweight "data is actually
+      // flowing here" cue with zero JS and zero new dependency. Hypothesis
+      // edges deliberately stay static/dashed instead: nothing flows along
+      // a relationship that isn't provable yet.
+      const flowDot =
+        evidence !== "hypothesis"
+          ? `<circle r="3.5" class="graph-edge-flow-dot"><animateMotion dur="2.4s" repeatCount="indefinite" path="${pathD}" /></circle>`
+          : "";
       return `<g class="graph-edge graph-edge-${evidence}" data-edge-from="${escapeHtml(e.from)}" data-edge-to="${escapeHtml(e.to)}">
-        <path d="M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
+        <path d="${pathD}" fill="none" marker-end="url(#graph-arrow-${evidence})" />
+        ${flowDot}
         ${e.label ? `<text x="${midX}" y="${(y1 + y2) / 2 - 8}" text-anchor="middle" class="graph-edge-label">${escapeHtml(e.label)}</text>` : ""}
       </g>`;
     })
@@ -2937,7 +2948,7 @@ function graphBlockHtml(spec) {
       // focusable dead weight for a keyboard/screen-reader user.
       const interactiveAttrs = hasDetail ? ` tabindex="0" role="button" aria-label="${escapeHtml(lines.join(" "))} — show details"` : "";
       return `<g class="${cls}" data-node-id="${escapeHtml(n.id)}"${interactiveAttrs}>
-        <rect x="${pos.x}" y="${pos.y}" width="${pos.w}" height="${pos.h}" rx="10" />
+        <rect x="${pos.x}" y="${pos.y}" width="${pos.w}" height="${pos.h}" rx="16" />
         <text x="${cx}" y="${textStartY}" text-anchor="middle">${textLines}${valueLine}</text>
         ${hasDetail ? `<circle class="graph-node-detail-dot" cx="${pos.x + pos.w - 10}" cy="${pos.y + 10}" r="4" />` : ""}
       </g>`;
