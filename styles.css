@@ -2219,90 +2219,135 @@ pre.mermaid svg {
 
 /* Research graph — a hand-laid-out, evidence-labeled system diagram with
    optional live scenario sliders (see graphBlockHtml() in src/pages.mjs and
-   the graph section of public/app.js). Deliberately not Mermaid-styled —
-   this should read as a native interactive web control, not a print
-   diagram, and it re-themes for free via the CSS custom properties below
-   instead of a JS re-render on theme toggle like Mermaid/Chart.js need. */
+   the graph section of public/app.js). Deliberately styled as an app
+   widget, not a document diagram: no hard-bordered frame like pre.mermaid/
+   .research-chart/.research-map use, elevated shadow-card nodes instead of
+   flat-stroked boxes, and verified/estimated edges carry a small dot
+   animated along the path with native SVG <animateMotion> (zero JS, zero
+   new dependency) so the diagram visibly "runs" instead of sitting static
+   like an exported picture. Re-themes for free via the CSS custom
+   properties below — no JS re-render needed on dark-mode toggle. */
 .research-graph {
-  margin: 0;
+  margin: 28px 0;
+  padding: 28px 22px 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(20, 24, 26, 0.05), 0 14px 32px -18px rgba(20, 24, 26, 0.28);
+}
+
+:root[data-theme="dark"] .research-graph {
+  box-shadow: none;
   border: 1px solid var(--outline);
-  background: var(--surface-low);
-  padding: 20px;
 }
 
 .graph-title {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--on-surface);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   text-align: center;
 }
 
 .graph-canvas-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 0 10px;
 }
 
 .graph-canvas-wrap svg {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  min-width: 480px;
+}
+
+.graph-node {
+  animation: graph-node-in 420ms ease backwards;
+}
+
+.graph-node:nth-child(1) { animation-delay: 0ms; }
+.graph-node:nth-child(2) { animation-delay: 60ms; }
+.graph-node:nth-child(3) { animation-delay: 120ms; }
+.graph-node:nth-child(4) { animation-delay: 180ms; }
+.graph-node:nth-child(5) { animation-delay: 240ms; }
+.graph-node:nth-child(6) { animation-delay: 300ms; }
+.graph-node:nth-child(n+7) { animation-delay: 360ms; }
+
+@keyframes graph-node-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-node {
+    animation: none;
+  }
 }
 
 .graph-node rect {
   fill: var(--surface);
-  stroke: var(--outline-strong);
-  stroke-width: 1.5px;
-  transition: stroke 200ms ease, fill 200ms ease;
+  stroke: var(--outline);
+  stroke-width: 1px;
+  filter: drop-shadow(0 1px 1px rgba(20, 24, 26, 0.06)) drop-shadow(0 6px 14px rgba(20, 24, 26, 0.08));
+  transition: filter 180ms ease, stroke 180ms ease;
+}
+
+:root[data-theme="dark"] .graph-node rect {
+  filter: none;
 }
 
 .graph-node text {
-  font-family: "JetBrains Mono", monospace;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
+  font-weight: 500;
   fill: var(--on-surface);
 }
 
 .graph-node-input rect {
   stroke: var(--secondary);
-  stroke-width: 2px;
+  stroke-width: 1.5px;
   stroke-dasharray: 4 3;
 }
 
 .graph-node-output rect {
-  fill: var(--primary-container);
-  stroke: var(--primary);
-  stroke-width: 2px;
+  fill: var(--primary);
+  stroke: none;
+  filter: drop-shadow(0 4px 14px rgba(0, 105, 72, 0.28));
 }
 
-:root[data-theme="light"] .graph-node-output text {
-  fill: #ffffff;
+.graph-node-output text {
+  fill: var(--on-primary);
+  font-weight: 600;
 }
 
 .graph-node-value {
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 800;
+  font-size: 14px;
 }
 
 .graph-node-value-extrapolated {
-  fill: var(--secondary);
+  fill: var(--on-primary);
+  opacity: 0.85;
 }
 
 .graph-node-extrapolated rect {
+  stroke: var(--secondary);
+  stroke-width: 2px;
   stroke-dasharray: 5 3;
 }
 
 .graph-edge path {
-  stroke-width: 1.5px;
+  stroke-width: 1.75px;
   fill: none;
   transition: stroke-width 150ms ease, opacity 150ms ease;
 }
 
 .graph-edge-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 9px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 9.5px;
   fill: var(--on-variant);
 }
 
@@ -2321,11 +2366,33 @@ pre.mermaid svg {
 .graph-edge-hypothesis path {
   stroke: var(--on-variant);
   stroke-dasharray: 5 4;
-  opacity: 0.7;
+  opacity: 0.55;
 }
 
 .graph-edge-hypothesis marker path {
   fill: var(--on-variant);
+}
+
+/* The animated "data is flowing" dot riding each verified/estimated edge —
+   see the <animateMotion> emitted per-edge in graphBlockHtml(). */
+.graph-edge-flow-dot {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+.graph-edge-verified .graph-edge-flow-dot {
+  fill: var(--primary);
+  color: var(--primary);
+}
+
+.graph-edge-estimated .graph-edge-flow-dot {
+  fill: var(--secondary);
+  color: var(--secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-edge-flow-dot animateMotion {
+    display: none;
+  }
 }
 
 .graph-legend {
@@ -2333,7 +2400,7 @@ pre.mermaid svg {
   flex-wrap: wrap;
   gap: 8px 18px;
   justify-content: center;
-  margin-top: 14px;
+  margin-top: 18px;
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   color: var(--on-variant);
@@ -2380,8 +2447,9 @@ pre.mermaid svg {
 }
 
 .graph-slider-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
   color: var(--on-surface);
 }
 
@@ -2393,6 +2461,8 @@ pre.mermaid svg {
 .graph-slider input[type="range"] {
   width: 100%;
   accent-color: var(--primary);
+  height: 22px;
+  cursor: pointer;
 }
 
 .graph-slider-anchor {
@@ -2429,14 +2499,11 @@ pre.mermaid svg {
   cursor: pointer;
 }
 
-.graph-node-has-detail rect {
-  transition: stroke 150ms ease, stroke-width 150ms ease, fill 150ms ease;
-}
-
 .graph-node-has-detail:hover rect,
 .graph-node-has-detail:focus-visible rect {
   stroke: var(--primary);
-  stroke-width: 2.5px;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 1px 1px rgba(20, 24, 26, 0.08)) drop-shadow(0 10px 20px -6px rgba(0, 105, 72, 0.35));
 }
 
 .graph-node-has-detail:focus-visible {
@@ -2445,20 +2512,34 @@ pre.mermaid svg {
 
 .graph-node-detail-dot {
   fill: var(--primary);
+  animation: graph-detail-dot-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes graph-detail-dot-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-node-detail-dot {
+    animation: none;
+  }
 }
 
 .graph-detail-panel {
   position: relative;
-  margin-top: 14px;
+  margin-top: 16px;
   padding: 14px 40px 14px 16px;
-  border: 1px solid var(--primary);
-  background: var(--surface);
+  border-radius: 14px;
+  background: var(--surface-low);
+  animation: graph-node-in 200ms ease;
 }
 
 .graph-detail-panel h4 {
   margin: 0 0 6px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--primary);
 }
 
@@ -2490,7 +2571,8 @@ pre.mermaid svg {
 
 @media (max-width: 640px) {
   .research-graph {
-    padding: 14px 10px;
+    padding: 18px 14px 16px;
+    border-radius: 16px;
   }
 }
 
