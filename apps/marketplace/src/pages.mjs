@@ -2857,7 +2857,12 @@ function dataBlockHtml(kind, raw) {
 // diagram; this is meant to feel like a native, animated web control, and it
 // doubles as a real scenario tool instead of a static picture.
 const GRAPH_COL_WIDTH = 232;
-const GRAPH_ROW_HEIGHT = 96;
+// Vertical gap between ranks (rows). Wider than the node height (64) by a
+// lot on purpose — when several nodes in one rank converge into fewer
+// nodes in the next (a common shape here), the edges need real room to
+// curve and their labels need room to sit without overlapping the node
+// boxes above/below or each other.
+const GRAPH_ROW_HEIGHT = 150;
 const GRAPH_NODE_W = 176;
 const GRAPH_NODE_H = 64;
 const GRAPH_MARGIN = 32;
