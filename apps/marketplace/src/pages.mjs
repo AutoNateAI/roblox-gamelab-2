@@ -845,14 +845,14 @@ export function renderHome(data) {
       </section>
 
       ${(() => {
-        // Only feature a region/org card once one actually has a real
-        // profile again — right now that's neither, so this gracefully
-        // drops to just the one investigation with real content instead of
-        // leaving two empty slots in a fixed 3-column grid.
+        // Always show one of each type (region, organization, investigation)
+        // — whether or not that type has a real profile yet, a "coming
+        // soon" card is still a real, honest card. The one with actual
+        // content leads the grid.
         const featuredCards = [
-          ...regions.filter((r) => r.status === "laboratory").slice(0, 1).map((region) => regionCard(region)),
-          ...organizations.filter((o) => o.status !== "watchlist").slice(0, 1).map((org) => organizationCard(org)),
           ...investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)),
+          ...regions.slice(0, 1).map((region) => regionCard(region)),
+          ...organizations.slice(0, 1).map((org) => organizationCard(org)),
         ];
         if (!featuredCards.length) return "";
         return `
@@ -2411,7 +2411,10 @@ export function renderCommunity() {
 const FILTER_TYPES = ["All", "Regions", "Organizations", "Systems", "Open Questions"];
 
 export function renderArticles() {
-  const featured = regions.find((r) => r.slug === "southeast-missouri");
+  // Feature whichever investigation actually has real content — same rule
+  // as the homepage hero (renderHome) — rather than a region/org that's
+  // currently just a "coming soon" stub.
+  const featured = investigations.find((i) => i.evidence?.length);
 
   const body = `
     <main class="articles-page">
@@ -2426,9 +2429,9 @@ export function renderArticles() {
             ? `<a class="about-founder-card" href="/research-and-case-studies/${featured.slug}">
                 <img src="${featured.thumbnail}" alt="${escapeHtml(featured.name)}" />
                 <div>
-                  <span class="kicker">${icon("star")} Featured &middot; ${escapeHtml(regionStatusLabels[featured.status] || featured.status)}</span>
+                  <span class="kicker">${icon("star")} Featured &middot; ${escapeHtml(investigationStatusLabels[featured.status] || featured.status)}</span>
                   <h2>${escapeHtml(featured.name)}</h2>
-                  <p>${escapeHtml(featured.tagline)}</p>
+                  <p>${escapeHtml(featured.question)}</p>
                 </div>
               </a>`
             : ""
@@ -2442,10 +2445,10 @@ export function renderArticles() {
         </div>
       </div>
       <div class="industry-grid lab-grid" data-article-grid>
+        ${[...investigations].sort((a, b) => (b.evidence?.length ? 1 : 0) - (a.evidence?.length ? 1 : 0)).map((investigation) => investigationCard(investigation)).join("")}
         ${regions.map((region) => regionCard(region)).join("")}
         ${organizations.map((org) => organizationCard(org)).join("")}
         ${systems.map((system) => systemCard(system)).join("")}
-        ${investigations.map((investigation) => investigationCard(investigation)).join("")}
       </div>
       <nav class="pagination" data-article-pagination aria-label="Pagination"></nav>
     </main>
