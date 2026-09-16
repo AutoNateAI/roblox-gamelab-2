@@ -405,16 +405,19 @@ graphBlocks.forEach((block) => {
     const to = currentPos(edge.to);
     const path = edgeElFor(edge)?.querySelector("path");
     if (!from || !to || !path) return;
-    const x1 = from.x + from.w;
-    const y1 = from.y + from.h / 2;
-    const x2 = to.x;
-    const y2 = to.y + to.h / 2;
-    const midX = (x1 + x2) / 2;
-    path.setAttribute("d", `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`);
+    // Top-to-bottom flow (matches graphBlockHtml in src/pages.mjs): bottom
+    // edge of the source node to top edge of the target, curving through a
+    // shared mid-height instead of the old left-to-right mid-width curve.
+    const x1 = from.x + from.w / 2;
+    const y1 = from.y + from.h;
+    const x2 = to.x + to.w / 2;
+    const y2 = to.y;
+    const midY = (y1 + y2) / 2;
+    path.setAttribute("d", `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`);
     const label = edgeElFor(edge)?.querySelector(".graph-edge-label");
     if (label) {
-      label.setAttribute("x", String(midX));
-      label.setAttribute("y", String((y1 + y2) / 2 - 8));
+      label.setAttribute("x", String((x1 + x2) / 2 + 10));
+      label.setAttribute("y", String(midY));
     }
   }
 
