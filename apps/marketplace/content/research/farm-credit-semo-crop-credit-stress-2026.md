@@ -14,12 +14,12 @@ Before you can read "adversely classified loans up 55% in six months" correctly,
 {
   "title": "How This Connects",
   "nodes": [
-    { "id": "cost", "label": "Input Costs\n(fuel + fertilizer + Iran-conflict volatility)", "rank": 0 },
-    { "id": "gov", "label": "Direct Gov't Payments\n$47.4B, +69.8% YoY", "rank": 0 },
-    { "id": "land", "label": "Farmland Value Growth\n0.6% in 2025, was 15.4% in 2023", "rank": 0 },
-    { "id": "margin", "label": "Producer Cash Margin\n& Collateral Cushion", "rank": 1 },
-    { "id": "repay", "label": "Repayment Capacity", "rank": 2 },
-    { "id": "class", "label": "Adversely Classified\nLoans", "rank": 3, "output": true, "baseline": 4.7, "format": "percent", "driverInput": "cost", "driverGain": 0.026 }
+    { "id": "cost", "label": "Input Costs\n(fuel + fertilizer + Iran-conflict volatility)", "rank": 0, "detail": "USDA ERS forecasts 2026 fuel/oil expenses up 28.8% and fertilizer/lime/soil-conditioner expenses up 15.3% nationally. Farm Credit SEMO's own March 2026 filing adds a specific driver: Iran-conflict energy/fertilizer volatility pushing some producers to shift corn/cotton acres toward soybeans." },
+    { "id": "gov", "label": "Direct Gov't Payments\n$47.4B, +69.8% YoY", "rank": 0, "detail": "USDA ERS forecasts $47.4B in 2026 direct government farm payments — a 69.8% increase over 2025's $27.9B, one of the largest year-over-year jumps in the forecast's history." },
+    { "id": "land", "label": "Farmland Value Growth\n0.6% in 2025, was 15.4% in 2023", "rank": 0, "detail": "Farm Credit SEMO's own disclosure: average 2025 benchmark farmland value rose just 0.6%, down sharply from 4.3% in 2024 and 15.4% in 2023 — the collateral cushion that normally absorbs a bad year is thinning." },
+    { "id": "margin", "label": "Producer Cash Margin\n& Collateral Cushion", "rank": 1, "detail": "Not separately disclosed anywhere — this is the node where the three verified inputs (cost, government support, collateral growth) combine into an estimate of what's actually left for a producer to service debt with." },
+    { "id": "repay", "label": "Repayment Capacity", "rank": 2, "detail": "Estimated, not measured: whether cash margin actually translates into on-time debt service depends on things public data doesn't show, like existing debt load and off-farm income." },
+    { "id": "class", "label": "Adversely Classified\nLoans", "rank": 3, "output": true, "baseline": 4.7, "format": "percent", "driverInput": "cost", "driverGain": 0.026, "detail": "Farm Credit Southeast Missouri's own disclosed adversely classified loan percentage: 4.7% (12/31/25) → 6.3% (3/31/26) → 7.3% (6/30/26). The slider above shows an illustrative extrapolation anchored to this real number, not a prediction." }
   ],
   "edges": [
     { "from": "cost", "to": "margin", "evidence": "verified", "label": "ERS: fuel +28.8%, fertilizer +15.3%" },

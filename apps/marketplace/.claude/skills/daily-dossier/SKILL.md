@@ -26,6 +26,15 @@ Same checkpoints as `research-brief`: show the findings list before drafting, st
 
 **Model**: `gpt-image-2.5-flare` (confirmed real, released 2026-09-08 — verified via WebSearch/WebFetch against `developers.openai.com`, not assumed from conversation). Same `/v1/images/generations` endpoint, same `1536x1024` landscape size as the old `gpt-image-2`, plus a `quality` param (`low`/`medium`/`high`/`xhigh`/`max`/`auto` — the script sets `"high"`). Flare over Sunburst deliberately: Sunburst is for iterative image-editing precision, this pipeline is one-shot batch text-to-image generation, which is exactly Flare's stated use case. `high` quality now costs a fraction of what it did on `gpt-image-2` (output tokens for a 1024×1024 `high` image dropped from ~7,024 to ~1,756), so this is a real cost drop, not just a quality bump — if image cost ever needs trimming further, `medium` is the next step down before reaching for a smaller size. The very first run after this change is still a live test of the new model end to end (response shape/`b64_json` key assumed unchanged since it's the same endpoint, but not yet proven on a real call) — if `generateOne()` throws or produces a garbled image, fall back to `gpt-image-2` and flag it rather than burning the whole job list on a broken model id.
 
+## Featured placement (part of Phase 2's `investigations[]` entry)
+
+The day's Question of the Day owns the site's featured slots — the home hero, the home "Featured Research" card, and the `/research-and-case-studies` hub's banner + first grid position all key off a single explicit `featured: true` field on the `investigations[]` entry (`src/pages.mjs`: `renderHome`, `renderArticles`), not on array order or evidence length. When Phase 2 writes today's entry:
+
+1. Set `featured: true` on today's new/updated entry.
+2. Find whichever *other* entry in `investigations[]` currently has `featured: true` (there should be exactly one) and remove the field (or set `false`) from it — only one investigation should hold it at a time.
+
+This flag is **only** set by this skill, on the day's actual Question of the Day. `dossier-second-look` (same-day follow-on articles from the rest of the dossier) must never set it — that's what keeps the day's QOTD pinned in place even as more articles get added later the same day.
+
 ## 5. Airtable write-back
 
 Load `reference/airtable-graph.md` for exact table/field names and the linking policy (search for existing Region/Organization/System records, never fabricate a new one on the fly). In order:
@@ -51,4 +60,4 @@ For each real candidate, create a `Research Backlog` and/or `Open Questions` row
 
 ## What this skill does not do
 
-Distribution copy (LinkedIn/Facebook/email/YouTube) — separate downstream skill, same boundary as `research-brief`. Interview/relationship logging (`People`/`Interactions`/`Claims & Observations`/`Opportunities`) beyond what Phase 7 seeds as backlog candidates — those get filled in as real interactions happen, not fabricated ahead of them. Creating new `Region`/`Organization`/`System` records — flag a genuinely new node back to Nathan instead of inventing one.
+Distribution copy (LinkedIn/Facebook/email/YouTube) — separate downstream skill, same boundary as `research-brief`. Interview/relationship logging (`People`/`Interactions`/`Claims & Observations`/`Opportunities`) beyond what Phase 7 seeds as backlog candidates — those get filled in as real interactions happen, not fabricated ahead of them. Creating new `Region`/`Organization`/`System` records — flag a genuinely new node back to Nathan instead of inventing one. **Walking through the rest of the dossier conversationally and deciding whether to build same-day follow-on articles** — that's `../dossier-second-look/SKILL.md`, run after this skill finishes, once Nathan wants to dig into what Phase 7 surfaced.

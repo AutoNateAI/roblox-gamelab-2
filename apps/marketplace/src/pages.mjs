@@ -800,12 +800,17 @@ export function renderLab() {
 }
 
 export function renderHome(data) {
-  // Feature whichever investigation actually has content (evidence/sourcePath)
-  // first — an empty "coming soon" stub with status "open" shouldn't win the
-  // homepage hero slot over a real, sourced piece just because its status
-  // label happens to say "open" too.
+  // `featured: true` is an explicit, single-owner flag set by the
+  // daily-dossier skill on the day's Question of the Day — it's the one
+  // that should hold the hero/featured slot, and it stays there even as
+  // same-day follow-on articles (via dossier-second-look) get published,
+  // since those never set the flag themselves. Falls back to the old
+  // "first investigation with real content" heuristic only if nothing is
+  // explicitly flagged yet (e.g. before daily-dossier's first real run).
   const featuredInvestigation =
-    investigations.find((i) => i.evidence?.length) || investigations.find((i) => i.status === "open");
+    investigations.find((i) => i.featured) ||
+    investigations.find((i) => i.evidence?.length) ||
+    investigations.find((i) => i.status === "open");
 
   const body = `
     <main class="lab-home">
@@ -863,7 +868,7 @@ export function renderHome(data) {
         // soon" card is still a real, honest card. The one with actual
         // content leads the grid.
         const featuredCards = [
-          ...investigations.filter((i) => i.evidence?.length).slice(0, 1).map((investigation) => investigationCard(investigation)),
+          ...[featuredInvestigation].filter(Boolean).map((investigation) => investigationCard(investigation)),
           ...regions.slice(0, 1).map((region) => regionCard(region)),
           ...organizations.slice(0, 1).map((org) => organizationCard(org)),
         ];
@@ -2424,10 +2429,10 @@ export function renderCommunity() {
 const FILTER_TYPES = ["All", "Regions", "Organizations", "Systems", "Open Questions"];
 
 export function renderArticles() {
-  // Feature whichever investigation actually has real content — same rule
-  // as the homepage hero (renderHome) — rather than a region/org that's
-  // currently just a "coming soon" stub.
-  const featured = investigations.find((i) => i.evidence?.length);
+  // Same `featured` flag/fallback rule as renderHome — the day's Question
+  // of the Day (set by daily-dossier) wins the banner and leads the grid,
+  // and stays pinned there across same-day follow-on articles.
+  const featured = investigations.find((i) => i.featured) || investigations.find((i) => i.evidence?.length);
 
   const body = `
     <main class="articles-page">
@@ -2458,7 +2463,10 @@ export function renderArticles() {
         </div>
       </div>
       <div class="industry-grid lab-grid" data-article-grid>
-        ${[...investigations].sort((a, b) => (b.evidence?.length ? 1 : 0) - (a.evidence?.length ? 1 : 0)).map((investigation) => investigationCard(investigation)).join("")}
+        ${[...investigations]
+          .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || (b.evidence?.length ? 1 : 0) - (a.evidence?.length ? 1 : 0))
+          .map((investigation) => investigationCard(investigation))
+          .join("")}
         ${regions.map((region) => regionCard(region)).join("")}
         ${organizations.map((org) => organizationCard(org)).join("")}
         ${systems.map((system) => systemCard(system)).join("")}
@@ -2915,16 +2923,23 @@ function graphBlockHtml(spec) {
       if (!pos) return "";
       const lines = String(n.label || n.id).split("\n");
       const isInput = inputs.some((inp) => inp.id === n.id);
-      const cls = ["graph-node", n.output ? "graph-node-output" : "", isInput ? "graph-node-input" : ""].filter(Boolean).join(" ");
+      const hasDetail = Boolean(n.detail);
+      const cls = ["graph-node", n.output ? "graph-node-output" : "", isInput ? "graph-node-input" : "", hasDetail ? "graph-node-has-detail" : ""].filter(Boolean).join(" ");
       const cx = pos.x + pos.w / 2;
       const textStartY = pos.y + pos.h / 2 - ((lines.length - 1) * 15) / 2 - (n.output ? 9 : 0);
       const textLines = lines.map((line, i) => `<tspan x="${cx}" dy="${i === 0 ? 0 : 15}">${escapeHtml(line)}</tspan>`).join("");
       const valueLine = n.output
         ? `<tspan x="${cx}" dy="${lines.length > 1 ? 17 : 15}" class="graph-node-value" data-node-value="${escapeHtml(n.id)}">${graphFormatValue(n.baseline, n.format)}</tspan>`
         : "";
-      return `<g class="${cls}" data-node-id="${escapeHtml(n.id)}">
+      // Tappable/clickable when the author gave it `detail` text — see the
+      // graph-detail-panel wiring in public/app.js. Not every node needs
+      // one; a node with nothing more to say than its label shouldn't be
+      // focusable dead weight for a keyboard/screen-reader user.
+      const interactiveAttrs = hasDetail ? ` tabindex="0" role="button" aria-label="${escapeHtml(lines.join(" "))} — show details"` : "";
+      return `<g class="${cls}" data-node-id="${escapeHtml(n.id)}"${interactiveAttrs}>
         <rect x="${pos.x}" y="${pos.y}" width="${pos.w}" height="${pos.h}" rx="10" />
         <text x="${cx}" y="${textStartY}" text-anchor="middle">${textLines}${valueLine}</text>
+        ${hasDetail ? `<circle class="graph-node-detail-dot" cx="${pos.x + pos.w - 10}" cy="${pos.y + 10}" r="4" />` : ""}
       </g>`;
     })
     .join("");
@@ -2950,10 +2965,22 @@ function graphBlockHtml(spec) {
     <span class="graph-legend-item graph-legend-hypothesis">Hypothesis — not provable from public data yet</span>
   </div>`;
 
+  const hasAnyDetail = nodes.some((n) => n.detail);
+  const detailPanel = hasAnyDetail
+    ? `<div class="graph-detail-panel" data-graph-detail hidden>
+        <button type="button" class="graph-detail-close" data-graph-detail-close aria-label="Close">${icon("close")}</button>
+        <h4 data-graph-detail-title></h4>
+        <p data-graph-detail-text></p>
+      </div>`
+    : "";
+  const hint = hasAnyDetail ? `<p class="graph-tap-hint">${icon("touch_app")} Tap a node for the evidence behind it.</p>` : "";
+
   const caption = spec.sourceLabel || spec.source || "";
   return `<figure class="research-graph" data-graph="${escapeHtml(JSON.stringify(spec))}">
     ${spec.title ? `<figcaption class="graph-title">${escapeHtml(spec.title)}</figcaption>` : ""}
+    ${hint}
     <div class="graph-canvas-wrap"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(spec.title || "System diagram")}">${defs}${edgeSvg}${nodeSvg}</svg></div>
+    ${detailPanel}
     ${legend}
     ${sliders ? `<div class="graph-controls">${sliders}</div>` : ""}
     ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}

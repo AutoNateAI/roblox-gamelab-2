@@ -847,6 +847,13 @@ export const investigations = [
     slug: "farm-credit-semo-crop-credit-stress-2026",
     icon: "help_center",
     status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-16) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
     name: "Farm Credit SEMO's Crop Loan Stress Is Rising. What Is Driving It?",
     question:
       "Can public crop, input-cost, freight, and lender disclosures explain the rise in Farm Credit Southeast Missouri's adversely classified and nonperforming loans without using confidential borrower data?",
