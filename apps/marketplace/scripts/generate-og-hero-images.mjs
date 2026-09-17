@@ -86,6 +86,10 @@ const jobs = [
     prompt: `A wide editorial image about a real agricultural-lending finding. Background: a close-up documentary shot of a farm loan ledger book and a quarterly financial statement on a wooden desk, a red pen resting on a highlighted line of numbers, a blurred green Southeast Missouri farm field visible through a window behind, warm natural light, no visible faces, fading into a dark navy panel with gold light. Large bold headline text reading "ADVERSELY CLASSIFIED LOANS JUST JUMPED 55%. HERE'S WHY." with a smaller line beneath reading "AutoNateAI · Farm Credit SEMO Crop-Credit Stress". ${STYLE}`,
   },
   {
+    file: "og/southeast-missouri-biomanufacturing-feasibility.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics feasibility question. Background: a documentary-style split composition — on the left, a stainless-steel industrial fermentation tank and pipework inside a modern bioprocessing facility under cool working light; blended on the right into a Southeast Missouri Bootheel corn field with a grain elevator on the horizon at golden hour, the two scenes fading into one another, then into a dark navy panel with gold light. Large bold headline text reading "COULD THE BOOTHEEL BECOME A BIOMANUFACTURING REGION?" with a smaller line beneath reading "AutoNateAI · Southeast Missouri Biomanufacturing Feasibility". No logos, no readable equipment signage. ${STYLE}`,
+  },
+  {
     file: "og/elevator-harvest-bottleneck.jpg",
     prompt: `A wide editorial image about an open research question. Background: a line of grain trucks queued on a gravel road waiting to unload at a busy grain elevator during harvest, dust in the air, late-afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "WHY DO THE SAME ELEVATORS CHOKE EVERY HARVEST?" with a smaller line beneath reading "AutoNateAI · Open Question, Coming Soon". ${STYLE}`,
   },

@@ -847,13 +847,6 @@ export const investigations = [
     slug: "farm-credit-semo-crop-credit-stress-2026",
     icon: "help_center",
     status: "investigating",
-    // Today's Question of the Day (daily-dossier, 2026-09-16) — holds the
-    // home hero + research-hub featured slot + first-in-grid position.
-    // Only one investigation should carry this at a time; the next
-    // daily-dossier run moves it here and clears it from whichever
-    // investigation held it before. Same-day follow-on articles (via
-    // dossier-second-look) must NOT set this.
-    featured: true,
     name: "Farm Credit SEMO's Crop Loan Stress Is Rising. What Is Driving It?",
     question:
       "Can public crop, input-cost, freight, and lender disclosures explain the rise in Farm Credit Southeast Missouri's adversely classified and nonperforming loans without using confidential borrower data?",
@@ -900,6 +893,75 @@ export const investigations = [
       { label: "Federal Reserve Beige Book, released Sep 2 2026 (St. Louis / Eighth District)", url: "https://www.federalreserve.gov/monetarypolicy/files/BeigeBook_20260902.pdf" },
       { label: "MoDOT — Southeast District Freight Plan", url: "https://www.modot.org/southeast-district-freight-plan" },
       { label: "USDA NASS — Missouri 2026 State Agriculture Overview", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=Missouri&year=2026" },
+    ],
+  },
+  {
+    slug: "southeast-missouri-biomanufacturing-feasibility",
+    icon: "biotech",
+    status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-17) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
+    name: "Could Southeast Missouri Become a Biomanufacturing Region — Or Is Feedstock Abundance Not Enough?",
+    question:
+      "What feedstock, utility, fermentation-scale, and offtake thresholds distinguish a plausible Southeast Missouri biomanufacturing site from a commodity-rich but nonviable location?",
+    tagline: "Clinton, Iowa turned a 40-year-old wet mill into a commercial-scale protein factory this year. The Bootheel has the corn. Here's everything else a region would need before it could try.",
+    thumbnail: "/assets/og/southeast-missouri-biomanufacturing-feasibility.jpg",
+    sourcePath: "../content/research/southeast-missouri-biomanufacturing-feasibility.md",
+    region: "southeast-missouri",
+    commodity: "Corn / Soybeans / Rice / Crop Residues",
+    evidence: [
+      { label: "ADM — Clinton, Iowa facility investment announcement, May 7 2026", note: "Two new high-speed corn receiving pits (25,000 bushels/hour each, completing by end of 2026) added to an existing 40+-year corn wet mill, grain elevator, and barge-loading complex.", url: "https://www.adm.com/en-us/news/news-releases/2026/5/adm-announces-investment-to-upgrade-clinton-iowa-corn-processing-facility/" },
+      { label: "ADM + The EVERY Company — OvoPro partnership announcement, Jul 14 2026", note: "Commercial-scale production of EVERY's precision-fermented OvoPro egg-white protein, sited at ADM's Clinton, Iowa facility using ADM's precision-fermentation capability.", url: "https://www.adm.com/fr-ca/news/news-releases/2026/7/adm-every-company-partner-to-deliver-us-based-commercial-scale-production-of-ovopro-egg-white-protein/" },
+      { label: "University of Minnesota — Minnesota Biomanufacturing Services expansion, Aug 14 2026", note: "New St. Paul CDMO facility five times larger with quadrupled fermentation capacity, full operations beginning spring 2026 — explicitly built to bridge lab-scale discovery and commercial-ready manufacturing.", url: "https://twin-cities.umn.edu/news-events/university-minnesota-quadruples-biomanufacturing-capability-fast-track-innovations-new" },
+      { label: "Northwestern University — DREAM Cloud Lab, $20M NSF award, Jul 2026", note: "AI-powered cloud lab for protein engineering; plans to synthesize/characterize 300,000+ proteins and generate up to 30M data points over four years, housed adjacent to a startup incubator.", url: "https://www.mccormick.northwestern.edu/news/articles/2026/07/ai-directed-protein-engineering-cloud-lab-receives-20-million-from-nsf/" },
+      { label: "DOE — ASPECT funding opportunity, released Sep 4 2026", note: "Up to $58M for bench and pre-pilot chemical technologies using alternative/waste feedstocks; concept papers due Oct 9 2026.", url: "https://www.energy.gov/cmei/fuels/funding-notice-accelerating-scale-and-pre-piloting-emerging-chemical-technologies-aspect" },
+      { label: "USDA Rural Development — Section 9003 biorefinery loan guarantee program", note: "Loan guarantees up to $250M for biorefineries, renewable chemicals, and biobased-product manufacturing; two Phase I application windows a year.", url: "https://www.rd.usda.gov/programs-services/energy-programs/biorefinery-renewable-chemical-and-biobased-product-manufacturing-program" },
+      { label: "MoDOT — Southeast District Freight Plan", note: "I-55, I-57, I-155 interstates; BNSF and Union Pacific rail; Mississippi River port facilities at SEMO Port, Mississippi, New Madrid, Pemiscot, and Ste. Genevieve Counties.", url: "https://www.modot.org/southeast-district-freight-plan" },
+    ],
+    stakeholders: ["Fisher Delta Research, Extension and Education Center applied-research staff", "Missouri Bootheel regional economic-development and utility staff", "Minnesota Biomanufacturing Services scale-up/CDMO staff", "ADM Clinton facility and precision-fermentation team", "DOE Alternative Fuels and Feedstocks Office (ASPECT program)", "USDA Rural Development Section 9003 program staff", "USDA APHIS Biotechnology Regulatory Services"],
+    hypothesis:
+      "Southeast Missouri satisfies the feedstock and freight layer of a biomanufacturing site but not yet the fermentation-capacity, scale-up-partner, industrial-utility, workforce, or offtake layers that Clinton, Iowa and the Twin Cities can currently document — meaning the opportunity is plausible on paper but unproven until site-level utility, workforce, and buyer data exist. This is a hypothesis to test against direct site and stakeholder data, not a conclusion.",
+    graphLayers: {
+      physical: "Corn/soybean/rice feedstock and I-55/57/155-BNSF/UP-Mississippi River freight are verified in SEMO; receiving/wet-mill/fermentation/purification infrastructure is verified only at benchmark sites (Clinton, IA; St. Paul, MN) and absent from SEMO's public record.",
+      capital: "Producer credit remains the local capital story; biomanufacturing adds DOE ASPECT (up to $58M) and USDA Section 9003 (up to $250M in guarantees) as open, national, project-conditional funding — not SEMO-specific commitments.",
+      business: "Farmer/elevator relationships stay unchanged; a biomanufacturing project would add a fermentation operator, a CDMO or scale-up partner, a regulatory-compliance function (USDA APHIS BRS), and a committed offtake buyer — none of which SEMO currently has a documented local relationship with.",
+      information: "No public dataset yet joins SEMO facility-level utility capacity, workforce availability, and offtake demand into a site-readiness model — that gap is this investigation's own headline finding.",
+    },
+    dataNeeds: [
+      "SEMO industrial water, power, and wastewater capacity by site — not publicly documented",
+      "Facility-level Bootheel elevator/dryer throughput and spare capacity",
+      "Crop-residue quantity and collection economics for a hypothetical feedstock-aggregation model",
+      "A qualified-bioprocess-workforce assessment for the region",
+      "A direct conversation with Fisher Delta, a Missouri economic-development office, a regional utility, or DOE/USDA program staff — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "SEMO Biomanufacturing Feasibility Map (feedstock + utilities + freight + incentives, GIS-based)",
+      "Reusable Midwest feedstock-to-product capability matrix (commodity/residue → fermentation → scale-up → offtake)",
+      "Funding-stage matcher: lab → pilot → pre-pilot → commercial financing pathways",
+    ],
+    findings:
+      "Southeast Missouri clears one of six benchmarked biomanufacturing capabilities outright (agricultural feedstock plus multimodal freight) and shares a second (applied agricultural research, via Fisher Delta) — but has no verified fermentation asset, scale-up/CDMO partner, documented industrial utility capacity, trained bioprocess workforce, or committed offtake buyer anywhere in the public record. Clinton, Iowa (ADM's precision-fermentation retrofit of a 40-year-old wet mill) and the Twin Cities (Minnesota Biomanufacturing Services' 2026 scale-up expansion) currently hold those capabilities instead. More than $300M in federal capital (DOE ASPECT, USDA Section 9003) is genuinely open to a qualifying project right now, but qualifying requires exactly the site-readiness and bench-validated-technology evidence this research pass could not find for Southeast Missouri. The opportunity is plausible, not proven — which is why status stays \"investigating.\"",
+    sources: [
+      { label: "ADM — Clinton, Iowa facility investment announcement, May 2026", url: "https://www.adm.com/en-us/news/news-releases/2026/5/adm-announces-investment-to-upgrade-clinton-iowa-corn-processing-facility/" },
+      { label: "ADM + The EVERY Company — OvoPro commercial-scale partnership, Jul 2026", url: "https://www.adm.com/fr-ca/news/news-releases/2026/7/adm-every-company-partner-to-deliver-us-based-commercial-scale-production-of-ovopro-egg-white-protein/" },
+      { label: "Minnesota Biomanufacturing Services (University of Minnesota)", url: "https://mbs.umn.edu/" },
+      { label: "University of Minnesota — biomanufacturing capability expansion announcement", url: "https://twin-cities.umn.edu/news-events/university-minnesota-quadruples-biomanufacturing-capability-fast-track-innovations-new" },
+      { label: "Northwestern University — DREAM Cloud Lab", url: "https://syntheticbiology.northwestern.edu/research/biofoundry/dream/" },
+      { label: "Northwestern McCormick — DREAM Cloud Lab $20M NSF award", url: "https://www.mccormick.northwestern.edu/news/articles/2026/07/ai-directed-protein-engineering-cloud-lab-receives-20-million-from-nsf/" },
+      { label: "NSF iBioFoundry — University of Illinois", url: "https://ibiofoundry.illinois.edu/" },
+      { label: "Global Center for Biofoundry Applications", url: "https://gcba.illinois.edu/" },
+      { label: "DOE — ASPECT funding opportunity", url: "https://www.energy.gov/cmei/fuels/funding-notice-accelerating-scale-and-pre-piloting-emerging-chemical-technologies-aspect" },
+      { label: "USDA Rural Development — Section 9003 program", url: "https://www.rd.usda.gov/programs-services/energy-programs/biorefinery-renewable-chemical-and-biobased-product-manufacturing-program" },
+      { label: "Federal Register — Section 9003 final rule, Jul 9 2026", url: "https://www.federalregister.gov/documents/2026/07/09/2026-13841/revisions-to-the-biorefinery-renewable-chemical-and-biobased-product-manufacturing-assistance-loan" },
+      { label: "USDA APHIS — Biotechnology Regulatory Services", url: "https://direct.aphis.usda.gov/biotechnology" },
+      { label: "MoDOT — Southeast District Freight Plan", url: "https://www.modot.org/southeast-district-freight-plan" },
+      { label: "University of Missouri Extension — Rice Extension", url: "https://extension.missouri.edu/programs/rice-extension" },
+      { label: "MU CAFNR — Fisher Delta 2026 Field Day", url: "https://cafnr.missouri.edu/stories/t-e-jake-fisher-delta-research-extension-and-education-center-hosts-2026-field-day/" },
     ],
   },
 ];
