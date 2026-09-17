@@ -28,12 +28,20 @@ Same checkpoints as `research-brief`: show the findings list before drafting, st
 
 ## Featured placement (part of Phase 2's `investigations[]` entry)
 
-The day's Question of the Day owns the site's featured slots — the home hero, the home "Featured Research" card, and the `/research-and-case-studies` hub's banner + first grid position all key off a single explicit `featured: true` field on the `investigations[]` entry (`src/pages.mjs`: `renderHome`, `renderArticles`), not on array order or evidence length. When Phase 2 writes today's entry:
+Two site sections key off publish recency, not array order or evidence length (`src/pages.mjs`: `renderHome`, `renderArticles` — fixed 2026-09-17, see git history for the old single-slot-plus-stub-padding behavior):
 
-1. Set `featured: true` on today's new/updated entry.
-2. Find whichever *other* entry in `investigations[]` currently has `featured: true` (there should be exactly one) and remove the field (or set `false`) from it — only one investigation should hold it at a time.
+- The home page's "Featured Research" row shows the **3 most recently published** investigations, most-recent first — sorted by `publishedDate` descending, `featured` as a tiebreaker for same-day articles.
+- The home hero panel and the `/research-and-case-studies` hub's banner card both show whichever investigation has `featured: true` (single slot, not the top-3 row).
 
-This flag is **only** set by this skill, on the day's actual Question of the Day. `dossier-second-look` (same-day follow-on articles from the rest of the dossier) must never set it — that's what keeps the day's QOTD pinned in place even as more articles get added later the same day.
+When Phase 2 writes today's entry:
+
+1. Set `publishedDate: "YYYY-MM-DD"` (today) on the new/updated entry — **every** investigation needs this; it's what drives the 3-slot ordering. See `../research-brief/reference/schema.md`.
+2. Set `featured: true` on today's entry, since it's the actual Question of the Day.
+3. Find whichever *other* entry in `investigations[]` currently has `featured: true` (there should be exactly one) and remove the field (or set `false`) from it — only one investigation should hold it at a time.
+
+The `featured` flag is **only** set by this skill, on the day's actual Question of the Day. `dossier-second-look` (same-day follow-on articles from the rest of the dossier) must never set `featured` — but it still must set `publishedDate` to that day's date, since that's what keeps same-day articles correctly grouped in the recency row (the `featured` tiebreak is what keeps the actual QOTD leading over a same-day follow-on piece when their dates tie).
+
+`investigations[].region` stays `""` — the site's own `regions[]`/`organizations[]`/`systems[]` arrays in `src/data.mjs` were emptied 2026-09-17 (they were nothing but unwritten "Coming Soon" stub pages; see git history). **This is separate from Airtable's `Regions`/`Organizations`/`Systems` tables**, which still hold real linking nodes for the knowledge graph — see the note in `reference/airtable-graph.md`. Don't repopulate `data.mjs`'s arrays as a side effect of a normal run; a real region/org/system profile page is a bigger scope decision, flag it to Nathan.
 
 ## 5. Airtable write-back
 

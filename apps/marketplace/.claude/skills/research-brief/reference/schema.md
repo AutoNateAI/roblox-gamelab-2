@@ -13,7 +13,8 @@ Structured, scannable metadata. Keep this flat — don't nest new sub-objects fo
   question: "The actual analytical research question, one sentence, precise — this is what renders under the H1, not the headline itself. Can be denser/more technical than `name`.",
   tagline: "One honest sentence for card previews — 'here's what we know, here's what's missing.'",
   thumbnail: "/assets/og/<slug>.jpg",                 // generated per Phase 3 below — same file also serves as the page's ogImage, no separate asset
-  region: "existing-region-slug" | "",               // must match a slug in regions[]
+  region: "existing-region-slug" | "",               // must match a slug in regions[] — leave "" if regions[] has no real profile for this yet (it's empty as of 2026-09-17, see data.mjs's comment above it)
+  publishedDate: "YYYY-MM-DD",                        // NEW — the day this article actually went live (today, in the skill's run). Drives recency ordering on the home page's "Featured Research" row and the research hub's default sort (see renderHome/renderArticles in src/pages.mjs) — every new investigation needs one, set once, never edited on a later research pass.
   commodity: "Rice / Soybeans",                       // free text, used as a tag
   evidence: [ { label, note, url } ],                 // what got you asking the question
   stakeholders: [ "..." ],                            // who you'd want to interview

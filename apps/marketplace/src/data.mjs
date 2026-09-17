@@ -590,56 +590,13 @@ export const regionStatusLabels = {
   watchlist: "Coming Soon",
 };
 
-export const regions = [
-  {
-    // Pulled back to "coming soon" on 2026-09-15 — the full profile didn't
-    // match the site's question-based structure. Cross-reference arrays
-    // (organizations/systems/investigations) are deliberately left populated
-    // so this stub still links forward to the one live piece (the Bootheel
-    // investigation) instead of dead-ending.
-    slug: "southeast-missouri",
-    icon: "landscape",
-    status: "watchlist",
-    name: "What's Actually Happening to Farm Country in the Missouri Bootheel?",
-    // Short, compact label for contexts that can't fit the full question
-    // (tag pills, kickers referencing "part of this region") — see
-    // shortName usage in regionCard()/investigationCard()/etc.
-    shortName: "Southeast Missouri (The Bootheel)",
-    thumbnail: "/assets/og/southeast-missouri.jpg",
-    tagline: "We haven't published an in-depth profile of this region yet — it's next up on the list.",
-    geography: "Coming soon.",
-    coordinates: "",
-    commodities: ["Soybeans", "Corn", "Cotton", "Rice", "Winter Wheat"],
-    stats: [],
-    production: "",
-    capital: "",
-    freight: "",
-    organizations: ["farm-credit-southeast-missouri"],
-    systems: ["agricultural-finance-and-capital"],
-    investigations: ["bootheel-rice-to-soybean-pivot"],
-    sources: [],
-  },
-  {
-    slug: "central-iowa-corn-belt",
-    icon: "grass",
-    status: "watchlist",
-    name: "What Keeps the Iowa Corn Belt's Farm Economy Running?",
-    shortName: "Central Iowa Corn Belt",
-    thumbnail: "/assets/og/central-iowa-corn-belt.jpg",
-    tagline: "We haven't profiled this region yet — it's next up on the list.",
-    geography: "Coming soon.",
-    coordinates: "",
-    commodities: ["Corn", "Soybeans"],
-    stats: [],
-    production: "",
-    capital: "",
-    freight: "",
-    organizations: [],
-    systems: [],
-    investigations: [],
-    sources: [],
-  },
-];
+// Emptied 2026-09-17 — the site had never published a real region profile
+// (both entries were "Coming Soon" stubs); with 3 real investigation
+// articles now live, a stub category page is worse than no category page.
+// investigations[] no longer sets a `region` slug pointing here — repopulate
+// this array (and re-link investigations to a real slug) once an actual
+// region profile gets written.
+export const regions = [];
 
 export const organizationTypeLabels = {
   lender: "Agricultural Lender",
@@ -651,53 +608,10 @@ export const organizationStatusLabels = {
   watchlist: "Coming Soon",
 };
 
-export const organizations = [
-  {
-    // Pulled back to "coming soon" on 2026-09-15 — same reason as the region
-    // profile: didn't match the site's question-based structure. systems/
-    // investigations left populated so this stub still links forward.
-    slug: "farm-credit-southeast-missouri",
-    icon: "account_balance",
-    status: "watchlist",
-    orgType: "lender",
-    name: "What Does Farm Credit Southeast Missouri Actually Do for Bootheel Farmers?",
-    shortName: "Farm Credit Southeast Missouri",
-    thumbnail: "/assets/og/farm-credit-southeast-missouri.jpg",
-    tagline: "We haven't published an in-depth profile of this organization yet — it's next up on the list.",
-    region: "southeast-missouri",
-    roleInSystem: "",
-    facts: [],
-    portfolioMix: [],
-    locations: [],
-    technologyStack: [],
-    commodities: [],
-    systems: ["agricultural-finance-and-capital"],
-    investigations: ["bootheel-rice-to-soybean-pivot"],
-    openQuestions: [],
-    sources: [],
-  },
-  {
-    slug: "bootheel-grain-cooperative",
-    icon: "storefront",
-    status: "watchlist",
-    orgType: "elevator",
-    name: "Who Actually Runs the Grain Elevators Bootheel Farmers Depend On?",
-    shortName: "Bootheel Grain Cooperative",
-    thumbnail: "/assets/og/bootheel-grain-cooperative.jpg",
-    tagline: "We haven't profiled a specific elevator or cooperative yet — it's next up on the list.",
-    region: "southeast-missouri",
-    roleInSystem: "",
-    facts: [],
-    portfolioMix: [],
-    locations: [],
-    technologyStack: [],
-    commodities: [],
-    systems: [],
-    investigations: [],
-    openQuestions: [],
-    sources: [],
-  },
-];
+// Emptied 2026-09-17 — same reason as regions[] above: both entries were
+// "Coming Soon" stubs with no real profile written. Repopulate once a real
+// organization profile exists.
+export const organizations = [];
 
 export const systemCategoryLabels = {
   "production-food": "Production & Food Systems",
@@ -715,48 +629,10 @@ export const systemStatusLabels = {
 // Business Analysis, Data Intelligence, Systems Mapping, AI & Automation.
 export const pillarLabels = ["Business Analysis", "Data Intelligence", "Systems Mapping", "AI & Automation"];
 
-export const systems = [
-  {
-    // Pulled back to "coming soon" on 2026-09-15 — same reason as the region
-    // and organization profiles: didn't match the site's question-based
-    // structure. regions/investigations left populated so this stub still
-    // links forward.
-    slug: "agricultural-finance-and-capital",
-    icon: "payments",
-    status: "planned",
-    category: "finance-capital",
-    name: "How Does a Farm Operation Actually Get a Loan?",
-    shortName: "Agricultural Finance & Capital",
-    thumbnail: "/assets/og/agricultural-finance-and-capital.jpg",
-    tagline: "We haven't published this deep dive yet — it's next up on the list.",
-    overview: "",
-    pipeline: [],
-    pillars: [],
-    dataModel: null,
-    datasets: [],
-    stakeholders: [],
-    regions: ["southeast-missouri"],
-    investigations: ["bootheel-rice-to-soybean-pivot"],
-  },
-  {
-    slug: "freight-infrastructure-storage",
-    icon: "local_shipping",
-    status: "planned",
-    category: "freight-infrastructure",
-    name: "How Does a Crop Actually Get From the Field to the Barge?",
-    shortName: "Freight / Infrastructure / Storage",
-    thumbnail: "/assets/og/freight-infrastructure-storage.jpg",
-    tagline: "We haven't published this deep dive yet — it's next up on the list.",
-    overview: "",
-    pipeline: [],
-    pillars: [],
-    dataModel: null,
-    datasets: [],
-    stakeholders: [],
-    regions: [],
-    investigations: [],
-  },
-];
+// Emptied 2026-09-17 — same reason as regions[]/organizations[] above: both
+// entries were "Coming Soon" stubs with no real deep dive written.
+// Repopulate once a real system deep dive exists.
+export const systems = [];
 
 export const investigationStatusLabels = {
   open: "Open Question",
@@ -779,7 +655,11 @@ export const investigations = [
     // same pattern as the tutorial content in content/tutorials/. See
     // apps/marketplace/.claude/skills/research-brief/.
     sourcePath: "../content/research/bootheel-rice-to-soybean-pivot.md",
-    region: "southeast-missouri",
+    // Site no longer carries standalone Region/Organization/System profile
+    // stubs (removed 2026-09-17 — see git history) — this stays "" until a
+    // real region profile page exists to point at.
+    region: "",
+    publishedDate: "2026-09-15",
     commodity: "Rice / Soybeans",
     evidence: [
       { label: "USDA NASS — national Acreage report, Jun 30 2026", note: "Soybean planted acreage up 5% from 2025 (85.4M acres); corn planted acreage down 3% from 2025 — national row-crop acreage is actively reallocating.", url: "https://www.nass.usda.gov/Newsroom/2026/06-30-2026.php" },
@@ -825,25 +705,6 @@ export const investigations = [
     ],
   },
   {
-    slug: "elevator-harvest-bottleneck",
-    icon: "help_center",
-    status: "open",
-    name: "Why Do the Same Grain Elevators Choke Every Single Harvest? (Coming Soon)",
-    question: "We haven't researched a specific elevator or bottleneck yet — it's next up on the list.",
-    tagline: "Coming soon.",
-    thumbnail: "/assets/og/elevator-harvest-bottleneck.jpg",
-    region: "southeast-missouri",
-    commodity: "",
-    evidence: [],
-    stakeholders: [],
-    hypothesis: "",
-    graphLayers: { physical: "", capital: "", business: "", information: "" },
-    dataNeeds: [],
-    artifacts: [],
-    findings: null,
-    sources: [],
-  },
-  {
     slug: "farm-credit-semo-crop-credit-stress-2026",
     icon: "help_center",
     status: "investigating",
@@ -853,7 +714,8 @@ export const investigations = [
     tagline: "Adversely classified loans went 4.7% → 6.3% → 7.3% across three straight quarters — here's what public data can and can't confirm about why, including a driver nobody's dossier had yet.",
     thumbnail: "/assets/og/farm-credit-semo-crop-credit-stress-2026.jpg",
     sourcePath: "../content/research/farm-credit-semo-crop-credit-stress-2026.md",
-    region: "southeast-missouri",
+    region: "",
+    publishedDate: "2026-09-16",
     commodity: "Rice / Soybeans / Corn / Cotton",
     evidence: [
       { label: "Farm Credit Southeast Missouri — Q2 2026 Stockholder Report", note: "Adversely classified loans rose from 4.7% (12/31/25) to 7.3% (6/30/26) of the portfolio; nonperforming loans rose from 1.3% to 2.3%. Management explicitly attributes the rise to \"continued adverse economic conditions within the crop sector.\"", url: "https://farmcreditsemo.com/sites/default/files/2026-08/Q2_2026_SH_Report.pdf" },
@@ -912,7 +774,8 @@ export const investigations = [
     tagline: "Clinton, Iowa turned a 40-year-old wet mill into a commercial-scale protein factory this year. The Bootheel has the corn. Here's everything else a region would need before it could try.",
     thumbnail: "/assets/og/southeast-missouri-biomanufacturing-feasibility.jpg",
     sourcePath: "../content/research/southeast-missouri-biomanufacturing-feasibility.md",
-    region: "southeast-missouri",
+    region: "",
+    publishedDate: "2026-09-17",
     commodity: "Corn / Soybeans / Rice / Crop Residues",
     evidence: [
       { label: "ADM — Clinton, Iowa facility investment announcement, May 7 2026", note: "Two new high-speed corn receiving pits (25,000 bushels/hour each, completing by end of 2026) added to an existing 40+-year corn wet mill, grain elevator, and barge-loading complex.", url: "https://www.adm.com/en-us/news/news-releases/2026/5/adm-announces-investment-to-upgrade-clinton-iowa-corn-processing-facility/" },

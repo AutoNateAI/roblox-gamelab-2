@@ -802,15 +802,28 @@ export function renderLab() {
 export function renderHome(data) {
   // `featured: true` is an explicit, single-owner flag set by the
   // daily-dossier skill on the day's Question of the Day — it's the one
-  // that should hold the hero/featured slot, and it stays there even as
-  // same-day follow-on articles (via dossier-second-look) get published,
-  // since those never set the flag themselves. Falls back to the old
-  // "first investigation with real content" heuristic only if nothing is
-  // explicitly flagged yet (e.g. before daily-dossier's first real run).
+  // that should hold the hero panel, and it stays there even as same-day
+  // follow-on articles (via dossier-second-look) get published, since those
+  // never set the flag themselves. Falls back to the old "first investigation
+  // with real content" heuristic only if nothing is explicitly flagged yet
+  // (e.g. before daily-dossier's first real run).
   const featuredInvestigation =
     investigations.find((i) => i.featured) ||
     investigations.find((i) => i.evidence?.length) ||
     investigations.find((i) => i.status === "open");
+
+  // The home page's "Featured Research" row is the latest 3 published
+  // articles, most-recent first — sorted by `publishedDate` (each
+  // investigation gets one, set by daily-dossier/research-brief on
+  // publish), with `featured` as a tiebreaker for same-day articles so the
+  // actual Question of the Day still leads over a same-day follow-on piece.
+  // This used to hardcode [featuredInvestigation, 1 region stub, 1
+  // organization stub] to always fill 3 slots — removed 2026-09-17 once the
+  // site had enough real articles that padding with "Coming Soon" cards was
+  // no longer necessary (see git history for the old behavior).
+  const latestInvestigations = [...investigations]
+    .sort((a, b) => (b.publishedDate || "").localeCompare(a.publishedDate || "") || (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+    .slice(0, 3);
 
   const body = `
     <main class="lab-home">
@@ -846,40 +859,16 @@ export function renderHome(data) {
         </div>
       </section>
 
-      <section class="section">
-        <div class="section-head section-head-center">
-          <div>
-            <span class="kicker">${icon("hub")} Research Library</span>
-            <h2>Four kinds of research, all in one place.</h2>
-            <p>Every piece we publish falls into one of these four types. Pick the one you need.</p>
-          </div>
-        </div>
-        <div class="value-grid">
-          <article><span>${icon("landscape")}</span><h3>Regions</h3><p>What's grown, who finances it, and how it gets to market — one farming region at a time.</p><a class="outline-button full" href="/research-and-case-studies?type=Regions">See Regions ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_balance")}</span><h3>Organizations</h3><p>Profiles of the real lenders, elevators, and cooperatives farmers deal with, with sourced public numbers.</p><a class="outline-button full" href="/research-and-case-studies?type=Organizations">See Organizations ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("account_tree")}</span><h3>How It Works</h3><p>Step-by-step breakdowns of real processes, like getting a loan or moving a crop to market.</p><a class="outline-button full" href="/research-and-case-studies?type=Systems">See How It Works ${icon("arrow_forward")}</a></article>
-          <article><span>${icon("help_center")}</span><h3>Open Questions</h3><p>What we're actively researching but haven't answered yet, labeled honestly as open.</p><a class="outline-button full" href="/research-and-case-studies?type=Open%20Questions">See Open Questions ${icon("arrow_forward")}</a></article>
-        </div>
-      </section>
-
       ${(() => {
-        // Always show one of each type (region, organization, investigation)
-        // — whether or not that type has a real profile yet, a "coming
-        // soon" card is still a real, honest card. The one with actual
-        // content leads the grid.
-        const featuredCards = [
-          ...[featuredInvestigation].filter(Boolean).map((investigation) => investigationCard(investigation)),
-          ...regions.slice(0, 1).map((region) => regionCard(region)),
-          ...organizations.slice(0, 1).map((org) => organizationCard(org)),
-        ];
+        const featuredCards = latestInvestigations.map((investigation) => investigationCard(investigation));
         if (!featuredCards.length) return "";
         return `
       <section class="section">
         <div class="section-head">
           <div>
             <span class="kicker">${icon("landscape")} Featured Research</span>
-            <h2>See the research in action.</h2>
-            <p>Top articles from our library.</p>
+            <h2>The latest research, most recent first.</h2>
+            <p>Every article on this site is real, sourced research — no "coming soon" filler.</p>
           </div>
           <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
         </div>
@@ -909,17 +898,17 @@ export function renderHome(data) {
     canonicalPath: "/",
     ogImage: "/assets/og/default.jpg",
     description:
-      "AutoNateAI researches how farm country's money, land, and grain actually move — regional profiles, organization profiles, how-things-work guides, and open questions, with Southeast Missouri as the deepest profile so far.",
+      "AutoNateAI researches how farm country's money, land, and grain actually move — real, sourced research articles, with Southeast Missouri as the deepest coverage so far.",
     ogTitle: "Agricultural Economic Systems Intelligence Lab",
     ogDescription:
-      "Real regions, real organizations, real numbers — how farm country actually works, researched and published free by Nathan Baker.",
+      "Real numbers, real sources — how farm country actually works, researched and published free by Nathan Baker.",
     structuredData: [
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "AutoNateAI",
         "url": "https://autonateai.com",
-        "description": "AutoNateAI researches how farm country's money, land, and grain actually move, nationally, with Southeast Missouri as the deepest profile so far.",
+        "description": "AutoNateAI researches how farm country's money, land, and grain actually move, nationally, with Southeast Missouri as the deepest coverage so far.",
         "founder": {
           "@type": "Person",
           "name": "Nathan Baker",
@@ -2415,19 +2404,17 @@ export function renderCommunity() {
   });
 }
 
-// Research & Case Studies — the single browsing hub. Regions, Organizations,
-// Systems, and Open Questions all live here as filters (see the second-pass
-// nav simplification note on navItems in data.mjs). The old general-lab
-// articles no longer show here (third pass: this hub is agriculture-only —
-// the articles/renderArticleDetail plumbing stays for their own URLs, just
-// not listed on this catalog). Everything still has its own real URL for
-// direct links and SEO — this page is the front door for browsing and
-// discovery, not the only way in. Filtering is plain client-side JS
-// (public/app.js filterArticles()); the catalog shows unpaginated, since
-// the combined set is small enough that pagination would just get in the
-// way of a farmer scanning for what applies to them.
-const FILTER_TYPES = ["All", "Regions", "Organizations", "Systems", "Open Questions"];
-
+// Research & Case Studies — the single browsing hub. Region/Organization/
+// System profile pages and the client-side type filters were removed
+// 2026-09-17 once the site had 3 real investigation articles and zero real
+// region/org/system profiles — a filter row with 3 permanently-empty
+// buttons was worse than no filter row. regionCard/organizationCard/
+// systemCard and the regions[]/organizations[]/systems[] data arrays stay
+// in place (all empty) so this grid — and a real profile page, once one
+// gets written — can come back with a single data change, not a rewrite.
+// The old general-lab articles still don't show here (third pass: this hub
+// is agriculture-only — the articles/renderArticleDetail plumbing stays for
+// their own URLs, just not listed on this catalog).
 export function renderArticles() {
   // Same `featured` flag/fallback rule as renderHome — the day's Question
   // of the Day (set by daily-dossier) wins the banner and leads the grid,
@@ -2440,7 +2427,7 @@ export function renderArticles() {
         <div>
           <span class="kicker">${icon("search")} Research & Case Studies</span>
           <h1>Everything we've researched, in one place.</h1>
-          <p>Regions, the lenders and businesses in them, how the money and the grain actually move, and the questions we're still chasing down. Search below, or filter by what you're actually looking for.</p>
+          <p>Real, sourced investigations into how farm country's money, land, and grain actually move. Search below for what applies to you.</p>
         </div>
         ${
           featured
@@ -2457,14 +2444,11 @@ export function renderArticles() {
       </section>
 
       <div class="content-tools">
-        <label>${icon("search")} <input type="search" placeholder="Search regions, lenders, questions..." data-article-search /></label>
-        <div class="filter-row" data-article-filters>
-          ${FILTER_TYPES.map((type) => `<button type="button" data-filter="${escapeHtml(type)}">${escapeHtml(type)}</button>`).join("")}
-        </div>
+        <label>${icon("search")} <input type="search" placeholder="Search articles, lenders, questions..." data-article-search /></label>
       </div>
       <div class="industry-grid lab-grid" data-article-grid>
         ${[...investigations]
-          .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || (b.evidence?.length ? 1 : 0) - (a.evidence?.length ? 1 : 0))
+          .sort((a, b) => (b.publishedDate || "").localeCompare(a.publishedDate || "") || (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
           .map((investigation) => investigationCard(investigation))
           .join("")}
         ${regions.map((region) => regionCard(region)).join("")}
@@ -2482,7 +2466,7 @@ export function renderArticles() {
     canonicalPath: "/research-and-case-studies",
     ogImage: "/assets/og/research-and-case-studies.jpg",
     description:
-      "Regional profiles, organization profiles, how-things-work explainers, and open questions from AutoNateAI's agricultural economic-intelligence research — all in one searchable, filterable place.",
+      "Real, sourced research articles on how farm country's money, land, and grain actually move — all in one searchable place.",
     ogTitle: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
     ogDescription:
       "Everything AutoNateAI has researched about how farm country's money, land, and grain actually move — search or filter to find what applies to you.",

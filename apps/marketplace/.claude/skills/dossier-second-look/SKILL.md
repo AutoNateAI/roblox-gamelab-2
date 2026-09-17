@@ -15,7 +15,7 @@ Pull the ranked candidate list Phase 7 of `daily-dossier` just wrote (`Research 
 
 Run `../research-brief/SKILL.md` phases 1-4 exactly as that skill specifies (same checkpoints, same evidence bar, same `\`\`\`chart`/`\`\`\`map`/`\`\`\`graph` fences — see `../research-brief/reference/interactive-blocks.md`). The dossier is still your starting source list the same way it is for `daily-dossier`.
 
-**The one rule that matters here**: the new `investigations[]` entry does **not** get `featured: true`. The day's Question of the Day keeps that slot — see `../daily-dossier/SKILL.md`'s "Featured placement" section for why. A same-day second (or third) article is a real, fully-published page; it's just not the pinned one. If Nathan explicitly asks to *replace* the featured slot with this instead, that's a deliberate override — move the flag by hand (set it here, clear it from today's original QOTD entry) rather than doing it automatically.
+**The one rule that matters here**: the new `investigations[]` entry does **not** get `featured: true`. The day's Question of the Day keeps that slot — see `../daily-dossier/SKILL.md`'s "Featured placement" section for why. A same-day second (or third) article is a real, fully-published page; it's just not the pinned one. It still needs `publishedDate` set to today's date (same as the QOTD entry) — that's what puts it in the home page's 3-latest-articles row at all; only `featured` (the single hero/banner slot) stays reserved for the actual QOTD. If Nathan explicitly asks to *replace* the featured slot with this instead, that's a deliberate override — move the flag by hand (set it here, clear it from today's original QOTD entry) rather than doing it automatically.
 
 ## 3. Airtable + deploy
 
