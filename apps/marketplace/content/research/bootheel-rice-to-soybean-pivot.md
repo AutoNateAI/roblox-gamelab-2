@@ -8,6 +8,8 @@ Two months ago I could've handed you a clean headline — "water's drying up, ri
 
 Before there was a "Bootheel rice industry" to have an opinion about, there was a swamp. Nearly 2 million acres of it — the overflow basin for the Mississippi and Ohio rivers and every Ozark stream that ever ran out of hillside room. In 1907, a group of timber men who'd already logged the place out incorporated the Little River Drainage District and set out to turn what was left into farmland. Construction ran from 1914 to 1928. What they left behind — over 900 miles of ditches, 300 miles of levees, draining 1.2 million acres across Bollinger, Cape Girardeau, Dunklin, New Madrid, Pemiscot, Scott, and Stoddard counties — is still, functionally, the plumbing this entire regional economy sits on top of. Every acre of rice or soybeans anyone's arguing about today is farmable at all because a hundred-plus-year-old engineering project said so. That's not trivia. That's the reason this is delta-flat, ditch-veined, gravity-drained land instead of a bayou — and it's worth remembering before anyone treats "the way the Bootheel farms" as a law of nature instead of a very deliberate, very old decision. ([Little River Drainage District — official history](https://www.thelrdd.org/history/))
 
+![A determined 1907 timber baron stands over a drained swamp pointing at a blueprint of ditches and levees while alligators look unimpressed](/assets/meme/bootheel-rice-to-soybean-pivot-01.jpg)
+
 ## How This Connects
 
 ```graph
@@ -47,11 +49,15 @@ Here's the part that made me stop writing the easy version of this piece. I went
 
 **Signal one — Congress just told rice growers to stay.** The One Big Beautiful Bill Act (H.R. 1, enacted July 2025) raised the Price Loss Coverage reference price for rice 20.7%, from $14.00 to $16.90 per hundredweight — the largest increase given to any covered commodity in that bill. That's not a subtle nudge. That's Congress rebuilding rice's safety net wider than it's been in years, right as the water underneath it gets more expensive to pull. ([USA Rice Federation: "Rice Wins with Enactment of the One Big Beautiful Bill Act"](https://www.usarice.com/news-and-events/publications/usa-rice-daily/article/usa-rice-daily/2025/07/07/rice-wins-with-enactment-of-the-one-big-beautiful-bill-act))
 
+![A rice farmer stands in a flooded paddy holding up a giant novelty check for $16.90/cwt as rice-grain confetti flies, a torn $14.00 price tag at her feet](/assets/meme/bootheel-rice-to-soybean-pivot-02.jpg)
+
 **Signal two — EPA just told soybeans to grow up.** On March 27, 2026, EPA finalized 2026-2027 Renewable Fuel Standard volumes requiring a 60% jump in biodiesel and renewable diesel production versus 2025, with soybean oil use for biofuel projected up roughly 17% — worth an estimated $31 billion to corn and soybean oil producers in 2026 alone, $2 billion more than 2025. That's real, durable, domestic demand pull that has nothing to do with anyone overseas buying a bushel. ([Holland & Knight: EPA Boosts Biofuel Mandates in Final RFS Rule for 2026-2027](https://www.hklaw.com/en/insights/publications/2026/04/epa-boosts-biofuel-mandates-in-final-renewable-fuel-standard-rule))
 
 **Signal three — the export market soybeans actually need is still hurt.** China halted soybean purchases in May 2025 in retaliation for tariffs, pushing its total duty on U.S. soybeans to 34%. The negotiated fix — 12 million metric tons by the end of 2025, at least 25 million metric tons a year through 2028 — sounds like relief until you check it against history: the five-year average was closer to 29 million metric tons, so even the "deal" locks in a market roughly 14% below normal, with a 13% tariff still standing. ([farmdoc daily: U.S.-China Soybean Deal, comparing past export levels](https://farmdocdaily.illinois.edu/2025/11/us-china-soybean-deal-comparing-past-export-levels-and-global-market-impacts.html))
 
 Put plainly: the same Congress that just made rice's price floor more attractive is a different branch of the same government making soybean demand more attractive for entirely different reasons — and a third arm, trade policy, is quietly capping how far that soybean demand story can actually run. Nobody wrote a memo reconciling these three. The farmer in the middle has to.
+
+![A farmer is stretched in a three-way tug-of-war between ropes held by cartoon buildings labeled USDA, EPA, and USTR](/assets/meme/bootheel-rice-to-soybean-pivot-03.jpg)
 
 ## The Numbers So Far
 
@@ -108,18 +114,28 @@ The aquifer everyone in the Bootheel is drawing from doesn't start at the Missou
 
 This is the part I didn't expect to find so directly. Missouri's 2026 rice acreage came in below average — and when Brownfield Ag News asked USA Rice's Mollie Buckler why, she didn't point to weather. She pointed to money: "We have some farmers to the west in our region and deep south in the Bootheel starting to cut rice... We're definitely dealing with some market issues that contributed to that low acreage number that we saw this year." That's a real, current, on-the-record signal that some version of this pivot is already underway — not a hypothesis about what might happen, a trade association's own read on what's happening right now. It just doesn't come with county-level numbers attached yet, which is exactly the gap this investigation still needs to close. ([Brownfield Ag News: Missouri Celebrates Rice Month as Harvest Gets Underway](https://www.brownfieldagnews.com/news/missouri-celebrates-rice-month-as-harvest-gets-underway/))
 
+![A USA Rice spokesperson gives a deadpan look at a podium while farmers quietly back away from a rice paddy in a thought bubble behind her](/assets/meme/bootheel-rice-to-soybean-pivot-04.jpg)
+
 ## Methodology
 
 This round pulled from USDA NASS (Acreage, Rice Outlook), the Farm Service Agency and Congressional Research Service (PLC/ARC reference prices), EPA's final Renewable Fuel Standard rule and legal-industry summaries of it, farmdoc daily's trade-data analysis of the U.S.-China soybean agreement, USA Rice Federation's own statement on H.R. 1, Brownfield Ag News' on-the-ground reporting, USGS/academic groundwater research on the Mississippi River Valley Alluvial Aquifer, and the Little River Drainage District's own historical record. It still does not include county-level USDA QuickStats data for the 12 Farm Credit SEMO counties specifically, Farm Credit Southeast Missouri's own current commodity-concentration figures, a Missouri-specific accounting of EQIP/on-farm-reservoir cost-share uptake (the strongest public data I found on that program is Arkansas-specific, via the Arkansas Groundwater Initiative), or a single direct conversation with a Bootheel grower, loan officer, or elevator manager. Those four gaps are the actual next phase of this investigation, not an afterthought.
 
+![Two researchers stand in front of a detective conspiracy board of red string connecting data-gap index cards, all pointing at one empty chair labeled "farmer to be interviewed"](/assets/meme/bootheel-rice-to-soybean-pivot-05.jpg)
+
 ## Moral of the Story
 
-If you take one thing from this, take this: **the crop-mix decision in front of Bootheel farmers right now isn't a weather story or a water story alone — it's a bet on which federal policy lever holds up longer, and almost nobody is framing it that way.** A few concrete moves that fall out of that:
+If you take one thing from this, take this: **the crop-mix decision in front of Bootheel farmers right now isn't a weather story or a water story alone — it's a bet on which federal policy lever holds up longer, and almost nobody is framing it that way.**
+
+![A farmer at a poker table pushes chips labeled "this season's acreage" toward three face-up cards marked PLC, RFS, and China Deal](/assets/meme/bootheel-rice-to-soybean-pivot-06.jpg)
+
+A few concrete moves that fall out of that:
 
 - **If you grow rice**, the new $16.90/cwt reference price is real money worth re-running your numbers against before you assume a pivot is your only move — but it does nothing for your water bill. Pair it with a real look at cost-share water infrastructure (the Arkansas Groundwater Initiative's on-farm reservoir/tailwater-recovery model is the closest documented template; ask your local NRCS office whether an equivalent exists on the Missouri side before assuming it doesn't) before you commit capital in either direction.
 - **If you grow soybeans, or you're leaning that way**, don't treat the biofuel-demand story as a permanent floor under the export story's problems. The China deal locks in volume that's still roughly 14% below the five-year average, with a 13% tariff still standing — model what your plan looks like if that number doesn't hold through 2028, not just if it does.
 - **If you're a lender**, the more useful conversation with a borrower this cycle isn't "what did you plant" — it's "which of these three signals are you actually betting on, and have you sized the collateral and the loan for what happens if that bet is wrong." That's a materially different renewal conversation than the one a generic crop budget gets you to.
 - **If you're an elevator or infrastructure operator**, the swing to watch isn't rice-versus-soybean acreage in isolation — it's whether a real pivot shows up as reduced dryer utilization before it shows up in any published county number, because Buckler's on-the-record read says growers are already moving ahead of the data.
+
+![A cartoon grain dryer wearing a detective hat holds a magnifying glass to its own dropping utilization gauge, next to a stack of folders labeled "county data — not yet published"](/assets/meme/bootheel-rice-to-soybean-pivot-07.jpg)
 
 None of this is instructions. It's a map of exactly which questions are worth asking before the next planting decision, instead of after.
 

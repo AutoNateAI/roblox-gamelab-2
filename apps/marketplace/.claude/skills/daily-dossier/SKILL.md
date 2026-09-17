@@ -43,6 +43,10 @@ The `featured` flag is **only** set by this skill, on the day's actual Question 
 
 `investigations[].region` stays `""` — the site's own `regions[]`/`organizations[]`/`systems[]` arrays in `src/data.mjs` were emptied 2026-09-17 (they were nothing but unwritten "Coming Soon" stub pages; see git history). **This is separate from Airtable's `Regions`/`Organizations`/`Systems` tables**, which still hold real linking nodes for the knowledge graph — see the note in `reference/airtable-graph.md`. Don't repopulate `data.mjs`'s arrays as a side effect of a normal run; a real region/org/system profile page is a bigger scope decision, flag it to Nathan.
 
+## 4.5. Meme visual pass (part of Phase 4, before Phase 5)
+
+Once Phase 4's build is verified and the article's Markdown is otherwise final, run `../meme-visual-pass/SKILL.md` against today's `content/research/<slug>.md` — a second read of the finished article that scatters ~9 contextual, meme-style illustrated images through the prose-heavy sections (everything that isn't already broken up by a chart/map/graph). This runs on **every** daily-dossier article, same as the hero image — not optional, not just for days Nathan asks. Re-run Phase 4's build-verify step afterward (the meme pass adds Markdown image lines and new files under `public/assets/meme/`, so the export needs to happen again to pick them up) before moving on to Phase 5.
+
 ## 5. Airtable write-back
 
 Load `reference/airtable-graph.md` for exact table/field names and the linking policy (search for existing Region/Organization/System records, never fabricate a new one on the fly). In order:

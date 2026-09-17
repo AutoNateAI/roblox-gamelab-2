@@ -43,6 +43,10 @@ Charts and maps are **not** separate image assets; they're data embedded directl
 3. Open the built page under `dist/site/research-and-case-studies/<slug>/index.html` and grep for `class="research-chart"`, `class="research-map"`, `class="research-graph"` (or `<pre class="mermaid">` for older content that still uses it) to confirm every block you wrote actually rendered as a data island, not as a raw code block (a JSON typo silently degrades to a visible `.data-block-error` — check for that string too). For an `app.js` change specifically, run `node --input-type=module --check < public/app.js` in addition to the normal `node --check` — the file loads as `type="module"`, where a duplicate top-level declaration is a silent-at-build-time `SyntaxError` that only shows up in the browser (see `docs/marketplace/agricultural-intelligence-lab.md` §10 for the incident this rule comes from).
 4. Report the new URL and a one-line summary of what's still open/missing. Do not commit or push unless asked.
 
+### 5. Meme visual pass (not optional for a daily-dossier run)
+
+Once Phase 4 is verified, run `../meme-visual-pass/SKILL.md` against the finished `content/research/<slug>.md` — it scatters ~9 contextual, meme-style illustrated images through the article's prose-heavy stretches, generated with `gpt-image-2.5-flare`. `daily-dossier` always runs this as its own numbered step; if you're driving `research-brief` standalone (no `daily-dossier` wrapper), run it too before calling the article finished — re-run Phase 4's build-verify step afterward, since the meme pass adds new Markdown image lines and files.
+
 ## Reference files
 
 | Need | Load |
