@@ -53,9 +53,26 @@ Phase 5: update `Status`/`Answer / Current Best Evidence`/`Last Checked` on any 
 
 ## `Regions` / `Organizations` / `Systems`
 
-**As of 2026-09-17 these are Airtable-only durable graph nodes — they no longer mirror anything in `src/data.mjs`.** The site's own `regions[]`/`organizations[]`/`systems[]` arrays were emptied that day (they were nothing but unwritten "Coming Soon" stub pages; the site now shows only real investigation articles — see `src/data.mjs`'s comments above each empty array and the `daily-dossier/SKILL.md` "Featured placement" section). The Airtable tables keep existing for their original purpose — linking a `Research Questions` record to a durable Region/Organization/System node in the knowledge graph — that's unaffected by the site cleanup. **Read-only for this skill either way** — search by `Name` via `list_records_for_table` to find the record to link, never create a new one here. If the dossier's question genuinely needs a Region/Organization/System that doesn't exist yet in Airtable, that's fine to add there (it's just a graph node); a new *site page* for it is the bigger scope decision — flag that to Nathan instead of touching `data.mjs`'s arrays as a side effect of a normal run.
+**As of 2026-09-17 these are Airtable-only durable graph nodes — they no longer mirror anything in `src/data.mjs`.** The site's own `regions[]`/`organizations[]`/`systems[]` arrays were emptied that day (they were nothing but unwritten "Coming Soon" stub pages; the site now shows only real investigation articles — see `src/data.mjs`'s comments above each empty array and the `daily-dossier/SKILL.md` "Featured placement" section). The Airtable tables keep existing for their original purpose — linking a `Research Questions` record to a durable Region/Organization/System node in the knowledge graph — that's unaffected by the site cleanup. **Read-only for `Organizations`/`Systems`** — search by `Name` via `list_records_for_table` to find the record to link, never create a new one here. If the dossier's question genuinely needs an Organization/System that doesn't exist yet in Airtable, that's fine to add there (it's just a graph node); a new *site page* for it is the bigger scope decision — flag that to Nathan instead of touching `data.mjs`'s arrays as a side effect of a normal run.
 
-Current real records as of the last check: Region `Southeast Missouri (The Bootheel)`, Organization `Farm Credit Southeast Missouri`, System `Agricultural Finance & Capital`. Re-check live rather than assuming this list is still complete — Regions/Organizations/Systems grow independently of this skill.
+### `Regions` — 18-region master rotation universe (added 2026-09-18)
+
+`Regions` stopped being "just the Bootheel" on 2026-09-18: it's now an 18-region master universe the daily radar rotates across, so the site accumulates a geographically diverse knowledge graph instead of re-covering the same 2-3 regions. `Region Class` (single select): `Recurring Local Lab` (Southeast Missouri / the Bootheel — the one permanent region, always one of the day's three questions), `National Rotation` (the 17 other regions the radar rotates the two outside-region questions across — Central Valley CA, Corn Belt IA/IL, Central/Northern Great Plains, Texas High Plains, Mississippi Delta, Gulf export corridor, Columbia Basin, Upper Midwest dairy, Southeast poultry belt, Florida specialty crops, Snake River Plain ID, Central Missouri/Rolla corridor, Delmarva, Northeast dairy, Desert Southwest, Central Appalachia/Ohio Valley), `Watchlist`, `Emerging Signal`. Re-check the live table rather than trusting this list if it's been a while — the radar can add rows.
+
+Rotation-tracking fields, all written by `daily-dossier` Phase 5 step 4 (one write per region touched that day, three per run) and otherwise read-only for this skill:
+
+| Field | Written how |
+|---|---|
+| `Last Flagship Research` (date) | Set to today whenever this region is one of the day's three flagship questions. |
+| `Flagship Research Count` (number) | Incremented by 1 each time this region is a flagship question — don't recompute from scratch, add 1 to whatever's there. |
+| `Last Deep Dive` (date) | Set to today only when the pass was a genuine substantive deep dive, not every flagship touch. |
+| `Research Themes Covered` (long text) | **Append**, never overwrite — a running, dated log of what's already been researched here (e.g. `"2026-09-15–2026-09-18: rice economics/policy and acreage; Farm Credit crop-loan stress; biomanufacturing feasibility."`). This is what lets the radar/this skill avoid repeating the same regional angle. |
+| `Rotation Notes` (long text) | Only touched when the dossier/radar surfaces something genuinely new about cooldown/priority for that region — don't restate what's already written. |
+| `Last Radar Touch` (date) | Set to today on all three regions used today, even the ones that don't get a full deep dive. |
+
+Same "search by `Name`, never fabricate a new row" rule as Organizations/Systems applies if a dossier question names a region outside the 18 — flag it to Nathan rather than creating one.
+
+Current real records as of the last check: Region `Southeast Missouri (The Bootheel)` (`Recurring Local Lab`, `Flagship Research Count: 3` as of 2026-09-18), Organization `Farm Credit Southeast Missouri`, System `Agricultural Finance & Capital`, plus the 17 `National Rotation` regions listed above. Re-check live rather than assuming this list is still complete — Regions/Organizations/Systems grow independently of this skill.
 
 ## `People` / `Infrastructure & Facilities` / `Interactions` / `Claims & Observations` / `Opportunities`
 

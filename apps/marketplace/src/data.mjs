@@ -761,13 +761,6 @@ export const investigations = [
     slug: "southeast-missouri-biomanufacturing-feasibility",
     icon: "biotech",
     status: "investigating",
-    // Today's Question of the Day (daily-dossier, 2026-09-17) — holds the
-    // home hero + research-hub featured slot + first-in-grid position.
-    // Only one investigation should carry this at a time; the next
-    // daily-dossier run moves it here and clears it from whichever
-    // investigation held it before. Same-day follow-on articles (via
-    // dossier-second-look) must NOT set this.
-    featured: true,
     name: "Could Southeast Missouri Become a Biomanufacturing Region — Or Is Feedstock Abundance Not Enough?",
     question:
       "What feedstock, utility, fermentation-scale, and offtake thresholds distinguish a plausible Southeast Missouri biomanufacturing site from a commodity-rich but nonviable location?",
@@ -825,6 +818,149 @@ export const investigations = [
       { label: "MoDOT — Southeast District Freight Plan", url: "https://www.modot.org/southeast-district-freight-plan" },
       { label: "University of Missouri Extension — Rice Extension", url: "https://extension.missouri.edu/programs/rice-extension" },
       { label: "MU CAFNR — Fisher Delta 2026 Field Day", url: "https://cafnr.missouri.edu/stories/t-e-jake-fisher-delta-research-extension-and-education-center-hosts-2026-field-day/" },
+    ],
+  },
+  {
+    slug: "bootheel-diesel-harvest-cost-2026",
+    icon: "local_gas_station",
+    status: "investigating",
+    name: "Diesel Just Hit $6.285. What Does That Actually Cost a Bootheel Farm?",
+    question:
+      "How much does the September 2026 diesel shock change per-acre and per-bushel economics for rice, corn, soybeans, and cotton across field operations, irrigation, drying, and hauling in Southeast Missouri — and which stakeholder in the value chain actually bears the cost?",
+    tagline: "USDA just named harvest, drying, and hauling as directly exposed to a record diesel price. Here's what's verified, what's still a real unknown, and why I won't hand you a made-up per-acre number.",
+    thumbnail: "/assets/og/bootheel-diesel-harvest-cost-2026.jpg",
+    sourcePath: "../content/research/bootheel-diesel-harvest-cost-2026.md",
+    region: "",
+    publishedDate: "2026-09-18",
+    commodity: "Rice / Corn / Soybeans / Cotton",
+    evidence: [
+      { label: "USDA AMS — Grain Transportation Report, Sep 17 2026", note: "National average diesel hit a record $6.285/gal for the week ending Sep 14, up 31.8¢ week-over-week and 254.6¢ above the same week last year; USDA explicitly names harvest, drying, and hauling as exposed activities, and links reduced Strait of Hormuz shipping (U.S.-Iran conflict) to the fuel-price pressure.", url: "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf" },
+      { label: "USDA NASS — Crop Production, Sep 11 2026", note: "Missouri rice planted acreage fell from 213,000 (2025) to 118,000 (2026), a 44.6% decline; soybean planted acreage rose from 5.6M to 5.95M acres.", url: "https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf" },
+      { label: "USDA AMS GTR — Iowa harvest weight exemptions", note: "Iowa issued weight-limit exemptions up to 90,000 lb gross through Oct 10, 2026 to cut truckloads needed during harvest amid high fuel prices — a real, contemporary state-level policy response to the same shock.", url: "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf" },
+    ],
+    stakeholders: ["Bootheel rice, corn, soybean, and cotton producers", "Farm Credit Southeast Missouri loan officers", "Regional grain elevators, dryers, and custom trucking operators", "Missouri Department of Transportation freight policy staff", "University of Missouri Extension — Fisher Delta Research Center"],
+    hypothesis:
+      "The diesel shock is real and verified at the national/workflow level, and Bootheel rice's flood-irrigation requirement makes this region more fuel-exposed than most U.S. row-crop geographies — but the actual per-acre and per-bushel dollar incidence, and which stakeholder in the value chain absorbs it, cannot be determined from public data alone. This is a hypothesis to test against local fuel-use, custom-rate, and contract-incidence data, not a conclusion.",
+    graphLayers: {
+      physical: "Flood-irrigated rice, drying, and hauling all run on diesel or diesel-priced energy; the Bootheel's drained-swamp geography (Little River Drainage District, 1914-1928) makes flood irrigation a routine input soybeans and dryland crops elsewhere don't share.",
+      capital: "Feeds directly into the same Farm Credit Southeast Missouri credit-classification trend our companion investigation is tracking — adversely classified loans already rose from 4.7% to 7.3% across three straight 2026 quarters before this specific shock is even accounted for.",
+      business: "Growers, custom operators, elevators, dryers, and truckers each sit on a different side of who actually pays for the extra fuel — public data cannot show contract-level incidence.",
+      information: "USDA's weekly Grain Transportation Report and monthly Crop Production report supply the national/state-level signal on a fast cadence; local fuel-use, custom-rate, and dryer-tariff data doesn't exist publicly and would require direct outreach.",
+    },
+    dataNeeds: [
+      "MU/USDA enterprise-budget diesel-use-per-acre figures by crop for Southeast Missouri",
+      "Local custom trucking, drying, and irrigation-pumping rates and how fast they're moving with the fuel price",
+      "Representative Bootheel haul distances to elevators and river terminals",
+      "Contract-level pass-through terms between growers, elevators, and buyers",
+      "A direct conversation with a Bootheel grower, custom operator, or elevator manager — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Bootheel Harvest Cost Propagation Engine — a transparent, low/base/high sensitivity model translating the national diesel price into per-acre and per-bushel cost ranges by crop, with an evidence-labeled stakeholder-incidence waterfall",
+    ],
+    findings:
+      "The diesel shock and its exposed workflows (harvest, drying, hauling) are fully verified at the national level via USDA's own transportation desk, and Missouri's rice acreage has genuinely contracted 44.6% while soybean acreage held roughly flat to slightly up — two real, sourced, state-level facts. What remains unverified is the actual dollar incidence per acre and per bushel locally, and which stakeholder in the SEMO value chain bears it; that requires local budget data and interviews this pass did not have access to, which is why status stays \"investigating.\"",
+    sources: [
+      { label: "USDA AMS — Grain Transportation Report, Sep 17 2026", url: "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf" },
+      { label: "USDA NASS — Crop Production, Sep 11 2026", url: "https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf" },
+      { label: "Little River Drainage District — official history", url: "https://www.thelrdd.org/history/" },
+    ],
+  },
+  {
+    slug: "central-great-plains-water-energy-irrigation-resilience-2026",
+    icon: "water_drop",
+    status: "investigating",
+    name: "The High Plains Got One Wet Year. Did It Actually Buy Farmers Time?",
+    question:
+      "After Kansas groundwater improved while Nebraska groundwater broadly declined, how should producers, lenders, and processors value irrigation resilience when diesel, electricity, and crop margins are volatile?",
+    tagline: "Kansas got its first statewide High Plains aquifer increase since 2019. Nebraska, sharing the same aquifer, got the opposite. Neither number means what a headline would make it mean.",
+    thumbnail: "/assets/og/central-great-plains-water-energy-irrigation-resilience-2026.jpg",
+    sourcePath: "../content/research/central-great-plains-water-energy-irrigation-resilience-2026.md",
+    region: "",
+    publishedDate: "2026-09-18",
+    commodity: "Corn / Soybeans / Irrigated Row Crops",
+    evidence: [
+      { label: "Kansas Geological Survey — 2025 High Plains aquifer report", note: "First overall statewide increase in the Kansas High Plains aquifer since 2019; south-central Kansas (Great Bend Prairie / Equus Beds) rose ~2.5 ft on average, driven by wetter conditions reducing pumping. Northwest/southwest Kansas kept declining, but less than the long-term average.", url: "https://kgs.ku.edu/news/article/groundwater-levels-in-the-kansas-high-plains-aquifer-see-first-overall-increase-since-2019" },
+      { label: "University of Nebraska-Lincoln IANR — 2026 statewide groundwater report", note: "Nearly 5,000 wells measured spring 2024-2025; statewide average decline of 0.29 ft, 62% of wells declined; Nebraska Panhandle saw declines exceeding 10 ft, the worst in the state.", url: "https://ianrnews.unl.edu/article/groundwater-levels-continue-to-decline-amid-persistent-drought-conditions" },
+    ],
+    stakeholders: ["Kansas and Nebraska irrigated-row-crop producers", "Kansas Groundwater Management Districts", "Nebraska Natural Resources Districts", "Agricultural lenders covering irrigated ground in both states", "K-State/UNL farm-management economists", "Ethanol, feedlot, and elevator operators in the region"],
+    hypothesis:
+      "Recent groundwater improvement buys meaningful economic resilience only where pumping lift, energy exposure, and crop-market economics also remain favorable — a regional-average water-level change alone will overstate resilience in some places and understate it in others. This is a hypothesis to test against district-level pumping-lift and energy-mix data, not a conclusion.",
+    graphLayers: {
+      physical: "Aquifer/well/pump/irrigated-field/crop/processor chain — Kansas and Nebraska moved in opposite directions in the same reporting year, within the same broader High Plains aquifer system.",
+      capital: "Water-energy cost feeds farm operating margin, asset value, and ultimately lender credit risk — the same mechanism our Bootheel diesel investigation traces for a different commodity and a different water context.",
+      business: "Producers, Groundwater Management Districts / Natural Resources Districts, utilities, and ethanol/feedlot/elevator operators all set the rules, demand, and contracts that turn a water-level number into a production decision.",
+      information: "Kansas Geological Survey, University of Nebraska-Lincoln, USDA NASS, and Extension enterprise budgets each publish on different cadences and geographies — no single source currently joins water trajectory, energy exposure, and crop economics into one model.",
+    },
+    dataNeeds: [
+      "Farm- or district-level pumping lift (depth to water) for both states",
+      "Electric-versus-diesel energy mix by irrigation district",
+      "Enterprise-budget crop margins under this year's specific energy prices",
+      "Processor/ethanol/feedlot throughput and demand data by district",
+      "A direct conversation with a Kansas GMD, Nebraska NRD, or regional lender — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Water-Energy-Agriculture Resilience GIS — a resilience quintile map, county/district scorecards, and sensitivity curves joining groundwater trajectory, pumping-energy sensitivity, and crop-market access into one evidence-labeled graph",
+    ],
+    findings:
+      "Kansas and Nebraska's 2026 groundwater trajectories are fully verified and genuinely opposite — a real, sourced divergence within the same High Plains aquifer system in the same reporting year. What isn't yet established is how that translates into farm-level economic resilience once pumping lift, energy source, and crop-market conditions are actually factored in; that requires district-level data this pass did not acquire, which is why status stays \"investigating.\"",
+    sources: [
+      { label: "Kansas Geological Survey — High Plains aquifer report, 2025 data", url: "https://kgs.ku.edu/news/article/groundwater-levels-in-the-kansas-high-plains-aquifer-see-first-overall-increase-since-2019" },
+      { label: "University of Nebraska-Lincoln IANR — statewide groundwater report", url: "https://ianrnews.unl.edu/article/groundwater-levels-continue-to-decline-amid-persistent-drought-conditions" },
+      { label: "USDA AMS — Grain Transportation Report, Sep 17 2026 (diesel price context)", url: "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf" },
+    ],
+  },
+  {
+    slug: "florida-crispr-citrus-recovery-economics-2026",
+    icon: "eco",
+    status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-18) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
+    name: "Florida Finally Has a CRISPR Citrus Product. Can Biology Reverse the Economics of Greening?",
+    question:
+      "Under what survival, yield, tree-price, adoption, and time-to-bearing assumptions does HLB-resistant CarriCea T1 make citrus replanting financially attractive for a Florida grower?",
+    tagline: "EPA cleared a CRISPR-edited citrus rootstock and growers already ordered 300,000+ trees. That proves the technology cleared a regulatory gate — not that replanting with it pencils out yet.",
+    thumbnail: "/assets/og/florida-crispr-citrus-recovery-economics-2026.jpg",
+    sourcePath: "../content/research/florida-crispr-citrus-recovery-economics-2026.md",
+    region: "",
+    publishedDate: "2026-09-18",
+    commodity: "Citrus",
+    evidence: [
+      { label: "University of Florida News, Aug 2026", note: "EPA approved commercial supply of CarriCea T1, a CRISPR-edited HLB-resistant rootstock developed from UF research and commercialized by Soilcea; growers have ordered 300,000+ trees; Florida's citrus industry has lost roughly 95% of production since HLB was detected in 2005.", url: "https://news.ufl.edu/2026/08/hlb-resistant-citrus-rootstock/" },
+      { label: "EPA newsroom, 2026", note: "Regulator's own framing: a tool 'to help prevent widespread loss of citrus crops and support America's food supply.' USDA considers fruit from this rootstock non-bioengineered.", url: "https://www.epa.gov/newsreleases/new-citrus-tool-help-prevent-widespread-loss-citrus-crops-and-support-americas-food" },
+      { label: "UF/IFAS EDIS — Florida Citrus Rootstock Selection Guide, 4th Edition", note: "The newest wave of released rootstocks (the group CarriCea T1 belongs to) has limited long-term commercial experience; performance depends on soil, disease pressure, climate, and management.", url: "https://edis.ifas.ufl.edu/publication/HS1260" },
+      { label: "Citrus Industry Magazine, Apr 2026", note: "Trade-press framing: CarriCea's registration called \"a major milestone\" for HLB-resistance technology reaching this stage at all.", url: "https://citrusindustry.net/2026/04/29/carricea-rootstock-registration-major-milestone/" },
+    ],
+    stakeholders: ["Florida citrus growers evaluating replant decisions", "UF/IFAS Citrus Research and Education Center", "Soilcea and citrus nurseries", "Citrus processors and packinghouses", "Agricultural lenders and crop-insurance providers covering Florida citrus"],
+    hypothesis:
+      "CarriCea T1's EPA approval and commercial order volume prove the technology cleared a real regulatory and commercial-availability gate, but not that a typical Florida grower earns a positive return from replanting with it — that depends on survival, yield, and time-to-bearing evidence that hasn't accumulated at commercial field scale yet. This is a hypothesis to test against multi-year field-performance and cohort cash-flow data, not a conclusion.",
+    graphLayers: {
+      physical: "UF discovery → Soilcea/CarriCea T1 → nursery propagation → grower replant → juvenile pre-bearing years → disease environment → fruit yield/quality → packinghouse/processor throughput.",
+      capital: "Replant is a multi-year capital commitment with foregone cash flow before any return — the same kind of capital-vs-evidence question our Bootheel and Central Great Plains investigations trace in different commodities.",
+      business: "Growers, nurseries, Soilcea, processors, and lenders each hold a different piece of the adoption-to-recovery chain; nursery fulfillment timing and regional distribution capacity for 300,000+ ordered trees is not yet publicly documented.",
+      information: "UF, EPA, and UF/IFAS extension guidance each publish at a different point in the technology's lifecycle — regulatory/commercialization evidence is strong; multi-year field-performance and economic evidence doesn't exist publicly yet.",
+    },
+    dataNeeds: [
+      "Multi-year commercial field survival and yield data for CarriCea T1 across Florida production environments",
+      "Nursery fulfillment timing and regional distribution for the 300,000+ ordered trees",
+      "County-level citrus acreage and disease/quarantine GIS data",
+      "Cohort cash-flow assumptions (tree cost, establishment cost, time-to-bearing, discount rate) from growers or lenders actually underwriting a replant",
+      "A direct conversation with UF/IFAS, a grower, a nursery, or a citrus lender — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Citrus Biological Recovery Scenario Engine — a cohort cash-flow model producing county/grove scenario cards, a disease/quarantine map, and an NPV/breakeven sensitivity surface across survival, yield, and time-to-bearing assumptions",
+    ],
+    findings:
+      "CarriCea T1's EPA approval and 300,000+-tree commercial order volume are fully verified — a genuine milestone for HLB-resistance technology reaching commercial availability at all, after a 95% industry production decline since 2005. What remains unverified is whether replanting with it is actually a positive-return decision for a typical grower: that depends on multi-year field survival/yield data and nursery fulfillment capacity that don't exist publicly yet, which is why status stays \"investigating.\"",
+    sources: [
+      { label: "University of Florida News — EPA Approves HLB-Resistant Citrus Rootstock", url: "https://news.ufl.edu/2026/08/hlb-resistant-citrus-rootstock/" },
+      { label: "EPA — New Citrus Tool press release", url: "https://www.epa.gov/newsreleases/new-citrus-tool-help-prevent-widespread-loss-citrus-crops-and-support-americas-food" },
+      { label: "UF/IFAS EDIS — Florida Citrus Rootstock Selection Guide, 4th Edition", url: "https://edis.ifas.ufl.edu/publication/HS1260" },
+      { label: "Citrus Industry Magazine — CarriCea Rootstock Registration coverage", url: "https://citrusindustry.net/2026/04/29/carricea-rootstock-registration-major-milestone/" },
     ],
   },
 ];

@@ -117,6 +117,18 @@ const jobs = [
     file: "og/freight-infrastructure-storage.jpg",
     prompt: `A wide editorial image about agricultural freight and storage. Background: a loaded grain barge being pushed by a towboat on a wide river, a grain elevator and conveyor visible on the riverbank, overcast working-day light, fading into a dark navy panel with gold light. Large bold headline text reading "HOW DOES A CROP GET FROM THE FIELD TO THE BOAT?" with a smaller line beneath reading "AutoNateAI · Freight, Infrastructure & Storage, Coming Soon". ${STYLE}`,
   },
+  {
+    file: "og/bootheel-diesel-harvest-cost-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style shot of a diesel fuel pump nozzle refueling a farm truck or tractor at a rural fuel stop during harvest, a rice field and grain dryer visible in the blurred background at golden hour, fading into a dark navy panel with gold light. Large bold headline text reading "DIESEL JUST HIT $6.285. WHAT DOES THAT COST A BOOTHEEL FARM?" with a smaller line beneath reading "AutoNateAI · Bootheel Diesel Harvest Cost, 2026". No logos, no readable pump signage or prices. ${STYLE}`,
+  },
+  {
+    file: "og/central-great-plains-water-energy-irrigation-resilience-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural water-and-energy finding. Background: a documentary-style aerial shot of a center-pivot irrigation system watering a green circular field in the High Plains, dry golden rangeland beyond it, a single well/pump structure visible at the field's center, warm late-afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "ONE WET YEAR. DID IT ACTUALLY BUY FARMERS TIME?" with a smaller line beneath reading "AutoNateAI · Central Great Plains Water-Energy Resilience, 2026". ${STYLE}`,
+  },
+  {
+    file: "og/florida-crispr-citrus-recovery-economics-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-biotechnology finding. Background: a documentary-style shot of a young, healthy citrus tree sapling being planted in a Florida grove row, older visibly declining/sparse citrus trees blurred in the background showing the contrast, warm morning light, fading into a dark navy panel with gold light. Large bold headline text reading "FLORIDA FINALLY HAS A CRISPR CITRUS PRODUCT" with a smaller line beneath reading "AutoNateAI · Florida CRISPR Citrus Recovery Economics, 2026". No logos, no readable tags. ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {

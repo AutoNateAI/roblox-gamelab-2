@@ -5,7 +5,7 @@ description: A conversational walk through the rest of today's dossier after dai
 
 # Dossier Second Look
 
-`daily-dossier` already ran today: one article is published, `featured: true` is set on it, and Phase 7 wrote a ranked list of other candidates into `Research Backlog`/`Open Questions`. This skill is what happens next — a discussion, not a pipeline. Don't run this as a rigid phase sequence; talk through the dossier with Nathan like a colleague looking at the same document, and only reach for `research-brief` once something specific is worth a real page.
+`daily-dossier` already ran today: **three** articles are published (the Bootheel/local flagship question plus two rotating outside-region questions), `featured: true` is set on whichever one of the three was the strongest finding, and Phase 7 wrote a ranked list of other candidates into `Research Backlog`/`Open Questions`. This skill is what happens next — a discussion, not a pipeline. Don't run this as a rigid phase sequence; talk through the dossier with Nathan like a colleague looking at the same document, and only reach for `research-brief` once something specific is worth a real page. Note that with three articles already shipped today, "the rest of the dossier" is usually thinner than it used to be — most of what a single-question day would have left on the table is now already covered by one of the three.
 
 ## 1. Ground the conversation
 
