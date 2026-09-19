@@ -129,6 +129,18 @@ const jobs = [
     file: "og/florida-crispr-citrus-recovery-economics-2026.jpg",
     prompt: `A wide editorial image about a real agricultural-biotechnology finding. Background: a documentary-style shot of a young, healthy citrus tree sapling being planted in a Florida grove row, older visibly declining/sparse citrus trees blurred in the background showing the contrast, warm morning light, fading into a dark navy panel with gold light. Large bold headline text reading "FLORIDA FINALLY HAS A CRISPR CITRUS PRODUCT" with a smaller line beneath reading "AutoNateAI · Florida CRISPR Citrus Recovery Economics, 2026". No logos, no readable tags. ${STYLE}`,
   },
+  {
+    file: "og/bootheel-cargill-soy-crush-status-market-impact-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style shot of an empty, undeveloped riverside industrial site near a Mississippi River grain port at dusk — bare graded ground, a lone rail spur curving toward the frame edge, a distant grain elevator and barge silhouette on the river, construction stopped, no active work visible, moody fading light, blending into a dark navy panel with gold light. Large bold headline text reading "A 62-MILLION-BUSHEL PLANT WAS PROMISED HERE. THEN IT WENT QUIET." with a smaller line beneath reading "AutoNateAI · Bootheel Soybean Crush Status, 2026". No logos, no readable signage. ${STYLE}`,
+  },
+  {
+    file: "og/texas-high-plains-cotton-drought-shock-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style aerial shot of a severely drought-stressed dryland cotton field on the Texas High Plains, cracked bare soil visible between stunted rows, a lush green center-pivot-irrigated circular field faintly visible in the far distance for contrast, harsh midday heat haze, fading into a dark navy panel with gold light. Large bold headline text reading "TEXAS COTTON YIELD JUST FELL 15.8%. WHO ABSORBS IT?" with a smaller line beneath reading "AutoNateAI · Texas High Plains Cotton Drought Shock, 2026". No logos, no readable signage. ${STYLE}`,
+  },
+  {
+    file: "og/delmarva-poultry-productivity-grower-consolidation-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style shot of a single large modern chicken house at golden hour on the Delmarva Peninsula, rows of ventilation fans visible, flat farmland stretching behind it, no people or birds visible, fading into a dark navy panel with gold light. Large bold headline text reading "40% MORE CHICKEN. 37% FEWER GROWERS. WHO WINS?" with a smaller line beneath reading "AutoNateAI · Delmarva Poultry Productivity, 2026". No logos, no readable signage. ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {

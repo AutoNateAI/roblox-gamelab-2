@@ -913,13 +913,6 @@ export const investigations = [
     slug: "florida-crispr-citrus-recovery-economics-2026",
     icon: "eco",
     status: "investigating",
-    // Today's Question of the Day (daily-dossier, 2026-09-18) — holds the
-    // home hero + research-hub featured slot + first-in-grid position.
-    // Only one investigation should carry this at a time; the next
-    // daily-dossier run moves it here and clears it from whichever
-    // investigation held it before. Same-day follow-on articles (via
-    // dossier-second-look) must NOT set this.
-    featured: true,
     name: "Florida Finally Has a CRISPR Citrus Product. Can Biology Reverse the Economics of Greening?",
     question:
       "Under what survival, yield, tree-price, adoption, and time-to-bearing assumptions does HLB-resistant CarriCea T1 make citrus replanting financially attractive for a Florida grower?",
@@ -961,6 +954,158 @@ export const investigations = [
       { label: "EPA — New Citrus Tool press release", url: "https://www.epa.gov/newsreleases/new-citrus-tool-help-prevent-widespread-loss-citrus-crops-and-support-americas-food" },
       { label: "UF/IFAS EDIS — Florida Citrus Rootstock Selection Guide, 4th Edition", url: "https://edis.ifas.ufl.edu/publication/HS1260" },
       { label: "Citrus Industry Magazine — CarriCea Rootstock Registration coverage", url: "https://citrusindustry.net/2026/04/29/carricea-rootstock-registration-major-milestone/" },
+    ],
+  },
+  {
+    slug: "bootheel-cargill-soy-crush-status-market-impact-2026",
+    icon: "help_center",
+    status: "investigating",
+    name: "The Bootheel Was Promised a 62M-Bushel Soybean Crush Plant. What Happened — and What Would It Change If It Returns?",
+    question:
+      "What is the verified 2026 status of Cargill's paused 62-million-bushel Pemiscot County soybean crush project, what public infrastructure already exists around it, and how would an operating plant change Bootheel basis, freight, crop mix, processor access, and lender risk?",
+    tagline: "Cargill announced it in 2022, paused it in 2023, and hasn't said a public word about it since — meanwhile the federal policy lever that shaped both decisions just swung the other way.",
+    thumbnail: "/assets/og/bootheel-cargill-soy-crush-status-market-impact-2026.jpg",
+    sourcePath: "../content/research/bootheel-cargill-soy-crush-status-market-impact-2026.md",
+    region: "",
+    publishedDate: "2026-09-19",
+    commodity: "Soybeans / Soymeal / Soy Oil",
+    evidence: [
+      { label: "Missouri Department of Economic Development — Caruthersville selected for new Cargill soybean processing facility", note: "May 17, 2022 announcement: 62 million bushels/year capacity, 45 full-time jobs paying more than double the county average, groundbreaking targeted early 2023, operations targeted 2026.", url: "https://ded.mo.gov/press-room/caruthersville-selected-new-cargill-soybean-processing-facility-bringing-new-market" },
+      { label: "Feed & Grain — Cargill soybean processing project on hold", note: "June 8, 2023: a Cargill spokesperson attributed the pause to \"many shifting market dynamics,\" with no updated completion timeline given.", url: "https://www.feedandgrain.com/grain-handling-processing/grain-facility-renovations-builds/news/15540267/cargill-soybean-processing-project-on-hold" },
+      { label: "DTN/Progressive Farmer — Soaring Soy Crush Spawns Opposition and Benefits", note: "May 2022: Cargill's plant was one of three announced within months of each other (alongside North Dakota Soybean Processors and Shell Rock Soy Processing, IA) in a renewable-diesel-driven capacity wave totaling roughly 143 million new bushels/year.", url: "https://www.dtnpf.com/agriculture/web/ag/news/business-inputs/article/2022/05/20/soaring-soy-crush-spawns-opposition" },
+      { label: "Holland & Knight — EPA Boosts Biofuel Mandates in Final RFS Rule for 2026-2027", note: "EPA finalized biomass-based diesel volumes of 5.33B gallons (2026) and 5.75B gallons (2027), up from 3.35B gallons in 2025 (~60% increase), published April 1, 2026, citing \"renewed demand for domestic soybean production.\"", url: "https://www.hklaw.com/en/insights/publications/2026/04/epa-boosts-biofuel-mandates-in-final-renewable-fuel-standard-rule" },
+    ],
+    stakeholders: ["Bootheel soybean growers", "Cargill", "Missouri Soybeans", "Pemiscot County Port Authority", "CGB (Consolidated Grain & Barge)", "Farm Credit Southeast Missouri", "local economic development organizations"],
+    hypothesis:
+      "If the plant remains paused, the Bootheel still has a measurable infrastructure-and-market-access gap that existing port capacity alone doesn't close; if it restarts, local crush demand could meaningfully alter soybean basis, barge/rail flows, crop incentives, and working-capital risk — but direction and magnitude both require a current status update and throughput evidence this pass doesn't have. This is a hypothesis to test against direct confirmation from Cargill or Missouri Soybeans, not a conclusion.",
+    graphLayers: {
+      physical: "Pemiscot County Port's existing slackwater harbor, 5-mile BNSF rail spur, 3-phase power, natural gas, water/sewer, and broadband sit ready in Caruthersville today, independent of whether Cargill's plant ever opens.",
+      capital: "Cargill never disclosed a project investment figure; a widely-repeated ~$4M Missouri ARPA rail/electric claim could not be independently verified this pass and is deliberately left out of the article rather than repeated as fact.",
+      business: "Cargill, Missouri Soybeans, the Pemiscot County Port Authority, CGB, and Bootheel growers/lenders all sit on different sides of one unresolved status question that a single phone call could likely answer.",
+      information: "No public dataset tracks this project's live status — the last public statement is from June 2023. This site's own periodic check is effectively the only public tracker right now.",
+    },
+    dataNeeds: [
+      "Any 2024-2026 public statement from Cargill or Missouri Soybeans on the project's current status",
+      "A verified public-infrastructure dollar figure tied specifically to this project, if one exists",
+      "Current local soybean basis data for the Caruthersville/Hayti area",
+      "Pemiscot County Port throughput and CGB grain-handling volume",
+      "A direct conversation with Cargill, Missouri Soybeans, the Port Authority, or a Bootheel grower or lender — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Bootheel Market Geometry Explorer — an OFF/ON processor-status scenario model showing how local soybean basis, freight routing, and procurement radius would change if the plant activates",
+    ],
+    findings: null,
+    sources: [
+      { label: "Missouri Department of Economic Development — Cargill announcement", url: "https://ded.mo.gov/press-room/caruthersville-selected-new-cargill-soybean-processing-facility-bringing-new-market" },
+      { label: "Feed & Grain — Cargill soybean processing project on hold", url: "https://www.feedandgrain.com/grain-handling-processing/grain-facility-renovations-builds/news/15540267/cargill-soybean-processing-project-on-hold" },
+      { label: "Brownfield Ag News — MO soy crush plant project is on hold", url: "https://www.brownfieldagnews.com/news/mo-soy-crush-plant-project-is-on-hold/" },
+      { label: "DTN/Progressive Farmer — Soaring Soy Crush Spawns Opposition and Benefits", url: "https://www.dtnpf.com/agriculture/web/ag/news/business-inputs/article/2022/05/20/soaring-soy-crush-spawns-opposition" },
+      { label: "Missouri Port Authorities — Pemiscot County port profile", url: "https://missouriports.org/missouris-ports/pemiscot-county/" },
+      { label: "Missouri Department of Agriculture — Grain Regulatory Services / licensed dealer database", url: "https://agriculture.mo.gov/grains/grainsearch.php" },
+      { label: "American Farm Bureau Federation — RFS Final Rule 2023-2024-2025 Analysis", url: "https://www.fb.org/market-intel/renewable-fuel-standard-final-rule-2023-2024-2025-increases-short-of-expectations" },
+      { label: "Holland & Knight — EPA Boosts Biofuel Mandates in Final RFS Rule for 2026-2027", url: "https://www.hklaw.com/en/insights/publications/2026/04/epa-boosts-biofuel-mandates-in-final-renewable-fuel-standard-rule" },
+      { label: "Little River Drainage District — official history", url: "https://www.thelrdd.org/history/" },
+    ],
+  },
+  {
+    slug: "texas-high-plains-cotton-drought-shock-2026",
+    icon: "help_center",
+    status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-19) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
+    name: "Texas High Plains Cotton Yield Is Forecast Down 15.8%. Who Absorbs the Drought Shock?",
+    question:
+      "With Texas cotton yield forecast 15.8% below 2025 and High Plains drought driving the decline, how does lost production propagate through growers, gins, cooperatives, warehouses, lenders, groundwater systems, and value-added cotton research?",
+    tagline: "The state number is real and worse than the national average. What it can't tell you yet is which of the High Plains' 42 counties are actually absorbing the loss.",
+    thumbnail: "/assets/og/texas-high-plains-cotton-drought-shock-2026.jpg",
+    sourcePath: "../content/research/texas-high-plains-cotton-drought-shock-2026.md",
+    region: "",
+    publishedDate: "2026-09-19",
+    commodity: "Upland Cotton / Cottonseed / Fiber",
+    evidence: [
+      { label: "Texas A&M AFPC / AgriLife — September 2026 WASDE analysis", note: "Texas cotton yield forecast 15.8% below 2025, nearly double the 9.0% national decline, with High Plains drought named as the primary driver.", url: "https://agrilifetoday.tamu.edu/2026/09/15/tough-year-for-texas-summer-crops-due-to-drought-extreme-temperatures/" },
+      { label: "USDA Farm Service Agency — Three Texas Counties Natural Disaster Designation", note: "September 14, 2026: three Texas counties designated primary natural disaster areas under fast-track drought criteria, with additional contiguous counties made eligible for emergency credit.", url: "https://www.fsa.usda.gov/news-events/news/09-14-2026/usda-designates-three-texas-counties-natural-disaster-areas" },
+      { label: "Plains Cotton Growers — Who We Are", note: "42-county Texas High Plains producer organization; the region produces 66% of Texas cotton and cottonseed and roughly 30% of the nation's; 8 of the top 10 U.S. cotton counties sit inside this footprint.", url: "https://www.plainscotton.org/who-we-are/" },
+    ],
+    stakeholders: ["Texas High Plains cotton growers", "Plains Cotton Growers", "Plains Cotton Cooperative Association", "regional cotton gins", "High Plains Underground Water Conservation District", "Texas Tech Fiber and Biopolymer Research Institute", "agricultural lenders", "crop insurers"],
+    hypothesis:
+      "The drought shock is not evenly distributed across the High Plains: dryland abandonment, irrigated pumping cost, gin utilization, and cooperative marketing volume likely create distinct county-level incidence paths that a state-level yield number can't reveal. This is a hypothesis to test against county-level acreage, gin-throughput, and lender data, not a conclusion.",
+    graphLayers: {
+      physical: "Drought propagates through dryland abandonment (~10% of 3.7M TX acres already failed) and harder irrigated pumping from the Ogallala Aquifer, then downstream into 42 counties' worth of gin and cooperative-warehouse throughput that isn't yet publicly quantified at that resolution.",
+      capital: "USDA FSA's September 14 disaster designation opens fast-track emergency credit for affected counties; the deeper capital question — how this year's volume shock hits gin/co-op working capital and lender risk — remains unmeasured publicly.",
+      business: "Plains Cotton Growers (42 counties), Plains Cotton Cooperative Association (farmer-owned marketing/warehousing), and Texas Tech's FBRI (fiber/biopolymer research) all sit on different sides of the same regional cotton system.",
+      information: "No public dataset yet joins 2026 county-level failed/harvested acreage, gin throughput, and HPWD pumping data for the High Plains — that join is exactly what this investigation is built toward.",
+    },
+    dataNeeds: [
+      "County-level 2026 failed/harvested cotton acreage across Plains Cotton Growers' 42 counties",
+      "Gin-level throughput and utilization figures",
+      "Crop-insurance indemnity data by county",
+      "HPWD's 2026 permitting/pumping data",
+      "A direct conversation with a High Plains grower, gin manager, PCG/PCCA staff member, or HPWD official — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Texas Cotton Shock Propagation GIS — a county-level failed-acreage and gin-catchment model with a water-risk overlay",
+    ],
+    findings: null,
+    sources: [
+      { label: "Texas A&M AgriLife Today — Tough Year for Texas Summer Crops", url: "https://agrilifetoday.tamu.edu/2026/09/15/tough-year-for-texas-summer-crops-due-to-drought-extreme-temperatures/" },
+      { label: "Oklahoma Farm Report — September WASDE cotton yield figures", url: "https://www.oklahomafarmreport.com/2026/09/16/september-wasde-forecasts-lower-production-higher-prices-for-most-crops/" },
+      { label: "USDA Farm Service Agency — Three Texas Counties Natural Disaster Designation", url: "https://www.fsa.usda.gov/news-events/news/09-14-2026/usda-designates-three-texas-counties-natural-disaster-areas" },
+      { label: "Plains Cotton Growers — Who We Are", url: "https://www.plainscotton.org/who-we-are/" },
+      { label: "Plains Cotton Cooperative Association — About PCCA", url: "https://pcca.com/who-we-are/about-pcca/" },
+      { label: "Texas State Historical Association — High Plains Underground Water Conservation District", url: "https://www.tshaonline.org/handbook/entries/high-plains-underground-water-conservation-district" },
+      { label: "Texas Tech Fiber and Biopolymer Research Institute", url: "https://www.depts.ttu.edu/fbri/" },
+    ],
+  },
+  {
+    slug: "delmarva-poultry-productivity-grower-consolidation-2026",
+    icon: "help_center",
+    status: "investigating",
+    name: "Delmarva Produces 40% More Chicken With 37% Fewer Growers Than 20 Years Ago. Who Captures the Productivity Gain?",
+    question:
+      "How has Delmarva increased chicken output while the number of growers fell sharply over two decades, and how are productivity gains, contract income, processing capital, feed demand, disease risk, and bargaining power distributed across growers and integrated poultry companies?",
+    tagline: "DCA's own 20-year numbers imply the average remaining grower's real income share roughly doubled — a calculation DCA doesn't publish, and this article shows the math instead of hiding it.",
+    thumbnail: "/assets/og/delmarva-poultry-productivity-grower-consolidation-2026.jpg",
+    sourcePath: "../content/research/delmarva-poultry-productivity-grower-consolidation-2026.md",
+    region: "",
+    publishedDate: "2026-09-19",
+    commodity: "Broilers / Corn / Soybeans / Feed / Poultry Litter",
+    evidence: [
+      { label: "Delmarva Chicken Association — 2025 Facts & Figures", note: "628M chickens, 4.7B pounds, $4.6B sales, 1,225 growers, 4,814 houses, $347M grower contract income, $999M employee wages, $1.2B feed purchases, $267M capital improvements. 20-year change: pounds +40.5%, growers -36.8%, houses -11.3%, grower contract income +27.4% inflation-adjusted.", url: "https://www.dcachicken.com/facts/facts-figures.cfm" },
+      { label: "Maryland Department of Agriculture — HPAI Caroline County press releases, Feb 25-26 2026", note: "Two presumptive HPAI cases confirmed on Caroline County, MD broiler farms on consecutive days, alongside a Kent County, DE detection — described by officials/industry as a recurring 'new normal' for the Eastern Shore.", url: "https://news.maryland.gov/mda/press-release/2026/02/25/preliminary-testing-confirms-highly-pathogenic-avian-influenza-in-caroline-county-3/" },
+      { label: "Perdue Farms and Mountaire Farms corporate history", note: "Perdue (Salisbury, MD, founded 1920) and Mountaire (Millsboro, DE, founded 1914, still family-owned) are two of the peninsula's major vertically integrated processors alongside Allen Harim.", url: "https://corporate.perduefarms.com/" },
+    ],
+    stakeholders: ["Independent contract growers", "Perdue Farms", "Mountaire Farms", "Allen Harim", "Delmarva Chicken Association", "agricultural lenders", "feed/grain suppliers", "conservation agencies (USDA NRCS)"],
+    hypothesis:
+      "Output growth with fewer growers/houses likely reflects higher house capacity, bird cycles, genetics, feed conversion, and processor coordination, but public aggregate data cannot assign causality or confirm whether the average remaining grower's real economic position actually improved as much as a naive pool-income/headcount calculation implies. This is a hypothesis to test against grower-level capital, debt, and income data, not a conclusion.",
+    graphLayers: {
+      physical: "Fewer, larger, more capital-intensive chicken houses (down 11.3% in count, up 40.5% in total output over 20 years) run under contract to three integrated processors clustered within ~25 miles of each other on the peninsula.",
+      capital: "Processors invested $267M in 2025 capital improvements; growers' own house-construction/upgrade capital and debt levels aren't publicly disclosed anywhere found this pass.",
+      business: "DCA, Perdue, Mountaire, Allen Harim, and 1,225 independent grower-businesses each hold a different piece of a system where recurring HPAI risk (Feb 2026 Caroline/Kent County detections) is becoming an annual cost of doing business.",
+      information: "DCA publishes strong aggregate 20-year figures but no per-grower average — the arithmetic implication (roughly doubled real per-grower share) in this article is a derived calculation, not a DCA-verified statistic.",
+    },
+    dataNeeds: [
+      "Grower-level house-construction/upgrade capital and debt data",
+      "A breakdown of the $267M 2025 capital-improvement figure by purpose (biosecurity vs. capacity vs. maintenance)",
+      "Company-level profit/margin data for Perdue, Mountaire, and Allen Harim",
+      "Feed-conversion and flock-cycle trend data explaining the mechanism behind the output increase",
+      "A direct conversation with DCA, a processor, or a Delmarva contract grower — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Delmarva Grower-Processor Dependency Network — a 20-year structural-trend dashboard with a capex/grower-income scenario model",
+    ],
+    findings: null,
+    sources: [
+      { label: "Delmarva Chicken Association — 2025 Facts & Figures", url: "https://www.dcachicken.com/facts/facts-figures.cfm" },
+      { label: "Maryland Department of Agriculture — Caroline County HPAI press release", url: "https://news.maryland.gov/mda/press-release/2026/02/25/preliminary-testing-confirms-highly-pathogenic-avian-influenza-in-caroline-county-3/" },
+      { label: "Perdue Farms — corporate history", url: "https://corporate.perduefarms.com/" },
+      { label: "Mountaire Farms — About Us", url: "https://www.mountaire.com/about-us/" },
+      { label: "USDA NRCS — Demonstration of Alternative Containment Structures for Stockpiling Poultry Litter", url: "https://cig.sc.egov.usda.gov/projects/demonstration-alternative-containment-structures-stockpiling-poultry-litter" },
     ],
   },
 ];
