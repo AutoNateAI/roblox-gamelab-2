@@ -12,3 +12,4 @@ episodes/*/.screen-memes-manifest.json
 episodes/*/qa_contact_sheet*.jpg
 tools/__pycache__/
 tools/tmp_pose_check/
+.DS_Store
