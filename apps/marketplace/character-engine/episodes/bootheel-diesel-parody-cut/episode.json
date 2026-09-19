@@ -1,0 +1,251 @@
+{
+  "episode": "bootheel-diesel-parody-cut",
+  "title": "Diesel Hit $6.28 And Y'all Good?",
+  "article_url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026",
+  "runtime_target_sec": 60,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/intro.png",
+    "prompt": "A cartoon 'BREAKING NEWS' parody graphic: a farmer sits frozen mid-bite of a sandwich at a diner counter, eyes bulging wide, staring down at a gas station receipt that's unrolling across the floor like a roll of toilet paper, the total glowing in giant red numbers at the bottom reading '$6.28'."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/outro.png",
+    "prompt": "A cartoon closing-gag scene: the same flaming hot potato from earlier lands with a thud directly inside a mailbox labeled 'YOU' in bold letters, smoke puffing out the top, while a cartoon hand slams the mailbox door shut and casually walks away whistling, looking back over its shoulder with a guilty grin."
+  },
+  "sources": [
+    {
+      "id": "s1",
+      "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf",
+      "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026 \u2014 up 31.8 cents week-over-week, 254.6 cents above the same week last year."
+    },
+    {
+      "id": "s2",
+      "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf",
+      "fact": "USDA NASS: Missouri rice planted acreage fell from 213,000 (2025) to 118,000 (2026), a 44.6% decline; soybean planted acreage rose from 5.6M to 5.95M acres."
+    },
+    {
+      "id": "s3",
+      "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf",
+      "fact": "Iowa issued weight-limit exemptions letting grain trucks run up to 90,000 lb gross through October 10, 2026, to cut truckloads needed during harvest amid high fuel prices. Missouri has not announced an equivalent."
+    },
+    {
+      "id": "s4",
+      "url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026",
+      "fact": "The dollar-per-acre incidence of the diesel shock, and which stakeholder in the value chain absorbs it, is not yet established from public data."
+    }
+  ],
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Nate. NATE. Diesel just hit six dollars and twenty-eight cents a gallon.",
+      "cite": [
+        "s1"
+      ],
+      "move": "pace_out",
+      "emphasis": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line01.png",
+        "prompt": "A cartoon guy at a gas pump falls backward off his feet in exaggerated shock, arms flailing, as the pump's digital display glows red with '$6.285'. Bold white meme-style caption text with a black outline across the top reads 'SIX DOLLARS. TWENTY-EIGHT CENTS.'"
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 2,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Six twenty-eight?! That ain't diesel, that's a damn down payment!",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line02.png",
+        "prompt": "A gas pump nozzle is dressed up like a car salesman in a cheap blazer, handing a shocked farmer a car-loan document instead of pumping fuel. Bold white meme-style caption text with a black outline across the top reads 'THAT AIN'T GAS, THAT'S A CAR NOTE'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 3,
+      "speaker": "kai",
+      "mood": "neutral",
+      "text": "Straight from USDA. Officially, not a typo.",
+      "cite": [
+        "s1"
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line03.png",
+        "prompt": "A giant red rubber stamp slams down on a government report, stamping it 'NOT A TYPO' in dripping red ink, papers scattering everywhere. Bold white meme-style caption text with a black outline across the top reads 'OFFICIAL. NOT A TYPO.'"
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 4,
+      "speaker": "nate",
+      "mood": "halflid",
+      "text": "Two-fifty more than last year. Inflation out here snatchin' wallets like it's rent day.",
+      "cite": [
+        "s1"
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line04.png",
+        "prompt": "A cartoon hand made entirely out of a giant green dollar sign reaches into a farmer's back pocket and yanks his wallet out while he looks over his shoulder in alarm. Bold white meme-style caption text with a black outline across the top reads 'INFLATION SNATCHIN' WALLETS'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 5,
+      "speaker": "kai",
+      "mood": "neutral",
+      "text": "And it's hittin' the Bootheel hardest. That's rice country, Nate.",
+      "cite": [],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line05.png",
+        "prompt": "A cartoon aerial view of a lush flooded rice paddy with a giant red bullseye target painted right over it, a tiny diesel pump icon in the crosshairs at the center. Bold white meme-style caption text with a black outline across the top reads 'BOOTHEEL IN THE CROSSHAIRS'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 6,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "Rice needs flooded fields. Flooded fields need pumps. Pumps need diesel. Domino effect, dawg.",
+      "cite": [],
+      "gesture": "explain_chop",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line06.png",
+        "prompt": "A row of giant dominoes falling into each other across a farm field: the first domino has a rice plant painted on it, the middle domino has a water pump painted on it, and the last domino is mid-explosion into a cartoon diesel pump with fuel spraying everywhere. Bold white meme-style caption text with a black outline across the top reads 'DOMINO EFFECT'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 7,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "So what, everybody said hell nah to rice this year?",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line07.png",
+        "prompt": "A cartoon rice plant with tiny arms and legs packs a small suitcase and walks away from a flooded rice paddy, waving goodbye over its shoulder with a done-with-this expression. Bold white meme-style caption text with a black outline across the top reads 'RICE SAID HELL NAH'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 8,
+      "speaker": "nate",
+      "mood": "neutral",
+      "text": "Rice acreage down forty-four percent. Soybeans just shrugged.",
+      "cite": [
+        "s2"
+      ],
+      "emphasis": [
+        3,
+        4,
+        5
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line08.png",
+        "prompt": "Split-panel cartoon. Left panel: a rice field visibly shrinking and wilting, a big red arrow labeled '-44.6%' pointing down. Right panel: a calm soybean field with tiny cartoon arms crossed in an exaggerated shrug, completely unbothered. Bold white meme-style caption text with a black outline across the top reads 'SOYBEANS DIDN'T FLINCH'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 9,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Meanwhile Iowa's like 'trucks can carry ninety thousand pounds now, no cap.'",
+      "cite": [
+        "s3"
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line09.png",
+        "prompt": "A confident cartoon mascot shaped like the state of Iowa, wearing sunglasses, flexes a bicep next to a massive grain truck stamped with a bright green '90,000 LBS OK' badge. Bold white meme-style caption text with a black outline across the top reads 'IOWA FLEXIN'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 10,
+      "speaker": "nate",
+      "mood": "halflid",
+      "text": "And Missouri said... nothing. Quiet as a church mouse at a poker game.",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line10.png",
+        "prompt": "A tiny cartoon mouse in a little vest sits perfectly still at a poker table full of cards and chips, saying absolutely nothing, side-eyeing the camera nervously. Bold white meme-style caption text with a black outline across the top reads 'MISSOURI RIGHT NOW'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 11,
+      "speaker": "kai",
+      "mood": "brows_up",
+      "text": "So who's really eatin' this bill? The farmer? The trucker?",
+      "cite": [
+        "s4"
+      ],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line11.png",
+        "prompt": "A restaurant table with a giant glowing check in the middle labeled with a big dollar sign. Four cartoon characters around the table \u2014 a farmer, a grain-dryer operator, a truck driver, and a buyer in a suit \u2014 all point at each other at once, none of them reaching for the check. Bold white meme-style caption text with a black outline across the top reads 'WHO'S GOT THE CHECK?'"
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 12,
+      "speaker": "nate",
+      "mood": "halflid",
+      "text": "Nobody knows yet. It's hot potato, and the potato costs six bucks.",
+      "cite": [],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line12.png",
+        "prompt": "A literal potato on fire, wearing a little price tag that reads '$6', flies through the air mid-toss between two pairs of cartoon hands. Bold white meme-style caption text with a black outline across the top reads 'HOT POTATO, LITERALLY'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 13,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "If you think you're catchin' that potato, go read the breakdown.",
+      "cite": [],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line13.png",
+        "prompt": "A cartoon guy dives dramatically out of the way, arms and legs flailing, as the same flaming potato from before flies straight at the camera. Bold white meme-style caption text with a black outline across the top reads 'NOT IT'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    },
+    {
+      "n": 14,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "Link's below. Don't come back mad we ain't warn your ass.",
+      "cite": [],
+      "gesture": "rest_stand",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-parody-cut/screen-memes/line14.png",
+        "prompt": "A cartoon hand winks and points down at a big glowing button that reads 'LINK BELOW' with a downward arrow, sparkles around it. Bold white meme-style caption text with a black outline across the top reads 'DON'T SAY WE DIDN'T WARN YOU'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other about the news \u2014 not a news broadcast. Real comedic timing: land the joke, let a real laugh or smirk show where it's funny, talk like you're actually ribbing your co-host."
+    }
+  ]
+}

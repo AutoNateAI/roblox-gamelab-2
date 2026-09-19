@@ -1,0 +1,120 @@
+{
+  "episode": "bootheel-diesel-harvest-cost-2026",
+  "title": "Diesel Just Hit $6.285. What Does That Actually Cost a Bootheel Farm?",
+  "runtime_target_sec": 90,
+  "sources": [
+    { "id": "s1", "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf", "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026 — up 31.8 cents week-over-week, 254.6 cents above the same week last year." },
+    { "id": "s2", "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf", "fact": "USDA NASS: Missouri rice planted acreage fell from 213,000 (2025) to 118,000 (2026), a 44.6% decline; soybean planted acreage rose from 5.6M to 5.95M acres." },
+    { "id": "s3", "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf", "fact": "Iowa issued weight-limit exemptions letting grain trucks run up to 90,000 lb gross through October 10, 2026, to cut truckloads needed during harvest amid high fuel prices. Missouri has not announced an equivalent." },
+    { "id": "s4", "url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026", "fact": "The dollar-per-acre incidence of the diesel shock, and which stakeholder in the value chain absorbs it, is not yet established from public data." }
+  ],
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Welcome back to the Lab. Nate, diesel just hit six dollars and twenty eight cents a gallon. That is not a typo.",
+      "cite": [],
+      "move": "pace_out",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line01.png",
+        "prompt": "A giant glowing red gas-station price sign reading '$6.285' crashes down like a wrecking ball, smashing through a small, calm price sign that reads '$3.74 LAST YEAR', debris and sparks flying. A cartoon gas-station attendant in a Black neighborhood ducks out of the way, eyes wide in shock. Bold white meme-style caption text with a black outline across the top reads 'THAT'S NOT A TYPO'."
+      }
+    },
+    {
+      "n": 2,
+      "speaker": "nate",
+      "mood": "neutral",
+      "text": "Straight from USDA's own transportation desk, Kai. A record, and up almost two dollars fifty from this exact week last year.",
+      "cite": ["s1"],
+      "gesture": "point_screen_R",
+      "emphasis": [7, 8, 9],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line02.png",
+        "prompt": "A cartoon government official in a windbreaker labeled 'USDA' slams a giant red rubber stamp reading 'RECORD' onto a report, papers flying everywhere. Behind him a bar chart bursts up through the ceiling, one bar tiny labeled '$3.74' and a much taller glowing bar labeled '$6.285', with a big arrow between them labeled '+$2.50'. Bold white meme-style caption text with a black outline across the top reads 'STRAIGHT FROM THE FEDS'."
+      }
+    },
+    {
+      "n": 3,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "Sure, but fuel costs spike every harvest. What makes this one worth a segment instead of a shrug?",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line03.png",
+        "prompt": "Two-panel comic split image, thick black divider down the middle, navy-and-gold accent colors. Left panel: a bored Black farmer in a seed-company cap glances sideways at an ordinary gas pump, shrugging with a flat 'meh' expression, small bold caption 'EVERY HARVEST' along the top of the panel. Right panel: the same farmer's eyes bulging wide in cartoon shock, jaw dropped, sweat drops flying off his face, staring at a glowing red gas-pump display reading '$6.285', small bold caption 'THIS ONE' along the top of the panel."
+      }
+    },
+    {
+      "n": 4,
+      "speaker": "nate",
+      "mood": "neutral",
+      "text": "Because it's hitting the one part of the Corn Belt that floods its fields to grow rice. Missouri rice acreage just fell forty four point six percent while soybeans barely moved — that's USDA's own September crop report, not a guess.",
+      "cite": ["s2"],
+      "gesture": "explain_chop",
+      "emphasis": [11, 12, 13],
+      "popup": { "headline": "Rice acres -44.6%", "subhead": "USDA NASS, Sep 11 2026" },
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line04.png",
+        "prompt": "Split-screen cartoon: on the left, a lush green flooded rice paddy is shrinking and swirling down a drain like a bathtub, a big label over it reading '-44.6%'. On the right, a sturdy soybean field stands tall and calm, completely unbothered, with a small hand-written sign stuck in the dirt reading 'barely moved'. A worried Black farmer stands at the boundary between the two, looking back and forth. Bold white meme-style caption text with a black outline across the top reads 'RICE DOWN. SOY? MEH.'"
+      }
+    },
+    {
+      "n": 5,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "And rice means pumps, right when diesel got expensive. Here's the seven counties actually sitting on that stretch of the Mississippi — Farm Credit Southeast Missouri's whole territory.",
+      "cite": [],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line05.png",
+        "prompt": "An old-fashioned illustrated treasure map drawn on weathered parchment, showing a winding river through farmland. Seven glowing amber X marks run down along the river, each topped with a tiny cartoon gas-pump icon instead of a treasure chest. A compass rose sits in one corner. A bold banner across the top, styled like a treasure-map title, reads 'THE DIESEL CORRIDOR'."
+      }
+    },
+    {
+      "n": 6,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "And Iowa already blinked — they waived truck weight limits up to ninety thousand pounds through October tenth, just to cut down on trips. Missouri hasn't done that yet.",
+      "cite": ["s3"],
+      "gesture": "count_one",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line06.png",
+        "prompt": "Split-panel cartoon. Left panel: a confident farmer wearing a cap shaped like the state of Iowa gives a big thumbs-up next to a huge grain truck with a green stamp on it reading '90,000 LBS OK'. Right panel: a Missouri farmer stands with arms crossed and a flat shrug next to an ordinary, unchanged grain truck, with a plain gray stamp reading 'NO CHANGE YET'. Bold white meme-style caption text with a black outline across the top reads 'IOWA BLINKED FIRST'."
+      }
+    },
+    {
+      "n": 7,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "So here's the actual open question. USDA proves the shock is real. Nobody's numbers yet prove who eats it — the grower, the dryer, the trucker, or the buyer on the other end.",
+      "cite": ["s4"],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line07.png",
+        "prompt": "A cartoon detective's corkboard covered in red string, connecting four polaroid-style photos — a farmer, a grain-dryer machine, a semi truck, and a grain elevator — all converging on a big glowing dollar-sign photo pinned in the center. A magnifying glass hovers over the dollar sign. Bold white meme-style caption text with a black outline across the top reads 'WHO ACTUALLY EATS IT?'"
+      }
+    },
+    {
+      "n": 8,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "If that's you, that's your cue. Read the full breakdown, and tell us which one it actually is.",
+      "cite": [],
+      "gesture": "rest_stand",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-harvest-cost-2026/screen-memes/line08.png",
+        "prompt": "A cartoon police line-up scene under one bright overhead spotlight, height-chart lines on the wall behind them: four exaggerated characters stand side by side looking nervously at the camera — a young Black farmer in overalls, a sweating Latina grain-dryer operator holding a thermometer, a tired white truck driver in a trucker cap holding a clipboard, and a sharply-dressed Asian grain buyer in a suit checking his phone. Bold white meme-style caption text with a black outline across the top reads 'ONE OF YOU IS PAYING FOR THIS'."
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "episode": "test-shared-screen",
+  "title": "Shared Screen Smoke Test",
+  "runtime_target_sec": 20,
+  "sources": [
+    { "id": "s1", "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf", "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026." }
+  ],
+  "lines": [
+    { "n": 1, "speaker": "kai", "mood": "smile", "text": "Welcome back to the Lab. Nate, diesel just hit a record price.", "cite": [], "move": "pace_out" },
+    { "n": 2, "speaker": "nate", "mood": "neutral", "text": "Six dollars twenty eight cents a gallon, Kai. That is a real number, not a vibe.", "cite": ["s1"], "gesture": "point_screen_R", "emphasis": [0,1,2,3,4], "popup": {"headline": "$6.285/gal", "subhead": "Record, week ending Sep 14"}, "screen": {"type": "stat", "value": "$6.285", "label": "Diesel, per gallon", "sublabel": "USDA AMS, Sep 17 2026"} },
+    { "n": 3, "speaker": "kai", "mood": "halflid", "text": "So who actually pays for that? That part is still unknown.", "cite": [], "gesture": "shrug" }
+  ]
+}
