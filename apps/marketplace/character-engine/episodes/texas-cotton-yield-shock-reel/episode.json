@@ -1,0 +1,47 @@
+{
+  "episode": "texas-cotton-yield-shock-reel",
+  "title": "Texas Cotton Down 15.8%. It's Giving Texarizona.",
+  "article_url": "https://autonateai.com/research-and-case-studies/texas-high-plains-cotton-drought-shock-2026",
+  "runtime_target_sec": 50,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/intro.png",
+    "prompt": "A cartoon weather-map character sweating bullets, arms flailing in panic, standing in front of a wall of red glowing drought icons, spotlighted like a stand-up stage."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/outro.png",
+    "prompt": "The same sweating weather-map character now giving an exhausted thumbs up, pointing toward a glowing 'READ MORE' sign."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://agrilifetoday.tamu.edu/2026/09/15/tough-year-for-texas-summer-crops-due-to-drought-extreme-temperatures/", "fact": "Texas cotton yield is forecast 15.8% below 2025 — nearly double the 9.0% national decline — with High Plains drought named as the main driver. 93% of Texas is in some stage of drought, and about 10% of the state's 3.7 million reported dryland crop acres had already been declared failed as of Sept 11, 2026." },
+    { "id": "s2", "url": "https://www.fsa.usda.gov/news-events/news/09-14-2026/usda-designates-three-texas-counties-natural-disaster-areas", "fact": "USDA designated three Texas counties primary natural disaster areas on Sept 14, 2026, opening fast-track emergency credit, with additional contiguous counties made eligible." }
+  ],
+  "lines": [
+    { "n": 1, "speaker": "nate", "mood": "brows_up", "text": "Kai, Texas cotton yield down fifteen point eight percent this year!", "cite": ["s1"], "emphasis": [4,5,6],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line01.png", "prompt": "A cartoon thermometer shaped like a cotton boll melting under a blazing sun, sweat pouring off it, a giant '-15.8%' stamped across it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 2, "speaker": "kai", "mood": "smile", "text": "Fifteen?! That's almost double what the whole rest of the country lost!", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line02.png", "prompt": "A cartoon scale comparing two piles of cotton, the Texas pile way smaller than the national pile, with an exaggerated shocked-face emoji hovering above it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 3, "speaker": "nate", "mood": "halflid", "text": "Ninety-three percent of Texas is in a damn drought right now.", "cite": ["s1"], "emphasis": [1],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line03.png", "prompt": "A cartoon map of Texas cracking apart into a dry desert texture, a giant '93%' glowing over it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 4, "speaker": "kai", "mood": "brows_up", "text": "Ninety-three?! At that point just rename the state 'Texarizona.'", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line04.png", "prompt": "A cartoon road sign reading 'WELCOME TO TEXARIZONA, POP: THIRSTY' with cacti sprouting up through a cracked cotton field." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 5, "speaker": "nate", "mood": "smile", "text": "Ten percent of the dryland cotton just flat-out failed already.", "cite": ["s1"], "emphasis": [1],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line05.png", "prompt": "A cartoon cotton field with half the plants drawn as crispy brown skeletons, a '10% FAILED' stamp glowing over it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 6, "speaker": "kai", "mood": "halflid", "text": "So bad the government stepped in — three counties declared disaster areas.", "cite": ["s2"], "emphasis": [8,9],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line06.png", "prompt": "A cartoon government building stamping a giant red 'DISASTER AREA' seal onto a small section of a Texas county map." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 7, "speaker": "nate", "mood": "brows_up", "text": "Disaster area for cotton? That's a whole different kind of 'high plains drifter.'", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line07.png", "prompt": "A cartoon cowboy riding a horse through a smoking, sun-scorched cotton field, tumbleweeds bouncing everywhere." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 8, "speaker": "kai", "mood": "halflid", "text": "Somebody out there losing a whole year's work to no rain.", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line08.png", "prompt": "A cartoon farmer staring at a cracked, empty field holding a calendar with the entire growing season crossed out in red." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 9, "speaker": "nate", "mood": "smile", "text": "Go read what happens when a whole state's cash crop just cooks.", "cite": [], "gesture": "rest_stand",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-yield-shock-reel/screen-memes/line09.png", "prompt": "A cartoon farmer giving a thumbs up pointing toward a glowing sign that reads 'READ MORE.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." }
+  ]
+}

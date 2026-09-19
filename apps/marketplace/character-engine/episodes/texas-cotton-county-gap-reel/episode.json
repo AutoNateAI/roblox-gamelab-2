@@ -1,0 +1,47 @@
+{
+  "episode": "texas-cotton-county-gap-reel",
+  "title": "42 Counties, One Blurry Number",
+  "article_url": "https://autonateai.com/research-and-case-studies/texas-high-plains-cotton-drought-shock-2026",
+  "runtime_target_sec": 48,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/intro.png",
+    "prompt": "A cartoon detective character standing in front of a giant blurry 42-piece jigsaw puzzle map of Texas, scratching his head, spotlighted on a stand-up stage."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/outro.png",
+    "prompt": "The same detective character shrugging with a magnifying glass in hand, pointing toward a glowing 'READ MORE' sign."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://www.plainscotton.org/who-we-are/", "fact": "Plains Cotton Growers represents 42 High Plains counties producing about 66% of Texas cotton and roughly 30% of the nation's." },
+    { "id": "s2", "url": "https://www.fsa.usda.gov/news-events/news/09-14-2026/usda-designates-three-texas-counties-natural-disaster-areas", "fact": "USDA's Sept 14, 2026 disaster designation covers specific counties and additional contiguous eligible counties, but no county-by-county cotton loss data has been published yet." }
+  ],
+  "lines": [
+    { "n": 1, "speaker": "nate", "mood": "brows_up", "text": "Kai, forty-two counties grow cotton up on the Texas High Plains.", "cite": ["s1"], "emphasis": [1,2],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line01.png", "prompt": "A cartoon patchwork quilt map made of 42 different county-shaped squares, all stitched together with a cotton-boll motif." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 2, "speaker": "kai", "mood": "smile", "text": "That's sixty-six percent of all Texas cotton, thirty percent of the WHOLE country!", "cite": ["s1"], "emphasis": [10,11],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line02.png", "prompt": "A cartoon pie chart with a giant glowing slice labeled 'TEXAS HIGH PLAINS' taking up a third of the whole USA-shaped pie." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 3, "speaker": "nate", "mood": "halflid", "text": "Forty-two counties, one big fifteen-point-eight percent number for all of 'em.", "cite": [], "gesture": "explain_chop",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line03.png", "prompt": "A single glowing '15.8%' number stamped across a blurry crowd of 42 tiny indistinguishable county faces." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 4, "speaker": "kai", "mood": "brows_up", "text": "That's like averaging everybody's test grade and callin' it a day!", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line04.png", "prompt": "A cartoon teacher character lazily averaging a stack of wildly different test papers into one grade, shrugging with a red pen." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 5, "speaker": "nate", "mood": "smile", "text": "Some county out there probably lost damn near everything!", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line05.png", "prompt": "A cartoon cotton field shown as a smoking crater with a tiny flag labeled '???' planted in the middle of it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 6, "speaker": "kai", "mood": "halflid", "text": "And another one prob'ly barely got touched, we just don't KNOW which is which.", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line06.png", "prompt": "A cartoon lush green cotton field sitting right next to a smoking crater field, a confused shrugging farmer standing between the two." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 7, "speaker": "nate", "mood": "brows_up", "text": "Government designated disaster counties, but ain't nobody published the real breakdown.", "cite": ["s2"], "emphasis": [1,2],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line07.png", "prompt": "A cartoon government stamp hovering shakily and uncertainly over a county map, unsure exactly where to land." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 8, "speaker": "kai", "mood": "halflid", "text": "It's forty-two counties and one blurry photo, Nate.", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line08.png", "prompt": "A cartoon blurry, low-resolution pixelated photo of Texas with a magnifying glass hovering uselessly over it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 9, "speaker": "nate", "mood": "smile", "text": "Go read why somebody needs to zoom that picture in, quick.", "cite": [], "gesture": "rest_stand",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/texas-cotton-county-gap-reel/screen-memes/line09.png", "prompt": "A cartoon farmer giving a thumbs up pointing toward a glowing sign that reads 'READ MORE.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." }
+  ]
+}

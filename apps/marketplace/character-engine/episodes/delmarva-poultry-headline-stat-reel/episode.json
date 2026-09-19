@@ -1,0 +1,46 @@
+{
+  "episode": "delmarva-poultry-headline-stat-reel",
+  "title": "More Chicken, Fewer Growers, Who's Winning?",
+  "article_url": "https://autonateai.com/research-and-case-studies/delmarva-poultry-productivity-grower-consolidation-2026",
+  "runtime_target_sec": 50,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/intro.png",
+    "prompt": "A cartoon chicken flexing dramatically on a bodybuilding competition stage under a spotlight, wearing a sequined robe."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/outro.png",
+    "prompt": "The same flexing cartoon chicken now giving a thumbs up, gesturing toward a glowing 'READ MORE' sign."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://www.dcachicken.com/facts/facts-figures.cfm", "fact": "Delmarva produced 40.5% more chicken over the last 20 years while the number of growers fell 36.8% to 1,225 and the number of chicken houses fell 11.3%." }
+  ],
+  "lines": [
+    { "n": 1, "speaker": "kai", "mood": "brows_up", "text": "Nate, Delmarva making forty percent MORE chicken than twenty years ago.", "cite": ["s1"], "emphasis": [4,5],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line01.png", "prompt": "A cartoon chicken flexing a giant bicep, a '40.5% MORE' championship belt wrapped around its waist." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 2, "speaker": "nate", "mood": "smile", "text": "Okay that's a flex, more chicken is always a W in my book.", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line02.png", "prompt": "A cartoon giant glowing 'W' trophy sitting on top of an enormous pile of rotisserie chickens." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 3, "speaker": "kai", "mood": "halflid", "text": "With thirty-seven percent FEWER growers doing all that work.", "cite": ["s1"], "emphasis": [3,4],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line03.png", "prompt": "A cartoon crowd of farmer characters shrinking one by one, a counter overhead ticking down with a '-36.8%' stamp." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 4, "speaker": "nate", "mood": "brows_up", "text": "Wait — more chicken, less people?! Who they got back there, robots?", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line04.png", "prompt": "A cartoon robot chicken wrangler standing alone in an empty farmyard, human farmers nowhere in sight." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 5, "speaker": "kai", "mood": "smile", "text": "Just twelve hundred and twenty-five families running the whole damn peninsula.", "cite": ["s1"], "emphasis": [2,3,4],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line05.png", "prompt": "A cartoon peninsula-shaped map covered edge to edge with 1,225 tiny glowing farmer icons packed tightly together." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 6, "speaker": "nate", "mood": "halflid", "text": "So a third of the growers just... vanished and nobody replaced 'em?", "cite": [], "gesture": "explain_chop",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line06.png", "prompt": "A cartoon 'MISSING' poster with a silhouette of a vanished farmer, a magnifying glass hovering over it uselessly." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 7, "speaker": "kai", "mood": "halflid", "text": "Fewer houses too. Eleven percent gone. Everything just got bigger and tighter.", "cite": ["s1"], "emphasis": [4],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line07.png", "prompt": "A cartoon chicken house being physically squeezed and compacted between two giant corporate hands." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 8, "speaker": "nate", "mood": "brows_up", "text": "So who's actually eating good off this — the growers or the companies?", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line08.png", "prompt": "A cartoon boxing ring with a tiny farmer on one side and a giant corporate suit on the other, a referee shrugging in the middle." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 9, "speaker": "kai", "mood": "smile", "text": "That's the whole damn question. Go read it.", "cite": [], "gesture": "rest_stand",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-headline-stat-reel/screen-memes/line09.png", "prompt": "A cartoon chicken giving a thumbs up pointing toward a glowing sign that reads 'READ MORE.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big number. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." }
+  ]
+}

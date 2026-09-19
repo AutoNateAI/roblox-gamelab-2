@@ -1,0 +1,46 @@
+{
+  "episode": "delmarva-poultry-per-grower-math-reel",
+  "title": "We Did Math DCA Refused To Publish",
+  "article_url": "https://autonateai.com/research-and-case-studies/delmarva-poultry-productivity-grower-consolidation-2026",
+  "runtime_target_sec": 50,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/intro.png",
+    "prompt": "A cartoon detective chicken character with a magnifying glass standing over a chalkboard full of equations, crime-scene tape strung everywhere, spotlighted on a stand-up stage."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/outro.png",
+    "prompt": "The same detective chicken giving a triumphant thumbs up, holding a stack of receipts, pointing toward a glowing 'READ MORE' sign."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://www.dcachicken.com/facts/facts-figures.cfm", "fact": "DCA's own 20-year figures show grower contract income (total pool) up 27.4% inflation-adjusted while grower count fell 36.8% to 1,225 — dividing one by the other implies the average remaining grower's real share roughly doubled, a calculation DCA itself never publishes." }
+  ],
+  "lines": [
+    { "n": 1, "speaker": "nate", "mood": "brows_up", "text": "Kai, I did some math DCA ain't never gonna do themselves.", "cite": [], "gesture": "explain_chop",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line01.png", "prompt": "A cartoon detective Nate character with a magnifying glass and a chalkboard covered in scribbled equations, crime-scene tape everywhere labeled 'MATH.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 2, "speaker": "kai", "mood": "smile", "text": "Ooh, math from Nate? This 'bout to be a crime scene.", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line02.png", "prompt": "A cartoon calculator wearing a tiny police hat, sirens flashing on top, comically alarmed expression." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 3, "speaker": "nate", "mood": "halflid", "text": "Grower pay pool up twenty-seven percent. Growers down thirty-seven percent.", "cite": ["s1"], "emphasis": [3,4,7,8],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line03.png", "prompt": "A cartoon see-saw wildly unbalanced, one side glowing with '+27.4% PAY POOL' and the other with '-36.8% GROWERS.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 4, "speaker": "kai", "mood": "brows_up", "text": "Okay and? Spell it out, I ain't got my calculator.", "cite": [], "gesture": "open_hands",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line04.png", "prompt": "A cartoon confused chicken squinting hard at a whiteboard covered in scribbled math symbols." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 5, "speaker": "nate", "mood": "smile", "text": "Divide that pool by way fewer growers — average share DOUBLED, dead ass.", "cite": ["s1"], "emphasis": [8],
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line05.png", "prompt": "A cartoon piggy bank suddenly doubling in size mid-air with a glowing '2X' stamp and sparkles bursting around it." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 6, "speaker": "kai", "mood": "brows_up", "text": "Doubled?! Why they ain't just SAY that in the little fact sheet?", "cite": [], "gesture": "shrug",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line06.png", "prompt": "A cartoon fact-sheet document with a big obvious blank space where a number should be, a question mark hovering over the gap." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 7, "speaker": "nate", "mood": "halflid", "text": "Cause it ain't THEIR number, it's OUR number, we did the damn math.", "cite": [], "gesture": "explain_chop",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line07.png", "prompt": "A cartoon magician pulling a rabbit out of a top hat, except the rabbit is labeled 'OUR NUMBER, NOT THEIRS.'" },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 8, "speaker": "kai", "mood": "smile", "text": "So the survivors out here maybe eating way better than we thought?", "cite": [], "gesture": "point_screen_L",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line08.png", "prompt": "A cartoon farmer counting a stack of cash with a raised, skeptical eyebrow, unsure if it's real or too good to be true." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." },
+    { "n": 9, "speaker": "nate", "mood": "halflid", "text": "'Maybe.' It's a calculation, not a receipt. Go read the receipts.", "cite": [], "gesture": "rest_stand",
+      "screen": { "type": "meme", "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/delmarva-poultry-per-grower-math-reel/screen-memes/line09.png", "prompt": "A cartoon chicken giving a thumbs up pointing toward a glowing 'READ MORE' sign, holding a stack of receipts in its other wing." },
+      "voice_instructions": "Channel Richard Pryor-style stand-up energy: exasperated, escalating, physically reactive delivery — real gasps, real disbelief, voice cracking on the big reveal. This is two friends losing it together over something absurd, not a news broadcast. Real cursing where the line calls for it, land every word of it like a punchline, not a warning label." }
+  ]
+}
