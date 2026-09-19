@@ -29,6 +29,8 @@ OPENAI_API_KEY=<key> USE_OPENAI_TTS=true python3 character-engine/tools/make_epi
 
 Everything else (caching, worker parallelism, the generation-phase timing breakdown) works exactly as documented in `nate-kai-video-director`.
 
+**Output**: lands at `character-engine/output/reels/<slug>.mp4` — a single flat folder for every rendered reel, alongside its YouTube sibling `character-engine/output/youtube/`. Same move-not-copy behavior as the base skill: the episode folder keeps its build cache (frames/audio/QA material) but the one finished video relocates there as `make_episode.py`'s last step.
+
 ## QA — reel-specific checks
 
 Do the base skill's QA pass, plus:

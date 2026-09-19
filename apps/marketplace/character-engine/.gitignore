@@ -10,6 +10,7 @@ episodes/*/concat*.txt
 episodes/*/audio_concat.txt
 episodes/*/.screen-memes-manifest.json
 episodes/*/qa_contact_sheet*.jpg
+output/
 tools/__pycache__/
 tools/tmp_pose_check/
 .DS_Store

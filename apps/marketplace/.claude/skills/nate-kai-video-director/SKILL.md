@@ -138,7 +138,7 @@ This runs, in order: (a) voice generation (`gpt-4o-mini-tts`, `cedar` for Nate /
 
 Everything is cached by content: re-running after editing only line 6's text regenerates only line 6's voice, meme (if its prompt changed), and render — everything else is a cache hit. `RENDER_WORKERS=<n>` env var caps the render process pool if the default (one per line) is too much for the machine's RAM.
 
-Output: `character-engine/episodes/<slug>/<slug>_youtube_final.mp4`.
+**Output**: `make_episode.py` moves the finished video to `character-engine/output/youtube/<slug>.mp4` as its last step (the `Done:` line it prints names this final path, not the old in-episode-folder one) — a single, flat, easy-to-browse folder for every rendered YouTube cut, separate from `character-engine/output/reels/` (the reel skill's equivalent). Everything else (`frames/`, `audio/`, the intermediate `_dialogue_cut.mp4`/`_video_only.mp4`) stays in `character-engine/episodes/<slug>/` as build cache/QA material (step 7 below still reads frames from there) — only the one finished deliverable per render relocates. Both `output/` subfolders are gitignored, same as the episode build cache.
 
 ## 7. QA before reporting done
 

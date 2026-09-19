@@ -21,6 +21,7 @@ import json
 import math
 import os
 import random
+import shutil
 import subprocess
 import sys
 import time
@@ -32,6 +33,13 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 REPO = Path(__file__).resolve().parent.parent
+# Consolidated, easy-to-browse export location — every episode's working files
+# (frames/, audio/, intermediate .mp4s) still live under episodes/<slug>/ as
+# build cache, but the one finished deliverable per render moves here so
+# Nathan doesn't have to go hunting through 18+ episode folders to find the
+# actual videos to watch/upload. Mirrors the youtube/reel split the pipeline
+# already has via --format. Gitignored, same as episodes/*/*.mp4.
+OUTPUT_DIR = REPO / "output"
 sys.path.insert(0, str(REPO / "tools"))
 import camera  # noqa: E402
 import make_stage as stage  # noqa: E402
@@ -1263,7 +1271,13 @@ def main():
           f"(generation {t_gen_done - t_gen_start:.1f}s / render {t_render_done - t_render_start:.1f}s / "
           f"assemble {t_assemble_done - t_render_done:.1f}s)")
 
-    print(f"Done: {final_mp4}")
+    export_subdir = "youtube" if render_format == "youtube" else "reels"
+    export_dir = OUTPUT_DIR / export_subdir
+    export_dir.mkdir(parents=True, exist_ok=True)
+    export_path = export_dir / f"{ep['episode']}.mp4"
+    shutil.move(str(final_mp4), str(export_path))
+
+    print(f"Done: {export_path}")
 
 
 if __name__ == "__main__":
