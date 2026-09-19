@@ -1,0 +1,149 @@
+{
+  "episode": "bootheel-diesel-hormuz-reel",
+  "title": "Why Diesel Actually Hit $6.28",
+  "article_url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026",
+  "runtime_target_sec": 42,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/intro.png",
+    "prompt": "A cartoon gas pump nozzle trembles and sweats nervously in its holster before anyone's even picked it up, a red warning siren light spinning on top of the pump, the price display still dark with a glowing 'LOADING...' spinner, teasing a big reveal."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/outro.png",
+    "prompt": "A cartoon hand stamps a glowing 'FULL STORY INSIDE' stamp onto a long unrolled paper receipt, then folds the whole receipt into a paper airplane and launches it straight at the camera."
+  },
+  "sources": [
+    {
+      "id": "s1",
+      "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf",
+      "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026 \u2014 up 31.8 cents week-over-week, 254.6 cents above the same week last year."
+    },
+    {
+      "id": "s2",
+      "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf",
+      "fact": "USDA AMS ties the spike to a specific cause: shipping through the Strait of Hormuz has dropped to its lowest level since the U.S.-Iran conflict began, squeezing global fuel supply."
+    }
+  ],
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Nate. NATE. Diesel hit six damn dollars, twenty-eight cents. The pump cracked tryna show us that number.",
+      "cite": [
+        "s1"
+      ],
+      "emphasis": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line01.png",
+        "prompt": "A gas station's digital price sign visibly cracks under the strain of flipping to a new number, '$6.285' glowing red through the crack like it broke the machine, sparks flying, a stunned driver frozen mid-sip of coffee watching from their car window."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 2,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Hold up, why though? Every price spike's got a villain, and it ain't the houseplant, Kai.",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line02.png",
+        "prompt": "A cartoon detective corkboard covered in red string connecting silly suspects \u2014 a bag of popcorn, a rubber duck, a houseplant \u2014 each crossed out with a big red X, except one true culprit photo in the center still hidden behind a glowing question mark."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 3,
+      "speaker": "kai",
+      "mood": "neutral",
+      "text": "This one's actually real. The Strait of Hormuz. Boats moving through there at the lowest rate in years.",
+      "cite": [
+        "s2"
+      ],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line03.png",
+        "prompt": "A zoomed-out cartoon world map with one single narrow shipping strait glowing red and squeezed shut like a kinked garden hose, a tiny cargo ship stuck in gridlock, oil barrels backing up for miles, a bold label reading 'STRAIT OF HORMUZ'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 4,
+      "speaker": "nate",
+      "mood": "halflid",
+      "text": "So somewhere across the whole planet, boats out here honking at each other like it's rush hour\u2014",
+      "cite": [],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line04.png",
+        "prompt": "A massive cartoon cargo ship sits stuck in bumper-to-bumper ocean traffic, tiny brake lights glowing red on its hull, other ships honking behind it, all under a hazy midday sun."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 5,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "\u2014and that's exactly why a rice farmer in the Bootheel is crying at a pump. Dead ass, not lying.",
+      "cite": [],
+      "gesture": "explain_chop",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line05.png",
+        "prompt": "Split-screen cartoon connected by a long dotted red line across a map: on the left, the same cargo ship stuck in ocean gridlock; on the right, thousands of miles away, a Missouri rice farmer standing at a gas pump wiping away a single dramatic tear."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 6,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Geopolitics reached all the way into Missouri, tapped a farmer on the shoulder, and said 'run your pockets.'",
+      "cite": [],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line06.png",
+        "prompt": "A giant cartoon arm labeled 'GEOPOLITICS' stretches all the way across a world map from the Middle East and taps a small Missouri farmer on the shoulder, the farmer turning around in alarmed surprise, dropping his hat."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 7,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "That's the whole damn chain. One chokepoint straight to your gas tank, straight to your tractor.",
+      "cite": [],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line07.png",
+        "prompt": "A simple glowing three-link cartoon chain floating in dark space: the first link shows a narrow shipping strait, the middle link shows a gas pump, the last link shows a tractor, small arrows flowing left to right between them."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 8,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "One shipping lane. One receipt that don't never end. And that's only half the story, dawg.",
+      "cite": [],
+      "gesture": "rest_stand",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-hormuz-reel/screen-memes/line08.png",
+        "prompt": "A single tiny paper gas-station receipt sits on a desk, but it's impossibly long \u2014 unrolling out the door, down the street, and disappearing over the horizon toward a tiny cargo ship far out at sea."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation \u2014 not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    }
+  ]
+}

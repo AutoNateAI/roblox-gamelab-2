@@ -277,6 +277,21 @@ def build_image_card(image_path, caption, domain, tag_color, width, height, font
     return img
 
 
+def fit_image_to_box(img, width, height):
+    """Scale (not stretch) an already-loaded RGBA image to fit inside
+    (width, height), centered on the same background every card type uses.
+    Shared by build_meme_card (loads from a generated meme file) and
+    make_episode.py's reel screen panel (already has a rendered PIL image —
+    the current line's shared_screen — in memory, no file to load)."""
+    fitted = img.copy()
+    fitted.thumbnail((width, height), Image.LANCZOS)
+    canvas = Image.new("RGBA", (width, height), BG)
+    px = (width - fitted.width) // 2
+    py = (height - fitted.height) // 2
+    canvas.alpha_composite(fitted.convert("RGBA"), (px, py))
+    return canvas
+
+
 def build_meme_card(image_path, width, height):
     """A contextual meme image, scaled (not stretched) to fit the box. type:
     "meme". No ticker/caption overlay — a meme has its own baked-in caption
@@ -292,13 +307,7 @@ def build_meme_card(image_path, width, height):
     box and pad the rest with the same background every other card type uses,
     same as build_image_card already does for a real chart/photo."""
     img = Image.open(image_path).convert("RGBA")
-    fitted = img.copy()
-    fitted.thumbnail((width, height), Image.LANCZOS)
-    canvas = Image.new("RGBA", (width, height), BG)
-    px = (width - fitted.width) // 2
-    py = (height - fitted.height) // 2
-    canvas.alpha_composite(fitted, (px, py))
-    return canvas
+    return fit_image_to_box(img, width, height)
 
 
 def _resolve_path(spec, base_dir):

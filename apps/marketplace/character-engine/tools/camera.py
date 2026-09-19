@@ -145,16 +145,47 @@ def single_shot_close(char_center_x, screen_center):
     return _window_from_bbox(bbox, margin=1.06)
 
 
-def single_shot_portrait(char_center_x, full_body=False):
-    """9:16 social crop centered on the speaking anchor.
+# --- Reel (9:16) shared-screen panel ---------------------------------------
+# v11: reel used to skip the shared screen entirely (see the old
+# single_shot_portrait docstring below this comment's predecessor) because
+# cropping character+screen together from the wide stage forces a distant,
+# tiny-subject wide shot — the screen sits ~900px outboard of each mark, way
+# more lateral reach than a narrow portrait frame can afford without zooming
+# out past the point either subject reads. Fix: stop trying to capture both
+# in one stage-space crop. The screen becomes a fixed delivery-space panel
+# (make_episode.py composites it directly, same technique as the caption bar
+# or brand pill — not a stage crop at all), and the character crop below is
+# framed against the *remaining* vertical space instead of the full frame.
+REEL_W, REEL_H = 1080, 1920
+REEL_PANEL_H = 760  # delivery-space px reserved for the screen panel, top of frame
+PORTRAIT_CHAR_ASPECT = REEL_W / (REEL_H - REEL_PANEL_H)
 
-    The physical stage screens sit far outboard from each anchor. Trying to include
-    them in portrait forces the camera back into a distant wide shot, so vertical
-    formats keep the character readable and put source cards/popups in delivery
-    overlays instead.
-    """
+
+def single_shot_portrait(char_center_x, full_body=False):
+    """Character-only crop for reel, framed against the space *below* the
+    screen panel (REEL_PANEL_H) instead of the full 1920 frame height.
+    Caller renders this at (REEL_W, REEL_H - REEL_PANEL_H) and pastes it at
+    y=REEL_PANEL_H, then composites the screen panel separately on top.
+
+    v13: PORTRAIT_CHAR_ASPECT is much closer to square than a true portrait
+    crop, so the resulting window is wide enough (~950-1000 stage-px) that
+    centering it exactly on a mark can still reach into the shared screen's
+    stage-space footprint (SHARED_SCREEN_CENTER +/- SCREEN_W/2) — even though
+    reel never pastes per-line content there, the *baked-in bezel border* is
+    part of the static stage art and bled through at the frame edge. Clamp
+    the window away from the screen's bounds entirely: push it further from
+    the mark, on the side away from the screen, rather than trying to shrink
+    it (shrinking would zoom in past what the character needs)."""
     box = char_box(char_center_x) if full_body else char_upper_box(char_center_x, frac=0.92)
-    return _window_from_bbox(box, margin=1.08, aspect=PORTRAIT_ASPECT)
+    window = _window_from_bbox(box, margin=1.08, aspect=PORTRAIT_CHAR_ASPECT)
+    half_w = window["width"] / 2
+    screen_left = stage.SHARED_SCREEN_CENTER[0] - stage.SCREEN_W / 2
+    screen_right = stage.SHARED_SCREEN_CENTER[0] + stage.SCREEN_W / 2
+    if char_center_x >= stage.SHARED_SCREEN_CENTER[0]:
+        window["center_x"] = max(window["center_x"], screen_right + half_w)
+    else:
+        window["center_x"] = min(window["center_x"], screen_left - half_w)
+    return window
 
 
 def nate_cam(char_center_x=None, walking=False):

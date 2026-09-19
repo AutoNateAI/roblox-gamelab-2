@@ -456,7 +456,10 @@ def draw_highlighted_words(draw, xy, text, font, max_width, active_idx, max_line
 
 def draw_brand_pill(draw, render_format, fonts):
     if render_format == "reel":
-        box = (54, 82, 294, 130)
+        # v12: the caption bar this used to sit just above is gone (see
+        # build_line_overlay) — simple bottom-right corner now, same row as
+        # the footer.
+        box = (816, DELIVER_H - 92, 1036, DELIVER_H - 44)
         font = fonts["tag"]
     else:
         # v6: was top-left (60,46)-(320,92) — the shared screen can land on
@@ -496,23 +499,14 @@ def build_line_overlay(episode_title, speaker, text, cite_domains, fonts, render
     draw_brand_pill(d, render_format, fonts)
 
     if render_format == "reel":
-        bar = (44, DELIVER_H - 760, DELIVER_W - 44, DELIVER_H - 520)
-        d.rounded_rectangle(bar, radius=22, fill=(8, 6, 16, 210), outline=color + (210,), width=3)
-        tag_box = (70, DELIVER_H - 732, 232, DELIVER_H - 684)
-        d.rounded_rectangle(tag_box, radius=12, fill=color + (255,))
-        d.text((tag_box[0] + 16, tag_box[1] + 10), speaker.upper(), font=fonts["tag"], fill=(10, 8, 16, 255))
-        draw_highlighted_words(
-            d, (72, DELIVER_H - 672), text, fonts["caption"], DELIVER_W - 150,
-            active_idx, 3, (240, 245, 250, 255), stage.AMBER + (255,),
-        )
-        if cite_domains:
-            src_text = "SOURCE: " + ", ".join(cite_domains)
-            src_font = fit_font(d, src_text, fonts["ticker"], DELIVER_W - 140, min_size=14)
-            d.text((DELIVER_W - 70, DELIVER_H - 538), src_text, font=src_font,
-                   fill=stage.AMBER + (235,), anchor="ra")
+        # v12: dropped the karaoke-style caption bar (bar/tag/highlighted
+        # words/source ticker) entirely for reel, by request — audio-first,
+        # no burned-in dialogue text. Just the brand pill (drawn above) and a
+        # small footer near the bottom; nothing left to fight the character
+        # crop for space, so both get simple, low-risk positions.
         footer = f"{BRAND_TEXT} / THE BRIEF / {episode_title}"
         footer_font = fit_font(d, footer, fonts["footer"], DELIVER_W - 100, min_size=14)
-        d.text((54, 118), footer, font=footer_font, fill=(210, 222, 240, 220))
+        d.text((44, DELIVER_H - 46), footer, font=footer_font, fill=(210, 222, 240, 220))
         return layer
 
     bar = (60, 888, 1860, 1012)
@@ -660,7 +654,12 @@ def build_cta_overlay(fonts, render_format, frame_index, cta_url, has_meme=False
     if render_format == "reel":
         box_w = int((DELIVER_W - 96) * pulse)
         cx = DELIVER_W // 2
-        cy = DELIVER_H - 480 if has_meme else DELIVER_H // 2
+        # v12: was DELIVER_H-480 (1440) — paired with the meme card sitting
+        # up near the top (60-680), that dumped all the leftover vertical
+        # space into one big gap between the two cards instead of balanced
+        # margins. 1290 centers this card + the meme card above it as one
+        # group, with equal ~330px margins top and bottom of the frame.
+        cy = 1290 if has_meme else DELIVER_H // 2
         half_h = 300 if has_meme else 420
         box = (cx - box_w // 2, cy - half_h, cx + box_w // 2, cy + half_h)
         title_font = fonts["popup_big"].font_variant(size=48)
@@ -757,7 +756,12 @@ def render_line(ep, line, rigs, caches, stage_bg, fonts, out_dir, rng, states, c
         # fixing line 4/6's gestures in this same pass.
         "line_spec": {k: line.get(k) for k in
                       ("gesture", "screen", "popup", "mood", "move", "emphasis", "cite")},
-        "render_version": 7,
+        # v11 bump: reel's screen-panel layout, character-crop aspect, and
+        # caption-bar position all changed in overlay-drawing code that isn't
+        # part of line_spec above — without this, every reel line would
+        # report a stale cache hit and keep the old (torso-overlapping)
+        # layout.
+        "render_version": 11,
     }
     if line_mp4.exists() and render_meta_path.exists():
         try:
@@ -810,6 +814,16 @@ def render_line(ep, line, rigs, caches, stage_bg, fonts, out_dir, rng, states, c
             lambda x: camera.kai_cam(x, walking))
     cam_windows = resolve_camera(cam_state, target_fn, speaker_xs, n_frames)
 
+    # v11: reel's screen panel — see camera.py's REEL_PANEL_H note. Computed
+    # once per line (the shared_screen image itself doesn't change frame to
+    # frame within a line), fit into the panel box below the top margin.
+    if render_format == "reel":
+        # v12: top margin pulled down from 40 to 100 — sat too close to the
+        # very top edge before.
+        panel_box = (40, 100, camera.REEL_W - 40, camera.REEL_PANEL_H - 40)
+        panel_img = screen_graphics.fit_image_to_box(
+            shared_screen, panel_box[2] - panel_box[0], panel_box[3] - panel_box[1])
+
     mux_wav = wav_path
     if domains:
         mux_wav = audio_dir / f"line{n:02d}_mixed.wav"
@@ -838,15 +852,43 @@ def render_line(ep, line, rigs, caches, stage_bg, fonts, out_dir, rng, states, c
         li_body = caches[listener].get(listener_poses[f], "neutral", li_eye, False)
         paste_char(scene, li_body, states[listener]["x"])
 
-        paste_screen(scene, shared_screen, stage.SHARED_SCREEN_CENTER)
+        # v12: reel doesn't paste the screen onto the stage at all — the panel
+        # gets its content straight from the in-memory `shared_screen` image
+        # (built once above), not a stage crop. Pasting it onto the stage too
+        # was the actual cause of the screen appearing a second time, cut off,
+        # over on one side of the character shot: the character-only camera
+        # window is centered tightly on the speaker, but its edge could still
+        # clip the pasted screen (900px away on the wide stage) during a
+        # push-transition or a walk beat, when the window briefly widens.
+        # youtube still needs this — its whole composition IS character+
+        # screen cropped together.
+        if render_format != "reel":
+            paste_screen(scene, shared_screen, stage.SHARED_SCREEN_CENTER)
 
-        frame_img = camera.render_window(scene, cam_windows[f], DELIVER_W, DELIVER_H).convert("RGBA")
+        if render_format == "reel":
+            # Character crop is framed against the space *below* the panel
+            # (camera.PORTRAIT_CHAR_ASPECT, baked into portrait_cam's window
+            # already) — render at that reduced height and paste below the
+            # panel instead of stretching a full-height render into it.
+            char_h = camera.REEL_H - camera.REEL_PANEL_H
+            char_crop = camera.render_window(scene, cam_windows[f], camera.REEL_W, char_h).convert("RGBA")
+            frame_img = Image.new("RGBA", (camera.REEL_W, camera.REEL_H), (10, 6, 22, 255))
+            frame_img.alpha_composite(char_crop, (0, camera.REEL_PANEL_H))
+            frame_img.alpha_composite(panel_img, (panel_box[0], panel_box[1]))
+            pd = ImageDraw.Draw(frame_img)
+            pd.rounded_rectangle(panel_box, radius=20, outline=TAG_COLOR[speaker] + (255,), width=4)
+        else:
+            frame_img = camera.render_window(scene, cam_windows[f], DELIVER_W, DELIVER_H).convert("RGBA")
         # v3 fix: build_popup_overlay() has always had a real youtube-format
         # layout (the box positioned at (1120, 118, 1810, 302)) sitting right
         # next to the reel-format one — this call was gated to reel-only, so
         # the youtube-format branch never ran. That's the actual reason the
         # 16:9 explainer videos never showed a popup.
-        popup = build_popup_overlay(line, speaker, fonts, f, render_format)
+        # v11: reel no longer calls this at all — the screen panel now covers
+        # the job popups used to do for reel (the only visual at all, back
+        # when reel had no screen), so a popup box would just be a second,
+        # redundant callout stacked on top of the same information.
+        popup = None if render_format == "reel" else build_popup_overlay(line, speaker, fonts, f, render_format)
         if popup:
             frame_img.alpha_composite(popup)
         overlay = build_line_overlay(ep["title"], speaker, line["text"], domains, fonts, render_format, f, duration)
@@ -890,19 +932,18 @@ def render_intro_segment(ep, stage_bg, fonts, out_dir, render_format):
         else:
             meme_img = screen_graphics.build_meme_card(str(meme_path), 1300, 560)
 
-    if render_format != "reel":
-        backdrop = render_backdrop(DELIVER_W, DELIVER_H).convert("RGBA")
+    # v11: reel used to show a live character crop (both anchors' marks,
+    # bbox-unioned) behind the intro card, but that crop was framed for the
+    # *full* frame height — with the meme card also overlaid at a fixed
+    # position, the two fought over the same pixels (the meme sat right on
+    # top of the anchors' heads). The intro is a 2.2s hook before anyone's
+    # talking anyway; matching youtube's already-working intro (clean
+    # backdrop, no live characters) sidesteps that entirely instead of
+    # reserving yet another panel layout just for this one brief segment.
+    backdrop = render_backdrop(DELIVER_W, DELIVER_H).convert("RGBA")
 
     for f in range(n_frames):
-        if render_format == "reel":
-            bbox = camera._bbox_union(
-                camera.char_box(stage.NATE_MARK_X),
-                camera.char_box(stage.KAI_MARK_X),
-            )
-            window = camera._window_from_bbox(bbox, margin=1.02, aspect=camera.PORTRAIT_ASPECT)
-            frame = camera.render_window(stage_bg.copy(), window, DELIVER_W, DELIVER_H).convert("RGBA")
-        else:
-            frame = backdrop.copy()
+        frame = backdrop.copy()
         d = ImageDraw.Draw(frame)
         t = f / max(n_frames - 1, 1)
         alpha = int(255 * min(1.0, t * 2.4))
@@ -981,7 +1022,12 @@ def render_cta_segment(ep, stage_bg, fonts, out_dir, render_format):
     meme_box = None
     if meme_path and meme_path.exists():
         if render_format == "reel":
-            meme_box = (64, 60, DELIVER_W - 64, 680)
+            # v12: was (64,60)-(...,680) — hugging the top with a big empty
+            # gap before the CTA card lower down, all the leftover space
+            # dumped in the middle. Meme card + CTA card are now centered as
+            # one group, with the space distributed to equal margins at the
+            # top and bottom instead (see build_cta_overlay's has_meme cy).
+            meme_box = (64, 330, DELIVER_W - 64, 950)
         else:
             meme_box = (410, 40, 1510, 520)
         meme_img = screen_graphics.build_meme_card(
