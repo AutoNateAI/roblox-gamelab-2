@@ -1,0 +1,132 @@
+{
+  "episode": "bootheel-diesel-whodunit-reel",
+  "title": "Who's Actually Paying For This?",
+  "article_url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026",
+  "runtime_target_sec": 50,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/intro.png",
+    "prompt": "A single dramatic spotlight shines down on an empty interrogation-room chair, a folder on the table stamped 'WHO PAYS?', heavy shadows across the room."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/outro.png",
+    "prompt": "A cartoon magnifying glass zooms in on a glowing newspaper headline reading 'THE ANSWER MIGHT BE INSIDE', dramatic light rays bursting outward."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf", "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026." },
+    { "id": "s4", "url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026", "fact": "The dollar-per-acre incidence of the diesel shock, and which stakeholder in the value chain absorbs it, is not yet established from public data." }
+  ],
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "kai",
+      "mood": "neutral",
+      "text": "Okay so diesel's at a record price. USDA proved that part. Confirmed.",
+      "cite": ["s1"],
+      "emphasis": [8],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line01.png",
+        "prompt": "A giant red 'CONFIRMED' rubber stamp slams down hard onto an official government report, dust and papers flying everywhere."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 2,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Right, but here's the part nobody's actually proven yet.",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line02.png",
+        "prompt": "A cartoon magnifying glass hovers dramatically over a completely blank page with nothing but a giant question mark in the center."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 3,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Who actually eats that cost, Nate? Nobody has said. On God.",
+      "cite": ["s4"],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line03.png",
+        "prompt": "A four-person cartoon police lineup under one bright spotlight: a farmer, a grain-dryer operator, a truck driver, and a buyer in a suit, all looking equally nervous and suspicious."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 4,
+      "speaker": "nate",
+      "mood": "neutral",
+      "text": "Is it the farmer? The dryer guy? The trucker? The buyer at the end?",
+      "cite": [],
+      "gesture": "explain_chop",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line04.png",
+        "prompt": "A cartoon detective points dramatically down a lineup of four suspects from before, each one flinching under the accusing finger, sweat flying."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 5,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "Every single one of them's got a reason to say 'not me.'",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line05.png",
+        "prompt": "The same four cartoon suspects now all point at each other simultaneously in a chaotic circle, panic lines and sweat drops everywhere."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 6,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "USDA nailed the diesel number. Nobody's nailed the damn receipt.",
+      "cite": [],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line06.png",
+        "prompt": "A detective corkboard split in two: one half fully solved with a big green checkmark labeled 'THE PRICE', the other half completely empty and cobwebbed labeled 'WHO PAYS'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 7,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "So somebody out here is quietly eating a bill and ain't said one word.",
+      "cite": [],
+      "gesture": "explain_chop",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line07.png",
+        "prompt": "A cartoon person awkwardly eats a giant literal paper invoice like a sandwich, sweating and forcing a smile through it."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 8,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "That's a real mystery. Not solved by us, not solved by anybody. Yet.",
+      "cite": [],
+      "gesture": "rest_stand",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-whodunit-reel/screen-memes/line08.png",
+        "prompt": "The same four suspects sit frozen around a restaurant table, a giant glowing unpaid check sitting in the middle, nobody reaching for it."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    }
+  ]
+}

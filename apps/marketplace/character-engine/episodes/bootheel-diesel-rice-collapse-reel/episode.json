@@ -1,0 +1,132 @@
+{
+  "episode": "bootheel-diesel-rice-collapse-reel",
+  "title": "Why Rice Took the Hit First",
+  "article_url": "https://autonateai.com/research-and-case-studies/bootheel-diesel-harvest-cost-2026",
+  "runtime_target_sec": 50,
+  "intro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/intro.png",
+    "prompt": "A cartoon rice paddy sits happily flooded and lush, then the water suddenly starts draining away in a giant whirlpool as a shadowy hand shaped like a dollar sign pulls a plug at the bottom, the rice plants looking alarmed."
+  },
+  "outro_meme": {
+    "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/outro.png",
+    "prompt": "A cartoon rice stalk stands back up, dusts itself off, and gives a determined nod while pointing toward a glowing newspaper in the distance labeled 'FULL STORY'."
+  },
+  "sources": [
+    { "id": "s1", "url": "https://www.ams.usda.gov/sites/default/files/media/GTR09172026.pdf", "fact": "USDA AMS: national average diesel hit a record $6.285/gal for the week ending Sep 14, 2026." },
+    { "id": "s2", "url": "https://www.nass.usda.gov/Publications/Todays_Reports/reports/crop0926.pdf", "fact": "USDA NASS: Missouri rice planted acreage fell from 213,000 (2025) to 118,000 (2026), a 44.6% decline; soybean planted acreage rose from 5.6M to 5.95M acres." }
+  ],
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "Nate, Missouri rice acreage just fell forty four point six percent. In one damn year.",
+      "cite": ["s2"],
+      "emphasis": [4, 5, 6],
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line01.png",
+        "prompt": "A giant red arrow plunges straight down through a wilting rice paddy, a stunned cartoon scarecrow watching a roadside sign flip from '213,000 ACRES' to '118,000 ACRES'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 2,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Hold up, forty four percent? That's not a dip, that's rice tapping out.",
+      "cite": [],
+      "gesture": "shrug",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line02.png",
+        "prompt": "A cartoon rice plant with tiny arms waves a small white flag of surrender in the middle of a half-drained flooded field, sweating and exhausted."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 3,
+      "speaker": "kai",
+      "mood": "neutral",
+      "text": "Cause rice ain't like other crops. That thing needs flooded fields, twenty-four seven.",
+      "cite": [],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line03.png",
+        "prompt": "A cutaway cartoon diagram of a rice paddy showing a water pump running nonstop underground like a beating heart, glowing pipes pumping water in a steady rhythm, labeled 'RICE NEEDS THIS 24/7'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 4,
+      "speaker": "nate",
+      "mood": "halflid",
+      "text": "And flooded fields need pumps. And pumps need—",
+      "cite": [],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line04.png",
+        "prompt": "A cartoon water pump chugs along sweating hard, straining, with a diesel gas can duct-taped crudely to its side as its only fuel source."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 5,
+      "speaker": "kai",
+      "mood": "smile",
+      "text": "—diesel. Expensive, record-breaking, six damn dollar diesel.",
+      "cite": ["s1"],
+      "gesture": "explain_chop",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line05.png",
+        "prompt": "The same cartoon water pump from before is now on fire and gasping, right next to a gas station price sign glowing red reading '$6.285', flames everywhere."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 6,
+      "speaker": "nate",
+      "mood": "brows_up",
+      "text": "Meanwhile soybeans just chilled while rice caught a whole energy bill.",
+      "cite": [],
+      "gesture": "open_hands",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line06.png",
+        "prompt": "Split-panel cartoon: a relaxed soybean plant lounges in a tiny lawn chair sipping lemonade under a sign reading 'BARELY MOVED', while next to it a rice plant sweats buckets holding an oversized bill labeled 'ENERGY COSTS'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 7,
+      "speaker": "kai",
+      "mood": "halflid",
+      "text": "Rice acres down, soybean acres up. That ain't coincidence, that's a retreat.",
+      "cite": [],
+      "gesture": "point_screen_L",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line07.png",
+        "prompt": "A war-map style cartoon showing tiny rice-plant soldiers retreating off a farm field map while confident soybean-plant soldiers march in and plant a flag claiming the territory."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    },
+    {
+      "n": 8,
+      "speaker": "nate",
+      "mood": "smile",
+      "text": "And that's just the acreage. Wait til you see who's really footing the bill.",
+      "cite": [],
+      "gesture": "rest_stand",
+      "screen": {
+        "type": "meme",
+        "path": "/Users/autonate/code/roblox-gamelab-2/apps/marketplace/lab-assets/bootheel-diesel-rice-collapse-reel/screen-memes/line08.png",
+        "prompt": "A dim detective corkboard teaser lit by one spotlight: a big red question mark pinned next to a glowing dollar sign, a banner across the bottom reading 'TO BE CONTINUED'."
+      },
+      "voice_instructions": "This is a fast, informal parody bit between two friends clowning each other and throwing real shade at this situation — not a news broadcast. Big, exaggerated reactions, real comedic timing, talk with genuine Black comedic energy and attitude, a little cursing where it lands naturally, really sell the disbelief and the roast. Make it funny enough that people want to know the rest of the story."
+    }
+  ]
+}
