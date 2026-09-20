@@ -25,7 +25,7 @@ Read `content/research/<slug>.md` (and its `sources[]`-equivalent citations/link
 Ask the user (or infer from how they phrased the request) which register they want. Two tones are proven so far — don't invent a third without being asked:
 
 - **Professional / research tone** (the default unless told otherwise): measured pacing, longer lines are fine (up to ~15-20s), still uses memes on screen but keeps the banter restrained. Example: `episodes/bootheel-diesel-harvest-cost-2026/`.
-- **Informal / comedic parody tone**: short lines, ideally under ~6 seconds of spoken audio each (roughly 10-15 words), rapid back-and-forth between Nate and Kai every line, real jokes built on the article's actual facts (similes/metaphors, slang, dry humor), swearing only if the user explicitly says it's fine (this is "friends" content, not the public site). Example: `episodes/bootheel-diesel-parody-cut/`. Real facts stay real — the humor rides on top of them, it doesn't replace them.
+- **Informal / comedic parody tone** (standing instruction from Nathan, 2026-09-20 — this is the tone for every distribution video built to drive traffic back to an article; parody performance, not the site's own voice): short lines, ideally under ~6 seconds of spoken audio each (roughly 10-15 words), rapid back-and-forth between Nate and Kai every line, real jokes built on the article's actual facts (similes/metaphors, slang, dry humor). **Cuss heavily and by default** — this is not "swearing if the user says it's fine" anymore, it's the baseline register for this tone: fuck/shit/damn/hell land naturally in almost every other line, the way a stand-up special is loose about it, not bleeped-for-broadcast. **Channel a Richard Pryor / Mike Epps / Katt Williams stand-up energy** — that specific register: a comic who's genuinely mad or genuinely tickled by the absurdity of a real fact and rides that energy into a bit, rhythmic profanity used for emphasis and timing (not randomly sprinkled), a storyteller's cadence with a punchline landing on the actual number/stat, callbacks within the episode, and a willingness to roast the situation (the regulator, the plant, the weather, the growers' bad luck) without ever roasting real named people cruelly or making up facts to get the joke. Example: `episodes/bootheel-diesel-parody-cut/` for the base energy; push further into the cussing/stand-up register than that example did. Real facts stay real — the humor and profanity ride on top of them, they don't replace or distort them. This tone is explicitly built to be more shareable/clickable than the professional cut, precisely because it's a parody performance — it is never the tone used on the site itself.
 
 Whichever tone, use `voice_instructions` (step 5) to steer TTS delivery per-episode rather than editing the global voice instructions — the global ones are tuned for the professional tone.
 
@@ -159,9 +159,20 @@ Then use the Read tool to pull the contact sheet and a handful of individual fra
 
 You cannot hear the audio yourself — say so explicitly when reporting, and ask the user to confirm delivery/tone landed.
 
+## 8. Sync to Google Drive
+
+Once the render passes QA, upload it so it's reachable from every device:
+
+```bash
+rclone copy character-engine/output/youtube/<slug>.mp4 "gdrive:AutoNateAI Website Marketing Videos/YouTube/"
+```
+
+Idempotent — re-running after a re-render overwrites the same filename in Drive. This is the last step before reporting the episode finished; don't skip it even for a quick/parody-tone render.
+
 ## Known gotchas worth remembering
 
 - `USE_OPENAI_TTS` not set → silent fallback to robotic macOS voices. Always set it.
 - A line's screen defaulting to nothing does **not** mean "no visual" — it means a branded standby card. It never means "show the caption."
 - `point_screen_R`/`point_screen_L` are frame-relative, not anatomical — don't reason about them as "Nate's right hand."
 - Editing a `screen.prompt` string is what invalidates the meme cache — editing only the rendered PNG by hand won't survive a re-render.
+- The `gdrive:` rclone remote must be configured (`rclone listremotes` should list it) for step 8's Drive sync to work — one-time setup per machine.
