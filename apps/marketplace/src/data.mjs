@@ -1011,13 +1011,6 @@ export const investigations = [
     slug: "texas-high-plains-cotton-drought-shock-2026",
     icon: "help_center",
     status: "investigating",
-    // Today's Question of the Day (daily-dossier, 2026-09-19) — holds the
-    // home hero + research-hub featured slot + first-in-grid position.
-    // Only one investigation should carry this at a time; the next
-    // daily-dossier run moves it here and clears it from whichever
-    // investigation held it before. Same-day follow-on articles (via
-    // dossier-second-look) must NOT set this.
-    featured: true,
     name: "Texas High Plains Cotton Yield Is Forecast Down 15.8%. Who Absorbs the Drought Shock?",
     question:
       "With Texas cotton yield forecast 15.8% below 2025 and High Plains drought driving the decline, how does lost production propagate through growers, gins, cooperatives, warehouses, lenders, groundwater systems, and value-added cotton research?",
@@ -1106,6 +1099,170 @@ export const investigations = [
       { label: "Perdue Farms — corporate history", url: "https://corporate.perduefarms.com/" },
       { label: "Mountaire Farms — About Us", url: "https://www.mountaire.com/about-us/" },
       { label: "USDA NRCS — Demonstration of Alternative Containment Structures for Stockpiling Poultry Litter", url: "https://cig.sc.egov.usda.gov/projects/demonstration-alternative-containment-structures-stockpiling-poultry-litter" },
+    ],
+  },
+  {
+    slug: "bootheel-irrigation-groundwater-energy-economics-2026",
+    icon: "water_drop",
+    status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-20) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
+    name: "The Bootheel Is Built on Groundwater. What Is One More Irrigation Pass Actually Worth in 2026?",
+    question:
+      "With persistent Southeast Missouri dryness, late-season soybean/cotton decisions, and elevated energy costs, when does another irrigation pass protect enough yield and quality to justify pumping cost and aquifer draw?",
+    tagline: "Groundwater dependence is real and well-documented. The correct next irrigation decision is field-specific, and no public source hands you that answer for free.",
+    thumbnail: "/assets/og/bootheel-irrigation-groundwater-energy-economics-2026.jpg",
+    sourcePath: "../content/research/bootheel-irrigation-groundwater-energy-economics-2026.md",
+    region: "",
+    publishedDate: "2026-09-20",
+    commodity: "Soybeans / Cotton / Corn",
+    evidence: [
+      { label: "Missouri DNR — Southeastern Lowlands Groundwater Province", note: "The Bootheel's shallow Southeast Lowlands Alluvial Aquifer holds up to 21 trillion gallons and supports irrigation wells pumping up to 3,000 gallons per minute; deeper McNairy/Wilcox formations hold ~44 trillion gallons combined, many artesian.", url: "https://dnr.mo.gov/document-search/groundwater-provinces-missouri-southeastern-lowlands-groundwater-province-pub3001/pub3001" },
+      { label: "MU Extension — Irrigating Soybeans (G4420)", note: "A single well-timed late pod-development/early seed-fill irrigation pass added 6.7 bu/ac (short-season), 3.7 bu/ac (medium-season), and 0.8 bu/ac (full-season) in SE Missouri trials; irrigating at flowering alone is largely wasted water.", url: "https://extension.missouri.edu/publications/g4420" },
+      { label: "MU Extension — Scott County irrigated soybean crop budget", note: "Representative SE Missouri cost structure: irrigation fuel ~$16.80/acre for 8 acre-inches (~$2.10/acre-inch), fixed irrigation cost ~$82/acre, repairs ~$12/acre, labor ~$5/acre.", url: "https://extension.missouri.edu/media/wysiwyg/Extensiondata/CountyPages/Scott/CropBudgets/Soybeans-RR-Extend-Irrigated.pdf" },
+      { label: "USDA ERS — Farm Sector Income Forecast, September 2026", note: "2026 net farm income forecast at $158.4B, down 5.5% real vs. 2025; production expenses $492.8B (+4.5%); fuel & oil expense forecast up 28.8% vs. the February 2026 estimate.", url: "https://www.ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+      { label: "USDA FSA — September 2026 Lending Rates for Agricultural Producers", note: "Direct operating loan rate 5.250%, farm ownership 6.000%, emergency loan (actual loss) 3.750%, effective Sept. 1, 2026.", url: "https://www.fsa.usda.gov/news-events/news/09-01-2026/usda-announces-september-2026-lending-rates-agricultural-producers" },
+    ],
+    stakeholders: ["Bootheel soybean and cotton growers", "Farm Credit Southeast Missouri", "Missouri Soybeans", "MU Extension / Fisher Delta Research Center", "NRCS / Missouri DNR", "regional grain and cotton buyers"],
+    hypothesis:
+      "Southeast Missouri is unusually irrigation-dependent and groundwater-rich, but the correct late-season irrigation decision is field-specific — a water-energy decision model joining crop stage, soil moisture, pump lift/efficiency, energy price, and expected yield response is the defensible product, not a single Bootheel-wide answer. This is a hypothesis to test against real field-level pump, moisture, and yield-response data, not a conclusion.",
+    graphLayers: {
+      physical: "Wells, pumps, and the Southeast Lowlands Alluvial Aquifer sit under a 12-county river-bottom soybean/cotton/corn/rice economy; fields, crop stage, and soil moisture determine what one more pass is actually worth.",
+      capital: "FSA's September 2026 lending rates (5.25% operating) and USDA's national fuel-cost/farm-income squeeze (fuel +28.8%, net farm income -5.5% real) set the financing and cost backdrop against which any marginal irrigation dollar gets judged this season.",
+      business: "Farm Credit Southeast Missouri, Missouri Soybeans, MU Extension/Fisher Delta, NRCS/Missouri DNR, and regional grain/cotton buyers all touch this decision from a different angle — credit exposure, agronomy, water policy, and market access respectively.",
+      information: "MU Extension and Missouri DNR supply strong regional/program-level evidence; no public source yet joins field-level pump lift, soil moisture, crop stage, and yield response into one current-season Bootheel dataset.",
+    },
+    dataNeeds: [
+      "Field-level pump lift, flow rate, and efficiency for representative Bootheel wells",
+      "Current-season (not representative/vintage) local diesel and electricity pricing",
+      "Real-time soil-moisture and crop-stage data tied to specific fields",
+      "Local yield/quality response to the last irrigation pass, by field and variety",
+      "A direct conversation with a Bootheel grower, Farm Credit SEMO loan officer, or MU Extension/Fisher Delta agronomist — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Bootheel Water-Energy Decision Engine — inputs field/crop/stage, soil moisture, forecast ET/rain, pump lift/flow/efficiency, energy price, and expected yield/quality response; outputs $/acre irrigation cost, break-even bushels/lint, sensitivity bands, and a stop/go 'measure more' state",
+    ],
+    findings:
+      "The Bootheel's groundwater dependence and the general shape of the irrigation cost structure are both well-documented: the marginal cost of one more pass (roughly $2/acre-inch in fuel) is far smaller than the average per-acre irrigation budget line suggests, and MU Extension's own agronomic guidance shows timing — not water volume — is what drives most of the yield-response variance. What remains unverified is the field-specific answer for any given 2026 Bootheel field, which requires current pump, moisture, and yield data this pass did not have access to, which is why status stays \"investigating.\"",
+    sources: [
+      { label: "Missouri DNR — Southeastern Lowlands Groundwater Province", url: "https://dnr.mo.gov/document-search/groundwater-provinces-missouri-southeastern-lowlands-groundwater-province-pub3001/pub3001" },
+      { label: "MU Extension — Irrigation Programs", url: "https://extension.missouri.edu/programs/irrigation" },
+      { label: "MU Extension — Irrigating Soybeans (G4420)", url: "https://extension.missouri.edu/publications/g4420" },
+      { label: "MU Extension — Scott County irrigated soybean crop budget", url: "https://extension.missouri.edu/media/wysiwyg/Extensiondata/CountyPages/Scott/CropBudgets/Soybeans-RR-Extend-Irrigated.pdf" },
+      { label: "Southern Ag Today — Irrigation Water Pumping Costs in the Mid-South", url: "https://southernagtoday.org/2024/09/04/irrigation-water-pumping-costs-in-the-mid-south/" },
+      { label: "USDA ERS — Farm Sector Income Forecast, September 2026", url: "https://www.ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+      { label: "USDA FSA — September 2026 Lending Rates for Agricultural Producers", url: "https://www.fsa.usda.gov/news-events/news/09-01-2026/usda-announces-september-2026-lending-rates-agricultural-producers" },
+      { label: "Brownfield Ag News — Early soybean yields look good as harvest advances in Missouri Bootheel", url: "https://www.brownfieldagnews.com/news/early-soybean-yields-look-good-as-harvest-advances-in-missouri-bootheel/" },
+    ],
+  },
+  {
+    slug: "central-valley-dairy-nitrogen-compliance-capital-2026",
+    icon: "policy",
+    status: "investigating",
+    name: "California Just Rewrote the Dairy Nitrogen Rulebook. What Will Compliance Actually Cost — and Who Pays?",
+    question:
+      "After California adopted WQ-2026-0028, what will dairy nitrogen/groundwater compliance actually cost at the farm level — and who bears the capital?",
+    tagline: "The regulation is real and dated. The farm-level compliance-capital number nobody has published yet is the actual story.",
+    thumbnail: "/assets/og/central-valley-dairy-nitrogen-compliance-capital-2026.jpg",
+    sourcePath: "../content/research/central-valley-dairy-nitrogen-compliance-capital-2026.md",
+    region: "",
+    publishedDate: "2026-09-20",
+    commodity: "Milk / Dairy",
+    evidence: [
+      { label: "State Water Resources Control Board — Order WQO 2026-0028", note: "Adopted September 15, 2026: requires affected dairies to supply alternative drinking water to nitrate-impacted households, stricter nitrogen monitoring, manure-pond leak prevention, and phased manure-application reduction on a schedule up to 35 years; Central Valley Regional Board must adopt final implementing regs within 5 years.", url: "https://www.waterboards.ca.gov/water_issues/programs/enforcement/dairy_general_order.shtml" },
+      { label: "Recorder (local reporting) — State Water Board dairy order coverage", note: "The Board's own spatial analysis found roughly 94% of dairies within one mile of the state's highest-risk nitrate groundwater areas are located in the Central Valley.", url: "https://www.recorderonline.com/news/state-water-board-releases-dairies-order-to-protect-water/article_4125ff2a-0c83-4f3e-b0be-1fc5c63a2dc0.html" },
+      { label: "CDFA / CDRF — 2026 Dairy Plus Program", note: "2026 (final) round: $34M available, capped at $750/cow up to $1.25M/project; applications due Sept. 14, 2026. Prior rounds 1+2 combined awarded $43.6M across 37 projects.", url: "https://www.grants.ca.gov/grants/2026-dairy-plus-program/" },
+      { label: "USDA NASS — Milk Production, January 2025", note: "California milk-cow inventory: 1.71 million head, roughly 18% of the ~9.45 million US milk-cow herd.", url: "https://www.nass.usda.gov/Statistics_by_State/California/Publications/Livestock_Releases/Milk_Production/2025/202501MILKPROD.pdf" },
+      { label: "California Dairies, Inc. — About", note: "Owned by nearly 300 independent family-owned dairy farms; the state's largest dairy cooperative.", url: "https://www.californiadairies.com/about/" },
+    ],
+    stakeholders: ["Central Valley dairy operators", "Western United Dairies", "California Dairies, Inc.", "State/Regional Water Boards", "CDFA / CDRF Dairy Plus Program", "agricultural lenders financing dairy capex"],
+    hypothesis:
+      "The new order concentrates real compliance-capital demand on a geographically narrow slice of California (the Central Valley, ~94% of at-risk dairies) at the same moment the state's primary compliance-grant pool (Dairy Plus) is in its smaller, final funding round — meaning a meaningful share of the capital gap likely falls to dairy balance sheets, cooperative-level financing, or ag lenders rather than grants. This is a hypothesis to test against real farm-level compliance-cost and grant-award data, not a conclusion.",
+    graphLayers: {
+      physical: "Central Valley dairies, manure lagoons/ponds, and groundwater wells sit atop the state's most nitrate-impacted aquifer zones — the same geography the Water Board's own spatial analysis flags as ~94% of the statewide at-risk total.",
+      capital: "A shrinking Dairy Plus grant pool ($34M in its final 2026 round, down from $43.6M combined in rounds 1+2) meets real per-cow technology costs ($850-950/cow for a lagoon system, $300k+ upfront for a liner retrofit) with no published farm-level compliance-cost total yet.",
+      business: "Western United Dairies and California Dairies, Inc. sit between individual dairies and processors; neither has yet published a compliance-capital position. Ag lenders are the likely backstop once grant capital runs out.",
+      information: "The regulatory event, the funding-program numbers, and generic technology costs are all well-documented. What's missing is a farm-archetype-level compliance-cost model and any real interview with an operator, cooperative, or lender.",
+    },
+    dataNeeds: [
+      "Round 3 (2026) Dairy Plus application/award data once CDFA publishes it — not yet public as of Sept. 20, 2026",
+      "Farm-level compliance-cost estimates broken out by dairy archetype (herd size, existing manure system, distance to a high-risk nitrate zone)",
+      "County/facility-level nitrate well-testing data tied to specific dairies",
+      "A direct conversation with a Central Valley dairy operator, Western United Dairies, California Dairies Inc., or an ag lender financing compliance capex — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "Central Valley Dairy Compliance Capital GIS — classify dairy archetypes by geography/risk/manure workflow/existing technology; layer regulatory obligations, grant eligibility windows, and capital-cost ranges to produce a compliance timeline, facility-risk map, capex waterfall, technology matrix, and funding gap by archetype",
+    ],
+    findings: null,
+    sources: [
+      { label: "State Water Resources Control Board — Dairy General Order program page", url: "https://www.waterboards.ca.gov/water_issues/programs/enforcement/dairy_general_order.shtml" },
+      { label: "Maven's Notebook — State Water Board adopts order to protect groundwater from overapplication of manure at dairies", url: "https://mavensnotebook.com/2026/09/17/press-release-state-water-board-adopts-order-to-protect-groundwater-from-overapplication-of-manure-at-dairies/" },
+      { label: "Western Water — Groundwater Regs: California Orders New Dairy Nitrate Rules", url: "https://www.western-water.com/2026/09/18/groundwater-regs-california-orders-new-dairy-nitrate-rules/" },
+      { label: "Recorder — State Water Board releases dairies order to protect water", url: "https://www.recorderonline.com/news/state-water-board-releases-dairies-order-to-protect-water/article_4125ff2a-0c83-4f3e-b0be-1fc5c63a2dc0.html" },
+      { label: "CDFA / Grants Portal — 2026 Dairy Plus Program", url: "https://www.grants.ca.gov/grants/2026-dairy-plus-program/" },
+      { label: "PR Newswire — Dairy Plus Program Makes $34 Million Available for Advanced Manure Management Projects on California Farms", url: "https://www.prnewswire.com/news-releases/dairy-plus-program-makes-34-million-available-for-advanced-manure-management-projects-on-california-farms-302802599.html" },
+      { label: "USDA NASS — Milk Production, January 2025", url: "https://www.nass.usda.gov/Statistics_by_State/California/Publications/Livestock_Releases/Milk_Production/2025/202501MILKPROD.pdf" },
+      { label: "California Dairies, Inc. — About", url: "https://www.californiadairies.com/about/" },
+      { label: "CDFA — Manure Nutrient Recovery, Removal, and Reuse on California Dairies", url: "https://www.cdfa.ca.gov/oefi/research/docs/cbc_manure_nutrient_report.pdf" },
+    ],
+  },
+  {
+    slug: "north-dakota-soy-crush-yield-finance-2026",
+    icon: "factory",
+    status: "investigating",
+    name: "North Dakota Built the Soybean Crush. Then Yields Fell in the Same Year Acreage Hit a Record. Does the Local-Processing Bet Still Pay?",
+    question:
+      "North Dakota built local soybean crush capacity; now soybean yields are near 30 bu/acre while processing capacity is being optimized. Does local processing still improve grower and regional resilience in a stressed year?",
+    tagline: "Green Bison, a tax-credit rule change, and a $500M state finance program are all real. Whether any of it reaches the grower's basis is the part nobody's published.",
+    thumbnail: "/assets/og/north-dakota-soy-crush-yield-finance-2026.jpg",
+    sourcePath: "../content/research/north-dakota-soy-crush-yield-finance-2026.md",
+    region: "",
+    publishedDate: "2026-09-20",
+    commodity: "Soybeans / Canola",
+    evidence: [
+      { label: "USDA NASS — North Dakota State Agriculture Overview, 2023-2026", note: "Soybean yield fell from 35.5 bu/ac (2023) to 37.5 (2024) to 34.5 (2025) to 30.0 bu/ac (2026), a four-year low, even as planted acreage rose to a record 6.85M acres; 2026 total production (203.7M bu) is the lowest of the four years.", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=North+Dakota&year=2026" },
+      { label: "Marathon Petroleum / ADM — Green Bison Soy Processing", note: "$350M joint venture (ADM 75%, Marathon Petroleum 25%) in Spiritwood, ND — North Dakota's first dedicated soybean crush plant, 150,000 bu/day nameplate capacity, ~600M lb refined soybean oil/year, opened for the 2023 harvest. No public throughput/utilization data.", url: "https://www.greenbisonsoy.com/" },
+      { label: "ADM — July 30, 2026 crush-capacity expansion release", note: "Investments at 4 US plants including Spiritwood unlock ~700,000 metric tons (25M+ bushels) of added annual crush demand; Spiritwood's operational-optimization work targeted for completion mid-2028, not immediate.", url: "https://www.adm.com/en-us/news/news-releases/2026/7/adm-to-expand-north-america-crush-capacity-amid-strong-biofuel-demand/" },
+      { label: "North Dakota Industrial Commission — 2026 Farm Financial Stability Program expansion", note: "$100M added March 2026, bringing combined 2026 Farm Financial Stability + Grain Inventory Loan support to $500M at a 3.75% fixed BND-side rate for producers with 2024-25 operating shortfalls.", url: "https://www.ndic.nd.gov/news/ndic-announces-100m-additional-loan-funding-bnd-2026-farm-financial-stability-program" },
+      { label: "NDSU Extension and Ag Research News — 2026 crop budget projections", note: "\"It's a revenue problem\" — NDSU's Ron Haugen attributes 2026's low projected crop returns to lower commodity prices, not input costs, which were flat to only modestly higher.", url: "https://www.ag.ndsu.edu/news/newsreleases/2026/february/ndsu-crop-budget-projections-show-low-returns-for-2026" },
+    ],
+    stakeholders: ["North Dakota soybean growers", "North Dakota Soybean Council", "Green Bison / ADM / Marathon Petroleum", "Northern Canola Growers Association", "Bank of North Dakota / local ag lenders", "NDSU Extension"],
+    hypothesis:
+      "North Dakota's local soybean-crush investment, a 2026 federal tax-credit rule change favoring soybean oil, and a $500M state farm-finance backstop are all real and mostly pulling in the same direction — but none of the public data yet shows whether any of that value actually reaches a grower's local cash basis in a lower-yield year, versus simply cushioning the state's agricultural economy in general. This is a hypothesis to test against real local-basis, plant-utilization, and lender data, not a conclusion.",
+    graphLayers: {
+      physical: "Green Bison's Spiritwood, ND crush plant (150,000 bu/day nameplate) sits inside a soybean-growing region that grew from 500,000 acres (1990) to 6.85M acres (2026) but historically exported ~95% of its crop whole, by rail.",
+      capital: "A 2026 Section 45Z guidance change roughly doubled the renewable-diesel credit value of Green Bison's soybean oil output; separately, BND/NDIC pushed $500M into farm-finance backstops for 2024-25 shortfalls — two real capital levers, neither one yet shown to connect to grower-level basis.",
+      business: "ADM (75%) and Marathon Petroleum (25%) own Green Bison; North Dakota Soybean Council and Northern Canola Growers Association sit as connector/advocacy organizations; Bank of North Dakota and local ag lenders hold the finance relationship with growers.",
+      information: "Production, plant nameplate capacity, the tax-credit change, and the state finance program are all well-documented. What's missing: actual plant utilization, historical/current local basis, procurement radius, and canola-vs-soybean acreage economics for an individual grower.",
+    },
+    dataNeeds: [
+      "Green Bison's actual annual throughput/utilization vs. its 150,000 bu/day nameplate capacity — not publicly disclosed",
+      "A historical local soybean basis series for the Spiritwood/Jamestown corridor, before and after the 2023 plant opening",
+      "Green Bison's real procurement radius and how it's shifted since the July 2026 expansion announcement",
+      "Canola-vs-soybean acreage economics for a representative eastern North Dakota grower in 2026",
+      "A direct conversation with a North Dakota Soybean Council representative, an ADM/Green Bison operator, a Bank of North Dakota loan officer, or a producer — zero interviews conducted so far",
+    ],
+    artifacts: [
+      "North Dakota Crush + Finance Resilience Graph — nodes for counties, soybean/canola acres and yield, elevators, Green Bison, canola processors, renewable-diesel offtake, meal buyers, rail, and BND/local lenders; scenarios comparing no-local-crush vs. operating/expanded crush under normal and low-yield production years",
+    ],
+    findings: null,
+    sources: [
+      { label: "USDA NASS — North Dakota State Agriculture Overview, 2026", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=North+Dakota&year=2026" },
+      { label: "USDA NASS — North Dakota State Agriculture Overview, 2025", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=North+Dakota&year=2025" },
+      { label: "USDA NASS — North Dakota State Agriculture Overview, 2024", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=North+Dakota&year=2024" },
+      { label: "USDA NASS — North Dakota State Agriculture Overview, 2023", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=North+Dakota&year=2023" },
+      { label: "Green Bison Soybean Processing — official site", url: "https://www.greenbisonsoy.com/" },
+      { label: "ADM — To Expand North America Crush Capacity Amid Strong Biofuel Demand (July 30, 2026)", url: "https://www.adm.com/en-us/news/news-releases/2026/7/adm-to-expand-north-america-crush-capacity-amid-strong-biofuel-demand/" },
+      { label: "North Dakota Industrial Commission — NDIC announces $100M additional loan funding for BND 2026 Farm Financial Stability Program", url: "https://www.ndic.nd.gov/news/ndic-announces-100m-additional-loan-funding-bnd-2026-farm-financial-stability-program" },
+      { label: "Agweek — How a region known for its wheat and grasslands turned toward corn and soybeans", url: "https://www.agweek.com/crops/how-a-region-known-for-its-wheat-and-grasslands-turned-toward-corn-and-soybeans" },
+      { label: "Agweek — Crushing it: North Dakota ready to ride wave of demand for soybean oil and meal", url: "https://www.agweek.com/business/crushing-it-north-dakota-ready-to-ride-wave-of-demand-for-soybean-oil-and-meal" },
+      { label: "American Farm Bureau Federation — 45Z Clean Fuel Production Credit", url: "https://www.fb.org/market-intel/45z-clean-fuel-production-credit" },
+      { label: "NDSU Extension and Ag Research News — NDSU crop budget projections show low returns for 2026", url: "https://www.ag.ndsu.edu/news/newsreleases/2026/february/ndsu-crop-budget-projections-show-low-returns-for-2026" },
     ],
   },
 ];

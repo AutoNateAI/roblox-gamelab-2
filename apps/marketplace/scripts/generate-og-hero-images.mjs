@@ -141,6 +141,18 @@ const jobs = [
     file: "og/delmarva-poultry-productivity-grower-consolidation-2026.jpg",
     prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style shot of a single large modern chicken house at golden hour on the Delmarva Peninsula, rows of ventilation fans visible, flat farmland stretching behind it, no people or birds visible, fading into a dark navy panel with gold light. Large bold headline text reading "40% MORE CHICKEN. 37% FEWER GROWERS. WHO WINS?" with a smaller line beneath reading "AutoNateAI · Delmarva Poultry Productivity, 2026". No logos, no readable signage. ${STYLE}`,
   },
+  {
+    file: "og/bootheel-irrigation-groundwater-energy-economics-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural water-and-energy finding. Background: a documentary-style shot of a single irrigation well pump and riser pipe standing in a green soybean field at golden hour, a center-pivot or furrow-irrigation line visible running into the crop rows, flat Bootheel river-bottom farmland stretching to the horizon, fading into a dark navy panel with gold light. Large bold headline text reading "ONE MORE IRRIGATION PASS. WHAT IS IT ACTUALLY WORTH?" with a smaller line beneath reading "AutoNateAI · Bootheel Irrigation & Groundwater Economics, 2026". No logos, no readable signage. ${STYLE}`,
+  },
+  {
+    file: "og/central-valley-dairy-nitrogen-compliance-capital-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-regulatory finding. Background: a documentary-style shot of a Central Valley California dairy manure lagoon/pond with a visible synthetic liner installation in progress, dairy barns and irrigated green cropland stretching behind it, clear California afternoon light, fading into a dark navy panel with gold light. Large bold headline text reading "CALIFORNIA JUST REWROTE THE DAIRY NITROGEN RULEBOOK" with a smaller line beneath reading "AutoNateAI · Central Valley Dairy Compliance Capital, 2026". No logos, no readable signage. ${STYLE}`,
+  },
+  {
+    file: "og/north-dakota-soy-crush-yield-finance-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-processing finding. Background: a documentary-style shot of a large modern soybean crush and refining plant complex on the North Dakota prairie at golden hour — tall grain silos, processing towers, and conveyor structures, a loaded grain truck approaching on a gravel road, flat harvested farmland stretching to the horizon, fading into a dark navy panel with gold light. Large bold headline text reading "NORTH DAKOTA BUILT THE CRUSH. THEN YIELDS FELL." with a smaller line beneath reading "AutoNateAI · North Dakota Soy Crush & Farm Finance, 2026". No logos, no readable signage. ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {
