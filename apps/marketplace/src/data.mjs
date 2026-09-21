@@ -705,6 +705,180 @@ export const investigations = [
     ],
   },
   {
+    slug: "bootheel-rice-basis-storage-marketing-loan-2026",
+    icon: "help_center",
+    status: "investigating",
+    name: "Missouri Rice Is Harvested. Should Bootheel Farmers Sell Now or Finance Time?",
+    question:
+      "With Missouri's 2026 rough-rice Marketing Assistance Loan rate set at $7.70/cwt and Dunklin County cash bids reported in the low-$6/bushel range, how much basis improvement — and by when — is actually required for storage or MAL-supported financing to beat a harvest-time sale once financing interest, storage, shrink and quality risk are counted?",
+    tagline: "A Dunklin County grower says he needs another 75 cents to feel good about selling. Converted into the loan rate's own units, his price is already above the government floor — the real math is somewhere else entirely.",
+    thumbnail: "/assets/og/bootheel-rice-basis-storage-marketing-loan-2026.jpg",
+    sourcePath: "../content/research/bootheel-rice-basis-storage-marketing-loan-2026.md",
+    region: "",
+    publishedDate: "2026-09-21",
+    commodity: "Rice",
+    evidence: [
+      { label: "Brownfield Ag News — Missouri rice farmer interview, Sep 2026", note: "Dunklin County producer and Missouri Rice Council chair Rance Daniels: average yields, only ~20% of his crop marketed, cash prices in the low $6/bu range, ~$6.75/bu as a more comfortable selling level; basis widened because 'the futures had outrun the mill market price.'", url: "https://www.brownfieldagnews.com/news/missouri-rice-farmer-holds-off-on-sales-as-basis-remains-wide/" },
+      { label: "USDA FSA — 2026 Marketing Assistance Loan Rates, Apr 2026", note: "Missouri's 2026 rough-rice MAL rate set at $7.70/cwt (long grain and medium/short grain), available through May 31, 2027.", url: "https://www.fsa.usda.gov/news-events/news/04-08-2026/usda-announces-2026-marketing-assistance-loan-rates-wheat-feed-grains" },
+      { label: "USDA FSA — September 2026 Lending Rates", note: "Direct operating loan rate 5.25%, direct ownership loan rate 6.00%, commodity loan rate 5.00%, effective Sep. 1, 2026.", url: "https://www.fsa.usda.gov/news-events/news/09-01-2026/usda-announces-september-2026-lending-rates-agricultural-producers" },
+      { label: "USDA ERS — Farm Sector Income Forecast, Sep 2026", note: "2026 farm sector debt forecast at $605.1B (+4.6%); production expenses at $492.8B (+4.5%); marketing/storage/transportation expenses up 12% YoY nationally.", url: "https://ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+      { label: "Arkansas Farm Bureau — Market Briefs, Sep 18 2026", note: "Mid-South rice basis 'near $1/cwt under the board' against November futures pushing toward $16/cwt — an independent cross-check that lands within cents of Daniels' own converted comfort price.", url: "https://www.arfb.com/news/2026/sep/18/market-briefs-september-18-2026/" },
+    ],
+    stakeholders: ["Rance Daniels / Missouri Rice Council", "Farm Credit Southeast Missouri loan officers", "County FSA offices administering the MAL", "USA Rice Federation (Mollie Buckler, Missouri liaison)", "Local rice mills and elevators setting Bootheel basis"],
+    hypothesis:
+      "If a grower's real cost of waiting is dominated by MAL/operating-credit interest rather than storage, shrink or quality risk, the Marketing Assistance Loan's actual value this year is cheap time to let basis narrow — not price support, since cash already appears to trade above the loan rate once converted to matching units. This is a hypothesis built from the FSA's actual September 2026 lending rate and the published MAL rate, not a locally verified Bootheel carry-cost figure — the real storage/shrink numbers that would fully settle it aren't public.",
+    graphLayers: {
+      physical: "Harvested rough rice moves from field to on-farm bin or elevator storage, then to a local mill for milling into the rice that actually sells — the same physical path the Commodity Credit Corporation's nonrecourse loan program was built around in 1933 to make viable at all.",
+      capital: "A grower chooses between a harvest-time cash bid (~$6.00-$6.75/bu per Daniels, ≈$13.3-$15.0/cwt converted), self-financed storage, an operating line at FSA's 5.25% September rate, or a $7.70/cwt Marketing Assistance Loan available through May 31, 2027 — each a different cost of waiting.",
+      business: "Growers, Farm Credit Southeast Missouri and other ag lenders, county FSA offices administering the MAL, the Missouri Rice Council, and the mills whose bids actually set the local basis that determines whether waiting pays.",
+      information: "Daily local mill bids, the widening/narrowing basis gap against futures, storage/drying/shrink costs, and MAL mechanics — several of which (a Bootheel-specific mill bid sheet, a local storage rate) simply aren't published anywhere public yet.",
+    },
+    dataNeeds: [
+      "A real, current Bootheel mill bid sheet by grade, in both $/bu and $/cwt",
+      "A documented local storage/drying/shrink cost figure — not a national or Iowa/Mississippi State benchmark",
+      "A forward basis curve by month for Missouri long-grain rice",
+      "Farm Credit Southeast Missouri's own rice-specific loan/collateral practices for the 2026 crop",
+      "A direct conversation with a Bootheel grower or lender beyond the one interview Brownfield already published",
+    ],
+    artifacts: [
+      "A weekly, plain-language Bootheel mill-bid and basis tracker published in both $/bu and $/cwt",
+      "A break-even carry calculator by days-in-storage once a real local storage-cost figure exists",
+    ],
+    findings:
+      "Converting Rance Daniels' publicly quoted cash price and comfort level from dollars-per-bushel into dollars-per-hundredweight — the units USDA's MAL rate and season-average price forecast are quoted in — shows his price is already running above, not below, both the $7.70/cwt MAL rate and close to USDA's own $14.90/cwt 2026/27 season-average forecast. The financing-interest cost of waiting out the MAL's full availability window, at FSA's actual 5.25% September rate, comes to roughly $0.27/cwt — a small fraction of the ~$1.7/cwt gap between his current price and his stated comfort level. That means the loan isn't functioning as price support this year; it's functioning as cheap time while basis narrows. What's still missing — a real Bootheel mill bid sheet and a documented local storage cost — is exactly what would tell a grower whether that basis gap is actually likely to close, which is why this stays \"investigating.\"",
+    sources: [
+      { label: "Brownfield Ag News — Missouri rice farmer holds off on sales as basis remains wide", url: "https://www.brownfieldagnews.com/news/missouri-rice-farmer-holds-off-on-sales-as-basis-remains-wide/" },
+      { label: "USDA FSA — 2026 Marketing Assistance Loan Rates for Wheat, Feed Grains, Oilseeds and Rice", url: "https://www.fsa.usda.gov/news-events/news/04-08-2026/usda-announces-2026-marketing-assistance-loan-rates-wheat-feed-grains" },
+      { label: "USDA FSA — USDA Announces September 2026 Lending Rates for Agricultural Producers", url: "https://www.fsa.usda.gov/news-events/news/09-01-2026/usda-announces-september-2026-lending-rates-agricultural-producers" },
+      { label: "USDA ERS — Farm Sector Income Forecast", url: "https://ers.usda.gov/topics/farm-economy/farm-sector-income-finances/farm-sector-income-forecast" },
+      { label: "Arkansas Farm Bureau — Market Briefs, September 18, 2026", url: "https://www.arfb.com/news/2026/sep/18/market-briefs-september-18-2026/" },
+      { label: "Missouri Rice Research and Merchandising Council — About", url: "https://missouririce.com/about/" },
+      { label: "University of Arkansas Extension — On-Farm Rice Drying and Storage", url: "https://www.uaex.uada.edu/farm-ranch/crops-commercial-horticulture/Grain_drying_and_storage/rice_drying_and_storage.aspx" },
+      { label: "EBSCO Research Starters — Roosevelt Creates the Commodity Credit Corporation", url: "https://www.ebsco.com/research-starters/history/roosevelt-creates-commodity-credit-corporation/" },
+      { label: "farmdoc daily — Farm Bill Review: Historical Background on Marketing Assistance Loans", url: "https://farmdocdaily.illinois.edu/2017/06/farm-bill-review-historical-background-marketing.html" },
+    ],
+  },
+  {
+    slug: "michigan-apple-storage-ai-packing-margin-2026",
+    icon: "help_center",
+    status: "investigating",
+    // Today's Question of the Day (daily-dossier, 2026-09-21) — holds the
+    // home hero + research-hub featured slot + first-in-grid position.
+    // Only one investigation should carry this at a time; the next
+    // daily-dossier run moves it here and clears it from whichever
+    // investigation held it before. Same-day follow-on articles (via
+    // dossier-second-look) must NOT set this.
+    featured: true,
+    name: "Michigan Has a Billion-Pound Apple Crop. Can Storage and AI Protect Grower Margin?",
+    question:
+      "With Michigan's 2026 apple crop running near its historical average in size but national wholesale box prices down roughly 28-36% over three years while H-2A labor costs have grown to 60-70% of that same wholesale price, how much of a Michigan grower's margin can controlled-atmosphere storage and AI-enabled packing routing actually protect — and how much sits upstream of anything a packing line can touch?",
+    tagline: "The crop is big and high-quality. A 45-acre farm is still projected to lose over $135,000 this season — the real problem is what's left of the box price after labor, not the size of the harvest.",
+    thumbnail: "/assets/og/michigan-apple-storage-ai-packing-margin-2026.jpg",
+    sourcePath: "../content/research/michigan-apple-storage-ai-packing-margin-2026.md",
+    region: "",
+    publishedDate: "2026-09-21",
+    commodity: "Apples",
+    evidence: [
+      { label: "USDA/NASS — Michigan 2026 State Overview", note: "Lists Michigan's 2026 apple crop at 1.05 billion lbs (≈25M bushels).", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=Michigan&year=2026" },
+      { label: "Michigan Apple Committee — 2026 crop-quality release, Aug 24 2026", note: "Executive director Diane Smith: crop expected above the USDA 25M-bushel estimate, exceptional size/color; Michigan's own historical average is 27.2M bushels/year.", url: "https://www.michiganapples.com/press-room/news-releases/michigan-apple-crop-expected-to-be-high-quality/" },
+      { label: "MSU Extension — Statewide Apple Maturity Report, Sep 10 2026", note: "Variety-level starch/firmness/Brix/color data across four regions; McIntosh running up to 18 days ahead of normal harvest timing, most varieties 11-24 days early.", url: "https://msu-prod.dotcms.cloud/news/michigan-statewide-apple-maturity-report-september-10-2026" },
+      { label: "FreshFruitPortal — USApple labor-cost-share report, May 28 2026", note: "USApple VP of Insights Chris Gerlach: H-2A-related expenses now run 60-70% of average wholesale price/box, up from ~40% in 2013; wholesale prices down ~23% from the 2023/24 peak.", url: "https://www.freshfruitportal.com/news/2026/05/28/aapple-growers-us/" },
+      { label: "Farm Credit East — 2026 Apple Outlook, May 19 2026", note: "National apple supply (263-275M bushels) growing faster than profitable-price demand; labor now \"the number one cost of production\"; current pricing \"not sustainable without changes in costs, pack-out, demand or supply.\"", url: "https://www.farmcrediteast.com/en/resources/todays-harvest-Blog/260519AppleOutlookHighSupplyTightMargins" },
+      { label: "Crain's Grand Rapids Business — Michigan apple growers face mounting losses, 2026", note: "A 45-acre Michigan apple farm projected to lose $135,495 this season; Michigan Apple Committee retail-split example: retailer earns $1.06, grower earns $0.19, on a $2.99 3-lb bag.", url: "https://www.crainsgrandrapids.com/news/agriculture/michigan-apple-growers-face-mounting-losses-despite-bumper-crop/" },
+    ],
+    stakeholders: ["Michigan apple growers deciding storage vs. fresh-pack vs. processing routing", "Riveridge Packing operations team", "Michigan Apple Committee (Diane Smith)", "GreenStone Farm Credit Services credit officers", "MSU Extension fruit/storage research team"],
+    hypothesis:
+      "If controlled-atmosphere storage and AI-enabled sorting mainly affect which share of a grower's crop reaches the fresh-market packout versus the processing channel, they can meaningfully improve a grower's return at the margin — but they can't reverse a structural shift in which labor cost, not storage cost, now consumes 60-70% of the wholesale price per box. This is a hypothesis built from national USApple/Farm Credit East reporting and one Michigan-specific loss example, not a verified Michigan-specific packout-to-margin figure.",
+    graphLayers: {
+      physical: "Orchards → harvest crews → bins → CA storage rooms → pre-sort/pack → fresh-pack or processing → retail — all sitting on Fruit Ridge and Michigan's other lake-effect growing districts, whose climate (not policy or capital) is why apples grow here at all.",
+      capital: "Harvest labor (increasingly the largest single cost), storage energy, inventory financing through lenders like GreenStone, and the packout split between fresh-pack and processing salvage value all compete for the same box-price dollar — a dollar that's fallen ~28-36% over three seasons.",
+      business: "Growers, Riveridge and other Fruit Ridge packers, the Michigan Apple Committee, GreenStone Farm Credit Services, and the retailers who capture over 5x the grower's own margin on a bag of apples per the Michigan Apple Committee's own cited example.",
+      information: "MSU Extension's variety-by-variety maturity/storage data is genuinely public and detailed — what's missing is the next layer down: 2026 CA-storage occupancy, packout percentage by grade/variety, and any measured AI-sorting ROI, none of which is published yet.",
+    },
+    dataNeeds: [
+      "2026 CA-storage occupancy by facility or region",
+      "Packout percentage by grade/variety for the actual 2026 crop, not a maturity-report proxy",
+      "Riveridge's own throughput or AI-sorting-ROI figures, if the company will share any",
+      "A Michigan-specific version of the Crain's $135,495 loss example — different farm sizes, different storage-access archetypes",
+      "A direct conversation with a Fruit Ridge grower, GreenStone loan officer, or Michigan Apple Committee staff",
+    ],
+    artifacts: [
+      "A variety-by-variety fresh-pack vs. CA-storage vs. processing margin comparison, once real 2026 packout data exists",
+      "A grower-facing break-even calculator for CA storage cost against the current wholesale price trend",
+    ],
+    findings:
+      "Michigan's 2026 crop is, by the state's own historical average, an ordinary-to-slightly-below-average year in size — not the record the 'billion-pound crop' framing implies — and the real margin threat isn't crop size at all. National USApple reporting shows H-2A-related labor expense has grown from roughly 40% of the average wholesale price per box in 2013 to 60-70% of it in 2026, while that box price itself has fallen roughly 28-36% over three seasons on national oversupply. A October 2025 DOL rule change that lowers the rate of Michigan's H-2A wage growth is real relief, but it doesn't reverse that cost-share climb. Crain's Grand Rapids Business's real farm example — a 45-acre operation projected to lose $135,495 this season, against a retail-vs-grower margin split of $1.06 to $0.19 on a bag of apples — shows the mechanism playing out in real numbers. Storage and AI sorting can shift packout mix at the margin, but the 2026 CA-occupancy and packout data that would show exactly how much margin they're actually protecting isn't public yet, which is why this stays \"investigating.\"",
+    sources: [
+      { label: "USDA/NASS — Michigan 2026 State Overview", url: "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=Michigan&year=2026" },
+      { label: "Michigan Apple Committee — Michigan Apple Crop Expected to Be High Quality", url: "https://www.michiganapples.com/press-room/news-releases/michigan-apple-crop-expected-to-be-high-quality/" },
+      { label: "Michigan Apple Committee — Current Michigan Apple Industry Issues", url: "https://www.michiganapples.com/about/issues/" },
+      { label: "MSU Extension — Michigan Statewide Apple Maturity Report, September 2, 2026", url: "https://msu-prod.dotcms.cloud/news/michigan-statewide-apple-maturity-report-september-2-2026" },
+      { label: "MSU Extension — Michigan Statewide Apple Maturity Report, September 10, 2026", url: "https://msu-prod.dotcms.cloud/news/michigan-statewide-apple-maturity-report-september-10-2026" },
+      { label: "MSU Extension — Michigan's H-2A Wage Offers in First Half of Fiscal Year 2026", url: "https://www.canr.msu.edu/news/michigan-s-h-2a-wage-offers-in-first-half-of-fiscal-year-2026" },
+      { label: "FreshFruitPortal — Labor consumes excessive 60-70% of US apple growers' wholesale price", url: "https://www.freshfruitportal.com/news/2026/05/28/aapple-growers-us/" },
+      { label: "FreshFruitPortal — USApple reports 2026 national crop and margin data", url: "https://www.freshfruitportal.com/news/2026/08/24/usapple-report/" },
+      { label: "Farm Credit East — 2026 Apple Outlook: High Supply with Tight Margins", url: "https://www.farmcrediteast.com/en/resources/todays-harvest-Blog/260519AppleOutlookHighSupplyTightMargins" },
+      { label: "GreenStone Farm Credit Services — Financial Performance", url: "https://www.greenstonefcs.com/about-us/financial-performance/" },
+      { label: "GreenStone Farm Credit Services — Strong Apple Harvest Expected in Michigan (2025 context)", url: "https://www.greenstonefcs.com/resources/strong-apple-harvest-expected-in-michigan/" },
+      { label: "Crain's Grand Rapids Business — Michigan apple growers face mounting losses despite bumper crop", url: "https://www.crainsgrandrapids.com/news/agriculture/michigan-apple-growers-face-mounting-losses-despite-bumper-crop/" },
+      { label: "Riveridge Packing", url: "https://riveridgepacking.com/" },
+    ],
+  },
+  {
+    slug: "georgia-poultry-gainesville-inland-port-rail-economics-2026",
+    icon: "help_center",
+    status: "investigating",
+    name: "Georgia Built a $134M Inland Port. Will Poultry Actually Move From Truck to Rail?",
+    question:
+      "Five months after the Gainesville Inland Port opened, has North Georgia's frozen-poultry export freight actually shifted from direct truck to Norfolk Southern rail, and does the distance/cost math even favor that shift at this lane length?",
+    tagline: "Georgia Ports itself still says frozen poultry moves by truck. Run the freight-industry math on the actual distance, and it's not obviously a cost story at all — it may be a congestion story wearing a cost story's clothes.",
+    thumbnail: "/assets/og/georgia-poultry-gainesville-inland-port-rail-economics-2026.jpg",
+    sourcePath: "../content/research/georgia-poultry-gainesville-inland-port-rail-economics-2026.md",
+    region: "",
+    publishedDate: "2026-09-21",
+    commodity: "Poultry (Frozen, Export)",
+    evidence: [
+      { label: "Georgia Ports Authority — Frozen Poultry Exports Up 8.5 Percent", note: "Savannah handled 55,957 TEUs of frozen poultry in the 12 months ending February 2026 (+8.5%); Georgia handled 37% of all U.S. frozen poultry exports in 2025. States plainly that frozen poultry currently 'moves to the port by truck.'", url: "https://gaports.com/press-releases/frozen-poultry-exports-up-8-5-percent-at-georgia-ports/" },
+      { label: "Georgia Ports Authority — Gainesville Inland Port facility page", note: "$134M facility, 200,000-container annual capacity at full build-out, five-day/week Norfolk Southern rail service, opened May 4, 2026.", url: "https://gaports.com/facilities/inland-ports/gainesville-inland-port/" },
+      { label: "Georgia Ports Authority — Gainesville Inland Port Set for May Opening", note: "CEO Griff Lynch: projected to replace 26,000 truck roundtrips in year one; serves ~330 regional manufacturers (poultry, heavy equipment, forest products), not poultry alone.", url: "https://gaports.com/press-releases/gpas-gainesville-inland-port-set-for-may-opening/" },
+      { label: "Greater Hall Chamber of Commerce — Economic Development", note: "330+ manufacturing/processing concerns in Hall County; 2025 year-end report: 10 new/expanding developments, 691 new jobs, $186.5M new capital investment.", url: "https://www.ghcc.com/economic-development/" },
+      { label: "AgGeorgia — Poultry Financing", note: "Finances poultry-house construction, upgrades, and equipment; no public mention of logistics/mode risk in underwriting.", url: "https://www.aggeorgia.com/loans/poultry" },
+      { label: "New Georgia Encyclopedia — Jesse Jewell", note: "Jewell built the first fully vertically-integrated poultry operation in Gainesville, 1930-1954 (hatchery, processing plant, feed mill, rendering plant) — the reason poultry freight is concentrated here at all.", url: "https://www.georgiaencyclopedia.org/articles/business-economy/jesse-jewell-1902-1975/" },
+    ],
+    stakeholders: ["North Georgia poultry integrators and exporters (e.g. Fieldale Farms)", "Georgia Ports Authority operations/planning staff", "Norfolk Southern intermodal service team", "AgGeorgia Farm Credit poultry-lending staff", "Greater Hall Chamber of Commerce economic-development staff", "Georgia Poultry Federation / USPOULTRY"],
+    hypothesis:
+      "Generic 2026 freight-industry cost benchmarks put the intermodal-vs-truck break-even around 500 miles one-way (below that, two drayage legs erode most of rail's per-mile savings); the Gainesville-to-Savannah lane is roughly 299 miles one-way. If that generic pattern holds on this specific lane, direct-cost savings alone may not be the main driver of any real mode shift — the more likely value driver is truck-driver capacity, service reliability, and Atlanta-area congestion relief, which is also exactly the rationale Georgia Ports Authority itself leads with publicly. This is a hypothesis built from generic national freight data applied to a specific real distance, not a Gainesville-specific study — it needs actual shipper rate quotes and dwell data to confirm or falsify.",
+    graphLayers: {
+      physical: "Poultry plants/cold stores (concentrated in Hall County since Jesse Jewell's 1930s-50s vertical-integration build-out) → drayage → Gainesville inland port → Norfolk Southern rail → Savannah reefer/cold storage (~3,600 powered slots) → vessel. The competing physical path is a direct ~299-mile truck haul.",
+      capital: "$134M in public Georgia Ports Authority capital built the rail option; AgGeorgia finances the poultry-house assets on the origin end; truck vs. rail carries different fuel, drayage, dwell, and working-capital-in-transit costs that aren't yet publicly measured for this specific lane.",
+      business: "Integrators/exporters choose the mode; Georgia Ports Authority and Norfolk Southern operate the rail alternative; the Greater Hall Chamber and regional economic-development offices use the port as a broader manufacturing-attraction asset, not a poultry-specific pitch.",
+      information: "Bookings, dwell time, container utilization, and reliability data exist inside GPA/Norfolk Southern systems but aren't public; the only public signal so far is GPA's own boilerplate language, which as of this research pass still describes poultry moving by truck.",
+    },
+    dataNeeds: [
+      "Actual poultry-specific container counts or share moving through Gainesville vs. direct-to-Savannah truck",
+      "Real Norfolk Southern intermodal rate quotes and drayage costs for this specific lane, not national generic benchmarks",
+      "Dwell-time and service-reliability data for the Gainesville-Savannah rail leg",
+      "A statement from a North Georgia poultry integrator (e.g. Fieldale Farms) or the Georgia Poultry Federation on whether/why they are or aren't using the rail option",
+      "AgGeorgia or another poultry lender's view on whether logistics-mode flexibility factors into underwriting",
+    ],
+    artifacts: [
+      "A lane-specific truck-vs-rail landed-cost comparison once real drayage/rail rate quotes exist",
+      "A tracker for Georgia Ports Authority's own public language about poultry mode share over time, as a proxy signal while direct data is unavailable",
+    ],
+    findings:
+      "The core adoption question — how much frozen poultry has actually shifted from truck to rail — remains genuinely unanswered in public data; Georgia Ports Authority's own most recent release, published well after the port's May 2026 opening, still describes frozen poultry moving to Savannah by truck. What this pass did surface: generic 2026 freight-industry cost benchmarks put the intermodal break-even around 500 miles one-way, and the actual Gainesville-to-Savannah distance is roughly 299 miles — short enough that the generic math doesn't hand rail an obvious cost win. That, plus Georgia Ports Authority's own public rationale (congestion relief and regional manufacturing capacity, not a poultry-specific savings figure), suggests the real value case for this $134M investment may be reliability and capacity rather than direct freight-cost savings — a real, sourced tension, not a settled answer, which is why this stays \"investigating.\"",
+    sources: [
+      { label: "Georgia Ports Authority — Frozen Poultry Exports Up 8.5 Percent", url: "https://gaports.com/press-releases/frozen-poultry-exports-up-8-5-percent-at-georgia-ports/" },
+      { label: "Georgia Ports Authority — Gainesville Inland Port facility page", url: "https://gaports.com/facilities/inland-ports/gainesville-inland-port/" },
+      { label: "Georgia Ports Authority — Gainesville Inland Port Set for May Opening", url: "https://gaports.com/press-releases/gpas-gainesville-inland-port-set-for-may-opening/" },
+      { label: "Norfolk Southern — Ship By Rail / Intermodal", url: "https://www.norfolksouthern.com/en/ship-by-rail/industry/intermodal" },
+      { label: "Greater Hall Chamber of Commerce — Economic Development", url: "https://www.ghcc.com/economic-development/" },
+      { label: "AgGeorgia — Poultry Financing", url: "https://www.aggeorgia.com/loans/poultry" },
+      { label: "New Georgia Encyclopedia — Jesse Jewell", url: "https://www.georgiaencyclopedia.org/articles/business-economy/jesse-jewell-1902-1975/" },
+      { label: "New Georgia Encyclopedia — Poultry Industry", url: "https://www.georgiaencyclopedia.org/articles/business-economy/poultry" },
+    ],
+  },
+  {
     slug: "farm-credit-semo-crop-credit-stress-2026",
     icon: "help_center",
     status: "investigating",
@@ -1105,13 +1279,6 @@ export const investigations = [
     slug: "bootheel-irrigation-groundwater-energy-economics-2026",
     icon: "water_drop",
     status: "investigating",
-    // Today's Question of the Day (daily-dossier, 2026-09-20) — holds the
-    // home hero + research-hub featured slot + first-in-grid position.
-    // Only one investigation should carry this at a time; the next
-    // daily-dossier run moves it here and clears it from whichever
-    // investigation held it before. Same-day follow-on articles (via
-    // dossier-second-look) must NOT set this.
-    featured: true,
     name: "The Bootheel Is Built on Groundwater. What Is One More Irrigation Pass Actually Worth in 2026?",
     question:
       "With persistent Southeast Missouri dryness, late-season soybean/cotton decisions, and elevated energy costs, when does another irrigation pass protect enough yield and quality to justify pumping cost and aquifer draw?",

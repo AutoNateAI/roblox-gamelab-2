@@ -153,6 +153,18 @@ const jobs = [
     file: "og/north-dakota-soy-crush-yield-finance-2026.jpg",
     prompt: `A wide editorial image about a real agricultural-processing finding. Background: a documentary-style shot of a large modern soybean crush and refining plant complex on the North Dakota prairie at golden hour — tall grain silos, processing towers, and conveyor structures, a loaded grain truck approaching on a gravel road, flat harvested farmland stretching to the horizon, fading into a dark navy panel with gold light. Large bold headline text reading "NORTH DAKOTA BUILT THE CRUSH. THEN YIELDS FELL." with a smaller line beneath reading "AutoNateAI · North Dakota Soy Crush & Farm Finance, 2026". No logos, no readable signage. ${STYLE}`,
   },
+  {
+    file: "og/bootheel-rice-basis-storage-marketing-loan-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-finance finding. Background: a documentary-style shot of a full rice bin/grain storage structure at golden-hour harvest time, a clipboard with a price ledger resting on a truck tailgate in the foreground (numbers not legible), flat Bootheel farmland behind, fading into a dark navy panel with gold light. Large bold headline text reading "SELL NOW, OR FINANCE THE WAIT?" with a smaller line beneath reading "AutoNateAI · Bootheel Rice Basis & Marketing Loan, 2026". No logos, no readable signage or numbers. ${STYLE}`,
+  },
+  {
+    file: "og/michigan-apple-storage-ai-packing-margin-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-economics finding. Background: a documentary-style shot of a Michigan apple orchard at golden-hour harvest, wooden bulk storage bins full of red apples in the foreground, a controlled-atmosphere storage warehouse loading dock faintly visible in the background, fading into a dark navy panel with gold light. Large bold headline text reading "A BILLION POUNDS OF APPLES. WHO ACTUALLY KEEPS THE MARGIN?" with a smaller line beneath reading "AutoNateAI · Michigan Apple Storage & AI Packing Margin, 2026". No logos, no readable signage or numbers. ${STYLE}`,
+  },
+  {
+    file: "og/georgia-poultry-gainesville-inland-port-rail-economics-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-logistics finding. Background: a documentary-style shot of a refrigerated intermodal rail container being loaded at a rural Georgia inland rail terminal at golden hour, a line of parked reefer trucks visible in the middle distance for contrast, flat North Georgia landscape behind, fading into a dark navy panel with gold light. Large bold headline text reading "GEORGIA SPENT $134M ON RAIL. POULTRY STILL MOVES BY TRUCK." with a smaller line beneath reading "AutoNateAI · Gainesville Inland Port Poultry Rail Economics, 2026". No logos, no readable signage or numbers. ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {
