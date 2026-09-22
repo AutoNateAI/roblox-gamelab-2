@@ -165,6 +165,18 @@ const jobs = [
     file: "og/georgia-poultry-gainesville-inland-port-rail-economics-2026.jpg",
     prompt: `A wide editorial image about a real agricultural-logistics finding. Background: a documentary-style shot of a refrigerated intermodal rail container being loaded at a rural Georgia inland rail terminal at golden hour, a line of parked reefer trucks visible in the middle distance for contrast, flat North Georgia landscape behind, fading into a dark navy panel with gold light. Large bold headline text reading "GEORGIA SPENT $134M ON RAIL. POULTRY STILL MOVES BY TRUCK." with a smaller line beneath reading "AutoNateAI · Gainesville Inland Port Poultry Rail Economics, 2026". No logos, no readable signage or numbers. ${STYLE}`,
   },
+  {
+    file: "og/wallula-pnw-ag-export-container-economics-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-logistics finding. Background: a documentary-style shot of a refrigerated or dry intermodal container being loaded onto a rail flatcar at a rural Eastern Washington inland rail terminal at golden hour, a hopper grain truck parked nearby for contrast, the Cascade foothills faintly visible in the distance, fading into a dark navy panel with gold light. Large bold headline text reading "THE EXPORT RAMP JUST MOVED 200 MILES INLAND" with a smaller line beneath reading "AutoNateAI · Wallula Inland Export Economics, 2026". No logos, no readable signage or numbers. ${STYLE}`,
+  },
+  {
+    file: "og/wisconsin-dairy-processing-capital-export-margin-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-finance finding. Background: a documentary-style shot inside a modern Wisconsin cheese production and cut-and-wrap facility, stainless steel equipment and stacked fresh cheese blocks under bright working light, a loading dock with a refrigerated export truck faintly visible through a bay door, fading into a dark navy panel with gold light. Large bold headline text reading "$1.13 BILLION IS BETTING ON CHEESE OVER WHEY" with a smaller line beneath reading "AutoNateAI · Wisconsin Dairy Processing Capital, 2026". No logos, no readable signage. ${STYLE}`,
+  },
+  {
+    file: "og/bootheel-harvest-margin-input-fuel-2027-crop-2026.jpg",
+    prompt: `A wide editorial image about a real agricultural-finance finding. Background: a documentary-style shot of a farm diesel fuel tank and a stack of fertilizer prepay invoices resting on a truck tailgate at golden-hour harvest time in the Missouri Bootheel, a rice field and grain dryer visible in the blurred background, fading into a dark navy panel with gold light. Large bold headline text reading "TWO SEASONS, ONE INVOICE PILE" with a smaller line beneath reading "AutoNateAI · Bootheel Harvest Margin Squeeze, 2026". No logos, no readable numbers or signage. ${STYLE}`,
+  },
 ];
 
 async function generateOne({ file, prompt }) {
