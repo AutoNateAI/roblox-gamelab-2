@@ -6827,3 +6827,11 @@ a.lab-card .industry-card::before {
 .opos-package h3 {
   font-size: clamp(24px, 1.9vw, 30px);
 }
+
+/* Meme visual breaks are square illustrations: keep them from dominating
+   the article column. */
+.markdown-figure:has(img[src*="/assets/meme/"]) {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
