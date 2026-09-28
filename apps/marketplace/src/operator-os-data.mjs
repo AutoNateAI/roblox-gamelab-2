@@ -107,10 +107,12 @@ export const operatorArticles = [
   {
     n: 7,
     slug: "prospects-clients-partners-goals-tasks-one-relationship-graph",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "hub",
     title: "Why Should Prospects, Clients, Partners, Goals, and Tasks Live in One Relationship Graph?",
     question: "Why should prospects, clients, partners, goals, and tasks live in one relationship graph?",
-    hook: "A broker starts as a prospect, becomes a client, then sends you three referrals. Three disconnected databases can't see that. One graph can.",
+    hook: "The same person moves from prospect to client to partner. Split them across lists and you can't see who actually feeds your business, or that referred customers are worth more.",
     audience: ["All Operators", "Real Estate"],
     queueDate: "2026-10-05",
     ogHeadline: "ONE GRAPH. EVERY RELATIONSHIP.",
