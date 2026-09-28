@@ -79,10 +79,12 @@ export const operatorArticles = [
   {
     n: 5,
     slug: "five-person-company-fifty-person-information-discipline",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "groups",
     title: "Can a 5-Person Company Operate With the Information Discipline of a 50-Person Company?",
     question: "Can a 5-person company operate with the information discipline of a 50-person company?",
-    hook: "Big companies pay whole departments to keep state, history, and handoffs straight. Small ones pay for it with the owner's evenings.",
+    hook: "Big companies pay whole teams to keep information straight. Small ones pay with the owner's evenings. AI finally makes the clerical half of that discipline affordable.",
     audience: ["All Operators"],
     queueDate: "2026-10-03",
     ogHeadline: "5 PEOPLE. 50-PERSON DISCIPLINE.",
