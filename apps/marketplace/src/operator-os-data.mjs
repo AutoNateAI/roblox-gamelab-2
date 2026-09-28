@@ -93,10 +93,12 @@ export const operatorArticles = [
   {
     n: 6,
     slug: "what-your-ai-should-know-before-recommending-your-next-sales-action",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "psychology",
     title: "What Information Should Your AI Know Before It Recommends Your Next Sales Action?",
     question: "What information should your AI know before it recommends your next sales action?",
-    hook: "ChatGPT gives confident advice about a business it has never seen. The fix isn't a better prompt — it's giving it the business.",
+    hook: "ChatGPT gives confident advice about a business it has never seen. Seven layers of context turn a generic answer into a real sales recommendation.",
     audience: ["All Operators"],
     queueDate: "2026-10-04",
     ogHeadline: "YOUR AI DOESN'T KNOW YOUR BUSINESS. YET.",
