@@ -2023,8 +2023,20 @@ a.hero-program-panel:focus-visible {
 }
 
 .markdown-body p,
-.markdown-body ul {
+.markdown-body ul,
+.markdown-body ol {
   margin: 0;
+}
+
+.markdown-body ol li + li,
+.markdown-body ul li + li {
+  margin-top: 6px;
+}
+
+.markdown-body ol li::marker {
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
 }
 
 .markdown-body code {

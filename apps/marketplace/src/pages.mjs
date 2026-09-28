@@ -2306,9 +2306,10 @@ export function markdownToHtml(markdown = "") {
     paragraph = [];
   }
 
+  let listTag = "ul";
   function flushList() {
     if (!list.length) return;
-    html.push(`<ul>${list.map((item) => `<li>${inlineMarkdown(item)}</li>`).join("")}</ul>`);
+    html.push(`<${listTag}>${list.map((item) => `<li>${inlineMarkdown(item)}</li>`).join("")}</${listTag}>`);
     list = [];
   }
 
@@ -2381,10 +2382,14 @@ export function markdownToHtml(markdown = "") {
     }
 
     const bullet = line.match(/^\s*-\s+(.+)$/);
-    if (bullet) {
+    const numbered = line.match(/^\s*\d+\.\s+(.+)$/);
+    if (bullet || numbered) {
       flushParagraph();
       flushTable();
-      list.push(bullet[1]);
+      const tag = numbered ? "ol" : "ul";
+      if (list.length && tag !== listTag) flushList();
+      listTag = tag;
+      list.push((bullet || numbered)[1]);
       continue;
     }
 
