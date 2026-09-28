@@ -117,7 +117,8 @@ if (chartBlocks.length) {
   });
   loadExternalScript("https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js").then(() => {
     const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
-    const palette = ["#f2b134", "#5aa9e6", "#7fbf7f", "#e07a5f", "#9a6cff"];
+    // Operator OS palette: emerald first, then river blue, amber, coral, violet.
+    const palette = ["#00a36c", "#3b82c4", "#e0a83a", "#e07a5f", "#8b6cff"];
     // Research-brief chart labels tend to be full sentences ("PLC reference
     // price — before H.R. 1"), not short categories. Vertical bars cram those
     // onto the x-axis and the wrapped/rotated labels eat almost the entire
