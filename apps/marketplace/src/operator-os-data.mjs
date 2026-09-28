@@ -37,10 +37,12 @@ export const operatorArticles = [
   {
     n: 2,
     slug: "cost-of-one-missed-estimate-hvac-electrical-contractor",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "request_quote",
     title: "What Does One Missed Estimate Actually Cost an HVAC or Electrical Contractor?",
     question: "What does one missed estimate actually cost an HVAC or electrical contractor?",
-    hook: "A missed estimate isn't one lost job. It's the ticket, the maintenance plan, the referral, and the review that never happen downstream.",
+    hook: "A silent HVAC estimate costs about $2,900 in expected revenue: the install, the repairs, the plan, and the referral. It never shows up as a loss anywhere.",
     audience: ["Contractors & Trades"],
     queueDate: "2026-09-30",
     ogHeadline: "WHAT DOES ONE MISSED ESTIMATE ACTUALLY COST?",
