@@ -149,10 +149,12 @@ export const operatorArticles = [
   {
     n: 10,
     slug: "what-should-a-contractor-automate-first",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "construction",
     title: "What Should a Contractor Automate First: Lead Generation, Quoting, Dispatch, or Follow-Up?",
     question: "What should a contractor automate first: lead generation, quoting, dispatch, or follow-up?",
-    hook: "Most contractors want more leads. Most contractors are already losing the leads they have. The order matters.",
+    hook: "Follow-up first, then quoting, then dispatch, with lead gen last. At $128 a paid HVAC lead, fixing follow-up adds as many jobs as 25% more ads, and makes every lead cheaper.",
     audience: ["Contractors & Trades"],
     queueDate: "2026-10-08",
     ogHeadline: "LEADS, QUOTES, DISPATCH, OR FOLLOW-UP?",
