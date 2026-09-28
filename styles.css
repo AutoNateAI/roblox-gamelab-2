@@ -5693,3 +5693,1137 @@ a.lab-card .industry-card::before {
   color: var(--on-variant);
   font-size: 13px;
 }
+
+/* ==========================================================================
+   OPERATOR OS (2026-09-28 repositioning) — home, /operator-os, /pricing,
+   research hub, operator article pages. Same editorial system as the rest
+   of the site (Fraunces headlines, mono kickers, square cards, emerald
+   accent); the cockpit illustration is intentionally always-dark so it
+   reads as a product screen in both themes.
+   ========================================================================== */
+
+.opos-hero .hero-content {
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.9fr);
+}
+
+/* --- Cockpit illustration ------------------------------------------------ */
+.opos-cockpit {
+  --ck-bg: #07110c;
+  --ck-panel: #0d1a14;
+  --ck-line: #1c3126;
+  --ck-text: #eef4f0;
+  --ck-muted: #9fb3a7;
+  --ck-accent: #34d399;
+  border: 1px solid var(--ck-line);
+  background: var(--ck-bg);
+  color: var(--ck-text);
+  box-shadow: 0 30px 90px rgba(3, 20, 12, 0.35);
+  font-size: 13px;
+  min-width: 0;
+}
+
+/* Icon spans sit inside spans that set their own font-family below —
+   pin the icon font back with higher specificity. */
+.opos-cockpit .material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-size: 16px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.opos-cockpit-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--ck-line);
+  padding: 10px 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--ck-muted);
+}
+
+.opos-cockpit-bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ck-line);
+}
+
+.opos-cockpit-bar span {
+  margin-left: 8px;
+}
+
+.opos-cockpit-bar b {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  color: var(--ck-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.opos-cockpit-body {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+}
+
+.opos-cockpit-nav {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  border-right: 1px solid var(--ck-line);
+  padding: 12px 8px;
+}
+
+.opos-cockpit-nav span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  color: var(--ck-muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.opos-cockpit-nav span.active {
+  background: color-mix(in srgb, var(--ck-accent) 14%, transparent);
+  color: var(--ck-accent);
+}
+
+.opos-cockpit-main {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  min-width: 0;
+}
+
+.opos-chat,
+.opos-prospect,
+.opos-timebox {
+  border: 1px solid var(--ck-line);
+  background: var(--ck-panel);
+  padding: 12px;
+}
+
+.opos-chat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ck-accent);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.opos-chat p {
+  margin: 8px 0 0;
+  color: var(--ck-text);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.opos-writes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.opos-writes span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid color-mix(in srgb, var(--ck-accent) 40%, var(--ck-line));
+  color: var(--ck-accent);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  padding: 4px 7px;
+  animation: opos-pop 0.5s ease both;
+}
+
+.opos-writes span:nth-child(2) { animation-delay: 0.15s; }
+.opos-writes span:nth-child(3) { animation-delay: 0.3s; }
+.opos-writes span:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes opos-pop {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.opos-prospect-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+}
+
+.opos-prospect-head strong {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+}
+
+.opos-prospect-head small {
+  color: var(--ck-muted);
+  font-size: 11.5px;
+}
+
+.opos-prospect-head b {
+  background: var(--ck-accent);
+  color: #06251a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  padding: 4px 7px;
+  white-space: nowrap;
+}
+
+.opos-meter {
+  height: 5px;
+  margin: 10px 0 8px;
+  background: var(--ck-line);
+}
+
+.opos-meter i {
+  display: block;
+  height: 100%;
+  background: var(--ck-accent);
+}
+
+.opos-prospect-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--ck-muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+}
+
+.opos-timebox ol {
+  display: grid;
+  gap: 6px;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.opos-timebox li {
+  color: var(--ck-text);
+  font-size: 12.5px;
+}
+
+.opos-timebox li b {
+  display: inline-block;
+  width: 42px;
+  color: var(--ck-accent);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opos-writes span { animation: none; }
+}
+
+/* --- Research signal strip ------------------------------------------------ */
+.opos-signal {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 36px var(--margin);
+  border-top: 1px solid var(--outline);
+  border-bottom: 1px solid var(--outline);
+}
+
+.opos-signal > div {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.opos-signal strong {
+  color: var(--primary);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(54px, 6vw, 84px);
+  font-weight: 620;
+  line-height: 1;
+}
+
+.opos-signal p {
+  margin: 0;
+  color: var(--on-variant);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.opos-signal a {
+  display: block;
+  margin-top: 6px;
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+}
+
+.opos-signal .opos-signal-turn {
+  color: var(--on-surface);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(20px, 1.9vw, 27px);
+  line-height: 1.3;
+}
+
+.opos-signal-turn em {
+  color: var(--primary);
+}
+
+/* --- Problem ------------------------------------------------------------- */
+.opos-problem {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.opos-problem-copy > p {
+  color: var(--on-variant);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.opos-tax {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 22px 0;
+  padding: 0;
+}
+
+.opos-tax li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 14.5px;
+}
+
+.opos-tax .material-symbols-outlined {
+  color: var(--error);
+}
+
+.opos-glue {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  border: 1px solid var(--outline);
+  background: var(--surface-low);
+  padding: 32px 24px;
+}
+
+.opos-glue-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.opos-glue-tools span {
+  border: 1px dashed var(--outline-strong);
+  background: var(--surface);
+  padding: 8px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.opos-glue-arrow {
+  color: var(--error);
+}
+
+.opos-glue-head {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  border: 2px solid var(--error);
+  background: color-mix(in srgb, var(--error) 7%, var(--surface));
+  padding: 18px 26px;
+  text-align: center;
+}
+
+.opos-glue-head .material-symbols-outlined {
+  color: var(--error);
+  font-size: 34px;
+}
+
+.opos-glue-head strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+}
+
+.opos-glue-head small {
+  color: var(--on-variant);
+}
+
+/* --- Four layers ---------------------------------------------------------- */
+.opos-layers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+  counter-reset: layer;
+}
+
+.opos-layers article {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 26px 22px;
+}
+
+.opos-layers article:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(var(--gutter) * -1);
+  width: var(--gutter);
+  height: 2px;
+  background: var(--primary);
+}
+
+.opos-layers .opos-layer-core {
+  border-color: var(--primary);
+  box-shadow: inset 0 3px 0 var(--primary);
+}
+
+.opos-layers > article > .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 30px;
+}
+
+.opos-layer-num {
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.opos-layers h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.opos-layers p {
+  margin: 0;
+  color: var(--on-variant);
+  line-height: 1.55;
+}
+
+.opos-layers small {
+  margin-top: 6px;
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.opos-connect-foot {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  margin: 28px 0 0;
+  border-left: 3px solid var(--primary);
+  background: var(--surface-low);
+  padding: 16px 20px;
+  color: var(--on-variant);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.opos-connect-foot > .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.opos-connect-foot strong {
+  color: var(--on-surface);
+}
+
+/* --- Loop ----------------------------------------------------------------- */
+.opos-loop {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--outline);
+}
+
+.opos-loop li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  background: var(--surface);
+  padding: 24px 20px;
+}
+
+.opos-loop li + li {
+  border-left: 1px solid var(--outline);
+}
+
+.opos-loop li:not(:last-child)::after {
+  content: "arrow_forward";
+  position: absolute;
+  top: 24px;
+  right: -13px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: "Material Symbols Outlined";
+  font-size: 16px;
+}
+
+.opos-loop .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 28px;
+}
+
+.opos-loop strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 19px;
+}
+
+.opos-loop span:not(.material-symbols-outlined) {
+  color: var(--on-variant);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* --- A day operating it ----------------------------------------------------- */
+.opos-day > * {
+  max-width: none;
+}
+
+.opos-day-steps {
+  display: grid;
+  gap: 14px;
+}
+
+.opos-day-steps article {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 20px 22px;
+}
+
+.opos-day-steps p {
+  margin: 8px 0 0;
+  font-size: 15px;
+}
+
+.opos-day-steps .opos-said {
+  color: var(--on-surface);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+/* --- Segments ------------------------------------------------------------- */
+.opos-segments {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.opos-segments .industry-card h3 {
+  font-size: 18px;
+}
+
+/* --- Demo steps / install steps ------------------------------------------- */
+.opos-demo-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.opos-demo-steps article {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 28px;
+}
+
+.opos-demo-steps b,
+.opos-steps b,
+.opos-call-steps b {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: var(--primary-container);
+  color: var(--on-primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+}
+
+.opos-demo-steps h3 {
+  margin: 16px 0 8px;
+  font-size: 22px;
+}
+
+.opos-demo-steps p {
+  margin: 0;
+  color: var(--on-variant);
+  line-height: 1.6;
+}
+
+.opos-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gutter);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opos-steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  align-items: center;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 22px;
+}
+
+.opos-steps li > .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.opos-steps h3 {
+  grid-column: 1 / -1;
+  margin: 10px 0 0;
+  font-size: 19px;
+}
+
+.opos-steps p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--on-variant);
+  line-height: 1.55;
+}
+
+.opos-call-steps {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opos-call-steps li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* --- Packages ------------------------------------------------------------- */
+.opos-packages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: stretch;
+}
+
+.opos-package {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 28px 24px;
+}
+
+.opos-package.featured {
+  border: 2px solid var(--primary);
+}
+
+.opos-package-flag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 9px;
+  text-transform: uppercase;
+}
+
+.opos-package h3 {
+  margin: 8px 0 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 620;
+}
+
+.opos-package small {
+  color: var(--on-variant);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.opos-package p {
+  margin: 10px 0 0;
+  color: var(--on-variant);
+  line-height: 1.55;
+}
+
+.opos-package ul {
+  display: grid;
+  gap: 9px;
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--outline);
+}
+
+.opos-package li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+
+.opos-package li .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.opos-price-fine {
+  margin-top: 18px;
+  color: var(--on-variant);
+}
+
+.opos-pricing-note {
+  align-self: center;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 26px;
+}
+
+.opos-pricing-note ul {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.opos-pricing-note li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  color: var(--on-variant);
+  line-height: 1.5;
+}
+
+.opos-pricing-note li .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.opos-pricing-note strong {
+  color: var(--on-surface);
+}
+
+/* --- Modules -------------------------------------------------------------- */
+.opos-modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid var(--outline);
+}
+
+.opos-modules article {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  background: var(--surface);
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--outline);
+}
+
+.opos-modules article:nth-child(odd) {
+  border-right: 1px solid var(--outline);
+}
+
+.opos-modules article:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.opos-modules article > .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 28px;
+}
+
+.opos-modules h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.opos-modules p {
+  margin: 0;
+  color: var(--on-variant);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.opos-modules strong {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* --- FAQ accordion -------------------------------------------------------- */
+.opos-faq {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+}
+
+.opos-faq details + details {
+  border-top: 1px solid var(--outline);
+}
+
+.opos-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 24px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.opos-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.opos-faq summary .material-symbols-outlined {
+  color: var(--primary);
+  transition: transform 160ms ease;
+}
+
+.opos-faq details[open] summary .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
+.opos-faq details p {
+  margin: 0;
+  padding: 0 24px 22px;
+  max-width: 880px;
+  color: var(--on-variant);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* --- Operator OS page ----------------------------------------------------- */
+.opos-subhero,
+.opos-subhero .hero-content {
+  min-height: min(620px, calc(100vh - 72px));
+}
+
+.opos-roles,
+.opos-graph {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.opos-roles article,
+.opos-graph article {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  padding: 24px 22px;
+}
+
+.opos-roles .material-symbols-outlined,
+.opos-graph .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 28px;
+}
+
+.opos-roles h3,
+.opos-graph h3 {
+  margin: 12px 0 6px;
+  font-size: 19px;
+}
+
+.opos-roles p,
+.opos-graph p {
+  margin: 0;
+  color: var(--on-variant);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.opos-stack {
+  border: 1px solid var(--outline);
+  background: var(--surface);
+}
+
+.opos-stack-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding: 16px 22px;
+  font-size: 15px;
+}
+
+.opos-stack-row + .opos-stack-row {
+  border-top: 1px solid var(--outline);
+}
+
+.opos-stack-layer {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.opos-stack-layer .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.opos-stack-row > span:nth-child(2) {
+  color: var(--on-variant);
+}
+
+.opos-stack-tools {
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.opos-positioning {
+  max-width: 980px;
+}
+
+.opos-positioning h2 {
+  margin: 12px 0 18px;
+}
+
+.opos-positioning p {
+  color: var(--on-variant);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+/* --- CTA band / notes ------------------------------------------------------ */
+.opos-cta-band {
+  margin: 0;
+}
+
+.opos-draft-note,
+.opos-archive-note {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--outline));
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface));
+  padding: 16px 18px;
+  margin: 18px 0;
+}
+
+.opos-draft-note .material-symbols-outlined,
+.opos-archive-note .material-symbols-outlined {
+  color: var(--primary);
+}
+
+.opos-draft-note p,
+.opos-archive-note p {
+  margin: 0;
+  color: var(--on-variant);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.opos-archive-note {
+  max-width: var(--container-max);
+}
+
+.opos-archive-note a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.opos-next a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* --- Responsive ------------------------------------------------------------ */
+@media (max-width: 1280px) {
+  .opos-segments {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .opos-packages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1120px) {
+  .opos-hero .hero-content,
+  .opos-problem,
+  .opos-signal {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .opos-layers,
+  .opos-roles,
+  .opos-graph {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .opos-layers article::after {
+    display: none;
+  }
+
+  .opos-loop {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .opos-loop li + li {
+    border-left: 0;
+    border-top: 1px solid var(--outline);
+  }
+
+  .opos-loop li:not(:last-child)::after {
+    top: auto;
+    bottom: -13px;
+    right: 24px;
+    content: "arrow_downward";
+  }
+
+  .opos-demo-steps,
+  .opos-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .opos-layers,
+  .opos-roles,
+  .opos-graph,
+  .opos-segments,
+  .opos-packages,
+  .opos-modules,
+  .opos-tax {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .opos-modules article:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .opos-modules article:nth-last-child(2) {
+    border-bottom: 1px solid var(--outline);
+  }
+
+  .opos-modules article {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .opos-modules strong {
+    grid-column: 2;
+  }
+
+  .opos-cockpit-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .opos-cockpit-nav {
+    display: flex;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--ck-line);
+  }
+
+  .opos-cockpit-nav span {
+    white-space: nowrap;
+  }
+
+  .opos-signal > div {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+
+  .opos-stack-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+/* Operator question cards show the whole OG image (headline baked in), so
+   match its 1200x630 ratio instead of the default 16:10 crop, and park the
+   status pill bottom-left, clear of the headline. */
+.opos-article-card .card-thumbnail {
+  aspect-ratio: 1200 / 630;
+}
+
+.opos-article-card .card-thumbnail .status-pill {
+  top: auto;
+  right: auto;
+  bottom: 10px;
+  left: 10px;
+}
+
+.about-hero .about-founder-card img[src*="/assets/og/"] {
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+}
+
+/* Pricing sits in the padded .about-page container; don't double the side
+   padding on its sections. */
+.about-page.opos-page > .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.opos-package h3 {
+  font-size: clamp(24px, 1.9vw, 30px);
+}

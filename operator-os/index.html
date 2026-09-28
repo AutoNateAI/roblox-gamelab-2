@@ -1,0 +1,226 @@
+<!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Operator OS — How It Works | AutoNateAI</title>
+        <meta name="description" content="How the AutoNateAI Operator OS works: a conversation layer (ChatGPT/Claude), structured business memory, a custom live cockpit, and managed AI agents — one repeatable architecture for contractors and small businesses." />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://autonateai.com/operator-os" />
+        <link rel="icon" type="image/svg+xml" href="/assets/brand/mark.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/brand/favicon-16.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <meta property="og:title" content="The Operator OS — Conversation, Memory, Cockpit, Agents" />
+        <meta property="og:description" content="One repeatable operating architecture: operate by conversation, keep one structured memory, see everything in a live cockpit." />
+        <meta property="og:url" content="https://autonateai.com/operator-os" />
+        <meta property="og:image" content="https://autonateai.com/assets/og/operator-os.jpg" />
+        <meta property="og:site_name" content="AutoNateAI" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Operator OS — Conversation, Memory, Cockpit, Agents" />
+        <meta name="twitter:description" content="One repeatable operating architecture: operate by conversation, keep one structured memory, see everything in a live cockpit." />
+        <meta name="twitter:image" content="https://autonateai.com/assets/og/operator-os.jpg" />
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","logo":"https://autonateai.com/assets/brand/logo-512.png","founder":{"@type":"Person","name":"Nathan Baker","jobTitle":"Founder & Systems Architect, AutoNateAI","sameAs":["https://www.linkedin.com/in/nate-gpt-expert/","https://www.facebook.com/nate.baker.944"]},"sameAs":["https://www.linkedin.com/company/autonate-ai","https://www.instagram.com/autonateai/","https://www.youtube.com/@autonate_ai","https://www.youtube.com/@AutoNate"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AutoNateAI","alternateName":["Autonate AI","Auto Nate AI"],"url":"https://autonateai.com","description":"AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses — operate through ChatGPT or Claude, keep one structured business memory, and see it all in a live custom cockpit."}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"AutoNateAI Operator OS","serviceType":"Conversational AI operating system implementation for small businesses","provider":{"@type":"Organization","name":"AutoNateAI","url":"https://autonateai.com"},"areaServed":{"@type":"Country","name":"United States"},"audience":{"@type":"BusinessAudience","audienceType":"Contractors, operators, and small businesses"},"offers":[{"@type":"Offer","name":"Operator OS — Foundation","description":"The core operating system around one part of your business.","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":3500}},{"@type":"Offer","name":"Operator OS — Growth","description":"The full relationship graph — prospects, clients, partners — with research memory and automations.","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":6500}},{"@type":"Offer","name":"Operator OS — Operational","description":"Multi-role teams, permissions, custom intelligence, and production hardening.","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":12000}},{"@type":"Offer","name":"Operator OS — Care + Evolution","description":"We keep it healthy and keep it growing as the business does.","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":500}}]}</script>
+        <script>
+          (function () {
+            var stored = localStorage.getItem("anai-theme");
+            var theme = stored || "light";
+            document.documentElement.setAttribute("data-theme", theme);
+          })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,420..680&family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles.css" />
+      </head>
+      <body>
+        
+    <header class="top-shell ">
+      <nav class="top-nav">
+        <a class="brand" href="/">AutoNateAI<span class="brand-dot">_</span></a>
+        <div class="nav-links" data-mobile-menu><a class="active" href="/operator-os">Operator OS</a><a class="" href="/research-and-case-studies">Research & Case Studies</a><a class="" href="/pricing">Pricing</a><a class="" href="/about">About</a></div>
+        <div class="nav-actions">
+          <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle><span class="material-symbols-outlined">menu</span></button>
+          <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle><span class="material-symbols-outlined">dark_mode</span></button>
+          <a class="nav-cta" href="/work-with-us">Book a Call</a>
+        </div>
+      </nav>
+    </header>
+  
+        
+    <main class="lab-home opos-page">
+      <section class="home-hero opos-subhero">
+        <div class="hero-bg"><img src="/assets/operator-os/architecture-hero.jpg" alt="" /></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="kicker"><span class="material-symbols-outlined">hub</span> The Operator OS</span>
+            <h1>A repeatable AI operating architecture for operators.</h1>
+            <p>The interface gives you visual context. The conversation gives you control. The architecture underneath gives your business structure. Here's every piece, and how they fit.</p>
+            <div class="button-row">
+              <a class="primary-button" href="/work-with-us">Book a Discovery Call <span class="material-symbols-outlined">arrow_forward</span></a>
+              <a class="secondary-button" href="/pricing">Pricing</a>
+            </div>
+          </div>
+          <aside class="hero-program-panel opos-premise">
+            <div class="hero-panel-body">
+              <span class="kicker"><span class="material-symbols-outlined">lightbulb</span> The Premise</span>
+              <h2>Operators don't need to become software engineers.</h2>
+              <p>They need an engineered operating environment they can control through conversation. We design the architecture, connect the systems, build the cockpit, and manage feature growth as the operation gets more sophisticated.</p>
+              <div class="hero-facts">
+                <span>Operate by conversation</span>
+                <span>One structured memory</span>
+                <span>Live visual cockpit</span>
+                <span>Managed feature growth</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">diversity_2</span> The Design Principle</span>
+            <h2>Everyone does the part they're best at.</h2>
+          </div>
+        </div>
+        <div class="opos-roles">
+          <article><span class="material-symbols-outlined">person</span><h3>Operator</h3><p>Talks, reviews, decides, approves.</p></article><article><span class="material-symbols-outlined">architecture</span><h3>AutoNateAI architecture</h3><p>Structures data, relationships, workflows, permissions, and scaling.</p></article><article><span class="material-symbols-outlined">smart_toy</span><h3>AI agents</h3><p>Research, synthesize, draft, classify, rank, and implement.</p></article><article><span class="material-symbols-outlined">monitoring</span><h3>Visual cockpit</h3><p>Shows the state of the business so the operator can verify what the AI sees.</p></article>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">layers</span> The Repeatable Stack</span>
+            <h2>One architecture, many businesses.</h2>
+            <p>The core doesn't get reinvented for every client. We maintain a reusable operating kernel and configure it to your graph.</p>
+          </div>
+        </div>
+        <div class="opos-stack">
+          
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">forum</span> Conversation</span>
+              <span>Natural-language command and reasoning surface</span>
+              <span class="opos-stack-tools">ChatGPT, Claude</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">database</span> Structured memory</span>
+              <span>Canonical business state and relationships</span>
+              <span class="opos-stack-tools">Airtable</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">travel_explore</span> Research</span>
+              <span>Investigation, synthesis, enrichment, ranking</span>
+              <span class="opos-stack-tools">ChatGPT + web/data agents</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">terminal</span> Build / scale</span>
+              <span>Low-level implementation and feature growth</span>
+              <span class="opos-stack-tools">Codex, Claude Code, local coding agents</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">mail</span> Communication</span>
+              <span>Inbound and outbound operational channel</span>
+              <span class="opos-stack-tools">Gmail</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">event</span> Meetings</span>
+              <span>Scheduled human interaction</span>
+              <span class="opos-stack-tools">Google Calendar</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">folder_open</span> Assets</span>
+              <span>Documents, reports, shared artifacts</span>
+              <span class="opos-stack-tools">Google Drive</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">monitoring</span> Interface</span>
+              <span>Visual operational context and controls</span>
+              <span class="opos-stack-tools">Custom web cockpit</span>
+            </div>
+            <div class="opos-stack-row">
+              <span class="opos-stack-layer"><span class="material-symbols-outlined">radar</span> Custom intelligence</span>
+              <span>Business-specific acquisition and decision systems</span>
+              <span class="opos-stack-tools">Scrapers, rankers, alerts, automations</span>
+            </div>
+        </div>
+      </section>
+
+      <section class="section compact opos-graph-section">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">hub</span> The Operating Graph</span>
+            <h2>Prospects, clients, and partners are roles, not databases.</h2>
+            <p>Someone can start as a prospect, become a client, and later send you referrals as a partner. One identity layer underneath means the system sees all of it, and your AI can reason about all of it.</p>
+          </div>
+        </div>
+        <div class="opos-graph">
+          <article><span class="material-symbols-outlined">apartment</span><h3>Organizations</h3><p>The companies in your world — customers, vendors, partners, prospects.</p></article><article><span class="material-symbols-outlined">person</span><h3>People</h3><p>Everyone you know, with or without an organization attached.</p></article><article><span class="material-symbols-outlined">handshake</span><h3>Relationships</h3><p>Prospect, client, partner — a role that changes over time, not a separate database.</p></article><article><span class="material-symbols-outlined">flag</span><h3>Goals</h3><p>A specific outcome with a target and a date, created once the research says it's real.</p></article><article><span class="material-symbols-outlined">folder_special</span><h3>Projects</h3><p>Agreed work for a client, carrying its own goals, touchpoints and evidence.</p></article><article><span class="material-symbols-outlined">event_available</span><h3>Touchpoints</h3><p>Every call, meeting, and message — attached to the relationship it moved.</p></article><article><span class="material-symbols-outlined">task_alt</span><h3>Tasks</h3><p>Global execution nodes that flow into the daily timebox, wherever they were created.</p></article><article><span class="material-symbols-outlined">forum</span><h3>Research Memory</h3><p>Nested comment threads written by you, your AI, your agents, and your scrapers.</p></article>
+        </div>
+        <p class="opos-connect-foot"><span class="material-symbols-outlined">route</span> <span><strong>Relationships generate goals. Goals generate tasks. Tasks consume attention. Attention produces outcomes.</strong> A task created under a client goal lands in the same daily timebox as everything else, never lost inside a CRM profile.</span></p>
+      </section>
+
+      <section class="spotlight-section">
+        <div class="spotlight-image"><img src="/assets/operator-os/operators-spotlight.jpg" alt="An electrician beside a service van, checking a phone" /></div>
+        <div>
+          <span class="kicker"><span class="material-symbols-outlined">radar</span> Custom Intelligence</span>
+          <h2>Scrapers and rankers become graph-ingestion adapters.</h2>
+          <p>State licensing portals, county records, websites, chamber directories, referrals, and manual entries all resolve into the same organizations and people. Each one gets a profile, a research thread, and a score. You review the ranked queue instead of 500 raw rows.</p>
+          <p>Manual networking stays first-class too. The person you met at a golf event lands in the same graph as the scraped list.</p>
+          <div class="button-row"><a class="primary-button" href="/pricing#modules">Module Pricing <span class="material-symbols-outlined">arrow_forward</span></a></div>
+        </div>
+      </section>
+
+      <section class="section compact">
+        <div class="section-head">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">route</span> How an Install Works</span>
+            <h2>From discovery to a cockpit you actually use.</h2>
+          </div>
+        </div>
+        <ol class="opos-steps">
+          <li><b>01</b><span class="material-symbols-outlined">search</span><h3>Discovery</h3><p>We learn how your operation actually moves: people, information, decisions, handoffs.</p></li><li><b>02</b><span class="material-symbols-outlined">account_tree</span><h3>Model the operating graph</h3><p>Your organizations, people, relationships, goals, and workflows, mapped before anything is built.</p></li><li><b>03</b><span class="material-symbols-outlined">database</span><h3>Instantiate memory</h3><p>The structured data layer goes live with your real records.</p></li><li><b>04</b><span class="material-symbols-outlined">monitoring</span><h3>Build the cockpit</h3><p>A custom interface over your graph, updating live as things change.</p></li><li><b>05</b><span class="material-symbols-outlined">forum</span><h3>Connect the conversation</h3><p>ChatGPT or Claude wired to your memory so you can operate by talking.</p></li><li><b>06</b><span class="material-symbols-outlined">trending_up</span><h3>Adopt &amp; evolve</h3><p>Onboarding, then new modules (scrapers, rankers, alerts) as the economics justify them.</p></li>
+        </ol>
+      </section>
+
+      <section class="section compact opos-positioning">
+        <span class="kicker"><span class="material-symbols-outlined">verified</span> What We're Actually Selling</span>
+        <h2>Not "AI automation." Not "an Airtable." Not "a custom dashboard."</h2>
+        <p>A conversational operating layer around your business. You talk to the system through ChatGPT or Claude, inspect the business through your cockpit, and hand deeper technical work to managed coding agents without carrying the engineering yourself. You keep what only you can provide: judgment, relationships, domain expertise, risk tolerance, final decisions. The system takes on more and more of the remembering, organizing, researching, routing, and repetitive work.</p>
+      </section>
+
+      
+      <section class="section compact">
+        <div class="detail-enroll-band opos-cta-band">
+          <div>
+            <span class="kicker"><span class="material-symbols-outlined">call</span> Discovery Call &middot; 20&ndash;30 min</span>
+            <h2>See the architecture running live.</h2>
+            <p>On the discovery call we show you AutoNateAI's own cockpit in production, then what yours would look like.</p>
+          </div>
+          <a class="primary-button" href="/work-with-us">Book a Discovery Call <span class="material-symbols-outlined">arrow_forward</span></a>
+        </div>
+      </section>
+    </main>
+  
+        
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>AutoNateAI<span class="brand-dot">_</span></strong>
+          <p>AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses. You talk to your business through ChatGPT or Claude, see it in a live cockpit, and we handle the architecture.</p>
+        </div>
+        <div><h5>The Operator OS</h5><ul><li><a href="/operator-os">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/pricing#modules">Custom Modules</a></li></ul></div>
+        <div><h5>Company</h5><ul><li><a href="/research-and-case-studies">Research &amp; Case Studies</a></li><li><a href="/about">About Nathan</a></li><li><a href="/work-with-us">Book a Discovery Call</a></li><li><a href="/research-and-case-studies?type=Ag%20Systems%20Archive">Ag Systems Archive</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoNateAI. Research. Architect. Automate. Operate.</span>
+      </div>
+    </footer>
+  
+        <script type="module" src="/app.js"></script>
+      </body>
+    </html>
