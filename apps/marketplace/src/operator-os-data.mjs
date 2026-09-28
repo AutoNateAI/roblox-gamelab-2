@@ -51,10 +51,12 @@ export const operatorArticles = [
   {
     n: 3,
     slug: "why-another-crm-increases-owner-cognitive-load",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "stacked_bar_chart",
     title: "Why Does Adding Another CRM Often Increase the Owner's Cognitive Load?",
     question: "Why does adding another CRM often increase the owner's cognitive load?",
-    hook: "The CRM was supposed to remember for you. Now you remember the CRM, the spreadsheet, the inbox, and which one is actually right.",
+    hook: "A CRM stores information. It doesn't carry it. Add one more tool that doesn't share memory and you've added pairs to reconcile, and the owner is still the integration layer.",
     audience: ["All Operators"],
     queueDate: "2026-10-01",
     ogHeadline: "WHY ANOTHER CRM MADE YOUR JOB HARDER",
