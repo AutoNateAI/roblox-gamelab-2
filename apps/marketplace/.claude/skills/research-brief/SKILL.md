@@ -1,60 +1,64 @@
 ---
 name: research-brief
-description: Turns one agricultural-economics research question into a published AutoNateAI research page — search-based research, a Markdown write-up with interactive diagrams/charts/maps, generated hero art, and a wired-in investigations[] entry in this site's static export. Use when the user gives a research question (or a Daily Radar candidate question) and wants it to become a real page at /research-and-case-studies/<slug>.
+description: Turns one AutoNateAI Operator OS question (an operational bottleneck contractors, operators, and small-business owners feel — follow-up, quoting, prospect ranking, owner attention, AI adoption) into a published, deeply researched article at /research-and-case-studies/<slug> — search-based research, a first-person Markdown write-up built to make the target operator recognize their own business, interactive charts/graphs, meme visual breaks, and the operatorArticles entry flipped to published. Use when the user names one of the 14 operator questions (or a new one) and wants the real article written.
 ---
 
-# Research Brief
+# Research Brief — Operator OS edition
 
-Produces one AutoNateAI research page end to end: **Research → Draft → Assets → Assemble & Verify**. Stop and show the user your work at the end of each phase — never chain straight through to a live build without a checkpoint, and never publish/commit without being asked.
+Rewritten 2026-09-28 when AutoNateAI repositioned from agricultural research to the **Operator OS** (conversational AI operating systems for contractors, operators, and small businesses). The old ag version is in git history; don't resurrect its bio, region, or commodity fields.
 
-This is a search-based skill: Phase 1 is real WebSearch/WebFetch research, not generation from the model's own knowledge. A claim with no fetched source is not a finding — see `reference/voice-and-evidence.md` before writing anything.
+One question in, one published article out: **Research → Draft → Visuals → Publish**. Every article exists to do one job — make a specific operator read it and think *"that's my business, and I didn't know it was costing me that much"* — then offer the discovery call. It is research first and sales second; the sale only works because the research is real.
 
-## The four phases
+## 0. Know the reader before you search
 
-### 1. Research (search-based)
-Given a question, search primary sources only — USDA NASS, Farm Credit Administration, Census, company filings, academic/extension research, no secondhand blog summaries as the sole source. Every claim gets a URL. If county/region-level data doesn't exist publicly, say so — don't extrapolate from national figures and present it as local. Load `reference/voice-and-evidence.md` for the evidence bar and the site's honesty rules (never invent a finding, never claim the private Radars publicly — see `docs/marketplace/lab-operating-model.md` §2 at the repo root).
+Every question in `src/operator-os-data.mjs` (`operatorArticles`) has an `audience` tag. Before researching, write down (scratch, not the page):
+- **Who exactly** is reading — e.g. "an HVAC owner with 3 trucks who still quotes from the cab of his truck at 9 PM," not "small businesses."
+- **The moment they feel it** — the specific night, call, or lost job where this question stops being abstract.
+- **What they already believe** — usually "I need more leads" or "I just need a better CRM." The article has to earn the right to move them off it.
 
-Output: a scratch findings list, each item `{ claim, url, dateOrVintage }`. Show this to the user before drafting — it's the cheapest point to catch a bad source.
+## 1. Research (search-based, real)
 
-### 2. Draft
-Load `reference/schema.md` for the exact field shapes. Produces two things:
-- `content/research/<slug>.md` — the long-form narrative (short answer, system diagram, numbers, geography, methodology, implications, doubling as the `investigations[]` entry's body). Load `reference/interactive-blocks.md` before writing any ` ```chart `/` ```map `/` ```graph ` fence — the JSON shape has to match exactly what `public/app.js` expects. Use ` ```graph ` (not ` ```mermaid `) for `## How This Connects` — it's a hand-laid-out, evidence-labeled, live-scenario-capable diagram instead of a static auto-layout flowchart.
-- A `src/data.mjs` `investigations[]` entry stub (question, status, region, commodity, stakeholders, evidence, hypothesis, dataNeeds, sources, `sourcePath` pointing at the new `.md` file).
+WebSearch/WebFetch only — no generation from memory. Every number gets a URL you actually loaded. Aim for 8–15 solid sources per article, prioritized:
 
-Status stays `"open"` unless the research phase actually produced a real, sourced answer — see `investigationStatusLabels` in `src/data.mjs`.
+1. **Primary data**: U.S. Census / BLS / SBA Office of Advocacy, U.S. Chamber of Commerce reports, Federal Reserve Small Business Credit Survey, trade associations (ACCA, NECA, PHCC, NAR, NARPM), academic papers (HBR/MIT Sloan/lead-response studies, cognitive-load and task-switching research — APA, Gloria Mark's attention research, Sophie Leroy's "attention residue").
+2. **Industry benchmarks with disclosed methodology**: ServiceTitan / Housecall Pro / Jobber annual reports, InsideSales/XANT lead-response studies, Salesforce "State of" reports, Gartner/Forrester public summaries — cite them as the vendor's own survey, never as neutral fact.
+3. **Real operator voices**: trade-publication interviews (Contracting Business, ACHR News, EC&M, Inman), forum threads only as color, never as a statistic.
 
-### 3. Assets
-One image per article, generated with `gpt-image-2.5-flare` via `scripts/generate-og-hero-images.mjs` — add one new job entry there, don't build a new script and don't use the older `scripts/generate-ag-lab-images.mjs` plain-photo pattern. This single generated image does triple duty: the investigation's `thumbnail` (card thumbnail *and* the image at the top of the article body) *and* the page's `ogImage` — set `ogImage: investigation.thumbnail || ...` in `renderInvestigationDetail` rather than generating a second, separate OG asset.
+Rules (full list in `reference/voice-and-evidence.md`):
+- Vendor stats are labeled as vendor stats ("per ServiceTitan's own 2025 survey of its customers").
+- Old stats are labeled with their year. The famous "respond in 5 minutes" study is from 2007/2011 — say so, then explain why it still matters or doesn't.
+- If there's no hard number for the exact question, **build a transparent model** (Section 5 of the article) with every assumption stated, instead of borrowing a number that doesn't fit.
 
-Requirements for the prompt (see the existing job entries for real examples):
-- **Photo-realistic**, relevant to the specific question this article answers — not a generic category stock photo.
-- The headline/caption text is **baked directly into the image by the model**, not added afterward — ask for "large bold headline text reading [X]" plus a smaller caption line "AutoNateAI · [short label], Coming Soon" (drop ", Coming Soon" once the piece has real content). Witty, click-worthy, professional — the same voice as `name` (see `reference/voice-and-evidence.md`), never clickbait that oversells a stub.
-- Composition: photo on the left, text baked into the **right ~40-45% of the frame**, dark navy background bleeding in behind the text (matches the site's brand — see `STYLE` constant in the script). Keep text out of the bottom ~10% of the frame — a first pass that crammed a headline against the bottom edge had to be regenerated with an explicit "generous quiet margin below the text" instruction.
-- Generate at `1536x1024`, the script center-crops to the `1200x630` OG size automatically.
-- Save as `og/<slug>.jpg` (not `investigations/<slug>.jpg`) — the `/assets/og/` path prefix is what makes `captionedImgClass()` in `src/pages.mjs` apply the right-cropping CSS (`.captioned-thumb`, `object-position: right center`) that keeps a card-thumbnail's tighter crop from clipping the caption text. A different path prefix silently loses that protection.
+Output: a scratch findings list `{ claim, url, year }`. Keep it in your scratchpad; you don't need to stop for approval unless a source looks shaky — the user has asked for these to be researched and shipped one at a time.
 
-Run it with `ONLY="<slug>" node scripts/generate-og-hero-images.mjs` from `apps/marketplace/` to generate just the new entry (or a comma-separated list to regenerate a few) — don't rerun the whole file, it'll re-spend on every image that's already good.
+## 2. Draft
 
-Charts and maps are **not** separate image assets; they're data embedded directly in the Markdown (Phase 2) and render client-side.
+Write `content/operator-os/<slug>.md` (replace the scaffold entirely — including its HTML comment). Section order and requirements are in `reference/schema.md`; voice in `reference/voice-and-evidence.md`; chart/graph JSON in `reference/interactive-blocks.md` (load it before writing any fence).
 
-### 4. Assemble & verify
-1. `node --check` every file you touched (`src/data.mjs`, `src/pages.mjs` if you changed it).
-2. `node scripts/export-static.mjs` from `apps/marketplace/` — must complete with no errors and no missing-asset warnings.
-3. Open the built page under `dist/site/research-and-case-studies/<slug>/index.html` and grep for `class="research-chart"`, `class="research-map"`, `class="research-graph"` (or `<pre class="mermaid">` for older content that still uses it) to confirm every block you wrote actually rendered as a data island, not as a raw code block (a JSON typo silently degrades to a visible `.data-block-error` — check for that string too). For an `app.js` change specifically, run `node --input-type=module --check < public/app.js` in addition to the normal `node --check` — the file loads as `type="module"`, where a duplicate top-level declaration is a silent-at-build-time `SyntaxError` that only shows up in the browser (see `docs/marketplace/agricultural-intelligence-lab.md` §10 for the incident this rule comes from).
-4. Report the new URL and a one-line summary of what's still open/missing. Do not commit or push unless asked.
+Target length: **2,000–3,200 words** of prose plus 2–4 interactive blocks. Deep, not padded — every section should either hand the reader a number, a mechanism, or a thing to do.
 
-### 5. Meme visual pass (not optional for a daily-dossier run)
+## 3. Visuals
 
-Once Phase 4 is verified, run `../meme-visual-pass/SKILL.md` against the finished `content/research/<slug>.md` — it scatters ~9 contextual, meme-style illustrated images through the article's prose-heavy stretches, generated with `gpt-image-2.5-flare`. `daily-dossier` always runs this as its own numbered step; if you're driving `research-brief` standalone (no `daily-dossier` wrapper), run it too before calling the article finished — re-run Phase 4's build-verify step afterward, since the meme pass adds new Markdown image lines and files.
+The OG/thumbnail image already exists (`public/assets/og/<slug>.jpg`, from `scripts/generate-operator-os-images.mjs`). Don't regenerate it unless the article's angle changed enough that the headline no longer fits.
+
+Then run a lighter **meme visual pass** (see `../meme-visual-pass/SKILL.md` for mechanics — manifest → `node scripts/generate-meme-images.mjs --manifest <file>`) with these Operator OS overrides:
+- **4–5 images per article**, not 9. Files at `meme/<slug>-01.jpg` …
+- Scenes come from the trades/small-business world of *this* article (a truck cab, a job site, a shop office, a kitchen-table invoice pile) and riff on a specific fact or number from the paragraph they sit in.
+- Accent colors: emerald green and forest black (the site's palette), not navy/gold.
+- Vary the people across the set (race, gender, age); no real people, no brands.
+- Insert them as `![alt](/assets/meme/<slug>-NN.jpg)` lines in prose-heavy stretches, never adjacent to a chart/graph fence and never inside the Short Answer.
+
+## 4. Publish
+
+1. In `src/operator-os-data.mjs`, set the article's `status: "published"` and `publishedDate: "<today YYYY-MM-DD>"`. That alone flips the page to `index,follow`, adds Article JSON-LD, and puts it in the sitemap. If research sharpened the angle, you may also tighten `hook` (one sentence, card-length) — keep `title`/`slug` stable (the slug is the URL).
+2. `node --check src/operator-os-data.mjs` and `npm run marketplace:build` from the repo root — no errors.
+3. In `dist/site/research-and-case-studies/<slug>/index.html`: confirm `content="index,follow"`, count `research-chart`/`research-graph` data islands, and grep for `data-block-error` (must be zero). Confirm every `/assets/meme/<slug>-*.jpg` referenced exists.
+4. Commit only this article's files (the Markdown, `operator-os-data.mjs`, its meme images) with a message like `Publish Operator Question 07: <short title>` and the repo's Co-Authored-By trailer. Pushing to `main` deploys (GitHub Pages workflow). The user has asked for each article to be pushed as it's finished — do that without re-asking; don't watch the deploy run.
 
 ## Reference files
 
 | Need | Load |
 |---|---|
-| Evidence bar, fabrication rules, voice | `reference/voice-and-evidence.md` |
-| Exact `investigations[]` field shapes + Markdown section order | `reference/schema.md` |
-| ` ```chart `/` ```map ` JSON spec (must match `public/app.js`) | `reference/interactive-blocks.md` |
-
-## What this skill does not do (yet)
-
-No live Airtable/Radar integration — this is the manual "one question in, one page out" loop. No distribution (LinkedIn/Facebook/email/YouTube) — that's a downstream skill that should consume the finished `investigations[]` entry, not be part of this one. No SEO/redirect work — that's handled separately.
+| Voice, evidence bar, what never appears publicly | `reference/voice-and-evidence.md` |
+| Article section order + the `operatorArticles` fields | `reference/schema.md` |
+| ` ```chart ` / ` ```graph ` / ` ```map ` JSON spec | `reference/interactive-blocks.md` |
