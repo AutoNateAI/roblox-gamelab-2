@@ -363,26 +363,6 @@ const server = createServer(async (request, response) => {
         html(response, 200, renderOperatorArticleDetail(operatorArticle));
         return;
       }
-      const region = regions.find((item) => item.slug === slug);
-      if (region) {
-        html(response, 200, renderRegionDetail(region));
-        return;
-      }
-      const organization = organizations.find((item) => item.slug === slug);
-      if (organization) {
-        html(response, 200, renderOrganizationDetail(organization));
-        return;
-      }
-      const system = systems.find((item) => item.slug === slug);
-      if (system) {
-        html(response, 200, renderSystemDetail(system));
-        return;
-      }
-      const investigation = investigations.find((item) => item.slug === slug);
-      if (investigation) {
-        html(response, 200, renderInvestigationDetail(investigation));
-        return;
-      }
       json(response, 404, { error: "Not found" });
       return;
     }

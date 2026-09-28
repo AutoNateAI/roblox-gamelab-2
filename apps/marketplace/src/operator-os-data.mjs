@@ -7,9 +7,8 @@
 // and the 14-question content queue is the "AutoNateAI Operator OS
 // Playbook" PDF (Google Drive, 2026-09-28).
 //
-// The agricultural research articles in data.mjs's `investigations` stay
-// live at their existing URLs (they're indexed) but are now the "Ag Systems
-// Archive" — they no longer lead the site.
+// The earlier agricultural research articles (data.mjs `investigations`)
+// were unpublished on 2026-09-28 so they stop competing in search.
 
 // --- Research & Case Studies: the 14-day discovery-question queue --------
 //

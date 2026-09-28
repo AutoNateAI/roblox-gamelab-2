@@ -125,33 +125,10 @@ for (const [routePath, html] of routes) {
   await writeFile(filePath, html);
 }
 
-// Region/organization/system/investigation detail pages all publish under
-// one unified path for SEO (fourth pass) — see the matching server.mjs
-// routing and firebase.json redirects for the old per-type detail URLs.
-for (const region of regions) {
-  const filePath = path.join(outDir, "research-and-case-studies", region.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderRegionDetail(region));
-}
-
-for (const organization of organizations) {
-  const filePath = path.join(outDir, "research-and-case-studies", organization.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderOrganizationDetail(organization));
-}
-
-for (const system of systems) {
-  const filePath = path.join(outDir, "research-and-case-studies", system.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderSystemDetail(system));
-}
-
-for (const investigation of investigations) {
-  const filePath = path.join(outDir, "research-and-case-studies", investigation.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderInvestigationDetail(investigation));
-}
-
+// The agricultural research (regions/organizations/systems/investigations)
+// was unpublished 2026-09-28 in the Operator OS repositioning — those
+// pages intentionally 404 now so Google drops them. Source data is still in
+// src/data.mjs + content/research/ if it's ever needed again.
 // Operator OS question articles share the same unified detail path.
 for (const article of operatorArticles) {
   const filePath = path.join(outDir, "research-and-case-studies", article.slug, "index.html");
@@ -159,27 +136,10 @@ for (const article of operatorArticles) {
   await writeFile(filePath, renderOperatorArticleDetail(article));
 }
 
-// Static redirect stubs for every path this rename moved, so an already-
-// shared or indexed old URL still lands on the new one instead of a 404.
+// Static redirect stub for the old hub path.
 await writeRedirect("articles", "/research-and-case-studies");
 for (const article of articles) {
   await writeRedirect(`articles/${article.handle}`, "/research-and-case-studies");
-}
-await writeRedirect("regions", "/research-and-case-studies?type=Regions");
-for (const region of regions) {
-  await writeRedirect(`regions/${region.slug}`, `/research-and-case-studies/${region.slug}`);
-}
-await writeRedirect("organizations", "/research-and-case-studies?type=Organizations");
-for (const organization of organizations) {
-  await writeRedirect(`organizations/${organization.slug}`, `/research-and-case-studies/${organization.slug}`);
-}
-await writeRedirect("systems", "/research-and-case-studies?type=Systems");
-for (const system of systems) {
-  await writeRedirect(`systems/${system.slug}`, `/research-and-case-studies/${system.slug}`);
-}
-await writeRedirect("investigations", "/research-and-case-studies?type=Open%20Questions");
-for (const investigation of investigations) {
-  await writeRedirect(`investigations/${investigation.slug}`, `/research-and-case-studies/${investigation.slug}`);
 }
 
 await cp(path.join(publicDir, "styles.css"), path.join(outDir, "styles.css"));
@@ -204,10 +164,6 @@ const sitemapUrls = [
   ...operatorArticles
     .filter((article) => article.status === "published")
     .map((article) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${article.slug}`, "0.8", article.publishedDate || TODAY)),
-  ...regions.map((region) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
-  ...organizations.map((org) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${org.slug}`, org.status === "watchlist" ? "0.4" : "0.8")),
-  ...systems.map((system) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${system.slug}`, "0.8")),
-  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${investigation.slug}`, "0.5")),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
@@ -233,12 +189,7 @@ await writeFile(
   ),
 );
 
-const detailPageCount =
-  operatorArticles.length +
-  regions.length +
-  organizations.length +
-  systems.length +
-  investigations.length;
+const detailPageCount = operatorArticles.length;
 
 console.log(
   `Exported ${routes.length + detailPageCount} pages to ${path.relative(rootDir, outDir)}`,

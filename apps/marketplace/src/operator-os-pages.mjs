@@ -1,15 +1,11 @@
 // Operator OS pages (2026-09-28 repositioning). Home, the Operator OS
 // product page, Pricing, the Research & Case Studies hub, the operator
 // article detail page, About, and Work With Us. Content comes from
-// operator-os-data.mjs; the agricultural research in data.mjs's
-// `investigations` is rendered here only as the "Ag Systems Archive" filter
-// on the research hub.
-import { investigations } from "./data.mjs";
+// operator-os-data.mjs. The earlier agricultural research is unpublished.
 import { escapeHtml, icon, pageShell } from "./components.mjs";
 import {
   breadcrumbs,
   formatDate,
-  investigationCard,
   markdownToHtml,
   readResearchMarkdown,
   stripFirstHeading,
@@ -615,7 +611,6 @@ export function renderPricing() {
 // ---------------------------------------------------------------------------
 export function renderArticles() {
   const ordered = [...operatorArticles].sort((a, b) => a.n - b.n);
-  const archive = [...investigations].sort((a, b) => (b.publishedDate || "").localeCompare(a.publishedDate || ""));
   const featured = ordered.find((a) => a.status === "published") || ordered[0];
 
   const body = `
@@ -637,15 +632,10 @@ export function renderArticles() {
       </section>
 
       <div class="content-tools">
-        <div class="filter-row" role="tablist" aria-label="Filter research">
-          <button type="button" data-filter="Operator OS">Operator Questions (${ordered.length})</button>
-          <button type="button" data-filter="Ag Systems Archive">Ag Systems Archive (${archive.length})</button>
-        </div>
         <label>${icon("search")} <input type="search" placeholder="Search questions, industries, workflows..." data-article-search /></label>
       </div>
       <div class="industry-grid lab-grid" data-article-grid>
         ${ordered.map((a) => operatorArticleCard(a)).join("")}
-        ${archive.map((i) => investigationCard(i, "Ag Systems Archive")).join("")}
       </div>
       <nav class="pagination" data-article-pagination aria-label="Pagination"></nav>
     </main>
@@ -750,7 +740,6 @@ export function renderAbout() {
     ["Are you an agency?", "No. AutoNateAI is an architecture practice. Nathan designs the system and manages how it grows; AI agents do much of the implementation and repetitive work. That's how a small practice delivers a system a big firm would charge far more for."],
     ["Do I have to be technical?", "No, and that's the whole point. You operate through conversation and look at your cockpit. The engineering and architecture are our job."],
     ["Where do you work?", "With operators across the U.S., remotely, and in person when it makes sense for discovery and onboarding."],
-    ["What happened to the agricultural research?", "It's still published, in the Ag Systems Archive on the Research & Case Studies page. That work is where the research-first method came from: map the real system, source every claim, then build. The Operator OS points the same method at the businesses we build for."],
   ];
 
   const body = `
