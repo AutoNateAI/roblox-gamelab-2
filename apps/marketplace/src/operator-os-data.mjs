@@ -135,10 +135,12 @@ export const operatorArticles = [
   {
     n: 9,
     slug: "rank-500-prospects-without-inspecting-500-rows",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "leaderboard",
     title: "How Do You Rank 500 Prospects Without Asking the Owner to Inspect 500 Rows?",
     question: "How do you rank 500 prospects without asking the owner to inspect 500 rows?",
-    hook: "A licensing scrape hands you 500 electricians. The owner has time to look at 15. The ranker is the whole product.",
+    hook: "A licensing scrape hands you 500 names. De-duplicate, enrich, and score them transparently, and the owner reviews 15 with the reasons attached. That's a 16x cut in review time.",
     audience: ["Contractors & Trades", "Local B2B"],
     queueDate: "2026-10-07",
     ogHeadline: "500 PROSPECTS. LOOK AT 15.",
