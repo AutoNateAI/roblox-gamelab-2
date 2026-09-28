@@ -1052,9 +1052,12 @@ filterButtons.forEach((button) => {
 // Allow a link into Research & Case Studies to land pre-filtered, e.g.
 // /articles?type=Regions from the homepage's "All Regions" button.
 const presetType = new URLSearchParams(window.location.search).get("type");
+// With no preset, the first filter button is the default view (on the
+// Research hub that's the Operator OS questions, not the ag archive).
 const presetButton = presetType && filterButtons.find((button) => button.dataset.filter === presetType);
-(presetButton || filterButtons[0])?.classList.add("active");
-if (presetButton) activeArticleFilter = presetType;
+const initialFilterButton = presetButton || filterButtons[0];
+initialFilterButton?.classList.add("active");
+if (initialFilterButton) activeArticleFilter = initialFilterButton.dataset.filter || "All";
 articleSearch?.addEventListener("input", () => {
   articlePage = 1;
   filterArticles();

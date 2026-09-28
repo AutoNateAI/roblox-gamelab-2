@@ -18,10 +18,14 @@
 // see renderArticles and the shared card helpers in src/pages.mjs. The
 // bare listing pages (/regions, /organizations, /systems, /investigations)
 // are unchanged. Old detail URLs 301-redirect via firebase.json.
+// OPERATOR OS PASS (2026-09-28): AutoNateAI repositioned from the ag
+// intelligence lab to the Operator OS (see src/operator-os-data.mjs). The
+// "Intelligence" nav slot became "Operator OS" at /operator-os; the brand
+// mark links home. Ag research lives on as the "Ag Systems Archive" filter.
 export const navItems = [
-  { label: "Intelligence", href: "/", keys: ["home"] },
+  { label: "Operator OS", href: "/operator-os", keys: ["operator-os"] },
   { label: "Research & Case Studies", href: "/research-and-case-studies", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
-  { label: "Work With Us", href: "/work-with-us", keys: ["work-with-us"] },
+  { label: "Pricing", href: "/pricing", keys: ["pricing"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];
 

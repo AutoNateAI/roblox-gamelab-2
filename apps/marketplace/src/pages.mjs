@@ -39,6 +39,18 @@ import {
   statusLabel,
 } from "./components.mjs";
 
+// Operator OS repositioning (2026-09-28): the home, about, work-with-us,
+// and research-hub pages now live in operator-os-pages.mjs.
+export {
+  renderAbout,
+  renderArticles,
+  renderHome,
+  renderOperatorArticleDetail,
+  renderOperatorOs,
+  renderPricing,
+  renderWorkWithUs,
+} from "./operator-os-pages.mjs";
+
 function shot(index) {
   return sceneShots[index % sceneShots.length];
 }
@@ -51,7 +63,7 @@ function packMedia(pack, index) {
   return `<img src="${shot(index ?? pack.heroShotIndex)}" alt="${escapeHtml(pack.title)}" />`;
 }
 
-function formatDate(value) {
+export function formatDate(value) {
   if (!value) return "";
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -341,11 +353,11 @@ function systemCard(system) {
   `;
 }
 
-function investigationCard(investigation) {
+export function investigationCard(investigation, category = "Open Questions") {
   const region = regions.find((r) => r.slug === investigation.region);
   const isPlaceholder = !investigation.evidence?.length;
   return `
-    <a class="lab-card" href="/research-and-case-studies/${investigation.slug}" data-category="Open Questions" data-search="${searchAttr(investigation.name, investigation.question)}">
+    <a class="lab-card" href="/research-and-case-studies/${investigation.slug}" data-category="${category}" data-search="${searchAttr(investigation.name, investigation.question)}">
       <article class="industry-card">
         <div class="card-thumbnail">${thumbnailOrIcon(investigation, investigation.icon)}<span class="status-pill">${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span></div>
         ${region ? `<span class="kicker">${icon("landscape")} ${escapeHtml(region.shortName || region.name)}</span>` : ""}
@@ -679,6 +691,7 @@ export function renderInvestigationDetail(investigation) {
   const body = `
     <main class="article-page">
       ${breadcrumbs([["Home", "/"], ["Research & Case Studies", "/research-and-case-studies"], [investigation.name, null]])}
+      <div class="opos-archive-note">${icon("inventory_2")}<p><strong>From the Ag Systems Archive.</strong> AutoNateAI now builds conversational operating systems for operators and small businesses. This earlier agricultural research stays published as a record of the method: map the real system, source every claim. <a href="/operator-os">See the Operator OS</a></p></div>
       <article class="article-detail">
         <header>
           <span class="kicker">${icon(investigation.icon)} Open Question &middot; ${escapeHtml(investigationStatusLabels[investigation.status] || investigation.status)}</span>
@@ -799,125 +812,6 @@ export function renderLab() {
   });
 }
 
-export function renderHome(data) {
-  // `featured: true` is an explicit, single-owner flag set by the
-  // daily-dossier skill on the day's Question of the Day — it's the one
-  // that should hold the hero panel, and it stays there even as same-day
-  // follow-on articles (via dossier-second-look) get published, since those
-  // never set the flag themselves. Falls back to the old "first investigation
-  // with real content" heuristic only if nothing is explicitly flagged yet
-  // (e.g. before daily-dossier's first real run).
-  const featuredInvestigation =
-    investigations.find((i) => i.featured) ||
-    investigations.find((i) => i.evidence?.length) ||
-    investigations.find((i) => i.status === "open");
-
-  // The home page's "Featured Research" row is the latest 3 published
-  // articles, most-recent first — sorted by `publishedDate` (each
-  // investigation gets one, set by daily-dossier/research-brief on
-  // publish), with `featured` as a tiebreaker for same-day articles so the
-  // actual Question of the Day still leads over a same-day follow-on piece.
-  // This used to hardcode [featuredInvestigation, 1 region stub, 1
-  // organization stub] to always fill 3 slots — removed 2026-09-17 once the
-  // site had enough real articles that padding with "Coming Soon" cards was
-  // no longer necessary (see git history for the old behavior).
-  const latestInvestigations = [...investigations]
-    .sort((a, b) => (b.publishedDate || "").localeCompare(a.publishedDate || "") || (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
-    .slice(0, 3);
-
-  const body = `
-    <main class="lab-home">
-      <section class="home-hero lab-masthead">
-        <div class="hero-bg"><img src="/assets/ag-lab/home-hero.jpg" alt="" /></div>
-        <div class="hero-content">
-          <div class="hero-copy">
-            <span class="kicker">${icon("agriculture")} Agricultural Economic Intelligence</span>
-            <h1>We study how farm country actually works — and publish it, free.</h1>
-            <p>How financing works, how a crop gets from a field to a buyer, which businesses connect to which — we research it, source it, and write it up in plain language, one region at a time.</p>
-            <div class="lab-byline">
-              <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker" />
-              <div><strong>Nathan Baker</strong><span>Founder, AutoNateAI</span></div>
-            </div>
-            <div class="button-row">
-              <a class="primary-button" href="/research-and-case-studies">Browse the Research ${icon("arrow_forward")}</a>
-              <a class="secondary-button" href="/work-with-us">Work With Us</a>
-            </div>
-          </div>
-          <a class="hero-program-panel" href="${featuredInvestigation ? `/research-and-case-studies/${featuredInvestigation.slug}` : "/research-and-case-studies?type=Open%20Questions"}">
-            <div class="hero-panel-body">
-              <span class="kicker">${icon("help_center")} Featured Research Question</span>
-              <h2>${featuredInvestigation ? escapeHtml(featuredInvestigation.name) : "Nothing open yet"}</h2>
-              <p>${featuredInvestigation ? escapeHtml(featuredInvestigation.question) : "Check back soon for the next open question."}</p>
-              <div class="hero-facts">
-                <span>Every Number, Sourced</span>
-                <span>Never a Guess Dressed as Fact</span>
-                <span>Farm Country, Actually Explained</span>
-                <span>Free. Public. No Pitch Deck.</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      ${(() => {
-        const featuredCards = latestInvestigations.map((investigation) => investigationCard(investigation));
-        if (!featuredCards.length) return "";
-        return `
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("landscape")} Featured Research</span>
-            <h2>The latest research, most recent first.</h2>
-            <p>Every article on this site is real, sourced research — no "coming soon" filler.</p>
-          </div>
-          <a class="primary-button" href="/research-and-case-studies">Browse Everything ${icon("arrow_forward")}</a>
-        </div>
-        <div class="industry-grid home-featured-grid${featuredCards.length < 3 ? " home-featured-grid-sparse" : ""}">
-          ${featuredCards.join("")}
-        </div>
-      </section>
-        `;
-      })()}
-
-      <section class="newsletter">
-        <div>
-          <h2>Are you a farm, lender, or agribusiness with a real system question?</h2>
-          <p>Reach out directly — business analysis, data work, and software builds around agricultural operations are all on the table.</p>
-          <div class="button-row">
-            <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
-          </div>
-        </div>
-      </section>
-    </main>
-  `;
-
-  return pageShell({
-    title: "AutoNateAI | Agricultural Economic Systems Intelligence Lab",
-    active: "home",
-    body,
-    canonicalPath: "/",
-    ogImage: "/assets/og/default.jpg",
-    description:
-      "AutoNateAI researches how farm country's money, land, and grain actually move — real, sourced research articles, with Southeast Missouri as the deepest coverage so far.",
-    ogTitle: "Agricultural Economic Systems Intelligence Lab",
-    ogDescription:
-      "Real numbers, real sources — how farm country actually works, researched and published free by Nathan Baker.",
-    structuredData: [
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "AutoNateAI",
-        "url": "https://autonateai.com",
-        "description": "AutoNateAI researches how farm country's money, land, and grain actually move, nationally, with Southeast Missouri as the deepest coverage so far.",
-        "founder": {
-          "@type": "Person",
-          "name": "Nathan Baker",
-        },
-      },
-    ],
-  });
-}
-
 export function renderProjects() {
   const body = `
     <main class="articles-page">
@@ -1019,7 +913,7 @@ export function renderOpenSource(page = 1) {
   });
 }
 
-function breadcrumbs(trail) {
+export function breadcrumbs(trail) {
   return `<nav class="breadcrumbs">${trail.map(([label, href], index) => (href ? `<a href="${href}">${escapeHtml(label)}</a><span>/</span>` : `<b>${escapeHtml(label)}</b>`)).join("")}</nav>`;
 }
 
@@ -1299,236 +1193,6 @@ export function renderPrograms(data) {
     ogTitle: "No worksheets. Real systems for real organizations.",
     ogDescription:
       "Design a real system with Claude Code and Codex, then find out whether it holds up when a real organization is depending on it.",
-  });
-}
-
-export function renderAbout() {
-  const values = [
-    ["Curiosity", "Ask sharper questions about how a farm economy actually behaves, not just repeat what's already assumed."],
-    ["Systems Thinking", "See the inputs, the money, the handoffs, and the failure points — not just the one piece in front of you."],
-    ["Integrity", "Every number gets a source. Every open question stays labeled open until it's actually answered."],
-    ["Creation", "Publish real analysis, dashboards, and tools — not just observations."],
-  ];
-  const faqs = [
-    ["Why agriculture?", "It's family. I grew up in Michigan, but my family is from the Missouri Bootheel, and I spent every summer here growing up. Once I started looking closely at agriculture with the same systems thinking I'd used in software — mapping how data, money, and decisions actually move — I realized nobody was writing most of it up in plain language. So I started, and I'm not stopping at one region."],
-    ["Do you only cover Southeast Missouri?", "No. Southeast Missouri — the Bootheel — is the deepest profile so far because it's where my family's from and where I'm building this. But the research and the consulting work are both national. If you're a farm operation, lender, elevator, or agribusiness anywhere in the country, I want to hear from you."],
-    ["Are you a farmer, a banker, or an economist?", "No — I'm a software engineer and business analyst by background. I'm not pretending otherwise. What I bring is the ability to research a system carefully, source it honestly, and explain it clearly — the same way I'd document any other complex system."],
-    ["How do you make sure this is accurate?", "Every fact on this site links to its public source — an annual report, a USDA dataset, a government filing. Where I don't have real data yet, the page says so instead of guessing. See any of the region or organization pages for examples."],
-    ["Do you also do consulting and software work?", "Yes — business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country. See Work With Us."],
-  ];
-
-  const body = `
-    <main class="about-page">
-      <section class="about-hero">
-        <div>
-          <span class="kicker">${icon("agriculture")} About</span>
-          <h1>Raised in Michigan. Rooted in the Bootheel. All in on agriculture.</h1>
-          <p>AutoNateAI is my independent research and consulting practice — where my software engineering and business-analytics background meets agriculture. I grew up in Michigan, where I first got curious about how farm economies actually work, but my family is from the Missouri Bootheel, and I spent every summer here growing up. I moved back down recently, and I'm building this from home now — researching agricultural economies nationally, not just the region I can see out the window. Consulting and software work are also on the table — see <a href="/work-with-us">Work With Us</a>.</p>
-          <div class="button-row">
-            <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
-            <a class="secondary-button" href="/research-and-case-studies">Browse the Research</a>
-          </div>
-        </div>
-        <aside class="about-founder-card">
-          <img src="/assets/nathan-baker.jpeg" alt="Nathan Baker, founder of AutoNateAI" />
-          <div>
-            <span class="kicker">Founder, AutoNateAI</span>
-            <h2>Nathan Baker</h2>
-            <p>Computer Science, University of Michigan. Software engineering and business analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now pointed at agriculture nationally, with deep family roots in the Bootheel.</p>
-          </div>
-        </aside>
-      </section>
-
-      <section class="about-mission">
-        <span class="kicker">${icon("architecture")} Mission</span>
-        <h2>The parts of your industry nobody explains clearly.</h2>
-        <p>A lot of what actually shapes an agricultural economy — how a lender underwrites a loan, how a crop-mix shift ripples through an elevator's harvest season, which roads and rail lines a region's grain really depends on — never gets written down anywhere a farm operation, a lender, or an agribusiness can just go read it. I research it, cite where every fact comes from, and publish it free.</p>
-        <p>I don't pretend to know more than I do. When I haven't found the answer yet, the page says "open question," not a guess dressed up as fact.</p>
-      </section>
-
-      <section class="spotlight-section">
-        <div class="spotlight-image"><img src="/assets/landing/tech-meets-agriculture.jpg" alt="A laptop showing a data chart, with farmland visible through the window behind it" /></div>
-        <div>
-          <span class="kicker">${icon("apartment")} Tech and Business Analytics, Pointed at Agriculture</span>
-          <h2>Whatever runs your operation, someone built the system underneath it — I map that first.</h2>
-          <p>Years before agriculture, I was a software engineer and business analyst at Microsoft, Citi, Veterans United, and Atomic Object — mapping how data, money, and decisions actually move through a complex system before anyone touched it. I grew up in Michigan, but my family's from the Missouri Bootheel, and I spent every summer here growing up. Once I pointed that same discipline at agriculture, it fit immediately: whether you're a farm operation, a lender, an elevator, or an agribusiness anywhere in the country, the approach is the same — map the real process, find where it actually breaks, source every claim before we build anything.</p>
-          <div class="button-row">
-            <a class="primary-button" href="/work-with-us">Speak With Nathan ${icon("arrow_forward")}</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section compact">
-        <div class="section-head">
-          <div>
-            <span class="kicker">${icon("diamond")} Values</span>
-            <h2>The standards behind the work.</h2>
-          </div>
-        </div>
-        <div class="about-values">
-          ${values.map(([title, text]) => `<article><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join("")}
-        </div>
-      </section>
-
-      <section class="detail-enroll-band">
-        <div>
-          <span class="kicker">${icon("handshake")} Work With Us</span>
-          <h2>Bring me a real workflow — I'll tell you straight whether it's a fit.</h2>
-          <p>Business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country.</p>
-        </div>
-        <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
-      </section>
-
-      <section class="section compact about-faq">
-        <div class="section-head"><div><span class="kicker">${icon("help")} FAQ</span><h2>Common questions</h2></div></div>
-        <div class="faq-grid">
-          ${faqs.map(([q, a]) => `<article><h3>${escapeHtml(q)}</h3><p>${escapeHtml(a)}</p></article>`).join("")}
-        </div>
-      </section>
-
-      <section class="detail-enroll-band">
-        <div>
-          <span class="kicker">${icon("local_activity")} Ready to Talk?</span>
-          <h2>Bring me a real question about your operation, or a real workflow to fix.</h2>
-          <p>Farm operations, lenders, elevators, agribusinesses — wherever you are in the country, every path starts with a conversation.</p>
-        </div>
-        <a class="primary-button" href="/work-with-us">Work With Us ${icon("arrow_forward")}</a>
-      </section>
-    </main>
-  `;
-
-  return pageShell({
-    title: "About Nathan Baker | AutoNateAI Agricultural Systems Lab",
-    active: "about",
-    body,
-    canonicalPath: "/about",
-    ogImage: "/assets/og/about.jpg",
-    description:
-      "Nathan Baker is the researcher behind AutoNateAI, studying how farm country's money, land, and grain actually move — a software engineer by background, ex-Microsoft, Citi, and Veterans United.",
-    ogTitle: "Nathan Baker — AutoNateAI Agricultural Systems Lab",
-    ogDescription:
-      "A software engineering background, now applied to researching how farm country actually works — plus still-open consulting and training work.",
-    structuredData: [
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Nathan Baker",
-        "jobTitle": "Founder, AutoNateAI",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "AutoNateAI",
-        },
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "University of Michigan",
-        },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(([q, a]) => ({
-          "@type": "Question",
-          "name": q,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": a,
-          },
-        })),
-      },
-    ],
-  });
-}
-
-export function renderWorkWithUs() {
-  const body = `
-    <main class="about-page">
-      <section class="home-hero">
-        <div class="hero-bg"><img src="/assets/landing/work-with-us-hero.jpg" alt="" /></div>
-        <div class="hero-content">
-          <div class="hero-copy">
-            <span class="kicker">${icon("handshake")} Work With Us</span>
-            <h1>Bring me a real workflow. I'll tell you straight whether it's a fit.</h1>
-            <p>Farm operations, lenders, elevators, and agribusinesses anywhere in the country — if there's a real workflow eating your team's time, or a question about how your part of this actually works, tell me about it below. I read every message myself.</p>
-          </div>
-          <aside class="hero-program-panel">
-            <img src="/assets/landing/work-with-us-panel.jpg" alt="" />
-            <div class="hero-panel-body">
-              <span class="kicker">${icon("checklist")} Who This Is For</span>
-              <h2>Farm operations, lenders, elevators, agribusinesses.</h2>
-              <p>Anywhere in the country — if a real workflow is eating your team's time, this is the place to start.</p>
-              <div class="hero-facts">
-                <span>Business &amp; Data Analysis</span>
-                <span>Custom Software Builds</span>
-                <span>Team AI Training</span>
-                <span>National, Not Just Local</span>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section compact">
-        <div class="book-layout">
-          <form class="form-stack booking-card booking-form" data-workwithus-form>
-            <div class="two-col">
-              <label>Name<input data-workwithus-field="name" autocomplete="name" placeholder="Jordan Rivera" required /></label>
-              <label>Email<input data-workwithus-field="email" autocomplete="email" type="email" placeholder="jordan@example.com" required /></label>
-            </div>
-            <div class="two-col">
-              <label>Organization<input data-workwithus-field="organization" autocomplete="organization" placeholder="Rivera Family Farms" /></label>
-              <label>What best describes you?
-                <select data-workwithus-field="orgType">
-                  <option value="">Select one</option>
-                  <option value="Farm / Ranch Operation">Farm / Ranch Operation</option>
-                  <option value="Lender / Bank / Credit Union">Lender / Bank / Credit Union</option>
-                  <option value="Elevator / Cooperative">Elevator / Cooperative</option>
-                  <option value="Agribusiness">Agribusiness</option>
-                  <option value="Other">Other</option>
-                </select>
-              </label>
-            </div>
-            <label>What do you need?
-              <select data-workwithus-field="need">
-                <option value="">Select one</option>
-                <option value="Business & Data Analysis">Business & Data Analysis</option>
-                <option value="Custom Software Build">Custom Software Build</option>
-                <option value="Team AI Training">Team AI Training</option>
-                <option value="Not sure yet">Not sure yet</option>
-              </select>
-            </label>
-            <label>Tell me about what you're working on<textarea data-workwithus-field="details" rows="4" placeholder="What's the workflow, the question, or the problem you want solved?" required></textarea></label>
-            <button class="primary-button full" type="submit">Send This to Nathan ${icon("arrow_forward")}</button>
-            <p class="fine-print" data-workwithus-status>This opens your email app with everything you entered above, addressed to autonate.ai@gmail.com — review it and hit send.</p>
-          </form>
-          <aside class="book-sidebar">
-            <div class="book-sidebar-block">
-              <span class="kicker">${icon("checklist")} What happens next</span>
-              <ol>
-                <li>Your email app opens with a message pre-filled from what you entered — review it and hit send.</li>
-                <li>I read every message myself — no auto-reply, an actual read.</li>
-                <li>You'll hear back within 1-2 business days with a straight answer on fit and next steps.</li>
-              </ol>
-            </div>
-            <div class="book-sidebar-block">
-              <span class="kicker">${icon("verified")} Background</span>
-              <p>Computer Science, University of Michigan. Software engineering and business-analytics experience across Microsoft, Citi, Veterans United, and Atomic Object — now applied to agriculture nationally.</p>
-              <a class="outline-button full" href="/about">About Nathan ${icon("arrow_forward")}</a>
-            </div>
-          </aside>
-        </div>
-      </section>
-    </main>
-  `;
-
-  return pageShell({
-    title: "Work With Us | AutoNateAI",
-    active: "work-with-us",
-    body,
-    canonicalPath: "/work-with-us",
-    ogImage: "/assets/landing/work-with-us-hero.jpg",
-    description: "Business analysis, data work, and software builds for farm operations, lenders, elevators, and agribusinesses anywhere in the country — tell Nathan Baker what you need.",
-    ogTitle: "Work With Us | AutoNateAI",
-    ogDescription: "Bring a real workflow or a real question — business analysis, data work, and software builds for agricultural operations nationally.",
   });
 }
 
@@ -2415,64 +2079,6 @@ export function renderCommunity() {
 // The old general-lab articles still don't show here (third pass: this hub
 // is agriculture-only — the articles/renderArticleDetail plumbing stays for
 // their own URLs, just not listed on this catalog).
-export function renderArticles() {
-  // Same `featured` flag/fallback rule as renderHome — the day's Question
-  // of the Day (set by daily-dossier) wins the banner and leads the grid,
-  // and stays pinned there across same-day follow-on articles.
-  const featured = investigations.find((i) => i.featured) || investigations.find((i) => i.evidence?.length);
-
-  const body = `
-    <main class="articles-page">
-      <section class="about-hero">
-        <div>
-          <span class="kicker">${icon("search")} Research & Case Studies</span>
-          <h1>Everything we've researched, in one place.</h1>
-          <p>Real, sourced investigations into how farm country's money, land, and grain actually move. Search below for what applies to you.</p>
-        </div>
-        ${
-          featured
-            ? `<a class="about-founder-card" href="/research-and-case-studies/${featured.slug}">
-                <img src="${featured.thumbnail}" alt="${escapeHtml(featured.name)}" />
-                <div>
-                  <span class="kicker">${icon("star")} Featured &middot; ${escapeHtml(investigationStatusLabels[featured.status] || featured.status)}</span>
-                  <h2>${escapeHtml(featured.name)}</h2>
-                  <p>${escapeHtml(featured.question)}</p>
-                </div>
-              </a>`
-            : ""
-        }
-      </section>
-
-      <div class="content-tools">
-        <label>${icon("search")} <input type="search" placeholder="Search articles, lenders, questions..." data-article-search /></label>
-      </div>
-      <div class="industry-grid lab-grid" data-article-grid>
-        ${[...investigations]
-          .sort((a, b) => (b.publishedDate || "").localeCompare(a.publishedDate || "") || (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
-          .map((investigation) => investigationCard(investigation))
-          .join("")}
-        ${regions.map((region) => regionCard(region)).join("")}
-        ${organizations.map((org) => organizationCard(org)).join("")}
-        ${systems.map((system) => systemCard(system)).join("")}
-      </div>
-      <nav class="pagination" data-article-pagination aria-label="Pagination"></nav>
-    </main>
-  `;
-
-  return pageShell({
-    title: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
-    active: "articles",
-    body,
-    canonicalPath: "/research-and-case-studies",
-    ogImage: "/assets/og/research-and-case-studies.jpg",
-    description:
-      "Real, sourced research articles on how farm country's money, land, and grain actually move — all in one searchable place.",
-    ogTitle: "Research & Case Studies | AutoNateAI Agricultural Systems Lab",
-    ogDescription:
-      "Everything AutoNateAI has researched about how farm country's money, land, and grain actually move — search or filter to find what applies to you.",
-  });
-}
-
 export function renderArticleDetail(article) {
   const body = `
     <main class="article-page">
@@ -2674,7 +2280,7 @@ function readTutorialMarkdown(tutorial) {
 // and eventually regions/organizations/systems) that carry their long-form
 // narrative in content/research/<slug>.md instead of an inline string field
 // in data.mjs. See apps/marketplace/.claude/skills/research-brief/.
-function readResearchMarkdown(sourcePath, fallbackTitle) {
+export function readResearchMarkdown(sourcePath, fallbackTitle) {
   try {
     return readFileSync(new URL(sourcePath, import.meta.url), "utf8");
   } catch {
@@ -2682,11 +2288,11 @@ function readResearchMarkdown(sourcePath, fallbackTitle) {
   }
 }
 
-function stripFirstHeading(markdown = "") {
+export function stripFirstHeading(markdown = "") {
   return markdown.replace(/^# .+\n+/, "");
 }
 
-function markdownToHtml(markdown = "") {
+export function markdownToHtml(markdown = "") {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const html = [];
   let paragraph = [];

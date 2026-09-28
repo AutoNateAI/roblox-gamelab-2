@@ -37,7 +37,11 @@ import {
   renderTutorialPack,
   renderTutorials,
   renderWorkWithUs,
+  renderOperatorArticleDetail,
+  renderOperatorOs,
+  renderPricing,
 } from "./src/pages.mjs";
+import { operatorArticles } from "./src/operator-os-data.mjs";
 import {
   articles,
   investigations,
@@ -277,6 +281,8 @@ const server = createServer(async (request, response) => {
       "/about",
       "/work-with-us",
       "/research-and-case-studies",
+      "/operator-os",
+      "/pricing",
     ]);
     if (pageRoutes.has(url.pathname)) {
       const programsData = await readJson("data/marketplace/programs.json");
@@ -285,6 +291,8 @@ const server = createServer(async (request, response) => {
         "/about": renderAbout,
         "/work-with-us": renderWorkWithUs,
         "/research-and-case-studies": renderArticles,
+        "/operator-os": renderOperatorOs,
+        "/pricing": renderPricing,
       };
       html(response, 200, renderers[url.pathname](programsData));
       return;
@@ -350,6 +358,11 @@ const server = createServer(async (request, response) => {
     // are untouched.
     if (url.pathname.startsWith("/research-and-case-studies/")) {
       const slug = url.pathname.split("/").filter(Boolean).at(-1);
+      const operatorArticle = operatorArticles.find((item) => item.slug === slug);
+      if (operatorArticle) {
+        html(response, 200, renderOperatorArticleDetail(operatorArticle));
+        return;
+      }
       const region = regions.find((item) => item.slug === slug);
       if (region) {
         html(response, 200, renderRegionDetail(region));

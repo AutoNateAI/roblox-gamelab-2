@@ -49,7 +49,7 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/work-with-us">Work With Us</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/work-with-us">Book a Call</a>`}
         </div>
       </nav>
     </header>
@@ -62,13 +62,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>Nathan Baker's independent research practice, studying how farm country actually works — the land, the money, the roads, and the businesses that connect them — and publishing it free.</p>
+          <p>AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses. You talk to your business through ChatGPT or Claude, see it in a live cockpit, and we handle the architecture.</p>
         </div>
-        <div><h5><a href="/research-and-case-studies">Research &amp; Case Studies</a></h5></div>
-        <div><ul><li><a href="/work-with-us">Work With Us</a></li><li><a href="/about">About Nathan</a></li></ul></div>
+        <div><h5>The Operator OS</h5><ul><li><a href="/operator-os">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/pricing#modules">Custom Modules</a></li></ul></div>
+        <div><h5>Company</h5><ul><li><a href="/research-and-case-studies">Research &amp; Case Studies</a></li><li><a href="/about">About Nathan</a></li><li><a href="/work-with-us">Book a Discovery Call</a></li><li><a href="/research-and-case-studies?type=Ag%20Systems%20Archive">Ag Systems Archive</a></li></ul></div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Independent agricultural economic research, published free.</span>
+        <span>&copy; 2026 AutoNateAI. Research. Architect. Automate. Operate.</span>
       </div>
     </footer>
   `;
@@ -78,7 +78,7 @@ const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
 const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI researches how farm country actually works — regional profiles, the lenders and businesses in them, how-things-work guides, and open questions — researched, sourced, and published free by Nathan Baker.";
+  "AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses — operate through ChatGPT or Claude, keep one structured business memory, and see it all in a live custom cockpit.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;
@@ -114,7 +114,7 @@ export function pageShell({
       "founder": {
         "@type": "Person",
         "name": "Nathan Baker",
-        "jobTitle": "Founder, AutoNateAI",
+        "jobTitle": "Founder & Systems Architect, AutoNateAI",
         "sameAs": [
           "https://www.linkedin.com/in/nate-gpt-expert/",
           "https://www.facebook.com/nate.baker.944",

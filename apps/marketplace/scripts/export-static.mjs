@@ -34,7 +34,11 @@ import {
   renderTutorialPack,
   renderTutorials,
   renderWorkWithUs,
+  renderOperatorArticleDetail,
+  renderOperatorOs,
+  renderPricing,
 } from "../src/pages.mjs";
+import { operatorArticles } from "../src/operator-os-data.mjs";
 import {
   articles,
   investigations,
@@ -67,6 +71,8 @@ const routes = [
   ["research-and-case-studies/index.html", renderArticles()],
   ["about/index.html", renderAbout()],
   ["work-with-us/index.html", renderWorkWithUs()],
+  ["operator-os/index.html", renderOperatorOs()],
+  ["pricing/index.html", renderPricing()],
 ];
 
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -146,6 +152,13 @@ for (const investigation of investigations) {
   await writeFile(filePath, renderInvestigationDetail(investigation));
 }
 
+// Operator OS question articles share the same unified detail path.
+for (const article of operatorArticles) {
+  const filePath = path.join(outDir, "research-and-case-studies", article.slug, "index.html");
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, renderOperatorArticleDetail(article));
+}
+
 // Static redirect stubs for every path this rename moved, so an already-
 // shared or indexed old URL still lands on the new one instead of a 404.
 await writeRedirect("articles", "/research-and-case-studies");
@@ -184,11 +197,17 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
   sitemapEntry("https://autonateai.com/research-and-case-studies", "0.9"),
   sitemapEntry("https://autonateai.com/about", "0.8"),
-  sitemapEntry("https://autonateai.com/work-with-us", "0.8"),
+  sitemapEntry("https://autonateai.com/work-with-us", "0.9"),
+  sitemapEntry("https://autonateai.com/operator-os", "0.9"),
+  sitemapEntry("https://autonateai.com/pricing", "0.9"),
+  // Draft (scaffold) articles are noindex until published — keep them out.
+  ...operatorArticles
+    .filter((article) => article.status === "published")
+    .map((article) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${article.slug}`, "0.8", article.publishedDate || TODAY)),
   ...regions.map((region) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${region.slug}`, region.status === "laboratory" ? "0.9" : "0.4")),
   ...organizations.map((org) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${org.slug}`, org.status === "watchlist" ? "0.4" : "0.8")),
   ...systems.map((system) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${system.slug}`, "0.8")),
-  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${investigation.slug}`, "0.8")),
+  ...investigations.map((investigation) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${investigation.slug}`, "0.5")),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
@@ -209,17 +228,18 @@ Sitemap: https://autonateai.com/sitemap.xml
 await writeFile(
   path.join(outDir, "404.html"),
   renderHome(programsData).replace(
-    "<title>AutoNateAI | Agricultural Economic Systems Intelligence Lab</title>",
+    "<title>AutoNateAI | The Operator OS — Run Your Business by Talking to It</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
 
 const detailPageCount =
+  operatorArticles.length +
   regions.length +
   organizations.length +
   systems.length +
   investigations.length;
 
 console.log(
-  `Exported ${routes.length + detailPageCount} agricultural intelligence pages to ${path.relative(rootDir, outDir)}`,
+  `Exported ${routes.length + detailPageCount} pages to ${path.relative(rootDir, outDir)}`,
 );
