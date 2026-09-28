@@ -23,10 +23,12 @@ export const operatorArticles = [
   {
     n: 1,
     slug: "contractor-lead-capacity-follow-up-breaking-point",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "call_split",
     title: "How Many Leads Can a Contractor Realistically Manage Before Follow-Up Starts Breaking?",
     question: "How many leads can a contractor realistically manage before follow-up starts breaking?",
-    hook: "Every owner has a number where the phone, the texts, and the memory stop keeping up. Past it, leads don't get rejected — they just quietly go cold.",
+    hook: "For an owner-operator, follow-up starts breaking around 20\u201325 new leads a month. Not from lack of hustle, but because the clock and your working memory both hit their ceilings.",
     audience: ["Contractors & Trades"],
     queueDate: "2026-09-29",
     ogHeadline: "HOW MANY LEADS BEFORE FOLLOW-UP BREAKS?",
