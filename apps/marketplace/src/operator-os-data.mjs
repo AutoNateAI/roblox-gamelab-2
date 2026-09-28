@@ -205,10 +205,12 @@ export const operatorArticles = [
   {
     n: 14,
     slug: "how-much-owner-attention-your-software-stack-consumes-every-week",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "hourglass_bottom",
     title: "How Much Owner Attention Is Your Current Software Stack Consuming Every Week?",
     question: "How much owner attention is your current software stack consuming every week?",
-    hook: "Nobody invoices you for the hours spent being the glue between your tools. That doesn't make them free.",
+    hook: "Toggling, re-entry, context hunting, and interruptions quietly take 8\u201312 owner hours a week, roughly $20K\u2013$30K a year. Nobody ever invoices you for it.",
     audience: ["All Operators"],
     queueDate: "2026-10-12",
     ogHeadline: "YOUR SOFTWARE IS BILLING YOU IN HOURS",
