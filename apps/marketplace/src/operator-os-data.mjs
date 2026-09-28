@@ -163,10 +163,12 @@ export const operatorArticles = [
   {
     n: 11,
     slug: "what-a-useful-ai-dashboard-shows-that-chatgpt-alone-cannot",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "dashboard",
     title: "What Does a Useful AI Dashboard Show That ChatGPT Alone Cannot?",
     question: "What does a useful AI dashboard show that ChatGPT alone cannot?",
-    hook: "Chat is a great way to change the business. It's a terrible way to see it. You need both — and they need to share the same memory.",
+    hook: "Chat is great for changing the business and a keyhole for seeing it. A cockpit shows state at a glance, including what your AI just did, so you catch what you didn't know to ask.",
     audience: ["All Operators"],
     queueDate: "2026-10-09",
     ogHeadline: "CHAT CHANGES IT. THE COCKPIT SHOWS IT.",
