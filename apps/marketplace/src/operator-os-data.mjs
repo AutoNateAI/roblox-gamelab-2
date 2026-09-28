@@ -121,10 +121,12 @@ export const operatorArticles = [
   {
     n: 8,
     slug: "every-meeting-automatically-changes-the-operating-plan",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "event_repeat",
     title: "What Would Your Business Look Like if Every Meeting Automatically Changed the Operating Plan?",
     question: "What would your business look like if every meeting automatically changed the operating plan?",
-    hook: "Most meetings end with good intentions and zero state change. The follow-ups live in someone's head until they don't.",
+    hook: "55% of workers say next steps after meetings are unclear, and memory fades fastest in the first hours. A 60-second capture can turn every meeting into a changed plan.",
     audience: ["Professional Services", "All Operators"],
     queueDate: "2026-10-06",
     ogHeadline: "EVERY MEETING SHOULD CHANGE THE PLAN",
