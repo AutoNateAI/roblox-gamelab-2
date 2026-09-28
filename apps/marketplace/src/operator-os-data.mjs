@@ -177,10 +177,12 @@ export const operatorArticles = [
   {
     n: 12,
     slug: "can-your-business-get-easier-to-operate-as-it-gets-more-complex",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "trending_up",
     title: "Can Your Business Become Easier to Operate as It Becomes More Complex?",
     question: "Can your business become easier to operate as it becomes more complex?",
-    hook: "Growth usually means more tools, more people, more things to remember. It doesn't have to mean more load on the owner.",
+    hook: "Growth usually hands the owner more to hold, the crisis Greiner described in 1972. Add capability to one memory and cockpit instead of new tools, and complexity stops landing on you.",
     audience: ["All Operators"],
     queueDate: "2026-10-10",
     ogHeadline: "MORE COMPLEX. EASIER TO RUN.",
