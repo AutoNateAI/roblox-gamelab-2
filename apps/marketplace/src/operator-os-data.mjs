@@ -65,10 +65,12 @@ export const operatorArticles = [
   {
     n: 4,
     slug: "what-should-happen-after-a-new-prospect-enters-your-business",
+    status: "published",
+    publishedDate: "2026-09-28",
     icon: "person_add",
     title: "What Should Happen Automatically After a New Prospect Enters Your Business?",
     question: "What should happen automatically after a new prospect enters your business?",
-    hook: "The first 48 hours after a new name shows up decide most of what happens next — and in most small businesses, nothing happens on purpose.",
+    hook: "Six things should happen automatically in the first 48 hours: capture, recognize, acknowledge, research, route, follow up. In most shops the owner does all six by hand, hours late.",
     audience: ["All Operators"],
     queueDate: "2026-10-02",
     ogHeadline: "A NEW PROSPECT JUST SHOWED UP. NOW WHAT?",
