@@ -119,29 +119,29 @@ export const studioMarkets = [
   },
 ];
 
-// Introductory packages. Prices are starting points; every series is scoped on a call.
+// Packages. Every episode is a 3–6 minute character drama that comes with 3 reels; scope is confirmed on a call.
 export const studioPackages = [
   {
-    name: "Animated Explainer",
-    price: "From $500",
-    unit: "60–90 seconds",
-    text: "One research-backed animated explainer: a single idea, told with characters and a clear payoff.",
-    includes: ["Topic research + script", "Original characters", "Voice, music, captions", "16:9 and 9:16 cuts"],
+    name: "Character Drama Explainer",
+    price: "$750",
+    unit: "1 episode + 3 reels",
+    text: "One research-backed character drama, 3–6 minutes: a single idea told through a story and a cast, with a clear payoff.",
+    includes: ["Topic research + script", "Original characters", "1 episode, 3–6 minutes", "3 reels for social (9:16)", "Voice, music, captions"],
   },
   {
     name: "Mini-Series",
-    price: "From $1,500",
-    unit: "3 episodes",
-    text: "A short arc that teaches one subject in depth: a story that builds from episode to episode.",
-    includes: ["Research brief + sources", "Story arc + cast", "3 episodes, 3–6 minutes each", "Thumbnails + descriptions"],
+    price: "$2,500",
+    unit: "3 episodes + 9 reels",
+    text: "The same character drama format across a short arc that teaches one subject in depth, building from episode to episode.",
+    includes: ["Research brief + sources", "Story arc + cast", "3 episodes, 3–6 minutes each", "9 reels for social (3 per episode)", "Thumbnails + descriptions"],
   },
   {
     name: "Research Series",
-    price: "From $3,000",
-    unit: "6 episodes",
+    price: "$7,500",
+    unit: "6 episodes + 18 reels",
     featured: true,
-    text: "Our flagship: a full season with a real story arc, teaching visuals, reels and learning materials, like The Curve.",
-    includes: ["Deep research + source library", "6 episodes, 5–8 minutes each", "6 reels for social", "Workbook / guide PDF + landing page"],
+    text: "Our flagship: a full season of character drama with a real story arc, teaching visuals, reels and learning materials, like The Curve.",
+    includes: ["Deep research + source library", "6 episodes, 3–6 minutes each", "18 reels for social (3 per episode)", "Workbook / guide PDF + landing page"],
   },
   {
     name: "Institutional Series",
