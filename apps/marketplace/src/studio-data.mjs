@@ -119,7 +119,7 @@ export const studioMarkets = [
   },
 ];
 
-// Packages. Every episode is a 3–6 minute character drama that comes with 3 reels; scope is confirmed on a call.
+// Packages: character drama episodes plus reels; scope is confirmed on a call.
 export const studioPackages = [
   {
     name: "Character Drama Explainer",
@@ -131,17 +131,17 @@ export const studioPackages = [
   {
     name: "Mini-Series",
     price: "$2,500",
-    unit: "3 episodes + 9 reels",
+    unit: "3 episodes + 3 reels",
     text: "The same character drama format across a short arc that teaches one subject in depth, building from episode to episode.",
-    includes: ["Research brief + sources", "Story arc + cast", "3 episodes, 3–6 minutes each", "9 reels for social (3 per episode)", "Thumbnails + descriptions"],
+    includes: ["Research brief + sources", "Story arc + cast", "3 episodes, 3–6 minutes each", "3 reels for social (9:16)", "Thumbnails + descriptions"],
   },
   {
     name: "Research Series",
     price: "$7,500",
-    unit: "6 episodes + 18 reels",
+    unit: "6 episodes + 6 reels",
     featured: true,
     text: "Our flagship: a full season of character drama with a real story arc, teaching visuals, reels and learning materials, like The Curve.",
-    includes: ["Deep research + source library", "6 episodes, 3–6 minutes each", "18 reels for social (3 per episode)", "Workbook / guide PDF + landing page"],
+    includes: ["Deep research + source library", "6 episodes, 5–8 minutes each", "6 reels for social (9:16)", "Workbook / guide PDF + landing page"],
   },
   {
     name: "Institutional Series",

@@ -61,7 +61,7 @@ function seriesCard(s) {
 export function renderStudioHome() {
   const curve = studioSeries[0];
   const assets = [
-    ["movie", "Episodes", "3–6 minute character drama episodes with a real arc"],
+    ["movie", "Episodes", "3–8 minute character drama episodes with a real arc"],
     ["smartphone", "Reels", "Vertical can-you-solve-it clips for social"],
     ["menu_book", "Workbooks", "Homework, worked solutions, answer keys"],
     ["co_present", "Instructor guides", "Run it as a class or discussion section"],
@@ -316,7 +316,7 @@ export function renderStudioPricing() {
       <section class="st-page-hero">
         <span class="kicker">${icon("sell")} Pricing</span>
         <h1>Clear packages. Every series scoped on a call.</h1>
-        <p>Every episode is a 3–6 minute character drama, and every episode comes with 3 reels. Multi-season and institutional programs are quoted.</p>
+        <p>Every package is character drama: 3–6 minute episodes for the explainer and mini-series, 5–8 minute episodes for the research series, with reels for social. Multi-season and institutional programs are quoted.</p>
       </section>
       <section class="section compact">
         <div class="st-packages">
@@ -414,7 +414,7 @@ export function renderStudioAbout() {
 // ---------------------------------------------------------------------------- START A PROJECT
 export function renderStartProject() {
   const orgTypes = ["School / University", "EdTech", "Nonprofit / Community Program", "Startup / Company", "Event / Expo", "Other"];
-  const needs = ["Character Drama Explainer (1 episode + 3 reels)", "Mini-Series (3 episodes + 9 reels)", "Research Series (6 episodes + 18 reels)", "Institutional / multi-season series", "Not sure yet — that's what the call is for"];
+  const needs = ["Character Drama Explainer (1 episode + 3 reels)", "Mini-Series (3 episodes + 3 reels)", "Research Series (6 episodes + 6 reels)", "Institutional / multi-season series", "Not sure yet — that's what the call is for"];
   const body = `
     <main class="about-page">
       <section class="st-page-hero">
@@ -453,7 +453,7 @@ export function renderStartProject() {
             </div>
             <div class="book-sidebar-block">
               <span class="kicker">${icon("sell")} Packages</span>
-              <p>Character drama explainer with 3 reels: $750. Three-episode mini-series: $2,500. Six-episode research series: $7,500. Institutional series quoted.</p>
+              <p>Character drama explainer with 3 reels: $750. Three-episode mini-series with 3 reels: $2,500. Six-episode research series with 6 reels: $7,500. Institutional series quoted.</p>
               <a class="outline-button full" href="/pricing">See Pricing ${icon("arrow_forward")}</a>
             </div>
             <div class="book-sidebar-block">
