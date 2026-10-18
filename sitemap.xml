@@ -2,122 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://autonateai.com/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/research-and-case-studies</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://autonateai.com/series</loc>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/about</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://autonateai.com/research</loc>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://autonateai.com/work-with-us</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/operator-os</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://autonateai.com/for-organizations</loc>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://autonateai.com/pricing</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/about</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autonateai.com/start-a-project</loc>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/contractor-lead-capacity-follow-up-breaking-point</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/cost-of-one-missed-estimate-hvac-electrical-contractor</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/why-another-crm-increases-owner-cognitive-load</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/what-should-happen-after-a-new-prospect-enters-your-business</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/five-person-company-fifty-person-information-discipline</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/what-your-ai-should-know-before-recommending-your-next-sales-action</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/prospects-clients-partners-goals-tasks-one-relationship-graph</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/every-meeting-automatically-changes-the-operating-plan</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/rank-500-prospects-without-inspecting-500-rows</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/what-should-a-contractor-automate-first</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/what-a-useful-ai-dashboard-shows-that-chatgpt-alone-cannot</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/can-your-business-get-easier-to-operate-as-it-gets-more-complex</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/using-ai-vs-building-an-ai-operating-system</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://autonateai.com/research-and-case-studies/how-much-owner-attention-your-software-stack-consumes-every-week</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
 </urlset>
