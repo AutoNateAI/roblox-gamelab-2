@@ -40,6 +40,15 @@ import {
 } from "../src/pages.mjs";
 import { operatorArticles } from "../src/operator-os-data.mjs";
 import {
+  renderResearch,
+  renderSeries,
+  renderStartProject,
+  renderStudioAbout,
+  renderStudioForOrganizations,
+  renderStudioHome,
+  renderStudioPricing,
+} from "../src/studio-pages.mjs";
+import {
   articles,
   investigations,
   labEvents,
@@ -66,13 +75,18 @@ const programsData = JSON.parse(
 const PAGE_SIZE = 6;
 const pageCount = (items) => Math.max(1, Math.ceil(items.length / PAGE_SIZE));
 
+// 2026-10-18 repositioning: AutoNateAI is a research and educational media company that builds animated series.
+// The Operator OS pages (home, /operator-os, its pricing, the Operator Question articles) are ARCHIVED: their source
+// stays in operator-os-pages.mjs / operator-os-data.mjs, they are no longer exported, linked or in the sitemap, and
+// their old URLs get noindex redirect stubs below.
 const routes = [
-  ["index.html", renderHome(programsData)],
-  ["research-and-case-studies/index.html", renderArticles()],
-  ["about/index.html", renderAbout()],
-  ["work-with-us/index.html", renderWorkWithUs()],
-  ["operator-os/index.html", renderOperatorOs()],
-  ["pricing/index.html", renderPricing()],
+  ["index.html", renderStudioHome()],
+  ["series/index.html", renderSeries()],
+  ["research/index.html", renderResearch()],
+  ["for-organizations/index.html", renderStudioForOrganizations()],
+  ["pricing/index.html", renderStudioPricing()],
+  ["about/index.html", renderStudioAbout()],
+  ["start-a-project/index.html", renderStartProject()],
 ];
 
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -125,21 +139,16 @@ for (const [routePath, html] of routes) {
   await writeFile(filePath, html);
 }
 
-// The agricultural research (regions/organizations/systems/investigations)
-// was unpublished 2026-09-28 in the Operator OS repositioning — those
-// pages intentionally 404 now so Google drops them. Source data is still in
-// src/data.mjs + content/research/ if it's ever needed again.
-// Operator OS question articles share the same unified detail path.
+// Archived Operator OS URLs → the studio (noindex redirect stubs, so old links and search results still land).
+await writeRedirect("operator-os", "/");
+await writeRedirect("work-with-us", "/start-a-project");
+await writeRedirect("research-and-case-studies", "/research");
 for (const article of operatorArticles) {
-  const filePath = path.join(outDir, "research-and-case-studies", article.slug, "index.html");
-  await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderOperatorArticleDetail(article));
+  await writeRedirect(`research-and-case-studies/${article.slug}`, "/research");
 }
-
-// Static redirect stub for the old hub path.
-await writeRedirect("articles", "/research-and-case-studies");
+await writeRedirect("articles", "/research");
 for (const article of articles) {
-  await writeRedirect(`articles/${article.handle}`, "/research-and-case-studies");
+  await writeRedirect(`articles/${article.handle}`, "/research");
 }
 
 await cp(path.join(publicDir, "styles.css"), path.join(outDir, "styles.css"));
@@ -155,15 +164,12 @@ await writeFile(
 await writeFile(path.join(outDir, "CNAME"), "autonateai.com\n");
 const sitemapUrls = [
   sitemapEntry("https://autonateai.com/", "1.0"),
-  sitemapEntry("https://autonateai.com/research-and-case-studies", "0.9"),
-  sitemapEntry("https://autonateai.com/about", "0.8"),
-  sitemapEntry("https://autonateai.com/work-with-us", "0.9"),
-  sitemapEntry("https://autonateai.com/operator-os", "0.9"),
-  sitemapEntry("https://autonateai.com/pricing", "0.9"),
-  // Draft (scaffold) articles are noindex until published — keep them out.
-  ...operatorArticles
-    .filter((article) => article.status === "published")
-    .map((article) => sitemapEntry(`https://autonateai.com/research-and-case-studies/${article.slug}`, "0.8", article.publishedDate || TODAY)),
+  sitemapEntry("https://autonateai.com/series", "0.9"),
+  sitemapEntry("https://autonateai.com/research", "0.8"),
+  sitemapEntry("https://autonateai.com/for-organizations", "0.9"),
+  sitemapEntry("https://autonateai.com/pricing", "0.8"),
+  sitemapEntry("https://autonateai.com/about", "0.7"),
+  sitemapEntry("https://autonateai.com/start-a-project", "0.9"),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
@@ -183,13 +189,16 @@ Sitemap: https://autonateai.com/sitemap.xml
 );
 await writeFile(
   path.join(outDir, "404.html"),
-  renderHome(programsData).replace(
-    "<title>AutoNateAI | The Operator OS — Run Your Business by Talking to It</title>",
+  renderStudioHome().replace(
+    "<title>AutoNateAI | Research-Driven Animated Series &amp; Educational Media</title>",
+    "<title>Page Not Found | AutoNateAI</title>",
+  ).replace(
+    "<title>AutoNateAI | Research-Driven Animated Series & Educational Media</title>",
     "<title>Page Not Found | AutoNateAI</title>",
   ),
 );
 
-const detailPageCount = operatorArticles.length;
+const detailPageCount = 0;
 
 console.log(
   `Exported ${routes.length + detailPageCount} pages to ${path.relative(rootDir, outDir)}`,

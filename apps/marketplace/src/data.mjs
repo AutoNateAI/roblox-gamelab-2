@@ -22,9 +22,11 @@
 // intelligence lab to the Operator OS (see src/operator-os-data.mjs). The
 // "Intelligence" nav slot became "Operator OS" at /operator-os; the brand
 // mark links home. Ag research lives on as the "Ag Systems Archive" filter.
+// 2026-10-18: AutoNateAI = research + educational media (animated series). Operator OS nav is archived.
 export const navItems = [
-  { label: "Operator OS", href: "/operator-os", keys: ["operator-os"] },
-  { label: "Research & Case Studies", href: "/research-and-case-studies", keys: ["articles", "investigations", "regions", "organizations", "systems"] },
+  { label: "Our Series", href: "/series", keys: ["series"] },
+  { label: "Research", href: "/research", keys: ["research"] },
+  { label: "For Organizations", href: "/for-organizations", keys: ["organizations"] },
   { label: "Pricing", href: "/pricing", keys: ["pricing"] },
   { label: "About", href: "/about", keys: ["about"] },
 ];

@@ -49,7 +49,7 @@ export function topNav(active = "home", mode = "full") {
         <div class="nav-actions">
           ${mode === "checkout" ? "" : `<button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-mobile-menu-toggle>${icon("menu")}</button>`}
           <button class="theme-toggle" aria-label="Toggle dark mode" data-theme-toggle>${icon("dark_mode")}</button>
-          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/work-with-us">Book a Call</a>`}
+          ${mode === "checkout" ? "" : `<a class="nav-cta" href="/start-a-project">Commission a Series</a>`}
         </div>
       </nav>
     </header>
@@ -62,13 +62,13 @@ export function footer() {
       <div class="footer-grid">
         <div>
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
-          <p>AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses. You talk to your business through ChatGPT or Claude, see it in a live cockpit, and we handle the architecture.</p>
+          <p>An independent research and educational media company. We turn complex subjects into original animated series, with the workbooks, reels and pages that put them to work, for our channels and for the organizations we partner with.</p>
         </div>
-        <div><h5>The Operator OS</h5><ul><li><a href="/operator-os">How It Works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/pricing#modules">Custom Modules</a></li></ul></div>
-        <div><h5>Company</h5><ul><li><a href="/research-and-case-studies">Research &amp; Case Studies</a></li><li><a href="/about">About Nathan</a></li><li><a href="/work-with-us">Book a Discovery Call</a></li></ul></div>
+        <div><h5>Studio</h5><ul><li><a href="/series">Our Series</a></li><li><a href="/research">Research</a></li><li><a href="/pricing">Pricing</a></li></ul></div>
+        <div><h5>Company</h5><ul><li><a href="/for-organizations">For Organizations</a></li><li><a href="/about">About Nathan</a></li><li><a href="/start-a-project">Start a Project</a></li><li><a href="https://botthatlyfe.com" target="_blank" rel="noopener">Bot That Lyfe</a></li></ul></div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 AutoNateAI. Research. Architect. Automate. Operate.</span>
+        <span>&copy; 2026 AutoNateAI. Complex ideas. Extraordinary stories.</span>
       </div>
     </footer>
   `;
@@ -76,9 +76,9 @@ export function footer() {
 
 const SITE_NAME = "AutoNateAI";
 const SITE_URL = "https://autonateai.com";
-const DEFAULT_OG_IMAGE = "/assets/og/default.jpg";
+const DEFAULT_OG_IMAGE = "/assets/og/studio.jpg";
 const DEFAULT_DESCRIPTION =
-  "AutoNateAI installs conversational AI operating systems for contractors, operators, and small businesses — operate through ChatGPT or Claude, keep one structured business memory, and see it all in a live custom cockpit.";
+  "AutoNateAI is an independent research and educational media company that turns complex subjects into original animated series — for our channels and for schools, nonprofits and startups.";
 
 function absoluteUrl(value = "/") {
   if (/^https?:\/\//.test(value)) return value;
@@ -114,7 +114,7 @@ export function pageShell({
       "founder": {
         "@type": "Person",
         "name": "Nathan Baker",
-        "jobTitle": "Founder & Systems Architect, AutoNateAI",
+        "jobTitle": "Founder, AutoNateAI",
         "sameAs": [
           "https://www.linkedin.com/in/nate-gpt-expert/",
           "https://www.facebook.com/nate.baker.944",
@@ -125,6 +125,7 @@ export function pageShell({
         "https://www.instagram.com/autonateai/",
         "https://www.youtube.com/@autonate_ai",
         "https://www.youtube.com/@AutoNate",
+        "https://botthatlyfe.com",
       ],
     },
     {
