@@ -48,6 +48,7 @@ import {
   renderStudioHome,
   renderStudioPricing,
 } from "../src/studio-pages.mjs";
+import { loadPublications, publicationPaths, publicationRoutes } from "../src/publications.mjs";
 import {
   articles,
   investigations,
@@ -88,6 +89,10 @@ const routes = [
   ["about/index.html", renderStudioAbout()],
   ["start-a-project/index.html", renderStartProject()],
 ];
+
+// autonateai.com/publications: its own Substack-style section, one file per post in content/publications/.
+const publications = await loadPublications(path.join(rootDir, "apps/marketplace/content/publications"));
+routes.push(...publicationRoutes(publications));
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -170,6 +175,7 @@ const sitemapUrls = [
   sitemapEntry("https://autonateai.com/pricing", "0.8"),
   sitemapEntry("https://autonateai.com/about", "0.7"),
   sitemapEntry("https://autonateai.com/start-a-project", "0.9"),
+  ...publicationPaths(publications).map((p) => sitemapEntry(`https://autonateai.com${p}`, "0.7")),
 ];
 await writeFile(
   path.join(outDir, "sitemap.xml"),
