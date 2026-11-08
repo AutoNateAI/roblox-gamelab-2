@@ -26,6 +26,7 @@
 export const navItems = [
   { label: "Our Series", href: "/series", keys: ["series"] },
   { label: "Research", href: "/research", keys: ["research"] },
+  { label: "Publications", href: "/publications", keys: ["publications"] },
   { label: "For Organizations", href: "/for-organizations", keys: ["organizations"] },
   { label: "Pricing", href: "/pricing", keys: ["pricing"] },
   { label: "About", href: "/about", keys: ["about"] },

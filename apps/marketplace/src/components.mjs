@@ -64,7 +64,7 @@ export function footer() {
           <strong>AutoNateAI<span class="brand-dot">_</span></strong>
           <p>An independent research and educational media company. We turn complex subjects into original animated series, with the workbooks, reels and pages that put them to work, for our channels and for the organizations we partner with.</p>
         </div>
-        <div><h5>Studio</h5><ul><li><a href="/series">Our Series</a></li><li><a href="/research">Research</a></li><li><a href="/pricing">Pricing</a></li></ul></div>
+        <div><h5>Studio</h5><ul><li><a href="/series">Our Series</a></li><li><a href="/research">Research</a></li><li><a href="/publications">Publications</a></li><li><a href="/pricing">Pricing</a></li></ul></div>
         <div><h5>Company</h5><ul><li><a href="/for-organizations">For Organizations</a></li><li><a href="/about">About Nathan</a></li><li><a href="/start-a-project">Start a Project</a></li><li><a href="https://botthatlyfe.com" target="_blank" rel="noopener">Bot That Lyfe</a></li></ul></div>
       </div>
       <div class="footer-bottom">
