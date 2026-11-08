@@ -1,0 +1,86 @@
+---
+title: One Gene, Three Letters
+subtitle: We looked up CFTR in the public records and checked them against each other. All five predictions held, and the famous deletion isn't quite where its name suggests.
+date: 2026-11-08
+status: published
+---
+<p>Before you can predict what a cell will do, you should be able to answer a simpler question: what do we actually know about one gene, and where is it written down?</p>
+
+<p>So we picked one. <strong>CFTR</strong> makes a channel in the membrane of cells that produce mucus. It moves chloride ions in and out of the cell, which controls the movement of water and keeps airway mucus thin and free-flowing. <a href="https://medlineplus.gov/genetics/gene/cftr/">Changes to this gene cause cystic fibrosis</a>, an inherited disease in which thick, sticky mucus builds up in the lungs and other organs.</p>
+
+<p>The most common of those changes has a name that sounds like a precise address: delta F508. It means one amino acid is missing, at position 508 of the protein. We wanted to find that spot ourselves.</p>
+
+<h2>What we wrote down first</h2>
+
+<p>Before opening a single record, we <a href="https://github.com/AutoNateAI/virtual-cell-lab/blob/main/runs/x01-one-real-gene/run-card.yaml">committed five predictions</a>, each with what would prove it wrong.</p>
+
+<table>
+<thead><tr><th>Prediction</th><th>Held?</th></tr></thead>
+<tbody>
+<tr><td>HGNC, NCBI Gene, Ensembl and UniProt all point at one gene on chromosome 7</td><td>Yes</td></tr>
+<tr><td>Translating the DNA letters ourselves gives exactly the protein UniProt reports</td><td>Yes</td></tr>
+<tr><td>Position 508 is phenylalanine, inside a named part of the protein</td><td>Yes</td></tr>
+<tr><td>Removing the three letters changes only that one amino acid</td><td>Yes</td></tr>
+<tr><td>ClinVar classifies this variant as pathogenic</td><td>Yes</td></tr>
+</tbody>
+</table>
+
+<h2>What the records say</h2>
+
+<ul>
+<li><a href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:1884">HGNC:1884</a> gives the gene its official name, CF transmembrane conductance regulator, at 7q31.2.</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/gene/1080">NCBI Gene 1080</a> places it on chromosome 7, across 188,641 letters and 27 exons.</li>
+<li><a href="https://www.uniprot.org/uniprotkb/P13569/entry">UniProt P13569</a> describes a protein of 1,480 amino acids, and puts position 508 inside a domain called ABC transporter 1, which runs from 423 to 646.</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/clinvar/variation/7105/">ClinVar VCV000007105</a> classifies the variant as pathogenic, at the review status "practice guideline".</li>
+</ul>
+
+<h2>Reading it three letters at a time</h2>
+
+<p>We took the 4,443 protein-coding letters from the reference transcript, <a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_000492.4">NM_000492.4</a>, and translated them ourselves, three at a time. That's 1,481 codons: 1,480 amino acids and a stop signal. The result matched UniProt's sequence at every position.</p>
+
+<p>Then we found the deletion, and it isn't quite what the name suggests.</p>
+
+<p>Amino acid 508 is phenylalanine, spelled <code>TTT</code>. You might expect those three letters to be the ones that go missing. The three letters actually removed are coding positions 1521 to 1523, <code>CTT</code>, and they straddle two codons:</p>
+
+<pre>normal       ATC  ATC  TTT  GGT
+             Ile  Ile  Phe  Gly
+
+delta F508   ATC  ATT  GGT
+             Ile  Ile  Gly</pre>
+
+<p>Codon 507 changes spelling, from <code>ATC</code> to <code>ATT</code>, but both spell isoleucine. The phenylalanine disappears. Because exactly three letters are gone, every codon after it still reads correctly. In our check, the edited sequence gave the normal protein minus that single amino acid: 1,479 long, and otherwise identical.</p>
+
+<p>According to <a href="https://medlineplus.gov/genetics/gene/cftr/">MedlinePlus</a>, that abnormal channel breaks down shortly after it is made and never reaches the cell membrane.</p>
+
+<h2>Most of the gene doesn't spell protein</h2>
+
+<p>The gene spans 188,641 letters on chromosome 7. Only 4,443 of them, about 2%, code for the protein. Most of the rest are <a href="https://www.genome.gov/genetics-glossary/Intron">introns</a>, stretches inside the gene that are removed during a process called splicing, so that only exons remain in the finished messenger RNA.</p>
+
+<h2>What this doesn't show</h2>
+
+<ul>
+<li><strong>We didn't measure anything biological.</strong> Removing letters from a string shows the consequence for the sequence. What that does to a protein, a cell or a person comes from the records, not from this run.</li>
+<li><strong>The databases aren't independent witnesses.</strong> RefSeq and UniProt draw on shared sequence evidence, and HGNC links the others together. Their agreement is a consistency check, not independent confirmation.</li>
+<li><strong>A gene's length depends on who you ask.</strong> NCBI gives 188,641 letters. Ensembl's gene record gives 428,852, though its matching transcript agrees with NCBI. Any gene length should come with the name of its record.</li>
+<li><strong>ClinVar's record has its own quirks.</strong> It's titled against an earlier version of the transcript, NM_000492.3, and its classification was last evaluated in 2004.</li>
+<li><strong>We made a mistake.</strong> The first run's ClinVar check came back empty, because our script only read the first 10 of 16 search results. We fixed it and re-ran it. The prediction didn't change.</li>
+</ul>
+
+<h2>Check it yourself</h2>
+
+<p>The <a href="https://github.com/AutoNateAI/virtual-cell-lab/tree/main/runs/x01-one-real-gene">script, results and saved records are public</a>. It needs only Python 3:</p>
+
+<pre>python3 -I runs/x01-one-real-gene/lookup.py</pre>
+
+<p>This run is the basis for Episode 5 of <em>Inside the Virtual Cell</em>.</p>
+
+<h2>Sources</h2>
+
+<ul>
+<li><a href="https://medlineplus.gov/genetics/gene/cftr/">CFTR gene</a>. MedlinePlus Genetics, National Library of Medicine. Retrieved 2026-11-08.</li>
+<li><a href="https://medlineplus.gov/genetics/condition/cystic-fibrosis/">Cystic fibrosis</a>. MedlinePlus Genetics, National Library of Medicine. Retrieved 2026-11-08.</li>
+<li><a href="https://www.genome.gov/genetics-glossary/Intron">Intron</a>. National Human Genome Research Institute. Retrieved 2026-11-08.</li>
+<li>Records from HGNC (RRID:SCR_002827), NCBI Gene, RefSeq, ClinVar, Ensembl and UniProtKB (CC BY 4.0), retrieved 2026-11-08 and <a href="https://github.com/AutoNateAI/virtual-cell-lab/tree/main/runs/x01-one-real-gene/snapshots">saved unedited</a>.</li>
+</ul>
+
+<p><small>General information, not medical advice. Independent project; not affiliated with or reviewed by any researcher or institution named. Written with AI assistance. Every figure above comes from the linked records and script.</small></p>
