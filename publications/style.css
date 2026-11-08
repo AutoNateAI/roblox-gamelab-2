@@ -46,6 +46,11 @@ img { display: block; max-width: 100%; }
 .pub-body h3 { font-family: Spectral, Georgia, serif; font-size: 23px; line-height: 1.25; margin: 32px 0 10px; }
 .pub-body p, .pub-body ul, .pub-body ol { margin: 0 0 20px; }
 .pub-body a { color: var(--accent-dark); text-decoration: underline; }
+.pub-body code { font-family: "SF Mono", Menlo, monospace; font-size: 0.85em; background: #f3f3f1; padding: 2px 5px; border-radius: 4px; }
+.pub-body pre { font-family: "SF Mono", Menlo, monospace; font-size: 16px; line-height: 1.5; background: #f3f3f1; padding: 16px 18px; border-radius: 8px; overflow-x: auto; margin: 0 0 20px; }
+.pub-body table { width: 100%; border-collapse: collapse; font-family: Inter, sans-serif; font-size: 16px; line-height: 1.4; margin: 0 0 24px; }
+.pub-body th, .pub-body td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.pub-body th { font-weight: 600; color: var(--muted); }
 .pub-body small { font-family: Inter, sans-serif; font-size: 13px; color: var(--muted); }
 .pub-body img { border-radius: 6px; margin: 24px auto; }
 .pub-end { text-align: center; margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--line); }

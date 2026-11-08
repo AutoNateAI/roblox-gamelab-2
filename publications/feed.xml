@@ -4,6 +4,12 @@
   <title>Virtual Cell Lab</title>
   <link>https://autonateai.com/publications</link>
   <description>Cells, data and the models trying to predict them. Research, experiments and findings, written in the open.</description>
-
+  <item>
+    <title>One Gene, Three Letters</title>
+    <link>https://autonateai.com/publications/one-gene-three-letters</link>
+    <guid>https://autonateai.com/publications/one-gene-three-letters</guid>
+    <pubDate>Sun, 08 Nov 2026 12:00:00 GMT</pubDate>
+    <description>We looked up CFTR in the public records and checked them against each other. All five predictions held, and the famous deletion isn't quite where its name suggests.</description>
+  </item>
 </channel>
 </rss>
